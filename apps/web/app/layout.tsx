@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Fraunces, Lora, Manrope } from 'next/font/google'
 import CookieBanner from '@/components/CookieBanner'
 import Analytics from '@/components/Analytics'
+import { Toaster } from '@/components/ui/toaster'
 import './globals.css'
 
 const fraunces = Fraunces({
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <CookieBanner />
         <Analytics />
+        <Toaster />
       </body>
     </html>
   )

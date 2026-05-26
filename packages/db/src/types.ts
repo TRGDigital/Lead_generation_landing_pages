@@ -107,6 +107,8 @@ export interface Database {
           lost_at: string | null
           qualified: boolean
           disqualification_reason: string | null
+          disqualification_notes: string | null
+          closed_at: string | null
           weekly_fee_pennies: number | null
           assigned_to: string | null
           created_at: string
@@ -141,6 +143,8 @@ export interface Database {
           lost_at?: string | null
           qualified?: boolean
           disqualification_reason?: string | null
+          disqualification_notes?: string | null
+          closed_at?: string | null
           weekly_fee_pennies?: number | null
           assigned_to?: string | null
           created_at?: string
@@ -175,6 +179,8 @@ export interface Database {
           lost_at?: string | null
           qualified?: boolean
           disqualification_reason?: string | null
+          disqualification_notes?: string | null
+          closed_at?: string | null
           weekly_fee_pennies?: number | null
           assigned_to?: string | null
           created_at?: string
@@ -297,6 +303,7 @@ export interface Database {
           id: string
           phone: string | null
           role: string
+          notification_preferences: Json
         }
         Insert: {
           created_at?: string
@@ -305,6 +312,7 @@ export interface Database {
           id: string
           phone?: string | null
           role?: string
+          notification_preferences?: Json
         }
         Update: {
           created_at?: string
@@ -313,12 +321,35 @@ export interface Database {
           id?: string
           phone?: string | null
           role?: string
+          notification_preferences?: Json
         }
         Relationships: []
       }
     }
     Views: { [_ in never]: never }
-    Functions: { [_ in never]: never }
+    Functions: {
+      client_update_campaign: {
+        Args: { p_care_home_id: string; p_is_active: boolean; p_bed_target: number }
+        Returns: void
+      }
+      client_update_lead_status: {
+        Args: { p_lead_id: string; p_status: string; p_note?: string }
+        Returns: void
+      }
+      client_qualify_lead: {
+        Args: {
+          p_lead_id: string
+          p_qualified: boolean
+          p_disqualification_reason?: string
+          p_disqualification_notes?: string
+        }
+        Returns: void
+      }
+      client_save_note: {
+        Args: { p_lead_id: string; p_note: string }
+        Returns: void
+      }
+    }
     Enums: {
       lead_status: LeadStatus
     }
