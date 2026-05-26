@@ -26,10 +26,11 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Lead Generation',
-    default: 'Lead Generation',
+    template: '%s | CareBeds',
+    default: 'CareBeds — Fill Your Empty Beds',
   },
-  description: 'Qualified care home resident enquiries for UK care settings.',
+  description:
+    'CareBeds connects UK care homes with pre-qualified resident enquiries. Pay only when a resident moves in.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

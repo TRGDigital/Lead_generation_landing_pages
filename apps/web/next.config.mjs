@@ -6,6 +6,12 @@ const __dirname = path.dirname(__filename)
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ['@uiw/react-md-editor', '@uiw/react-markdown-preview'],
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: '*.supabase.co', pathname: '/storage/v1/object/public/**' },
+    ],
+  },
   webpack: (config, { dir }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
