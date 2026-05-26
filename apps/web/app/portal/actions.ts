@@ -2,8 +2,10 @@
 
 import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
-import { createClient } from '@/lib/supabase/server'
+import * as Sentry from '@sentry/nextjs'
+import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { getPortalContext, PORTAL_HOME_COOKIE } from '@/lib/portal'
+import { syncCampaignStatus } from '@/lib/google-ads'
 
 export async function setPortalHome(homeId: string) {
   const { homes } = await getPortalContext()
@@ -29,5 +31,25 @@ export async function updateCampaign(homeId: string, isActive: boolean, bedTarge
   if (error) return { error: error.message }
 
   revalidatePath('/portal')
+
+  // Sync Google Ads — non-blocking; failure must not block the portal toggle
+  void (async () => {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const db = createServiceClient() as unknown as any
+      const { data: home } = await db
+        .from('care_homes')
+        .select('google_ads_customer_id, google_ads_campaign_id')
+        .eq('id', homeId)
+        .single()
+      if (home?.google_ads_customer_id && home?.google_ads_campaign_id) {
+        await syncCampaignStatus(home.google_ads_customer_id, home.google_ads_campaign_id, isActive)
+      }
+    } catch (err) {
+      Sentry.captureException(err, { extra: { homeId, isActive } })
+      console.error('[portal:updateCampaign] Google Ads sync failed (non-fatal):', err)
+    }
+  })()
+
   return { success: true }
 }

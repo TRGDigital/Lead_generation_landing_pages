@@ -10,8 +10,6 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "14.5"
   }
@@ -210,6 +208,9 @@ export type Database = {
           content: Json
           cqc_rating: string | null
           created_at: string
+          google_ads_campaign_id: string | null
+          google_ads_customer_id: string | null
+          google_ads_last_synced_at: string | null
           hero_image_url: string | null
           id: string
           is_active: boolean
@@ -229,6 +230,9 @@ export type Database = {
           content: Json
           cqc_rating?: string | null
           created_at?: string
+          google_ads_campaign_id?: string | null
+          google_ads_customer_id?: string | null
+          google_ads_last_synced_at?: string | null
           hero_image_url?: string | null
           id?: string
           is_active?: boolean
@@ -248,6 +252,9 @@ export type Database = {
           content?: Json
           cqc_rating?: string | null
           created_at?: string
+          google_ads_campaign_id?: string | null
+          google_ads_customer_id?: string | null
+          google_ads_last_synced_at?: string | null
           hero_image_url?: string | null
           id?: string
           is_active?: boolean
@@ -259,6 +266,30 @@ export type Database = {
           slug?: string
           updated_at?: string
           weekly_bed_value_pennies?: number | null
+        }
+        Relationships: []
+      }
+      cron_logs: {
+        Row: {
+          cron_name: string
+          id: string
+          ok: boolean
+          ran_at: string
+          summary: Json | null
+        }
+        Insert: {
+          cron_name: string
+          id?: string
+          ok: boolean
+          ran_at?: string
+          summary?: Json | null
+        }
+        Update: {
+          cron_name?: string
+          id?: string
+          ok?: boolean
+          ran_at?: string
+          summary?: Json | null
         }
         Relationships: []
       }
@@ -327,6 +358,7 @@ export type Database = {
           id: string
           idempotency_key: string | null
           ip_address: string | null
+          lead_source: string
           lost_at: string | null
           message: string | null
           move_in_timeframe: string | null
@@ -335,6 +367,7 @@ export type Database = {
           phone: string
           qualified: boolean
           resident_name: string | null
+          sla_alerted_at: string | null
           status: Database["public"]["Enums"]["lead_status"]
           tour_booked_at: string | null
           tour_completed_at: string | null
@@ -363,6 +396,7 @@ export type Database = {
           id?: string
           idempotency_key?: string | null
           ip_address?: string | null
+          lead_source?: string
           lost_at?: string | null
           message?: string | null
           move_in_timeframe?: string | null
@@ -371,6 +405,7 @@ export type Database = {
           phone: string
           qualified?: boolean
           resident_name?: string | null
+          sla_alerted_at?: string | null
           status?: Database["public"]["Enums"]["lead_status"]
           tour_booked_at?: string | null
           tour_completed_at?: string | null
@@ -399,6 +434,7 @@ export type Database = {
           id?: string
           idempotency_key?: string | null
           ip_address?: string | null
+          lead_source?: string
           lost_at?: string | null
           message?: string | null
           move_in_timeframe?: string | null
@@ -407,6 +443,7 @@ export type Database = {
           phone?: string
           qualified?: boolean
           resident_name?: string | null
+          sla_alerted_at?: string | null
           status?: Database["public"]["Enums"]["lead_status"]
           tour_booked_at?: string | null
           tour_completed_at?: string | null
@@ -708,3 +745,4 @@ export type User = Tables<"users">
 export type MarketingLead = Tables<"marketing_leads">
 export type Author = Tables<"authors">
 export type BlogPost = Tables<"blog_posts">
+export type CronLog = Tables<"cron_logs">

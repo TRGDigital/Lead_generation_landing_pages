@@ -2,8 +2,10 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import * as Sentry from '@sentry/nextjs'
 import { createServiceClient } from '@/lib/supabase/server'
 import { requireAdmin } from '@/lib/auth'
+import { syncCampaignStatus } from '@/lib/google-ads'
 import { CareHomeFormSchema } from '@lib/schemas'
 import type { CareHomeContent, CareHomeBrand } from '@/lib/types/care-home'
 
@@ -91,6 +93,24 @@ export async function toggleCareHomeActive(id: string, isActive: boolean) {
   if (error) return { error: (error as { message: string }).message }
   revalidatePath('/admin/care-homes')
   revalidatePath('/admin/campaigns')
+
+  // Sync Google Ads campaign status — non-blocking; failure must not break the toggle
+  void (async () => {
+    try {
+      const { data: home } = await db
+        .from('care_homes')
+        .select('google_ads_customer_id, google_ads_campaign_id')
+        .eq('id', id)
+        .single()
+      if (home?.google_ads_customer_id && home?.google_ads_campaign_id) {
+        await syncCampaignStatus(home.google_ads_customer_id, home.google_ads_campaign_id, isActive)
+      }
+    } catch (err) {
+      Sentry.captureException(err, { extra: { homeId: id, isActive } })
+      console.error('[toggleCareHomeActive] Google Ads sync failed (non-fatal):', err)
+    }
+  })()
+
   return { success: true }
 }
 

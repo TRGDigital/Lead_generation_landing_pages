@@ -88,6 +88,7 @@ export async function POST(req: NextRequest) {
       ip_address: ip,
       user_agent: ua,
       idempotency_key: data.idempotencyKey ?? null,
+      lead_source: 'form',
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any)
     .select('id')
