@@ -69,6 +69,22 @@ const config: Config = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      boxShadow: {
+        soft: '0 2px 8px 0 rgba(42, 38, 32, 0.06)',
+        card: '0 4px 24px 0 rgba(42, 38, 32, 0.10)',
+      },
+      screens: {
+        pane: '900px',
+      },
+      keyframes: {
+        fadeUp: {
+          '0%': { opacity: '0', transform: 'translateY(16px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        fadeUp: 'fadeUp 0.5s ease-out both',
+      },
     },
   },
   plugins: [],

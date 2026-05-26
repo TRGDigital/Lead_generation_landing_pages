@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { Fraunces, Lora, Manrope } from 'next/font/google'
+import CookieBanner from '@/components/CookieBanner'
+import Analytics from '@/components/Analytics'
 import './globals.css'
 
 const fraunces = Fraunces({
@@ -37,6 +39,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-screen bg-background text-foreground antialiased">
         {children}
+        <CookieBanner />
+        <Analytics />
       </body>
     </html>
   )

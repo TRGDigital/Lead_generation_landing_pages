@@ -1,0 +1,47 @@
+import type { VercelKV } from '@vercel/kv'
+
+let kv: VercelKV | null = null
+
+async function getKv() {
+  if (kv) return kv
+  try {
+    const mod = await import('@vercel/kv')
+    kv = mod.kv
+    return kv
+  } catch {
+    return null
+  }
+}
+
+export async function checkRateLimit(
+  identifier: string,
+  limit: number,
+  windowSeconds: number
+): Promise<{ allowed: boolean; remaining: number }> {
+  const store = await getKv()
+  if (!store) {
+    return { allowed: true, remaining: limit }
+  }
+
+  const key = `rl:${identifier}`
+  const count = await store.incr(key)
+  if (count === 1) {
+    await store.expire(key, windowSeconds)
+  }
+
+  const remaining = Math.max(0, limit - count)
+  return { allowed: count <= limit, remaining }
+}
+
+export async function checkIdempotency(key: string): Promise<boolean> {
+  const store = await getKv()
+  if (!store) return false
+  const exists = await store.get(`idempotency:${key}`)
+  return exists !== null
+}
+
+export async function setIdempotency(key: string, ttlSeconds = 86400): Promise<void> {
+  const store = await getKv()
+  if (!store) return
+  await store.set(`idempotency:${key}`, '1', { ex: ttlSeconds })
+}
