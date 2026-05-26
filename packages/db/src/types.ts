@@ -3,6 +3,17 @@
 
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[]
 
+export type LeadStatus =
+  | 'new'
+  | 'contacted'
+  | 'qualified'
+  | 'converted'
+  | 'lost'
+  | 'tour_booked'
+  | 'tour_completed'
+  | 'assessed'
+  | 'moved_in'
+
 export interface Database {
   public: {
     Tables: {
@@ -77,7 +88,7 @@ export interface Database {
           care_type: string | null
           move_in_timeframe: string | null
           message: string | null
-          status: 'new' | 'contacted' | 'qualified' | 'converted' | 'lost'
+          status: LeadStatus
           notes: string | null
           utm_source: string | null
           utm_medium: string | null
@@ -88,6 +99,16 @@ export interface Database {
           ip_address: string | null
           user_agent: string | null
           idempotency_key: string | null
+          contacted_at: string | null
+          tour_booked_at: string | null
+          tour_completed_at: string | null
+          assessed_at: string | null
+          moved_in_at: string | null
+          lost_at: string | null
+          qualified: boolean
+          disqualification_reason: string | null
+          weekly_fee_pennies: number | null
+          assigned_to: string | null
           created_at: string
           updated_at: string
         }
@@ -101,7 +122,7 @@ export interface Database {
           care_type?: string | null
           move_in_timeframe?: string | null
           message?: string | null
-          status?: Database['public']['Enums']['lead_status']
+          status?: LeadStatus
           notes?: string | null
           utm_source?: string | null
           utm_medium?: string | null
@@ -112,6 +133,16 @@ export interface Database {
           ip_address?: string | null
           user_agent?: string | null
           idempotency_key?: string | null
+          contacted_at?: string | null
+          tour_booked_at?: string | null
+          tour_completed_at?: string | null
+          assessed_at?: string | null
+          moved_in_at?: string | null
+          lost_at?: string | null
+          qualified?: boolean
+          disqualification_reason?: string | null
+          weekly_fee_pennies?: number | null
+          assigned_to?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -125,7 +156,7 @@ export interface Database {
           care_type?: string | null
           move_in_timeframe?: string | null
           message?: string | null
-          status?: Database['public']['Enums']['lead_status']
+          status?: LeadStatus
           notes?: string | null
           utm_source?: string | null
           utm_medium?: string | null
@@ -136,6 +167,16 @@ export interface Database {
           ip_address?: string | null
           user_agent?: string | null
           idempotency_key?: string | null
+          contacted_at?: string | null
+          tour_booked_at?: string | null
+          tour_completed_at?: string | null
+          assessed_at?: string | null
+          moved_in_at?: string | null
+          lost_at?: string | null
+          qualified?: boolean
+          disqualification_reason?: string | null
+          weekly_fee_pennies?: number | null
+          assigned_to?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -147,6 +188,106 @@ export interface Database {
             referencedColumns: ['id']
           }
         ]
+      }
+      lead_activities: {
+        Row: {
+          id: string
+          lead_id: string
+          type: string
+          old_value: string | null
+          new_value: string | null
+          note: string | null
+          performed_by: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          lead_id: string
+          type: string
+          old_value?: string | null
+          new_value?: string | null
+          note?: string | null
+          performed_by?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          lead_id?: string
+          type?: string
+          old_value?: string | null
+          new_value?: string | null
+          note?: string | null
+          performed_by?: string | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'lead_activities_lead_id_fkey'
+            columns: ['lead_id']
+            referencedRelation: 'leads'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      care_home_users: {
+        Row: {
+          care_home_id: string
+          user_id: string
+          role: 'owner' | 'manager' | 'viewer'
+          invited_by: string | null
+          created_at: string
+        }
+        Insert: {
+          care_home_id: string
+          user_id: string
+          role: 'owner' | 'manager' | 'viewer'
+          invited_by?: string | null
+          created_at?: string
+        }
+        Update: {
+          care_home_id?: string
+          user_id?: string
+          role?: 'owner' | 'manager' | 'viewer'
+          invited_by?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
+      campaign_spend: {
+        Row: {
+          id: string
+          care_home_id: string
+          date: string
+          spend_pennies: number
+          impressions: number | null
+          clicks: number | null
+          conversions: number | null
+          source: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          care_home_id: string
+          date: string
+          spend_pennies?: number
+          impressions?: number | null
+          clicks?: number | null
+          conversions?: number | null
+          source?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          care_home_id?: string
+          date?: string
+          spend_pennies?: number
+          impressions?: number | null
+          clicks?: number | null
+          conversions?: number | null
+          source?: string
+          created_at?: string
+        }
+        Relationships: []
       }
       users: {
         Row: {
@@ -179,7 +320,7 @@ export interface Database {
     Views: { [_ in never]: never }
     Functions: { [_ in never]: never }
     Enums: {
-      lead_status: 'new' | 'contacted' | 'qualified' | 'converted' | 'lost'
+      lead_status: LeadStatus
     }
     CompositeTypes: { [_ in never]: never }
   }
