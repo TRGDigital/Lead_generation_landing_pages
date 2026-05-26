@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* shadcn/ui color tokens — mapped to brand palette (HSL) */
+    --background: 37 50% 97%;         /* #faf6f0 */
+    --foreground: 36 14% 15%;         /* #2a2620 */
+    --card: 30 44% 92%;               /* #f4ece0 */
+    --card-foreground: 36 14% 15%;
+    --popover: 37 50% 97%;
+    --popover-foreground: 36 14% 15%;
+    --primary: 28 51% 28%;            /* #6b4423 */
+    --primary-foreground: 37 50% 97%;
+    --secondary: 30 44% 92%;          /* #f4ece0 */
+    --secondary-foreground: 36 14% 15%;
+    --muted: 30 31% 85%;              /* #e6dccb */
+    --muted-foreground: 30 8% 32%;    /* #5a5247 */
+    --accent: 28 43% 46%;             /* #a87242 */
+    --accent-foreground: 37 50% 97%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 30 31% 85%;             /* #e6dccb */
+    --input: 30 31% 85%;
+    --ring: 28 51% 28%;               /* #6b4423 */
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
