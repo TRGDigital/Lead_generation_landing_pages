@@ -7,11 +7,13 @@ const DEFAULT_TIMEFRAMES = ['Urgently (within 2 weeks)', 'Within the next month'
 
 export function LocationLeadForm({
   locationSlug,
+  areaName,
   timeframes = DEFAULT_TIMEFRAMES,
   anchorId,
   flat = false,
 }: {
   locationSlug: string
+  areaName?: string
   careTypes?: string[]
   timeframes?: string[]
   anchorId?: string
@@ -140,7 +142,8 @@ export function LocationLeadForm({
           {submitting ? 'Sending…' : 'Get matched to local homes'}
         </button>
         <p className="text-center text-xs leading-relaxed text-slate-400">
-          By submitting you agree to be contacted by a care adviser. We never share your details with anyone you have not asked us to.
+          By submitting you agree to be contacted by a care adviser from a care home in the
+          {areaName ? ` ${areaName} ` : ' '}area, who will liaise with you to arrange a visit.
         </p>
       </form>
     </div>

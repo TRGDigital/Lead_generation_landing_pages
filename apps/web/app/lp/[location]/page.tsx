@@ -100,7 +100,7 @@ export default async function LocationLandingPage({ params }: { params: { locati
             </div>
           </div>
           <div className="lg:pl-4">
-            <LocationLeadForm locationSlug={page.slug} timeframes={c.timeframes} anchorId="enquire" />
+            <LocationLeadForm locationSlug={page.slug} areaName={area} timeframes={c.timeframes} anchorId="enquire" />
           </div>
         </div>
       </section>
@@ -135,7 +135,7 @@ export default async function LocationLandingPage({ params }: { params: { locati
               ))}
             </div>
             <div className="mt-10 flex justify-center">
-              <GetMatchedModal locationSlug={page.slug} timeframes={c.timeframes} />
+              <GetMatchedModal locationSlug={page.slug} areaName={area} timeframes={c.timeframes} />
             </div>
           </div>
         </section>
@@ -200,7 +200,7 @@ export default async function LocationLandingPage({ params }: { params: { locati
             </div>
           </div>
           <div className="flex justify-center pt-2">
-            <GetMatchedModal locationSlug={page.slug} timeframes={c.timeframes} label="Get matched to local homes" />
+            <GetMatchedModal locationSlug={page.slug} areaName={area} timeframes={c.timeframes} label="Get matched to local homes" />
           </div>
         </div>
       </section>
@@ -219,7 +219,7 @@ export default async function LocationLandingPage({ params }: { params: { locati
               ))}
             </div>
             <div className="mt-10 flex justify-center">
-              <GetMatchedModal locationSlug={page.slug} timeframes={c.timeframes} />
+              <GetMatchedModal locationSlug={page.slug} areaName={area} timeframes={c.timeframes} />
             </div>
           </div>
         </section>
@@ -243,7 +243,7 @@ export default async function LocationLandingPage({ params }: { params: { locati
               ))}
             </div>
             <div className="mt-10 flex justify-center">
-              <GetMatchedModal locationSlug={page.slug} timeframes={c.timeframes} />
+              <GetMatchedModal locationSlug={page.slug} areaName={area} timeframes={c.timeframes} />
             </div>
           </div>
         </section>

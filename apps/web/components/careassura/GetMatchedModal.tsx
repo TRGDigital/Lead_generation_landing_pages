@@ -5,11 +5,13 @@ import { LocationLeadForm } from './LocationLeadForm'
 
 export function GetMatchedModal({
   locationSlug,
+  areaName,
   timeframes,
   label = 'Get matched',
   className,
 }: {
   locationSlug: string
+  areaName?: string
   timeframes?: string[]
   label?: string
   className?: string
@@ -63,7 +65,7 @@ export function GetMatchedModal({
                 <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
               </svg>
             </button>
-            <LocationLeadForm locationSlug={locationSlug} timeframes={timeframes} flat />
+            <LocationLeadForm locationSlug={locationSlug} areaName={areaName} timeframes={timeframes} flat />
           </div>
         </div>
       )}
