@@ -12,7 +12,7 @@ export async function signIn(formData: FormData) {
   const supabase = createClient()
   const email = formData.get('email') as string
   const password = formData.get('password') as string
-  const redirectTo = safeRedirect((formData.get('redirect') as string) ?? '/')
+  const redirectTo = safeRedirect((formData.get('redirect') as string) ?? '/admin')
 
   const { error } = await supabase.auth.signInWithPassword({ email, password })
 

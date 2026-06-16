@@ -25,7 +25,7 @@ export default function SignInPage({ searchParams }: Props) {
           <input
             type="hidden"
             name="redirect"
-            value={searchParams.redirect ?? '/'}
+            value={searchParams.redirect ?? '/admin'}
           />
 
           <div>
