@@ -77,8 +77,8 @@ export default function DevelopmentPage() {
               live and used across the UK care sector today.
             </p>
             <div className="mt-8 flex items-center gap-8">
-              <Image src="/products/carestream-logo.png" alt="CareStreamAI" width={150} height={35} className="h-7 w-auto sm:h-8" />
-              <Image src="/products/careassura-logo.webp" alt="CareAssura" width={400} height={237} className="h-8 w-auto sm:h-9" />
+              <Image src="/products/carestream-logo.png" alt="CareStreamAI" width={150} height={35} className="h-9 w-auto sm:h-10" />
+              <Image src="/products/careassura-logo.webp" alt="CareAssura" width={400} height={237} className="h-11 w-auto sm:h-12" />
             </div>
           </div>
 
@@ -105,7 +105,7 @@ export default function DevelopmentPage() {
               <div className="grid gap-0 md:grid-cols-2">
                 {/* Left — narrative */}
                 <div className="p-8 sm:p-10">
-                  <Image src={logo} alt={name} width={400} height={237} className="h-9 w-auto" />
+                  <Image src={logo} alt={name} width={400} height={237} className="h-11 w-auto" />
                   <p className="mt-5 text-sm font-medium text-brand-ink-muted">{tagline}</p>
                   <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">{body}</p>
                   <a

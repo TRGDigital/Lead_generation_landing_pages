@@ -2,7 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Megaphone, Globe, Code2, ArrowRight, Check } from 'lucide-react'
-import { RotatingHeadline } from '@/components/marketing/RotatingHeadline'
+import { HomeHero } from '@/components/marketing/HomeHero'
+import PostCard from '@/components/blog/PostCard'
+import { getPublishedPosts } from '@/lib/blog'
 
 export const dynamic = 'force-static'
 
@@ -52,7 +54,9 @@ const SERVICES = [
   },
 ]
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { posts } = await getPublishedPosts(1)
+  const latest = posts.slice(0, 4)
   return (
     <>
       {/* JSON-LD — Organization */}
@@ -71,66 +75,7 @@ export default function HomePage() {
         }}
       />
 
-      {/* ── Hero ──────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden">
-        {/* Image — bleeds to the right edge of the viewport on desktop */}
-        <div className="absolute inset-y-0 right-0 hidden w-[46%] lg:block">
-          <Image
-            src="/hero-resident.jpg"
-            alt="A care home resident relaxing in her room, looking out over the garden"
-            fill
-            priority
-            sizes="46vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-brand-bg to-transparent" />
-        </div>
-
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="py-16 lg:w-1/2 lg:py-28 lg:pr-12">
-            <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">
-              Specialist care-sector agency
-            </p>
-            <h1 className="mt-4 font-display text-5xl font-semibold leading-tight text-brand-ink sm:text-6xl">
-              We help care providers{' '}
-              <RotatingHeadline
-                phrases={['win more enquiries.', 'stand out online.', 'build better software.']}
-                className="italic text-brand-accent-soft"
-              />
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
-              TRG Digital is a specialist agency for the UK care sector. We grow your enquiries,
-              build your website, and develop the software that sets you apart, all under one roof.
-            </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/contact"
-                className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-brand-ink shadow-soft transition-all hover:bg-brand-ink hover:text-white hover:shadow-card"
-              >
-                Book a free demo
-              </Link>
-              <Link
-                href="/about"
-                className="inline-flex h-12 items-center justify-center rounded-xl border border-brand-line px-8 text-base font-medium text-brand-ink-soft transition-colors hover:border-brand-ink hover:text-brand-ink"
-              >
-                What we do
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Image — full width below the text on mobile/tablet */}
-        <div className="relative h-64 w-full sm:h-80 lg:hidden">
-          <Image
-            src="/hero-resident.jpg"
-            alt="A care home resident relaxing in her room, looking out over the garden"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-        </div>
-      </section>
+      <HomeHero />
 
       {/* ── Services ──────────────────────────────────────────────────── */}
       <section className="px-6 py-20">
@@ -218,7 +163,7 @@ export default function HomePage() {
               { name: 'CareAssura', logo: '/products/careassura-logo.webp', body: 'A UK care home directory that helps families find, compare and choose the right care with confidence.', href: 'https://careassura.co.uk' },
             ].map(({ name, logo, body, href }) => (
               <div key={name} className="rounded-2xl border border-brand-line bg-white p-8 shadow-soft">
-                <Image src={logo} alt={name} width={400} height={237} className="h-9 w-auto" />
+                <Image src={logo} alt={name} width={400} height={237} className="h-12 w-auto" />
                 <p className="mt-4 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
                 <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
                   <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-brand-accent hover:text-brand-ink">
@@ -258,6 +203,26 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── Latest from the blog ──────────────────── */}
+      {latest.length > 0 && (
+        <section className="bg-brand-bg-warm px-6 py-20">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">From the blog</p>
+                <h2 className="mt-2 font-display text-3xl font-semibold text-brand-ink sm:text-4xl">Insight for the care sector</h2>
+              </div>
+              <Link href="/blog" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-ink hover:text-brand-accent">
+                View all posts <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {latest.map((post) => <PostCard key={post.id} post={post} />)}
+            </div>
+          </div>
+        </section>
+      )}
     </>
   )
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export const dynamic = 'force-static'
 
@@ -41,16 +42,50 @@ export default function AboutPage() {
 
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section className="px-6 pt-16 pb-20">
-        <div className="mx-auto max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">About us</p>
-          <h1 className="mt-4 font-display text-5xl font-semibold leading-tight text-brand-ink">
-            A digital agency built only for care
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed text-brand-ink-soft">
-            TRG Digital helps UK care providers grow. We bring modern marketing, websites and
-            software to a sector that has long been underserved by generic agencies, and we do it
-            with a deep understanding of how care really works.
-          </p>
+        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">About us</p>
+            <h1 className="mt-4 font-display text-4xl font-semibold leading-tight text-brand-ink sm:text-5xl">
+              Where care meets{' '}
+              <span className="italic text-brand-accent-soft">development.</span>
+            </h1>
+            <p className="mt-6 text-lg leading-relaxed text-brand-ink-soft">
+              TRG Digital helps UK care providers grow. We bring modern marketing, websites and
+              software to a sector that has long been underserved by generic agencies, and we do it
+              with a deep understanding of how care really works.
+            </p>
+            <div className="mt-8">
+              <Link
+                href="/contact"
+                className="inline-flex h-12 items-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-brand-ink shadow-soft transition-all hover:bg-brand-ink hover:text-white"
+              >
+                Work with us
+              </Link>
+            </div>
+          </div>
+
+          {/* Visual — a care setting, paired with the software we build */}
+          <div className="relative">
+            <div className="overflow-hidden rounded-2xl shadow-card">
+              <Image
+                src="/hero-resident.jpg"
+                alt="A care home resident relaxing in her room"
+                width={1600}
+                height={906}
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-6 -left-4 hidden w-2/5 overflow-hidden rounded-lg border border-brand-line bg-white shadow-card sm:block">
+              <div className="flex items-center gap-1 border-b border-brand-line bg-brand-bg-warm px-2 py-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-red-400" />
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-300" />
+                <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
+              </div>
+              <Image src="/mockups/carestream.jpg" alt="CareStream, software we build for care" width={1320} height={940} className="w-full" />
+            </div>
+          </div>
         </div>
       </section>
 
