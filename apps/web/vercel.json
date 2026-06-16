@@ -1,0 +1,10 @@
+{
+  "buildCommand": "NODE_OPTIONS='--max-old-space-size=4096' next build && rm -rf .next/cache",
+  "outputDirectory": ".next",
+  "crons": [
+    { "path": "/api/cron/google-ads-sync", "schedule": "0 8 * * *" },
+    { "path": "/api/cron/daily-summary",   "schedule": "0 8 * * *" },
+    { "path": "/api/cron/sla-alerts",      "schedule": "0 9 * * *" },
+    { "path": "/api/cron/data-retention",  "schedule": "0 2 * * *" }
+  ]
+}

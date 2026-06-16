@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getLocationPage, getAllLocationSlugs } from '@/lib/location-page'
 import { LocationLeadForm } from '@/components/careassura/LocationLeadForm'
+import { GetMatchedModal } from '@/components/careassura/GetMatchedModal'
 
 export const revalidate = 60
 
@@ -50,7 +51,7 @@ export default async function LocationLandingPage({ params }: { params: { locati
       {/* Header */}
       <header className="border-b border-slate-100">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Image src="/products/careassura-logo.webp" alt="CareAssura" width={400} height={237} className="h-14 w-auto" priority />
+          <Image src="/products/careassura-logo.webp" alt="CareAssura" width={400} height={237} className="h-20 w-auto" priority />
           <a href="#enquire" className="rounded-full bg-gradient-to-r from-violet-600 to-purple-600 px-5 py-2 text-sm font-semibold text-white">
             Get free help
           </a>
@@ -99,7 +100,7 @@ export default async function LocationLandingPage({ params }: { params: { locati
             </div>
           </div>
           <div className="lg:pl-4">
-            <LocationLeadForm locationSlug={page.slug} timeframes={c.timeframes} />
+            <LocationLeadForm locationSlug={page.slug} timeframes={c.timeframes} anchorId="enquire" />
           </div>
         </div>
       </section>
@@ -133,6 +134,9 @@ export default async function LocationLandingPage({ params }: { params: { locati
                 </div>
               ))}
             </div>
+            <div className="mt-10 flex justify-center">
+              <GetMatchedModal locationSlug={page.slug} timeframes={c.timeframes} />
+            </div>
           </div>
         </section>
       )}
@@ -155,6 +159,10 @@ export default async function LocationLandingPage({ params }: { params: { locati
                 The best homes in {area} go beyond day-to-day care, with physiotherapy, gentle exercise and activities that
                 help residents stay strong, mobile and independent for longer.
               </p>
+              <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
+                We only suggest homes with the right nursing and therapy teams on hand, so you can be confident your loved
+                one is supported to live as fully and comfortably as possible.
+              </p>
             </div>
           </div>
           {/* Respite */}
@@ -165,10 +173,34 @@ export default async function LocationLandingPage({ params }: { params: { locati
                 Choosing a care home is about people as much as place. We match you to homes where residents are known,
                 listened to and treated with real kindness, every single day.
               </p>
+              <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
+                From a favourite armchair to a familiar face at breakfast, the small things matter. We take the time to
+                understand what makes your family member feel at home, and find the places that get those details right.
+              </p>
             </div>
             <div className="order-1 overflow-hidden rounded-2xl shadow-lg lg:order-2">
               <Image src="/careassura/respite.jpg" alt="A care worker chatting warmly with a resident over a cup of tea" width={1232} height={832} className="aspect-[16/10] w-full object-cover" />
             </div>
+          </div>
+          {/* Companionship */}
+          <div className="grid items-center gap-8 lg:grid-cols-2">
+            <div className="overflow-hidden rounded-2xl shadow-lg">
+              <Image src="/careassura/companionship.jpg" alt="A nurse sharing a warm conversation with a smiling resident in a care home lounge" width={1400} height={830} className="aspect-[16/10] w-full object-cover" />
+            </div>
+            <div>
+              <h3 className="text-2xl font-semibold text-slate-900">People who genuinely care</h3>
+              <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
+                Great care comes down to great people. The homes we recommend in {area} are led by teams who treat residents
+                like family, with patience, good humour and real affection.
+              </p>
+              <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
+                A friendly chat, a shared cup of tea, a hand to hold. These moments are what turn a care home into a real
+                home, and they are exactly what we look for on your behalf.
+              </p>
+            </div>
+          </div>
+          <div className="flex justify-center pt-2">
+            <GetMatchedModal locationSlug={page.slug} timeframes={c.timeframes} label="Get matched to local homes" />
           </div>
         </div>
       </section>
@@ -185,6 +217,9 @@ export default async function LocationLandingPage({ params }: { params: { locati
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">{p.body}</p>
                 </div>
               ))}
+            </div>
+            <div className="mt-10 flex justify-center">
+              <GetMatchedModal locationSlug={page.slug} timeframes={c.timeframes} />
             </div>
           </div>
         </section>
@@ -206,6 +241,9 @@ export default async function LocationLandingPage({ params }: { params: { locati
                   <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-slate-600">{f.answer}</p>
                 </details>
               ))}
+            </div>
+            <div className="mt-10 flex justify-center">
+              <GetMatchedModal locationSlug={page.slug} timeframes={c.timeframes} />
             </div>
           </div>
         </section>

@@ -51,3 +51,62 @@ Use relative imports in files where the `@db` alias is not reliably resolved. Us
 - Minor inconsistency in import style  
 - Avoids build-time resolution failures  
 - Can be unified in a later phase once confirmed working
+
+---
+
+## ADR-004: Monetary values in pennies (integer) throughout
+
+**Date:** 2026-05-26  
+**Status:** Accepted
+
+**Context:**  
+JavaScript floating-point arithmetic on currency values causes subtle rounding errors (0.1 + 0.2 ≠ 0.3). All care-home fee and ad spend values are whole pence in practice.
+
+**Decision:**  
+Store and compute all monetary values in pence (integer). Divide by 100 only at the display layer (`formatPennies`). The economics library (`packages/lib/src/economics.ts`) operates entirely in pennies.
+
+**Consequences:**  
+- Integer arithmetic — no floating-point currency bugs  
+- Display layer is the single conversion point  
+- Column names use `_pennies` suffix to make the unit explicit
+
+---
+
+## ADR-005: Non-blocking Google Ads sync via void IIFE
+
+**Date:** 2026-05-26  
+**Status:** Accepted
+
+**Context:**  
+When a care home is toggled active/inactive, we want to sync the campaign status to Google Ads. But the Google Ads API can be slow or unavailable, and the toggle must feel instant to the user.
+
+**Decision:**  
+Fire the Google Ads sync in a `void (async () => { ... })()` pattern (non-blocking IIFE) so the server action returns immediately. Failures are captured via `Sentry.captureException`.
+
+**Consequences:**  
+- Toggle UX is always fast  
+- Google Ads may lag behind by seconds if the API is slow, but will converge  
+- Errors are surfaced via Sentry, not as user-visible failures
+
+---
+
+## ADR-006: Economics classification thresholds (CPM as % of annual revenue)
+
+**Date:** 2026-05-26  
+**Status:** Accepted
+
+**Context:**  
+Need an objective signal for whether a care home's ad spend is performing well, using data available in the system.
+
+**Decision:**  
+Classify using CPM (cost per move-in) as a percentage of annual bed revenue (weekly fee × 52 weeks):
+- `good`: CPM < 4% of annual revenue  
+- `monitor`: CPM 4–8%  
+- `review`: CPM > 8%  
+- `insufficient`: fewer than 5 move-ins or missing data
+
+Rationale: a move-in generates ~25× the CPM in revenue over a typical stay, so <4% represents a strong payback.
+
+**Consequences:**  
+- Requires `weekly_bed_value_pennies` to be set on the care home record  
+- Homes without 5+ move-ins show `insufficient` — prevents false signals from small samples

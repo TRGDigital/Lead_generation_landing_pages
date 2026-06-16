@@ -8,10 +8,14 @@ const DEFAULT_TIMEFRAMES = ['Urgently (within 2 weeks)', 'Within the next month'
 export function LocationLeadForm({
   locationSlug,
   timeframes = DEFAULT_TIMEFRAMES,
+  anchorId,
+  flat = false,
 }: {
   locationSlug: string
   careTypes?: string[]
   timeframes?: string[]
+  anchorId?: string
+  flat?: boolean
 }) {
   const [submitting, setSubmitting] = useState(false)
   const [done, setDone] = useState(false)
@@ -61,9 +65,16 @@ export function LocationLeadForm({
   const input = 'w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-500/20'
   const label = 'mb-1.5 block text-sm font-medium text-slate-700'
 
+  const cardCls = flat
+    ? 'bg-white'
+    : 'rounded-2xl bg-white p-6 shadow-xl ring-1 ring-slate-100 sm:p-7'
+  const doneCls = flat
+    ? 'bg-white p-2 text-center'
+    : 'rounded-2xl bg-white p-8 text-center shadow-xl ring-1 ring-slate-100'
+
   if (done) {
     return (
-      <div className="rounded-2xl bg-white p-8 text-center shadow-xl ring-1 ring-slate-100">
+      <div className={doneCls}>
         <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-violet-100">
           <svg viewBox="0 0 24 24" className="h-7 w-7 text-violet-600" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </div>
@@ -77,7 +88,7 @@ export function LocationLeadForm({
   }
 
   return (
-    <div id="enquire" className="rounded-2xl bg-white p-6 shadow-xl ring-1 ring-slate-100 sm:p-7">
+    <div id={anchorId} className={cardCls}>
       <p className="text-xs font-semibold uppercase tracking-wider text-violet-600">Free &amp; impartial</p>
       <h3 className="mt-1 text-xl font-semibold text-slate-900">Find your care home</h3>
       <p className="mt-1 text-sm text-slate-600">Tell us a little about your situation and we&apos;ll match you to the right local homes.</p>
