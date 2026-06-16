@@ -6,7 +6,7 @@ import { HomeHero } from '@/components/marketing/HomeHero'
 import PostCard from '@/components/blog/PostCard'
 import { getPublishedPosts } from '@/lib/blog'
 
-export const dynamic = 'force-static'
+export const revalidate = 60
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
@@ -159,11 +159,11 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {[
-              { name: 'CareStreamAI', logo: '/products/carestream-logo.png', body: 'Policies, training, audits and CQC tools, answered for care staff in over 60 languages, grounded in the provider’s own documents.', href: 'https://carestreamai.com' },
-              { name: 'CareAssura', logo: '/products/careassura-logo.webp', body: 'A UK care home directory that helps families find, compare and choose the right care with confidence.', href: 'https://careassura.co.uk' },
-            ].map(({ name, logo, body, href }) => (
+              { name: 'CareStreamAI', logo: '/products/carestream-logo.png', logoW: 700, logoH: 210, body: 'Policies, training, audits and CQC tools, answered for care staff in over 60 languages, grounded in the provider’s own documents.', href: 'https://carestreamai.com' },
+              { name: 'CareAssura', logo: '/products/careassura-logo.webp', logoW: 400, logoH: 237, body: 'A UK care home directory that helps families find, compare and choose the right care with confidence.', href: 'https://careassura.co.uk' },
+            ].map(({ name, logo, logoW, logoH, body, href }) => (
               <div key={name} className="rounded-2xl border border-brand-line bg-white p-8 shadow-soft">
-                <Image src={logo} alt={name} width={400} height={237} className="h-12 w-auto" />
+                <Image src={logo} alt={name} width={logoW} height={logoH} className="h-16 w-auto" />
                 <p className="mt-4 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
                 <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
                   <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-brand-accent hover:text-brand-ink">

@@ -8,12 +8,12 @@ const PHRASES = ['win more enquiries.', 'stand out online.', 'build better softw
 
 function Frame({ src, alt, url, w, h, className = '' }: { src: string; alt: string; url: string; w: number; h: number; className?: string }) {
   return (
-    <div className={`overflow-hidden rounded-lg border border-brand-line bg-white shadow-card ${className}`}>
-      <div className="flex items-center gap-1 border-b border-brand-line bg-brand-bg-warm px-2 py-1.5">
-        <span className="h-1.5 w-1.5 rounded-full bg-red-400" />
-        <span className="h-1.5 w-1.5 rounded-full bg-amber-300" />
-        <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
-        <span className="ml-1.5 hidden truncate rounded bg-white px-1.5 py-0.5 text-[8px] text-brand-ink-muted sm:block">{url}</span>
+    <div className={`overflow-hidden rounded-xl border border-brand-line bg-white shadow-card ${className}`}>
+      <div className="flex items-center gap-1.5 border-b border-brand-line bg-brand-bg-warm px-3 py-2">
+        <span className="h-2 w-2 rounded-full bg-red-400" />
+        <span className="h-2 w-2 rounded-full bg-amber-300" />
+        <span className="h-2 w-2 rounded-full bg-green-400" />
+        <span className="ml-2 hidden truncate rounded bg-white px-2 py-0.5 text-[9px] text-brand-ink-muted sm:block">{url}</span>
       </div>
       <Image src={src} alt={alt} width={w} height={h} className="w-full" />
     </div>
@@ -22,7 +22,7 @@ function Frame({ src, alt, url, w, h, className = '' }: { src: string; alt: stri
 
 function Mockups() {
   return (
-    <div className="relative w-full max-w-md px-2">
+    <div className="relative w-full max-w-xl px-4">
       <Frame src="/mockups/carestream.jpg" alt="The CareStream homepage" url="carestreamai.com" w={1320} h={940} />
       <Frame
         src="/mockups/careassura.jpg"
@@ -30,7 +30,7 @@ function Mockups() {
         url="careassura.co.uk"
         w={1320}
         h={895}
-        className="absolute -bottom-8 right-0 w-[70%]"
+        className="absolute -bottom-8 right-0 w-[74%]"
       />
     </div>
   )
