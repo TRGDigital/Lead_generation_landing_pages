@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const PRODUCTS = [
   {
     name: 'CareStreamAI',
-    logo: '/products/carestream-logo.png', logoW: 700, logoH: 210,
+    logo: '/products/carestream-logo.png', logoW: 700, logoH: 210, logoClass: 'h-12',
     tagline: 'Policies, training and CQC tools, in every language',
     body:
       "CareStream gives every member of a care team instant, cited answers from their own policies, training, audits and CQC tools, around the clock and in over 60 languages. Every answer is grounded in the provider's own documents, never the open internet, so staff always act on the right guidance.",
@@ -30,7 +30,7 @@ const PRODUCTS = [
   },
   {
     name: 'CareAssura',
-    logo: '/products/careassura-logo.webp', logoW: 400, logoH: 237,
+    logo: '/products/careassura-logo.webp', logoW: 400, logoH: 237, logoClass: 'h-16',
     tagline: 'Helping families find the right care home',
     body:
       'CareAssura is a UK care home directory built for families. It brings together detailed listings, honest guidance and simple comparison tools, so people can make confident, informed decisions about care for someone they love.',
@@ -78,7 +78,7 @@ export default function DevelopmentPage() {
             </p>
             <div className="mt-8 flex items-center gap-8">
               <Image src="/products/carestream-logo.png" alt="CareStreamAI" width={700} height={210} className="h-12 w-auto sm:h-14" />
-              <Image src="/products/careassura-logo.webp" alt="CareAssura" width={400} height={237} className="h-14 w-auto sm:h-16" />
+              <Image src="/products/careassura-logo.webp" alt="CareAssura" width={400} height={237} className="h-16 w-auto sm:h-20" />
             </div>
           </div>
 
@@ -97,7 +97,7 @@ export default function DevelopmentPage() {
       {/* ── Products ──────────────────────────────────────────────────── */}
       <section className="px-6 pb-24 pt-8">
         <div className="mx-auto max-w-5xl space-y-8">
-          {PRODUCTS.map(({ name, logo, logoW, logoH, tagline, body, features, href, cta }) => (
+          {PRODUCTS.map(({ name, logo, logoW, logoH, logoClass, tagline, body, features, href, cta }) => (
             <div
               key={name}
               className="overflow-hidden rounded-3xl border border-brand-line bg-white shadow-soft"
@@ -105,7 +105,7 @@ export default function DevelopmentPage() {
               <div className="grid gap-0 md:grid-cols-2">
                 {/* Left — narrative */}
                 <div className="p-8 sm:p-10">
-                  <Image src={logo} alt={name} width={logoW} height={logoH} className="h-14 w-auto" />
+                  <Image src={logo} alt={name} width={logoW} height={logoH} className={`${logoClass} w-auto`} />
                   <p className="mt-5 text-sm font-medium text-brand-ink-muted">{tagline}</p>
                   <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">{body}</p>
                   <a
