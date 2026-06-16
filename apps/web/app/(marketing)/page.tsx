@@ -160,7 +160,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {[
               { name: 'CareStreamAI', logo: '/products/carestream-logo.png', logoW: 700, logoH: 210, logoClass: 'h-14', body: 'Policies, training, audits and CQC tools, answered for care staff in over 60 languages, grounded in the provider’s own documents.', href: 'https://carestreamai.com' },
-              { name: 'CareAssura', logo: '/products/careassura-logo.webp', logoW: 400, logoH: 237, logoClass: 'h-20', body: 'A UK care home directory that helps families find, compare and choose the right care with confidence.', href: 'https://careassura.co.uk' },
+              { name: 'CareAssura', logo: '/products/careassura-logo.webp', logoW: 364, logoH: 91, logoClass: 'h-14', body: 'A UK care home directory that helps families find, compare and choose the right care with confidence.', href: 'https://careassura.co.uk' },
             ].map(({ name, logo, logoW, logoH, logoClass, body, href }) => (
               <div key={name} className="rounded-2xl border border-brand-line bg-white p-8 shadow-soft">
                 <Image src={logo} alt={name} width={logoW} height={logoH} className={`${logoClass} w-auto`} />

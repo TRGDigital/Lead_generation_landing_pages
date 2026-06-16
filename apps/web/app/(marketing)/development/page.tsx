@@ -30,7 +30,7 @@ const PRODUCTS = [
   },
   {
     name: 'CareAssura',
-    logo: '/products/careassura-logo.webp', logoW: 400, logoH: 237, logoClass: 'h-16',
+    logo: '/products/careassura-logo.webp', logoW: 364, logoH: 91, logoClass: 'h-12',
     tagline: 'Helping families find the right care home',
     body:
       'CareAssura is a UK care home directory built for families. It brings together detailed listings, honest guidance and simple comparison tools, so people can make confident, informed decisions about care for someone they love.',
@@ -78,7 +78,7 @@ export default function DevelopmentPage() {
             </p>
             <div className="mt-8 flex items-center gap-8">
               <Image src="/products/carestream-logo.png" alt="CareStreamAI" width={700} height={210} className="h-12 w-auto sm:h-14" />
-              <Image src="/products/careassura-logo.webp" alt="CareAssura" width={400} height={237} className="h-16 w-auto sm:h-20" />
+              <Image src="/products/careassura-logo.webp" alt="CareAssura" width={364} height={91} className="h-12 w-auto sm:h-14" />
             </div>
           </div>
 

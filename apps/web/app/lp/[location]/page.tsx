@@ -50,8 +50,8 @@ export default async function LocationLandingPage({ params }: { params: { locati
     <div className="min-h-screen bg-white text-slate-900">
       {/* Header */}
       <header className="border-b border-slate-100">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Image src="/products/careassura-logo.webp" alt="CareAssura" width={400} height={237} className="h-20 w-auto" priority />
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
+          <Image src="/products/careassura-logo.webp" alt="CareAssura" width={364} height={91} className="h-16 w-auto sm:h-20" priority />
           <a href="#enquire" className="rounded-full bg-gradient-to-r from-violet-600 to-purple-600 px-5 py-2 text-sm font-semibold text-white">
             Get free help
           </a>
@@ -263,7 +263,7 @@ export default async function LocationLandingPage({ params }: { params: { locati
       {/* Footer */}
       <footer className="border-t border-slate-100 py-8">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 text-center sm:flex-row sm:text-left">
-          <Image src="/products/careassura-logo.webp" alt="CareAssura" width={400} height={237} className="h-10 w-auto" />
+          <Image src="/products/careassura-logo.webp" alt="CareAssura" width={364} height={91} className="h-10 w-auto" />
           <p className="text-xs text-slate-400">© {new Date().getFullYear()} CareAssura. Free, impartial help finding care across the UK.</p>
         </div>
       </footer>
