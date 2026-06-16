@@ -197,15 +197,15 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* CTA */}
         <div className="mt-12 rounded-2xl bg-brand-accent px-8 py-8 text-center">
-          <p className="font-display text-xl font-semibold text-white">
+          <p className="font-display text-xl font-semibold text-brand-ink">
             Ready to fill your empty beds?
           </p>
-          <p className="mt-2 text-sm text-white/80">
-            Book a free demo and see how CareBeds works for your home.
+          <p className="mt-2 text-sm text-brand-ink/75">
+            Book a free demo and see how our marketing works for your home.
           </p>
           <Link
             href="/contact"
-            className="mt-5 inline-flex h-10 items-center rounded-xl bg-white px-6 text-sm font-semibold text-brand-accent transition-all hover:bg-brand-bg"
+            className="mt-5 inline-flex h-10 items-center rounded-xl bg-brand-ink px-6 text-sm font-semibold text-white transition-all hover:bg-brand-ink/90"
           >
             Book a demo
           </Link>

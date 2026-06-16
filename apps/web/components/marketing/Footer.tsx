@@ -4,7 +4,7 @@ import Image from 'next/image'
 const LINKS = {
   Services: [
     { href: '/marketing', label: 'Marketing' },
-    { href: '/website-development', label: 'Website Development' },
+    { href: '/website-development', label: 'Website build' },
     { href: '/development', label: 'Development' },
   ],
   Company: [

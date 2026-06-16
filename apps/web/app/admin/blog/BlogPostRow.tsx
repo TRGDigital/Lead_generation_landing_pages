@@ -4,8 +4,11 @@ import Link from 'next/link'
 import { useTransition } from 'react'
 import { Edit, Globe, EyeOff, Trash2 } from 'lucide-react'
 import { publishBlogPost, unpublishBlogPost, deleteBlogPost } from './actions'
-import { formatDate } from '@/lib/blog'
 import type { PostWithAuthor } from '@/lib/blog'
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+}
 
 export default function BlogPostRow({ post }: { post: PostWithAuthor }) {
   const [isPending, startTransition] = useTransition()

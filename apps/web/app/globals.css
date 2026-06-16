@@ -4,26 +4,26 @@
 
 @layer base {
   :root {
-    /* shadcn/ui color tokens — mapped to brand palette (HSL) */
-    --background: 37 50% 97%;         /* #faf6f0 */
+    /* shadcn/ui color tokens — white base with the TRG yellow accent (HSL) */
+    --background: 0 0% 100%;          /* #ffffff */
     --foreground: 36 14% 15%;         /* #2a2620 */
-    --card: 30 44% 92%;               /* #f4ece0 */
+    --card: 40 14% 97%;              /* #f7f6f3 */
     --card-foreground: 36 14% 15%;
-    --popover: 37 50% 97%;
+    --popover: 0 0% 100%;
     --popover-foreground: 36 14% 15%;
-    --primary: 28 51% 28%;            /* #6b4423 */
-    --primary-foreground: 37 50% 97%;
-    --secondary: 30 44% 92%;          /* #f4ece0 */
+    --primary: 46 96% 59%;           /* #FBCC33 (logo yellow) */
+    --primary-foreground: 36 14% 15%; /* dark text on yellow */
+    --secondary: 40 14% 96%;         /* #f5f4f1 */
     --secondary-foreground: 36 14% 15%;
-    --muted: 30 31% 85%;              /* #e6dccb */
+    --muted: 40 13% 95%;             /* #f3f2ef */
     --muted-foreground: 30 8% 32%;    /* #5a5247 */
-    --accent: 28 43% 46%;             /* #a87242 */
-    --accent-foreground: 37 50% 97%;
+    --accent: 46 96% 59%;            /* #FBCC33 */
+    --accent-foreground: 36 14% 15%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 30 31% 85%;             /* #e6dccb */
-    --input: 30 31% 85%;
-    --ring: 28 51% 28%;               /* #6b4423 */
+    --border: 40 13% 91%;            /* #ebe9e4 */
+    --input: 40 13% 91%;
+    --ring: 46 96% 59%;              /* #FBCC33 */
     --radius: 0.5rem;
   }
 

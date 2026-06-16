@@ -105,7 +105,7 @@ export default function HomePage() {
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/contact"
-                className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-white shadow-soft transition-all hover:bg-brand-ink hover:shadow-card"
+                className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-brand-ink shadow-soft transition-all hover:bg-brand-ink hover:text-white hover:shadow-card"
               >
                 Book a free demo
               </Link>
@@ -214,12 +214,12 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {[
-              { name: 'CareStreamAI', body: 'Policies, training, audits and CQC tools, answered for care staff in over 60 languages, grounded in the provider’s own documents.', href: 'https://carestreamai.com' },
-              { name: 'CareAssura', body: 'A UK care home directory that helps families find, compare and choose the right care with confidence.', href: 'https://careassura.co.uk' },
-            ].map(({ name, body, href }) => (
+              { name: 'CareStreamAI', logo: '/products/carestream-logo.png', body: 'Policies, training, audits and CQC tools, answered for care staff in over 60 languages, grounded in the provider’s own documents.', href: 'https://carestreamai.com' },
+              { name: 'CareAssura', logo: '/products/careassura-logo.webp', body: 'A UK care home directory that helps families find, compare and choose the right care with confidence.', href: 'https://careassura.co.uk' },
+            ].map(({ name, logo, body, href }) => (
               <div key={name} className="rounded-2xl border border-brand-line bg-white p-8 shadow-soft">
-                <h3 className="font-display text-2xl font-semibold text-brand-ink">{name}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
+                <Image src={logo} alt={name} width={400} height={237} className="h-9 w-auto" />
+                <p className="mt-4 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
                 <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
                   <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-brand-accent hover:text-brand-ink">
                     Visit site <ArrowRight className="h-4 w-4" />
@@ -235,23 +235,23 @@ export default function HomePage() {
       {/* ── Final CTA ─────────────────────────────────────────────────── */}
       <section className="bg-brand-accent px-6 py-20 text-center">
         <div className="mx-auto max-w-2xl">
-          <h2 className="font-display text-3xl font-semibold text-white sm:text-4xl">
+          <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
             Let&apos;s grow your care business
           </h2>
-          <p className="mt-4 text-white/80">
+          <p className="mt-4 text-brand-ink/75">
             Book a free 20-minute call. Tell us where you want to grow and we&apos;ll show you exactly
             how we can help, whether that&apos;s enquiries, a new website, or custom software.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               href="/contact"
-              className="inline-flex h-12 items-center rounded-xl bg-white px-8 text-sm font-semibold text-brand-accent shadow-soft transition-all hover:bg-brand-bg"
+              className="inline-flex h-12 items-center rounded-xl bg-brand-ink px-8 text-sm font-semibold text-white shadow-soft transition-all hover:bg-brand-ink/90"
             >
               Book a free demo
             </Link>
             <Link
               href="/development"
-              className="inline-flex h-12 items-center px-8 text-sm font-medium text-white/80 transition-colors hover:text-white"
+              className="inline-flex h-12 items-center px-8 text-sm font-medium text-brand-ink/70 transition-colors hover:text-brand-ink"
             >
               See our work →
             </Link>

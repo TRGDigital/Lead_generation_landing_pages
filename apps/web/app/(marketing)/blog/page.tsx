@@ -137,7 +137,7 @@ export default async function BlogIndexPage({ searchParams }: Props) {
                 href={`/blog?page=${p}`}
                 className={`h-9 w-9 rounded-xl text-center text-sm font-medium leading-9 transition-colors ${
                   p === page
-                    ? 'bg-brand-accent text-white'
+                    ? 'bg-brand-accent text-brand-ink'
                     : 'border border-brand-line text-brand-ink-soft hover:border-brand-ink hover:text-brand-ink'
                 }`}
               >

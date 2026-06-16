@@ -136,7 +136,7 @@ export default function AboutPage() {
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Link
               href="/contact"
-              className="inline-flex h-12 items-center rounded-xl bg-brand-accent px-8 text-sm font-semibold text-white shadow-soft transition-all hover:bg-brand-ink"
+              className="inline-flex h-12 items-center rounded-xl bg-brand-accent px-8 text-sm font-semibold text-brand-ink shadow-soft transition-all hover:bg-brand-ink hover:text-white"
             >
               Get in touch
             </Link>

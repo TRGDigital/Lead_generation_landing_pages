@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { Plus } from 'lucide-react'
 import { requireAdmin } from '@/lib/auth'
 import { getAllPostsForAdmin } from '@/lib/blog'
-import { formatDate } from '@/lib/blog'
 import BlogPostRow from './BlogPostRow'
 
 export const metadata: Metadata = { title: 'Blog — Admin' }

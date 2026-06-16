@@ -11,7 +11,7 @@ const LINKS = [
   { href: '/about', label: 'About us' },
   { href: '/development', label: 'Development' },
   { href: '/marketing', label: 'Marketing' },
-  { href: '/website-development', label: 'Website Development' },
+  { href: '/website-development', label: 'Website build' },
   { href: '/blog', label: 'Blog' },
 ]
 
@@ -63,7 +63,7 @@ export default function Nav() {
           </Link>
           <Link
             href="/contact"
-            className="inline-flex h-9 items-center rounded-lg bg-brand-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-brand-ink"
+            className="inline-flex h-9 items-center rounded-lg bg-brand-accent px-4 text-sm font-semibold text-brand-ink transition-colors hover:bg-brand-ink hover:text-white"
           >
             Book a demo
           </Link>
@@ -99,7 +99,7 @@ export default function Nav() {
           <div className="pt-3 border-t border-brand-line/60">
             <Link
               href="/contact"
-              className="block w-full rounded-lg bg-brand-accent px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-brand-ink"
+              className="block w-full rounded-lg bg-brand-accent px-4 py-2.5 text-center text-sm font-semibold text-brand-ink hover:bg-brand-ink hover:text-white"
               onClick={() => setOpen(false)}
             >
               Book a demo

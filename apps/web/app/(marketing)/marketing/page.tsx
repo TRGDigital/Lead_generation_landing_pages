@@ -135,7 +135,7 @@ export default function MarketingPage() {
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/contact"
-                className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-white shadow-soft transition-all hover:bg-brand-ink hover:shadow-card"
+                className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-brand-ink shadow-soft transition-all hover:bg-brand-ink hover:text-white hover:shadow-card"
               >
                 Book a free demo
               </Link>
@@ -297,23 +297,23 @@ export default function MarketingPage() {
       {/* ── Final CTA ─────────────────────────────────────────────────── */}
       <section className="bg-brand-accent px-6 py-20 text-center">
         <div className="mx-auto max-w-2xl">
-          <h2 className="font-display text-3xl font-semibold text-white sm:text-4xl">
+          <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
             Ready to stop leaving beds empty?
           </h2>
-          <p className="mt-4 text-white/80">
+          <p className="mt-4 text-brand-ink/75">
             Book a free 20-minute demo. We&apos;ll show you how our marketing works and what results
             to expect for your specific home.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               href="/contact"
-              className="inline-flex h-12 items-center rounded-xl bg-white px-8 text-sm font-semibold text-brand-accent shadow-soft transition-all hover:bg-brand-bg"
+              className="inline-flex h-12 items-center rounded-xl bg-brand-ink px-8 text-sm font-semibold text-white shadow-soft transition-all hover:bg-brand-ink/90"
             >
               Book a free demo
             </Link>
             <Link
               href="/how-it-works"
-              className="inline-flex h-12 items-center px-8 text-sm font-medium text-white/80 transition-colors hover:text-white"
+              className="inline-flex h-12 items-center px-8 text-sm font-medium text-brand-ink/70 transition-colors hover:text-brand-ink"
             >
               Learn more first →
             </Link>

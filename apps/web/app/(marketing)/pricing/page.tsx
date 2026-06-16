@@ -111,7 +111,7 @@ export default function PricingPage() {
             <div className="mt-8">
               <Link
                 href="/contact"
-                className="block w-full rounded-xl bg-brand-accent py-3 text-center text-sm font-semibold text-white shadow-soft transition-all hover:bg-brand-ink hover:shadow-card"
+                className="block w-full rounded-xl bg-brand-accent py-3 text-center text-sm font-semibold text-brand-ink shadow-soft transition-all hover:bg-brand-ink hover:text-white hover:shadow-card"
               >
                 Get your quoted rate
               </Link>
@@ -199,17 +199,17 @@ export default function PricingPage() {
       {/* ── CTA ───────────────────────────────────────────────────────── */}
       <section className="bg-brand-accent px-6 py-20 text-center">
         <div className="mx-auto max-w-xl">
-          <h2 className="font-display text-3xl font-semibold text-white">
+          <h2 className="font-display text-3xl font-semibold text-brand-ink">
             Get your quoted rate
           </h2>
-          <p className="mt-4 text-white/80">
+          <p className="mt-4 text-brand-ink/75">
             Rates vary by location and competition. Book a demo and we&apos;ll give you an
             exact figure for your home.
           </p>
           <div className="mt-8">
             <Link
               href="/contact"
-              className="inline-flex h-12 items-center rounded-xl bg-white px-8 text-sm font-semibold text-brand-accent shadow-soft transition-all hover:bg-brand-bg"
+              className="inline-flex h-12 items-center rounded-xl bg-brand-ink px-8 text-sm font-semibold text-white shadow-soft transition-all hover:bg-brand-ink/90"
             >
               Book a free demo
             </Link>

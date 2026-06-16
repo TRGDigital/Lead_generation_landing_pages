@@ -7,6 +7,7 @@ import {
   Megaphone,
   Settings,
   BookOpen,
+  TrendingUp,
 } from 'lucide-react'
 import AdminNavLink from './AdminNavLink'
 
@@ -16,6 +17,7 @@ const navItems = [
   { href: '/admin/care-homes', icon: <Building2 className="h-4 w-4" />, label: 'Care Homes' },
   { href: '/admin/funnel', icon: <BarChart3 className="h-4 w-4" />, label: 'Funnel' },
   { href: '/admin/campaigns', icon: <Megaphone className="h-4 w-4" />, label: 'Campaigns' },
+  { href: '/admin/economics', icon: <TrendingUp className="h-4 w-4" />, label: 'Economics' },
   { href: '/admin/blog', icon: <BookOpen className="h-4 w-4" />, label: 'Blog' },
   { href: '/admin/settings', icon: <Settings className="h-4 w-4" />, label: 'Settings' },
 ]

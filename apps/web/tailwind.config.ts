@@ -53,15 +53,15 @@ const config: Config = {
         },
         // Brand palette — direct hex values
         brand: {
-          bg: '#faf6f0',
-          'bg-warm': '#f4ece0',
+          bg: '#ffffff',
+          'bg-warm': '#f7f6f3',
           ink: '#2a2620',
           'ink-soft': '#5a5247',
           'ink-muted': '#8a8175',
-          accent: '#6b4423',
-          'accent-soft': '#a87242',
+          accent: '#FBCC33',
+          'accent-soft': '#FBCC33',
           sage: '#7a8a6f',
-          line: '#e6dccb',
+          line: '#ebe9e4',
         },
       },
       borderRadius: {

@@ -51,7 +51,7 @@ export default function WebsiteDevelopmentPage() {
       {/* ── Header ────────────────────────────────────────────────────── */}
       <section className="px-6 pt-20 pb-12">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">Website Development</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">Website build</p>
           <h1 className="mt-4 font-display text-4xl font-semibold leading-tight text-brand-ink sm:text-5xl">
             Websites built for the{' '}
             <span className="italic text-brand-accent-soft">care sector.</span>
@@ -64,7 +64,7 @@ export default function WebsiteDevelopmentPage() {
           <div className="mt-9">
             <Link
               href="/contact"
-              className="inline-flex h-12 items-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-white shadow-soft transition-all hover:bg-brand-ink"
+              className="inline-flex h-12 items-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-brand-ink shadow-soft transition-all hover:bg-brand-ink hover:text-white"
             >
               Book a free demo
             </Link>
@@ -135,18 +135,18 @@ export default function WebsiteDevelopmentPage() {
       {/* ── CTA ───────────────────────────────────────────────────────── */}
       <section className="bg-brand-accent px-6 py-20 text-center">
         <div className="mx-auto max-w-2xl">
-          <h2 className="font-display text-3xl font-semibold text-white sm:text-4xl">
+          <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
             Ready for a website that works as hard as you do?
           </h2>
-          <p className="mt-4 text-white/80">
+          <p className="mt-4 text-brand-ink/75">
             Tell us about your service and we&apos;ll show you what a care-sector site built to convert
             could do for your enquiries.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/contact" className="inline-flex h-12 items-center rounded-xl bg-white px-8 text-sm font-semibold text-brand-accent shadow-soft transition-all hover:bg-brand-bg">
+            <Link href="/contact" className="inline-flex h-12 items-center rounded-xl bg-brand-ink px-8 text-sm font-semibold text-white shadow-soft transition-all hover:bg-brand-ink/90">
               Book a free demo
             </Link>
-            <Link href="/marketing" className="inline-flex h-12 items-center px-8 text-sm font-medium text-white/80 transition-colors hover:text-white">
+            <Link href="/marketing" className="inline-flex h-12 items-center px-8 text-sm font-medium text-brand-ink/70 transition-colors hover:text-brand-ink">
               See our marketing <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
           </div>
