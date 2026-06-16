@@ -23,25 +23,38 @@ export async function checkRateLimit(
     return { allowed: true, remaining: limit }
   }
 
-  const key = `rl:${identifier}`
-  const count = await store.incr(key)
-  if (count === 1) {
-    await store.expire(key, windowSeconds)
+  // Fail open: if KV isn't configured (env missing) the calls throw — never let
+  // that break a form submission.
+  try {
+    const key = `rl:${identifier}`
+    const count = await store.incr(key)
+    if (count === 1) {
+      await store.expire(key, windowSeconds)
+    }
+    const remaining = Math.max(0, limit - count)
+    return { allowed: count <= limit, remaining }
+  } catch {
+    return { allowed: true, remaining: limit }
   }
-
-  const remaining = Math.max(0, limit - count)
-  return { allowed: count <= limit, remaining }
 }
 
 export async function checkIdempotency(key: string): Promise<boolean> {
   const store = await getKv()
   if (!store) return false
-  const exists = await store.get(`idempotency:${key}`)
-  return exists !== null
+  try {
+    const exists = await store.get(`idempotency:${key}`)
+    return exists !== null
+  } catch {
+    return false
+  }
 }
 
 export async function setIdempotency(key: string, ttlSeconds = 86400): Promise<void> {
   const store = await getKv()
   if (!store) return
-  await store.set(`idempotency:${key}`, '1', { ex: ttlSeconds })
+  try {
+    await store.set(`idempotency:${key}`, '1', { ex: ttlSeconds })
+  } catch {
+    /* fail open */
+  }
 }
