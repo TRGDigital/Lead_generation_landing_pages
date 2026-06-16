@@ -96,13 +96,21 @@ export default async function LocationLandingPage({ params }: { params: { locati
               </ul>
             )}
             {/* CQC ratings — referenced in words, attributed to CQC (not the official roundel) */}
-            <div className="mt-7 rounded-xl bg-slate-50 p-4 ring-1 ring-slate-100">
-              <p className="text-[15px] leading-relaxed text-slate-700">
-                We only ever suggest care homes rated{' '}
-                <RatingLabel word="Good" tone="good" /> or{' '}
-                <RatingLabel word="Outstanding" tone="outstanding" /> by the Care Quality Commission.
-              </p>
-              <p className="mt-2 text-xs text-slate-400">Ratings are published by the CQC and can change. Always check a home&apos;s current rating at cqc.org.uk.</p>
+            <div className="mt-7 flex items-start gap-4 overflow-hidden rounded-2xl border border-violet-100 bg-gradient-to-br from-violet-50 via-white to-white p-5 shadow-sm">
+              <span className="mt-0.5 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-purple-600 shadow-sm">
+                <svg viewBox="0 0 24 24" className="h-6 w-6 text-white" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
+                  <path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" strokeLinejoin="round" />
+                  <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              <div>
+                <p className="text-base font-semibold leading-relaxed text-slate-900">
+                  We only ever suggest care homes rated{' '}
+                  <RatingLabel word="Good" tone="good" /> or{' '}
+                  <RatingLabel word="Outstanding" tone="outstanding" /> by the Care Quality Commission.
+                </p>
+                <p className="mt-2 text-xs text-slate-500">Ratings are published by the CQC and can change. Always check a home&apos;s current rating at cqc.org.uk.</p>
+              </div>
             </div>
           </div>
           <div className="lg:pl-4">
