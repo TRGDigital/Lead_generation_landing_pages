@@ -74,6 +74,22 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
               <dd>{lead.resident_name}</dd>
             </>
           )}
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+          {(lead as any).care_for && (
+            <>
+              <dt className="text-muted-foreground">Who is the care for</dt>
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+              <dd>{(lead as any).care_for}</dd>
+            </>
+          )}
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+          {(lead as any).area && (
+            <>
+              <dt className="text-muted-foreground">Area</dt>
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+              <dd>{(lead as any).area} (location lead)</dd>
+            </>
+          )}
           {lead.move_in_timeframe && (
             <>
               <dt className="text-muted-foreground">Move-in timeframe</dt>

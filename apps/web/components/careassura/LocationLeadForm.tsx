@@ -2,12 +2,11 @@
 
 import { useState } from 'react'
 
-const DEFAULT_CARE_TYPES = ['Residential care', 'Nursing care', 'Dementia care', 'Respite / short stay', 'Not sure yet']
+const CARE_FOR = ['My mum or dad', 'My husband or wife', 'A relative', 'Myself', 'A friend', 'Someone else']
 const DEFAULT_TIMEFRAMES = ['Urgently (within 2 weeks)', 'Within the next month', '1 to 3 months', 'Just researching']
 
 export function LocationLeadForm({
   locationSlug,
-  careTypes = DEFAULT_CARE_TYPES,
   timeframes = DEFAULT_TIMEFRAMES,
 }: {
   locationSlug: string
@@ -37,7 +36,7 @@ export function LocationLeadForm({
           fullName: values.fullName ?? '',
           email: values.email ?? '',
           phone: values.phone ?? '',
-          careType: values.careType || undefined,
+          careFor: values.careFor || undefined,
           moveInTimeframe: values.moveInTimeframe || undefined,
           message: values.message || undefined,
           companyWebsite: values.companyWebsite ?? '',
@@ -81,7 +80,7 @@ export function LocationLeadForm({
     <div id="enquire" className="rounded-2xl bg-white p-6 shadow-xl ring-1 ring-slate-100 sm:p-7">
       <p className="text-xs font-semibold uppercase tracking-wider text-violet-600">Free &amp; impartial</p>
       <h3 className="mt-1 text-xl font-semibold text-slate-900">Find your care home</h3>
-      <p className="mt-1 text-sm text-slate-600">Tell us what you need and we&apos;ll match you to the right local homes.</p>
+      <p className="mt-1 text-sm text-slate-600">Tell us a little about your situation and we&apos;ll match you to the right local homes.</p>
 
       <form onSubmit={onSubmit} className="mt-5 space-y-3.5" noValidate>
         {/* Honeypot */}
@@ -105,10 +104,10 @@ export function LocationLeadForm({
         </div>
         <div className="grid gap-3.5 sm:grid-cols-2">
           <div>
-            <label className={label} htmlFor="ll_care">Type of care</label>
-            <select id="ll_care" className={input} value={values.careType ?? ''} onChange={(e) => set('careType', e.target.value)}>
+            <label className={label} htmlFor="ll_for">Who is the care for?</label>
+            <select id="ll_for" className={input} value={values.careFor ?? ''} onChange={(e) => set('careFor', e.target.value)}>
               <option value="">Please choose…</option>
-              {careTypes.map((c) => <option key={c} value={c}>{c}</option>)}
+              {CARE_FOR.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
           <div>
@@ -119,10 +118,14 @@ export function LocationLeadForm({
             </select>
           </div>
         </div>
+        <div>
+          <label className={label} htmlFor="ll_msg">Anything else? <span className="font-normal text-slate-400">(optional)</span></label>
+          <textarea id="ll_msg" rows={3} placeholder="Tell us anything that would help us find the right home." className={input} value={values.message ?? ''} onChange={(e) => set('message', e.target.value)} />
+        </div>
 
         {error && <p className="text-sm text-red-600">{error}</p>}
 
-        <button type="submit" disabled={submitting} className="w-full rounded-lg bg-gradient-to-r from-violet-600 to-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-95 disabled:opacity-60">
+        <button type="submit" disabled={submitting} className="w-full rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-95 disabled:opacity-60">
           {submitting ? 'Sending…' : 'Get matched to local homes'}
         </button>
         <p className="text-center text-xs leading-relaxed text-slate-400">
