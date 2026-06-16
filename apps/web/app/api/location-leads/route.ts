@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     return await handle(req)
   } catch (e) {
     console.error('[api/location-leads] uncaught:', e)
-    return NextResponse.json({ error: 'Server error', detail: String(e) }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to save enquiry' }, { status: 500 })
   }
 }
 

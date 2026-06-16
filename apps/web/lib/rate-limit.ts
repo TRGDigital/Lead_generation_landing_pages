@@ -4,6 +4,9 @@ let kv: VercelKV | null = null
 
 async function getKv() {
   if (kv) return kv
+  // Don't even load @vercel/kv unless KV is configured — its proxy throws on
+  // access when the env vars are missing.
+  if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) return null
   try {
     const mod = await import('@vercel/kv')
     kv = mod.kv
