@@ -8,12 +8,14 @@ import {
   Settings,
   BookOpen,
   TrendingUp,
+  Send,
 } from 'lucide-react'
 import AdminNavLink from './AdminNavLink'
 
 const navItems = [
   { href: '/admin', icon: <LayoutDashboard className="h-4 w-4" />, label: 'Overview' },
   { href: '/admin/leads', icon: <Users className="h-4 w-4" />, label: 'Leads' },
+  { href: '/admin/buyers', icon: <Send className="h-4 w-4" />, label: 'Buyers' },
   { href: '/admin/care-homes', icon: <Building2 className="h-4 w-4" />, label: 'Care Homes' },
   { href: '/admin/funnel', icon: <BarChart3 className="h-4 w-4" />, label: 'Funnel' },
   { href: '/admin/campaigns', icon: <Megaphone className="h-4 w-4" />, label: 'Campaigns' },

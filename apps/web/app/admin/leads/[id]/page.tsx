@@ -3,6 +3,8 @@ import { createServiceClient } from '@/lib/supabase/server'
 import { Separator } from '@/components/ui/separator'
 import StatusWorkflow from '@/components/admin/StatusWorkflow'
 import ActivityTimeline from '@/components/admin/ActivityTimeline'
+import DistributePanel from '@/components/admin/DistributePanel'
+import { matchBuyersForLead } from '@/lib/distribution'
 import type { Tables } from '@db/types'
 
 export const dynamic = 'force-dynamic'
@@ -35,14 +37,44 @@ async function getLeadDetail(id: string) {
   const home = homesResult.data as unknown as HomeRow | null
   const activities = (activitiesResult.data ?? []) as unknown as ActivityRow[]
 
-  return { lead, home, activities }
+  // Distribution: matched buyers + any already-sent distributions for this lead.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const leadAny = lead as any
+  const matches = await matchBuyersForLead({
+    id: lead.id,
+    full_name: lead.full_name,
+    email: lead.email,
+    phone: lead.phone,
+    area: leadAny.area ?? null,
+    care_type: lead.care_type ?? null,
+    care_for: leadAny.care_for ?? null,
+    move_in_timeframe: lead.move_in_timeframe ?? null,
+    message: lead.message ?? null,
+  })
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const distResult = await (supabase as any)
+    .from('lead_distributions')
+    .select('buyer_id, status, channel, sent_at, buyers(name)')
+    .eq('lead_id', id)
+    .order('sent_at', { ascending: false })
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const existing = ((distResult.data ?? []) as any[]).map((r) => ({
+    buyer_id: r.buyer_id as string,
+    buyer_name: (r.buyers?.name as string) ?? 'Unknown buyer',
+    status: r.status as string,
+    channel: r.channel as string,
+    sent_at: r.sent_at as string,
+  }))
+
+  return { lead, home, activities, area: (leadAny.area ?? null) as string | null, matches, existing }
 }
 
 export default async function LeadDetailPage({ params }: { params: { id: string } }) {
   const result = await getLeadDetail(params.id)
   if (!result) notFound()
 
-  const { lead, home, activities } = result
+  const { lead, home, activities, area, matches, existing } = result
 
   return (
     <div className="max-w-3xl space-y-8">
@@ -115,6 +147,11 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
           )}
         </dl>
       </section>
+
+      <Separator />
+
+      {/* Lead distribution */}
+      <DistributePanel leadId={lead.id} area={area} matches={matches} existing={existing} />
 
       <Separator />
 

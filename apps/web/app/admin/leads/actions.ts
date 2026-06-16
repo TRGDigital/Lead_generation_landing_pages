@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { createServiceClient } from '@/lib/supabase/server'
 import { requireAdmin } from '@/lib/auth'
 import { LeadStatusUpdateSchema } from '@lib/schemas'
+import { distributeLead } from '@/lib/distribution'
 
 type LeadStatusInput = {
   leadId: string
@@ -57,6 +58,17 @@ export async function updateLeadStatus(input: LeadStatusInput) {
   revalidatePath('/admin')
 
   return { success: true }
+}
+
+export async function distributeLeadAction(leadId: string, buyerIds: string[]) {
+  const user = await requireAdmin()
+  if (!Array.isArray(buyerIds) || buyerIds.length === 0) {
+    return { error: 'Select at least one buyer' }
+  }
+  const results = await distributeLead(leadId, buyerIds, user.id)
+  revalidatePath(`/admin/leads/${leadId}`)
+  revalidatePath('/admin/leads')
+  return { success: true, results }
 }
 
 export async function addLeadNote(leadId: string, note: string) {

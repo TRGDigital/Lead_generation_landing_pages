@@ -3,6 +3,7 @@ import { createServiceClient } from '@/lib/supabase/server'
 import { LocationLeadSchema } from '@lib/schemas'
 import { sendTemplateEmail } from '@lib/sendgrid'
 import { checkRateLimit, checkIdempotency, setIdempotency } from '@/lib/rate-limit'
+import { matchBuyersForLead, distributeLead } from '@/lib/distribution'
 
 // CareAssura location landing pages capture leads that are NOT yet tied to a
 // single care home — they land unassigned in /admin/leads, tagged by area, ready
@@ -112,6 +113,29 @@ async function handle(req: NextRequest) {
         move_in_timeframe: data.moveInTimeframe ?? '',
       },
     }).catch(() => {})
+  }
+
+  // Auto-distribute to matching buyers (off by default — set AUTO_DISTRIBUTE_LEADS=true
+  // to flip on). Non-blocking so it never delays the form response.
+  if (process.env.AUTO_DISTRIBUTE_LEADS === 'true') {
+    void (async () => {
+      try {
+        const buyers = await matchBuyersForLead({
+          id: lead.id,
+          full_name: data.fullName,
+          email: data.email,
+          phone: data.phone,
+          area: loc.area_name,
+          care_type: data.careType ?? 'Residential care',
+          care_for: data.careFor ?? null,
+          move_in_timeframe: data.moveInTimeframe ?? null,
+          message: data.message ?? null,
+        })
+        if (buyers.length) await distributeLead(lead.id, buyers.map((b) => b.id), null)
+      } catch (e) {
+        console.error('[location-leads] auto-distribute failed:', e)
+      }
+    })()
   }
 
   return NextResponse.json({ success: true, leadId: lead.id })

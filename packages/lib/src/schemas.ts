@@ -47,6 +47,22 @@ export const LocationLeadSchema = z.object({
 })
 export type LocationLeadValues = z.infer<typeof LocationLeadSchema>
 
+// ── Lead distribution: buyer directory ─────────────────────────────────────────
+export const BuyerFormSchema = z.object({
+  name: z.string().min(2, 'Name is required').max(120),
+  contact_email: z.string().email('Invalid email').or(z.literal('')).optional(),
+  contact_phone: z.string().max(30).or(z.literal('')).optional(),
+  areas: z.array(z.string().min(1)).default([]),       // area names the buyer covers
+  care_types: z.array(z.string().min(1)).default([]),  // accepted care types; empty = all
+  price_per_lead_pennies: z.number().int().nonnegative().optional(),
+  monthly_cap: z.number().int().positive().optional(),
+  notify_email: z.boolean().default(true),
+  notify_sms: z.boolean().default(false),
+  active: z.boolean().default(true),
+  notes: z.string().max(2000).or(z.literal('')).optional(),
+})
+export type BuyerFormValues = z.infer<typeof BuyerFormSchema>
+
 // ── Admin schemas ─────────────────────────────────────────────────────────────
 
 const LEAD_STATUSES = [
