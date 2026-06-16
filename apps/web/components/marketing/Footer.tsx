@@ -1,8 +1,10 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 const LINKS = {
   Product: [
     { href: '/how-it-works', label: 'How it works' },
+    { href: '/development', label: 'Development' },
     { href: '/pricing', label: 'Pricing' },
     { href: '/blog', label: 'Blog' },
   ],
@@ -24,11 +26,11 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="font-display text-lg font-semibold text-brand-ink">
-              Care<span className="text-brand-accent">Beds</span>
+            <Link href="/" className="inline-flex items-center" aria-label="TRG Digital home">
+              <Image src="/trg-digital-logo.png" alt="TRG Digital" width={138} height={32} className="h-7 w-auto" />
             </Link>
             <p className="mt-3 text-sm text-brand-ink-muted leading-relaxed">
-              Qualified care home enquiries, on demand. Fill empty beds faster.
+              Software and growth for the UK care sector. We build, run and market products that help care providers and the families they serve.
             </p>
           </div>
 
@@ -56,19 +58,10 @@ export default function Footer() {
 
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-brand-line/60 pt-8 sm:flex-row">
           <p className="text-xs text-brand-ink-muted">
-            © {new Date().getFullYear()} CareBeds. Part of the{' '}
-            <a
-              href="https://careassura.co.uk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-brand-ink transition-colors"
-            >
-              CareAssura
-            </a>{' '}
-            family.
+            © {new Date().getFullYear()} TRG Digital. All rights reserved.
           </p>
           <p className="text-xs text-brand-ink-muted">
-            Regulated occupancy marketing for UK care homes.
+            Building software and growth for UK care.
           </p>
         </div>
       </div>

@@ -26,7 +26,6 @@ const INCLUDED = [
   'Google Search Ads campaigns (managed and funded)',
   'Meta retargeting campaigns',
   'Enquiry qualification and filtering',
-  'CareBeds operator portal access',
   'Team members — unlimited seats',
   'Monthly performance reports',
   'Priority support via phone and email',
@@ -42,7 +41,7 @@ const NOT_INCLUDED = [
 const PRICING_FAQS = [
   {
     q: 'How is a confirmed move-in defined?',
-    a: 'A move-in is confirmed when a resident physically moves into your care home. We track this via the CareBeds portal — you log the move-in date, which triggers the invoice.',
+    a: 'A move-in is confirmed when a resident physically moves into your care home. We confirm the move-in date with you, which triggers the invoice.',
   },
   {
     q: 'What if an enquiry doesn\'t result in a move-in?',
@@ -54,11 +53,11 @@ const PRICING_FAQS = [
   },
   {
     q: 'What\'s the minimum commitment?',
-    a: "There's no minimum commitment, no lock-in, and no notice period. You can pause or cancel the service at any time from your portal.",
+    a: "There's no minimum commitment, no lock-in, and no notice period. You can pause or cancel the service at any time, just let us know.",
   },
   {
     q: 'How are invoices raised?',
-    a: 'Invoices are raised automatically when a move-in is logged in the portal. Payment is due within 30 days. We accept BACS and direct debit.',
+    a: 'Invoices are raised automatically when a move-in is confirmed. Payment is due within 30 days. We accept BACS and direct debit.',
   },
   {
     q: 'Do you offer discounts for multiple homes?',

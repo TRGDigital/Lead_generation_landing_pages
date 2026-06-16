@@ -9,7 +9,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 export const metadata: Metadata = {
   title: 'How CareBeds Works — Managed Occupancy Marketing for Care Homes',
   description:
-    'See how CareBeds fills empty care home beds: we build your landing page, run targeted ads, qualify every enquiry, and deliver move-in-ready leads to your portal.',
+    'See how CareBeds fills empty care home beds: we build your landing page, run targeted ads, qualify every enquiry, and deliver move-in-ready leads to your inbox.',
   alternates: { canonical: `${SITE_URL}/how-it-works` },
   openGraph: {
     title: 'How CareBeds Works',
@@ -42,7 +42,7 @@ const PHASES = [
       'Meta (Facebook/Instagram) retargeting for families researching care',
       'We fund and manage all ad spend — you pay nothing upfront',
       'Campaigns optimised weekly based on actual enquiry quality',
-      'You can pause campaigns instantly from your portal at any time',
+      'You can pause campaigns instantly at any time, just let us know',
     ],
   },
   {
@@ -53,17 +53,17 @@ const PHASES = [
       'We verify: correct care type, right geography, and realistic funding',
       'Unqualified submissions are filtered out — no spam, no tyre-kickers',
       'Qualified enquiries include full context: resident details, timing, care needs',
-      'Average response required: under 10 seconds in the CareBeds portal',
+      'Average response required: under 10 seconds, from any device',
     ],
   },
   {
     phase: 'Phase 4',
     title: 'You close the placement',
     points: [
-      'Receive qualified enquiries directly in your CareBeds portal',
+      'Receive qualified enquiries directly, by email and SMS',
       'One tap to call or email the family from your phone',
       'Track every enquiry from first contact to move-in',
-      'Log tour dates, assessments, and outcomes in the portal',
+      'Track tour dates, assessments and outcomes with us',
       'Pay the confirmed move-in fee only when a resident moves in',
     ],
   },
@@ -74,14 +74,14 @@ const HANDLES = [
   'Google & Meta advertising campaigns',
   'Ad spend and creative optimisation',
   'Enquiry qualification and filtering',
-  'Portal access for your team',
+  'Qualified lead delivery to your team',
   'Monthly performance reporting',
 ]
 
 const HOME_HANDLES = [
   'Respond to qualified enquiries within a working day',
   'Conduct tours and assessments as normal',
-  'Log outcomes in the portal (tour booked, move-in, etc.)',
+  'Confirm outcomes with us (tour booked, move-in, etc.)',
   'Keep your care home profile and capacity up to date',
 ]
 

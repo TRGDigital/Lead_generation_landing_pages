@@ -2,12 +2,14 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const LINKS = [
   { href: '/how-it-works', label: 'How it works' },
+  { href: '/development', label: 'Development' },
   { href: '/pricing', label: 'Pricing' },
   { href: '/blog', label: 'Blog' },
   { href: '/about', label: 'About' },
@@ -21,10 +23,15 @@ export default function Nav() {
     <header className="sticky top-0 z-40 w-full border-b border-brand-line/60 bg-brand-bg/95 backdrop-blur supports-[backdrop-filter]:bg-brand-bg/80">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-1.5" onClick={() => setOpen(false)}>
-          <span className="font-display text-lg font-semibold tracking-tight text-brand-ink">
-            Care<span className="text-brand-accent">Beds</span>
-          </span>
+        <Link href="/" className="flex items-center" onClick={() => setOpen(false)} aria-label="TRG Digital home">
+          <Image
+            src="/trg-digital-logo.png"
+            alt="TRG Digital"
+            width={138}
+            height={32}
+            priority
+            className="h-7 w-auto sm:h-8"
+          />
         </Link>
 
         {/* Desktop nav */}

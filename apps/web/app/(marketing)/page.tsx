@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { CheckCircle, TrendingDown, Zap, Shield } from 'lucide-react'
 
 export const dynamic = 'force-static'
@@ -67,14 +68,14 @@ const PILLARS = [
   {
     Icon: Zap,
     title: 'On/off control',
-    body: "You're in control. Activate when you have empty beds, pause when full. One tap in your portal — effective immediately.",
+    body: "You're in control. Activate when you have empty beds, pause when full. One click and the change is effective immediately.",
   },
 ]
 
 const STEPS = [
   { n: '01', title: 'We build your page', body: 'Your dedicated landing page goes live in days, fully managed and optimised for search.' },
   { n: '02', title: 'We run your ads', body: 'Targeted Google and Meta campaigns drive families to your landing page — 24/7.' },
-  { n: '03', title: 'You receive enquiries', body: 'Pre-qualified leads land in your portal. Full qualification in under 10 seconds.' },
+  { n: '03', title: 'You receive enquiries', body: 'Pre-qualified leads land straight in your inbox. Full qualification in under 10 seconds.' },
 ]
 
 const COSTS = [
@@ -103,34 +104,62 @@ export default function HomePage() {
       />
 
       {/* ── Hero ──────────────────────────────────────────────────────── */}
-      <section className="px-6 pt-20 pb-24 text-center">
-        <div className="mx-auto max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">
-            Care home occupancy marketing
-          </p>
-          <h1 className="mt-4 font-display text-5xl font-semibold leading-tight text-brand-ink sm:text-6xl">
-            Fill empty beds,{' '}
-            <span className="italic text-brand-accent-soft">on demand.</span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brand-ink-soft">
-            We run targeted advertising, build high-converting landing pages, and deliver
-            pre-qualified enquiries directly to your care home. Activate when beds are
-            empty. Pause when you&apos;re full. Pay only when a resident moves in.
-          </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link
-              href="/contact"
-              className="inline-flex h-12 items-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-white shadow-soft transition-all hover:bg-brand-ink hover:shadow-card"
-            >
-              Book a free demo
-            </Link>
-            <Link
-              href="/how-it-works"
-              className="inline-flex h-12 items-center rounded-xl border border-brand-line px-8 text-base font-medium text-brand-ink-soft transition-colors hover:border-brand-ink hover:text-brand-ink"
-            >
-              See how it works
-            </Link>
+      <section className="relative overflow-hidden">
+        {/* Image — bleeds to the right edge of the viewport on desktop */}
+        <div className="absolute inset-y-0 right-0 hidden w-[46%] lg:block">
+          <Image
+            src="/hero-resident.jpg"
+            alt="A care home resident relaxing in her room, looking out over the garden"
+            fill
+            priority
+            sizes="46vw"
+            className="object-cover"
+          />
+          {/* soft seam blending the image into the page background */}
+          <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-brand-bg to-transparent" />
+        </div>
+
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="py-16 lg:w-1/2 lg:py-28 lg:pr-12">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">
+              Care home occupancy marketing
+            </p>
+            <h1 className="mt-4 font-display text-5xl font-semibold leading-tight text-brand-ink sm:text-6xl">
+              Fill empty beds,{' '}
+              <span className="italic text-brand-accent-soft">on demand.</span>
+            </h1>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
+              We run targeted advertising, build high-converting landing pages, and deliver
+              pre-qualified enquiries directly to your care home. Activate when beds are
+              empty. Pause when you&apos;re full. Pay only when a resident moves in.
+            </p>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/contact"
+                className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-white shadow-soft transition-all hover:bg-brand-ink hover:shadow-card"
+              >
+                Book a free demo
+              </Link>
+              <Link
+                href="/how-it-works"
+                className="inline-flex h-12 items-center justify-center rounded-xl border border-brand-line px-8 text-base font-medium text-brand-ink-soft transition-colors hover:border-brand-ink hover:text-brand-ink"
+              >
+                See how it works
+              </Link>
+            </div>
           </div>
+        </div>
+
+        {/* Image — full width below the text on mobile/tablet */}
+        <div className="relative h-64 w-full sm:h-80 lg:hidden">
+          <Image
+            src="/hero-resident.jpg"
+            alt="A care home resident relaxing in her room, looking out over the garden"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
         </div>
       </section>
 
@@ -228,7 +257,7 @@ export default function HomePage() {
                 'Full landing page — built and managed for you',
                 'Google & Meta advertising campaigns',
                 'Pre-qualified enquiry delivery',
-                'Operator portal with on/off control',
+                'On/off control over your campaigns',
                 'No contracts — cancel anytime',
               ].map((item) => (
                 <li key={item} className="flex items-center gap-2">
