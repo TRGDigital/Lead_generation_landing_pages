@@ -11,6 +11,15 @@ type LocationRow = { area_name: string }
 type LeadRow = { id: string }
 
 export async function POST(req: NextRequest) {
+  try {
+    return await handle(req)
+  } catch (e) {
+    console.error('[api/location-leads] uncaught:', e)
+    return NextResponse.json({ error: 'Server error', detail: String(e) }, { status: 500 })
+  }
+}
+
+async function handle(req: NextRequest) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
   const ua = req.headers.get('user-agent') ?? ''
 
