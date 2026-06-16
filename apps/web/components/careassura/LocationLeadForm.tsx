@@ -82,8 +82,8 @@ export function LocationLeadForm({
         </div>
         <h3 className="text-xl font-semibold text-slate-900">Thank you</h3>
         <p className="mt-2 text-sm leading-relaxed text-slate-600">
-          We have your details and a care adviser will be in touch shortly to talk through the right homes for you. If it
-          is urgent, please call us.
+          We have your details and will pass them to local care homes with availability. The right homes will be in touch
+          with you shortly to arrange a visit.
         </p>
       </div>
     )
@@ -93,7 +93,7 @@ export function LocationLeadForm({
     <div id={anchorId} className={cardCls}>
       <p className="text-xs font-semibold uppercase tracking-wider text-violet-600">Free &amp; impartial</p>
       <h3 className="mt-1 text-xl font-semibold text-slate-900">Find your care home</h3>
-      <p className="mt-1 text-sm text-slate-600">Tell us a little about your situation and we&apos;ll match you to the right local homes.</p>
+      <p className="mt-1 text-sm text-slate-600">Tell us a little about your situation and we&apos;ll pass your details to local homes that have availability.</p>
 
       <form onSubmit={onSubmit} className="mt-5 space-y-3.5" noValidate>
         {/* Honeypot */}

@@ -77,13 +77,13 @@ export default async function LocationLandingPage({ params }: { params: { locati
                   <span className="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">{area}</span>.</>
               )}
             </h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
-              {hero.subheadline ?? `Comparing care homes is stressful. We make it simple. Tell us what you need and a local care adviser will match you to the right homes in ${area}, free and with no pressure.`}
+            <p className="mt-5 max-w-xl text-xl leading-relaxed text-slate-600">
+              {hero.subheadline ?? `Finding the right care home should not mean ringing round for hours. Tell us what you need and we will pass your details to care homes in the ${area} area that have genuine availability. The right homes then get in touch with you directly to arrange a visit. It is free, with no obligation.`}
             </p>
             {(hero.bullets?.length ?? 0) > 0 && (
               <ul className="mt-7 space-y-2.5">
                 {hero.bullets!.map((b) => (
-                  <li key={b} className="flex items-start gap-3 text-[15px] text-slate-700">
+                  <li key={b} className="flex items-start gap-3 text-base text-slate-700">
                     <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-violet-100">
                       <svg viewBox="0 0 24 24" className="h-3 w-3 text-violet-600" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" /></svg>
                     </span>
