@@ -26,6 +26,26 @@ export const LeadSubmissionSchema = EnquiryFormSchema.extend({
 
 export type LeadSubmissionValues = z.infer<typeof LeadSubmissionSchema>
 
+// ── CareAssura location-landing-page lead (not tied to a single care home) ──────
+export const LocationLeadSchema = z.object({
+  locationSlug: z.string().min(1).max(120),
+  fullName: z.string().min(2, 'Name must be at least 2 characters').max(100),
+  email: z.string().email('Please enter a valid email address'),
+  phone: z.string().min(7, 'Please enter a valid phone number').max(20),
+  careType: z.string().max(50).optional(),
+  moveInTimeframe: z.string().max(50).optional(),
+  message: z.string().max(1000).optional(),
+  companyWebsite: z.string().max(0, ''), // honeypot — must be empty
+  idempotencyKey: z.string().uuid().optional(),
+  utmSource: z.string().max(100).optional(),
+  utmMedium: z.string().max(100).optional(),
+  utmCampaign: z.string().max(200).optional(),
+  utmContent: z.string().max(200).optional(),
+  utmTerm: z.string().max(200).optional(),
+  gclid: z.string().max(200).optional(),
+})
+export type LocationLeadValues = z.infer<typeof LocationLeadSchema>
+
 // ── Admin schemas ─────────────────────────────────────────────────────────────
 
 const LEAD_STATUSES = [

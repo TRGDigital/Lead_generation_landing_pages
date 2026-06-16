@@ -1,65 +1,39 @@
-import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
-import type { Database } from '../../packages/db/src/types'
 
-type CookieToSet = { name: string; value: string; options?: Record<string, unknown> }
-
-export async function middleware(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({ request })
-
-  const supabase = createServerClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll()
-        },
-        setAll(cookiesToSet: CookieToSet[]) {
-          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
-          supabaseResponse = NextResponse.next({ request })
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          )
-        },
-      },
-    }
-  )
-
-  // Refresh session — must happen before any redirect logic
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
+export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const isAdminRoute = pathname.startsWith('/admin')
-  const isPortalRoute = pathname.startsWith('/portal')
+  const host = ((request.headers.get('host') || '').toLowerCase().split(':')[0]) || ''
 
-  if (isAdminRoute || isPortalRoute) {
-    if (!user) {
-      const url = request.nextUrl.clone()
-      url.pathname = '/auth/sign-in'
-      url.searchParams.set('redirect', pathname)
-      return NextResponse.redirect(url)
+  // ── CareAssura location subdomains: <area>.careassura.com -> /lp/<area> ──
+  if (host === 'careassura.com' || host.endsWith('.careassura.com')) {
+    const sub = host.replace(/\.?careassura\.com$/, '')
+    if (!sub || sub === 'www') {
+      return NextResponse.redirect('https://careassura.co.uk')
     }
-
-    const { data } = await supabase
-      .from('users')
-      .select('role')
-      .eq('id', user.id)
-      .single()
-
-    // Explicit cast: supabase-js column-select type inference limitation with this DB format
-    const role = (data as { role: string } | null)?.role
-
-    if (isAdminRoute && role !== 'admin') {
+    // Only rewrite the landing root; let /api, /_next and assets pass through.
+    if (pathname === '/' || pathname === '') {
       const url = request.nextUrl.clone()
-      url.pathname = '/forbidden'
-      return NextResponse.redirect(url)
+      url.pathname = `/lp/${sub}`
+      return NextResponse.rewrite(url)
     }
+    return NextResponse.next()
   }
 
-  return supabaseResponse
+  if (!pathname.startsWith('/admin') && !pathname.startsWith('/portal')) {
+    return NextResponse.next()
+  }
+
+  // Supabase stores auth tokens in a cookie named sb-<ref>-auth-token
+  const hasSession = request.cookies.getAll().some((c) => c.name.includes('-auth-token'))
+
+  if (!hasSession) {
+    const url = request.nextUrl.clone()
+    url.pathname = '/auth/sign-in'
+    url.searchParams.set('redirect', pathname)
+    return NextResponse.redirect(url)
+  }
+
+  return NextResponse.next()
 }
 
 export const config = {

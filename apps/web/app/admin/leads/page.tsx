@@ -15,7 +15,7 @@ import type { Tables } from '@db/types'
 type LeadRow = Pick<
   Tables<'leads'>,
   'id' | 'full_name' | 'email' | 'phone' | 'status' | 'care_home_id' | 'created_at'
->
+> & { area?: string | null }
 type HomeRow = Pick<Tables<'care_homes'>, 'id' | 'name'>
 
 const PAGE_SIZE = 25
@@ -37,7 +37,7 @@ async function getLeads(search: string, status: string, page: number) {
 
   let query = supabase
     .from('leads')
-    .select('id, full_name, email, phone, status, care_home_id, created_at', { count: 'exact' })
+    .select('id, full_name, email, phone, status, care_home_id, area, created_at', { count: 'exact' })
     .order('created_at', { ascending: false })
     .range((page - 1) * PAGE_SIZE, page * PAGE_SIZE - 1)
 
@@ -47,7 +47,7 @@ async function getLeads(search: string, status: string, page: number) {
   const { data, count } = await query
 
   const leads = (data ?? []) as unknown as LeadRow[]
-  const homeIds = [...new Set(leads.map((l) => l.care_home_id))]
+  const homeIds = [...new Set(leads.map((l) => l.care_home_id).filter(Boolean))] as string[]
 
   let homes: HomeRow[] = []
   if (homeIds.length > 0) {
@@ -147,7 +147,7 @@ export default async function LeadsInboxPage({
                   <p className="text-xs text-muted-foreground">{lead.email}</p>
                 </TableCell>
                 <TableCell className="text-sm">
-                  {homesMap[lead.care_home_id] ?? '—'}
+                  {homesMap[lead.care_home_id] ?? (lead.area ? `${lead.area} (area)` : '—')}
                 </TableCell>
                 <TableCell>
                   <Badge variant={STATUS_VARIANTS[lead.status] ?? 'outline'}>
