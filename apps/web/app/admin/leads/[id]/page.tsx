@@ -5,6 +5,8 @@ import StatusWorkflow from '@/components/admin/StatusWorkflow'
 import ActivityTimeline from '@/components/admin/ActivityTimeline'
 import type { Tables } from '@db/types'
 
+export const dynamic = 'force-dynamic'
+
 type LeadRow = Tables<'leads'>
 type ActivityRow = Tables<'lead_activities'>
 type HomeRow = Pick<Tables<'care_homes'>, 'id' | 'name'>

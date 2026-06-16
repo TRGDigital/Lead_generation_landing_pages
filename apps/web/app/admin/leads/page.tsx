@@ -12,6 +12,10 @@ import { Badge } from '@/components/ui/badge'
 import ResponseTimeBadge from '@/components/admin/ResponseTimeBadge'
 import type { Tables } from '@db/types'
 
+// Admin lead views must always reflect the live database — never a cached/static
+// snapshot (otherwise newly captured leads appear to be "missing").
+export const dynamic = 'force-dynamic'
+
 type LeadRow = Pick<
   Tables<'leads'>,
   'id' | 'full_name' | 'email' | 'phone' | 'status' | 'care_home_id' | 'created_at'
