@@ -174,8 +174,8 @@ export default async function LocationLandingPage({ params }: { params: { locati
                 help residents stay strong, mobile and independent for longer.
               </p>
               <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
-                We only suggest homes with the right nursing and therapy teams on hand, so you can be confident your loved
-                one is supported to live as fully and comfortably as possible.
+                We only suggest homes with engaging daily activities and the right support on hand, so you can be confident
+                your loved one is helped to live as fully and comfortably as possible.
               </p>
             </div>
           </div>
