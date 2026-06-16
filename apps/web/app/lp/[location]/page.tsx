@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { getLocationPage, getAllLocationSlugs } from '@/lib/location-page'
 import { LocationLeadForm } from '@/components/careassura/LocationLeadForm'
 import { GetMatchedModal } from '@/components/careassura/GetMatchedModal'
+import { LegalLinks } from '@/components/careassura/LegalLinks'
 
 export const revalidate = 60
 
@@ -22,14 +23,16 @@ export async function generateMetadata({ params }: { params: { location: string 
   }
 }
 
-function CqcBadge({ rating, tone }: { rating: string; tone: 'good' | 'outstanding' }) {
-  const cls = tone === 'good'
-    ? 'bg-green-50 text-green-700 ring-green-200'
-    : 'bg-teal-50 text-teal-700 ring-teal-200'
+// Our own rating labels in the CQC rating colours (Good = green, Outstanding =
+// blue/teal). These are deliberately NOT the official CQC roundel graphics:
+// those may only be used by the rated care home itself, on its own page, linked
+// to its CQC profile. Here we simply reference the ratings in words, attributed
+// to the CQC, which is permitted.
+function RatingLabel({ word, tone }: { word: string; tone: 'good' | 'outstanding' }) {
+  const cls = tone === 'good' ? 'bg-[#1a7f4b]' : 'bg-[#0e7490]'
   return (
-    <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold ring-1 ${cls}`}>
-      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden><path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.2l1.2-6.6L2.5 9l6.6-.9L12 2z" /></svg>
-      CQC {rating}
+    <span className={`inline-flex items-center rounded-md px-2.5 py-1 text-sm font-semibold text-white ${cls}`}>
+      {word}
     </span>
   )
 }
@@ -92,11 +95,14 @@ export default async function LocationLandingPage({ params }: { params: { locati
                 ))}
               </ul>
             )}
-            {/* CQC ratings */}
-            <div className="mt-6 flex flex-wrap items-center gap-2.5">
-              <span className="text-sm text-slate-500">Homes we suggest are rated:</span>
-              <CqcBadge rating="Good" tone="good" />
-              <CqcBadge rating="Outstanding" tone="outstanding" />
+            {/* CQC ratings — referenced in words, attributed to CQC (not the official roundel) */}
+            <div className="mt-7 rounded-xl bg-slate-50 p-4 ring-1 ring-slate-100">
+              <p className="text-[15px] leading-relaxed text-slate-700">
+                We only ever suggest care homes rated{' '}
+                <RatingLabel word="Good" tone="good" /> or{' '}
+                <RatingLabel word="Outstanding" tone="outstanding" /> by the Care Quality Commission.
+              </p>
+              <p className="mt-2 text-xs text-slate-400">Ratings are published by the CQC and can change. Always check a home&apos;s current rating at cqc.org.uk.</p>
             </div>
           </div>
           <div className="lg:pl-4">
@@ -262,9 +268,14 @@ export default async function LocationLandingPage({ params }: { params: { locati
 
       {/* Footer */}
       <footer className="border-t border-slate-100 py-8">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 text-center sm:flex-row sm:text-left">
-          <Image src="/products/careassura-logo.webp" alt="CareAssura" width={364} height={91} className="h-10 w-auto" />
-          <p className="text-xs text-slate-400">© {new Date().getFullYear()} CareAssura. Free, impartial help finding care across the UK.</p>
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-6 text-center">
+          <div className="flex w-full flex-col items-center justify-between gap-3 sm:flex-row sm:text-left">
+            <Image src="/products/careassura-logo.webp" alt="CareAssura" width={364} height={91} className="h-10 w-auto" />
+            <p className="text-xs text-slate-400">© {new Date().getFullYear()} CareAssura. Free, impartial help finding care across the UK.</p>
+          </div>
+          <div className="flex w-full justify-center border-t border-slate-50 pt-4 sm:justify-end">
+            <LegalLinks />
+          </div>
         </div>
       </footer>
     </div>
