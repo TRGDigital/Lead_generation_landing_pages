@@ -6,13 +6,13 @@ export const dynamic = 'force-static'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
 export const metadata: Metadata = {
-  title: 'About CareBeds — Occupancy Marketing for UK Care Homes',
+  title: 'About TRG Digital | A Specialist Care-Sector Agency',
   description:
-    'CareBeds is a performance-based occupancy marketing platform built for UK care home operators. Learn about our founding thesis and the team behind the product.',
+    'TRG Digital is a digital agency built only for the UK care sector. We grow enquiries, build websites and develop custom software, including our own products CareStream and CareAssura.',
   alternates: { canonical: `${SITE_URL}/about` },
   openGraph: {
-    title: 'About CareBeds',
-    description: 'Performance-based occupancy marketing for UK care homes.',
+    title: 'About TRG Digital',
+    description: 'A specialist digital agency for the UK care sector.',
     type: 'website',
     url: `${SITE_URL}/about`,
   },
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      {/* JSON-LD — Organization + AboutPage */}
+      {/* JSON-LD — AboutPage */}
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -31,14 +31,10 @@ export default function AboutPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'AboutPage',
-            name: 'About CareBeds',
+            name: 'About TRG Digital',
             url: `${SITE_URL}/about`,
-            description: 'Performance-based occupancy marketing for UK care homes.',
-            publisher: {
-              '@type': 'Organization',
-              name: 'CareBeds',
-              url: SITE_URL,
-            },
+            description: 'A specialist digital agency for the UK care sector.',
+            publisher: { '@type': 'Organization', name: 'TRG Digital', url: SITE_URL },
           }),
         }}
       />
@@ -48,12 +44,12 @@ export default function AboutPage() {
         <div className="mx-auto max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">About us</p>
           <h1 className="mt-4 font-display text-5xl font-semibold leading-tight text-brand-ink">
-            Built by people who understand care
+            A digital agency built only for care
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-brand-ink-soft">
-            CareBeds was founded on a simple observation: UK care homes are consistently
-            undermarketed. Families searching for care struggle to find the right home; care
-            homes struggle to fill beds. The mismatch is a marketing problem, not a care problem.
+            TRG Digital helps UK care providers grow. We bring modern marketing, websites and
+            software to a sector that has long been underserved by generic agencies, and we do it
+            with a deep understanding of how care really works.
           </p>
         </div>
       </section>
@@ -61,51 +57,38 @@ export default function AboutPage() {
       {/* ── Story ─────────────────────────────────────────────────────── */}
       <section className="bg-brand-bg-warm px-6 py-16">
         <div className="mx-auto max-w-3xl space-y-6 text-brand-ink-soft leading-relaxed">
-          <h2 className="font-display text-2xl font-semibold text-brand-ink">Our founding thesis</h2>
+          <h2 className="font-display text-2xl font-semibold text-brand-ink">Why we exist</h2>
           <p>
-            Most care homes have no dedicated marketing function. They rely on word of mouth,
-            aging referral agency contracts, and occasional local advertising — none of which
-            scales, and none of which can be turned on and off in response to occupancy.
+            Most agencies treat care like any other industry. We do the opposite. Everything we
+            build, market and develop is for the UK care sector, so we already understand your
+            families, your regulators, your funding routes and the way people choose care.
           </p>
           <p>
-            Meanwhile, the tools that work in performance marketing — PPC, conversion-optimised
-            landing pages, data-driven optimisation — are well understood in other sectors but
-            have barely touched the care market.
-          </p>
-          <p>
-            CareBeds closes that gap. We bring modern performance marketing to UK care homes,
-            wrapped in a model that aligns our incentives with yours: we only earn when you fill
-            a bed.
+            That focus changes the work. Our campaigns speak to real families, our websites are
+            built around the questions people actually ask, and our software solves problems we have
+            seen on the ground in care.
           </p>
 
-          <h2 className="font-display text-2xl font-semibold text-brand-ink pt-4">The CareAssura family</h2>
+          <h2 className="font-display text-2xl font-semibold text-brand-ink pt-4">What we do</h2>
           <p>
-            CareBeds is part of the{' '}
-            <a
-              href="https://careassura.co.uk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-brand-accent hover:text-brand-ink transition-colors"
-            >
-              CareAssura
-            </a>{' '}
-            group — a family of products and services built to help the UK care sector operate
-            more effectively. CareAssura provides care home directories, review aggregation, and
-            family-facing content to help families find the right care setting.
-          </p>
-          <p>
-            CareBeds is the operator-facing complement: where CareAssura helps families find
-            homes, CareBeds helps homes find families.
+            We work across three areas, all under one roof. Our{' '}
+            <Link href="/marketing" className="font-medium text-brand-accent hover:text-brand-ink transition-colors">marketing</Link>{' '}
+            fills empty beds with targeted advertising and high-converting landing pages. Our{' '}
+            <Link href="/website-development" className="font-medium text-brand-accent hover:text-brand-ink transition-colors">website development</Link>{' '}
+            builds fast, search-optimised sites that grow your exposure. And our{' '}
+            <Link href="/development" className="font-medium text-brand-accent hover:text-brand-ink transition-colors">custom development</Link>{' '}
+            creates bespoke tools and platforms for the sector.
           </p>
 
-          <h2 className="font-display text-2xl font-semibold text-brand-ink pt-4">The team</h2>
+          <h2 className="font-display text-2xl font-semibold text-brand-ink pt-4">We build our own products</h2>
           <p>
-            We&apos;re a small, focused team with backgrounds in performance marketing, SaaS
-            product development, and the care sector. Our advisors include registered care home
-            managers and former CQC inspectors.
-          </p>
-          <p className="italic text-brand-ink-muted">
-            [Team profiles coming soon]
+            We do not just advise, we ship. Two of our own products are live and used across the
+            sector today:{' '}
+            <a href="https://carestreamai.com" target="_blank" rel="noopener noreferrer" className="font-medium text-brand-accent hover:text-brand-ink transition-colors">CareStreamAI</a>,
+            an AI policy, training and CQC platform for care teams, and{' '}
+            <a href="https://careassura.co.uk" target="_blank" rel="noopener noreferrer" className="font-medium text-brand-accent hover:text-brand-ink transition-colors">CareAssura</a>,
+            a care home directory that helps families find the right care. Building our own software
+            keeps us close to the problems our clients face every day.
           </p>
         </div>
       </section>
@@ -119,16 +102,16 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {[
               {
-                title: 'Aligned incentives',
-                body: 'We earn when you fill a bed. That alignment shapes every decision we make — from ad targeting to enquiry qualification.',
+                title: 'Sector specialists',
+                body: 'Care is all we do. We know CQC, care types, funding routes and the families behind every enquiry.',
               },
               {
-                title: 'Transparent reporting',
-                body: 'You see every enquiry, every conversion, every move-in. No black boxes, no opaque metrics.',
+                title: 'Outcome-focused',
+                body: 'We measure success the way you do: more enquiries, more residents and more value from every visitor.',
               },
               {
-                title: 'Care-first compliance',
-                body: "We know advertising in the care sector carries regulatory obligations. Every campaign and landing page is CQC-compliant by design.",
+                title: 'End-to-end partner',
+                body: 'Marketing, websites and software from one team, so nothing falls between agencies and everything works together.',
               },
             ].map(({ title, body }) => (
               <div key={title} className="rounded-2xl border border-brand-line bg-white p-6 shadow-soft">
@@ -147,8 +130,8 @@ export default function AboutPage() {
             Interested in working with us?
           </h2>
           <p className="mt-4 text-brand-ink-soft">
-            Whether you&apos;re a care home operator, group, or potential partner, we&apos;d
-            love to hear from you.
+            Whether you&apos;re a single home, a care group, or a potential partner, we&apos;d love to
+            hear what you&apos;re trying to grow.
           </p>
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Link

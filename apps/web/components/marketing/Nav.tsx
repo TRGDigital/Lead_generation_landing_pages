@@ -8,11 +8,11 @@ import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const LINKS = [
-  { href: '/how-it-works', label: 'How it works' },
+  { href: '/about', label: 'About us' },
   { href: '/development', label: 'Development' },
-  { href: '/pricing', label: 'Pricing' },
+  { href: '/marketing', label: 'Marketing' },
+  { href: '/website-development', label: 'Website Development' },
   { href: '/blog', label: 'Blog' },
-  { href: '/about', label: 'About' },
 ]
 
 export default function Nav() {

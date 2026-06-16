@@ -2,14 +2,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const LINKS = {
-  Product: [
-    { href: '/how-it-works', label: 'How it works' },
+  Services: [
+    { href: '/marketing', label: 'Marketing' },
+    { href: '/website-development', label: 'Website Development' },
     { href: '/development', label: 'Development' },
-    { href: '/pricing', label: 'Pricing' },
-    { href: '/blog', label: 'Blog' },
   ],
   Company: [
-    { href: '/about', label: 'About' },
+    { href: '/about', label: 'About us' },
+    { href: '/blog', label: 'Blog' },
     { href: '/contact', label: 'Contact' },
   ],
   Legal: [

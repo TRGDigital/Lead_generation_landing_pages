@@ -7,12 +7,12 @@ export const dynamic = 'force-static'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
 export const metadata: Metadata = {
-  title: 'Pricing — Pay Per Move-In | CareBeds',
+  title: 'Pricing — Pay Per Move-In | TRG Digital',
   description:
-    'CareBeds charges a single fixed fee per confirmed move-in. No setup fee, no monthly retainer, no contracts. See what\'s included and how pricing works.',
+    'TRG Digital charges a single fixed fee per confirmed move-in. No setup fee, no monthly retainer, no contracts. See what\'s included and how pricing works.',
   alternates: { canonical: `${SITE_URL}/pricing` },
   openGraph: {
-    title: 'Pricing — Pay Per Move-In | CareBeds',
+    title: 'Pricing — Pay Per Move-In | TRG Digital',
     description: 'No setup fee, no retainer. One fixed fee per confirmed move-in.',
     type: 'website',
     url: `${SITE_URL}/pricing`,
@@ -141,14 +141,14 @@ export default function PricingPage() {
       <section className="px-6 py-20">
         <div className="mx-auto max-w-4xl">
           <h2 className="mb-12 text-center font-display text-3xl font-semibold text-brand-ink">
-            How CareBeds compares
+            How TRG Digital compares
           </h2>
           <div className="overflow-hidden rounded-2xl border border-brand-line bg-white shadow-soft">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-brand-line">
                   <th className="px-6 py-4 text-left font-semibold text-brand-ink"></th>
-                  <th className="px-6 py-4 text-center font-semibold text-brand-accent">CareBeds</th>
+                  <th className="px-6 py-4 text-center font-semibold text-brand-accent">TRG Digital</th>
                   <th className="px-6 py-4 text-center font-semibold text-brand-ink-soft">Referral agency</th>
                   <th className="px-6 py-4 text-center font-semibold text-brand-ink-soft">In-house PPC</th>
                 </tr>

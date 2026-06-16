@@ -1,87 +1,55 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { CheckCircle, TrendingDown, Zap, Shield } from 'lucide-react'
+import { Megaphone, Globe, Code2, ArrowRight, Check } from 'lucide-react'
+import { RotatingHeadline } from '@/components/marketing/RotatingHeadline'
 
 export const dynamic = 'force-static'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
 export const metadata: Metadata = {
-  title: 'Fill Empty Beds, On Demand | CareBeds',
+  title: 'TRG Digital | A Specialist Digital Agency for the Care Sector',
   description:
-    "CareBeds sends qualified care home enquiries to UK operators. Activate when you have empty beds. Pause when you're full. Pay only on confirmed move-ins.",
+    'TRG Digital is a specialist agency for the UK care sector. We increase your enquiries, build your website, and develop custom software like CareStream and CareAssura.',
   alternates: { canonical: SITE_URL },
   openGraph: {
-    title: 'Fill Empty Beds, On Demand | CareBeds',
-    description: 'Qualified care home enquiries for UK operators. Activate when beds are empty, pause when full.',
+    title: 'TRG Digital | A Specialist Digital Agency for the Care Sector',
+    description: 'Marketing, websites and custom software, built only for the UK care sector.',
     type: 'website',
     url: SITE_URL,
     images: [{ url: `${SITE_URL}/og-home.jpg`, width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fill Empty Beds, On Demand | CareBeds',
-    description: 'Qualified care home enquiries for UK operators.',
+    title: 'TRG Digital | A Specialist Digital Agency for the Care Sector',
+    description: 'Marketing, websites and custom software, built only for the UK care sector.',
   },
   robots: { index: true, follow: true },
 }
 
-const FAQS = [
+const SERVICES = [
   {
-    q: 'How quickly will I receive enquiries?',
-    a: 'Most homes receive their first qualified enquiry within 5–10 business days of going live. The timeline depends on local search demand and the care types you offer.',
+    Icon: Megaphone,
+    title: 'More enquiries, faster',
+    kicker: 'Marketing',
+    body: 'Targeted PPC and high-converting landing pages that bring qualified enquiries to your door and fill empty beds on demand.',
+    href: '/marketing',
   },
   {
-    q: 'What makes an enquiry "qualified"?',
-    a: "We verify that the enquirer genuinely needs care, that the care type matches what you offer, and that they can meet your fee level — before the enquiry reaches your inbox.",
+    Icon: Globe,
+    title: 'Websites that win business',
+    kicker: 'Website Development',
+    body: 'Modern, fast, search-optimised websites built specifically for care providers, designed to grow your exposure and turn visitors into enquiries.',
+    href: '/website-development',
   },
   {
-    q: 'Do I pay for every enquiry?',
-    a: "No. You only pay when a resident actually moves in. No fees for enquiries, consultations, tours, or assessments that don't result in a placement.",
+    Icon: Code2,
+    title: 'Software built for care',
+    kicker: 'Custom Development',
+    body: 'Bespoke tools and platforms for the sector, including our own products CareStream and CareAssura.',
+    href: '/development',
   },
-  {
-    q: 'Can I pause the service?',
-    a: 'Yes — instantly, from your dashboard. Turn the campaign off when your home is full, turn it back on when you have capacity. No notice periods, no penalties.',
-  },
-  {
-    q: 'Do I need to handle the advertising myself?',
-    a: "No. We build, manage, and fund the advertising campaigns. You don't touch Google Ads, Meta, or any ad platform.",
-  },
-  {
-    q: 'Is there a setup fee or monthly retainer?',
-    a: 'No upfront fee and no monthly retainer. You pay a single fixed fee per confirmed move-in, and nothing else.',
-  },
-]
-
-const PILLARS = [
-  {
-    Icon: Shield,
-    title: 'Proven landing pages',
-    body: 'We build and host a CQC-compliant landing page for your home — optimised for families searching for care. Updated by us, always converting.',
-  },
-  {
-    Icon: CheckCircle,
-    title: 'Qualified enquiries',
-    body: 'Every enquiry is pre-screened before it reaches you: right care type, right geography, right funding level. No time wasted on mismatches.',
-  },
-  {
-    Icon: Zap,
-    title: 'On/off control',
-    body: "You're in control. Activate when you have empty beds, pause when full. One click and the change is effective immediately.",
-  },
-]
-
-const STEPS = [
-  { n: '01', title: 'We build your page', body: 'Your dedicated landing page goes live in days, fully managed and optimised for search.' },
-  { n: '02', title: 'We run your ads', body: 'Targeted Google and Meta campaigns drive families to your landing page — 24/7.' },
-  { n: '03', title: 'You receive enquiries', body: 'Pre-qualified leads land straight in your inbox. Full qualification in under 10 seconds.' },
-]
-
-const COSTS = [
-  { stat: '£900/week', label: 'average cost of one empty bed' },
-  { stat: '8–12 weeks', label: 'typical vacancy duration without targeted marketing' },
-  { stat: '£8,000+', label: 'revenue lost per vacancy at average UK weekly fees' },
 ]
 
 export default function HomePage() {
@@ -95,9 +63,9 @@ export default function HomePage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Organization',
-            name: 'CareBeds',
+            name: 'TRG Digital',
             url: SITE_URL,
-            description: 'Qualified care home enquiries for UK care operators.',
+            description: 'A specialist digital agency for the UK care sector: marketing, website development and custom software.',
             contactPoint: { '@type': 'ContactPoint', contactType: 'sales', url: `${SITE_URL}/contact` },
           }),
         }}
@@ -115,23 +83,24 @@ export default function HomePage() {
             sizes="46vw"
             className="object-cover"
           />
-          {/* soft seam blending the image into the page background */}
           <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-brand-bg to-transparent" />
         </div>
 
         <div className="mx-auto max-w-6xl px-6">
           <div className="py-16 lg:w-1/2 lg:py-28 lg:pr-12">
             <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">
-              Care home occupancy marketing
+              Specialist care-sector agency
             </p>
             <h1 className="mt-4 font-display text-5xl font-semibold leading-tight text-brand-ink sm:text-6xl">
-              Fill empty beds,{' '}
-              <span className="italic text-brand-accent-soft">on demand.</span>
+              We help care providers{' '}
+              <RotatingHeadline
+                phrases={['win more enquiries.', 'stand out online.', 'build better software.']}
+                className="italic text-brand-accent-soft"
+              />
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
-              We run targeted advertising, build high-converting landing pages, and deliver
-              pre-qualified enquiries directly to your care home. Activate when beds are
-              empty. Pause when you&apos;re full. Pay only when a resident moves in.
+              TRG Digital is a specialist agency for the UK care sector. We grow your enquiries,
+              build your website, and develop the software that sets you apart, all under one roof.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -141,10 +110,10 @@ export default function HomePage() {
                 Book a free demo
               </Link>
               <Link
-                href="/how-it-works"
+                href="/about"
                 className="inline-flex h-12 items-center justify-center rounded-xl border border-brand-line px-8 text-base font-medium text-brand-ink-soft transition-colors hover:border-brand-ink hover:text-brand-ink"
               >
-                See how it works
+                What we do
               </Link>
             </div>
           </div>
@@ -163,133 +132,101 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Problem ───────────────────────────────────────────────────── */}
-      <section className="bg-brand-ink px-6 py-16 text-white">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-12 text-center">
-            <TrendingDown className="mx-auto mb-4 h-10 w-10 text-brand-accent-soft" />
-            <h2 className="font-display text-3xl font-semibold sm:text-4xl">
-              Empty beds cost more than you think
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base text-white/70">
-              Traditional care home marketing is slow, expensive, and unpredictable. Word of
-              mouth and referral agencies fill beds eventually — but every week without a
-              resident is revenue gone for good.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {COSTS.map(({ stat, label }) => (
-              <div key={stat} className="rounded-2xl bg-white/5 p-6 text-center">
-                <p className="font-display text-4xl font-semibold text-brand-accent-soft">{stat}</p>
-                <p className="mt-2 text-sm text-white/70">{label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Solution pillars ──────────────────────────────────────────── */}
+      {/* ── Services ──────────────────────────────────────────────────── */}
       <section className="px-6 py-20">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-14 text-center">
+          <div className="mb-14 max-w-2xl">
             <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
-              A smarter way to fill beds
+              Three ways we grow your care business
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-brand-ink-soft">
-              Everything handled. You focus on care; we fill the pipeline.
+            <p className="mt-4 text-brand-ink-soft">
+              From the first enquiry to the software that runs behind the scenes, we cover the digital
+              side of care so you can focus on delivering it.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {PILLARS.map(({ Icon, title, body }) => (
-              <div key={title} className="rounded-2xl border border-brand-line bg-white p-8 shadow-soft">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-accent/10">
+            {SERVICES.map(({ Icon, title, kicker, body, href }) => (
+              <Link
+                key={title}
+                href={href}
+                className="group flex flex-col rounded-2xl border border-brand-line bg-white p-8 shadow-soft transition-all hover:-translate-y-0.5 hover:border-brand-accent/40 hover:shadow-card"
+              >
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-accent/10">
                   <Icon className="h-5 w-5 text-brand-accent" />
                 </div>
-                <h3 className="mt-5 font-display text-xl font-semibold text-brand-ink">{title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
-              </div>
+                <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-brand-accent">{kicker}</p>
+                <h3 className="mt-1 font-display text-xl font-semibold text-brand-ink">{title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
+                <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-ink">
+                  Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── How it works ──────────────────────────────────────────────── */}
-      <section className="bg-brand-bg-warm px-6 py-20">
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-14 text-center">
-            <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
-              Up and running in days
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
-            {STEPS.map(({ n, title, body }) => (
-              <div key={n}>
-                <p className="font-display text-5xl font-semibold text-brand-line">{n}</p>
-                <h3 className="mt-3 font-display text-xl font-semibold text-brand-ink">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <Link href="/how-it-works" className="text-sm font-medium text-brand-accent hover:text-brand-ink transition-colors">
-              Full walkthrough →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Pricing teaser ────────────────────────────────────────────── */}
-      <section className="px-6 py-20 text-center">
-        <div className="mx-auto max-w-xl">
-          <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
-            Transparent, performance-based pricing
-          </h2>
-          <p className="mt-4 text-brand-ink-soft">
-            No setup fee. No monthly retainer. A single fixed fee per confirmed move-in.
-          </p>
-          <div className="mt-10 inline-block rounded-2xl border border-brand-line bg-white p-8 shadow-soft text-left w-full">
-            <p className="text-xs font-semibold uppercase tracking-wider text-brand-accent">
-              Per confirmed move-in
-            </p>
-            <p className="mt-2 font-display text-5xl font-semibold text-brand-ink">Fixed fee</p>
-            <ul className="mt-6 space-y-2 text-sm text-brand-ink-soft">
+      {/* ── Specialists, not generalists ──────────────────────────────── */}
+      <section className="bg-brand-ink px-6 py-20 text-white">
+        <div className="mx-auto max-w-5xl">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+            <div>
+              <h2 className="font-display text-3xl font-semibold sm:text-4xl">
+                We only work with care.
+              </h2>
+              <p className="mt-5 text-base leading-relaxed text-white/70">
+                TRG Digital is a specialist, not a generalist. Everything we market, build and develop
+                is for the UK care sector, so we already understand your families, your regulators and
+                the way people choose care. That focus is why our work converts.
+              </p>
+            </div>
+            <ul className="space-y-4">
               {[
-                'Full landing page — built and managed for you',
-                'Google & Meta advertising campaigns',
-                'Pre-qualified enquiry delivery',
-                'On/off control over your campaigns',
-                'No contracts — cancel anytime',
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 shrink-0 text-brand-sage" />
-                  {item}
+                ['Sector specialists', 'We speak care: CQC, funding routes, care types and the questions families actually ask.'],
+                ['Built to perform', 'Every page, campaign and product is measured on the outcome that matters: more enquiries and more residents.'],
+                ['End to end', 'Marketing, websites and software from one team, so nothing falls between agencies.'],
+              ].map(([t, b]) => (
+                <li key={t} className="flex gap-3 rounded-2xl bg-white/5 p-5">
+                  <Check className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-accent-soft" />
+                  <div>
+                    <p className="font-semibold text-white">{t}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-white/60">{b}</p>
+                  </div>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="mt-6">
-            <Link href="/pricing" className="text-sm font-medium text-brand-accent hover:text-brand-ink transition-colors">
-              Full pricing details →
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* ── FAQ ───────────────────────────────────────────────────────── */}
-      <section className="bg-brand-bg-warm px-6 py-20">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="mb-10 text-center font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
-            Frequently asked questions
-          </h2>
-          <div className="space-y-3">
-            {FAQS.map(({ q, a }) => (
-              <details key={q} className="group rounded-xl border border-brand-line bg-white px-6 py-4">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-brand-ink">
-                  {q}
-                  <span className="shrink-0 text-lg leading-none text-brand-ink-muted transition-transform group-open:rotate-45">+</span>
-                </summary>
-                <p className="mt-3 text-sm leading-relaxed text-brand-ink-soft">{a}</p>
-              </details>
+      {/* ── Our own products ──────────────────────────────────────────── */}
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-12 max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-wider text-brand-accent">Built by us</p>
+            <h2 className="mt-2 font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
+              We build our own software for care
+            </h2>
+            <p className="mt-4 text-brand-ink-soft">
+              We do not just talk about custom development, we ship it. Two of our own products are live
+              and used across the sector today.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {[
+              { name: 'CareStreamAI', body: 'Policies, training, audits and CQC tools, answered for care staff in over 60 languages, grounded in the provider’s own documents.', href: 'https://carestreamai.com' },
+              { name: 'CareAssura', body: 'A UK care home directory that helps families find, compare and choose the right care with confidence.', href: 'https://careassura.co.uk' },
+            ].map(({ name, body, href }) => (
+              <div key={name} className="rounded-2xl border border-brand-line bg-white p-8 shadow-soft">
+                <h3 className="font-display text-2xl font-semibold text-brand-ink">{name}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
+                <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
+                  <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-brand-accent hover:text-brand-ink">
+                    Visit site <ArrowRight className="h-4 w-4" />
+                  </a>
+                  <Link href="/development" className="text-brand-ink-soft hover:text-brand-ink">Read more</Link>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -299,11 +236,11 @@ export default function HomePage() {
       <section className="bg-brand-accent px-6 py-20 text-center">
         <div className="mx-auto max-w-2xl">
           <h2 className="font-display text-3xl font-semibold text-white sm:text-4xl">
-            Ready to stop leaving beds empty?
+            Let&apos;s grow your care business
           </h2>
           <p className="mt-4 text-white/80">
-            Book a free 20-minute demo. We&apos;ll show you how CareBeds works and what results
-            to expect for your specific home.
+            Book a free 20-minute call. Tell us where you want to grow and we&apos;ll show you exactly
+            how we can help, whether that&apos;s enquiries, a new website, or custom software.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
@@ -313,10 +250,10 @@ export default function HomePage() {
               Book a free demo
             </Link>
             <Link
-              href="/how-it-works"
+              href="/development"
               className="inline-flex h-12 items-center px-8 text-sm font-medium text-white/80 transition-colors hover:text-white"
             >
-              Learn more first →
+              See our work →
             </Link>
           </div>
         </div>

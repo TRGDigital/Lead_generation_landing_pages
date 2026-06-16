@@ -5,12 +5,12 @@ import ContactForm from '@/components/marketing/ContactForm'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
 export const metadata: Metadata = {
-  title: 'Contact CareBeds — Book a Demo',
+  title: 'Contact TRG Digital — Book a Demo',
   description:
-    'Get in touch with CareBeds to book a free demo, ask about pricing, or discuss how we can help fill empty beds in your care home.',
+    'Get in touch with TRG Digital to book a free demo, ask about pricing, or discuss how we can help fill empty beds in your care home.',
   alternates: { canonical: `${SITE_URL}/contact` },
   openGraph: {
-    title: 'Contact CareBeds — Book a Demo',
+    title: 'Contact TRG Digital — Book a Demo',
     description: 'Book a free demo or ask us anything about performance-based care home occupancy marketing.',
     type: 'website',
     url: `${SITE_URL}/contact`,
@@ -30,7 +30,7 @@ export default function ContactPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'ContactPage',
-            name: 'Contact CareBeds',
+            name: 'Contact TRG Digital',
             url: `${SITE_URL}/contact`,
           }),
         }}

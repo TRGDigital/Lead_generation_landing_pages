@@ -7,13 +7,13 @@ export const dynamic = 'force-static'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
 export const metadata: Metadata = {
-  title: 'How CareBeds Works — Managed Occupancy Marketing for Care Homes',
+  title: 'How TRG Digital Works — Managed Occupancy Marketing for Care Homes',
   description:
-    'See how CareBeds fills empty care home beds: we build your landing page, run targeted ads, qualify every enquiry, and deliver move-in-ready leads to your inbox.',
+    'See how TRG Digital fills empty care home beds: we build your landing page, run targeted ads, qualify every enquiry, and deliver move-in-ready leads to your inbox.',
   alternates: { canonical: `${SITE_URL}/how-it-works` },
   openGraph: {
-    title: 'How CareBeds Works',
-    description: 'From empty bed to confirmed move-in — the CareBeds process explained.',
+    title: 'How TRG Digital Works',
+    description: 'From empty bed to confirmed move-in — the TRG Digital process explained.',
     type: 'website',
     url: `${SITE_URL}/how-it-works`,
   },
@@ -96,7 +96,7 @@ export default function HowItWorksPage() {
             From empty bed to confirmed move-in
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brand-ink-soft">
-            CareBeds handles everything between your landing page and a qualified family at your
+            TRG Digital handles everything between your landing page and a qualified family at your
             door. You focus on care; we fill your pipeline.
           </p>
         </div>
@@ -137,7 +137,7 @@ export default function HowItWorksPage() {
           </h2>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <div className="rounded-2xl border border-brand-line bg-white p-8">
-              <p className="font-semibold text-brand-ink">CareBeds handles</p>
+              <p className="font-semibold text-brand-ink">TRG Digital handles</p>
               <ul className="mt-4 space-y-2">
                 {HANDLES.map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-brand-ink-soft">
@@ -167,7 +167,7 @@ export default function HowItWorksPage() {
         <div className="mx-auto max-w-xl">
           <h2 className="font-display text-3xl font-semibold text-brand-ink">Ready to get started?</h2>
           <p className="mt-4 text-brand-ink-soft">
-            Book a free demo and we&apos;ll walk you through exactly what CareBeds would look
+            Book a free demo and we&apos;ll walk you through exactly what TRG Digital would look
             like for your specific home.
           </p>
           <div className="mt-8">

@@ -26,11 +26,11 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | CareBeds',
-    default: 'CareBeds — Fill Your Empty Beds',
+    template: '%s | TRG Digital',
+    default: 'TRG Digital | A Specialist Digital Agency for the Care Sector',
   },
   description:
-    'CareBeds connects UK care homes with pre-qualified resident enquiries. Pay only when a resident moves in.',
+    'TRG Digital is a specialist agency for the UK care sector: marketing and enquiry generation, website development, and custom software including CareStream and CareAssura.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
