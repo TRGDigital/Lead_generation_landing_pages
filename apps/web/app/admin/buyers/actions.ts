@@ -6,25 +6,21 @@ import { createServiceClient } from '@/lib/supabase/server'
 import { requireAdmin } from '@/lib/auth'
 import { BuyerFormSchema } from '@lib/schemas'
 
-function lines(v: FormDataEntryValue | undefined): string[] {
-  return typeof v === 'string' ? v.split('\n').map((s) => s.trim()).filter(Boolean) : []
-}
-
-function coerce(raw: Record<string, FormDataEntryValue>) {
+function buildInput(fd: FormData) {
+  const price = fd.get('price_per_lead')
+  const cap = fd.get('monthly_cap')
   return {
-    name: raw['name'],
-    contact_email: (raw['contact_email'] as string) ?? '',
-    contact_phone: (raw['contact_phone'] as string) ?? '',
-    areas: lines(raw['areas']),
-    care_types: lines(raw['care_types']),
-    price_per_lead_pennies: raw['price_per_lead']
-      ? Math.round(Number(raw['price_per_lead']) * 100)
-      : undefined,
-    monthly_cap: raw['monthly_cap'] ? Number(raw['monthly_cap']) : undefined,
-    notify_email: raw['notify_email'] === 'true' || raw['notify_email'] === 'on',
-    notify_sms: raw['notify_sms'] === 'true' || raw['notify_sms'] === 'on',
-    active: raw['active'] === 'true' || raw['active'] === 'on',
-    notes: (raw['notes'] as string) ?? '',
+    name: fd.get('name'),
+    contact_email: (fd.get('contact_email') as string) ?? '',
+    contact_phone: (fd.get('contact_phone') as string) ?? '',
+    areas: fd.getAll('areas').map(String).filter(Boolean),       // multi-select of landing-page areas
+    care_types: fd.getAll('care_types').map(String).filter(Boolean), // multi-select of care types
+    price_per_lead_pennies: price ? Math.round(Number(price) * 100) : undefined,
+    monthly_cap: cap ? Number(cap) : undefined,
+    notify_email: fd.get('notify_email') === 'true',
+    notify_sms: fd.get('notify_sms') === 'true',
+    active: fd.get('active') === 'true',
+    notes: (fd.get('notes') as string) ?? '',
   }
 }
 
@@ -47,7 +43,7 @@ function toRow(d: ReturnType<typeof BuyerFormSchema.parse>) {
 
 export async function createBuyer(formData: FormData) {
   await requireAdmin()
-  const parsed = BuyerFormSchema.safeParse(coerce(Object.fromEntries(formData)))
+  const parsed = BuyerFormSchema.safeParse(buildInput(formData))
   if (!parsed.success) return { error: 'Validation failed', issues: parsed.error.issues }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const db = createServiceClient() as any
@@ -59,7 +55,7 @@ export async function createBuyer(formData: FormData) {
 
 export async function updateBuyer(id: string, formData: FormData) {
   await requireAdmin()
-  const parsed = BuyerFormSchema.safeParse(coerce(Object.fromEntries(formData)))
+  const parsed = BuyerFormSchema.safeParse(buildInput(formData))
   if (!parsed.success) return { error: 'Validation failed', issues: parsed.error.issues }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const db = createServiceClient() as any

@@ -7,6 +7,11 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Switch } from '@/components/ui/switch'
+import { Checkbox } from '@/components/ui/checkbox'
+
+// The three standard care types buyers can accept. These match the care_type
+// values captured on the location landing pages, so matching aligns exactly.
+export const CARE_TYPE_OPTIONS = ['Residential care', 'Nursing care', 'Dementia care']
 
 export type BuyerInitial = {
   name?: string
@@ -25,19 +30,34 @@ export type BuyerInitial = {
 export default function BuyerForm({
   initial,
   action,
+  areaOptions,
 }: {
   initial?: BuyerInitial
   action: (fd: FormData) => Promise<{ error?: string } | void>
+  areaOptions: string[]
 }) {
   const [pending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
+  const [areaSel, setAreaSel] = useState<Set<string>>(new Set(initial?.areas ?? []))
+  const [careSel, setCareSel] = useState<Set<string>>(new Set(initial?.care_types ?? []))
   const [emailOn, setEmailOn] = useState(initial?.notify_email ?? true)
   const [smsOn, setSmsOn] = useState(initial?.notify_sms ?? false)
   const [active, setActive] = useState(initial?.active ?? true)
 
+  function toggle(set: Set<string>, setter: (s: Set<string>) => void, v: string) {
+    const n = new Set(set)
+    if (n.has(v)) n.delete(v)
+    else n.add(v)
+    setter(n)
+  }
+
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const fd = new FormData(e.currentTarget)
+    fd.delete('areas')
+    fd.delete('care_types')
+    areaSel.forEach((a) => fd.append('areas', a))
+    careSel.forEach((c) => fd.append('care_types', c))
     fd.set('notify_email', String(emailOn))
     fd.set('notify_sms', String(smsOn))
     fd.set('active', String(active))
@@ -67,15 +87,33 @@ export default function BuyerForm({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="areas">Areas covered (one per line)</Label>
-        <Textarea id="areas" name="areas" rows={4} defaultValue={(initial?.areas ?? []).join('\n')} placeholder={'Haywards Heath\nBurgess Hill\nLindfield'} />
-        <p className="text-xs text-muted-foreground">Must match the lead’s area name exactly (the landing-page area, e.g. “Haywards Heath”).</p>
+        <Label>Landing-page areas covered</Label>
+        <p className="text-xs text-muted-foreground">Tick the landing pages this buyer should receive leads from. This is what links a landing page to the buyer.</p>
+        {areaOptions.length === 0 ? (
+          <p className="text-sm text-muted-foreground">No published landing pages yet — create one under Care Homes first.</p>
+        ) : (
+          <div className="grid grid-cols-1 gap-2 rounded-md border p-3 sm:grid-cols-2">
+            {areaOptions.map((a) => (
+              <label key={a} className="flex items-center gap-2 text-sm">
+                <Checkbox checked={areaSel.has(a)} onCheckedChange={() => toggle(areaSel, setAreaSel, a)} />
+                {a}
+              </label>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="care_types">Care types accepted (one per line)</Label>
-        <Textarea id="care_types" name="care_types" rows={3} defaultValue={(initial?.care_types ?? []).join('\n')} placeholder={'Residential care\nDementia care\nNursing care'} />
-        <p className="text-xs text-muted-foreground">Leave blank to accept all care types.</p>
+        <Label>Care types accepted</Label>
+        <p className="text-xs text-muted-foreground">Leave all unticked to accept every care type.</p>
+        <div className="flex flex-wrap gap-4 rounded-md border p-3">
+          {CARE_TYPE_OPTIONS.map((c) => (
+            <label key={c} className="flex items-center gap-2 text-sm">
+              <Checkbox checked={careSel.has(c)} onCheckedChange={() => toggle(careSel, setCareSel, c)} />
+              {c}
+            </label>
+          ))}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
