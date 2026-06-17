@@ -21,7 +21,7 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>
 
-export default function ContactForm({ onDark = false }: { onDark?: boolean }) {
+export default function ContactForm() {
   const [pending, startTransition] = useTransition()
   const [submitted, setSubmitted] = useState(false)
   const [serverError, setServerError] = useState<string | null>(null)
@@ -112,7 +112,7 @@ export default function ContactForm({ onDark = false }: { onDark?: boolean }) {
         <p className="rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">{serverError}</p>
       )}
 
-      <button type="submit" disabled={pending} className={`btn-pop w-full disabled:opacity-70 ${onDark ? 'btn-on-dark' : ''}`}>
+      <button type="submit" disabled={pending} className="btn-pop w-full disabled:opacity-70">
         {pending ? 'Sending…' : 'Send message'}
       </button>
 

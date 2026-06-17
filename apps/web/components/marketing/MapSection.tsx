@@ -26,7 +26,7 @@ export function MapSection() {
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-pop mt-7 w-fit"
+              className="btn-pop btn-on-dark mt-7 w-fit"
             >
               Get directions
               <span className="btn-arrow" aria-hidden>→</span>
