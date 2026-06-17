@@ -95,13 +95,21 @@ export function HomeHero() {
             build your website, and develop the software that sets you apart, all under one roof.
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Link href="/contact" className="btn-cta">
-              Book a free demo
+            <Link href="/contact" className="btn-pop">
+              Start your project
               <span className="btn-arrow" aria-hidden>→</span>
             </Link>
             <Link href="/about" className="btn-cta-outline">
               What we do
             </Link>
+          </div>
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-brand-ink-soft">
+            {['Care-sector specialists', 'Found on Google & Bing', 'Enquiries, not clicks'].map((p) => (
+              <span key={p} className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand-pop" />
+                {p}
+              </span>
+            ))}
           </div>
         </div>
       </div>

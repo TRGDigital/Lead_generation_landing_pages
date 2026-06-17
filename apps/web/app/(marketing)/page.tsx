@@ -45,6 +45,7 @@ const SERVICES = [
     title: 'More enquiries, faster',
     kicker: 'Marketing',
     body: 'Targeted PPC and high-converting landing pages that bring qualified enquiries to your door and fill empty beds on demand.',
+    includes: ['Google & Meta Ads', 'SEO', 'Landing pages'],
     href: '/marketing',
   },
   {
@@ -52,6 +53,7 @@ const SERVICES = [
     title: 'Websites that win business',
     kicker: 'Website Development',
     body: 'Modern, fast, search-optimised websites built specifically for care providers, designed to grow your exposure and turn visitors into enquiries.',
+    includes: ['Mobile-first', 'SEO-built', 'Fast & secure'],
     href: '/website-development',
   },
   {
@@ -59,6 +61,7 @@ const SERVICES = [
     title: 'Software built for care',
     kicker: 'Custom Development',
     body: 'Bespoke tools and platforms for the sector, including our own products CareStream and CareAssura.',
+    includes: ['Custom platforms', 'AI tools', 'Integrations'],
     href: '/development',
   },
 ]
@@ -89,7 +92,12 @@ export default async function HomePage() {
 
       <BrandStrip />
 
-      <StatementBand eyebrow="TRG Digital" cta={{ label: 'Start your project', href: '#start' }}>
+      <StatementBand
+        eyebrow="TRG Digital"
+        tone="dark"
+        sub="We blend sharp strategy with standout creative — websites, search, paid media and software, all built to do one thing: bring more families to your door."
+        cta={{ label: 'Start your project', href: '#start' }}
+      >
         A leading digital marketing agency with a creative kick
       </StatementBand>
 
@@ -106,19 +114,24 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {SERVICES.map(({ Icon, title, kicker, body, href }) => (
+            {SERVICES.map(({ Icon, title, kicker, body, includes, href }) => (
               <Link
                 key={title}
                 href={href}
-                className="group flex flex-col rounded-2xl border border-brand-line bg-white p-8 shadow-soft transition-all hover:-translate-y-0.5 hover:border-brand-pop/40 hover:shadow-card"
+                className="group flex flex-col rounded-2xl border border-brand-line bg-white p-8 shadow-soft transition-all hover:-translate-y-1 hover:border-brand-pop/40 hover:shadow-card"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-pop/10">
-                  <Icon className="h-5 w-5 text-brand-pop" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-pop/10 transition-colors group-hover:bg-brand-pop">
+                  <Icon className="h-6 w-6 text-brand-pop transition-colors group-hover:text-white" />
                 </div>
                 <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-brand-pop">{kicker}</p>
                 <h3 className="mt-1 font-display text-xl font-semibold text-brand-ink">{title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
-                <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-ink">
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {includes.map((tag) => (
+                    <span key={tag} className="rounded-full bg-brand-bg-warm px-2.5 py-1 text-xs font-medium text-brand-ink-soft">{tag}</span>
+                  ))}
+                </div>
+                <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-pop">
                   Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
               </Link>
@@ -171,7 +184,11 @@ export default async function HomePage() {
       {/* Renders only when real quotes exist */}
       <Testimonials />
 
-      <StatementBand tone="pop" cta={{ label: 'Start your project', href: '#start' }}>
+      <StatementBand
+        tone="pop"
+        sub="Stop losing enquiries to competitors who simply show up first. Let's get your home found, chosen and full."
+        cta={{ label: 'Start your project', href: '#start' }}
+      >
         Ready to outrank your competition and reduce empty beds?
       </StatementBand>
 

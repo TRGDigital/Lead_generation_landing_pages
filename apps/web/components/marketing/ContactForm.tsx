@@ -113,7 +113,7 @@ export default function ContactForm() {
         <p className="rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">{serverError}</p>
       )}
 
-      <Button type="submit" className="w-full h-12" disabled={pending}>
+      <Button type="submit" className="h-12 w-full bg-brand-pop text-base font-semibold text-white hover:bg-brand-pop-dark" disabled={pending}>
         {pending ? 'Sending…' : 'Send message'}
       </Button>
 

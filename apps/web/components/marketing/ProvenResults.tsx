@@ -5,10 +5,10 @@ import { ArrowRight } from 'lucide-react'
 // NOTE: the stat tiles use honest, qualitative values for now — swap in the real
 // percentages/figures (e.g. '+140%' enquiries) once client campaign data is in.
 const STATS = [
-  { value: 'More', label: 'qualified enquiries' },
-  { value: 'Fewer', label: 'empty beds' },
-  { value: 'Page 1', label: 'local search visibility' },
-  { value: 'Instant', label: 'leads to your inbox' },
+  { value: 'More', label: 'qualified enquiries', detail: 'Campaigns tuned to fill beds, not chase clicks.' },
+  { value: 'Fewer', label: 'empty beds', detail: 'Every empty room is lost revenue — we close the gap.' },
+  { value: 'Page 1', label: 'local search visibility', detail: 'Found first when families search in your area.' },
+  { value: 'Instant', label: 'leads to your inbox', detail: 'Enquiries delivered the moment they come in.' },
 ]
 
 type Work = { name: string; blurb: string; image?: string; href?: string; status?: 'In build' | 'Live' }
@@ -30,11 +30,12 @@ export function ProvenResults() {
           </h2>
         </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-6 lg:grid-cols-4">
-          {STATS.map(({ value, label }) => (
-            <div key={label} className="rounded-2xl border border-brand-line bg-brand-bg-warm p-6 text-center">
-              <p className="font-display text-3xl font-bold text-brand-pop sm:text-4xl">{value}</p>
-              <p className="mt-2 text-sm leading-snug text-brand-ink-soft">{label}</p>
+        <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-3xl bg-brand-pop/20 sm:grid-cols-2 lg:grid-cols-4">
+          {STATS.map(({ value, label, detail }) => (
+            <div key={label} className="bg-brand-pop p-7 text-center text-white">
+              <p className="font-display text-4xl font-bold leading-none sm:text-5xl">{value}</p>
+              <p className="mt-3 text-sm font-semibold uppercase tracking-wide text-white/90">{label}</p>
+              <p className="mt-2 text-xs leading-relaxed text-white/75">{detail}</p>
             </div>
           ))}
         </div>

@@ -1,19 +1,25 @@
+import { ShieldCheck, HeartHandshake, Target, BedDouble } from 'lucide-react'
+
 // "Making sense of a complicated industry" — the things that make care marketing
 // hard, and how TRG removes each one.
 const POINTS = [
   {
+    icon: ShieldCheck,
     problem: 'CQC, funding routes and care types',
     solution: 'We speak care fluently, so every campaign and page is accurate, compliant and credible to families.',
   },
   {
+    icon: HeartHandshake,
     problem: 'Families choosing in a vulnerable moment',
     solution: 'We build journeys that answer the real questions and earn trust, not generic marketing fluff.',
   },
   {
+    icon: Target,
     problem: 'Generic agencies that don’t get care',
     solution: 'Care is the only sector we work in. Nothing is learned on your budget — we already know it.',
   },
   {
+    icon: BedDouble,
     problem: 'Empty beds quietly draining revenue',
     solution: 'We focus relentlessly on the one metric that matters: qualified enquiries that fill beds.',
   },
@@ -35,13 +41,18 @@ export function ComplicatedIndustry() {
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
-          {POINTS.map(({ problem, solution }) => (
-            <div key={problem} className="rounded-2xl border border-brand-line bg-white p-7 shadow-soft">
-              <p className="flex items-start gap-2 font-display text-lg font-semibold text-brand-ink">
-                <span className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-brand-pop" />
-                {problem}
-              </p>
-              <p className="mt-3 pl-4 text-sm leading-relaxed text-brand-ink-soft">{solution}</p>
+          {POINTS.map(({ icon: Icon, problem, solution }) => (
+            <div
+              key={problem}
+              className="group flex gap-5 rounded-2xl border border-brand-line bg-white p-7 shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-card"
+            >
+              <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop transition-colors group-hover:bg-brand-pop group-hover:text-white">
+                <Icon className="h-6 w-6" />
+              </span>
+              <div>
+                <p className="font-display text-lg font-semibold text-brand-ink">{problem}</p>
+                <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{solution}</p>
+              </div>
             </div>
           ))}
         </div>
