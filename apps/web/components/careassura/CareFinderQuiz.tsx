@@ -88,6 +88,23 @@ export function CareFinderQuiz({
     return question.title
   }
 
+  // A warm, varying line of encouragement per step (replaces a "Step X of Y" counter,
+  // which makes the quiz feel long). Deterministic by step → no flicker on re-render.
+  function progressNote(): string {
+    if (q.type === 'contact') return 'Last step — where should we send your matches?'
+    if (step === 0) return 'Let’s find you the right care — it takes about a minute'
+    if (isLast) return 'Last question — nearly there!'
+    const cheers = [
+      'Nice — that helps us narrow it down',
+      'You’re doing great',
+      'Thanks — a few more to go',
+      'Brilliant, keep going',
+      'Great — we’re building your shortlist',
+      'Almost there',
+    ]
+    return cheers[step % cheers.length] as string
+  }
+
   function next() { if (!isLast) setStep((s) => s + 1); else finish() }
   function back() { if (step > 0) setStep((s) => s - 1) }
 
@@ -178,9 +195,9 @@ export function CareFinderQuiz({
     <div className={cardCls} id={anchorId}>
       {/* Progress */}
       <div className="mb-5">
-        <div className="mb-1.5 flex items-center justify-between text-xs font-medium text-slate-500">
-          <span>Step {step + 1} of {total}</span>
-          {step > 0 && <button type="button" onClick={back} className="text-violet-600 hover:underline">Back</button>}
+        <div className="mb-1.5 flex items-center justify-between gap-3 text-xs font-medium">
+          <span className="min-w-0 truncate text-violet-600">{progressNote()}</span>
+          {step > 0 && <button type="button" onClick={back} className="shrink-0 text-slate-400 hover:text-slate-600 hover:underline">Back</button>}
         </div>
         <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
           <div className="h-full rounded-full bg-gradient-to-r from-violet-600 to-purple-600 transition-all duration-300" style={{ width: `${((step + 1) / total) * 100}%` }} />
