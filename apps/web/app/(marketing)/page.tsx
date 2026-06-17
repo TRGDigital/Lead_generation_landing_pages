@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Megaphone, Globe, Code2, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { HomeHero } from '@/components/marketing/HomeHero'
 import { BrandStrip } from '@/components/marketing/BrandStrip'
 import { AgencyIntro } from '@/components/marketing/AgencyIntro'
+import { CoreServices } from '@/components/marketing/CoreServices'
 import { StatementBand } from '@/components/marketing/StatementBand'
 import { ScrollingBanner } from '@/components/marketing/ScrollingBanner'
 import { ShowcaseMarquee } from '@/components/marketing/ShowcaseMarquee'
@@ -41,33 +42,6 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-const SERVICES = [
-  {
-    Icon: Megaphone,
-    title: 'More enquiries, faster',
-    kicker: 'Marketing',
-    body: 'Targeted PPC and high-converting landing pages that bring qualified enquiries to your door and fill empty beds on demand.',
-    includes: ['Google & Meta Ads', 'SEO', 'Landing pages'],
-    href: '/marketing',
-  },
-  {
-    Icon: Globe,
-    title: 'Websites that win business',
-    kicker: 'Website Development',
-    body: 'Modern, fast, search-optimised websites built specifically for care providers, designed to grow your exposure and turn visitors into enquiries.',
-    includes: ['Mobile-first', 'SEO-built', 'Fast & secure'],
-    href: '/website-development',
-  },
-  {
-    Icon: Code2,
-    title: 'Software built for care',
-    kicker: 'Custom Development',
-    body: 'Bespoke tools and platforms for the sector, including our own products CareStream and CareAssura.',
-    includes: ['Custom platforms', 'AI tools', 'Integrations'],
-    href: '/development',
-  },
-]
-
 export default async function HomePage() {
   const { posts } = await getPublishedPosts(1)
   const latest = posts.slice(0, 4)
@@ -96,44 +70,7 @@ export default async function HomePage() {
 
       <AgencyIntro />
 
-      {/* ── Services ──────────────────────────────────────────────────── */}
-      <section className="px-6 py-20">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-14 max-w-2xl">
-            <h2 className="font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
-              Three ways we grow your care business
-            </h2>
-            <p className="mt-4 text-brand-ink-soft">
-              From the first enquiry to the software that runs behind the scenes, we cover the digital
-              side of care so you can focus on delivering it.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {SERVICES.map(({ Icon, title, kicker, body, includes, href }) => (
-              <Link
-                key={title}
-                href={href}
-                className="group flex flex-col rounded-2xl border border-brand-line bg-white p-8 shadow-soft transition-all hover:-translate-y-1 hover:border-brand-pop/40 hover:shadow-card"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-pop/10 transition-colors group-hover:bg-brand-pop">
-                  <Icon className="h-6 w-6 text-brand-pop transition-colors group-hover:text-white" />
-                </div>
-                <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-brand-pop">{kicker}</p>
-                <h3 className="mt-1 font-display text-xl font-semibold text-brand-ink">{title}</h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {includes.map((tag) => (
-                    <span key={tag} className="rounded-full bg-brand-bg-warm px-2.5 py-1 text-xs font-medium text-brand-ink-soft">{tag}</span>
-                  ))}
-                </div>
-                <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-pop">
-                  Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <CoreServices />
 
       <ShowcaseMarquee />
 
