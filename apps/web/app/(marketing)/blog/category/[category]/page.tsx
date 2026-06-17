@@ -12,7 +12,11 @@ type Props = { params: { category: string }; searchParams: { page?: string } }
 
 export async function generateStaticParams() {
   const categories = await getCategories()
-  return categories.map((category) => ({ category: encodeURIComponent(category) }))
+  // Skip empty/blank categories — an empty slug would emit '/blog/category',
+  // which collides with the '/blog/category/[category]' route and fails the build.
+  return categories
+    .filter((category) => typeof category === 'string' && category.trim().length > 0)
+    .map((category) => ({ category: encodeURIComponent(category) }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
