@@ -6,74 +6,47 @@ import Image from 'next/image'
 
 const PHRASES = ['win more enquiries.', 'stand out online.', 'build better software.']
 
-// A single browser-framed screenshot of real work.
-function Frame({
-  src,
-  alt,
-  url,
-  w,
-  h,
-  className = '',
-  style,
-}: {
-  src: string
-  alt: string
-  url: string
-  w: number
-  h: number
-  className?: string
-  style?: React.CSSProperties
-}) {
+type Item = { type: 'desktop' | 'phone'; src: string; alt: string; url?: string }
+
+const ITEMS: Item[] = [
+  { type: 'desktop', src: '/mockups/haywards-landing.png', alt: 'A care home website we built', url: 'careassura.com' },
+  { type: 'phone', src: '/mockups/haywards-mobile.png', alt: 'The same site on mobile' },
+  { type: 'desktop', src: '/mockups/careassura.jpg', alt: 'CareAssura', url: 'careassura.co.uk' },
+  { type: 'phone', src: '/mockups/carestream-mobile.png', alt: 'CareStream on mobile' },
+  { type: 'desktop', src: '/mockups/carestream.jpg', alt: 'CareStream', url: 'carestreamai.com' },
+]
+
+function HeroFrame({ item }: { item: Item }) {
+  if (item.type === 'phone') {
+    return (
+      <div className="h-[330px] w-[156px] flex-shrink-0 overflow-hidden rounded-[1.6rem] border-4 border-brand-ink bg-brand-ink shadow-card">
+        <div className="relative h-full w-full overflow-hidden rounded-[1.25rem] bg-white">
+          <Image src={item.src} alt={item.alt} fill sizes="156px" className="object-cover object-top" />
+        </div>
+      </div>
+    )
+  }
   return (
-    <div
-      className={`overflow-hidden rounded-xl border border-brand-line bg-white shadow-card ${className}`}
-      style={style}
-    >
+    <div className="w-[420px] flex-shrink-0 overflow-hidden rounded-xl border border-brand-line bg-white shadow-card">
       <div className="flex items-center gap-1.5 border-b border-brand-line bg-brand-bg-warm px-3 py-2">
         <span className="h-2 w-2 rounded-full bg-red-400" />
         <span className="h-2 w-2 rounded-full bg-amber-300" />
         <span className="h-2 w-2 rounded-full bg-green-400" />
-        <span className="ml-2 hidden truncate rounded bg-white px-2 py-0.5 text-[9px] text-brand-ink-muted sm:block">{url}</span>
+        <span className="ml-2 truncate rounded bg-white px-2 py-0.5 text-[9px] text-brand-ink-muted">{item.url}</span>
       </div>
-      <Image src={src} alt={alt} width={w} height={h} className="w-full" />
+      <div className="relative h-[260px] w-full">
+        <Image src={item.src} alt={item.alt} fill sizes="420px" className="object-cover object-top" />
+      </div>
     </div>
   )
 }
 
-// "Show your work" — a floating collage of the real sites + products TRG builds.
-function WorkShowcase() {
+function HeroScroller() {
   return (
-    <div className="relative mx-auto h-[440px] w-full max-w-xl">
-      {/* Back: CareStream product */}
-      <Frame
-        src="/mockups/carestream.jpg"
-        alt="CareStream — software we build for care"
-        url="carestreamai.com"
-        w={1320}
-        h={940}
-        className="absolute left-0 top-2 w-[58%] -rotate-3"
-        style={{ animation: 'floaty 7s ease-in-out infinite' }}
-      />
-      {/* Front-right: a live lead-gen landing page we run */}
-      <Frame
-        src="/mockups/haywards-landing.png"
-        alt="A care home landing page we run to generate enquiries"
-        url="careassura.com"
-        w={1280}
-        h={1066}
-        className="absolute right-0 top-0 w-[52%] rotate-2"
-        style={{ animation: 'floaty 6s ease-in-out infinite', animationDelay: '0.6s' }}
-      />
-      {/* Front-centre: CareAssura directory */}
-      <Frame
-        src="/mockups/careassura.jpg"
-        alt="CareAssura — a care home directory we built"
-        url="careassura.co.uk"
-        w={1320}
-        h={895}
-        className="absolute bottom-0 left-1/2 w-[60%] -translate-x-1/2 rotate-1"
-        style={{ animation: 'floaty 8s ease-in-out infinite', animationDelay: '1.1s' }}
-      />
+    <div className="animate-marquee flex w-max items-center gap-6">
+      {[...ITEMS, ...ITEMS].map((item, i) => (
+        <HeroFrame key={i} item={item} />
+      ))}
     </div>
   )
 }
@@ -91,21 +64,16 @@ export function HomeHero() {
 
   return (
     <section className="relative overflow-hidden">
-      {/* Right visual — a floating showcase of the real work we ship */}
-      <div className="absolute inset-y-0 right-0 hidden w-[52%] items-center bg-brand-bg-warm lg:flex">
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.04), transparent 70%)' }}
-        />
-        <div className="w-full px-8">
-          <WorkShowcase />
-        </div>
-        <div className="absolute inset-y-0 left-0 z-10 w-28 bg-gradient-to-r from-brand-bg to-transparent" />
+      {/* Right-to-left scrolling band of real work, behind the text */}
+      <div className="pointer-events-none absolute inset-0 hidden items-center lg:flex">
+        <HeroScroller />
       </div>
+      {/* Fade the frames out as they reach the headline on the left */}
+      <div className="absolute inset-y-0 left-0 z-10 hidden w-[58%] bg-gradient-to-r from-brand-bg from-45% via-brand-bg/85 to-transparent lg:block" />
 
       {/* Text */}
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="py-16 lg:w-1/2 lg:py-28 lg:pr-12">
+      <div className="relative z-20 mx-auto max-w-6xl px-6">
+        <div className="py-16 lg:w-1/2 lg:py-32 lg:pr-12">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">
             Specialist care-sector agency
           </p>
@@ -137,10 +105,12 @@ export function HomeHero() {
         </div>
       </div>
 
-      {/* Mobile visual */}
-      <div className="px-6 pb-12 lg:hidden">
-        <div className="rounded-2xl bg-brand-bg-warm py-10">
-          <WorkShowcase />
+      {/* Mobile visual — a scrolling band under the text */}
+      <div className="marquee-mask pb-12 lg:hidden">
+        <div className="animate-marquee flex w-max items-center gap-5 px-6">
+          {[...ITEMS, ...ITEMS].map((item, i) => (
+            <HeroFrame key={i} item={item} />
+          ))}
         </div>
       </div>
     </section>
