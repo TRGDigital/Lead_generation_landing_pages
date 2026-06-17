@@ -13,7 +13,7 @@ const ICONS = [
   { Logo: Supabase, name: 'Supabase', pos: '-left-5 top-6', delay: '0.9s', dur: '7.1s' },
   { Logo: TypeScript, name: 'TypeScript', pos: '-left-6 top-1/4', delay: '0.2s', dur: '6.3s' },
   { Logo: Meta, name: 'Meta', pos: '-left-5 top-1/2', delay: '1.3s', dur: '7.3s' },
-  { Logo: Twilio, name: 'Twilio', pos: '-left-4 bottom-1/4', delay: '0.5s', dur: '6.9s' },
+  { Logo: Twilio, name: 'Twilio', pos: '-bottom-4 right-2/5', delay: '0.5s', dur: '6.9s' },
   { Logo: Cloudflare, name: 'Cloudflare', pos: '-bottom-4 right-1/4', delay: '0.55s', dur: '6.7s' },
   { Logo: Claude, name: 'Claude', pos: '-bottom-3 right-12', delay: '1.1s', dur: '6.2s' },
 ]
