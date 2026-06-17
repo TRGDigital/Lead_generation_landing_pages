@@ -91,7 +91,7 @@ function band() {
 function HeroScroller() {
   const items = band()
   return (
-    <div className="animate-marquee flex w-max items-center gap-6">
+    <div className="animate-marquee-hero flex w-max items-center gap-6">
       {[...items, ...items].map((node, i) => (
         <div key={i} className="flex-shrink-0">{node}</div>
       ))}
@@ -145,7 +145,7 @@ export function HomeHero() {
 
       {/* Mobile visual — a scrolling band under the text */}
       <div className="marquee-mask pb-12 lg:hidden">
-        <div className="animate-marquee flex w-max items-center gap-5 px-6">
+        <div className="animate-marquee-hero flex w-max items-center gap-5 px-6">
           {[...COLS, ...COLS].map((col, i) => (
             <Column key={i} col={col} />
           ))}

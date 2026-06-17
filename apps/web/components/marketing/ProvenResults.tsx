@@ -45,7 +45,7 @@ export function ProvenResults() {
             Live results from our latest care campaigns and websites are landing now — ask us for the most recent
             figures from real client work.
           </p>
-          <Link href="#start" className="btn-cta shrink-0">
+          <Link href="#start" className="btn-cta btn-on-dark shrink-0">
             Get the numbers
             <span className="btn-arrow" aria-hidden>→</span>
           </Link>

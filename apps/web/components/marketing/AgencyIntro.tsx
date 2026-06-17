@@ -42,7 +42,7 @@ export function AgencyIntro() {
               enquiries, fewer empty beds, and a digital presence families trust at the moment they need it most.
             </p>
           </div>
-          <Link href="#start" className="btn-cta mt-8">
+          <Link href="#start" className="btn-cta btn-on-dark mt-8">
             Start your project
             <span className="btn-arrow" aria-hidden>→</span>
           </Link>

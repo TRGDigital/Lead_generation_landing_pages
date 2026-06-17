@@ -54,7 +54,7 @@ export function CoreServices() {
           {/* CTA banner */}
           <Link
             href="/contact"
-            className="mt-8 flex items-center justify-center gap-3 rounded-2xl bg-brand-pop px-6 py-6 text-center font-display text-xl font-bold uppercase tracking-tight text-white transition-colors hover:bg-brand-pop-dark sm:text-2xl"
+            className="mt-8 flex items-center justify-center gap-3 rounded-2xl bg-brand-pop px-6 py-6 text-center font-display text-xl font-bold uppercase tracking-tight text-white shadow-[4px_4px_0_0_#2a2620] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:bg-brand-pop-dark hover:shadow-[2px_2px_0_0_#2a2620] sm:text-2xl"
           >
             Know what you want? Book a free demo
             <span aria-hidden>→</span>

@@ -7,7 +7,6 @@ import { z } from 'zod'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { Button } from '@/components/ui/button'
 import { CheckCircle } from 'lucide-react'
 
 const schema = z.object({
@@ -22,7 +21,7 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>
 
-export default function ContactForm() {
+export default function ContactForm({ onDark = false }: { onDark?: boolean }) {
   const [pending, startTransition] = useTransition()
   const [submitted, setSubmitted] = useState(false)
   const [serverError, setServerError] = useState<string | null>(null)
@@ -113,9 +112,9 @@ export default function ContactForm() {
         <p className="rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">{serverError}</p>
       )}
 
-      <Button type="submit" className="h-12 w-full bg-brand-pop text-base font-semibold text-white hover:bg-brand-pop-dark" disabled={pending}>
+      <button type="submit" disabled={pending} className={`btn-pop w-full disabled:opacity-70 ${onDark ? 'btn-on-dark' : ''}`}>
         {pending ? 'Sending…' : 'Send message'}
-      </Button>
+      </button>
 
       <p className="text-xs text-center text-brand-ink-muted">
         We respond within one business day. By submitting, you agree to our{' '}

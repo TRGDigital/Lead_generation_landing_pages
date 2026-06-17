@@ -66,6 +66,13 @@
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+/* Slower variant for the (long) hero band */
+.animate-marquee-hero {
+  animation: marquee 150s linear infinite;
+}
+.animate-marquee-hero:hover {
+  animation-play-state: paused;
+}
 .marquee-mask {
   -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
@@ -104,6 +111,16 @@
 .btn-pop:active {
   transform: translate(4px, 4px);
   box-shadow: 0 0 0 0 #2a2620;
+}
+/* On dark sections the ink shadow vanishes — use a light offset shadow instead. */
+.btn-on-dark {
+  box-shadow: 4px 4px 0 0 rgba(255, 255, 255, 0.92);
+}
+.btn-on-dark:hover {
+  box-shadow: 2px 2px 0 0 rgba(255, 255, 255, 0.92);
+}
+.btn-on-dark:active {
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.92);
 }
 .btn-arrow {
   transition: transform 0.2s ease;

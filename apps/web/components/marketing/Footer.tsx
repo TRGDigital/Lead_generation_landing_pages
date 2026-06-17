@@ -60,7 +60,7 @@ export default function Footer() {
               <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-accent" />
               Suite Ra01, 195-197 Wood Street, London, E17 3NU
             </p>
-            <Link href="/contact" className="btn-pop mt-6">
+            <Link href="/contact" className="btn-pop btn-on-dark mt-6">
               Start your project
               <span className="btn-arrow" aria-hidden>→</span>
             </Link>

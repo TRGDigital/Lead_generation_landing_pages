@@ -40,7 +40,7 @@ export function StartProject() {
         </div>
 
         <div>
-          <ContactForm />
+          <ContactForm onDark />
         </div>
       </div>
     </section>
