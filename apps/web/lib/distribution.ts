@@ -78,27 +78,56 @@ export async function matchBuyersForLead(lead: DistLead): Promise<Buyer[]> {
 }
 
 function leadEmailHtml(lead: DistLead, buyer: Buyer, finder: Array<{ question: string; answer: string }> = []): string {
-  const row = (k: string, v?: string | null) =>
+  // Brand gradient with a solid fallback (Outlook ignores the image, keeps the colour).
+  const grad = 'background-color:#7c3aed;background-image:linear-gradient(135deg,#2B4FE8 0%,#8640D4 52%,#D940D4 100%)'
+  const firstName = escapeHtml((lead.full_name || '').split(' ')[0] || 'the family')
+  const tel = (lead.phone || '').replace(/[^\d+]/g, '')
+  const phone = escapeHtml(lead.phone || '')
+  const email = escapeHtml(lead.email || '')
+
+  const detail = (k: string, v?: string | null) =>
     v
-      ? `<tr><td style="padding:4px 14px 4px 0;color:#666;vertical-align:top">${k}</td><td style="padding:4px 0;font-weight:600">${escapeHtml(v)}</td></tr>`
+      ? `<tr><td style="padding:9px 0;border-bottom:1px solid #f0f0f2;color:#787880;font-size:13px;width:38%;vertical-align:top">${k}</td><td style="padding:9px 0;border-bottom:1px solid #f0f0f2;color:#1a1a1f;font-size:14px;font-weight:600;vertical-align:top">${escapeHtml(v)}</td></tr>`
       : ''
-  const finderRows = finder.map((f) => row(f.question, f.answer)).join('')
-  return `<div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;color:#1a1a1a">
-    <h2 style="margin:0 0 4px">New care enquiry${lead.area ? ` — ${escapeHtml(lead.area)}` : ''}</h2>
-    <p style="color:#666;margin:0 0 16px">Hi ${escapeHtml(buyer.name)}, a new enquiry has been matched to your area. Please contact the family promptly.</p>
-    <table style="border-collapse:collapse;font-size:14px">
-      ${row('Name', lead.full_name)}
-      ${row('Phone', lead.phone)}
-      ${row('Email', lead.email)}
-      ${row('Area', lead.area)}
-      ${row('Care type', lead.care_type)}
-      ${row('Care for', lead.care_for)}
-      ${row('Timeframe', lead.move_in_timeframe)}
-      ${row('Message', lead.message)}
-    </table>
-    ${finderRows ? `<h3 style="margin:20px 0 6px;font-size:14px">What they told us</h3><table style="border-collapse:collapse;font-size:14px">${finderRows}</table>` : ''}
-    <p style="color:#999;font-size:12px;margin-top:18px">Sent via CareAssura lead distribution.</p>
-  </div>`
+  const finderRows = finder.map((f) => detail(f.question, f.answer)).join('')
+
+  return `<div style="margin:0;padding:24px 12px;background:#f4f4f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
+  <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #ececf1">
+    <tr><td style="${grad};padding:24px 28px" align="center">
+      <div style="font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:700;letter-spacing:-0.01em;color:#ffffff">CareAssura</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.9);margin-top:3px;letter-spacing:0.02em">New care enquiry for you</div>
+    </td></tr>
+    <tr><td style="padding:28px">
+      <h1 style="margin:0 0 6px;font-size:20px;color:#15151a">New enquiry${lead.area ? ` in ${escapeHtml(lead.area)}` : ''}</h1>
+      <p style="margin:0 0 22px;font-size:14px;color:#555;line-height:1.55">Hi ${escapeHtml(buyer.name)}, a family looking for care has been matched to your area. Enquiries convert best within the first hour, so please get in touch with ${firstName} soon.</p>
+
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f5fc;border:1px solid #ece7f7;border-radius:12px"><tr><td style="padding:18px 20px">
+        <div style="font-size:18px;font-weight:700;color:#15151a">${escapeHtml(lead.full_name)}</div>
+        <div style="margin-top:10px;font-size:15px"><a href="tel:${tel}" style="color:#2B4FE8;text-decoration:none;font-weight:700">${phone}</a></div>
+        <div style="margin-top:5px;font-size:14px"><a href="mailto:${email}" style="color:#2B4FE8;text-decoration:none">${email}</a></div>
+      </td></tr></table>
+
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin-top:20px">
+        ${detail('Care type', lead.care_type)}
+        ${detail('Care for', lead.care_for)}
+        ${detail('Timeframe', lead.move_in_timeframe)}
+        ${detail('Area', lead.area)}
+        ${detail('Message', lead.message)}
+      </table>
+
+      ${finderRows ? `<h2 style="margin:24px 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;color:#8a8a93">What they told us</h2><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">${finderRows}</table>` : ''}
+
+      <table role="presentation" cellpadding="0" cellspacing="0" style="margin:26px 0 2px"><tr><td style="${grad};border-radius:9px" align="center">
+        <a href="tel:${tel}" style="display:inline-block;padding:13px 30px;color:#ffffff;font-weight:700;font-size:14px;text-decoration:none">Call ${firstName} now</a>
+      </td></tr></table>
+    </td></tr>
+    <tr><td style="padding:18px 28px;background:#fafafa;border-top:1px solid #eee">
+      <p style="margin:0;font-size:12px;color:#9a9aa2;line-height:1.55">You're receiving this because ${escapeHtml(buyer.name)} is set up to receive ${lead.area ? escapeHtml(lead.area) + ' ' : ''}enquiries through CareAssura. Reply to this email to contact the enquirer directly.</p>
+    </td></tr>
+  </table>
+  </td></tr></table>
+</div>`
 }
 
 function leadSmsBody(lead: DistLead): string {
