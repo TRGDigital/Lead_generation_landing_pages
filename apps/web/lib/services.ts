@@ -23,7 +23,7 @@ export const SERVICES: Service[] = [
     title: 'Search Engine Optimisation (SEO)',
     short: 'Get found before your competitors',
     body: 'Get found first. We grow your organic visibility so the right families discover you before your competitors do.',
-    href: '/marketing',
+    href: '/seo',
   },
   {
     icon: Target,
