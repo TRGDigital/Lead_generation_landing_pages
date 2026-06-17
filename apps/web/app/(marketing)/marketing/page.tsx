@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { CheckCircle, TrendingDown, Zap, Shield } from 'lucide-react'
+import { CheckCircle, Zap, Shield, Check } from 'lucide-react'
+import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 
 export const dynamic = 'force-static'
 
@@ -28,48 +29,18 @@ export const metadata: Metadata = {
 }
 
 const FAQS = [
-  {
-    q: 'How quickly will I receive enquiries?',
-    a: 'Most homes receive their first qualified enquiry within 5 to 10 business days of going live. The timeline depends on local search demand and the care types you offer.',
-  },
-  {
-    q: 'What makes an enquiry "qualified"?',
-    a: 'We verify that the enquirer genuinely needs care, that the care type matches what you offer, and that they can meet your fee level, before the enquiry reaches your inbox.',
-  },
-  {
-    q: 'Do I pay for every enquiry?',
-    a: "No. You only pay when a resident actually moves in. No fees for enquiries, consultations, tours, or assessments that don't result in a placement.",
-  },
-  {
-    q: 'Can I pause the service?',
-    a: 'Yes, instantly. Turn the campaign off when your home is full, turn it back on when you have capacity. No notice periods, no penalties.',
-  },
-  {
-    q: 'Do I need to handle the advertising myself?',
-    a: "No. We build, manage, and fund the advertising campaigns. You don't touch Google Ads, Meta, or any ad platform.",
-  },
-  {
-    q: 'Is there a setup fee or monthly retainer?',
-    a: 'No upfront fee and no monthly retainer. You pay a single fixed fee per confirmed move-in, and nothing else.',
-  },
+  { q: 'How quickly will I receive enquiries?', a: 'Most homes receive their first qualified enquiry within 5 to 10 business days of going live. The timeline depends on local search demand and the care types you offer.' },
+  { q: 'What makes an enquiry "qualified"?', a: 'We verify that the enquirer genuinely needs care, that the care type matches what you offer, and that they can meet your fee level, before the enquiry reaches your inbox.' },
+  { q: 'Do I pay for every enquiry?', a: "No. You only pay when a resident actually moves in. No fees for enquiries, consultations, tours, or assessments that don't result in a placement." },
+  { q: 'Can I pause the service?', a: 'Yes, instantly. Turn the campaign off when your home is full, turn it back on when you have capacity. No notice periods, no penalties.' },
+  { q: 'Do I need to handle the advertising myself?', a: "No. We build, manage, and fund the advertising campaigns. You don't touch Google Ads, Meta, or any ad platform." },
+  { q: 'Is there a setup fee or monthly retainer?', a: 'No upfront fee and no monthly retainer. You pay a single fixed fee per confirmed move-in, and nothing else.' },
 ]
 
 const PILLARS = [
-  {
-    Icon: Shield,
-    title: 'Proven landing pages',
-    body: 'We build and host a CQC-compliant landing page for your home, optimised for families searching for care. Updated by us, always converting.',
-  },
-  {
-    Icon: CheckCircle,
-    title: 'Qualified enquiries',
-    body: 'Every enquiry is pre-screened before it reaches you: right care type, right geography, right funding level. No time wasted on mismatches.',
-  },
-  {
-    Icon: Zap,
-    title: 'On/off control',
-    body: "You're in control. Activate when you have empty beds, pause when full. One click and the change is effective immediately.",
-  },
+  { Icon: Shield, title: 'Proven landing pages', body: 'We build and host a CQC-compliant landing page for your home, optimised for families searching for care. Updated by us, always converting.' },
+  { Icon: CheckCircle, title: 'Qualified enquiries', body: 'Every enquiry is pre-screened before it reaches you: right care type, right geography, right funding level. No time wasted on mismatches.' },
+  { Icon: Zap, title: 'On/off control', body: "You're in control. Activate when you have empty beds, pause when full. One click and the change is effective immediately." },
 ]
 
 const STEPS = [
@@ -80,8 +51,18 @@ const STEPS = [
 
 const COSTS = [
   { stat: '£900/week', label: 'average cost of one empty bed' },
-  { stat: '8 to 12 weeks', label: 'typical vacancy duration without targeted marketing' },
-  { stat: '£8,000+', label: 'revenue lost per vacancy at average UK weekly fees' },
+  { stat: '8–12 weeks', label: 'typical vacancy without targeted marketing' },
+  { stat: '£8,000+', label: 'revenue lost per vacancy at average UK fees' },
+]
+
+const POINTS = [
+  'Targeted Google & Meta advertising',
+  'High-converting, CQC-compliant landing pages',
+  'Pre-qualified enquiries — right care type & area',
+  'On/off control — pause when you’re full',
+  'Pay only when a resident moves in',
+  'Real-time enquiry delivery & tracking',
+  'Local SEO to win organic enquiries too',
 ]
 
 export default function MarketingPage() {
@@ -104,99 +85,158 @@ export default function MarketingPage() {
       />
 
       {/* ── Hero ──────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden">
-        {/* Image — bleeds to the right edge of the viewport on desktop */}
-        <div className="absolute inset-y-0 right-0 hidden w-[46%] lg:block">
-          <Image
-            src="/hero-resident.jpg"
-            alt="A care home resident relaxing in her room, looking out over the garden"
-            fill
-            priority
-            sizes="46vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-brand-bg to-transparent" />
-        </div>
-
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="py-16 lg:w-1/2 lg:py-28 lg:pr-12">
-            <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">
-              Care home occupancy marketing
-            </p>
-            <h1 className="mt-4 font-display text-5xl font-semibold leading-tight text-brand-ink sm:text-6xl">
-              Fill empty beds,{' '}
-              <span className="italic text-brand-accent-soft">on demand.</span>
+      <section className="relative overflow-hidden px-6 pb-16 pt-16">
+        <Star className="absolute left-4 top-10 hidden h-16 w-16 -rotate-12 text-brand-accent lg:block" />
+        <Star className="absolute right-8 bottom-10 hidden h-12 w-12 rotate-12 text-brand-pop/60 lg:block" />
+        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Care home occupancy marketing</p>
+            <h1 className="mt-4 font-display text-4xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-5xl lg:text-6xl">
+              Fill empty beds, <span className="text-brand-pop">on demand</span>
             </h1>
+            <Squiggle className="mt-5 h-6 w-56 text-brand-pop" />
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
-              We run targeted advertising, build high-converting landing pages, and deliver
-              pre-qualified enquiries directly to your care home. Activate when beds are
-              empty. Pause when you&apos;re full. Pay only when a resident moves in.
+              We run targeted advertising, build high-converting landing pages, and deliver pre-qualified enquiries
+              straight to your care home. Activate when beds are empty. Pause when you&apos;re full. Pay only when a
+              resident moves in.
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" className="btn-cta">
-                Book a free demo
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Link href="/contact" className="btn-pop">
+                Start your project
+                <span className="btn-arrow" aria-hidden>→</span>
               </Link>
               <Link href="/how-it-works" className="btn-cta-outline">
                 See how it works
               </Link>
             </div>
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-brand-ink-soft">
+              {['Pay per move-in', 'Pause anytime', 'Enquiries, not clicks'].map((p) => (
+                <span key={p} className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-brand-pop" />
+                  {p}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Image — full width below the text on mobile/tablet */}
-        <div className="relative h-64 w-full sm:h-80 lg:hidden">
-          <Image
-            src="/hero-resident.jpg"
-            alt="A care home resident relaxing in her room, looking out over the garden"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
+          {/* Visual — a landing page + an incoming enquiry */}
+          <div className="relative">
+            <div className="overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card">
+              <div className="flex items-center gap-1.5 border-b border-brand-line bg-brand-bg-warm px-3 py-2">
+                <span className="h-2 w-2 rounded-full bg-red-400" />
+                <span className="h-2 w-2 rounded-full bg-amber-300" />
+                <span className="h-2 w-2 rounded-full bg-green-400" />
+                <span className="ml-2 truncate rounded bg-white px-2 py-0.5 text-[9px] text-brand-ink-muted">careassura.com</span>
+              </div>
+              <div className="relative aspect-[16/11] w-full">
+                <Image src="/mockups/haywards-landing.png" alt="A high-converting care landing page we built" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover object-top" priority />
+              </div>
+            </div>
+            <div className="absolute -bottom-6 -left-6 hidden w-56 rounded-xl border border-brand-line bg-white p-4 shadow-card sm:block">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-brand-ink">New enquiry</span>
+                <span className="rounded-full bg-brand-pop px-2 py-0.5 text-[10px] font-semibold text-white">new</span>
+              </div>
+              <p className="mt-2 text-sm font-semibold text-brand-ink">Margaret W.</p>
+              <p className="text-xs text-brand-ink-muted">Haywards Heath · Residential care</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ── Problem ───────────────────────────────────────────────────── */}
-      <section className="bg-brand-ink px-6 py-16 text-white">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-12 text-center">
-            <TrendingDown className="mx-auto mb-4 h-10 w-10 text-brand-accent-soft" />
-            <h2 className="font-display text-3xl font-semibold sm:text-4xl">
+      {/* ── Problem (dark) ────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-brand-ink px-6 py-24 text-white">
+        <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brand-pop/20 blur-3xl" />
+        <Star className="absolute left-8 top-12 hidden h-16 w-16 text-brand-accent lg:block" />
+        <Burst className="absolute -bottom-12 -right-10 h-52 w-52 text-brand-pop/30" />
+        <div className="relative mx-auto max-w-5xl">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">The cost of empty beds</p>
+            <h2 className="mt-3 font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight sm:text-4xl">
               Empty beds cost more than you think
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base text-white/70">
-              Traditional care home marketing is slow, expensive, and unpredictable. Word of
-              mouth and referral agencies fill beds eventually, but every week without a
-              resident is revenue gone for good.
+            <p className="mx-auto mt-4 text-lg leading-relaxed text-white/70">
+              Word of mouth and referral agencies fill beds eventually — but every week without a resident is
+              revenue gone for good.
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+          <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-3xl bg-brand-pop/20 sm:grid-cols-3">
             {COSTS.map(({ stat, label }) => (
-              <div key={stat} className="rounded-2xl bg-white/5 p-6 text-center">
-                <p className="font-display text-4xl font-semibold text-brand-accent-soft">{stat}</p>
-                <p className="mt-2 text-sm text-white/70">{label}</p>
+              <div key={stat} className="bg-brand-pop p-7 text-center text-white">
+                <p className="font-display text-4xl font-bold leading-none">{stat}</p>
+                <p className="mt-3 text-sm leading-snug text-white/85">{label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Solution pillars ──────────────────────────────────────────── */}
-      <section className="px-6 py-20">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-14 text-center">
-            <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
-              A smarter way to fill beds
+      {/* ── Rich two-column ───────────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-brand-bg-warm px-6 py-24">
+        <Dots className="absolute right-10 top-12 hidden h-20 w-20 text-brand-pop/40 lg:block" />
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
+          <div>
+            <h2 className="font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-4xl">
+              Marketing that fills beds, not just clicks
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-brand-ink-soft">
-              Everything handled. You focus on care; we fill the pipeline.
-            </p>
+            <p className="mt-4 font-display text-lg font-semibold text-brand-pop">Enquiries you can actually convert.</p>
+            <div className="mt-6 space-y-4 text-base leading-relaxed text-brand-ink-soft">
+              <p>
+                Most agencies sell you traffic and impressions. We sell you{' '}
+                <span className="font-semibold text-brand-ink">enquiries</span>. We run targeted Google and Meta
+                campaigns that put your home in front of families actively searching for care nearby, then send
+                them to a{' '}
+                <Link href="/website-development" className="font-semibold text-brand-pop underline-offset-2 hover:underline">high-converting landing page</Link>{' '}
+                built to turn that visit into a real conversation.
+              </p>
+              <p>
+                Every enquiry is pre-qualified for care type, area and funding before it reaches your inbox, and
+                you only pay when a resident actually moves in. Switch it on when you have empty beds, pause it the
+                moment you&apos;re full. When you want to compound results, we layer in organic{' '}
+                <Link href="/website-development" className="font-semibold text-brand-pop underline-offset-2 hover:underline">SEO</Link>{' '}
+                and bespoke{' '}
+                <Link href="/development" className="font-semibold text-brand-pop underline-offset-2 hover:underline">software</Link>.
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            {POINTS.map((point) => (
+              <div key={point} className="flex items-center gap-4 rounded-xl bg-brand-ink px-5 py-4 text-white">
+                <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-brand-pop">
+                  <Check className="h-4 w-4 text-white" />
+                </span>
+                <span className="font-display text-sm font-semibold uppercase tracking-wide">{point}</span>
+              </div>
+            ))}
+            <div className="rounded-2xl bg-brand-accent p-7">
+              <p className="font-display text-xl font-bold uppercase leading-tight tracking-tight text-brand-ink">
+                Ready to stop leaving beds empty?
+              </p>
+              <Link href="/contact" className="btn-pop mt-5">
+                Submit a project enquiry
+                <span className="btn-arrow" aria-hidden>→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Pillars ───────────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden px-6 py-24">
+        <Star className="absolute right-10 top-12 hidden h-16 w-16 rotate-12 text-brand-accent lg:block" />
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">A smarter way to fill beds</p>
+            <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
+              Everything handled, end to end
+            </h2>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {PILLARS.map(({ Icon, title, body }) => (
-              <div key={title} className="rounded-2xl border border-brand-line bg-white p-8 shadow-soft">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-accent/10">
-                  <Icon className="h-5 w-5 text-brand-accent" />
+              <div key={title} className="group rounded-2xl border border-brand-line bg-white p-8 shadow-soft transition-all hover:-translate-y-1 hover:border-brand-pop/40 hover:shadow-card">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-pop/10 transition-colors group-hover:bg-brand-pop">
+                  <Icon className="h-6 w-6 text-brand-pop transition-colors group-hover:text-white" />
                 </div>
                 <h3 className="mt-5 font-display text-xl font-semibold text-brand-ink">{title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
@@ -206,25 +246,28 @@ export default function MarketingPage() {
         </div>
       </section>
 
-      {/* ── How it works ──────────────────────────────────────────────── */}
-      <section className="bg-brand-bg-warm px-6 py-20">
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-14 text-center">
-            <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
+      {/* ── Process ───────────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-brand-bg-warm px-6 py-24">
+        <Squiggle className="absolute -left-6 top-16 hidden h-8 w-64 text-brand-accent lg:block" />
+        <Dots className="absolute bottom-12 right-10 hidden h-20 w-20 text-brand-pop/40 lg:block" />
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-14 max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">How it works</p>
+            <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
               Up and running in days
             </h2>
           </div>
-          <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
             {STEPS.map(({ n, title, body }) => (
-              <div key={n}>
-                <p className="font-display text-5xl font-semibold text-brand-line">{n}</p>
+              <div key={n} className="rounded-2xl border border-brand-line bg-white p-7 shadow-soft">
+                <p className="font-display text-5xl font-bold text-brand-pop">{n}</p>
                 <h3 className="mt-3 font-display text-xl font-semibold text-brand-ink">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
               </div>
             ))}
           </div>
-          <div className="mt-12 text-center">
-            <Link href="/how-it-works" className="text-sm font-medium text-brand-accent hover:text-brand-ink transition-colors">
+          <div className="mt-10">
+            <Link href="/how-it-works" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-pop hover:text-brand-ink">
               Full walkthrough →
             </Link>
           </div>
@@ -232,20 +275,18 @@ export default function MarketingPage() {
       </section>
 
       {/* ── Pricing teaser ────────────────────────────────────────────── */}
-      <section className="px-6 py-20 text-center">
-        <div className="mx-auto max-w-xl">
-          <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
-            Transparent, performance-based pricing
+      <section className="relative overflow-hidden px-6 py-24">
+        <Star className="absolute left-8 top-12 hidden h-14 w-14 -rotate-12 text-brand-pop/60 lg:block" />
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Pricing</p>
+          <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
+            Performance-based, no surprises
           </h2>
-          <p className="mt-4 text-brand-ink-soft">
-            No setup fee. No monthly retainer. A single fixed fee per confirmed move-in.
-          </p>
-          <div className="mt-10 inline-block rounded-2xl border border-brand-line bg-white p-8 shadow-soft text-left w-full">
-            <p className="text-xs font-semibold uppercase tracking-wider text-brand-accent">
-              Per confirmed move-in
-            </p>
-            <p className="mt-2 font-display text-5xl font-semibold text-brand-ink">Fixed fee</p>
-            <ul className="mt-6 space-y-2 text-sm text-brand-ink-soft">
+          <p className="mt-4 text-brand-ink-soft">No setup fee. No monthly retainer. A single fixed fee per confirmed move-in.</p>
+          <div className="mt-10 w-full rounded-2xl border-2 border-brand-pop/30 bg-white p-8 text-left shadow-soft">
+            <p className="text-xs font-semibold uppercase tracking-wider text-brand-pop">Per confirmed move-in</p>
+            <p className="mt-2 font-display text-5xl font-bold uppercase text-brand-ink">Fixed fee</p>
+            <ul className="mt-6 space-y-2.5 text-sm text-brand-ink-soft">
               {[
                 'Full landing page, built and managed for you',
                 'Google & Meta advertising campaigns',
@@ -253,25 +294,26 @@ export default function MarketingPage() {
                 'On/off control over your campaigns',
                 'No contracts, cancel anytime',
               ].map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 shrink-0 text-brand-sage" />
+                <li key={item} className="flex items-center gap-2.5">
+                  <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand-pop/10">
+                    <Check className="h-3 w-3 text-brand-pop" />
+                  </span>
                   {item}
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="mt-6">
-            <Link href="/pricing" className="text-sm font-medium text-brand-accent hover:text-brand-ink transition-colors">
-              Full pricing details →
+            <Link href="/pricing" className="btn-pop mt-7">
+              See full pricing
+              <span className="btn-arrow" aria-hidden>→</span>
             </Link>
           </div>
         </div>
       </section>
 
       {/* ── FAQ ───────────────────────────────────────────────────────── */}
-      <section className="bg-brand-bg-warm px-6 py-20">
+      <section className="bg-brand-bg-warm px-6 py-24">
         <div className="mx-auto max-w-3xl">
-          <h2 className="mb-10 text-center font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
+          <h2 className="mb-10 text-center font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
             Frequently asked questions
           </h2>
           <div className="space-y-3">
@@ -279,7 +321,7 @@ export default function MarketingPage() {
               <details key={q} className="group rounded-xl border border-brand-line bg-white px-6 py-4">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-brand-ink">
                   {q}
-                  <span className="shrink-0 text-lg leading-none text-brand-ink-muted transition-transform group-open:rotate-45">+</span>
+                  <span className="shrink-0 text-lg leading-none text-brand-pop transition-transform group-open:rotate-45">+</span>
                 </summary>
                 <p className="mt-3 text-sm leading-relaxed text-brand-ink-soft">{a}</p>
               </details>
@@ -289,23 +331,24 @@ export default function MarketingPage() {
       </section>
 
       {/* ── Final CTA ─────────────────────────────────────────────────── */}
-      <section className="bg-brand-accent px-6 py-20 text-center">
-        <div className="mx-auto max-w-2xl">
-          <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
+      <section className="relative overflow-hidden bg-brand-pop px-6 py-16 text-center text-white">
+        <Star className="absolute left-8 top-8 hidden h-16 w-16 text-white/50 sm:block" />
+        <Star className="absolute bottom-8 right-8 hidden h-10 w-10 text-brand-accent sm:block" />
+        <Burst className="absolute -bottom-10 right-1/4 hidden h-40 w-40 text-white/15 sm:block" />
+        <div className="relative mx-auto max-w-3xl">
+          <h2 className="font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight sm:text-4xl">
             Ready to stop leaving beds empty?
           </h2>
-          <p className="mt-4 text-brand-ink/75">
-            Book a free 20-minute demo. We&apos;ll show you how our marketing works and what results
-            to expect for your specific home.
+          <p className="mx-auto mt-5 max-w-xl leading-relaxed text-white/85">
+            Book a free 20-minute demo. We&apos;ll show you how our marketing works and what results to expect for
+            your specific home.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/contact" className="btn-pop">
-              Book a free demo
+            <Link href="/contact" className="btn-cta">
+              Start your project
+              <span className="btn-arrow" aria-hidden>→</span>
             </Link>
-            <Link
-              href="/how-it-works"
-              className="inline-flex h-12 items-center px-8 text-sm font-medium text-brand-ink/70 transition-colors hover:text-brand-ink"
-            >
+            <Link href="/how-it-works" className="inline-flex h-12 items-center gap-1 px-6 text-sm font-semibold uppercase tracking-wide text-white/90 transition-colors hover:text-white">
               Learn more first →
             </Link>
           </div>
