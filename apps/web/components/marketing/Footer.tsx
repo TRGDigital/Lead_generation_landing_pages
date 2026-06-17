@@ -1,68 +1,81 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { MapPin } from 'lucide-react'
+import { SERVICES } from '@/lib/services'
 
-const LINKS = {
-  Services: [
-    { href: '/marketing', label: 'Marketing' },
-    { href: '/website-development', label: 'Website build' },
-    { href: '/development', label: 'Development' },
-  ],
-  Company: [
-    { href: '/about', label: 'About us' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/contact', label: 'Contact' },
-  ],
-  Legal: [
-    { href: '/privacy', label: 'Privacy policy' },
-    { href: '/terms', label: 'Terms of service' },
-    { href: '/cookies', label: 'Cookie policy' },
-  ],
+const COMPANY = [
+  { href: '/about', label: 'About us' },
+  { href: '/blog', label: 'Knowledge Hub' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/how-it-works', label: 'How it works' },
+]
+const PRODUCTS = [
+  { href: 'https://carestreamai.com', label: 'CareStream' },
+  { href: 'https://careassura.co.uk', label: 'CareAssura' },
+]
+const LEGAL = [
+  { href: '/privacy', label: 'Privacy policy' },
+  { href: '/terms', label: 'Terms of service' },
+  { href: '/cookies', label: 'Cookie policy' },
+]
+
+function Col({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <p className="text-xs font-semibold uppercase tracking-wider text-white/50">{title}</p>
+      <ul className="mt-4 space-y-2.5">{children}</ul>
+    </div>
+  )
+}
+function FLink({ href, label }: { href: string; label: string }) {
+  const external = href.startsWith('http')
+  return (
+    <li>
+      <a
+        href={href}
+        {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        className="text-sm text-white/70 transition-colors hover:text-white"
+      >
+        {label}
+      </a>
+    </li>
+  )
 }
 
 export default function Footer() {
   return (
-    <footer className="border-t border-brand-line/60 bg-brand-bg">
-      <div className="mx-auto max-w-6xl px-6 py-12">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+    <footer className="bg-brand-ink text-white">
+      <div className="mx-auto max-w-6xl px-6 py-16">
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-6">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
+          <div className="col-span-2 lg:col-span-2">
             <Link href="/" className="inline-flex items-center" aria-label="TRG Digital home">
-              <Image src="/trg-digital-logo.png" alt="TRG Digital" width={138} height={32} className="h-7 w-auto" />
+              <Image src="/trg-digital-logo.png" alt="TRG Digital" width={138} height={32} className="h-8 w-auto brightness-0 invert" />
             </Link>
-            <p className="mt-3 text-sm text-brand-ink-muted leading-relaxed">
-              Software and growth for the UK care sector. We build, run and market products that help care providers and the families they serve.
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
+              A specialist digital marketing agency for the UK care sector — more enquiries, fewer empty beds.
             </p>
+            <p className="mt-4 flex items-start gap-2 text-sm text-white/60">
+              <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-accent" />
+              Suite Ra01, 195-197 Wood Street, London, E17 3NU
+            </p>
+            <Link href="/contact" className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand-pop px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-pop-dark">
+              Start your project →
+            </Link>
           </div>
 
-          {/* Link groups */}
-          {Object.entries(LINKS).map(([group, items]) => (
-            <div key={group}>
-              <p className="text-xs font-semibold uppercase tracking-wider text-brand-ink-muted">
-                {group}
-              </p>
-              <ul className="mt-3 space-y-2">
-                {items.map(({ href, label }) => (
-                  <li key={href}>
-                    <Link
-                      href={href}
-                      className="text-sm text-brand-ink-soft hover:text-brand-ink transition-colors"
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <Col title="Services">
+            {SERVICES.map((s) => <FLink key={s.title} href={s.href} label={s.title} />)}
+          </Col>
+          <Col title="Company">{COMPANY.map((l) => <FLink key={l.href} {...l} />)}</Col>
+          <Col title="Products">{PRODUCTS.map((l) => <FLink key={l.href} {...l} />)}</Col>
+          <Col title="Legal">{LEGAL.map((l) => <FLink key={l.href} {...l} />)}</Col>
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-brand-line/60 pt-8 sm:flex-row">
-          <p className="text-xs text-brand-ink-muted">
-            © {new Date().getFullYear()} TRG Digital. All rights reserved.
-          </p>
-          <p className="text-xs text-brand-ink-muted">
-            Building software and growth for UK care.
-          </p>
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 sm:flex-row">
+          <p className="text-xs text-white/50">© {new Date().getFullYear()} TRG Digital. All rights reserved.</p>
+          <p className="text-xs text-white/50">Marketing, websites &amp; software, built only for UK care.</p>
         </div>
       </div>
     </footer>

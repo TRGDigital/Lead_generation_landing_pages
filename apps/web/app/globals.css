@@ -82,7 +82,13 @@
   .btn-cta-outline {
     @apply inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-brand-line px-7 text-base font-medium text-brand-ink-soft transition-all hover:-translate-y-0.5 hover:border-brand-ink hover:text-brand-ink;
   }
+  /* Contrasting coral CTA */
+  .btn-pop {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-pop px-7 text-base font-semibold text-white shadow-soft transition-all hover:-translate-y-0.5 hover:bg-brand-pop-dark hover:shadow-card;
+  }
 }
+.btn-pop .btn-arrow { transition: transform 0.2s ease; }
+.btn-pop:hover .btn-arrow { transform: translateX(3px); }
 .btn-cta .btn-arrow,
 .btn-cta-outline .btn-arrow {
   transition: transform 0.2s ease;

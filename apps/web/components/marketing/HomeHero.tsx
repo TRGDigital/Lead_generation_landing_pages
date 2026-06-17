@@ -1,10 +1,5 @@
-'use client'
-
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-
-const PHRASES = ['win more enquiries.', 'stand out online.', 'build better software.']
 
 type Shot = { src: string; alt: string; url?: string }
 type Col =
@@ -76,16 +71,6 @@ function HeroScroller() {
 }
 
 export function HomeHero() {
-  const [i, setI] = useState(0)
-  const [show, setShow] = useState(true)
-
-  useEffect(() => {
-    const hold = 2400, out = 450
-    const t1 = setTimeout(() => setShow(false), hold)
-    const t2 = setTimeout(() => { setI((p) => (p + 1) % PHRASES.length); setShow(true) }, hold + out)
-    return () => { clearTimeout(t1); clearTimeout(t2) }
-  }, [i])
-
   return (
     <section className="relative overflow-hidden">
       {/* Right-to-left scrolling band of real work, behind the text */}
@@ -98,20 +83,12 @@ export function HomeHero() {
       {/* Text */}
       <div className="relative z-20 mx-auto max-w-6xl px-6">
         <div className="py-16 lg:w-1/2 lg:py-32 lg:pr-12">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">
-            Specialist care-sector agency
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">
+            Digital marketing agency delivering results for the care sector
           </p>
-          <h1 className="mt-4 font-display text-5xl font-semibold leading-tight text-brand-ink sm:text-6xl">
-            We help care providers{' '}
-            <span className="relative inline-grid align-baseline">
-              <span aria-hidden className="invisible col-start-1 row-start-1 italic">build better software.</span>
-              <span
-                aria-live="polite"
-                className={`col-start-1 row-start-1 italic text-brand-accent-soft transition-all duration-[450ms] ease-out ${show ? 'translate-y-0 opacity-100' : '-translate-y-3 opacity-0'}`}
-              >
-                {PHRASES[i]}
-              </span>
-            </span>
+          <h1 className="mt-4 font-display text-5xl font-bold uppercase leading-[1.02] tracking-tight text-brand-ink sm:text-6xl lg:text-7xl">
+            More enquiries.<br />
+            <span className="text-brand-pop">Fewer empty beds.</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
             TRG Digital is a specialist agency for the UK care sector. We grow your enquiries,

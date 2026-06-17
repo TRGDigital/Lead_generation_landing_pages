@@ -60,6 +60,8 @@ const config: Config = {
           'ink-muted': '#8a8175',
           accent: '#FBCC33',
           'accent-soft': '#FBCC33',
+          pop: '#F0532B',
+          'pop-dark': '#d8431f',
           sage: '#7a8a6f',
           line: '#ebe9e4',
         },

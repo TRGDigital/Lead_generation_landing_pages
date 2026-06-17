@@ -1,14 +1,17 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Megaphone, Globe, Code2, ArrowRight, Check } from 'lucide-react'
+import { Megaphone, Globe, Code2, ArrowRight } from 'lucide-react'
 import { HomeHero } from '@/components/marketing/HomeHero'
+import { BrandStrip } from '@/components/marketing/BrandStrip'
+import { StatementBand } from '@/components/marketing/StatementBand'
 import { ShowcaseMarquee } from '@/components/marketing/ShowcaseMarquee'
-import { TechStrip } from '@/components/marketing/TechStrip'
-import { StatBand } from '@/components/marketing/StatBand'
-import { CaseStudies } from '@/components/marketing/CaseStudies'
+import { ComplicatedIndustry } from '@/components/marketing/ComplicatedIndustry'
+import { ProvenResults } from '@/components/marketing/ProvenResults'
+import { StartProject } from '@/components/marketing/StartProject'
 import { Testimonials } from '@/components/marketing/Testimonials'
-import { AuditForm } from '@/components/marketing/AuditForm'
+import { TechStack } from '@/components/marketing/TechStack'
+import { MapSection } from '@/components/marketing/MapSection'
 import PostCard from '@/components/blog/PostCard'
 import { getPublishedPosts } from '@/lib/blog'
 
@@ -76,6 +79,7 @@ export default async function HomePage() {
             name: 'TRG Digital',
             url: SITE_URL,
             description: 'A specialist digital agency for the UK care sector: marketing, website development and custom software.',
+            address: { '@type': 'PostalAddress', streetAddress: 'Suite Ra01, 195-197 Wood Street', addressLocality: 'London', postalCode: 'E17 3NU', addressCountry: 'GB' },
             contactPoint: { '@type': 'ContactPoint', contactType: 'sales', url: `${SITE_URL}/contact` },
           }),
         }}
@@ -83,15 +87,17 @@ export default async function HomePage() {
 
       <HomeHero />
 
-      <TechStrip />
+      <BrandStrip />
 
-      <ShowcaseMarquee />
+      <StatementBand eyebrow="TRG Digital" cta={{ label: 'Start your project', href: '#start' }}>
+        A leading digital marketing agency with a creative kick
+      </StatementBand>
 
       {/* ── Services ──────────────────────────────────────────────────── */}
       <section className="px-6 py-20">
         <div className="mx-auto max-w-5xl">
           <div className="mb-14 max-w-2xl">
-            <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
+            <h2 className="font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
               Three ways we grow your care business
             </h2>
             <p className="mt-4 text-brand-ink-soft">
@@ -104,12 +110,12 @@ export default async function HomePage() {
               <Link
                 key={title}
                 href={href}
-                className="group flex flex-col rounded-2xl border border-brand-line bg-white p-8 shadow-soft transition-all hover:-translate-y-0.5 hover:border-brand-accent/40 hover:shadow-card"
+                className="group flex flex-col rounded-2xl border border-brand-line bg-white p-8 shadow-soft transition-all hover:-translate-y-0.5 hover:border-brand-pop/40 hover:shadow-card"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-accent/10">
-                  <Icon className="h-5 w-5 text-brand-accent" />
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-pop/10">
+                  <Icon className="h-5 w-5 text-brand-pop" />
                 </div>
-                <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-brand-accent">{kicker}</p>
+                <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-brand-pop">{kicker}</p>
                 <h3 className="mt-1 font-display text-xl font-semibold text-brand-ink">{title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
                 <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-ink">
@@ -121,53 +127,18 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Specialists, not generalists ──────────────────────────────── */}
-      <section className="bg-brand-ink px-6 py-20 text-white">
-        <div className="mx-auto max-w-5xl">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div>
-              <h2 className="font-display text-3xl font-semibold sm:text-4xl">
-                We only work with care.
-              </h2>
-              <p className="mt-5 text-base leading-relaxed text-white/70">
-                TRG Digital is a specialist, not a generalist. Everything we market, build and develop
-                is for the UK care sector, so we already understand your families, your regulators and
-                the way people choose care. That focus is why our work converts.
-              </p>
-            </div>
-            <ul className="space-y-4">
-              {[
-                ['Sector specialists', 'We speak care: CQC, funding routes, care types and the questions families actually ask.'],
-                ['Built to perform', 'Every page, campaign and product is measured on the outcome that matters: more enquiries and more residents.'],
-                ['End to end', 'Marketing, websites and software from one team, so nothing falls between agencies.'],
-              ].map(([t, b]) => (
-                <li key={t} className="flex gap-3 rounded-2xl bg-white/5 p-5">
-                  <Check className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-accent-soft" />
-                  <div>
-                    <p className="font-semibold text-white">{t}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-white/60">{b}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
+      <ShowcaseMarquee />
 
-      <StatBand />
+      <ComplicatedIndustry />
 
-      {/* ── Our work (case studies) ───────────────────────────────────── */}
-      <CaseStudies />
-
-      {/* ── Testimonials (renders only when real quotes exist) ────────── */}
-      <Testimonials />
+      <ProvenResults />
 
       {/* ── Our own products ──────────────────────────────────────────── */}
       <section className="px-6 py-20">
         <div className="mx-auto max-w-5xl">
           <div className="mb-12 max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-wider text-brand-accent">Built by us</p>
-            <h2 className="mt-2 font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
+            <p className="text-xs font-semibold uppercase tracking-wider text-brand-pop">Built by us</p>
+            <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
               We build our own software for care
             </h2>
             <p className="mt-4 text-brand-ink-soft">
@@ -184,7 +155,7 @@ export default async function HomePage() {
                 <Image src={logo} alt={name} width={logoW} height={logoH} className={`${logoClass} w-auto`} />
                 <p className="mt-4 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
                 <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
-                  <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-brand-accent hover:text-brand-ink">
+                  <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-brand-pop hover:text-brand-ink">
                     Visit site <ArrowRight className="h-4 w-4" />
                   </a>
                   <Link href="/development" className="text-brand-ink-soft hover:text-brand-ink">Read more</Link>
@@ -195,46 +166,27 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Free audit (lead magnet) ──────────────────────────────────── */}
-      <AuditForm />
+      <StartProject />
 
-      {/* ── Final CTA ─────────────────────────────────────────────────── */}
-      <section className="bg-brand-accent px-6 py-20 text-center">
-        <div className="mx-auto max-w-2xl">
-          <h2 className="font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
-            Let&apos;s grow your care business
-          </h2>
-          <p className="mt-4 text-brand-ink/75">
-            Book a free 20-minute call. Tell us where you want to grow and we&apos;ll show you exactly
-            how we can help, whether that&apos;s enquiries, a new website, or custom software.
-          </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link
-              href="/contact"
-              className="inline-flex h-12 items-center rounded-xl bg-brand-ink px-8 text-sm font-semibold text-white shadow-soft transition-all hover:bg-brand-ink/90"
-            >
-              Book a free demo
-            </Link>
-            <Link
-              href="/development"
-              className="inline-flex h-12 items-center px-8 text-sm font-medium text-brand-ink/70 transition-colors hover:text-brand-ink"
-            >
-              See our work →
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Renders only when real quotes exist */}
+      <Testimonials />
 
-      {/* ── Latest from the blog ──────────────────── */}
+      <StatementBand tone="pop" cta={{ label: 'Start your project', href: '#start' }}>
+        Ready to outrank your competition and reduce empty beds?
+      </StatementBand>
+
+      <TechStack />
+
+      {/* ── Knowledge Hub ─────────────────────────────────────────────── */}
       {latest.length > 0 && (
         <section className="bg-brand-bg-warm px-6 py-20">
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">From the blog</p>
-                <h2 className="mt-2 font-display text-3xl font-semibold text-brand-ink sm:text-4xl">Insight for the care sector</h2>
+                <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Knowledge Hub</p>
+                <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">Insight for the care sector</h2>
               </div>
-              <Link href="/blog" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-ink hover:text-brand-accent">
+              <Link href="/blog" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-ink hover:text-brand-pop">
                 View all posts <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -244,6 +196,8 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      <MapSection />
     </>
   )
 }
