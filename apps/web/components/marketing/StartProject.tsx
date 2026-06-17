@@ -1,5 +1,6 @@
 import { Check } from 'lucide-react'
 import ContactForm from '@/components/marketing/ContactForm'
+import { Star, Burst, Dots } from '@/components/marketing/Decor'
 
 const PROMISES = [
   'A reply within one business day',
@@ -12,8 +13,11 @@ const PROMISES = [
 // left, the working form on the right.
 export function StartProject() {
   return (
-    <section id="start" className="bg-brand-ink px-6 py-24 text-white">
-      <div className="mx-auto grid max-w-6xl items-start gap-12 lg:grid-cols-2">
+    <section id="start" className="relative overflow-hidden bg-brand-ink px-6 py-24 text-white">
+      <Star className="absolute right-10 top-12 hidden h-20 w-20 text-brand-accent lg:block" />
+      <Burst className="absolute -bottom-12 -left-10 h-52 w-52 text-brand-pop/30" />
+      <Dots className="absolute bottom-12 right-1/4 hidden h-16 w-16 text-white/20 lg:block" />
+      <div className="relative mx-auto grid max-w-6xl items-start gap-12 lg:grid-cols-2">
         <div>
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">Start your project</p>
           <h2 className="mt-3 font-display text-4xl font-bold uppercase leading-[1.05] tracking-tight sm:text-5xl">

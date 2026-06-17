@@ -26,8 +26,9 @@ export function StatementBand({
       {tone !== 'light' && (
         <>
           <div className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full bg-white/10 blur-3xl" />
-          <Star className="absolute left-8 top-8 hidden h-8 w-8 text-white/40 sm:block" />
-          <Burst className="absolute -bottom-6 right-12 hidden h-20 w-20 text-white/15 sm:block" />
+          <Star className="absolute left-8 top-6 hidden h-16 w-16 text-white/50 sm:block" />
+          <Star className="absolute bottom-6 right-8 hidden h-10 w-10 text-brand-accent sm:block" />
+          <Burst className="absolute -bottom-10 right-1/4 hidden h-40 w-40 text-white/15 sm:block" />
         </>
       )}
       <div className="relative mx-auto max-w-3xl text-center">

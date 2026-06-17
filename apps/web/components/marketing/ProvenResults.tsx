@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { TrendingUp, BedDouble, TrendingDown, MapPin } from 'lucide-react'
-import { Star, Dots } from './Decor'
+import { Star, Dots, Burst } from './Decor'
 
 // "Proven results across the care sector".
 // Framed around the OUTCOMES we're built to drive (honest — no fabricated figures).
@@ -17,8 +17,9 @@ export function ProvenResults() {
   return (
     <section className="relative overflow-hidden bg-brand-ink px-6 py-24 text-white">
       <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brand-pop/20 blur-3xl" />
-      <Star className="absolute right-10 top-12 hidden h-9 w-9 text-brand-accent lg:block" />
-      <Dots className="absolute bottom-10 left-10 hidden h-14 w-14 text-brand-pop/40 lg:block" />
+      <Star className="absolute right-12 top-12 hidden h-16 w-16 text-brand-accent lg:block" />
+      <Dots className="absolute bottom-10 left-10 hidden h-20 w-20 text-brand-pop/50 lg:block" />
+      <Burst className="absolute -bottom-12 right-1/4 hidden h-48 w-48 text-brand-accent/15 lg:block" />
       <div className="relative mx-auto max-w-6xl">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">Proven across the care sector</p>

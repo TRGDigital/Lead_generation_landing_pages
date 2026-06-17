@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Star, Dots } from './Decor'
+import { Star, Dots, Squiggle } from './Decor'
 
 // "Our core services" — a bordered card with per-service care-sector copy and a
 // 'See service' button each, plus a bold CTA banner (BoxChilli-style).
@@ -34,8 +34,9 @@ export function CoreServices() {
           <span className="absolute -top-3.5 left-8 bg-brand-bg px-3 font-display text-sm font-bold uppercase tracking-widest text-brand-pop">
             Our core services
           </span>
-          <Star className="absolute -right-4 -top-5 h-10 w-10 rotate-12 text-brand-accent" />
-          <Dots className="absolute -bottom-5 -left-5 h-14 w-14 text-brand-pop/40" />
+          <Star className="absolute -right-7 -top-8 h-16 w-16 rotate-12 text-brand-accent" />
+          <Dots className="absolute -bottom-7 -left-7 h-20 w-20 text-brand-pop/60" />
+          <Squiggle className="absolute -top-4 right-1/4 hidden h-7 w-48 text-brand-pop/70 lg:block" />
 
           <div className="grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-2">
             {SERVICES.map(({ title, body, href }) => (

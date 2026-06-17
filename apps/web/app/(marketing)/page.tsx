@@ -106,8 +106,8 @@ export default async function HomePage() {
               <span className="absolute -top-3.5 left-8 bg-brand-bg px-3 font-display text-sm font-bold uppercase tracking-widest text-brand-pop">
                 Knowledge Hub
               </span>
-              <Star className="absolute -right-4 -top-5 h-10 w-10 rotate-12 text-brand-accent" />
-              <Dots className="absolute -bottom-5 -left-5 h-14 w-14 text-brand-pop/40" />
+              <Star className="absolute -right-7 -top-8 h-16 w-16 rotate-12 text-brand-accent" />
+              <Dots className="absolute -bottom-7 -left-7 h-20 w-20 text-brand-pop/60" />
               <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
                 <h2 className="font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">Insight for the care sector</h2>
                 <Link href="/blog" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-pop hover:text-brand-ink">

@@ -4,7 +4,7 @@ import {
   AnalyticsCard, LighthouseCard, LeadsTableCard, GithubCard, VercelCard,
   GoogleSearchCard, BingSearchCard, RankingsCard, AdsCard, CmsCard,
 } from './HeroMockups'
-import { Squiggle } from './Decor'
+import { Squiggle, Star } from './Decor'
 
 type Shot = { src: string; alt: string; url?: string }
 type Col =
@@ -109,6 +109,7 @@ export function HomeHero() {
       </div>
       {/* Fade the frames out as they reach the headline on the left */}
       <div className="absolute inset-y-0 left-0 z-10 hidden w-[58%] bg-gradient-to-r from-brand-bg from-45% via-brand-bg/85 to-transparent lg:block" />
+      <Star className="absolute bottom-8 left-2 z-[11] hidden h-20 w-20 text-brand-accent lg:block" />
 
       {/* Text */}
       <div className="relative z-20 mx-auto max-w-6xl px-6">
@@ -120,7 +121,7 @@ export function HomeHero() {
             More enquiries.<br />
             <span className="text-brand-pop">Fewer empty beds.</span>
           </h1>
-          <Squiggle className="mt-5 h-5 w-44 text-brand-pop" />
+          <Squiggle className="mt-5 h-7 w-72 text-brand-pop" />
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
             TRG Digital is a specialist agency for the UK care sector. We grow your enquiries,
             build your website, and develop the software that sets you apart, all under one roof.
