@@ -29,7 +29,7 @@
     "@sentry/nextjs": "^10.53.1",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.49.4",
-    "@uiw/react-md-editor": "^4.1.1",
+    "@uiw/react-md-editor": "^3.3.8",
     "@vercel/kv": "^3.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

@@ -16,6 +16,7 @@ export type DistLead = {
   care_for: string | null
   move_in_timeframe: string | null
   message: string | null
+  marketing_consent?: boolean | null
   answers?: Record<string, unknown> | null
 }
 
@@ -114,6 +115,7 @@ function leadEmailHtml(lead: DistLead, buyer: Buyer, finder: Array<{ question: s
         ${detail('Timeframe', lead.move_in_timeframe)}
         ${detail('Area', lead.area)}
         ${detail('Message', lead.message)}
+        ${lead.marketing_consent ? `<tr><td style="padding:9px 0;border-bottom:1px solid #f0f0f2;color:#787880;font-size:13px;width:38%;vertical-align:top">Consent to contact</td><td style="padding:9px 0;border-bottom:1px solid #f0f0f2;color:#16a34a;font-size:14px;font-weight:700;vertical-align:top">Granted &#10003;</td></tr>` : ''}
       </table>
 
       ${finderRows ? `<h2 style="margin:24px 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;color:#8a8a93">What they told us</h2><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">${finderRows}</table>` : ''}

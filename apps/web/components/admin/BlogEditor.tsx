@@ -4,7 +4,10 @@ import dynamic from 'next/dynamic'
 import { useRef, useState, useEffect, useTransition } from 'react'
 import { saveBlogPost } from '@/app/admin/blog/actions'
 import type { PostWithAuthor, Author } from '@/lib/blog'
+import '@uiw/react-md-editor/dist/markdown-editor.css'
 
+// react-md-editor v3 (CJS) — v4 pulls ESM-only rehype deps that break Next 14's
+// webpack with "Cannot read properties of undefined (reading 'call')".
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
 
 type Props = {
