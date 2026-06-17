@@ -12,8 +12,8 @@ function Chrome({ url }: { url: string }) {
   )
 }
 
-const Shell = ({ url, children }: { url: string; children: React.ReactNode }) => (
-  <div className="h-[400px] w-[400px] flex-shrink-0 overflow-hidden rounded-xl border border-brand-line bg-white shadow-card">
+const Shell = ({ url, w = 'w-[400px]', children }: { url: string; w?: string; children: React.ReactNode }) => (
+  <div className={`h-[400px] ${w} flex-shrink-0 overflow-hidden rounded-xl border border-brand-line bg-white shadow-card`}>
     <Chrome url={url} />
     <div className="p-6">{children}</div>
   </div>
@@ -85,6 +85,100 @@ export function LeadsCard() {
       </div>
       <div className="mt-3 flex items-center justify-between text-[10px] text-brand-ink-muted">
         <span>Week 1</span><span>Week 4</span>
+      </div>
+    </Shell>
+  )
+}
+
+// Leads table — modelled on the live admin, with contact details blurred (PII-safe).
+const STATUS: Record<string, string> = {
+  new: 'bg-amber-100 text-amber-700',
+  contacted: 'bg-slate-100 text-slate-600',
+  'tour booked': 'bg-green-100 text-green-700',
+}
+export function LeadsTableCard() {
+  const rows = [
+    ['Margaret Singh', 'margaret.s@example.com', 'new', '07700 900777', '2h'],
+    ['Derek Mason', 'derek.m@example.com', 'new', '07700 901000', '6h'],
+    ['Joan Fletcher', 'joan.f@example.com', 'contacted', '07700 900999', '21h'],
+    ['Alan Pickering', 'alan.p@example.com', 'new', '07700 900888', '1d'],
+    ['Sheila Roberts', 'sheila.r@example.com', 'tour booked', '07700 900555', '3d'],
+    ['Brian Walsh', 'brian.w@example.com', 'new', '07700 900666', '3d'],
+  ]
+  return (
+    <Shell url="trgdigital.com/leads" w="w-[540px]">
+      <p className="font-display text-lg font-bold text-brand-ink">Leads</p>
+      <div className="mt-3">
+        {rows.map(([name, email, status, phone, recv]) => (
+          <div key={email} className="flex items-center gap-3 border-b border-brand-line py-2.5 last:border-0">
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-xs font-semibold text-brand-pop">{name}</p>
+              <p className="truncate select-none text-[10px] text-brand-ink-muted blur-[3px]">{email}</p>
+            </div>
+            <span className="hidden text-[10px] text-brand-ink-soft sm:block">Haywards Heath</span>
+            <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${STATUS[status as string]}`}>{status}</span>
+            <span className="w-20 select-none text-[10px] text-brand-ink-soft blur-[3px]">{phone}</span>
+            <span className="w-8 text-right text-[10px] text-brand-ink-muted">{recv}</span>
+          </div>
+        ))}
+      </div>
+    </Shell>
+  )
+}
+
+export function GithubCard() {
+  const commits = [
+    ['a1b2c3d', 'feat: lead distribution to buyers'],
+    ['d4e5f6a', 'fix: enquiry email delivery'],
+    ['7890abc', 'feat: care-finder quiz funnel'],
+  ]
+  return (
+    <Shell url="github.com/trgdigital">
+      <div className="flex items-center justify-between">
+        <p className="font-display text-sm font-bold text-brand-ink">careassura / web</p>
+        <span className="rounded-full bg-[#8250df] px-2.5 py-0.5 text-[10px] font-semibold text-white">Merged</span>
+      </div>
+      <p className="mt-1 text-[11px] text-brand-ink-muted">main · 1,284 commits</p>
+      <div className="mt-5 space-y-3">
+        {commits.map(([hash, msg]) => (
+          <div key={hash} className="flex items-center gap-2.5">
+            <code className="rounded bg-brand-bg-warm px-1.5 py-0.5 text-[10px] text-brand-ink-soft">{hash}</code>
+            <span className="truncate text-xs text-brand-ink">{msg}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-6 flex items-center gap-2 rounded-lg bg-green-50 px-3 py-2.5 text-xs font-medium text-green-700">
+        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        All checks passed
+      </div>
+    </Shell>
+  )
+}
+
+export function VercelCard() {
+  const deps = [
+    ['careassura.com', 'Production · main', '2m'],
+    ['carestreamai.com', 'Production · main', '1h'],
+    ['trgdigital.com', 'Production · main', '3h'],
+  ]
+  return (
+    <Shell url="vercel.com/trgdigital">
+      <div className="flex items-center gap-2">
+        <svg viewBox="0 0 24 24" className="h-4 w-4 fill-brand-ink" aria-hidden><path d="M12 3 22 21 2 21Z" /></svg>
+        <p className="font-display text-sm font-bold text-brand-ink">Deployments</p>
+      </div>
+      <div className="mt-5 space-y-3.5">
+        {deps.map(([name, branch, time]) => (
+          <div key={name} className="flex items-center justify-between rounded-lg border border-brand-line px-3 py-2.5">
+            <div className="min-w-0">
+              <p className="truncate text-xs font-semibold text-brand-ink">{name}</p>
+              <p className="truncate text-[10px] text-brand-ink-muted">{branch} · {time} ago</p>
+            </div>
+            <span className="flex items-center gap-1.5 text-[10px] font-semibold text-green-600">
+              <span className="h-2 w-2 rounded-full bg-green-500" /> Ready
+            </span>
+          </div>
+        ))}
       </div>
     </Shell>
   )
