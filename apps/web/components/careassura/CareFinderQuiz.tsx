@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { QuizQuestion } from '@/lib/care-finder'
 
 // Gamified multi-step care finder. One question at a time with a progress bar.
@@ -9,11 +9,15 @@ import type { QuizQuestion } from '@/lib/care-finder'
 export function CareFinderQuiz({
   locationSlug,
   questions,
+  questionSetKey,
+  variant,
   anchorId,
   flat = false,
 }: {
   locationSlug: string
   questions: QuizQuestion[]
+  questionSetKey?: string
+  variant?: string
   anchorId?: string
   flat?: boolean
 }) {
@@ -25,6 +29,8 @@ export function CareFinderQuiz({
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
   const [done, setDone] = useState(false)
+  const [sessionId] = useState(() => (typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : ''))
+  const maxStep = useRef(0)
 
   const total = questions.length
   const q = questions[step] as QuizQuestion   // bounded by step; runtime-guarded below
@@ -39,6 +45,17 @@ export function CareFinderQuiz({
       utmTerm: p.get('utm_term') || undefined, gclid: p.get('gclid') || undefined,
     }
   }, [])
+
+  // Funnel tracking: record the furthest step reached + completion (best-effort).
+  useEffect(() => {
+    if (!sessionId) return
+    maxStep.current = Math.max(maxStep.current, step)
+    fetch('/api/quiz-track', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sessionId, slug: locationSlug, questionSet: questionSetKey, variant, step: maxStep.current, total, completed: done, leadId }),
+    }).catch(() => {})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step, done, leadId])
 
   if (!questions.length) return null // no questions configured
 

@@ -7,11 +7,13 @@ import type { QuizQuestion } from '@/lib/care-finder'
 export function GetMatchedModal({
   locationSlug,
   questions,
+  questionSetKey,
   label = 'Get matched',
   className,
 }: {
   locationSlug: string
   questions: QuizQuestion[]
+  questionSetKey?: string
   areaName?: string
   timeframes?: string[]
   label?: string
@@ -66,7 +68,7 @@ export function GetMatchedModal({
                 <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
               </svg>
             </button>
-            <CareFinderQuiz locationSlug={locationSlug} questions={questions} flat />
+            <CareFinderQuiz locationSlug={locationSlug} questions={questions} questionSetKey={questionSetKey} flat />
           </div>
         </div>
       )}

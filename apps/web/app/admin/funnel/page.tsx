@@ -32,8 +32,40 @@ async function getFunnelData() {
   }))
 }
 
+// Care-finder quiz drop-off: per step, how many sessions reached it (per template).
+async function getQuizFunnels() {
+  const supabase = createServiceClient() as unknown as any
+  const [{ data: sessions }, { data: sets }] = await Promise.all([
+    supabase.from('quiz_sessions').select('question_set, step_reached, completed, lead_id'),
+    supabase.from('question_sets').select('key, name, questions'),
+  ])
+  const setMap = new Map((sets ?? []).map((s: any) => [s.key, s]))
+  const bySet: Record<string, any[]> = {}
+  for (const s of (sessions ?? []) as any[]) (bySet[s.question_set] ??= []).push(s)
+
+  return Object.entries(bySet).map(([key, sess]) => {
+    const set = setMap.get(key) as any
+    const questions = (set?.questions ?? []) as any[]
+    const started = sess.length
+    const steps = questions.map((qq: any, i: number) => ({
+      index: i,
+      label: String(qq.title ?? `Step ${i + 1}`),
+      type: String(qq.type ?? ''),
+      reached: sess.filter((x: any) => (x.step_reached ?? 0) >= i).length,
+    }))
+    return {
+      key,
+      name: String(set?.name ?? key),
+      started,
+      completed: sess.filter((x: any) => x.completed).length,
+      leads: sess.filter((x: any) => x.lead_id).length,
+      steps,
+    }
+  }).sort((a, b) => b.started - a.started)
+}
+
 export default async function FunnelPage() {
-  const data = await getFunnelData()
+  const [data, quizFunnels] = await Promise.all([getFunnelData(), getQuizFunnels()])
 
   return (
     <div className="space-y-6">
@@ -71,6 +103,40 @@ export default async function FunnelPage() {
               })}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {/* Care-finder quiz drop-off */}
+      {quizFunnels.length > 0 && (
+        <div className="space-y-6 pt-2">
+          <h2 className="text-xl font-semibold">Care Finder Quiz</h2>
+          {quizFunnels.map((f) => (
+            <div key={f.key} className="rounded-lg border bg-card p-6">
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <h3 className="font-medium">{f.name}</h3>
+                <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                  <span><strong className="text-foreground">{f.started}</strong> started</span>
+                  <span><strong className="text-foreground">{f.leads}</strong> leads</span>
+                  <span><strong className="text-foreground">{f.completed}</strong> completed</span>
+                  <span><strong className="text-foreground">{f.started ? ((f.leads / f.started) * 100).toFixed(0) : 0}%</strong> capture</span>
+                </div>
+              </div>
+              <div className="space-y-1.5">
+                {f.steps.map((s) => {
+                  const pct = f.started ? (s.reached / f.started) * 100 : 0
+                  return (
+                    <div key={s.index} className="flex items-center gap-3 text-sm">
+                      <span className="w-56 shrink-0 truncate text-muted-foreground" title={s.label}>{s.index + 1}. {s.label}{s.type === 'contact' ? ' (contact)' : ''}</span>
+                      <div className="h-4 flex-1 overflow-hidden rounded bg-muted">
+                        <div className={`h-full rounded ${s.type === 'contact' ? 'bg-emerald-500' : 'bg-violet-500'}`} style={{ width: `${pct}%` }} />
+                      </div>
+                      <span className="w-24 shrink-0 text-right tabular-nums">{s.reached} ({pct.toFixed(0)}%)</span>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
