@@ -109,10 +109,7 @@ export default function PricingPage() {
             </div>
 
             <div className="mt-8">
-              <Link
-                href="/contact"
-                className="block w-full rounded-xl bg-brand-accent py-3 text-center text-sm font-semibold text-brand-ink shadow-soft transition-all hover:bg-brand-ink hover:text-white hover:shadow-card"
-              >
+              <Link href="/contact" className="btn-cta w-full">
                 Get your quoted rate
               </Link>
             </div>
@@ -207,10 +204,7 @@ export default function PricingPage() {
             exact figure for your home.
           </p>
           <div className="mt-8">
-            <Link
-              href="/contact"
-              className="inline-flex h-12 items-center rounded-xl bg-brand-ink px-8 text-sm font-semibold text-white shadow-soft transition-all hover:bg-brand-ink/90"
-            >
+            <Link href="/contact" className="btn-pop">
               Book a free demo
             </Link>
           </div>

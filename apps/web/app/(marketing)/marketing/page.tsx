@@ -133,16 +133,10 @@ export default function MarketingPage() {
               empty. Pause when you&apos;re full. Pay only when a resident moves in.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/contact"
-                className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-brand-ink shadow-soft transition-all hover:bg-brand-ink hover:text-white hover:shadow-card"
-              >
+              <Link href="/contact" className="btn-cta">
                 Book a free demo
               </Link>
-              <Link
-                href="/how-it-works"
-                className="inline-flex h-12 items-center justify-center rounded-xl border border-brand-line px-8 text-base font-medium text-brand-ink-soft transition-colors hover:border-brand-ink hover:text-brand-ink"
-              >
+              <Link href="/how-it-works" className="btn-cta-outline">
                 See how it works
               </Link>
             </div>
@@ -305,10 +299,7 @@ export default function MarketingPage() {
             to expect for your specific home.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link
-              href="/contact"
-              className="inline-flex h-12 items-center rounded-xl bg-brand-ink px-8 text-sm font-semibold text-white shadow-soft transition-all hover:bg-brand-ink/90"
-            >
+            <Link href="/contact" className="btn-pop">
               Book a free demo
             </Link>
             <Link

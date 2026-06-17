@@ -60,8 +60,9 @@ export default function Footer() {
               <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-accent" />
               Suite Ra01, 195-197 Wood Street, London, E17 3NU
             </p>
-            <Link href="/contact" className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand-pop px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-pop-dark">
-              Start your project →
+            <Link href="/contact" className="btn-pop mt-6">
+              Start your project
+              <span className="btn-arrow" aria-hidden>→</span>
             </Link>
           </div>
 

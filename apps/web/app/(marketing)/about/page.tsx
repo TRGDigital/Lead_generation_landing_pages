@@ -56,10 +56,7 @@ export default function AboutPage() {
               with a deep understanding of how care really works.
             </p>
             <div className="mt-8">
-              <Link
-                href="/contact"
-                className="inline-flex h-12 items-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-brand-ink shadow-soft transition-all hover:bg-brand-ink hover:text-white"
-              >
+              <Link href="/contact" className="btn-cta">
                 Work with us
               </Link>
             </div>
@@ -197,10 +194,7 @@ export default function AboutPage() {
             hear what you&apos;re trying to grow.
           </p>
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Link
-              href="/contact"
-              className="inline-flex h-12 items-center rounded-xl bg-brand-accent px-8 text-sm font-semibold text-brand-ink shadow-soft transition-all hover:bg-brand-ink hover:text-white"
-            >
+            <Link href="/contact" className="btn-cta">
               Get in touch
             </Link>
           </div>

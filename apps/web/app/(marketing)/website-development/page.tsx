@@ -62,10 +62,7 @@ export default function WebsiteDevelopmentPage() {
             real enquiries.
           </p>
           <div className="mt-9">
-            <Link
-              href="/contact"
-              className="inline-flex h-12 items-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-brand-ink shadow-soft transition-all hover:bg-brand-ink hover:text-white"
-            >
+            <Link href="/contact" className="btn-cta">
               Book a free demo
             </Link>
           </div>
@@ -143,7 +140,7 @@ export default function WebsiteDevelopmentPage() {
             could do for your enquiries.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/contact" className="inline-flex h-12 items-center rounded-xl bg-brand-ink px-8 text-sm font-semibold text-white shadow-soft transition-all hover:bg-brand-ink/90">
+            <Link href="/contact" className="btn-pop">
               Book a free demo
             </Link>
             <Link href="/marketing" className="inline-flex h-12 items-center px-8 text-sm font-medium text-brand-ink/70 transition-colors hover:text-brand-ink">

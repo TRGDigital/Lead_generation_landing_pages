@@ -26,10 +26,10 @@ export function MapSection() {
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-7 inline-flex w-fit items-center gap-2 rounded-xl bg-brand-pop px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-pop-dark"
+              className="btn-pop mt-7 w-fit"
             >
               Get directions
-              <span aria-hidden>→</span>
+              <span className="btn-arrow" aria-hidden>→</span>
             </a>
           </div>
         </div>

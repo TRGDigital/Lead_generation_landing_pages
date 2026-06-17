@@ -171,10 +171,7 @@ export default function HowItWorksPage() {
             like for your specific home.
           </p>
           <div className="mt-8">
-            <Link
-              href="/contact"
-              className="inline-flex h-12 items-center rounded-xl bg-brand-accent px-8 text-sm font-semibold text-brand-ink shadow-soft transition-all hover:bg-brand-ink hover:text-white"
-            >
+            <Link href="/contact" className="btn-cta">
               Book a free demo
             </Link>
           </div>

@@ -112,9 +112,9 @@ export default function DevelopmentPage() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-7 inline-flex h-11 items-center gap-1.5 rounded-xl bg-brand-accent px-6 text-sm font-semibold text-brand-ink transition-colors hover:bg-brand-ink hover:text-white"
+                    className="btn-cta mt-7"
                   >
-                    {cta} <ArrowUpRight className="h-4 w-4" />
+                    {cta} <ArrowUpRight className="btn-arrow h-4 w-4" />
                   </a>
                 </div>
 
@@ -146,10 +146,7 @@ export default function DevelopmentPage() {
             We design, build and run software for the care sector and beyond. Tell us what you are
             trying to solve and we will help you shape it.
           </p>
-          <Link
-            href="/contact"
-            className="mt-8 inline-flex h-12 items-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-brand-ink transition-colors hover:bg-white"
-          >
+          <Link href="/contact" className="btn-cta mt-8">
             Talk to us
           </Link>
         </div>
