@@ -1,7 +1,9 @@
 import Image from 'next/image'
 
-// "Brands that have chosen TRG Digital" — client logos. Greyscale at rest, full
-// colour on hover (the "pop" effect).
+// "Brands that have chosen TRG Digital" — a horizontal auto-scrolling logo strip.
+// The supplied logos have a cream paper background; placing them on a matching cream
+// band with mix-blend-multiply makes that background disappear. Greyscale at rest,
+// full colour on hover.
 const CLIENTS = [
   { name: 'Meadow Rose Nursing Home', src: '/clients/meadow-rose.png' },
   { name: 'Charlotte House', src: '/clients/charlotte-house.png' },
@@ -15,25 +17,21 @@ const CLIENTS = [
 
 export function BrandStrip() {
   return (
-    <section className="border-b border-brand-line/60 bg-brand-bg-warm px-6 py-14">
-      <div className="mx-auto max-w-6xl">
-        <p className="text-center text-xs font-semibold uppercase tracking-widest text-brand-ink-muted">
-          Brands that have chosen TRG Digital
-        </p>
-        <div className="mt-9 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {CLIENTS.map((c) => (
-            <div
-              key={c.name}
-              className="flex h-24 items-center justify-center rounded-xl border border-brand-line bg-white px-4"
-            >
-              <Image
-                src={c.src}
-                alt={c.name}
-                width={320}
-                height={120}
-                className="h-16 w-auto max-w-full object-contain opacity-70 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
-              />
-            </div>
+    <section className="overflow-hidden border-b border-brand-line/60 bg-[#f4f1e8] py-12">
+      <p className="px-6 text-center text-xs font-semibold uppercase tracking-widest text-brand-ink-muted">
+        Brands that have chosen TRG Digital
+      </p>
+      <div className="marquee-mask mt-8">
+        <div className="animate-marquee flex w-max items-center gap-14 px-7">
+          {[...CLIENTS, ...CLIENTS].map((c, i) => (
+            <Image
+              key={i}
+              src={c.src}
+              alt={c.name}
+              width={320}
+              height={120}
+              className="h-14 w-auto flex-shrink-0 object-contain opacity-70 mix-blend-multiply grayscale transition duration-300 hover:opacity-100 hover:grayscale-0 md:h-16"
+            />
           ))}
         </div>
       </div>

@@ -4,7 +4,9 @@ import Image from 'next/image'
 import { Megaphone, Globe, Code2, ArrowRight } from 'lucide-react'
 import { HomeHero } from '@/components/marketing/HomeHero'
 import { BrandStrip } from '@/components/marketing/BrandStrip'
+import { AgencyIntro } from '@/components/marketing/AgencyIntro'
 import { StatementBand } from '@/components/marketing/StatementBand'
+import { ScrollingBanner } from '@/components/marketing/ScrollingBanner'
 import { ShowcaseMarquee } from '@/components/marketing/ShowcaseMarquee'
 import { ComplicatedIndustry } from '@/components/marketing/ComplicatedIndustry'
 import { ProvenResults } from '@/components/marketing/ProvenResults'
@@ -92,14 +94,7 @@ export default async function HomePage() {
 
       <BrandStrip />
 
-      <StatementBand
-        eyebrow="TRG Digital"
-        tone="dark"
-        sub="We blend sharp strategy with standout creative — websites, search, paid media and software, all built to do one thing: bring more families to your door."
-        cta={{ label: 'Start your project', href: '#start' }}
-      >
-        A leading digital marketing agency with a creative kick
-      </StatementBand>
+      <AgencyIntro />
 
       {/* ── Services ──────────────────────────────────────────────────── */}
       <section className="px-6 py-20">
@@ -178,6 +173,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <ScrollingBanner />
 
       <StartProject />
 

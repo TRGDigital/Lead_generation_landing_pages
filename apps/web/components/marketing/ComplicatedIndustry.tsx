@@ -1,60 +1,72 @@
-import { ShieldCheck, HeartHandshake, Target, BedDouble } from 'lucide-react'
+import Link from 'next/link'
+import { Check } from 'lucide-react'
 
-// "Making sense of a complicated industry" — the things that make care marketing
-// hard, and how TRG removes each one.
-const POINTS = [
-  {
-    icon: ShieldCheck,
-    problem: 'CQC, funding routes and care types',
-    solution: 'We speak care fluently, so every campaign and page is accurate, compliant and credible to families.',
-  },
-  {
-    icon: HeartHandshake,
-    problem: 'Families choosing in a vulnerable moment',
-    solution: 'We build journeys that answer the real questions and earn trust, not generic marketing fluff.',
-  },
-  {
-    icon: Target,
-    problem: 'Generic agencies that don’t get care',
-    solution: 'Care is the only sector we work in. Nothing is learned on your budget — we already know it.',
-  },
-  {
-    icon: BedDouble,
-    problem: 'Empty beds quietly draining revenue',
-    solution: 'We focus relentlessly on the one metric that matters: qualified enquiries that fill beds.',
-  },
+// "Making sense of a complicated industry" — rich, SEO-friendly two-column section:
+// multi-paragraph care-sector copy with internal links on the left; honest trust
+// badges + a CTA box on the right.
+const BADGES = [
+  'Care sector specialists — it’s all we do',
+  'Marketing, websites & software under one roof',
+  'Google & Meta advertising specialists',
+  'Two live products built in-house',
+  'Measured on enquiries, not vanity metrics',
 ]
 
 export function ComplicatedIndustry() {
   return (
     <section className="bg-brand-bg-warm px-6 py-24">
-      <div className="mx-auto max-w-6xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Why TRG</p>
-          <h2 className="mt-3 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
+      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
+        {/* Copy */}
+        <div>
+          <h2 className="font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-4xl">
             Making sense of a complicated industry
           </h2>
-          <p className="mt-4 text-brand-ink-soft">
-            Care isn&apos;t like other sectors, and care marketing shouldn&apos;t be treated like it is. Here&apos;s
-            what makes it hard — and how we take it off your plate.
-          </p>
+          <p className="mt-4 font-display text-lg font-semibold text-brand-pop">Specialist care marketing, from day one.</p>
+          <div className="mt-6 space-y-4 text-base leading-relaxed text-brand-ink-soft">
+            <p>
+              Care isn&apos;t like other sectors. Families researching a care home are often doing it in a
+              stressful, emotional moment — weighing up CQC ratings, funding routes and care types while trying
+              to find somewhere they can trust. Generic agencies treat care like any other industry. We do the
+              opposite: everything we market and build is shaped around how care decisions are really made.
+            </p>
+            <p>
+              That focus changes the work. Our{' '}
+              <Link href="/website-development" className="font-semibold text-brand-pop underline-offset-2 hover:underline">care home websites</Link>{' '}
+              are built around the questions families actually ask. Our{' '}
+              <Link href="/marketing" className="font-semibold text-brand-pop underline-offset-2 hover:underline">paid campaigns</Link>{' '}
+              target the people genuinely searching for care near you. And our SEO and content earn the organic
+              visibility that brings enquiries in month after month, without paying for every click.
+            </p>
+            <p>
+              The aim is simple: take the complexity off your plate and turn it into a steady flow of qualified
+              enquiries — more families finding you, more visits booked and fewer empty beds — backed by a team
+              that understands care, regulation and the families behind every enquiry. When it&apos;s time to
+              scale, our{' '}
+              <Link href="/development" className="font-semibold text-brand-pop underline-offset-2 hover:underline">custom software</Link>{' '}
+              joins it all up.
+            </p>
+          </div>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
-          {POINTS.map(({ icon: Icon, problem, solution }) => (
-            <div
-              key={problem}
-              className="group flex gap-5 rounded-2xl border border-brand-line bg-white p-7 shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-card"
-            >
-              <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop transition-colors group-hover:bg-brand-pop group-hover:text-white">
-                <Icon className="h-6 w-6" />
+        {/* Badges + CTA */}
+        <div className="space-y-3">
+          {BADGES.map((b) => (
+            <div key={b} className="flex items-center gap-4 rounded-xl bg-brand-ink px-5 py-4 text-white">
+              <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-brand-pop">
+                <Check className="h-4 w-4 text-white" />
               </span>
-              <div>
-                <p className="font-display text-lg font-semibold text-brand-ink">{problem}</p>
-                <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{solution}</p>
-              </div>
+              <span className="font-display text-sm font-semibold uppercase tracking-wide">{b}</span>
             </div>
           ))}
+          <div className="rounded-2xl bg-brand-accent p-7">
+            <p className="font-display text-xl font-bold uppercase leading-tight tracking-tight text-brand-ink">
+              Does this sound like the marketing support you&apos;ve been looking for?
+            </p>
+            <Link href="#start" className="btn-pop mt-5">
+              Submit a project enquiry
+              <span className="btn-arrow" aria-hidden>→</span>
+            </Link>
+          </div>
         </div>
       </div>
     </section>
