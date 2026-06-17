@@ -43,15 +43,13 @@ export default function PostCard({ post }: Props) {
           )}
         </div>
 
-        <h2 className="mt-3 flex-1 font-display text-xl font-semibold leading-snug text-brand-ink group-hover:text-brand-accent transition-colors">
-          <Link href={`/blog/${post.slug}`} className="after:absolute after:inset-0">
-            {post.title}
-          </Link>
+        <h2 className="mt-3 font-display text-xl font-semibold leading-snug text-brand-ink transition-colors group-hover:text-brand-pop">
+          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
         </h2>
 
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-brand-ink-soft">{post.excerpt}</p>
+        <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-brand-ink-soft">{post.excerpt}</p>
 
-        <div className="mt-4 flex items-center gap-3 text-xs text-brand-ink-muted border-t border-brand-line/50 pt-4">
+        <div className="mt-4 flex items-center gap-3 border-t border-brand-line/50 pt-4 text-xs text-brand-ink-muted">
           {post.author && (
             <span className="font-medium text-brand-ink-soft">{post.author.name}</span>
           )}
@@ -59,6 +57,11 @@ export default function PostCard({ post }: Props) {
             <span className="ml-auto">{formatDate(post.published_at)}</span>
           )}
         </div>
+
+        <Link href={`/blog/${post.slug}`} className="btn-pop mt-5 h-10 px-5 text-xs">
+          Read now
+          <span className="btn-arrow" aria-hidden>→</span>
+        </Link>
       </div>
     </article>
   )
