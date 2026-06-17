@@ -30,7 +30,7 @@ function Mockups() {
         url="careassura.co.uk"
         w={1320}
         h={895}
-        className="absolute -bottom-10 right-0 w-[60%]"
+        className="absolute -bottom-10 right-0 w-[72%]"
       />
     </div>
   )
@@ -52,7 +52,7 @@ export function HomeHero() {
   return (
     <section className="relative overflow-hidden">
       {/* Right visual — resident photo, crossfading to product mockups on "build better software" */}
-      <div className="absolute inset-y-0 right-0 hidden w-[46%] lg:block">
+      <div className="absolute inset-y-0 right-0 hidden w-[49%] lg:block">
         <div className={`absolute inset-0 transition-opacity duration-700 ${software ? 'opacity-0' : 'opacity-100'}`}>
           <Image src="/hero-resident.jpg" alt="A care home resident relaxing in her room" fill priority sizes="46vw" className="object-cover" />
         </div>
