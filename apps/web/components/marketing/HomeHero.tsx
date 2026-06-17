@@ -22,7 +22,7 @@ function Frame({ src, alt, url, w, h, className = '' }: { src: string; alt: stri
 
 function Mockups() {
   return (
-    <div className="relative w-full max-w-xl px-4">
+    <div className="relative w-full max-w-2xl px-3">
       <Frame src="/mockups/carestream.jpg" alt="The CareStream homepage" url="carestreamai.com" w={1320} h={940} />
       <Frame
         src="/mockups/careassura.jpg"
@@ -30,7 +30,7 @@ function Mockups() {
         url="careassura.co.uk"
         w={1320}
         h={895}
-        className="absolute -bottom-8 right-0 w-[74%]"
+        className="absolute -bottom-10 right-0 w-[60%]"
       />
     </div>
   )
