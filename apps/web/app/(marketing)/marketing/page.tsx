@@ -277,35 +277,62 @@ export default function MarketingPage() {
       {/* ── Pricing teaser ────────────────────────────────────────────── */}
       <section className="relative overflow-hidden px-6 py-24">
         <Star className="absolute left-8 top-12 hidden h-14 w-14 -rotate-12 text-brand-pop/60 lg:block" />
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Pricing</p>
-          <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
-            Performance-based, no surprises
-          </h2>
-          <p className="mt-4 text-brand-ink-soft">No setup fee. No monthly retainer. A single fixed fee per confirmed move-in.</p>
-          <div className="mt-10 w-full rounded-2xl border-2 border-brand-pop/30 bg-white p-8 text-left shadow-soft">
-            <p className="text-xs font-semibold uppercase tracking-wider text-brand-pop">Per confirmed move-in</p>
-            <p className="mt-2 font-display text-5xl font-bold uppercase text-brand-ink">Fixed fee</p>
-            <ul className="mt-6 space-y-2.5 text-sm text-brand-ink-soft">
-              {[
-                'Full landing page, built and managed for you',
-                'Google & Meta advertising campaigns',
-                'Pre-qualified enquiry delivery',
-                'On/off control over your campaigns',
-                'No contracts, cancel anytime',
-              ].map((item) => (
-                <li key={item} className="flex items-center gap-2.5">
-                  <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand-pop/10">
-                    <Check className="h-3 w-3 text-brand-pop" />
+        <Dots className="absolute bottom-12 right-10 hidden h-20 w-20 text-brand-accent/50 lg:block" />
+        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
+          {/* Copy */}
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Pricing</p>
+            <h2 className="mt-2 font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-4xl">
+              Performance-based, no surprises
+            </h2>
+            <p className="mt-5 max-w-md text-lg leading-relaxed text-brand-ink-soft">
+              Forget setup fees and monthly retainers. With TRG you pay one fixed fee per confirmed move-in — and
+              nothing else. No win, no fee.
+            </p>
+            <div className="mt-7 space-y-3">
+              {['No setup fee', 'No monthly retainer', 'No contracts — cancel anytime'].map((r) => (
+                <div key={r} className="flex items-center gap-3 text-brand-ink">
+                  <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-pop">
+                    <Check className="h-3.5 w-3.5 text-white" />
                   </span>
-                  {item}
-                </li>
+                  <span className="font-semibold">{r}</span>
+                </div>
               ))}
-            </ul>
-            <Link href="/pricing" className="btn-pop mt-7">
+            </div>
+            <Link href="/pricing" className="btn-pop mt-8">
               See full pricing
               <span className="btn-arrow" aria-hidden>→</span>
             </Link>
+          </div>
+
+          {/* Value card */}
+          <div className="overflow-hidden rounded-3xl border-2 border-brand-pop/30 bg-white shadow-card">
+            <div className="bg-brand-ink px-8 py-7 text-white">
+              <p className="text-xs font-semibold uppercase tracking-widest text-brand-accent">You pay only when</p>
+              <p className="mt-1.5 font-display text-2xl font-bold uppercase leading-tight tracking-tight">
+                A resident moves in
+              </p>
+              <p className="mt-2 text-sm text-white/70">One simple, fixed fee per confirmed placement.</p>
+            </div>
+            <div className="p-8">
+              <p className="text-xs font-semibold uppercase tracking-wider text-brand-pop">What&apos;s included</p>
+              <ul className="mt-4 space-y-3 text-sm text-brand-ink-soft">
+                {[
+                  'Full landing page, built and managed for you',
+                  'Google & Meta advertising campaigns',
+                  'Pre-qualified enquiry delivery',
+                  'On/off control over your campaigns',
+                  'No contracts, cancel anytime',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5">
+                    <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand-pop/10">
+                      <Check className="h-3 w-3 text-brand-pop" />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
