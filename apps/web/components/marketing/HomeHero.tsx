@@ -82,7 +82,7 @@ export function HomeHero() {
 
       {/* Text */}
       <div className="relative z-20 mx-auto max-w-6xl px-6">
-        <div className="py-16 lg:w-1/2 lg:py-32 lg:pr-12">
+        <div className="pb-16 pt-8 lg:w-1/2 lg:pb-28 lg:pr-12 lg:pt-16">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">
             Digital marketing agency delivering results for the care sector
           </p>
