@@ -1,10 +1,46 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Globe, Search, Target, MessageSquareText, Code2 } from 'lucide-react'
 
 export const dynamic = 'force-static'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
+
+// The core TRG Digital services — everything that grows a care provider's enquiries,
+// from the website itself to the marketing that fills it and the software behind it.
+const SERVICES = [
+  {
+    icon: Globe,
+    title: 'New website',
+    body: 'Fast, modern, search-optimised sites built around the questions families actually ask — designed to turn visitors into enquiries.',
+    href: '/website-development',
+  },
+  {
+    icon: Search,
+    title: 'Search Engine Optimisation (SEO)',
+    body: 'Get found first. We grow your organic visibility so the right families discover you before your competitors do.',
+    href: '/marketing',
+  },
+  {
+    icon: Target,
+    title: 'PPC advertising',
+    body: 'Targeted Google and social campaigns that put you in front of families actively searching for care — measured on enquiries, not clicks.',
+    href: '/marketing',
+  },
+  {
+    icon: MessageSquareText,
+    title: 'Enquiry generation',
+    body: 'High-converting landing pages and lead capture that fill empty beds with quality, ready-to-act enquiries.',
+    href: '/marketing',
+  },
+  {
+    icon: Code2,
+    title: 'Software development',
+    body: 'Bespoke tools and platforms for the care sector — the same capability behind our own products, CareStream and CareAssura.',
+    href: '/development',
+  },
+] as const
 
 export const metadata: Metadata = {
   title: 'About TRG Digital | A Specialist Care-Sector Agency',
@@ -104,17 +140,6 @@ export default function AboutPage() {
             seen on the ground in care.
           </p>
 
-          <h2 className="font-display text-2xl font-semibold text-brand-ink pt-4">What we do</h2>
-          <p>
-            We work across three areas, all under one roof. Our{' '}
-            <Link href="/marketing" className="font-medium text-brand-accent hover:text-brand-ink transition-colors">marketing</Link>{' '}
-            fills empty beds with targeted advertising and high-converting landing pages. Our{' '}
-            <Link href="/website-development" className="font-medium text-brand-accent hover:text-brand-ink transition-colors">website development</Link>{' '}
-            builds fast, search-optimised sites that grow your exposure. And our{' '}
-            <Link href="/development" className="font-medium text-brand-accent hover:text-brand-ink transition-colors">custom development</Link>{' '}
-            creates bespoke tools and platforms for the sector.
-          </p>
-
           <h2 className="font-display text-2xl font-semibold text-brand-ink pt-4">We build our own products</h2>
           <p>
             We do not just advise, we ship. Two of our own products are live and used across the
@@ -125,6 +150,44 @@ export default function AboutPage() {
             a care home directory that helps families find the right care. Building our own software
             keeps us close to the problems our clients face every day.
           </p>
+        </div>
+      </section>
+
+      {/* ── What we do (services) ─────────────────────────────────────── */}
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">What we do</p>
+            <h2 className="mt-3 font-display text-3xl font-semibold text-brand-ink">
+              Everything you need to win more enquiries
+            </h2>
+            <p className="mt-4 leading-relaxed text-brand-ink-soft">
+              From a new website to the campaigns that fill it and the software that sets you apart — all
+              under one roof, all built for the care sector.
+            </p>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICES.map(({ icon: Icon, title, body, href }) => (
+              <Link
+                key={title}
+                href={href}
+                className="group flex flex-col rounded-2xl border border-brand-line bg-white p-6 shadow-soft transition-all hover:-translate-y-0.5 hover:border-brand-accent hover:shadow-card"
+              >
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-bg-warm text-brand-accent transition-colors group-hover:bg-brand-accent group-hover:text-brand-ink">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <h3 className="mt-4 font-display text-lg font-semibold text-brand-ink">{title}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-accent">
+                  Learn more
+                  <svg viewBox="0 0 24 24" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                    <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
