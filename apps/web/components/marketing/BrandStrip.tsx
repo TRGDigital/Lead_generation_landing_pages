@@ -17,7 +17,7 @@ const CLIENTS = [
 
 export function BrandStrip() {
   return (
-    <section className="overflow-hidden border-b border-brand-line/60 bg-[#f4f1e8] py-12">
+    <section className="overflow-hidden border-b border-brand-line/60 bg-brand-bg py-12">
       <p className="px-6 text-center text-xs font-semibold uppercase tracking-widest text-brand-ink-muted">
         Brands that have chosen TRG Digital
       </p>
@@ -30,7 +30,7 @@ export function BrandStrip() {
               alt={c.name}
               width={320}
               height={120}
-              className="h-14 w-auto flex-shrink-0 object-contain opacity-70 mix-blend-multiply grayscale transition duration-300 hover:opacity-100 hover:grayscale-0 md:h-16"
+              className="h-14 w-auto flex-shrink-0 object-contain opacity-80 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0 md:h-16"
             />
           ))}
         </div>

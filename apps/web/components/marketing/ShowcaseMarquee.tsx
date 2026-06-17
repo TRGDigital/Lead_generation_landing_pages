@@ -125,8 +125,8 @@ export function ShowcaseMarquee() {
   ]
 
   return (
-    <section className="overflow-hidden py-20">
-      <div className="mx-auto mb-12 max-w-6xl px-6">
+    <section className="overflow-hidden pb-20 pt-8">
+      <div className="mx-auto mb-10 max-w-6xl px-6">
         <p className="text-xs font-semibold uppercase tracking-wider text-brand-accent">Our work in action</p>
         <h2 className="mt-2 max-w-2xl font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
           From search to enquiry — we build the whole journey

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { AnalyticsCard, LighthouseCard, LeadsCard } from './HeroMockups'
 
 type Shot = { src: string; alt: string; url?: string }
 type Col =
@@ -60,11 +61,29 @@ function Column({ col }: { col: Col }) {
   )
 }
 
+// The scrolling band mixes real screenshots with dashboard mockups (analytics
+// growth, PageSpeed all-green, monthly leads).
+function band() {
+  return [
+    <Column key="c0" col={COLS[0]!} />,
+    <AnalyticsCard key="analytics" />,
+    <Column key="c1" col={COLS[1]!} />,
+    <LighthouseCard key="lighthouse" />,
+    <Column key="c2" col={COLS[2]!} />,
+    <LeadsCard key="leads" />,
+    <Column key="c3" col={COLS[3]!} />,
+    <Column key="c4" col={COLS[4]!} />,
+    <Column key="c5" col={COLS[5]!} />,
+    <Column key="c6" col={COLS[6]!} />,
+  ]
+}
+
 function HeroScroller() {
+  const items = band()
   return (
     <div className="animate-marquee flex w-max items-center gap-6">
-      {[...COLS, ...COLS].map((col, i) => (
-        <Column key={i} col={col} />
+      {[...items, ...items].map((node, i) => (
+        <div key={i} className="flex-shrink-0">{node}</div>
       ))}
     </div>
   )

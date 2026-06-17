@@ -99,19 +99,21 @@ export default async function HomePage() {
 
       {/* ── Knowledge Hub ─────────────────────────────────────────────── */}
       {latest.length > 0 && (
-        <section className="bg-brand-bg-warm px-6 py-20">
+        <section className="bg-brand-bg px-6 py-24">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Knowledge Hub</p>
-                <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">Insight for the care sector</h2>
+            <div className="relative rounded-3xl border-2 border-brand-pop/30 p-6 sm:p-10">
+              <span className="absolute -top-3.5 left-8 bg-brand-bg px-3 font-display text-sm font-bold uppercase tracking-widest text-brand-pop">
+                Knowledge Hub
+              </span>
+              <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+                <h2 className="font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">Insight for the care sector</h2>
+                <Link href="/blog" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-pop hover:text-brand-ink">
+                  View all posts <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
-              <Link href="/blog" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-ink hover:text-brand-pop">
-                View all posts <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {latest.map((post) => <PostCard key={post.id} post={post} />)}
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                {latest.map((post) => <PostCard key={post.id} post={post} />)}
+              </div>
             </div>
           </div>
         </section>

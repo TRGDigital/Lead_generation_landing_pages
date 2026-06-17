@@ -20,19 +20,19 @@ export function StatementBand({
   const ctaCls = tone === 'pop' ? 'btn-cta' : 'btn-pop'
 
   return (
-    <section className={`relative overflow-hidden px-6 py-24 ${bg}`}>
+    <section className={`relative overflow-hidden px-6 py-16 ${bg}`}>
       {/* soft accent glow for energy */}
       {tone !== 'light' && (
-        <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full bg-white/10 blur-3xl" />
       )}
-      <div className="relative mx-auto max-w-4xl text-center">
+      <div className="relative mx-auto max-w-3xl text-center">
         {eyebrow && <p className={`text-sm font-semibold uppercase tracking-widest ${eyebrowCls}`}>{eyebrow}</p>}
-        <h2 className="mt-4 font-display text-4xl font-bold uppercase leading-[1.05] tracking-tight sm:text-5xl">
+        <h2 className="mt-4 font-display text-3xl font-bold uppercase leading-[1.08] tracking-tight sm:text-4xl">
           {children}
         </h2>
-        {sub && <p className={`mx-auto mt-6 max-w-2xl text-lg leading-relaxed ${subCls}`}>{sub}</p>}
+        {sub && <p className={`mx-auto mt-5 max-w-xl leading-relaxed ${subCls}`}>{sub}</p>}
         {cta && (
-          <div className="mt-9">
+          <div className="mt-8">
             <Link href={cta.href} className={ctaCls}>
               {cta.label}
               <span className="btn-arrow" aria-hidden>→</span>
