@@ -17,6 +17,9 @@ type Props = {
 
 export default function BlogEditor({ post, authors }: Props) {
   const [body, setBody] = useState(post?.body_mdx ?? '')
+  const [heroUrl, setHeroUrl] = useState(post?.hero_image_url ?? '')
+  const [uploading, setUploading] = useState(false)
+  const [uploadError, setUploadError] = useState('')
   const [saved, setSaved] = useState(false)
   const [isPending, startTransition] = useTransition()
   const autoSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -43,6 +46,23 @@ export default function BlogEditor({ post, authors }: Props) {
       setSaved(true)
       setTimeout(() => setSaved(false), 2000)
     })
+  }
+
+  async function uploadHero(file: File) {
+    setUploadError('')
+    setUploading(true)
+    try {
+      const fd = new FormData()
+      fd.append('file', file)
+      const res = await fetch('/api/admin/blog/upload-image', { method: 'POST', body: fd })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) throw new Error(data?.error || 'Upload failed')
+      setHeroUrl(data.url)
+    } catch (e) {
+      setUploadError(e instanceof Error ? e.message : 'Upload failed')
+    } finally {
+      setUploading(false)
+    }
   }
 
   return (
@@ -112,11 +132,39 @@ export default function BlogEditor({ post, authors }: Props) {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-brand-ink mb-1">Hero image URL</label>
+          <label className="block text-sm font-medium text-brand-ink mb-1">Hero image</label>
+          {heroUrl && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={heroUrl} alt="" className="mb-2 h-32 w-full rounded-lg border border-brand-line object-cover" />
+          )}
+          <div className="mb-2 flex items-center gap-3">
+            <label className="cursor-pointer rounded-lg border border-brand-line px-3 py-2 text-sm hover:bg-brand-line/20">
+              {uploading ? 'Uploading…' : heroUrl ? 'Replace image' : 'Upload image'}
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/webp,image/gif"
+                className="hidden"
+                disabled={uploading}
+                onChange={(e) => {
+                  const f = e.target.files?.[0]
+                  if (f) void uploadHero(f)
+                  e.target.value = ''
+                }}
+              />
+            </label>
+            {heroUrl && (
+              <button type="button" onClick={() => setHeroUrl('')} className="text-sm text-red-600 hover:underline">
+                Remove
+              </button>
+            )}
+          </div>
+          {uploadError && <p className="mb-1 text-xs text-red-600">{uploadError}</p>}
           <input
             name="hero_image_url"
             type="url"
-            defaultValue={post?.hero_image_url ?? ''}
+            value={heroUrl}
+            onChange={(e) => setHeroUrl(e.target.value)}
+            placeholder="…or paste an image URL"
             className="w-full rounded-xl border border-brand-line px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent/30"
           />
         </div>
