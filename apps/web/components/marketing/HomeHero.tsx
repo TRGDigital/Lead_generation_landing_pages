@@ -6,9 +6,29 @@ import Image from 'next/image'
 
 const PHRASES = ['win more enquiries.', 'stand out online.', 'build better software.']
 
-function Frame({ src, alt, url, w, h, className = '' }: { src: string; alt: string; url: string; w: number; h: number; className?: string }) {
+// A single browser-framed screenshot of real work.
+function Frame({
+  src,
+  alt,
+  url,
+  w,
+  h,
+  className = '',
+  style,
+}: {
+  src: string
+  alt: string
+  url: string
+  w: number
+  h: number
+  className?: string
+  style?: React.CSSProperties
+}) {
   return (
-    <div className={`overflow-hidden rounded-xl border border-brand-line bg-white shadow-card ${className}`}>
+    <div
+      className={`overflow-hidden rounded-xl border border-brand-line bg-white shadow-card ${className}`}
+      style={style}
+    >
       <div className="flex items-center gap-1.5 border-b border-brand-line bg-brand-bg-warm px-3 py-2">
         <span className="h-2 w-2 rounded-full bg-red-400" />
         <span className="h-2 w-2 rounded-full bg-amber-300" />
@@ -20,17 +40,39 @@ function Frame({ src, alt, url, w, h, className = '' }: { src: string; alt: stri
   )
 }
 
-function Mockups() {
+// "Show your work" — a floating collage of the real sites + products TRG builds.
+function WorkShowcase() {
   return (
-    <div className="relative w-full max-w-2xl px-3">
-      <Frame src="/mockups/carestream.jpg" alt="The CareStream homepage" url="carestreamai.com" w={1320} h={940} />
+    <div className="relative mx-auto h-[440px] w-full max-w-xl">
+      {/* Back: CareStream product */}
+      <Frame
+        src="/mockups/carestream.jpg"
+        alt="CareStream — software we build for care"
+        url="carestreamai.com"
+        w={1320}
+        h={940}
+        className="absolute left-0 top-2 w-[58%] -rotate-3"
+        style={{ animation: 'floaty 7s ease-in-out infinite' }}
+      />
+      {/* Front-right: a live lead-gen landing page we run */}
+      <Frame
+        src="/mockups/haywards-landing.png"
+        alt="A care home landing page we run to generate enquiries"
+        url="careassura.com"
+        w={1280}
+        h={1066}
+        className="absolute right-0 top-0 w-[52%] rotate-2"
+        style={{ animation: 'floaty 6s ease-in-out infinite', animationDelay: '0.6s' }}
+      />
+      {/* Front-centre: CareAssura directory */}
       <Frame
         src="/mockups/careassura.jpg"
-        alt="The CareAssura homepage"
+        alt="CareAssura — a care home directory we built"
         url="careassura.co.uk"
         w={1320}
         h={895}
-        className="absolute -bottom-10 right-0 w-[72%]"
+        className="absolute bottom-0 left-1/2 w-[60%] -translate-x-1/2 rotate-1"
+        style={{ animation: 'floaty 8s ease-in-out infinite', animationDelay: '1.1s' }}
       />
     </div>
   )
@@ -47,17 +89,16 @@ export function HomeHero() {
     return () => { clearTimeout(t1); clearTimeout(t2) }
   }, [i])
 
-  const software = i === 2
-
   return (
     <section className="relative overflow-hidden">
-      {/* Right visual — resident photo, crossfading to product mockups on "build better software" */}
-      <div className="absolute inset-y-0 right-0 hidden w-[49%] lg:block">
-        <div className={`absolute inset-0 transition-opacity duration-700 ${software ? 'opacity-0' : 'opacity-100'}`}>
-          <Image src="/hero-resident.jpg" alt="A care home resident relaxing in her room" fill priority sizes="46vw" className="object-cover" />
-        </div>
-        <div className={`absolute inset-0 flex items-center justify-center bg-brand-bg-warm transition-opacity duration-700 ${software ? 'opacity-100' : 'opacity-0'}`}>
-          <Mockups />
+      {/* Right visual — a floating showcase of the real work we ship */}
+      <div className="absolute inset-y-0 right-0 hidden w-[52%] items-center bg-brand-bg-warm lg:flex">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.04), transparent 70%)' }}
+        />
+        <div className="w-full px-8">
+          <WorkShowcase />
         </div>
         <div className="absolute inset-y-0 left-0 z-10 w-28 bg-gradient-to-r from-brand-bg to-transparent" />
       </div>
@@ -103,13 +144,9 @@ export function HomeHero() {
 
       {/* Mobile visual */}
       <div className="px-6 pb-12 lg:hidden">
-        {software ? (
-          <div className="flex justify-center rounded-2xl bg-brand-bg-warm py-10"><Mockups /></div>
-        ) : (
-          <div className="relative h-64 w-full overflow-hidden rounded-2xl sm:h-80">
-            <Image src="/hero-resident.jpg" alt="A care home resident relaxing in her room" fill priority sizes="100vw" className="object-cover" />
-          </div>
-        )}
+        <div className="rounded-2xl bg-brand-bg-warm py-10">
+          <WorkShowcase />
+        </div>
       </div>
     </section>
   )
