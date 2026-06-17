@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Megaphone, Globe, Code2, ArrowRight, Check } from 'lucide-react'
 import { HomeHero } from '@/components/marketing/HomeHero'
+import { ShowcaseMarquee } from '@/components/marketing/ShowcaseMarquee'
 import { TechStrip } from '@/components/marketing/TechStrip'
 import { StatBand } from '@/components/marketing/StatBand'
 import { CaseStudies } from '@/components/marketing/CaseStudies'
@@ -83,6 +84,8 @@ export default async function HomePage() {
       <HomeHero />
 
       <TechStrip />
+
+      <ShowcaseMarquee />
 
       {/* ── Services ──────────────────────────────────────────────────── */}
       <section className="px-6 py-20">

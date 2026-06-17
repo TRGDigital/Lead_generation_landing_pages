@@ -126,16 +126,11 @@ export function HomeHero() {
             build your website, and develop the software that sets you apart, all under one roof.
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/contact"
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-accent px-8 text-base font-semibold text-brand-ink shadow-soft transition-all hover:bg-brand-ink hover:text-white hover:shadow-card"
-            >
+            <Link href="/contact" className="btn-cta">
               Book a free demo
+              <span className="btn-arrow" aria-hidden>→</span>
             </Link>
-            <Link
-              href="/about"
-              className="inline-flex h-12 items-center justify-center rounded-xl border border-brand-line px-8 text-base font-medium text-brand-ink-soft transition-colors hover:border-brand-ink hover:text-brand-ink"
-            >
+            <Link href="/about" className="btn-cta-outline">
               What we do
             </Link>
           </div>

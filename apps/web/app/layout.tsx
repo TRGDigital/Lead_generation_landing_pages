@@ -1,20 +1,15 @@
 import type { Metadata } from 'next'
-import { Fraunces, Lora, Manrope } from 'next/font/google'
+import { Bricolage_Grotesque, Manrope } from 'next/font/google'
 import CookieBanner from '@/components/CookieBanner'
 import Analytics from '@/components/Analytics'
 import { Toaster } from '@/components/ui/toaster'
 import './globals.css'
 
-const fraunces = Fraunces({
+// Display: Bricolage Grotesque — a characterful modern grotesque for a bold,
+// distinctive, agency feel (replaces the serif Fraunces). Body: Manrope (sans).
+const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
-  variable: '--font-fraunces',
-  display: 'swap',
-  axes: ['SOFT', 'WONK', 'opsz'],
-})
-
-const lora = Lora({
-  subsets: ['latin'],
-  variable: '--font-lora',
+  variable: '--font-bricolage',
   display: 'swap',
 })
 
@@ -37,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${lora.variable} ${manrope.variable}`}
+      className={`${bricolage.variable} ${manrope.variable}`}
     >
       <body className="min-h-screen bg-background text-foreground antialiased">
         {children}

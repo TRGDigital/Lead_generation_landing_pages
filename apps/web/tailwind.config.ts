@@ -13,8 +13,8 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ['var(--font-manrope)', ...fontFamily.sans],
-        display: ['var(--font-fraunces)', ...fontFamily.serif],
-        body: ['var(--font-lora)', ...fontFamily.serif],
+        display: ['var(--font-bricolage)', ...fontFamily.sans],
+        body: ['var(--font-manrope)', ...fontFamily.sans],
       },
       colors: {
         // shadcn/ui CSS variable tokens

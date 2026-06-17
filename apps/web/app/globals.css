@@ -54,3 +54,40 @@
 @media (prefers-reduced-motion: reduce) {
   @keyframes floaty { 0%, 100% { transform: none; } }
 }
+
+/* Infinite horizontal marquee for the work showcase (track holds two copies). */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 60s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+}
+
+/* Unique CTA buttons — bold, with a sliding arrow + colour-flip on hover. */
+@layer components {
+  .btn-cta {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-accent px-7 text-base font-semibold text-brand-ink shadow-soft transition-all hover:-translate-y-0.5 hover:bg-brand-ink hover:text-white hover:shadow-card;
+  }
+  .btn-cta-outline {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-brand-line px-7 text-base font-medium text-brand-ink-soft transition-all hover:-translate-y-0.5 hover:border-brand-ink hover:text-brand-ink;
+  }
+}
+.btn-cta .btn-arrow,
+.btn-cta-outline .btn-arrow {
+  transition: transform 0.2s ease;
+}
+.btn-cta:hover .btn-arrow,
+.btn-cta-outline:hover .btn-arrow {
+  transform: translateX(3px);
+}
