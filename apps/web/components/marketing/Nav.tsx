@@ -27,12 +27,12 @@ export default function Nav() {
         {/* Logo */}
         <Link href="/" className="flex items-center" onClick={() => setOpen(false)} aria-label="TRG Digital home">
           <Image
-            src="/trg-digital-logo.png"
+            src="/trg-digital-2025.png"
             alt="TRG Digital"
-            width={138}
-            height={32}
+            width={4167}
+            height={967}
             priority
-            className="h-7 w-auto sm:h-8"
+            className="h-8 w-auto sm:h-9"
           />
         </Link>
 

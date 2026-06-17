@@ -51,7 +51,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 lg:col-span-2">
             <Link href="/" className="inline-flex items-center" aria-label="TRG Digital home">
-              <Image src="/trg-digital-logo.png" alt="TRG Digital" width={138} height={32} className="h-8 w-auto brightness-0 invert" />
+              <Image src="/trg-digital-2025.png" alt="TRG Digital" width={4167} height={967} className="h-9 w-auto brightness-0 invert" />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
               A specialist digital marketing agency for the UK care sector — more enquiries, fewer empty beds.

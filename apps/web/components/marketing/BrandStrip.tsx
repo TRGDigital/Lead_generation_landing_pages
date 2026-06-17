@@ -14,6 +14,7 @@ const CLIENTS = [
   { name: 'Ascot Grange Care Home', src: '/clients/ascot-grange.png' },
   { name: 'Riverwell Beck Care Home', src: '/clients/riverwell-beck.png' },
   { name: 'Ferndale Nursing Home', src: '/clients/ferndale.png' },
+  { name: 'Crossways Residential Care Home', src: '/clients/crossways-residential.png' },
 ]
 
 export function BrandStrip() {

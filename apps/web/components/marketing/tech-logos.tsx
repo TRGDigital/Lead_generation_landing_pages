@@ -109,8 +109,20 @@ export function NextJs() {
   )
 }
 
+export function GoogleCloud() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-full w-full" aria-hidden>
+      <path fill="#EA4335" d="M14.4 8.05 16 6.45l.107-.677A7.2 7.2 0 0 0 4.612 9.2a.86.86 0 0 1 .545.027l3.2-.528s.163-.27.247-.253A4 4 0 0 1 14.4 8.05z" />
+      <path fill="#4285F4" d="M19.07 9.2a7.21 7.21 0 0 0-2.176-3.5L14.64 7.95a4 4 0 0 1 1.467 3.173v.4a2 2 0 0 1 0 4h-4l-.4.4v2.4l.4.387h4a5.2 5.2 0 0 0 2.963-9.51z" />
+      <path fill="#34A853" d="M7.987 19.6H12v-3.2H7.987a1.99 1.99 0 0 1-.823-.18l-.564.173-1.61 1.6-.14.553A5.18 5.18 0 0 0 7.987 19.6z" />
+      <path fill="#FBBC05" d="M7.987 9.2A5.2 5.2 0 0 0 4.85 18.546l2.32-2.32a2 2 0 1 1 2.646-2.647l2.32-2.32A5.19 5.19 0 0 0 7.987 9.2z" />
+    </svg>
+  )
+}
+
 // Icon entries with marks (used by the floating cluster + strip).
 export const TECH = [
+  { name: 'Google Cloud', Icon: GoogleCloud },
   { name: 'Vercel', Icon: Vercel },
   { name: 'GitHub', Icon: GitHub },
   { name: 'Google', Icon: Google },
