@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Star, Burst } from './Decor'
 
 // "A leading digital marketing agency with a creative kick" — a rich, SEO-friendly
 // intro: bold headline, coloured sub-head, multi-paragraph care-sector copy with
@@ -14,6 +15,8 @@ export function AgencyIntro() {
   return (
     <section className="relative overflow-hidden bg-brand-ink px-6 py-24 text-white">
       <div className="pointer-events-none absolute -left-24 top-1/3 h-72 w-72 rounded-full bg-brand-pop/20 blur-3xl" />
+      <Star className="absolute left-5 top-8 h-9 w-9 text-brand-accent" />
+      <Burst className="absolute -bottom-10 -right-8 h-32 w-32 text-brand-pop/30" />
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
         {/* Copy */}
         <div>

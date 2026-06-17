@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Check } from 'lucide-react'
+import { Star, Squiggle } from './Decor'
 
 // "Making sense of a complicated industry" — rich, SEO-friendly two-column section:
 // multi-paragraph care-sector copy with internal links on the left; honest trust
@@ -14,8 +15,10 @@ const BADGES = [
 
 export function ComplicatedIndustry() {
   return (
-    <section className="bg-brand-bg-warm px-6 py-24">
-      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
+    <section className="relative overflow-hidden bg-brand-bg-warm px-6 py-24">
+      <Star className="absolute right-10 top-12 h-12 w-12 rotate-12 text-brand-pop/30" />
+      <Squiggle className="absolute -left-4 bottom-16 hidden h-6 w-52 text-brand-accent lg:block" />
+      <div className="relative mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
         {/* Copy */}
         <div>
           <h2 className="font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-4xl">

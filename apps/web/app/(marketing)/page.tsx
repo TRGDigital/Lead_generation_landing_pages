@@ -15,6 +15,7 @@ import { StartProject } from '@/components/marketing/StartProject'
 import { Testimonials } from '@/components/marketing/Testimonials'
 import { TechStack } from '@/components/marketing/TechStack'
 import { MapSection } from '@/components/marketing/MapSection'
+import { Star, Dots } from '@/components/marketing/Decor'
 import PostCard from '@/components/blog/PostCard'
 import { getPublishedPosts } from '@/lib/blog'
 
@@ -105,6 +106,8 @@ export default async function HomePage() {
               <span className="absolute -top-3.5 left-8 bg-brand-bg px-3 font-display text-sm font-bold uppercase tracking-widest text-brand-pop">
                 Knowledge Hub
               </span>
+              <Star className="absolute -right-4 -top-5 h-10 w-10 rotate-12 text-brand-accent" />
+              <Dots className="absolute -bottom-5 -left-5 h-14 w-14 text-brand-pop/40" />
               <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
                 <h2 className="font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">Insight for the care sector</h2>
                 <Link href="/blog" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-pop hover:text-brand-ink">

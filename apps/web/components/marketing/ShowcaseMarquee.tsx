@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Squiggle } from './Decor'
 
 // An auto-scrolling showcase that tells the whole enquiry journey we build for a
 // client: a desktop site → a mobile site → how it appears on Google → on Bing →
@@ -135,6 +136,7 @@ export function ShowcaseMarquee() {
           A fast site on every device, found across Google and Bing, turning searches into enquiries delivered
           straight to you. Here&apos;s what that looks like.
         </p>
+        <Squiggle className="mt-6 h-5 w-44 text-brand-pop" />
       </div>
 
       <div className="marquee-mask">

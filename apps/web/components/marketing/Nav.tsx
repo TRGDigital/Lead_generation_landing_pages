@@ -118,7 +118,7 @@ export default function Nav() {
             <Phone className="h-4 w-4 text-brand-pop" /> 0207 000 0000
           </a>
           <Link href="/contact" className="btn-pop h-10 px-5 text-xs">
-            Book a demo
+            Contact us
           </Link>
         </div>
 
@@ -187,7 +187,7 @@ export default function Nav() {
               className="block w-full rounded-lg bg-brand-accent px-4 py-2.5 text-center text-sm font-semibold text-brand-ink hover:bg-brand-ink hover:text-white"
               onClick={() => setOpen(false)}
             >
-              Book a demo
+              Contact us
             </Link>
           </div>
         </nav>

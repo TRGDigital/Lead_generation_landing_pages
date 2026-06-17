@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Check } from 'lucide-react'
+import { Star, Dots } from './Decor'
 
 // "We build our own software for care" — richer, alternating two-column product
 // showcases. Proof that TRG doesn't just advise, it ships.
@@ -31,8 +32,10 @@ const PRODUCTS = [
 
 export function OwnProducts() {
   return (
-    <section className="px-6 py-24">
-      <div className="mx-auto max-w-6xl">
+    <section className="relative overflow-hidden px-6 py-24">
+      <Star className="absolute left-10 top-12 hidden h-10 w-10 -rotate-12 text-brand-accent lg:block" />
+      <Dots className="absolute right-10 top-16 hidden h-12 w-12 text-brand-pop/30 lg:block" />
+      <div className="relative mx-auto max-w-6xl">
         <div className="mx-auto mb-14 max-w-2xl text-center">
           <p className="text-xs font-semibold uppercase tracking-wider text-brand-pop">Built by us</p>
           <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
