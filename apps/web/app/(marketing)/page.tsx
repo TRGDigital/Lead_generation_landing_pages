@@ -3,6 +3,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Megaphone, Globe, Code2, ArrowRight, Check } from 'lucide-react'
 import { HomeHero } from '@/components/marketing/HomeHero'
+import { TechStrip } from '@/components/marketing/TechStrip'
+import { StatBand } from '@/components/marketing/StatBand'
+import { CaseStudies } from '@/components/marketing/CaseStudies'
+import { Testimonials } from '@/components/marketing/Testimonials'
+import { AuditForm } from '@/components/marketing/AuditForm'
 import PostCard from '@/components/blog/PostCard'
 import { getPublishedPosts } from '@/lib/blog'
 
@@ -77,6 +82,8 @@ export default async function HomePage() {
 
       <HomeHero />
 
+      <TechStrip />
+
       {/* ── Services ──────────────────────────────────────────────────── */}
       <section className="px-6 py-20">
         <div className="mx-auto max-w-5xl">
@@ -144,6 +151,14 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <StatBand />
+
+      {/* ── Our work (case studies) ───────────────────────────────────── */}
+      <CaseStudies />
+
+      {/* ── Testimonials (renders only when real quotes exist) ────────── */}
+      <Testimonials />
+
       {/* ── Our own products ──────────────────────────────────────────── */}
       <section className="px-6 py-20">
         <div className="mx-auto max-w-5xl">
@@ -176,6 +191,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── Free audit (lead magnet) ──────────────────────────────────── */}
+      <AuditForm />
 
       {/* ── Final CTA ─────────────────────────────────────────────────── */}
       <section className="bg-brand-accent px-6 py-20 text-center">

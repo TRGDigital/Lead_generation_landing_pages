@@ -1,46 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Globe, Search, Target, MessageSquareText, Code2 } from 'lucide-react'
+import { SERVICES } from '@/lib/services'
 
 export const dynamic = 'force-static'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
-
-// The core TRG Digital services — everything that grows a care provider's enquiries,
-// from the website itself to the marketing that fills it and the software behind it.
-const SERVICES = [
-  {
-    icon: Globe,
-    title: 'New website',
-    body: 'Fast, modern, search-optimised sites built around the questions families actually ask — designed to turn visitors into enquiries.',
-    href: '/website-development',
-  },
-  {
-    icon: Search,
-    title: 'Search Engine Optimisation (SEO)',
-    body: 'Get found first. We grow your organic visibility so the right families discover you before your competitors do.',
-    href: '/marketing',
-  },
-  {
-    icon: Target,
-    title: 'PPC advertising',
-    body: 'Targeted Google and social campaigns that put you in front of families actively searching for care — measured on enquiries, not clicks.',
-    href: '/marketing',
-  },
-  {
-    icon: MessageSquareText,
-    title: 'Enquiry generation',
-    body: 'High-converting landing pages and lead capture that fill empty beds with quality, ready-to-act enquiries.',
-    href: '/marketing',
-  },
-  {
-    icon: Code2,
-    title: 'Software development',
-    body: 'Bespoke tools and platforms for the care sector — the same capability behind our own products, CareStream and CareAssura.',
-    href: '/development',
-  },
-] as const
 
 export const metadata: Metadata = {
   title: 'About TRG Digital | A Specialist Care-Sector Agency',
