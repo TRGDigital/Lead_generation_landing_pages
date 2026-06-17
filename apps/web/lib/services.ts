@@ -1,4 +1,4 @@
-import { Globe, Search, Target, MessageSquareText, Code2, type LucideIcon } from 'lucide-react'
+import { Globe, Search, Target, MessageSquareText, Code2, Palette, type LucideIcon } from 'lucide-react'
 
 // The single source of truth for TRG Digital's services — used by the nav mega-menu,
 // the homepage, and the About page so they never drift apart.
@@ -11,6 +11,13 @@ export type Service = {
 }
 
 export const SERVICES: Service[] = [
+  {
+    icon: Palette,
+    title: 'Rebranding',
+    short: 'New logo, identity & website',
+    body: 'A complete rebrand — strategy, logo, full visual identity, guidelines and a redesigned, rebuilt website that families trust.',
+    href: '/rebranding',
+  },
   {
     icon: Globe,
     title: 'New website',
