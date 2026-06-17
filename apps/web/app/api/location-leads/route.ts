@@ -117,10 +117,12 @@ async function handle(req: NextRequest) {
     }).catch(() => {})
   }
 
-  // Auto-distribute to matching buyers (off by default — set AUTO_DISTRIBUTE_LEADS=true
-  // to flip on). Non-blocking so it never delays the form response.
+  // Auto-distribute to matching buyers (set AUTO_DISTRIBUTE_LEADS=true to enable).
+  // Awaited deliberately: on Vercel serverless a background promise kicked off after
+  // the response is frozen and may never complete, so we finish it within the request
+  // (adds ~1–2s to the form response but guarantees the buyer is notified).
   if (process.env.AUTO_DISTRIBUTE_LEADS === 'true') {
-    void (async () => {
+    await (async () => {
       try {
         const buyers = await matchBuyersForLead({
           id: lead.id,

@@ -10,6 +10,7 @@ import {
   TrendingUp,
   Send,
   FileBarChart,
+  ListChecks,
 } from 'lucide-react'
 import AdminNavLink from './AdminNavLink'
 
@@ -20,6 +21,7 @@ const navItems = [
   { href: '/admin/reports', icon: <FileBarChart className="h-4 w-4" />, label: 'Reports' },
   { href: '/admin/care-homes', icon: <Building2 className="h-4 w-4" />, label: 'Care Homes' },
   { href: '/admin/funnel', icon: <BarChart3 className="h-4 w-4" />, label: 'Funnel' },
+  { href: '/admin/quiz', icon: <ListChecks className="h-4 w-4" />, label: 'Care Finder' },
   { href: '/admin/campaigns', icon: <Megaphone className="h-4 w-4" />, label: 'Campaigns' },
   { href: '/admin/economics', icon: <TrendingUp className="h-4 w-4" />, label: 'Economics' },
   { href: '/admin/blog', icon: <BookOpen className="h-4 w-4" />, label: 'Blog' },
