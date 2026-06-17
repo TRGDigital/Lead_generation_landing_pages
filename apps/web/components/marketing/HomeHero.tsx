@@ -42,7 +42,7 @@ function Browser({ shot, h, w }: { shot: Shot; h: string; w: string }) {
 
 function Phone({ shot }: { shot: Shot }) {
   return (
-    <div className="h-[330px] w-[155px] flex-shrink-0 overflow-hidden rounded-[1.6rem] border-4 border-brand-ink bg-brand-ink shadow-card">
+    <div className="h-[400px] w-[188px] flex-shrink-0 overflow-hidden rounded-[1.8rem] border-4 border-brand-ink bg-brand-ink shadow-card">
       <div className="relative h-full w-full overflow-hidden rounded-[1.25rem] bg-white">
         <Image src={shot.src} alt={shot.alt} fill sizes="155px" className="object-cover object-top" />
       </div>
@@ -52,11 +52,11 @@ function Phone({ shot }: { shot: Shot }) {
 
 function Column({ col }: { col: Col }) {
   if (col.kind === 'phone') return <Phone shot={col.shot} />
-  if (col.kind === 'desktop') return <Browser shot={col.shot} w="w-[410px]" h="h-[250px]" />
+  if (col.kind === 'desktop') return <Browser shot={col.shot} w="w-[500px]" h="h-[312px]" />
   return (
-    <div className="flex flex-col gap-4">
-      <Browser shot={col.shots[0]} w="w-[260px]" h="h-[120px]" />
-      <Browser shot={col.shots[1]} w="w-[260px]" h="h-[120px]" />
+    <div className="flex flex-col gap-5">
+      <Browser shot={col.shots[0]} w="w-[320px]" h="h-[170px]" />
+      <Browser shot={col.shots[1]} w="w-[320px]" h="h-[170px]" />
     </div>
   )
 }
@@ -101,7 +101,7 @@ export function HomeHero() {
 
       {/* Text */}
       <div className="relative z-20 mx-auto max-w-6xl px-6">
-        <div className="pb-16 pt-8 lg:w-1/2 lg:pb-28 lg:pr-12 lg:pt-16">
+        <div className="pb-10 pt-8 lg:w-1/2 lg:pb-12 lg:pr-12 lg:pt-14">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">
             Digital marketing agency delivering results for the care sector
           </p>

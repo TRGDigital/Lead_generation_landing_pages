@@ -17,7 +17,7 @@ const CLIENTS = [
 
 export function BrandStrip() {
   return (
-    <section className="overflow-hidden border-b border-brand-line/60 bg-brand-bg py-12">
+    <section className="overflow-hidden border-b border-brand-line/60 bg-brand-bg pb-12 pt-6">
       <p className="px-6 text-center text-xs font-semibold uppercase tracking-widest text-brand-ink-muted">
         Brands that have chosen TRG Digital
       </p>

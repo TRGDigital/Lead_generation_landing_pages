@@ -13,9 +13,9 @@ function Chrome({ url }: { url: string }) {
 }
 
 const Shell = ({ url, children }: { url: string; children: React.ReactNode }) => (
-  <div className="h-[320px] w-[320px] flex-shrink-0 overflow-hidden rounded-xl border border-brand-line bg-white shadow-card">
+  <div className="h-[400px] w-[400px] flex-shrink-0 overflow-hidden rounded-xl border border-brand-line bg-white shadow-card">
     <Chrome url={url} />
-    <div className="p-5">{children}</div>
+    <div className="p-6">{children}</div>
   </div>
 )
 
@@ -61,8 +61,7 @@ export function LighthouseCard() {
   return (
     <Shell url="pagespeed.web.dev">
       <p className="text-xs font-medium text-brand-ink-muted">Website performance</p>
-      <p className="mt-1 font-display text-xl font-bold text-brand-ink">All green, all fast</p>
-      <div className="mt-6 grid grid-cols-2 gap-y-6">
+      <div className="mt-7 grid grid-cols-2 gap-y-8">
         <Gauge label="Performance" score={98} />
         <Gauge label="Accessibility" score={100} />
         <Gauge label="Best practices" score={96} />
