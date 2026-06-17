@@ -1,4 +1,5 @@
 import { MapPin } from 'lucide-react'
+import { Star } from './Decor'
 
 const ADDRESS = 'Suite Ra01, 195-197 Wood Street, London, E17 3NU'
 
@@ -15,7 +16,8 @@ export function MapSection() {
       />
       <div className="pointer-events-none absolute inset-0">
         <div className="mx-auto flex h-full max-w-6xl items-center px-6">
-          <div className="pointer-events-auto w-full max-w-sm rounded-2xl bg-brand-ink p-7 text-white shadow-card lg:p-9">
+          <div className="pointer-events-auto relative w-full max-w-sm rounded-2xl bg-brand-ink p-7 text-white shadow-card lg:p-9">
+            <Star className="absolute -right-6 -top-7 h-14 w-14 rotate-12 text-brand-accent" />
             <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">Find us</p>
             <h2 className="mt-3 font-display text-3xl font-bold uppercase tracking-tight">Where we are</h2>
             <p className="mt-4 flex items-start gap-3 text-white/80">

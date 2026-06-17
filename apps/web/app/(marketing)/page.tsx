@@ -100,8 +100,9 @@ export default async function HomePage() {
 
       {/* ── Knowledge Hub ─────────────────────────────────────────────── */}
       {latest.length > 0 && (
-        <section className="bg-brand-bg px-6 py-24">
-          <div className="mx-auto max-w-6xl">
+        <section className="relative overflow-hidden bg-brand-bg px-6 py-24">
+          <Star className="absolute left-6 top-12 hidden h-20 w-20 -rotate-12 text-brand-accent lg:block" />
+          <div className="relative mx-auto max-w-6xl">
             <div className="relative rounded-3xl border-2 border-brand-pop/30 p-6 sm:p-10">
               <span className="absolute -top-3.5 left-8 bg-brand-bg px-3 font-display text-sm font-bold uppercase tracking-widest text-brand-pop">
                 Knowledge Hub

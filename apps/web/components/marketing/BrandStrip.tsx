@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { Star } from './Decor'
 
 // "Brands that have chosen TRG Digital" — a horizontal auto-scrolling logo strip.
 // The supplied logos have a cream paper background; placing them on a matching cream
@@ -17,8 +18,10 @@ const CLIENTS = [
 
 export function BrandStrip() {
   return (
-    <section className="overflow-hidden border-b border-brand-line/60 bg-brand-bg pb-12 pt-6">
-      <p className="px-6 text-center text-xs font-semibold uppercase tracking-widest text-brand-ink-muted">
+    <section className="relative overflow-hidden border-b border-brand-line/60 bg-brand-bg pb-12 pt-6">
+      <Star className="absolute -left-4 top-2 hidden h-16 w-16 -rotate-12 text-brand-pop/70 lg:block" />
+      <Star className="absolute -right-4 bottom-2 hidden h-16 w-16 rotate-12 text-brand-accent lg:block" />
+      <p className="relative px-6 text-center text-xs font-semibold uppercase tracking-widest text-brand-ink-muted">
         Brands that have chosen TRG Digital
       </p>
       <div className="marquee-mask mt-8">

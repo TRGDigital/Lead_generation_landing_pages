@@ -110,6 +110,7 @@ export function HomeHero() {
       {/* Fade the frames out as they reach the headline on the left */}
       <div className="absolute inset-y-0 left-0 z-10 hidden w-[58%] bg-gradient-to-r from-brand-bg from-45% via-brand-bg/85 to-transparent lg:block" />
       <Star className="absolute bottom-8 left-2 z-[11] hidden h-20 w-20 text-brand-accent lg:block" />
+      <Star className="absolute right-1/3 top-10 z-[11] hidden h-14 w-14 rotate-12 text-brand-pop/70 lg:block" />
 
       {/* Text */}
       <div className="relative z-20 mx-auto max-w-6xl px-6">
