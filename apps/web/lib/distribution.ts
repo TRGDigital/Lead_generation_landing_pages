@@ -94,9 +94,9 @@ function leadEmailHtml(lead: DistLead, buyer: Buyer, finder: Array<{ question: s
   return `<div style="margin:0;padding:24px 12px;background:#f4f4f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
   <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #ececf1">
-    <tr><td style="${grad};padding:24px 28px" align="center">
-      <div style="font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:700;letter-spacing:-0.01em;color:#ffffff">CareAssura</div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.9);margin-top:3px;letter-spacing:0.02em">New care enquiry for you</div>
+    <tr><td style="${grad};padding:22px 28px" align="center">
+      <img src="https://lead-generation-landing-pages.vercel.app/careassura-logo.png" alt="CareAssura" width="168" style="display:block;margin:0 auto 4px;width:168px;max-width:168px;height:auto" />
+      <div style="font-size:12px;color:rgba(255,255,255,0.92);margin-top:2px;letter-spacing:0.02em">New care enquiry for you</div>
     </td></tr>
     <tr><td style="padding:28px">
       <h1 style="margin:0 0 6px;font-size:20px;color:#15151a">New enquiry${lead.area ? ` in ${escapeHtml(lead.area)}` : ''}</h1>

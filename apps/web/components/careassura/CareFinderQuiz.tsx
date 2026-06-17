@@ -152,12 +152,14 @@ export function CareFinderQuiz({
   }
 
   // Enrich the captured lead with the answers gathered after contact (best-effort).
-  async function enrich(allAnswers: Record<string, any>) {
+  // On completion (completed=true) the server distributes the lead to buyers with
+  // the FULL answer set.
+  async function enrich(allAnswers: Record<string, any>, completed = false) {
     if (!leadId) return
     try {
       await fetch('/api/location-leads/enrich', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ leadId, answers: allAnswers }),
+        body: JSON.stringify({ leadId, answers: allAnswers, completed }),
       })
     } catch { /* best-effort */ }
   }
@@ -169,7 +171,7 @@ export function CareFinderQuiz({
   }
 
   function finish() {
-    if (leadId) void enrich(answers)
+    if (leadId) void enrich(answers, true)
     setDone(true)
   }
 

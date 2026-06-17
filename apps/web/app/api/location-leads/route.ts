@@ -3,7 +3,6 @@ import { createServiceClient } from '@/lib/supabase/server'
 import { LocationLeadSchema } from '@lib/schemas'
 import { sendTemplateEmail } from '@lib/sendgrid'
 import { checkRateLimit, checkIdempotency, setIdempotency } from '@/lib/rate-limit'
-import { matchBuyersForLead, distributeLead } from '@/lib/distribution'
 import { careTypeLabel } from '@/lib/care-finder'
 
 // CareAssura location landing pages capture leads that are NOT yet tied to a
@@ -117,30 +116,10 @@ async function handle(req: NextRequest) {
     }).catch(() => {})
   }
 
-  // Auto-distribute to matching buyers (set AUTO_DISTRIBUTE_LEADS=true to enable).
-  // Awaited deliberately: on Vercel serverless a background promise kicked off after
-  // the response is frozen and may never complete, so we finish it within the request
-  // (adds ~1–2s to the form response but guarantees the buyer is notified).
-  if (process.env.AUTO_DISTRIBUTE_LEADS === 'true') {
-    await (async () => {
-      try {
-        const buyers = await matchBuyersForLead({
-          id: lead.id,
-          full_name: data.fullName,
-          email: data.email,
-          phone: data.phone,
-          area: loc.area_name,
-          care_type: careTypeLabel((data.answers as Record<string, unknown> | undefined)?.care_type as string | undefined),
-          care_for: data.careFor ?? null,
-          move_in_timeframe: data.moveInTimeframe ?? null,
-          message: data.message ?? null,
-        })
-        if (buyers.length) await distributeLead(lead.id, buyers.map((b) => b.id), null)
-      } catch (e) {
-        console.error('[location-leads] auto-distribute failed:', e)
-      }
-    })()
-  }
+  // NOTE: auto-distribution does NOT happen here. The lead is created at the
+  // mid-funnel contact step with only partial answers; distributing now would email
+  // buyers an incomplete enquiry. Distribution fires on quiz COMPLETION in
+  // /api/location-leads/enrich (completed=true), once all answers are saved.
 
   return NextResponse.json({ success: true, leadId: lead.id })
 }
