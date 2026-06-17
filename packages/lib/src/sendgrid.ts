@@ -4,6 +4,7 @@ export interface SendHtmlEmailOptions {
   subject: string
   html: string
   replyTo?: string
+  customArgs?: Record<string, string> // echoed back by the SendGrid Event Webhook
 }
 
 // Send a one-off HTML email (no SendGrid dynamic template needed). Used to
@@ -27,7 +28,9 @@ export async function sendHtmlEmail(opts: SendHtmlEmailOptions): Promise<void> {
         name: process.env.SENDGRID_FROM_NAME ?? 'CareAssura',
       },
       ...(opts.replyTo ? { reply_to: { email: opts.replyTo } } : {}),
-      personalizations: [{ to: [{ email: opts.to, name: opts.toName }] }],
+      personalizations: [
+        { to: [{ email: opts.to, name: opts.toName }], ...(opts.customArgs ? { custom_args: opts.customArgs } : {}) },
+      ],
       subject: opts.subject,
       content: [{ type: 'text/html', value: opts.html }],
     }),

@@ -7,7 +7,7 @@ import { createServiceClient } from '@/lib/supabase/server'
 export async function POST(req: NextRequest) {
   try {
     const b = (await req.json().catch(() => ({}))) as {
-      sessionId?: string; slug?: string; questionSet?: string; variant?: string
+      sessionId?: string; slug?: string; questionSet?: string; variant?: string; experimentId?: string
       step?: number; total?: number; completed?: boolean; leadId?: string
     }
     const id = String(b?.sessionId ?? '')
@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
         slug: String(b.slug ?? '').slice(0, 120),
         question_set: String(b.questionSet ?? '').slice(0, 40),
         variant: b.variant ? String(b.variant).slice(0, 40) : null,
+        ...(b.experimentId && /^[0-9a-fA-F-]{36}$/.test(b.experimentId) ? { experiment_id: b.experimentId } : {}),
         step_reached: Math.max(0, Math.min(99, Number(b.step) || 0)),
         total_steps: Math.max(0, Math.min(99, Number(b.total) || 0)),
         completed: !!b.completed,

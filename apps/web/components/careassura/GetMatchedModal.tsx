@@ -8,12 +8,16 @@ export function GetMatchedModal({
   locationSlug,
   questions,
   questionSetKey,
+  variantQuestions,
+  experimentId,
   label = 'Get matched',
   className,
 }: {
   locationSlug: string
   questions: QuizQuestion[]
   questionSetKey?: string
+  variantQuestions?: QuizQuestion[] | null
+  experimentId?: string
   areaName?: string
   timeframes?: string[]
   label?: string
@@ -68,7 +72,7 @@ export function GetMatchedModal({
                 <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
               </svg>
             </button>
-            <CareFinderQuiz locationSlug={locationSlug} questions={questions} questionSetKey={questionSetKey} flat />
+            <CareFinderQuiz locationSlug={locationSlug} questions={questions} questionSetKey={questionSetKey} variantQuestions={variantQuestions} experimentId={experimentId} flat />
           </div>
         </div>
       )}

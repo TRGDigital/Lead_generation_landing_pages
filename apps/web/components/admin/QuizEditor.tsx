@@ -45,22 +45,36 @@ export function QuizEditor({ sets }: { sets: SetRow[] }) {
         ))}
       </div>
 
-      {/* key forces a fresh editor (and fresh local state) when switching templates */}
-      <SetEditor key={current.key} set={current} />
+      {/* key forces fresh local state when switching templates */}
+      <QuestionsEditor
+        key={current.key}
+        initial={current.questions}
+        onSave={(qs) => saveQuestionSet(current.key, qs)}
+        savedHint="live on your landing pages"
+      />
     </div>
   )
 }
 
-function SetEditor({ set }: { set: SetRow }) {
+// Reusable wording form for a questions array. Used for the live template wording
+// and (with a different onSave) for an experiment's variant-B wording.
+export function QuestionsEditor({
+  initial,
+  onSave,
+  savedHint,
+}: {
+  initial: QuizQuestion[]
+  onSave: (questions: QuizQuestion[]) => Promise<unknown>
+  savedHint: string
+}) {
   const [questions, setQuestions] = useState<QuizQuestion[]>(() =>
-    // deep clone so edits don't mutate the server payload
-    JSON.parse(JSON.stringify(set.questions)) as QuizQuestion[],
+    JSON.parse(JSON.stringify(initial)) as QuizQuestion[],
   )
   const [pending, startTransition] = useTransition()
   const [saved, setSaved] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const dirty = JSON.stringify(questions) !== JSON.stringify(set.questions)
+  const dirty = JSON.stringify(questions) !== JSON.stringify(initial)
 
   function patchQuestion(idx: number, patch: Partial<QuizQuestion>) {
     setQuestions((prev) => prev.map((q, i) => (i === idx ? { ...q, ...patch } : q)))
@@ -81,7 +95,7 @@ function SetEditor({ set }: { set: SetRow }) {
     setError(null)
     startTransition(async () => {
       try {
-        await saveQuestionSet(set.key, questions)
+        await onSave(questions)
         setSaved(true)
       } catch (e) {
         setError(e instanceof Error ? e.message : 'Save failed')
@@ -91,13 +105,12 @@ function SetEditor({ set }: { set: SetRow }) {
 
   return (
     <div className="space-y-4">
-      {/* sticky save bar */}
       <div className="sticky top-0 z-10 -mx-1 flex items-center justify-between gap-3 rounded-md border bg-background/95 px-4 py-3 backdrop-blur">
         <div className="text-sm text-muted-foreground">
           {dirty ? (
             <span className="font-medium text-amber-600">Unsaved changes</span>
           ) : saved ? (
-            <span className="font-medium text-emerald-600">Saved · live on your landing pages</span>
+            <span className="font-medium text-emerald-600">Saved · {savedHint}</span>
           ) : (
             <span>{questions.length} questions</span>
           )}

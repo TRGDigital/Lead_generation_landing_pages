@@ -10,18 +10,24 @@ export function CareFinderQuiz({
   locationSlug,
   questions,
   questionSetKey,
-  variant,
+  variantQuestions,
+  experimentId,
   anchorId,
   flat = false,
 }: {
   locationSlug: string
   questions: QuizQuestion[]
   questionSetKey?: string
-  variant?: string
+  variantQuestions?: QuizQuestion[] | null
+  experimentId?: string
   anchorId?: string
   flat?: boolean
 }) {
   const [step, setStep] = useState(0)
+  // A/B assignment is client-side so the landing page stays static. First render is
+  // always variant A (deterministic → no hydration mismatch); a B assignment swaps
+  // the wording on mount and is sticky per visitor via localStorage.
+  const [assigned, setAssigned] = useState<'A' | 'B' | null>(null)
   const [answers, setAnswers] = useState<Record<string, any>>({})
   const [contact, setContact] = useState({ fullName: '', email: '', phone: '' })
   const [companyWebsite, setCompanyWebsite] = useState('') // honeypot
@@ -32,9 +38,27 @@ export function CareFinderQuiz({
   const [sessionId] = useState(() => (typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : ''))
   const maxStep = useRef(0)
 
-  const total = questions.length
-  const q = questions[step] as QuizQuestion   // bounded by step; runtime-guarded below
+  const hasExperiment = !!experimentId && !!variantQuestions && variantQuestions.length > 0
+  const activeQuestions = assigned === 'B' && hasExperiment ? (variantQuestions as QuizQuestion[]) : questions
+  const total = activeQuestions.length
+  const q = activeQuestions[step] as QuizQuestion   // bounded by step; runtime-guarded below
   const isLast = step === total - 1
+
+  // Assign the visitor to A or B on mount (sticky per experiment).
+  useEffect(() => {
+    if (!hasExperiment) { setAssigned('A'); return }
+    const key = `cf-ab:${experimentId}`
+    let v: 'A' | 'B'
+    try {
+      const saved = window.localStorage.getItem(key)
+      v = saved === 'A' || saved === 'B' ? saved : Math.random() < 0.5 ? 'A' : 'B'
+      window.localStorage.setItem(key, v)
+    } catch {
+      v = Math.random() < 0.5 ? 'A' : 'B'
+    }
+    setAssigned(v)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [experimentId])
 
   const utm = useMemo(() => {
     if (typeof window === 'undefined') return {} as Record<string, string | undefined>
@@ -48,16 +72,16 @@ export function CareFinderQuiz({
 
   // Funnel tracking: record the furthest step reached + completion (best-effort).
   useEffect(() => {
-    if (!sessionId) return
+    if (!sessionId || assigned === null) return
     maxStep.current = Math.max(maxStep.current, step)
     fetch('/api/quiz-track', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sessionId, slug: locationSlug, questionSet: questionSetKey, variant, step: maxStep.current, total, completed: done, leadId }),
+      body: JSON.stringify({ sessionId, slug: locationSlug, questionSet: questionSetKey, variant: assigned, experimentId, step: maxStep.current, total, completed: done, leadId }),
     }).catch(() => {})
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [step, done, leadId])
+  }, [step, done, leadId, assigned])
 
-  if (!questions.length) return null // no questions configured
+  if (!activeQuestions.length) return null // no questions configured
 
   function title(question: QuizQuestion): string {
     if (question.titleIf && answers[question.titleIf.questionId] === question.titleIf.equals) return question.titleIf.title

@@ -19,6 +19,14 @@ export type QuizQuestion = {
 
 export type QuestionSet = { key: string; name: string; questions: QuizQuestion[] }
 
+export type QuizExperiment = {
+  id: string
+  question_set: string
+  name: string
+  status: string
+  variant_b: QuizQuestion[]
+}
+
 // Map a quiz care_type answer → a buyer-matchable care_type string (buyers tick
 // Residential / Nursing / Dementia; the others fold into the nearest).
 const CARE_TYPE_LABEL: Record<string, string> = {
@@ -42,6 +50,18 @@ export async function getQuestionSet(key: string): Promise<QuestionSet | null> {
     .eq('status', 'active')
     .single()
   return (data as QuestionSet | null) ?? null
+}
+
+// The running A/B experiment for a template (variant B wording), if any.
+export async function getRunningExperiment(key: string): Promise<QuizExperiment | null> {
+  const db = createServiceClient() as unknown as any
+  const { data } = await db
+    .from('quiz_experiments')
+    .select('id, question_set, name, status, variant_b')
+    .eq('question_set', key)
+    .eq('status', 'running')
+    .maybeSingle()
+  return (data as QuizExperiment | null) ?? null
 }
 
 // Pretty-print the captured answers for the buyer email / admin (label-resolved,
