@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { Check, ArrowRight, ShieldCheck, Users, Target } from 'lucide-react'
 import { SERVICES } from '@/lib/services'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { FloatingTechIcons } from '@/components/marketing/FloatingTechIcons'
 
 export const dynamic = 'force-static'
 
@@ -92,8 +93,9 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Visual — care, paired with the software we build */}
+          {/* Visual — care, paired with the software we build + floating tech logos */}
           <div className="relative">
+            <FloatingTechIcons />
             <div className="overflow-hidden rounded-2xl shadow-card">
               <Image
                 src="/hero-resident.jpg"
