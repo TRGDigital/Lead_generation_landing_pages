@@ -106,32 +106,64 @@ export default function WebsiteDevelopmentPage() {
         </div>
       </section>
 
-      {/* ── Rich intro (SEO) ──────────────────────────────────────────── */}
+      {/* ── Rich intro (SEO) — copy left, key points right ────────────── */}
       <section className="relative overflow-hidden bg-brand-bg-warm px-6 py-24">
         <Dots className="absolute right-10 top-12 hidden h-20 w-20 text-brand-pop/40 lg:block" />
-        <div className="mx-auto max-w-3xl">
-          <h2 className="font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
-            Your hardest-working salesperson
-          </h2>
-          <p className="mt-4 font-display text-lg font-semibold text-brand-pop">Care websites designed to fill beds.</p>
-          <div className="mt-6 space-y-4 text-base leading-relaxed text-brand-ink-soft">
-            <p>
-              For most families, choosing care starts with a search and ends on a website. If your site is slow,
-              hard to use on a phone, or doesn&apos;t answer the questions they&apos;re really asking, they move on
-              to a competitor — often without ever picking up the phone. We build sites that do the opposite: load
-              fast, look trustworthy, and make enquiring effortless.
-            </p>
-            <p>
-              Every TRG website is built for the care sector specifically. We structure pages around real search
-              behaviour for{' '}
-              <Link href="/marketing" className="font-semibold text-brand-pop underline-offset-2 hover:underline">local care searches</Link>,
-              write content that speaks to CQC ratings, funding routes and care types, and design enquiry journeys
-              that turn quiet visits into booked tours. When you&apos;re ready to scale, the site plugs straight into
-              our{' '}
-              <Link href="/marketing" className="font-semibold text-brand-pop underline-offset-2 hover:underline">paid and organic marketing</Link>{' '}
-              and, where you need something bespoke, our{' '}
-              <Link href="/development" className="font-semibold text-brand-pop underline-offset-2 hover:underline">custom software</Link>.
-            </p>
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
+          {/* Copy */}
+          <div>
+            <h2 className="font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-4xl">
+              Your hardest-working salesperson
+            </h2>
+            <p className="mt-4 font-display text-lg font-semibold text-brand-pop">Care websites designed to fill beds.</p>
+            <div className="mt-6 space-y-4 text-base leading-relaxed text-brand-ink-soft">
+              <p>
+                For most families, choosing care starts with a search and ends on a website. If your site is slow,
+                hard to use on a phone, or doesn&apos;t answer the questions they&apos;re really asking, they move
+                on to a competitor — often without ever picking up the phone. We build sites that do the opposite:
+                load fast, look trustworthy, and make enquiring effortless.
+              </p>
+              <p>
+                Every TRG website is built for the care sector specifically. We structure pages around real search
+                behaviour for{' '}
+                <Link href="/marketing" className="font-semibold text-brand-pop underline-offset-2 hover:underline">local care searches</Link>,
+                write content that speaks to CQC ratings, funding routes and care types, and design enquiry
+                journeys that turn quiet visits into booked tours. When you&apos;re ready to scale, the site plugs
+                straight into our{' '}
+                <Link href="/marketing" className="font-semibold text-brand-pop underline-offset-2 hover:underline">paid and organic marketing</Link>{' '}
+                and, where you need something bespoke, our{' '}
+                <Link href="/development" className="font-semibold text-brand-pop underline-offset-2 hover:underline">custom software</Link>.
+              </p>
+            </div>
+          </div>
+
+          {/* Key points + CTA */}
+          <div className="space-y-3">
+            {[
+              'Fully responsive — flawless on mobile, tablet & desktop',
+              'Search-engine optimised (SEO) from day one',
+              'Compressed, next-gen images for fast loading',
+              'Lightning-fast page-load speed & Core Web Vitals',
+              'Secure HTTPS, accessible & WCAG-friendly',
+              'Conversion-focused enquiry forms & clear CTAs',
+              'Hosted, maintained & analytics built in',
+            ].map((point) => (
+              <div key={point} className="flex items-center gap-4 rounded-xl bg-brand-ink px-5 py-4 text-white">
+                <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-brand-pop">
+                  <Check className="h-4 w-4 text-white" />
+                </span>
+                <span className="font-display text-sm font-semibold uppercase tracking-wide">{point}</span>
+              </div>
+            ))}
+            <div className="rounded-2xl bg-brand-accent p-7">
+              <p className="font-display text-xl font-bold uppercase leading-tight tracking-tight text-brand-ink">
+                Want a website that does all this?
+              </p>
+              <Link href="/contact" className="btn-pop mt-5">
+                Submit a project enquiry
+                <span className="btn-arrow" aria-hidden>→</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
