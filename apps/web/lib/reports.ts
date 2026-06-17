@@ -19,6 +19,9 @@ export type DeliveryRow = {
   price_pennies: number | null
   sent_at: string
   captured_at: string | null
+  delivered_at: string | null
+  opened_at: string | null
+  clicked_at: string | null
 }
 
 export type BuyerStat = {
@@ -38,7 +41,7 @@ export type DistributionReport = {
   utm: { source: string; campaign: string; captured: number }[]
   caps: { name: string; used: number; cap: number | null }[]
   deliveries: DeliveryRow[]
-  kpis: { captured: number; deliveries: number; leadsDelivered: number; undistributed: number; failed: number; revenue: number }
+  kpis: { captured: number; deliveries: number; leadsDelivered: number; undistributed: number; failed: number; revenue: number; delivered: number; opened: number; clicked: number }
 }
 
 const WON = new Set(['converted', 'moved_in'])
@@ -57,7 +60,7 @@ export async function getDistributionReport({ from, to }: ReportRange): Promise<
   const [leadsRes, distRes, buyersRes, monthDistRes] = await Promise.all([
     db.from('leads').select('id, area, created_at, distributed_at, utm_source, utm_campaign').gte('created_at', fromIso).lte('created_at', toIso),
     db.from('lead_distributions')
-      .select('lead_id, buyer_id, status, channel, sent_at, price_pennies, buyers(name), leads(full_name, area, care_type, created_at, status)')
+      .select('lead_id, buyer_id, status, channel, sent_at, price_pennies, delivered_at, opened_at, clicked_at, buyers(name), leads(full_name, area, care_type, created_at, status)')
       .gte('sent_at', fromIso).lte('sent_at', toIso).order('sent_at', { ascending: false }),
     db.from('buyers').select('id, name, monthly_cap'),
     db.from('lead_distributions').select('buyer_id').gte('created_at', monthStart.toISOString()),
@@ -80,6 +83,9 @@ export async function getDistributionReport({ from, to }: ReportRange): Promise<
     price_pennies: d.price_pennies ?? null,
     sent_at: d.sent_at,
     captured_at: d.leads?.created_at ?? null,
+    delivered_at: d.delivered_at ?? null,
+    opened_at: d.opened_at ?? null,
+    clicked_at: d.clicked_at ?? null,
   }))
 
   const day = (iso: string) => iso.slice(0, 10)
@@ -136,6 +142,9 @@ export async function getDistributionReport({ from, to }: ReportRange): Promise<
       undistributed: leads.filter((l) => !l.distributed_at).length,
       failed: deliveries.filter((d) => d.status === 'failed').length,
       revenue: deliveries.reduce((s, d) => s + (d.price_pennies ?? 0), 0),
+      delivered: deliveries.filter((d) => d.delivered_at).length,
+      opened: deliveries.filter((d) => d.opened_at).length,
+      clicked: deliveries.filter((d) => d.clicked_at).length,
     },
   }
 }

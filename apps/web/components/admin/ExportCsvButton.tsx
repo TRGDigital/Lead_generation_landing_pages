@@ -13,6 +13,9 @@ type Row = {
   price_pennies: number | null
   sent_at: string
   captured_at: string | null
+  delivered_at: string | null
+  opened_at: string | null
+  clicked_at: string | null
 }
 
 function csv(v: unknown): string {
@@ -22,7 +25,7 @@ function csv(v: unknown): string {
 
 export default function ExportCsvButton({ rows, filename }: { rows: Row[]; filename: string }) {
   function download() {
-    const headers = ['Lead', 'Area', 'Care type', 'Buyer', 'Channel', 'Delivery status', 'Lead status', 'Price (£)', 'Captured at', 'Delivered at']
+    const headers = ['Lead', 'Area', 'Care type', 'Buyer', 'Channel', 'Delivery status', 'Lead status', 'Price (£)', 'Captured at', 'Sent at', 'Delivered at', 'Opened at', 'Clicked at']
     const lines = [headers.join(',')]
     for (const r of rows) {
       lines.push(
@@ -37,6 +40,9 @@ export default function ExportCsvButton({ rows, filename }: { rows: Row[]; filen
           r.price_pennies != null ? (r.price_pennies / 100).toFixed(2) : '',
           r.captured_at ?? '',
           r.sent_at,
+          r.delivered_at ?? '',
+          r.opened_at ?? '',
+          r.clicked_at ?? '',
         ]
           .map(csv)
           .join(',')

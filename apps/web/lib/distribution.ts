@@ -155,6 +155,7 @@ export async function distributeLead(
           subject: `New CareAssura lead${lead.area ? ` — ${lead.area}` : ''}${lead.care_type ? ` (${lead.care_type})` : ''}`,
           html: leadEmailHtml(lead, buyer, finder),
           replyTo: lead.email,
+          customArgs: { lead_id: leadId, buyer_id: buyer.id },
         })
         channels.push('email')
       }

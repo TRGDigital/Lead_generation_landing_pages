@@ -52,6 +52,9 @@ export default async function ReportsPage({ searchParams }: { searchParams: { fr
         <Card label="Not yet sent" value={r.kpis.undistributed} accent={r.kpis.undistributed ? 'text-amber-600' : ''} />
         <Card label="Failed sends" value={r.kpis.failed} accent={r.kpis.failed ? 'text-destructive' : ''} />
         <Card label="Revenue" value={money(r.kpis.revenue)} />
+        <Card label="Delivered" value={r.kpis.delivered} accent="text-green-600" />
+        <Card label="Opened" value={r.kpis.opened} />
+        <Card label="Clicked" value={r.kpis.clicked} />
       </div>
 
       {/* Daily chart */}
@@ -79,7 +82,10 @@ export default async function ReportsPage({ searchParams }: { searchParams: { fr
                   <th className="p-3">Buyer</th>
                   <th className="p-3">Channel</th>
                   <th className="p-3">Status</th>
-                  <th className="p-3 whitespace-nowrap">Delivered at</th>
+                  <th className="p-3 whitespace-nowrap">Sent at</th>
+                  <th className="p-3 text-center">Delivered</th>
+                  <th className="p-3 text-center">Opened</th>
+                  <th className="p-3 text-center">Clicked</th>
                 </tr>
               </thead>
               <tbody className="divide-y">
@@ -92,6 +98,9 @@ export default async function ReportsPage({ searchParams }: { searchParams: { fr
                     <td className="p-3 text-muted-foreground">{d.channel}</td>
                     <td className="p-3"><Badge variant={d.status === 'failed' ? 'destructive' : 'secondary'}>{d.status}</Badge></td>
                     <td className="p-3 whitespace-nowrap text-muted-foreground">{fmtDateTime(d.sent_at)}</td>
+                    <td className="p-3 text-center" title={d.delivered_at ? fmtDateTime(d.delivered_at) : ''}>{d.delivered_at ? <span className="text-green-600">✓</span> : <span className="text-muted-foreground">—</span>}</td>
+                    <td className="p-3 text-center" title={d.opened_at ? fmtDateTime(d.opened_at) : ''}>{d.opened_at ? <span className="text-green-600">✓</span> : <span className="text-muted-foreground">—</span>}</td>
+                    <td className="p-3 text-center" title={d.clicked_at ? fmtDateTime(d.clicked_at) : ''}>{d.clicked_at ? <span className="text-green-600">✓</span> : <span className="text-muted-foreground">—</span>}</td>
                   </tr>
                 ))}
               </tbody>
