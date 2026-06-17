@@ -30,6 +30,7 @@ export function CareFinderQuiz({
   const [assigned, setAssigned] = useState<'A' | 'B' | null>(null)
   const [answers, setAnswers] = useState<Record<string, any>>({})
   const [contact, setContact] = useState({ fullName: '', email: '', phone: '' })
+  const [consent, setConsent] = useState(false)
   const [companyWebsite, setCompanyWebsite] = useState('') // honeypot
   const [leadId, setLeadId] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
@@ -129,13 +130,14 @@ export function CareFinderQuiz({
     if (!contact.fullName.trim()) return setError('Please enter your name.')
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(contact.email.trim())) return setError('Please enter a valid email.')
     if (contact.phone.trim().length < 7) return setError('Please enter a phone number.')
+    if (!consent) return setError('Please tick the box to agree to be contacted.')
     setSubmitting(true)
     try {
       const res = await fetch('/api/location-leads', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           locationSlug, fullName: contact.fullName.trim(), email: contact.email.trim(), phone: contact.phone.trim(),
-          answers, companyWebsite,
+          answers, companyWebsite, consent,
           idempotencyKey: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : undefined,
           ...utm,
         }),
@@ -269,6 +271,10 @@ export function CareFinderQuiz({
             <input value={contact.phone} onChange={(e) => setContact((c) => ({ ...c, phone: e.target.value }))} type="tel" placeholder="Phone" autoComplete="tel"
               className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm focus:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-500/20" />
             <input value={companyWebsite} onChange={(e) => setCompanyWebsite(e.target.value)} tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
+            <label className="flex items-start gap-2.5 text-left text-xs text-slate-600">
+              <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-violet-600 focus:ring-violet-500/30" />
+              <span>I agree to be contacted by local care companies to arrange a visit.</span>
+            </label>
             {error && <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600">{error}</p>}
             <button type="submit" disabled={submitting} className="w-full rounded-full bg-gradient-to-r from-violet-600 to-purple-600 px-6 py-3 text-sm font-semibold text-white disabled:opacity-60">
               {submitting ? 'Finding your matches…' : 'See my matches'}

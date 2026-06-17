@@ -84,6 +84,8 @@ async function handle(req: NextRequest) {
       ip_address: ip,
       user_agent: ua,
       idempotency_key: data.idempotencyKey ?? null,
+      marketing_consent: data.consent ?? false,
+      consent_at: data.consent ? new Date().toISOString() : null,
       lead_source: 'careassura-location',
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any)
