@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { HomeHero } from '@/components/marketing/HomeHero'
 import { BrandStrip } from '@/components/marketing/BrandStrip'
@@ -11,6 +10,7 @@ import { ScrollingBanner } from '@/components/marketing/ScrollingBanner'
 import { ShowcaseMarquee } from '@/components/marketing/ShowcaseMarquee'
 import { ComplicatedIndustry } from '@/components/marketing/ComplicatedIndustry'
 import { ProvenResults } from '@/components/marketing/ProvenResults'
+import { OwnProducts } from '@/components/marketing/OwnProducts'
 import { StartProject } from '@/components/marketing/StartProject'
 import { Testimonials } from '@/components/marketing/Testimonials'
 import { TechStack } from '@/components/marketing/TechStack'
@@ -78,38 +78,7 @@ export default async function HomePage() {
 
       <ProvenResults />
 
-      {/* ── Our own products ──────────────────────────────────────────── */}
-      <section className="px-6 py-20">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-12 max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-wider text-brand-pop">Built by us</p>
-            <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
-              We build our own software for care
-            </h2>
-            <p className="mt-4 text-brand-ink-soft">
-              We do not just talk about custom development, we ship it. Two of our own products are live
-              and used across the sector today.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {[
-              { name: 'CareStreamAI', logo: '/products/carestream-logo.png', logoW: 700, logoH: 210, logoClass: 'h-14', body: 'Policies, training, audits and CQC tools, answered for care staff in over 60 languages, grounded in the provider’s own documents.', href: 'https://carestreamai.com' },
-              { name: 'CareAssura', logo: '/products/careassura-logo.webp', logoW: 364, logoH: 91, logoClass: 'h-14', body: 'A UK care home directory that helps families find, compare and choose the right care with confidence.', href: 'https://careassura.co.uk' },
-            ].map(({ name, logo, logoW, logoH, logoClass, body, href }) => (
-              <div key={name} className="rounded-2xl border border-brand-line bg-white p-8 shadow-soft">
-                <Image src={logo} alt={name} width={logoW} height={logoH} className={`${logoClass} w-auto`} />
-                <p className="mt-4 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
-                <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
-                  <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-brand-pop hover:text-brand-ink">
-                    Visit site <ArrowRight className="h-4 w-4" />
-                  </a>
-                  <Link href="/development" className="text-brand-ink-soft hover:text-brand-ink">Read more</Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <OwnProducts />
 
       <ScrollingBanner />
 
