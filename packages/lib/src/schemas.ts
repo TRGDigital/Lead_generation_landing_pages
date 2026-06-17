@@ -44,6 +44,7 @@ export const LocationLeadSchema = z.object({
   utmContent: z.string().max(200).optional(),
   utmTerm: z.string().max(200).optional(),
   gclid: z.string().max(200).optional(),
+  answers: z.record(z.any()).optional(),   // care-finder quiz answers (keyed by question id)
 })
 export type LocationLeadValues = z.infer<typeof LocationLeadSchema>
 

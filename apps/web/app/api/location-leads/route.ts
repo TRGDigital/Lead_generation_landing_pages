@@ -4,6 +4,7 @@ import { LocationLeadSchema } from '@lib/schemas'
 import { sendTemplateEmail } from '@lib/sendgrid'
 import { checkRateLimit, checkIdempotency, setIdempotency } from '@/lib/rate-limit'
 import { matchBuyersForLead, distributeLead } from '@/lib/distribution'
+import { careTypeLabel } from '@/lib/care-finder'
 
 // CareAssura location landing pages capture leads that are NOT yet tied to a
 // single care home — they land unassigned in /admin/leads, tagged by area, ready
@@ -71,9 +72,10 @@ async function handle(req: NextRequest) {
       email: data.email,
       phone: data.phone,
       care_for: data.careFor ?? null,
-      care_type: data.careType ?? 'Residential care',
+      care_type: careTypeLabel((data.answers as Record<string, unknown> | undefined)?.care_type as string | undefined),
       move_in_timeframe: data.moveInTimeframe ?? null,
       message: data.message ?? null,
+      answers: data.answers ?? {},
       utm_source: data.utmSource ?? null,
       utm_medium: data.utmMedium ?? null,
       utm_campaign: data.utmCampaign ?? null,
@@ -126,7 +128,7 @@ async function handle(req: NextRequest) {
           email: data.email,
           phone: data.phone,
           area: loc.area_name,
-          care_type: data.careType ?? 'Residential care',
+          care_type: careTypeLabel((data.answers as Record<string, unknown> | undefined)?.care_type as string | undefined),
           care_for: data.careFor ?? null,
           move_in_timeframe: data.moveInTimeframe ?? null,
           message: data.message ?? null,

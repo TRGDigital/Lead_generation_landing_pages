@@ -1,16 +1,17 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { LocationLeadForm } from './LocationLeadForm'
+import { CareFinderQuiz } from './CareFinderQuiz'
+import type { QuizQuestion } from '@/lib/care-finder'
 
 export function GetMatchedModal({
   locationSlug,
-  areaName,
-  timeframes,
+  questions,
   label = 'Get matched',
   className,
 }: {
   locationSlug: string
+  questions: QuizQuestion[]
   areaName?: string
   timeframes?: string[]
   label?: string
@@ -65,7 +66,7 @@ export function GetMatchedModal({
                 <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
               </svg>
             </button>
-            <LocationLeadForm locationSlug={locationSlug} areaName={areaName} timeframes={timeframes} flat />
+            <CareFinderQuiz locationSlug={locationSlug} questions={questions} flat />
           </div>
         </div>
       )}

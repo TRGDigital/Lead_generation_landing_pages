@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getLocationPage, getAllLocationSlugs } from '@/lib/location-page'
-import { LocationLeadForm } from '@/components/careassura/LocationLeadForm'
+import { getQuestionSet } from '@/lib/care-finder'
+import { CareFinderQuiz } from '@/components/careassura/CareFinderQuiz'
 import { GetMatchedModal } from '@/components/careassura/GetMatchedModal'
 import { LegalLinks } from '@/components/careassura/LegalLinks'
 
@@ -48,6 +49,10 @@ export default async function LocationLandingPage({ params }: { params: { locati
   const steps = c.howItWorks?.steps ?? []
   const points = c.whyUs?.points ?? []
   const faqs = c.faq ?? []
+
+  // The gamified care-finder quiz (template chosen per page: residential | nursing).
+  const qset = await getQuestionSet(page.question_set || 'residential')
+  const questions = qset?.questions ?? []
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
@@ -114,7 +119,7 @@ export default async function LocationLandingPage({ params }: { params: { locati
             </div>
           </div>
           <div className="lg:pl-4">
-            <LocationLeadForm locationSlug={page.slug} areaName={area} timeframes={c.timeframes} anchorId="enquire" />
+            <CareFinderQuiz locationSlug={page.slug} questions={questions} anchorId="enquire" />
           </div>
         </div>
       </section>
@@ -149,7 +154,7 @@ export default async function LocationLandingPage({ params }: { params: { locati
               ))}
             </div>
             <div className="mt-10 flex justify-center">
-              <GetMatchedModal locationSlug={page.slug} areaName={area} timeframes={c.timeframes} />
+              <GetMatchedModal locationSlug={page.slug} questions={questions} areaName={area} timeframes={c.timeframes} />
             </div>
           </div>
         </section>
@@ -214,7 +219,7 @@ export default async function LocationLandingPage({ params }: { params: { locati
             </div>
           </div>
           <div className="flex justify-center pt-2">
-            <GetMatchedModal locationSlug={page.slug} areaName={area} timeframes={c.timeframes} label="Get matched to local homes" />
+            <GetMatchedModal locationSlug={page.slug} questions={questions} areaName={area} timeframes={c.timeframes} label="Get matched to local homes" />
           </div>
         </div>
       </section>
@@ -233,7 +238,7 @@ export default async function LocationLandingPage({ params }: { params: { locati
               ))}
             </div>
             <div className="mt-10 flex justify-center">
-              <GetMatchedModal locationSlug={page.slug} areaName={area} timeframes={c.timeframes} />
+              <GetMatchedModal locationSlug={page.slug} questions={questions} areaName={area} timeframes={c.timeframes} />
             </div>
           </div>
         </section>
@@ -257,7 +262,7 @@ export default async function LocationLandingPage({ params }: { params: { locati
               ))}
             </div>
             <div className="mt-10 flex justify-center">
-              <GetMatchedModal locationSlug={page.slug} areaName={area} timeframes={c.timeframes} />
+              <GetMatchedModal locationSlug={page.slug} questions={questions} areaName={area} timeframes={c.timeframes} />
             </div>
           </div>
         </section>
