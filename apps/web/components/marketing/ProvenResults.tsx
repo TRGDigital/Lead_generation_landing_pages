@@ -1,80 +1,54 @@
-import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
+import { TrendingUp, BedDouble, TrendingDown, MapPin } from 'lucide-react'
 
 // "Proven results across the care sector".
-// NOTE: the stat tiles use honest, qualitative values for now — swap in the real
-// percentages/figures (e.g. '+140%' enquiries) once client campaign data is in.
-const STATS = [
-  { value: 'More', label: 'qualified enquiries', detail: 'Campaigns tuned to fill beds, not chase clicks.' },
-  { value: 'Fewer', label: 'empty beds', detail: 'Every empty room is lost revenue — we close the gap.' },
-  { value: 'Page 1', label: 'local search visibility', detail: 'Found first when families search in your area.' },
-  { value: 'Instant', label: 'leads to your inbox', detail: 'Enquiries delivered the moment they come in.' },
-]
-
-type Work = { name: string; blurb: string; image?: string; href?: string; status?: 'In build' | 'Live' }
-const WORK: Work[] = [
-  { name: 'Crossways Care Home', blurb: 'A new, search-optimised website built to turn local searches into enquiries and visits.', status: 'In build' },
-  { name: 'Ferndale Nursing Home', blurb: 'A fresh site and enquiry funnel designed to showcase the home and fill available beds.', status: 'In build' },
-  { name: 'CareAssura', blurb: 'A UK care home directory that helps families find, compare and choose the right care.', image: '/mockups/careassura.jpg', href: 'https://careassura.co.uk', status: 'Live' },
-  { name: 'CareStream', blurb: 'An AI policy, training and CQC platform used by care teams in 60+ languages.', image: '/mockups/carestream.jpg', href: 'https://carestreamai.com', status: 'Live' },
+// Framed around the OUTCOMES we're built to drive (honest — no fabricated figures).
+// When real client numbers are in, swap each `value` for the hard stat
+// (e.g. '+140%' enquiries, '92%' occupancy) and drop the "figures coming" note.
+const OUTCOMES = [
+  { icon: TrendingUp, value: 'More enquiries', detail: 'Campaigns tuned to fill beds, not chase clicks.' },
+  { icon: BedDouble, value: 'Higher occupancy', detail: 'Fewer empty rooms, more residents, more revenue.' },
+  { icon: TrendingDown, value: 'Lower cost per enquiry', detail: 'More value from every pound of marketing budget.' },
+  { icon: MapPin, value: 'Stronger local visibility', detail: 'Found first when families search for care nearby.' },
 ]
 
 export function ProvenResults() {
   return (
-    <section className="px-6 py-24">
-      <div className="mx-auto max-w-6xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Results</p>
-          <h2 className="mt-3 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
-            Proven results across the care sector
+    <section className="relative overflow-hidden bg-brand-ink px-6 py-24 text-white">
+      <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brand-pop/20 blur-3xl" />
+      <div className="relative mx-auto max-w-6xl">
+        <div className="max-w-2xl">
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">Proven across the care sector</p>
+          <h2 className="mt-3 font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight sm:text-4xl">
+            We measure success the way you do
           </h2>
+          <p className="mt-4 text-lg leading-relaxed text-white/70">
+            No vanity metrics. Everything we build, run and optimise is judged on the outcomes that actually grow a
+            care business — qualified enquiries in, and empty beds out.
+          </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-3xl bg-brand-pop/20 sm:grid-cols-2 lg:grid-cols-4">
-          {STATS.map(({ value, label, detail }) => (
-            <div key={label} className="bg-brand-pop p-7 text-center text-white">
-              <p className="font-display text-4xl font-bold leading-none sm:text-5xl">{value}</p>
-              <p className="mt-3 text-sm font-semibold uppercase tracking-wide text-white/90">{label}</p>
-              <p className="mt-2 text-xs leading-relaxed text-white/75">{detail}</p>
+        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {OUTCOMES.map(({ icon: Icon, value, detail }) => (
+            <div key={value} className="rounded-2xl border border-white/10 bg-white/5 p-7 transition-colors hover:border-brand-pop/40 hover:bg-white/10">
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-pop">
+                <Icon className="h-6 w-6 text-white" />
+              </span>
+              <p className="mt-5 font-display text-xl font-bold leading-tight text-white">{value}</p>
+              <p className="mt-2 text-sm leading-relaxed text-white/65">{detail}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {WORK.map(({ name, blurb, image, href, status }) => {
-            const card = (
-              <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-brand-line bg-white shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-card">
-                <div className="relative aspect-[16/10] overflow-hidden bg-brand-bg-warm">
-                  {image ? (
-                    <Image src={image} alt={name} fill sizes="(max-width:640px) 100vw, 25vw" className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]" />
-                  ) : (
-                    <div className="flex h-full items-center justify-center">
-                      <span className="font-display text-xl font-semibold text-brand-ink/30">{name.split(' ')[0]}</span>
-                    </div>
-                  )}
-                  {status && (
-                    <span className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[11px] font-semibold ${status === 'Live' ? 'bg-brand-accent text-brand-ink' : 'bg-brand-ink/85 text-white'}`}>
-                      {status}
-                    </span>
-                  )}
-                </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="font-display text-base font-semibold text-brand-ink">{name}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-ink-soft">{blurb}</p>
-                  {href && (
-                    <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-pop">
-                      Visit site <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                    </span>
-                  )}
-                </div>
-              </div>
-            )
-            return href ? (
-              <a key={name} href={href} target="_blank" rel="noopener noreferrer" className="block">{card}</a>
-            ) : (
-              <div key={name}>{card}</div>
-            )
-          })}
+        <div className="mt-10 flex flex-col items-start gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-xl text-sm text-white/50">
+            Live results from our latest care campaigns and websites are landing now — ask us for the most recent
+            figures from real client work.
+          </p>
+          <Link href="#start" className="btn-cta shrink-0">
+            Get the numbers
+            <span className="btn-arrow" aria-hidden>→</span>
+          </Link>
         </div>
       </div>
     </section>
