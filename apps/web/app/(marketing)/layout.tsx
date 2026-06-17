@@ -1,5 +1,6 @@
 import Nav from '@/components/marketing/Nav'
 import Footer from '@/components/marketing/Footer'
+import { FloatingCta } from '@/components/marketing/FloatingCta'
 
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -7,6 +8,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
       <Nav />
       <main className="flex-1">{children}</main>
       <Footer />
+      <FloatingCta />
     </div>
   )
 }

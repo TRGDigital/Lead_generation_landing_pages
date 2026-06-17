@@ -6,37 +6,61 @@ import Image from 'next/image'
 
 const PHRASES = ['win more enquiries.', 'stand out online.', 'build better software.']
 
-type Item = { type: 'desktop' | 'phone'; src: string; alt: string; url?: string }
+type Shot = { src: string; alt: string; url?: string }
+type Col =
+  | { kind: 'desktop'; shot: Shot }
+  | { kind: 'phone'; shot: Shot }
+  | { kind: 'stack'; shots: [Shot, Shot] }
 
-const ITEMS: Item[] = [
-  { type: 'desktop', src: '/mockups/haywards-landing.png', alt: 'A care home website we built', url: 'careassura.com' },
-  { type: 'phone', src: '/mockups/haywards-mobile.png', alt: 'The same site on mobile' },
-  { type: 'desktop', src: '/mockups/careassura.jpg', alt: 'CareAssura', url: 'careassura.co.uk' },
-  { type: 'phone', src: '/mockups/carestream-mobile.png', alt: 'CareStream on mobile' },
-  { type: 'desktop', src: '/mockups/carestream.jpg', alt: 'CareStream', url: 'carestreamai.com' },
+const COLS: Col[] = [
+  { kind: 'desktop', shot: { src: '/mockups/haywards-landing.png', alt: 'A care home website we built', url: 'careassura.com' } },
+  { kind: 'phone', shot: { src: '/mockups/haywards-mobile.png', alt: 'The same site on mobile' } },
+  { kind: 'stack', shots: [
+    { src: '/mockups/careassura.jpg', alt: 'CareAssura', url: 'careassura.co.uk' },
+    { src: '/mockups/carestream.jpg', alt: 'CareStream', url: 'carestreamai.com' },
+  ] },
+  { kind: 'desktop', shot: { src: '/mockups/carestream-desktop.png', alt: 'CareStream platform', url: 'carestreamai.com' } },
+  { kind: 'phone', shot: { src: '/mockups/carestream-mobile.png', alt: 'CareStream on mobile' } },
+  { kind: 'stack', shots: [
+    { src: '/mockups/carestream.jpg', alt: 'CareStream', url: 'carestreamai.com' },
+    { src: '/mockups/haywards-landing.png', alt: 'A care home landing page', url: 'careassura.com' },
+  ] },
+  { kind: 'phone', shot: { src: '/mockups/carestream-pricing-mobile.png', alt: 'CareStream pricing on mobile' } },
 ]
 
-function HeroFrame({ item }: { item: Item }) {
-  if (item.type === 'phone') {
-    return (
-      <div className="h-[330px] w-[156px] flex-shrink-0 overflow-hidden rounded-[1.6rem] border-4 border-brand-ink bg-brand-ink shadow-card">
-        <div className="relative h-full w-full overflow-hidden rounded-[1.25rem] bg-white">
-          <Image src={item.src} alt={item.alt} fill sizes="156px" className="object-cover object-top" />
-        </div>
-      </div>
-    )
-  }
+function Browser({ shot, h, w }: { shot: Shot; h: string; w: string }) {
   return (
-    <div className="w-[420px] flex-shrink-0 overflow-hidden rounded-xl border border-brand-line bg-white shadow-card">
-      <div className="flex items-center gap-1.5 border-b border-brand-line bg-brand-bg-warm px-3 py-2">
-        <span className="h-2 w-2 rounded-full bg-red-400" />
-        <span className="h-2 w-2 rounded-full bg-amber-300" />
-        <span className="h-2 w-2 rounded-full bg-green-400" />
-        <span className="ml-2 truncate rounded bg-white px-2 py-0.5 text-[9px] text-brand-ink-muted">{item.url}</span>
+    <div className={`${w} flex-shrink-0 overflow-hidden rounded-xl border border-brand-line bg-white shadow-card`}>
+      <div className="flex items-center gap-1.5 border-b border-brand-line bg-brand-bg-warm px-3 py-1.5">
+        <span className="h-1.5 w-1.5 rounded-full bg-red-400" />
+        <span className="h-1.5 w-1.5 rounded-full bg-amber-300" />
+        <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
+        <span className="ml-2 truncate rounded bg-white px-2 py-0.5 text-[8px] text-brand-ink-muted">{shot.url}</span>
       </div>
-      <div className="relative h-[260px] w-full">
-        <Image src={item.src} alt={item.alt} fill sizes="420px" className="object-cover object-top" />
+      <div className={`relative ${h} w-full`}>
+        <Image src={shot.src} alt={shot.alt} fill sizes="420px" className="object-cover object-top" />
       </div>
+    </div>
+  )
+}
+
+function Phone({ shot }: { shot: Shot }) {
+  return (
+    <div className="h-[330px] w-[155px] flex-shrink-0 overflow-hidden rounded-[1.6rem] border-4 border-brand-ink bg-brand-ink shadow-card">
+      <div className="relative h-full w-full overflow-hidden rounded-[1.25rem] bg-white">
+        <Image src={shot.src} alt={shot.alt} fill sizes="155px" className="object-cover object-top" />
+      </div>
+    </div>
+  )
+}
+
+function Column({ col }: { col: Col }) {
+  if (col.kind === 'phone') return <Phone shot={col.shot} />
+  if (col.kind === 'desktop') return <Browser shot={col.shot} w="w-[410px]" h="h-[250px]" />
+  return (
+    <div className="flex flex-col gap-4">
+      <Browser shot={col.shots[0]} w="w-[260px]" h="h-[120px]" />
+      <Browser shot={col.shots[1]} w="w-[260px]" h="h-[120px]" />
     </div>
   )
 }
@@ -44,8 +68,8 @@ function HeroFrame({ item }: { item: Item }) {
 function HeroScroller() {
   return (
     <div className="animate-marquee flex w-max items-center gap-6">
-      {[...ITEMS, ...ITEMS].map((item, i) => (
-        <HeroFrame key={i} item={item} />
+      {[...COLS, ...COLS].map((col, i) => (
+        <Column key={i} col={col} />
       ))}
     </div>
   )
@@ -108,8 +132,8 @@ export function HomeHero() {
       {/* Mobile visual — a scrolling band under the text */}
       <div className="marquee-mask pb-12 lg:hidden">
         <div className="animate-marquee flex w-max items-center gap-5 px-6">
-          {[...ITEMS, ...ITEMS].map((item, i) => (
-            <HeroFrame key={i} item={item} />
+          {[...COLS, ...COLS].map((col, i) => (
+            <Column key={i} col={col} />
           ))}
         </div>
       </div>
