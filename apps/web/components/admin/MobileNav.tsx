@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import AdminNavLink from './AdminNavLink'
 import { navItems } from './AdminSidebar'
+import TrgLogo from './TrgLogo'
 
 export default function MobileNav() {
   const [open, setOpen] = useState(false)
@@ -23,8 +24,8 @@ export default function MobileNav() {
         <SheetContent side="left">
           <SheetHeader>
             <SheetTitle asChild>
-              <Link href="/admin" onClick={() => setOpen(false)} className="font-semibold">
-                Lead Gen Admin
+              <Link href="/admin" onClick={() => setOpen(false)}>
+                <TrgLogo />
               </Link>
             </SheetTitle>
           </SheetHeader>
@@ -35,7 +36,7 @@ export default function MobileNav() {
           </nav>
         </SheetContent>
       </Sheet>
-      <span className="ml-3 font-semibold text-foreground">Lead Gen Admin</span>
+      <TrgLogo className="ml-3" />
     </div>
   )
 }

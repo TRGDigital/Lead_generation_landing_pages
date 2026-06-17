@@ -14,6 +14,7 @@ import {
   ListChecks,
 } from 'lucide-react'
 import AdminNavLink from './AdminNavLink'
+import TrgLogo from './TrgLogo'
 
 const navItems = [
   { href: '/admin', icon: <LayoutDashboard className="h-4 w-4" />, label: 'Overview' },
@@ -34,8 +35,8 @@ export default function AdminSidebar() {
   return (
     <aside className="hidden lg:flex lg:flex-col lg:w-60 lg:shrink-0 border-r bg-background">
       <div className="flex h-14 items-center border-b px-6">
-        <Link href="/admin" className="font-semibold text-foreground">
-          Lead Gen Admin
+        <Link href="/admin">
+          <TrgLogo />
         </Link>
       </div>
       <nav className="flex-1 space-y-1 p-4">
