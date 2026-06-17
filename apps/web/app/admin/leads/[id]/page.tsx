@@ -5,6 +5,7 @@ import StatusWorkflow from '@/components/admin/StatusWorkflow'
 import ActivityTimeline from '@/components/admin/ActivityTimeline'
 import DistributePanel from '@/components/admin/DistributePanel'
 import { matchBuyersForLead } from '@/lib/distribution'
+import { getQuestionSet, formatAnswers } from '@/lib/care-finder'
 import type { Tables } from '@db/types'
 
 export const dynamic = 'force-dynamic'
@@ -67,14 +68,22 @@ async function getLeadDetail(id: string) {
     sent_at: r.sent_at as string,
   }))
 
-  return { lead, home, activities, area: (leadAny.area ?? null) as string | null, matches, existing }
+  // Care-finder quiz answers (resolved to labelled Q&A in template order).
+  let finder: Array<{ question: string; answer: string }> = []
+  if (leadAny.answers && typeof leadAny.answers === 'object' && Object.keys(leadAny.answers).length) {
+    const { data: pg } = await (supabase as any).from('location_pages').select('question_set').eq('area_name', leadAny.area).limit(1).maybeSingle()
+    const set = await getQuestionSet((pg?.question_set as string) ?? 'residential')
+    finder = formatAnswers(set, leadAny.answers as Record<string, unknown>)
+  }
+
+  return { lead, home, activities, area: (leadAny.area ?? null) as string | null, matches, existing, finder }
 }
 
 export default async function LeadDetailPage({ params }: { params: { id: string } }) {
   const result = await getLeadDetail(params.id)
   if (!result) notFound()
 
-  const { lead, home, activities, area, matches, existing } = result
+  const { lead, home, activities, area, matches, existing, finder } = result
 
   return (
     <div className="max-w-3xl space-y-8">
@@ -97,6 +106,21 @@ export default async function LeadDetailPage({ params }: { params: { id: string 
       </div>
 
       <Separator />
+
+      {/* Care-finder quiz answers */}
+      {finder.length > 0 && (
+        <section className="space-y-3">
+          <h2 className="font-medium">Care Finder Answers</h2>
+          <dl className="grid grid-cols-1 gap-x-8 gap-y-2 text-sm sm:grid-cols-2">
+            {finder.map((f) => (
+              <div key={f.question} className="flex flex-col">
+                <dt className="text-muted-foreground">{f.question}</dt>
+                <dd className="font-medium">{f.answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
 
       {/* Enquiry details */}
       <section className="space-y-3">

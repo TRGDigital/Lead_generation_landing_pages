@@ -4,6 +4,7 @@
 import { createServiceClient } from '@/lib/supabase/server'
 import { sendHtmlEmail } from '@lib/sendgrid'
 import { sendSms } from '@lib/twilio'
+import { getQuestionSet, formatAnswers } from '@/lib/care-finder'
 
 export type DistLead = {
   id: string
@@ -15,6 +16,7 @@ export type DistLead = {
   care_for: string | null
   move_in_timeframe: string | null
   message: string | null
+  answers?: Record<string, unknown> | null
 }
 
 export type Buyer = {
@@ -75,11 +77,12 @@ export async function matchBuyersForLead(lead: DistLead): Promise<Buyer[]> {
   return eligible
 }
 
-function leadEmailHtml(lead: DistLead, buyer: Buyer): string {
+function leadEmailHtml(lead: DistLead, buyer: Buyer, finder: Array<{ question: string; answer: string }> = []): string {
   const row = (k: string, v?: string | null) =>
     v
       ? `<tr><td style="padding:4px 14px 4px 0;color:#666;vertical-align:top">${k}</td><td style="padding:4px 0;font-weight:600">${escapeHtml(v)}</td></tr>`
       : ''
+  const finderRows = finder.map((f) => row(f.question, f.answer)).join('')
   return `<div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;color:#1a1a1a">
     <h2 style="margin:0 0 4px">New care enquiry${lead.area ? ` — ${escapeHtml(lead.area)}` : ''}</h2>
     <p style="color:#666;margin:0 0 16px">Hi ${escapeHtml(buyer.name)}, a new enquiry has been matched to your area. Please contact the family promptly.</p>
@@ -93,6 +96,7 @@ function leadEmailHtml(lead: DistLead, buyer: Buyer): string {
       ${row('Timeframe', lead.move_in_timeframe)}
       ${row('Message', lead.message)}
     </table>
+    ${finderRows ? `<h3 style="margin:20px 0 6px;font-size:14px">What they told us</h3><table style="border-collapse:collapse;font-size:14px">${finderRows}</table>` : ''}
     <p style="color:#999;font-size:12px;margin-top:18px">Sent via CareAssura lead distribution.</p>
   </div>`
 }
@@ -118,6 +122,16 @@ export async function distributeLead(
   const lead = leadData as DistLead | null
   if (!lead) return []
 
+  // Resolve the care-finder answers into labelled Q&A for the buyer email.
+  let finder: Array<{ question: string; answer: string }> = []
+  try {
+    if (lead.answers && Object.keys(lead.answers).length && lead.area) {
+      const { data: pg } = await db.from('location_pages').select('question_set').eq('area_name', lead.area).limit(1).maybeSingle()
+      const set = await getQuestionSet((pg?.question_set as string) ?? 'residential')
+      finder = formatAnswers(set, lead.answers as Record<string, unknown>)
+    }
+  } catch { /* best-effort — email still sends without the answer detail */ }
+
   const { data: buyerData } = await db.from('buyers').select('*').in('id', buyerIds)
   const buyers = (buyerData ?? []) as Buyer[]
 
@@ -139,7 +153,7 @@ export async function distributeLead(
           to: buyer.contact_email,
           toName: buyer.name,
           subject: `New CareAssura lead${lead.area ? ` — ${lead.area}` : ''}${lead.care_type ? ` (${lead.care_type})` : ''}`,
-          html: leadEmailHtml(lead, buyer),
+          html: leadEmailHtml(lead, buyer, finder),
           replyTo: lead.email,
         })
         channels.push('email')
