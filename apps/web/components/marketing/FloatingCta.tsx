@@ -1,35 +1,31 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { MessageSquareText } from 'lucide-react'
 
-// A persistent "Get in touch" CTA that floats with the page (appears after a little
-// scroll). Hidden on the contact page itself.
+// A distinctive, always-in-view contact "sticker" — a rotated coral seal that
+// straightens + grows on hover. Hidden only on the contact page.
 export function FloatingCta() {
-  const [show, setShow] = useState(false)
   const pathname = usePathname()
-
-  useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > 600)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
   if (pathname === '/contact') return null
 
   return (
     <Link
       href="/contact"
       aria-label="Get in touch"
-      className={`fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-brand-ink px-5 py-3 text-sm font-semibold text-white shadow-card transition-all duration-300 hover:bg-brand-accent hover:text-brand-ink ${
-        show ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
-      }`}
+      className="group fixed bottom-5 right-5 z-50 sm:bottom-6 sm:right-6"
     >
-      <MessageSquareText className="h-4 w-4" />
-      Get in touch
+      <span className="relative flex h-[88px] w-[88px] -rotate-[10deg] items-center justify-center rounded-full bg-brand-pop text-center shadow-[4px_4px_0_0_#2a2620] ring-2 ring-brand-ink transition-all duration-300 group-hover:rotate-0 group-hover:scale-105 sm:h-24 sm:w-24">
+        {/* dashed seal ring */}
+        <span className="absolute inset-1.5 rounded-full border-2 border-dashed border-white/50" />
+        <span className="font-display text-[11px] font-bold uppercase leading-tight tracking-wide text-white sm:text-xs">
+          Get in
+          <br />
+          touch
+          <br />
+          <span className="inline-block text-base transition-transform group-hover:translate-x-0.5">→</span>
+        </span>
+      </span>
     </Link>
   )
 }

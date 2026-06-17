@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X, ChevronDown, Mail, Phone } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { SERVICES } from '@/lib/services'
 
@@ -23,6 +23,18 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-brand-line/60 bg-brand-bg/95 backdrop-blur supports-[backdrop-filter]:bg-brand-bg/80">
+      {/* Contact utility strip */}
+      <div className="hidden border-b border-brand-line/40 bg-brand-ink md:block">
+        <div className="mx-auto flex max-w-6xl items-center justify-end gap-6 px-6 py-1.5 text-xs text-white/80">
+          <a href="mailto:hello@trgdigital.com" className="flex items-center gap-1.5 font-medium transition-colors hover:text-brand-accent">
+            <Mail className="h-3.5 w-3.5" /> hello@trgdigital.com
+          </a>
+          <a href="tel:+442070000000" className="flex items-center gap-1.5 font-medium transition-colors hover:text-brand-accent">
+            <Phone className="h-3.5 w-3.5" /> 0207 000 0000
+          </a>
+        </div>
+      </div>
+
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center" onClick={() => setOpen(false)} aria-label="TRG Digital home">
@@ -178,7 +190,13 @@ export default function Nav() {
               {label}
             </Link>
           ))}
-          <div className="border-t border-brand-line/60 pt-3">
+          <div className="space-y-3 border-t border-brand-line/60 pt-3">
+            <a href="mailto:hello@trgdigital.com" className="flex items-center gap-2 px-3 text-sm font-medium text-brand-ink-soft">
+              <Mail className="h-4 w-4 text-brand-pop" /> hello@trgdigital.com
+            </a>
+            <a href="tel:+442070000000" className="flex items-center gap-2 px-3 text-sm font-medium text-brand-ink-soft">
+              <Phone className="h-4 w-4 text-brand-pop" /> 0207 000 0000
+            </a>
             <Link
               href="/contact"
               className="block w-full rounded-lg bg-brand-accent px-4 py-2.5 text-center text-sm font-semibold text-brand-ink hover:bg-brand-ink hover:text-white"

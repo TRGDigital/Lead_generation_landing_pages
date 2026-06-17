@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { AnalyticsCard, LighthouseCard, LeadsTableCard, GithubCard, VercelCard } from './HeroMockups'
+import {
+  AnalyticsCard, LighthouseCard, LeadsTableCard, GithubCard, VercelCard,
+  GoogleSearchCard, BingSearchCard, RankingsCard, AdsCard, CmsCard,
+} from './HeroMockups'
 
 type Shot = { src: string; alt: string; url?: string }
 type Col =
@@ -68,14 +71,19 @@ function band() {
     <Column key="c0" col={COLS[0]!} />,
     <LeadsTableCard key="leadstable" />,
     <Column key="c1" col={COLS[1]!} />,
+    <GoogleSearchCard key="google" />,
     <AnalyticsCard key="analytics" />,
     <Column key="c2" col={COLS[2]!} />,
+    <BingSearchCard key="bing" />,
     <LighthouseCard key="lighthouse" />,
     <Column key="c3" col={COLS[3]!} />,
+    <RankingsCard key="rankings" />,
     <GithubCard key="github" />,
     <Column key="c4" col={COLS[4]!} />,
+    <AdsCard key="ads" />,
     <VercelCard key="vercel" />,
     <Column key="c5" col={COLS[5]!} />,
+    <CmsCard key="cms" />,
     <Column key="c6" col={COLS[6]!} />,
   ]
 }

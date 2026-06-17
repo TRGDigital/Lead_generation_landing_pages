@@ -77,23 +77,39 @@
 /* Unique CTA buttons — bold, with a sliding arrow + colour-flip on hover. */
 @layer components {
   .btn-cta {
-    @apply inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-accent px-7 text-base font-semibold text-brand-ink shadow-soft transition-all hover:-translate-y-0.5 hover:bg-brand-ink hover:text-white hover:shadow-card;
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-accent px-7 text-sm font-bold uppercase tracking-wide text-brand-ink;
   }
   .btn-cta-outline {
-    @apply inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-brand-line px-7 text-base font-medium text-brand-ink-soft transition-all hover:-translate-y-0.5 hover:border-brand-ink hover:text-brand-ink;
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-xl border-2 border-brand-ink bg-white px-7 text-sm font-bold uppercase tracking-wide text-brand-ink;
   }
-  /* Contrasting coral CTA */
   .btn-pop {
-    @apply inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-pop px-7 text-base font-semibold text-white shadow-soft transition-all hover:-translate-y-0.5 hover:bg-brand-pop-dark hover:shadow-card;
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-pop px-7 text-sm font-bold uppercase tracking-wide text-white;
   }
 }
-.btn-pop .btn-arrow { transition: transform 0.2s ease; }
-.btn-pop:hover .btn-arrow { transform: translateX(3px); }
-.btn-cta .btn-arrow,
-.btn-cta-outline .btn-arrow {
+/* Distinctive 'sticker' buttons: hard offset shadow that presses in on hover/click. */
+.btn-cta,
+.btn-cta-outline,
+.btn-pop {
+  box-shadow: 4px 4px 0 0 #2a2620;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn-cta:hover,
+.btn-cta-outline:hover,
+.btn-pop:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 0 #2a2620;
+}
+.btn-cta:active,
+.btn-cta-outline:active,
+.btn-pop:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 0 #2a2620;
+}
+.btn-arrow {
   transition: transform 0.2s ease;
 }
 .btn-cta:hover .btn-arrow,
-.btn-cta-outline:hover .btn-arrow {
-  transform: translateX(3px);
+.btn-cta-outline:hover .btn-arrow,
+.btn-pop:hover .btn-arrow {
+  transform: translateX(2px);
 }
