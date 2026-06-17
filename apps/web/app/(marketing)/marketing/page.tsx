@@ -31,10 +31,10 @@ export const metadata: Metadata = {
 const FAQS = [
   { q: 'How quickly will I receive enquiries?', a: 'Most homes receive their first qualified enquiry within 5 to 10 business days of going live. The timeline depends on local search demand and the care types you offer.' },
   { q: 'What makes an enquiry "qualified"?', a: 'We verify that the enquirer genuinely needs care, that the care type matches what you offer, and that they can meet your fee level, before the enquiry reaches your inbox.' },
-  { q: 'Do I pay for every enquiry?', a: "No. You only pay when a resident actually moves in. No fees for enquiries, consultations, tours, or assessments that don't result in a placement." },
+  { q: 'Do I pay for every enquiry?', a: "You pay a fixed fee for each qualified lead — an enquiry we've verified as a genuine match for your home. Mismatched or unqualified enquiries are free." },
   { q: 'Can I pause the service?', a: 'Yes, instantly. Turn the campaign off when your home is full, turn it back on when you have capacity. No notice periods, no penalties.' },
   { q: 'Do I need to handle the advertising myself?', a: "No. We build, manage, and fund the advertising campaigns. You don't touch Google Ads, Meta, or any ad platform." },
-  { q: 'Is there a setup fee or monthly retainer?', a: 'No upfront fee and no monthly retainer. You pay a single fixed fee per confirmed move-in, and nothing else.' },
+  { q: 'Is there a setup fee or monthly retainer?', a: 'No upfront fee and no monthly retainer. You pay a single fixed fee per qualified lead, and nothing else.' },
 ]
 
 const PILLARS = [
@@ -60,7 +60,7 @@ const POINTS = [
   'High-converting, CQC-compliant landing pages',
   'Pre-qualified enquiries — right care type & area',
   'On/off control — pause when you’re full',
-  'Pay only when a resident moves in',
+  'Pay only for qualified leads',
   'Real-time enquiry delivery & tracking',
   'Local SEO to win organic enquiries too',
 ]
@@ -97,8 +97,8 @@ export default function MarketingPage() {
             <Squiggle className="mt-5 h-6 w-56 text-brand-pop" />
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
               We run targeted advertising, build high-converting landing pages, and deliver pre-qualified enquiries
-              straight to your care home. Activate when beds are empty. Pause when you&apos;re full. Pay only when a
-              resident moves in.
+              straight to your care home. Activate when beds are empty. Pause when you&apos;re full. Pay only for
+              qualified leads.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/contact" className="btn-pop">
@@ -110,7 +110,7 @@ export default function MarketingPage() {
               </Link>
             </div>
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-brand-ink-soft">
-              {['Pay per move-in', 'Pause anytime', 'Enquiries, not clicks'].map((p) => (
+              {['Pay per qualified lead', 'Pause anytime', 'Enquiries, not clicks'].map((p) => (
                 <span key={p} className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-brand-pop" />
                   {p}
@@ -191,7 +191,7 @@ export default function MarketingPage() {
               </p>
               <p>
                 Every enquiry is pre-qualified for care type, area and funding before it reaches your inbox, and
-                you only pay when a resident actually moves in. Switch it on when you have empty beds, pause it the
+                you only pay for the qualified leads we deliver. Switch it on when you have empty beds, pause it the
                 moment you&apos;re full. When you want to compound results, we layer in organic{' '}
                 <Link href="/website-development" className="font-semibold text-brand-pop underline-offset-2 hover:underline">SEO</Link>{' '}
                 and bespoke{' '}
@@ -286,8 +286,8 @@ export default function MarketingPage() {
               Performance-based, no surprises
             </h2>
             <p className="mt-5 max-w-md text-lg leading-relaxed text-brand-ink-soft">
-              Forget setup fees and monthly retainers. With TRG you pay one fixed fee per confirmed move-in — and
-              nothing else. No win, no fee.
+              Forget setup fees and monthly retainers. With TRG you pay one fixed fee per qualified lead — and
+              nothing else. Only ever pay for enquiries that genuinely match your home.
             </p>
             <div className="mt-7 space-y-3">
               {['No setup fee', 'No monthly retainer', 'No contracts — cancel anytime'].map((r) => (
@@ -308,11 +308,11 @@ export default function MarketingPage() {
           {/* Value card */}
           <div className="overflow-hidden rounded-3xl border-2 border-brand-pop/30 bg-white shadow-card">
             <div className="bg-brand-ink px-8 py-7 text-white">
-              <p className="text-xs font-semibold uppercase tracking-widest text-brand-accent">You pay only when</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-brand-accent">You pay only for</p>
               <p className="mt-1.5 font-display text-2xl font-bold uppercase leading-tight tracking-tight">
-                A resident moves in
+                Each qualified lead
               </p>
-              <p className="mt-2 text-sm text-white/70">One simple, fixed fee per confirmed placement.</p>
+              <p className="mt-2 text-sm text-white/70">One simple, fixed fee per qualified lead — nothing else.</p>
             </div>
             <div className="p-8">
               <p className="text-xs font-semibold uppercase tracking-wider text-brand-pop">What&apos;s included</p>
