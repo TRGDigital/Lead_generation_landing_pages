@@ -9,24 +9,24 @@ export const dynamic = 'force-static'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
 export const metadata: Metadata = {
-  title: 'Cost of an Empty Bed Calculator | Care Home Occupancy | TRG Digital',
+  title: 'Cost of an Empty Bed & Savings Calculator | Care Home Occupancy | TRG Digital',
   description:
-    'Free calculator showing how much empty beds cost your care home — per week, month and year. See the revenue you lose to vacancies, and what filling them is worth.',
+    'Free calculator showing how much empty beds cost your care home per week, month and year, plus how much you could save and the return on investment by filling them with TRG Digital.',
   alternates: { canonical: `${SITE_URL}/tools/empty-bed-calculator` },
   robots: { index: true, follow: true },
 }
 
 const FAQS = [
-  { q: 'How much does an empty care home bed cost?', a: 'It’s simply the weekly fee you’d charge, lost for every week the bed sits empty. At £1,100 per week, a single empty bed costs around £57,200 a year — and most homes have more than one vacancy at a time.' },
-  { q: 'How long do beds usually stay empty?', a: 'Without proactive marketing, vacancies often take 8–12 weeks to fill through word of mouth and referrals — every week of which is revenue gone for good.' },
-  { q: 'How can I fill empty beds faster?', a: 'Targeted advertising and a high-converting website put your home in front of families actively searching for care nearby, and deliver pre-qualified enquiries — turning weeks of vacancy into days.' },
+  { q: 'How much does an empty care home bed cost?', a: 'It’s simply the weekly fee you’d charge, lost for every week the bed sits empty. At £1,100 per week, a single empty bed costs around £57,200 a year, and most homes have more than one vacancy at a time.' },
+  { q: 'How long do beds usually stay empty?', a: 'Without proactive marketing, vacancies often take 8 to 12 weeks to fill through word of mouth and referrals, every week of which is revenue gone for good.' },
+  { q: 'How can I fill empty beds faster?', a: 'Targeted advertising and a high-converting website put your home in front of families actively searching for care nearby, and deliver pre-qualified enquiries, turning weeks of vacancy into days.' },
 ]
 
 const POINTS = [
-  'See the true weekly, monthly & yearly cost',
+  'See the true weekly, monthly and yearly cost',
   'Account for how long beds sit empty',
+  'See your potential savings and ROI with TRG',
   'Updates instantly as you type',
-  'Turn the number into a plan to fill them',
 ]
 
 export default function EmptyBedPage() {
@@ -60,8 +60,8 @@ export default function EmptyBedPage() {
               </h1>
               <Squiggle className="mt-5 h-6 w-56 text-brand-pop" />
               <p className="mt-6 max-w-md text-lg leading-relaxed text-brand-ink-soft">
-                Every empty bed is revenue gone for good. Enter your fee, how many beds are empty and for how long —
-                and see exactly what those vacancies are costing you.
+                Every empty bed is revenue gone for good. See exactly what your vacancies are costing you, then how
+                much you could recover, and your return on investment, by filling them with TRG.
               </p>
               <ul className="mt-6 space-y-2.5">
                 {POINTS.map((p) => (
@@ -86,18 +86,18 @@ export default function EmptyBedPage() {
           </h2>
           <div className="mt-4 space-y-4 text-base leading-relaxed text-brand-ink-soft">
             <p>
-              Every empty bed in a care home is revenue that&apos;s gone for good — you can&apos;t sell last
+              Every empty bed in a care home is revenue that&apos;s gone for good, you can&apos;t sell last
               week&apos;s vacancy. Yet because the cost is spread out and easy to overlook, many operators
               underestimate just how much occupancy gaps are quietly costing them. Our free cost-of-an-empty-bed
               calculator makes that number impossible to ignore, turning your weekly fee and current vacancies into
-              the real figure you&apos;re losing every week, every month and across a full year — the business case
+              the real figure you&apos;re losing every week, every month and across a full year, the business case
               for filling beds faster, in black and white.
             </p>
             <p>
               Using it takes seconds. Enter the weekly fee you charge per bed, the number of beds currently empty,
               and roughly how long they&apos;ve been vacant. The calculator instantly shows your lost revenue per
               week, per month and annualised over a year, plus the total those current vacancies have already cost
-              you. Care home, nursing home and domiciliary care operators use it to justify proactive marketing —
+              you. Care home, nursing home and domiciliary care operators use it to justify proactive marketing, 
               because once you can see that a handful of empty beds adds up to tens of thousands of pounds a year,
               filling them quickly becomes the obvious priority.
             </p>
@@ -128,7 +128,7 @@ export default function EmptyBedPage() {
             Stop losing money to empty beds
           </h2>
           <p className="mx-auto mt-5 max-w-xl leading-relaxed text-white/85">
-            We deliver pre-qualified enquiries straight to your home — you only pay per qualified lead.
+            We deliver pre-qualified enquiries straight to your home, you only pay per qualified lead.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link href="/marketing" className="btn-cta">

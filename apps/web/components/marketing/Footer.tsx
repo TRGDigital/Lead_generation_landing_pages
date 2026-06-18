@@ -55,7 +55,7 @@ export default function Footer() {
               <Image src="/trg-digital-2025.png" alt="TRG Digital" width={4167} height={967} className="h-9 w-auto brightness-0 invert" />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
-              A specialist digital marketing agency for the UK care sector — more enquiries, fewer empty beds.
+              A specialist digital marketing agency for the UK care sector, more enquiries, fewer empty beds.
             </p>
             <p className="mt-4 flex items-start gap-2 text-sm text-white/60">
               <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-accent" />

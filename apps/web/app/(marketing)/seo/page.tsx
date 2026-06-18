@@ -10,15 +10,15 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 export const metadata: Metadata = {
   title: 'Care Sector SEO | Get Found First | TRG Digital',
   description:
-    'Specialist SEO for UK care providers. We grow your organic visibility — local, technical and on-page SEO — so families find your care home first, and enquiries come in month after month.',
+    'Specialist SEO for UK care providers. We grow your organic visibility, local, technical and on-page SEO, so families find your care home first, and enquiries come in month after month.',
   alternates: { canonical: `${SITE_URL}/seo` },
   robots: { index: true, follow: true },
 }
 
 const WHAT_WE_OPTIMISE = [
-  { Icon: Search, title: 'Keyword strategy', body: 'We target the exact searches families and professionals use to find care near you — not vanity terms.' },
+  { Icon: Search, title: 'Keyword strategy', body: 'We target the exact searches families and professionals use to find care near you, not vanity terms.' },
   { Icon: FileText, title: 'On-page SEO', body: 'Titles, structure, internal links and content tuned page-by-page so search engines understand and rank you.' },
-  { Icon: Settings, title: 'Technical SEO', body: 'Fast load speed, clean code, indexing and Core Web Vitals — the foundations rankings are built on.' },
+  { Icon: Settings, title: 'Technical SEO', body: 'Fast load speed, clean code, indexing and Core Web Vitals, the foundations rankings are built on.' },
   { Icon: MapPin, title: 'Local SEO', body: 'Google Business Profile, local pages and citations so you show up across your catchment area.' },
   { Icon: PenLine, title: 'Content that ranks', body: 'Genuinely useful, care-aware content that answers real questions and earns organic visibility.' },
   { Icon: BarChart3, title: 'Reporting', body: 'Clear, honest reporting on rankings, organic traffic and the enquiries it actually drives.' },
@@ -43,7 +43,7 @@ const STEPS = [
 export default function SeoPage() {
   return (
     <>
-      {/* JSON-LD — Service */}
+      {/* JSON-LD, Service */}
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -72,7 +72,7 @@ export default function SeoPage() {
             <Squiggle className="mt-5 h-6 w-56 text-brand-pop" />
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
               When a family searches for care in your area, you need to be the home they find first. We grow your
-              organic visibility — local, technical and on-page SEO — so enquiries come in month after month,
+              organic visibility, local, technical and on-page SEO, so enquiries come in month after month,
               without paying for every click.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -94,7 +94,7 @@ export default function SeoPage() {
             </div>
           </div>
 
-          {/* Visual — a #1 Google result + organic growth */}
+          {/* Visual, a #1 Google result + organic growth */}
           <div className="relative">
             <div className="overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card">
               <div className="flex items-center gap-1.5 border-b border-brand-line bg-brand-bg-warm px-3 py-2">
@@ -142,7 +142,7 @@ export default function SeoPage() {
               <p>
                 Paid ads stop the moment you stop paying. SEO compounds. By earning page-one rankings for the
                 searches families actually use, you turn Google and Bing into a steady source of enquiries that
-                keeps working long after the work is done — and costs nothing per click.
+                keeps working long after the work is done, and costs nothing per click.
               </p>
               <p>
                 We approach SEO the way the care sector needs it: local-first, technically sound and genuinely

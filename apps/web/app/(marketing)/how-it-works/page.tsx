@@ -9,13 +9,13 @@ export const dynamic = 'force-static'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
 export const metadata: Metadata = {
-  title: 'How TRG Digital Works — Managed Marketing for Care Homes',
+  title: 'How TRG Digital Works, Managed Marketing for Care Homes',
   description:
     'See how TRG Digital fills empty care home beds: we build your landing page, run targeted ads, qualify every enquiry, and deliver qualified leads straight to your inbox.',
   alternates: { canonical: `${SITE_URL}/how-it-works` },
   openGraph: {
     title: 'How TRG Digital Works',
-    description: 'From empty bed to qualified enquiry — the TRG Digital process explained.',
+    description: 'From empty bed to qualified enquiry, the TRG Digital process explained.',
     type: 'website',
     url: `${SITE_URL}/how-it-works`,
   },
@@ -29,11 +29,11 @@ const PHASES = [
     title: 'We build your landing page',
     points: [
       "Custom page designed around your home's strengths and specialisms",
-      'CQC-compliant copy — no "best in class" superlatives',
-      'Optimised for Google search — local + care-type keywords',
+      'CQC-compliant copy, no "best in class" superlatives',
+      'Optimised for Google search, local + care-type keywords',
       'Uses your photography or our care stock library',
-      'Mobile-first — most families research on phones',
-      'Live within 3–5 business days of onboarding',
+      'Mobile-first, most families research on phones',
+      'Live within 3 to 5 business days of onboarding',
     ],
   },
   {
@@ -42,7 +42,7 @@ const PHASES = [
     points: [
       'Google Search Ads targeting high-intent care queries in your area',
       'Meta (Facebook/Instagram) retargeting for researching families',
-      'We fund and manage all ad spend — you pay nothing upfront',
+      'We fund and manage all ad spend, you pay nothing upfront',
       'Campaigns optimised weekly on real enquiry quality',
       'Pause campaigns instantly any time, just let us know',
     ],
@@ -53,7 +53,7 @@ const PHASES = [
     points: [
       'Every submission is reviewed before it reaches your inbox',
       'We verify correct care type, right geography and realistic funding',
-      'Unqualified submissions are filtered out — no spam, no tyre-kickers',
+      'Unqualified submissions are filtered out, no spam, no tyre-kickers',
       'Qualified leads include full context: resident details, timing, needs',
       'Delivered to you in real time, by email and SMS',
     ],
@@ -66,7 +66,7 @@ const PHASES = [
       'One tap to call or email the family from your phone',
       'Track every enquiry from first contact to move-in',
       'Book tours, assessments and outcomes with us',
-      'Pay one fixed fee per qualified lead — mismatches are free',
+      'Pay one fixed fee per qualified lead, mismatches are free',
     ],
   },
 ]
@@ -90,7 +90,7 @@ const HOME_HANDLES = [
 export default function HowItWorksPage() {
   return (
     <>
-      {/* JSON-LD — HowTo */}
+      {/* JSON-LD, HowTo */}
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -117,7 +117,7 @@ export default function HowItWorksPage() {
             <Squiggle className="mt-5 h-6 w-56 text-brand-pop" />
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
               TRG Digital handles everything between your landing page and a qualified family at your door. You
-              focus on care; we fill your pipeline — and you only ever pay for qualified leads.
+              focus on care; we fill your pipeline, and you only ever pay for qualified leads.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/contact" className="btn-pop">
@@ -138,7 +138,7 @@ export default function HowItWorksPage() {
             </div>
           </div>
 
-          {/* Visual — a landing page + an incoming enquiry */}
+          {/* Visual, a landing page + an incoming enquiry */}
           <div className="relative">
             <div className="overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card">
               <div className="flex items-center gap-1.5 border-b border-brand-line bg-brand-bg-warm px-3 py-2">
@@ -210,7 +210,7 @@ export default function HowItWorksPage() {
             </h2>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {/* We handle — dark */}
+            {/* We handle, dark */}
             <div className="rounded-2xl bg-brand-ink p-8 text-white">
               <p className="font-display text-lg font-bold uppercase tracking-tight text-brand-accent">TRG Digital handles</p>
               <ul className="mt-5 space-y-3">
@@ -224,7 +224,7 @@ export default function HowItWorksPage() {
                 ))}
               </ul>
             </div>
-            {/* You handle — light */}
+            {/* You handle, light */}
             <div className="rounded-2xl border-2 border-brand-pop/30 bg-white p-8">
               <p className="font-display text-lg font-bold uppercase tracking-tight text-brand-pop">You handle</p>
               <ul className="mt-5 space-y-3">

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 
-// "Our work" — showcase of sites/products TRG has built. Crossways + Ferndale are
+// "Our work", showcase of sites/products TRG has built. Crossways + Ferndale are
 // in build (next day or so) and will swap from 'In build' → live with a screenshot
 // + real results. CareAssura + CareStream are live products. No fabricated metrics:
 // add a `result` line to any item once the numbers are real.
@@ -52,7 +52,7 @@ export function CaseStudies() {
             Real sites, built to win enquiries
           </h2>
           <p className="mt-4 text-brand-ink-soft">
-            From care home websites to the software the sector runs on — here&apos;s a sample of what we build.
+            From care home websites to the software the sector runs on, here&apos;s a sample of what we build.
           </p>
         </div>
 

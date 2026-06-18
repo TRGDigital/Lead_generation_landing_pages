@@ -1,4 +1,4 @@
-// "Powered by" strip — the best-in-class tools TRG builds on. Real, non-fabricated
+// "Powered by" strip, the best-in-class tools TRG builds on. Real, non-fabricated
 // credibility. Currently rendered as clean monochrome wordmarks; drop official SVG/PNG
 // logos into /public/tech and swap the <span> for <Image> when you have them.
 const TOOLS = ['Vercel', 'Google Partner', 'Anthropic Claude', 'OpenAI', 'Supabase', 'Stripe', 'Next.js']

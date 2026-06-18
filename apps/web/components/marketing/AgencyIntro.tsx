@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Star, Burst, Squiggle, Dots } from './Decor'
 
-// "A leading digital marketing agency with a creative kick" — a rich, SEO-friendly
+// "A leading digital marketing agency with a creative kick", a rich, SEO-friendly
 // intro: bold headline, coloured sub-head, multi-paragraph care-sector copy with
 // internal links, and a panel of honest credentials.
 const CREDENTIALS = [
@@ -26,14 +26,14 @@ export function AgencyIntro() {
             A leading digital marketing agency with a creative kick
           </h2>
           <p className="mt-5 font-display text-lg font-semibold text-brand-pop">
-            Websites, SEO, paid media, AI and software — built for care.
+            Websites, SEO, paid media, AI and software, built for care.
           </p>
           <div className="mt-6 space-y-4 text-base leading-relaxed text-white/75">
             <p>
               At TRG Digital we build lead-generating websites and run digital marketing campaigns with one
               job: turning online visibility into real enquiries, visits and move-ins. We work{' '}
-              <span className="font-semibold text-white">only with the care sector</span> — care homes, nursing
-              homes and domiciliary care — so everything we do is shaped around how families actually search for,
+              <span className="font-semibold text-white">only with the care sector</span>, care homes, nursing
+              homes and domiciliary care, so everything we do is shaped around how families actually search for,
               compare and choose care.
             </p>
             <p>

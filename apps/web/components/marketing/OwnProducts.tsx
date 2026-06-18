@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ArrowRight, Check } from 'lucide-react'
 import { Star, Dots, Squiggle } from './Decor'
 
-// "We build our own software for care" — richer, alternating two-column product
+// "We build our own software for care", richer, alternating two-column product
 // showcases. Proof that TRG doesn't just advise, it ships.
 const PRODUCTS = [
   {
@@ -14,7 +14,7 @@ const PRODUCTS = [
     shot: '/mockups/carestream-desktop.png',
     url: 'carestreamai.com',
     href: 'https://carestreamai.com',
-    body: 'An AI policy, training and CQC platform built for care teams. CareStream answers staff questions in over 60 languages, grounded in the provider’s own policies and documents — turning compliance from a burden into something your team can actually use day to day.',
+    body: 'An AI policy, training and CQC platform built for care teams. CareStream answers staff questions in over 60 languages, grounded in the provider’s own policies and documents, turning compliance from a burden into something your team can actually use day to day.',
     features: ['AI answers in 60+ languages', 'Policies, training & CQC tools', 'Grounded in your own documents'],
   },
   {
@@ -25,7 +25,7 @@ const PRODUCTS = [
     shot: '/mockups/careassura.jpg',
     url: 'careassura.co.uk',
     href: 'https://careassura.co.uk',
-    body: 'A UK care home directory that helps families find, compare and choose the right care with confidence — and connects providers with genuinely interested enquiries. It’s the same lead-generation engine we put to work for our clients.',
+    body: 'A UK care home directory that helps families find, compare and choose the right care with confidence, and connects providers with genuinely interested enquiries. It’s the same lead-generation engine we put to work for our clients.',
     features: ['UK-wide care home directory', 'Compare homes with confidence', 'Connects families to the right care'],
   },
 ]
@@ -43,7 +43,7 @@ export function OwnProducts() {
             We build our own software for care
           </h2>
           <p className="mt-4 text-brand-ink-soft">
-            We don&apos;t just talk about custom development — we ship it. Two of our own products are live and used
+            We don&apos;t just talk about custom development, we ship it. Two of our own products are live and used
             across the sector today, which keeps us close to the problems our clients face every day.
           </p>
         </div>

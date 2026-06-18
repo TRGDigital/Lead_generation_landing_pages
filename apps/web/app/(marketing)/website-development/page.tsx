@@ -34,7 +34,7 @@ const STEPS = [
 export default function WebsiteDevelopmentPage() {
   return (
     <>
-      {/* JSON-LD — Service */}
+      {/* JSON-LD, Service */}
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -84,7 +84,7 @@ export default function WebsiteDevelopmentPage() {
             </div>
           </div>
 
-          {/* Visual — a real care website we built */}
+          {/* Visual, a real care website we built */}
           <div className="relative">
             <div className="overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card">
               <div className="flex items-center gap-1.5 border-b border-brand-line bg-brand-bg-warm px-3 py-2">
@@ -106,7 +106,7 @@ export default function WebsiteDevelopmentPage() {
         </div>
       </section>
 
-      {/* ── Rich intro (SEO) — copy left, key points right ────────────── */}
+      {/* ── Rich intro (SEO), copy left, key points right ────────────── */}
       <section className="relative overflow-hidden bg-brand-bg-warm px-6 py-24">
         <Dots className="absolute right-10 top-12 hidden h-20 w-20 text-brand-pop/40 lg:block" />
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
@@ -120,7 +120,7 @@ export default function WebsiteDevelopmentPage() {
               <p>
                 For most families, choosing care starts with a search and ends on a website. If your site is slow,
                 hard to use on a phone, or doesn&apos;t answer the questions they&apos;re really asking, they move
-                on to a competitor — often without ever picking up the phone. We build sites that do the opposite:
+                on to a competitor, often without ever picking up the phone. We build sites that do the opposite:
                 load fast, look trustworthy, and make enquiring effortless.
               </p>
               <p>
@@ -140,7 +140,7 @@ export default function WebsiteDevelopmentPage() {
           {/* Key points + CTA */}
           <div className="space-y-3">
             {[
-              'Fully responsive — flawless on mobile, tablet & desktop',
+              'Fully responsive, flawless on mobile, tablet & desktop',
               'Search-engine optimised (SEO) from day one',
               'Compressed, next-gen images for fast loading',
               'Lightning-fast page-load speed & Core Web Vitals',
@@ -204,7 +204,7 @@ export default function WebsiteDevelopmentPage() {
                 A better website means more of the right enquiries
               </h2>
               <p className="mt-5 max-w-md text-lg leading-relaxed text-white/70">
-                It&apos;s not about a prettier site — it&apos;s about more families finding you, trusting you and
+                It&apos;s not about a prettier site, it&apos;s about more families finding you, trusting you and
                 getting in touch.
               </p>
               <Link href="/contact" className="btn-cta btn-on-dark mt-8">

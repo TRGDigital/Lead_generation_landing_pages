@@ -6,7 +6,7 @@ import { Star, Squiggle, Dots } from '@/components/marketing/Decor'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
 export const metadata: Metadata = {
-  title: 'Contact TRG Digital — Start Your Project',
+  title: 'Contact TRG Digital, Start Your Project',
   description:
     'Get in touch with TRG Digital to start your project, ask about pricing, or discuss how we can fill empty beds in your care home.',
   alternates: { canonical: `${SITE_URL}/contact` },
@@ -24,13 +24,13 @@ const NEXT_STEPS = [
   'We respond within one business day',
   'A brief call to understand your home and needs',
   'We prepare a tailored plan for your care type',
-  "You decide if it's a fit — no pressure",
+  "You decide if it's a fit, no pressure",
 ]
 
 export default function ContactPage() {
   return (
     <>
-      {/* JSON-LD — ContactPage */}
+      {/* JSON-LD, ContactPage */}
       <script
         type="application/ld+json"
         suppressHydrationWarning

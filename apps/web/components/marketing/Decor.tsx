@@ -1,4 +1,4 @@
-// Decorative graphic accents (BoxChilli-style) — sparkle stars, wiggly lines, dot
+// Decorative graphic accents (BoxChilli-style), sparkle stars, wiggly lines, dot
 // grids and starbursts. Colour them with a `text-*` class (they use currentColor).
 // Always decorative: pointer-events-none + aria-hidden, positioned absolutely by the
 // caller.

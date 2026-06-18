@@ -15,7 +15,7 @@ const schema = z.object({
   company: z.string().optional(),
   phone: z.string().optional(),
   message: z.string().min(10, 'Please tell us a bit more (at least 10 characters)'),
-  // honeypot — must stay empty
+  // honeypot, must stay empty
   website: z.string().max(0, 'Bot detected').optional(),
 })
 
@@ -70,7 +70,7 @@ export default function ContactForm() {
       onSubmit={handleSubmit(onSubmit)}
       className="rounded-2xl border border-brand-line bg-white p-8 shadow-soft space-y-5"
     >
-      {/* Honeypot — hidden from real users */}
+      {/* Honeypot, hidden from real users */}
       <input {...register('website')} type="text" className="sr-only" tabIndex={-1} autoComplete="off" />
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">

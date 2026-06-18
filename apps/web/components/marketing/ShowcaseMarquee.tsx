@@ -73,7 +73,7 @@ function BingCard() {
       </div>
       <div className="mt-4">
         <p className="text-[11px] text-[#4d5156]">careassura.com</p>
-        <p className="mt-0.5 text-base font-medium leading-snug text-[#1a0dab]">Haywards Heath Care Homes — Genuine Availability</p>
+        <p className="mt-0.5 text-base font-medium leading-snug text-[#1a0dab]">Haywards Heath Care Homes, Genuine Availability</p>
         <p className="mt-1 text-xs leading-relaxed text-[#4d5156]">
           Tell us what you need and local care homes with availability come to you. Free for families, no obligation…
         </p>
@@ -131,7 +131,7 @@ export function ShowcaseMarquee() {
       <div className="relative mx-auto mb-10 max-w-6xl px-6">
         <p className="text-xs font-semibold uppercase tracking-wider text-brand-accent">Our work in action</p>
         <h2 className="mt-2 max-w-2xl font-display text-3xl font-semibold text-brand-ink sm:text-4xl">
-          From search to enquiry — we build the whole journey
+          From search to enquiry, we build the whole journey
         </h2>
         <p className="mt-4 max-w-2xl text-brand-ink-soft">
           A fast site on every device, found across Google and Bing, turning searches into enquiries delivered

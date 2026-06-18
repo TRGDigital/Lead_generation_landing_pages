@@ -48,7 +48,7 @@ export default async function HomePage() {
   const latest = posts.slice(0, 4)
   return (
     <>
-      {/* JSON-LD — Organization */}
+      {/* JSON-LD, Organization */}
       <script
         type="application/ld+json"
         suppressHydrationWarning

@@ -79,7 +79,7 @@ export const mdxComponents = {
       </span>
     )
   },
-  // Pull quote callout — usage: <Callout>text</Callout>
+  // Pull quote callout, usage: <Callout>text</Callout>
   Callout: ({ children }: { children: ReactNode }) => (
     <div className="my-6 rounded-xl border border-brand-accent/30 bg-brand-accent/5 px-6 py-4 text-brand-ink-soft">
       {children}

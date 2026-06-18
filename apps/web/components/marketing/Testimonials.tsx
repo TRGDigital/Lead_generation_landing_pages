@@ -1,4 +1,4 @@
-// Client testimonials. Intentionally EMPTY until we have real, attributable quotes —
+// Client testimonials. Intentionally EMPTY until we have real, attributable quotes, 
 // the section renders nothing while empty so the site never ships fabricated reviews.
 // Add real entries (quote + name + role/home) and it appears automatically.
 //

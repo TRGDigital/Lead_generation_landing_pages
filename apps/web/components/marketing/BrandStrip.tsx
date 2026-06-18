@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Star } from './Decor'
 
-// "Brands that have chosen TRG Digital" — a horizontal auto-scrolling logo strip.
+// "Brands that have chosen TRG Digital", a horizontal auto-scrolling logo strip.
 // The supplied logos have a cream paper background; placing them on a matching cream
 // band with mix-blend-multiply makes that background disappear. Greyscale at rest,
 // full colour on hover.

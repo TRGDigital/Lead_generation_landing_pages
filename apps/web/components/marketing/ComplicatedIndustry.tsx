@@ -2,11 +2,11 @@ import Link from 'next/link'
 import { Check } from 'lucide-react'
 import { Star, Squiggle, Dots } from './Decor'
 
-// "Making sense of a complicated industry" — rich, SEO-friendly two-column section:
+// "Making sense of a complicated industry", rich, SEO-friendly two-column section:
 // multi-paragraph care-sector copy with internal links on the left; honest trust
 // badges + a CTA box on the right.
 const BADGES = [
-  'Care sector specialists — it’s all we do',
+  'Care sector specialists, it’s all we do',
   'Marketing, websites & software under one roof',
   'Google & Meta advertising specialists',
   'Two live products built in-house',
@@ -29,7 +29,7 @@ export function ComplicatedIndustry() {
           <div className="mt-6 space-y-4 text-base leading-relaxed text-brand-ink-soft">
             <p>
               Care isn&apos;t like other sectors. Families researching a care home are often doing it in a
-              stressful, emotional moment — weighing up CQC ratings, funding routes and care types while trying
+              stressful, emotional moment, weighing up CQC ratings, funding routes and care types while trying
               to find somewhere they can trust. Generic agencies treat care like any other industry. We do the
               opposite: everything we market and build is shaped around how care decisions are really made.
             </p>
@@ -43,7 +43,7 @@ export function ComplicatedIndustry() {
             </p>
             <p>
               The aim is simple: take the complexity off your plate and turn it into a steady flow of qualified
-              enquiries — more families finding you, more visits booked and fewer empty beds — backed by a team
+              enquiries, more families finding you, more visits booked and fewer empty beds, backed by a team
               that understands care, regulation and the families behind every enquiry. When it&apos;s time to
               scale, our{' '}
               <Link href="/development" className="font-semibold text-brand-pop underline-offset-2 hover:underline">custom software</Link>{' '}

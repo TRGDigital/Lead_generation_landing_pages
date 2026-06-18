@@ -6,7 +6,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
 export const metadata: Metadata = {
   title: 'Cookie Policy | CareBeds',
-  description: 'CareBeds cookie policy — what cookies we use and how to manage them.',
+  description: 'CareBeds cookie policy, what cookies we use and how to manage them.',
   alternates: { canonical: `${SITE_URL}/cookies` },
   robots: { index: true, follow: true },
 }
@@ -33,7 +33,7 @@ const COOKIES = [
   {
     name: '_ga, _ga_*',
     purpose: 'Analytics (with consent)',
-    description: 'Google Analytics — used to understand how visitors use this site. IP anonymisation is enabled.',
+    description: 'Google Analytics, used to understand how visitors use this site. IP anonymisation is enabled.',
     duration: '2 years',
   },
 ]
@@ -54,7 +54,7 @@ export default function CookiesPage() {
           <h2 className="font-display text-xl font-semibold text-brand-ink">What are cookies?</h2>
           <p>
             Cookies are small text files stored on your device when you visit a website. They
-            help the site remember information about your visit — such as whether you&apos;re
+            help the site remember information about your visit, such as whether you&apos;re
             logged in.
           </p>
 
@@ -86,7 +86,7 @@ export default function CookiesPage() {
           <h2 className="font-display text-xl font-semibold text-brand-ink">Managing cookies</h2>
           <p>
             You can control cookies through the cookie banner that appears when you first visit
-            this site. You can also manage cookies through your browser settings — see your
+            this site. You can also manage cookies through your browser settings, see your
             browser&apos;s help documentation for instructions.
           </p>
           <p>

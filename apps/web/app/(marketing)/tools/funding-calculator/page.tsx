@@ -11,16 +11,16 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 export const metadata: Metadata = {
   title: 'Free Care Funding Calculator | Care Home Costs & Funding | TRG Digital',
   description:
-    'Free care funding calculator for the UK. Estimate care home or nursing care costs and who pays — your contribution, local authority support and NHS funding — for England, Scotland, Wales and Northern Ireland.',
+    'Free care funding calculator for the UK. Estimate care home or nursing care costs and who pays, your contribution, local authority support and NHS funding, for England, Scotland, Wales and Northern Ireland.',
   alternates: { canonical: `${SITE_URL}/tools/funding-calculator` },
   robots: { index: true, follow: true },
 }
 
 const FAQS = [
-  { q: 'How much does a care home cost in the UK?', a: 'Residential care typically costs around £800–£1,200 per week and nursing care £1,000–£1,500+ per week, varying significantly by region. London and the South East are usually higher.' },
+  { q: 'How much does a care home cost in the UK?', a: 'Residential care typically costs around £800 to £1,200 per week and nursing care £1,000 to £1,500+ per week, varying significantly by region. London and the South East are usually higher.' },
   { q: 'What is the capital threshold for care funding?', a: 'In England and Northern Ireland, if your total assets (savings plus property, where assessable) are below £23,250 your local authority must contribute. Below £14,250 you pay nothing from capital. Scotland and Wales use different thresholds.' },
-  { q: 'Does the NHS pay towards a nursing home?', a: 'If you have a primary health need, NHS Continuing Healthcare can fund the full cost. Separately, in a registered nursing home the NHS pays a weekly Funded Nursing Care (FNC) contribution directly to the home — this isn’t means tested.' },
-  { q: 'What is a Deferred Payment Agreement?', a: 'A DPA lets you use your home’s value to pay for care without selling it now — the local authority pays your fees and recovers the cost later, usually when the property is sold.' },
+  { q: 'Does the NHS pay towards a nursing home?', a: 'If you have a primary health need, NHS Continuing Healthcare can fund the full cost. Separately, in a registered nursing home the NHS pays a weekly Funded Nursing Care (FNC) contribution directly to the home, this isn’t means tested.' },
+  { q: 'What is a Deferred Payment Agreement?', a: 'A DPA lets you use your home’s value to pay for care without selling it now, the local authority pays your fees and recovers the cost later, usually when the property is sold.' },
 ]
 
 const POINTS = [
@@ -62,7 +62,7 @@ export default function FundingCalculatorPage() {
               </h1>
               <Squiggle className="mt-5 h-6 w-56 text-brand-pop" />
               <p className="mt-6 max-w-md text-lg leading-relaxed text-brand-ink-soft">
-                Work out how much care will cost and who pays — your contribution, local authority support and NHS
+                Work out how much care will cost and who pays, your contribution, local authority support and NHS
                 funding. A clear, no-sign-up estimate in under a minute.
               </p>
               <ul className="mt-6 space-y-2.5">
@@ -90,8 +90,8 @@ export default function FundingCalculatorPage() {
           <div className="mt-4 space-y-4 text-base leading-relaxed text-brand-ink-soft">
             <p>
               Working out who pays for care is one of the most confusing parts of arranging it. Care funding in the
-              UK is means-tested, and the rules — capital thresholds, the personal expenses allowance, tariff income
-              and NHS contributions like Funded Nursing Care — differ between England, Scotland, Wales and Northern
+              UK is means-tested, and the rules, capital thresholds, the personal expenses allowance, tariff income
+              and NHS contributions like Funded Nursing Care, differ between England, Scotland, Wales and Northern
               Ireland. Our free care funding calculator brings all of that together into a clear, personalised
               estimate in under a minute, with no sign-up and no jargon, so families can understand roughly what
               residential or nursing care will cost and who will pay before they ever speak to a local authority.
@@ -101,7 +101,7 @@ export default function FundingCalculatorPage() {
               you own your home (and whether a partner still lives there), your total weekly income and the weekly
               care fee. The calculator applies the correct means-test thresholds for your nation, works out any
               tariff income, factors in NHS or Funded Nursing Care contributions, and tells you whether you&apos;re
-              likely to be self-funding, in the partial-funding band or eligible for full council support — together
+              likely to be self-funding, in the partial-funding band or eligible for full council support, together
               with a weekly breakdown of what you, the council and the NHS would each pay, and whether a Deferred
               Payment Agreement might apply. It&apos;s a guide rather than financial advice, but it gives a realistic
               picture before a formal financial assessment.

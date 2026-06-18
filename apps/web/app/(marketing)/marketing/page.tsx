@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 const FAQS = [
   { q: 'How quickly will I receive enquiries?', a: 'Most homes receive their first qualified enquiry within 5 to 10 business days of going live. The timeline depends on local search demand and the care types you offer.' },
   { q: 'What makes an enquiry "qualified"?', a: 'We verify that the enquirer genuinely needs care, that the care type matches what you offer, and that they can meet your fee level, before the enquiry reaches your inbox.' },
-  { q: 'Do I pay for every enquiry?', a: "You pay a fixed fee for each qualified lead — an enquiry we've verified as a genuine match for your home. Mismatched or unqualified enquiries are free." },
+  { q: 'Do I pay for every enquiry?', a: "You pay a fixed fee for each qualified lead, an enquiry we've verified as a genuine match for your home. Mismatched or unqualified enquiries are free." },
   { q: 'Can I pause the service?', a: 'Yes, instantly. Turn the campaign off when your home is full, turn it back on when you have capacity. No notice periods, no penalties.' },
   { q: 'Do I need to handle the advertising myself?', a: "No. We build, manage, and fund the advertising campaigns. You don't touch Google Ads, Meta, or any ad platform." },
   { q: 'Is there a setup fee or monthly retainer?', a: 'No upfront fee and no monthly retainer. You pay a single fixed fee per qualified lead, and nothing else.' },
@@ -51,15 +51,15 @@ const STEPS = [
 
 const COSTS = [
   { stat: '£900/week', label: 'average cost of one empty bed' },
-  { stat: '8–12 weeks', label: 'typical vacancy without targeted marketing' },
+  { stat: '8 to 12 weeks', label: 'typical vacancy without targeted marketing' },
   { stat: '£8,000+', label: 'revenue lost per vacancy at average UK fees' },
 ]
 
 const POINTS = [
   'Targeted Google & Meta advertising',
   'High-converting, CQC-compliant landing pages',
-  'Pre-qualified enquiries — right care type & area',
-  'On/off control — pause when you’re full',
+  'Pre-qualified enquiries, right care type & area',
+  'On/off control, pause when you’re full',
   'Pay only for qualified leads',
   'Real-time enquiry delivery & tracking',
   'Local SEO to win organic enquiries too',
@@ -68,7 +68,7 @@ const POINTS = [
 export default function MarketingPage() {
   return (
     <>
-      {/* JSON-LD — Service */}
+      {/* JSON-LD, Service */}
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -119,7 +119,7 @@ export default function MarketingPage() {
             </div>
           </div>
 
-          {/* Visual — a landing page + an incoming enquiry */}
+          {/* Visual, a landing page + an incoming enquiry */}
           <div className="relative">
             <div className="overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card">
               <div className="flex items-center gap-1.5 border-b border-brand-line bg-brand-bg-warm px-3 py-2">
@@ -156,7 +156,7 @@ export default function MarketingPage() {
               Empty beds cost more than you think
             </h2>
             <p className="mx-auto mt-4 text-lg leading-relaxed text-white/70">
-              Word of mouth and referral agencies fill beds eventually — but every week without a resident is
+              Word of mouth and referral agencies fill beds eventually, but every week without a resident is
               revenue gone for good.
             </p>
           </div>
@@ -286,11 +286,11 @@ export default function MarketingPage() {
               Performance-based, no surprises
             </h2>
             <p className="mt-5 max-w-md text-lg leading-relaxed text-brand-ink-soft">
-              Forget setup fees and monthly retainers. With TRG you pay one fixed fee per qualified lead — and
+              Forget setup fees and monthly retainers. With TRG you pay one fixed fee per qualified lead, and
               nothing else. Only ever pay for enquiries that genuinely match your home.
             </p>
             <div className="mt-7 space-y-3">
-              {['No setup fee', 'No monthly retainer', 'No contracts — cancel anytime'].map((r) => (
+              {['No setup fee', 'No monthly retainer', 'No contracts, cancel anytime'].map((r) => (
                 <div key={r} className="flex items-center gap-3 text-brand-ink">
                   <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-pop">
                     <Check className="h-3.5 w-3.5 text-white" />
@@ -312,7 +312,7 @@ export default function MarketingPage() {
               <p className="mt-1.5 font-display text-2xl font-bold uppercase leading-tight tracking-tight">
                 Each qualified lead
               </p>
-              <p className="mt-2 text-sm text-white/70">One simple, fixed fee per qualified lead — nothing else.</p>
+              <p className="mt-2 text-sm text-white/70">One simple, fixed fee per qualified lead, nothing else.</p>
             </div>
             <div className="p-8">
               <p className="text-xs font-semibold uppercase tracking-wider text-brand-pop">What&apos;s included</p>

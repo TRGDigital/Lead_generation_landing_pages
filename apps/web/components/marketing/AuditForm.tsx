@@ -3,7 +3,7 @@
 import { useState, useTransition } from 'react'
 import { CheckCircle } from 'lucide-react'
 
-// Free care website & enquiry audit — a soft, high-intent lead magnet. Posts to the
+// Free care website & enquiry audit, a soft, high-intent lead magnet. Posts to the
 // existing /api/marketing-leads endpoint (the site URL + goal are folded into the
 // message; `website` stays the empty honeypot the API expects).
 export function AuditForm() {

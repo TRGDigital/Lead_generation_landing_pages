@@ -6,7 +6,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
 export const metadata: Metadata = {
   title: 'Terms of Service | CareBeds',
-  description: 'CareBeds terms of service — the terms that govern use of our platform and services.',
+  description: 'CareBeds terms of service, the terms that govern use of our platform and services.',
   alternates: { canonical: `${SITE_URL}/terms` },
   robots: { index: true, follow: true },
 }

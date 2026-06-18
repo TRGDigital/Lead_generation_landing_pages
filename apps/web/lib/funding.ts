@@ -1,4 +1,4 @@
-// UK care funding means-test model — ported from the CareAssura calculator.
+// UK care funding means-test model, ported from the CareAssura calculator.
 // Figures are public policy, reviewed each April.
 
 export type Country = 'england' | 'scotland' | 'wales' | 'ni'

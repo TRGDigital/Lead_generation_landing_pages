@@ -10,26 +10,26 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 export const metadata: Metadata = {
   title: 'Free Tools for Care Providers | The Care Toolkit | TRG Digital',
   description:
-    'Free, care-specific tools for UK care homes, nursing homes and domiciliary care — a care funding calculator, website grader, CQC checker and more.',
+    'Free, care-specific tools for UK care homes, nursing homes and domiciliary care, a care funding calculator, website grader, CQC checker and more.',
   alternates: { canonical: `${SITE_URL}/tools` },
   robots: { index: true, follow: true },
 }
 
 const TOOLS = [
-  { Icon: Calculator, title: 'Care Funding Calculator', desc: 'Estimate care costs and who pays — your contribution, council support and NHS funding, for all four UK nations.', href: '/tools/funding-calculator', live: true },
-  { Icon: BedDouble, title: 'Cost of an Empty Bed', desc: 'See exactly how much each empty bed costs you per week, month and year — and what filling them is worth.', href: '/tools/empty-bed-calculator', live: true },
-  { Icon: Gauge, title: 'Your Care Website Grader', desc: 'Score your care website the way families judge it — CQC rating, fees, enquiry journey, speed and mobile.', live: false },
+  { Icon: Calculator, title: 'Care Funding Calculator', desc: 'Estimate care costs and who pays, your contribution, council support and NHS funding, for all four UK nations.', href: '/tools/funding-calculator', live: true },
+  { Icon: BedDouble, title: 'Cost of an Empty Bed', desc: 'See exactly how much each empty bed costs you per week, month and year, and what filling them is worth.', href: '/tools/empty-bed-calculator', live: true },
+  { Icon: Gauge, title: 'Your Care Website Grader', desc: 'Score your care website the way families judge it, CQC rating, fees, enquiry journey, speed and mobile.', live: false },
   { Icon: Award, title: 'CQC Rating Checker', desc: 'Look up a care provider’s latest CQC rating and inspection at a glance.', live: false },
-  { Icon: FileText, title: 'Care Heading Checker', desc: 'Check whether your page headings use the words families actually search for — care types, location and more.', live: false },
-  { Icon: Code2, title: 'Care Schema Checker', desc: 'See if your site has the structured data that wins rich results for care homes — reviews, FAQs and local business.', live: false },
+  { Icon: FileText, title: 'Care Heading Checker', desc: 'Check whether your page headings use the words families actually search for, care types, location and more.', live: false },
+  { Icon: Code2, title: 'Care Schema Checker', desc: 'See if your site has the structured data that wins rich results for care homes, reviews, FAQs and local business.', live: false },
   { Icon: Zap, title: 'Website Speed Checker', desc: 'A slow site loses worried families. Check your speed on mobile and desktop, with a care-focused verdict.', live: false },
-  { Icon: Network, title: 'Sitemap Checker', desc: 'Make sure the pages families need — fees, care types, contact, locations — are actually in your sitemap.', live: false },
+  { Icon: Network, title: 'Sitemap Checker', desc: 'Make sure the pages families need, fees, care types, contact, locations, are actually in your sitemap.', live: false },
 ]
 
 export default function ToolsPage() {
   return (
     <>
-      {/* JSON-LD — CollectionPage */}
+      {/* JSON-LD, CollectionPage */}
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -58,7 +58,7 @@ export default function ToolsPage() {
             <Squiggle className="h-6 w-56 text-brand-pop" />
           </div>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
-            Free, care-specific tools for care homes, nursing homes and domiciliary care — built by us, no sign-up
+            Free, care-specific tools for care homes, nursing homes and domiciliary care, built by us, no sign-up
             to use. More are landing all the time.
           </p>
         </div>
@@ -99,7 +99,7 @@ export default function ToolsPage() {
             Want the results turned into more enquiries?
           </h2>
           <p className="relative mx-auto mt-3 max-w-xl text-white/85">
-            The tools show you what&apos;s possible — we make it happen. Marketing, websites and software, built for care.
+            The tools show you what&apos;s possible, we make it happen. Marketing, websites and software, built for care.
           </p>
           <div className="relative mt-7">
             <Link href="/contact" className="btn-cta">

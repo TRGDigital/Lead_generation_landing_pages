@@ -149,7 +149,7 @@ export function FundingCalculator() {
         {result.dpaPossible && (
           <p className="mt-4 flex items-start gap-2 rounded-xl border border-brand-line bg-white p-4 text-sm text-brand-ink-soft">
             <Info className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-pop" />
-            You may be eligible for a <span className="font-semibold text-brand-ink">Deferred Payment Agreement</span> — using your home&apos;s value to pay for care without selling it now.
+            You may be eligible for a <span className="font-semibold text-brand-ink">Deferred Payment Agreement</span>, using your home&apos;s value to pay for care without selling it now.
           </p>
         )}
 

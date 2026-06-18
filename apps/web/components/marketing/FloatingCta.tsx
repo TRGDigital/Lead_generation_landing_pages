@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-// A distinctive, always-in-view contact "sticker" — a rotated coral seal that
+// A distinctive, always-in-view contact "sticker", a rotated coral seal that
 // straightens + grows on hover. Hidden only on the contact page.
 export function FloatingCta() {
   const pathname = usePathname()

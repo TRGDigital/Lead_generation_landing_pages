@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 const VALUE_BADGES = [
   'Care is the only sector we work in',
   'We build & ship our own software',
-  'Marketing, websites & software — one team',
+  'Marketing, websites & software, one team',
   'Measured on enquiries, not vanity metrics',
   'CareStream & CareAssura, live across care',
 ]
@@ -42,7 +42,7 @@ const OPERATE = [
 export default function AboutPage() {
   return (
     <>
-      {/* JSON-LD — AboutPage */}
+      {/* JSON-LD, AboutPage */}
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -71,7 +71,7 @@ export default function AboutPage() {
             <Squiggle className="mt-5 h-6 w-56 text-brand-pop" />
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
               TRG Digital helps UK care providers grow. We bring modern marketing, websites and software to a
-              sector long underserved by generic agencies — and we do it with a deep understanding of how care
+              sector long underserved by generic agencies, and we do it with a deep understanding of how care
               really works.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -93,7 +93,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Visual — care, paired with the software we build + floating tech logos */}
+          {/* Visual, care, paired with the software we build + floating tech logos */}
           <div className="relative">
             <FloatingTechIcons />
             <div className="overflow-hidden rounded-2xl shadow-card">
@@ -132,7 +132,7 @@ export default function AboutPage() {
               <p>
                 Most agencies treat care like any other industry. We do the opposite. Everything we build, market
                 and develop is for the UK care sector, so we already understand your families, your regulators,
-                your funding routes and the way people choose care. That focus changes the work — our{' '}
+                your funding routes and the way people choose care. That focus changes the work, our{' '}
                 <Link href="/marketing" className="font-semibold text-brand-pop underline-offset-2 hover:underline">campaigns</Link>{' '}
                 speak to real families, our{' '}
                 <Link href="/website-development" className="font-semibold text-brand-pop underline-offset-2 hover:underline">websites</Link>{' '}
@@ -140,7 +140,7 @@ export default function AboutPage() {
                 on the ground in care.
               </p>
               <p>
-                And we don&apos;t just advise — we ship. Two of our own products are live and used across the sector
+                And we don&apos;t just advise, we ship. Two of our own products are live and used across the sector
                 today:{' '}
                 <a href="https://carestreamai.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-pop underline-offset-2 hover:underline">CareStream</a>, an AI
                 policy, training and CQC platform for care teams, and{' '}
@@ -184,7 +184,7 @@ export default function AboutPage() {
               Everything you need to win more enquiries
             </h2>
             <p className="mt-4 leading-relaxed text-brand-ink-soft">
-              From a new website to the campaigns that fill it and the software that sets you apart — all under one
+              From a new website to the campaigns that fill it and the software that sets you apart, all under one
               roof, all built for the care sector.
             </p>
           </div>

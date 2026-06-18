@@ -90,7 +90,7 @@ export function LeadsCard() {
   )
 }
 
-// Leads table — modelled on the live admin, with contact details blurred (PII-safe).
+// Leads table, modelled on the live admin, with contact details blurred (PII-safe).
 const STATUS: Record<string, string> = {
   new: 'bg-amber-100 text-amber-700',
   contacted: 'bg-slate-100 text-slate-600',
@@ -183,7 +183,7 @@ export function BingSearchCard() {
       </div>
       <div className="mt-6">
         <p className="text-[11px] text-[#4d5156]">careassura.com</p>
-        <p className="mt-1 text-base font-medium leading-snug text-[#1a0dab]">Haywards Heath Care Homes — Genuine Availability</p>
+        <p className="mt-1 text-base font-medium leading-snug text-[#1a0dab]">Haywards Heath Care Homes, Genuine Availability</p>
         <p className="mt-1.5 text-xs leading-relaxed text-[#4d5156]">Tell us what you need and local care homes with availability come to you. Free for families, no obligation…</p>
       </div>
       <p className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-[11px] font-semibold text-green-700">Top of Bing results</p>

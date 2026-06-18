@@ -4,7 +4,7 @@ const STATS = [
   { value: '100%', label: 'Focused on the UK care sector' },
   { value: '2', label: 'Live products built in-house' },
   { value: '60+', label: 'Languages CareStream supports' },
-  { value: 'End-to-end', label: 'Marketing, web & software — one team' },
+  { value: 'End-to-end', label: 'Marketing, web & software, one team' },
 ]
 
 export function StatBand() {

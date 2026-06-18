@@ -9,7 +9,7 @@ const PROMISES = [
   'One team for marketing, websites & software',
 ]
 
-// "Start your project" — the primary contact section. Bold copy + promises on the
+// "Start your project", the primary contact section. Bold copy + promises on the
 // left, the working form on the right.
 export function StartProject() {
   return (
@@ -24,7 +24,7 @@ export function StartProject() {
             Let&apos;s fill your beds
           </h2>
           <p className="mt-5 max-w-md text-lg leading-relaxed text-white/70">
-            Tell us where you want to grow — more enquiries, a new website, or custom software — and we&apos;ll come
+            Tell us where you want to grow, more enquiries, a new website, or custom software, and we&apos;ll come
             back with a clear plan to get you there.
           </p>
           <ul className="mt-8 space-y-3">

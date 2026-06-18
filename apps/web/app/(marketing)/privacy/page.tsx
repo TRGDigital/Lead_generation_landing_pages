@@ -6,7 +6,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | CareBeds',
-  description: 'CareBeds privacy policy — how we collect, use, and protect your data.',
+  description: 'CareBeds privacy policy, how we collect, use, and protect your data.',
   alternates: { canonical: `${SITE_URL}/privacy` },
   robots: { index: true, follow: true },
 }
@@ -61,10 +61,10 @@ export default function PrivacyPage() {
           <h2>6. Third parties</h2>
           <p>We share data with the following third parties:</p>
           <ul>
-            <li>Supabase (database and authentication hosting — EU servers)</li>
-            <li>Vercel (website hosting — EU/US servers)</li>
-            <li>SendGrid (transactional email — US servers, EU Standard Contractual Clauses apply)</li>
-            <li>Google Analytics (website analytics — anonymised IP)</li>
+            <li>Supabase (database and authentication hosting, EU servers)</li>
+            <li>Vercel (website hosting, EU/US servers)</li>
+            <li>SendGrid (transactional email, US servers, EU Standard Contractual Clauses apply)</li>
+            <li>Google Analytics (website analytics, anonymised IP)</li>
           </ul>
 
           <h2>7. Your rights</h2>

@@ -7,12 +7,12 @@ export const dynamic = 'force-static'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
 export const metadata: Metadata = {
-  title: 'Pricing — Pay Per Move-In | TRG Digital',
+  title: 'Pricing, Pay Per Move-In | TRG Digital',
   description:
     'TRG Digital charges a single fixed fee per confirmed move-in. No setup fee, no monthly retainer, no contracts. See what\'s included and how pricing works.',
   alternates: { canonical: `${SITE_URL}/pricing` },
   openGraph: {
-    title: 'Pricing — Pay Per Move-In | TRG Digital',
+    title: 'Pricing, Pay Per Move-In | TRG Digital',
     description: 'No setup fee, no retainer. One fixed fee per confirmed move-in.',
     type: 'website',
     url: `${SITE_URL}/pricing`,
@@ -22,17 +22,17 @@ export const metadata: Metadata = {
 }
 
 const INCLUDED = [
-  'Dedicated landing page — built and hosted by us',
+  'Dedicated landing page, built and hosted by us',
   'Google Search Ads campaigns (managed and funded)',
   'Meta retargeting campaigns',
   'Enquiry qualification and filtering',
-  'Team members — unlimited seats',
+  'Team members, unlimited seats',
   'Monthly performance reports',
   'Priority support via phone and email',
 ]
 
 const NOT_INCLUDED = [
-  'Ad spend — we cover this',
+  'Ad spend, we cover this',
   'Setup or onboarding fees',
   'Monthly management fees',
   'Fees for enquiries that don\'t convert',
@@ -61,7 +61,7 @@ const PRICING_FAQS = [
   },
   {
     q: 'Do you offer discounts for multiple homes?',
-    a: 'Yes — we offer volume pricing for care groups operating more than 3 homes. Contact us to discuss a group agreement.',
+    a: 'Yes, we offer volume pricing for care groups operating more than 3 homes. Contact us to discuss a group agreement.',
   },
 ]
 
@@ -77,7 +77,7 @@ export default function PricingPage() {
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
             No retainers. No contracts. No fees for enquiries that don&apos;t convert. You
-            pay a single fixed fee when a resident moves in — and nothing else.
+            pay a single fixed fee when a resident moves in, and nothing else.
           </p>
         </div>
       </section>
@@ -152,9 +152,9 @@ export default function PricingPage() {
               </thead>
               <tbody>
                 {[
-                  ['Setup cost', '£0', '£0', '£2,000–5,000'],
+                  ['Setup cost', '£0', '£0', '£2,000 to 5,000'],
                   ['Monthly fee', '£0', '£0', '£1,000+/mo'],
-                  ['Pay per move-in', '✓', '✓ (10–15%)', '—'],
+                  ['Pay per move-in', '✓', '✓ (10 to 15%)', ', '],
                   ['Exclusive leads', '✓', '✗', '✓'],
                   ['You manage ads', 'No', 'No', 'Yes'],
                   ['Landing page included', '✓', '✗', '✗'],

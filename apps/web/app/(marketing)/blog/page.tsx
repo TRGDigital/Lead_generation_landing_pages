@@ -11,9 +11,9 @@ export const revalidate = 3600
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
 export const metadata: Metadata = {
-  title: 'Knowledge Hub — Care Sector Marketing & Software Insights | TRG Digital',
+  title: 'Knowledge Hub, Care Sector Marketing & Software Insights | TRG Digital',
   description:
-    'Guides, analysis and practical advice for UK care providers — marketing, websites, SEO, enquiries and care software, from the TRG Digital team.',
+    'Guides, analysis and practical advice for UK care providers, marketing, websites, SEO, enquiries and care software, from the TRG Digital team.',
   alternates: { canonical: `${SITE_URL}/blog` },
   openGraph: {
     title: 'TRG Digital Knowledge Hub',
@@ -50,7 +50,7 @@ export default async function BlogIndexPage({ searchParams }: Props) {
 
   return (
     <>
-      {/* JSON-LD — Blog */}
+      {/* JSON-LD, Blog */}
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -80,7 +80,7 @@ export default async function BlogIndexPage({ searchParams }: Props) {
             <Squiggle className="h-6 w-56 text-brand-pop" />
           </div>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
-            Guides, analysis and practical advice on marketing, websites, SEO, enquiries and care software — for
+            Guides, analysis and practical advice on marketing, websites, SEO, enquiries and care software, for
             UK care providers.
           </p>
         </div>

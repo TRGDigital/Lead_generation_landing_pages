@@ -82,7 +82,7 @@ export function formatAnswers(set: QuestionSet | null, answers: Record<string, a
     if (q.type === 'budget' && typeof raw === 'object') {
       const min = raw.min ? `£${raw.min}` : ''
       const max = raw.max ? `£${raw.max}` : ''
-      answer = [min, max].filter(Boolean).join(' – ') || ''
+      answer = [min, max].filter(Boolean).join(' to ') || ''
       if (!answer) continue
     } else {
       const labelFor = (v: string) => q.options?.find(o => o.value === v)?.label ?? v

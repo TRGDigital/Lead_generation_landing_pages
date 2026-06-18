@@ -11,26 +11,26 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 export const metadata: Metadata = {
   title: 'Care Home Rebranding | Logo, Identity & Website | TRG Digital',
   description:
-    'A complete care-sector rebrand from TRG Digital — brand strategy, new logo and concepts, full visual identity, guidelines, tone of voice and a redesigned, rebuilt website.',
+    'A complete care-sector rebrand from TRG Digital, brand strategy, new logo and concepts, full visual identity, guidelines, tone of voice and a redesigned, rebuilt website.',
   alternates: { canonical: `${SITE_URL}/rebranding` },
   robots: { index: true, follow: true },
 }
 
 const INCLUDES = [
-  { Icon: Compass, title: 'Brand strategy & positioning', body: 'Who you are, who you serve and the promise you make — the foundation everything is built on.' },
+  { Icon: Compass, title: 'Brand strategy & positioning', body: 'Who you are, who you serve and the promise you make, the foundation everything is built on.' },
   { Icon: PenTool, title: 'Logo design & concepts', body: 'A distinctive new logo, presented as multiple concepts and refined with you, with full variations and file formats.' },
-  { Icon: Palette, title: 'Visual identity', body: 'A complete system — colour palette, typography, iconography and graphic style that feels unmistakably yours.' },
-  { Icon: BookOpen, title: 'Brand guidelines', body: 'A clear brand book so anyone — your team or ours — can apply the brand consistently, everywhere.' },
-  { Icon: MessageSquareText, title: 'Tone of voice & messaging', body: 'How you sound, your key messages and taglines — language that earns trust with families.' },
+  { Icon: Palette, title: 'Visual identity', body: 'A complete system, colour palette, typography, iconography and graphic style that feels unmistakably yours.' },
+  { Icon: BookOpen, title: 'Brand guidelines', body: 'A clear brand book so anyone, your team or ours, can apply the brand consistently, everywhere.' },
+  { Icon: MessageSquareText, title: 'Tone of voice & messaging', body: 'How you sound, your key messages and taglines, language that earns trust with families.' },
   { Icon: Globe, title: 'Website redesign & build', body: 'A brand-new, search-optimised website that brings the identity to life and turns visitors into enquiries.' },
-  { Icon: Printer, title: 'Print & signage', body: 'Stationery, brochures, welcome packs, exterior signage and reception materials — the brand in the real world.' },
+  { Icon: Printer, title: 'Print & signage', body: 'Stationery, brochures, welcome packs, exterior signage and reception materials, the brand in the real world.' },
   { Icon: Share2, title: 'Social & marketing collateral', body: 'Social profiles, templates, ad creative and the assets your team needs to launch and stay on-brand.' },
 ]
 
 const POINTS = [
   'Brand strategy & positioning',
   'New logo, with multiple concepts',
-  'Full visual identity — colour, type, icons',
+  'Full visual identity, colour, type, icons',
   'A brand guidelines document',
   'Tone of voice & key messaging',
   'A redesigned, rebuilt website',
@@ -38,9 +38,9 @@ const POINTS = [
 ]
 
 const STEPS = [
-  { n: '01', title: 'Discover', body: 'We get under the skin of your home — your families, your values and where you want to be — to define the strategy.' },
+  { n: '01', title: 'Discover', body: 'We get under the skin of your home, your families, your values and where you want to be, to define the strategy.' },
   { n: '02', title: 'Design', body: 'Logo concepts, a full visual identity and the messaging that brings it to life, refined together until it’s right.' },
-  { n: '03', title: 'Build & roll out', body: 'We rebuild your website and apply the new brand everywhere — print, signage, social and beyond.' },
+  { n: '03', title: 'Build & roll out', body: 'We rebuild your website and apply the new brand everywhere, print, signage, social and beyond.' },
 ]
 
 const SWATCHES = ['#F0532B', '#FBCC33', '#2a2620', '#7a8a6f', '#f4f1e8']
@@ -48,7 +48,7 @@ const SWATCHES = ['#F0532B', '#FBCC33', '#2a2620', '#7a8a6f', '#f4f1e8']
 export default function RebrandingPage() {
   return (
     <>
-      {/* JSON-LD — Service */}
+      {/* JSON-LD, Service */}
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -76,8 +76,8 @@ export default function RebrandingPage() {
             </h1>
             <Squiggle className="mt-5 h-6 w-56 text-brand-pop" />
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
-              More than a new logo. We rebuild your brand from the ground up — strategy, identity, messaging and a
-              brand-new website — so your home looks the part and wins the trust of every family that finds you.
+              More than a new logo. We rebuild your brand from the ground up, strategy, identity, messaging and a
+              brand-new website, so your home looks the part and wins the trust of every family that finds you.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/contact" className="btn-pop">
@@ -98,7 +98,7 @@ export default function RebrandingPage() {
             </div>
           </div>
 
-          {/* Visual — a brand board */}
+          {/* Visual, a brand board */}
           <div className="relative">
             <div className="rounded-2xl border border-brand-line bg-white p-6 shadow-card">
               <p className="text-xs font-semibold uppercase tracking-widest text-brand-ink-muted">Brand board</p>
@@ -142,16 +142,16 @@ export default function RebrandingPage() {
             <p className="mt-4 font-display text-lg font-semibold text-brand-pop">A complete rebrand, done properly.</p>
             <div className="mt-6 space-y-4 text-base leading-relaxed text-brand-ink-soft">
               <p>
-                A tired logo, an outdated website and inconsistent materials quietly cost you enquiries — families
+                A tired logo, an outdated website and inconsistent materials quietly cost you enquiries, families
                 judge the quality of your care by the way you present it. A full rebrand fixes that from the inside
                 out: a clear strategy, a distinctive identity and a consistent presence everywhere a family meets
                 your home.
               </p>
               <p>
-                We handle the whole thing under one roof — brand strategy, logo and identity, guidelines, tone of
+                We handle the whole thing under one roof, brand strategy, logo and identity, guidelines, tone of
                 voice and a redesigned, rebuilt{' '}
                 <Link href="/website-development" className="font-semibold text-brand-pop underline-offset-2 hover:underline">website</Link>{' '}
-                — then plug straight into your{' '}
+, then plug straight into your{' '}
                 <Link href="/marketing" className="font-semibold text-brand-pop underline-offset-2 hover:underline">marketing</Link>{' '}
                 so the new brand starts winning enquiries from day one.
               </p>
@@ -238,7 +238,7 @@ export default function RebrandingPage() {
           </h2>
           <p className="mx-auto mt-5 max-w-xl leading-relaxed text-white/85">
             Book a free consultation and we&apos;ll show you what a complete rebrand could do for the way families
-            see — and choose — your care.
+            see, and choose, your care.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link href="/contact" className="btn-cta">

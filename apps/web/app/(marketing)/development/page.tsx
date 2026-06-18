@@ -11,7 +11,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 export const metadata: Metadata = {
   title: 'Custom Software Development for Care | TRG Digital',
   description:
-    'TRG Digital designs, builds and runs custom software for the UK care sector — the same capability behind our own products, CareStream and CareAssura.',
+    'TRG Digital designs, builds and runs custom software for the UK care sector, the same capability behind our own products, CareStream and CareAssura.',
   alternates: { canonical: `${SITE_URL}/development` },
   robots: { index: true, follow: true },
 }
@@ -51,7 +51,7 @@ const PRODUCTS = [
 
 const WHAT_WE_BUILD = [
   { Icon: Code2, title: 'Web platforms & portals', body: 'Bespoke applications and customer portals, built for your exact workflow.' },
-  { Icon: Sparkles, title: 'AI assistants', body: 'Grounded, useful AI tools — the kind that power CareStream — built on your data.' },
+  { Icon: Sparkles, title: 'AI assistants', body: 'Grounded, useful AI tools, the kind that power CareStream, built on your data.' },
   { Icon: LayoutDashboard, title: 'Dashboards & reporting', body: 'Turn scattered data into clear, real-time dashboards your team will actually use.' },
   { Icon: Plug, title: 'Integrations & APIs', body: 'Connect the tools you already run so everything talks to everything else.' },
   { Icon: Workflow, title: 'Workflow automation', body: 'Automate the repetitive admin that eats your team’s time, safely and reliably.' },
@@ -70,7 +70,7 @@ const POINTS = [
 
 const STEPS = [
   { n: '01', title: 'Discover', body: 'We learn the problem, the users and the workflow, then scope the smallest thing that moves the needle.' },
-  { n: '02', title: 'Design & build', body: 'Bespoke, on-brand and built on a fast, secure modern stack — shipped in iterations you can see.' },
+  { n: '02', title: 'Design & build', body: 'Bespoke, on-brand and built on a fast, secure modern stack, shipped in iterations you can see.' },
   { n: '03', title: 'Launch & run', body: 'We host, monitor, support and keep improving it, so it stays fast, secure and genuinely useful.' },
 ]
 
@@ -91,7 +91,7 @@ function BrowserMock({ src, alt, url, w, h }: { src: string; alt: string; url: s
 export default function DevelopmentPage() {
   return (
     <>
-      {/* JSON-LD — Service */}
+      {/* JSON-LD, Service */}
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -115,12 +115,12 @@ export default function DevelopmentPage() {
           <div>
             <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Custom software</p>
             <h1 className="mt-4 font-display text-4xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-5xl lg:text-6xl">
-              We don&apos;t just advise — we <span className="text-brand-pop">ship</span>
+              We don&apos;t just advise, we <span className="text-brand-pop">ship</span>
             </h1>
             <Squiggle className="mt-5 h-6 w-56 text-brand-pop" />
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
               We design, build and run custom software for the care sector. The proof? Two of our own products are
-              live and used across the UK today — and we&apos;ll build the same way for you.
+              live and used across the UK today, and we&apos;ll build the same way for you.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Link href="/contact" className="btn-pop">
@@ -161,7 +161,7 @@ export default function DevelopmentPage() {
             <div className="mt-6 space-y-4 text-base leading-relaxed text-brand-ink-soft">
               <p>
                 When the tools you can buy don&apos;t fit the way care actually works, generic software just adds
-                friction. We build bespoke platforms, AI assistants and automations around your real workflow — the
+                friction. We build bespoke platforms, AI assistants and automations around your real workflow, the
                 same capability behind our own products,{' '}
                 <a href="https://carestreamai.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-pop underline-offset-2 hover:underline">CareStream</a>{' '}
                 and{' '}
@@ -299,7 +299,7 @@ export default function DevelopmentPage() {
             Have a product in mind?
           </h2>
           <p className="mx-auto mt-5 max-w-xl leading-relaxed text-white/85">
-            Tell us what you&apos;re trying to solve and we&apos;ll help you shape it — from a single tool to a full
+            Tell us what you&apos;re trying to solve and we&apos;ll help you shape it, from a single tool to a full
             platform.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

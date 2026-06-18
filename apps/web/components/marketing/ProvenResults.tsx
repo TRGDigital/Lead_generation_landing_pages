@@ -3,7 +3,7 @@ import { TrendingUp, BedDouble, TrendingDown, MapPin } from 'lucide-react'
 import { Star, Dots, Burst } from './Decor'
 
 // "Proven results across the care sector".
-// Framed around the OUTCOMES we're built to drive (honest — no fabricated figures).
+// Framed around the OUTCOMES we're built to drive (honest, no fabricated figures).
 // When real client numbers are in, swap each `value` for the hard stat
 // (e.g. '+140%' enquiries, '92%' occupancy) and drop the "figures coming" note.
 const OUTCOMES = [
@@ -28,7 +28,7 @@ export function ProvenResults() {
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-white/70">
             No vanity metrics. Everything we build, run and optimise is judged on the outcomes that actually grow a
-            care business — qualified enquiries in, and empty beds out.
+            care business, qualified enquiries in, and empty beds out.
           </p>
         </div>
 
@@ -46,7 +46,7 @@ export function ProvenResults() {
 
         <div className="mt-10 flex flex-col items-start gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-xl text-sm text-white/50">
-            Live results from our latest care campaigns and websites are landing now — ask us for the most recent
+            Live results from our latest care campaigns and websites are landing now, ask us for the most recent
             figures from real client work.
           </p>
           <Link href="#start" className="btn-cta btn-on-dark shrink-0">

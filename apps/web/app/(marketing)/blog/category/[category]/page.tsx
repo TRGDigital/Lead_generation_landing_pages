@@ -12,7 +12,7 @@ type Props = { params: { category: string }; searchParams: { page?: string } }
 
 export async function generateStaticParams() {
   const categories = await getCategories()
-  // Skip empty/blank categories — an empty slug would emit '/blog/category',
+  // Skip empty/blank categories, an empty slug would emit '/blog/category',
   // which collides with the '/blog/category/[category]' route and fails the build.
   return categories
     .filter((category) => typeof category === 'string' && category.trim().length > 0)
@@ -22,7 +22,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const category = decodeURIComponent(params.category)
   return {
-    title: `${category} — CareBeds Blog`,
+    title: `${category}, CareBeds Blog`,
     description: `Read CareBeds articles about ${category.toLowerCase()}.`,
     alternates: { canonical: `${SITE_URL}/blog/category/${params.category}` },
     robots: { index: true, follow: true },

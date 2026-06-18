@@ -147,7 +147,7 @@ export function HomeHero() {
         </div>
       </div>
 
-      {/* Mobile visual — a scrolling band under the text */}
+      {/* Mobile visual, a scrolling band under the text */}
       <div className="marquee-mask pb-12 lg:hidden">
         <div className="animate-marquee-hero flex w-max items-center gap-5 px-6">
           {[...COLS, ...COLS].map((col, i) => (

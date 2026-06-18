@@ -1,12 +1,12 @@
 import Link from 'next/link'
 import { Star, Dots, Squiggle } from './Decor'
 
-// "Our core services" — a bordered card with per-service care-sector copy and a
+// "Our core services", a bordered card with per-service care-sector copy and a
 // 'See service' button each, plus a bold CTA banner (BoxChilli-style).
 const SERVICES = [
   {
     title: 'Search Engine Optimisation (SEO)',
-    body: 'When a family searches for care in your area, you need to be the home they find first. We build a reliable, long-term SEO presence — local pages, content and technical fixes — so you rank for the searches that actually bring enquiries, not vanity keywords.',
+    body: 'When a family searches for care in your area, you need to be the home they find first. We build a reliable, long-term SEO presence, local pages, content and technical fixes, so you rank for the searches that actually bring enquiries, not vanity keywords.',
     href: '/marketing',
   },
   {
@@ -16,12 +16,12 @@ const SERVICES = [
   },
   {
     title: 'Paid Media Advertising & PPC',
-    body: 'Wasting budget on clicks that never call? Our Google and Meta campaigns put you in front of families actively looking for care near you — and we measure success on enquiries and filled beds, not impressions.',
+    body: 'Wasting budget on clicks that never call? Our Google and Meta campaigns put you in front of families actively looking for care near you, and we measure success on enquiries and filled beds, not impressions.',
     href: '/marketing',
   },
   {
     title: 'Custom Software Development',
-    body: 'When off-the-shelf tools don’t fit, we build bespoke platforms for the care sector — the same capability behind our own products, CareStream and CareAssura. Automate the busywork and give your team tools built for care.',
+    body: 'When off-the-shelf tools don’t fit, we build bespoke platforms for the care sector, the same capability behind our own products, CareStream and CareAssura. Automate the busywork and give your team tools built for care.',
     href: '/development',
   },
 ]

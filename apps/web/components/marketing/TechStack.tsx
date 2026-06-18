@@ -1,4 +1,4 @@
-// "The technology we build on" — the full stack, auto-scrolling across the page.
+// "The technology we build on", the full stack, auto-scrolling across the page.
 // Icon logos with brand colour (greyscale at rest, colour on hover); a few tools
 // without clean marks render as brand-coloured wordmarks.
 import { TECH } from './tech-logos'

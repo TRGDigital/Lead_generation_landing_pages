@@ -44,7 +44,7 @@ export const COPY = {
   ],
 
   // Campaign
-  campaignOn: 'Campaign on — accepting enquiries',
+  campaignOn: 'Campaign on, accepting enquiries',
   campaignOff: 'Campaign paused',
   turnOffConfirmTitle: 'Pause campaign?',
   turnOffConfirmBody:
