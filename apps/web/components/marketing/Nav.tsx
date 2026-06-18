@@ -59,21 +59,30 @@ export default function Nav() {
             </button>
 
             {servicesOpen && (
-              <div className="absolute left-1/2 top-full z-50 w-[34rem] -translate-x-1/2 pt-3">
-                <div className="overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card">
+              <div className="absolute left-1/2 top-full z-50 w-[37rem] -translate-x-1/2 pt-3">
+                <div className="relative overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card">
+                  {/* coral accent bar */}
+                  <div className="h-1.5 w-full bg-brand-pop" />
+                  <div className="flex items-center justify-between px-4 pb-1 pt-4">
+                    <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-pop">What we do</p>
+                    <span className="font-display text-[11px] font-bold uppercase tracking-wide text-brand-ink-muted">All under one roof</span>
+                  </div>
                   <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-2">
                     {SERVICES.map(({ icon: Icon, title, short, href }) => (
                       <Link
                         key={title}
                         href={href}
                         onClick={() => setServicesOpen(false)}
-                        className="group flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-brand-bg-warm"
+                        className="group flex items-start gap-3 rounded-xl border border-transparent p-3 transition-all hover:border-brand-pop/30 hover:bg-brand-bg-warm"
                       >
-                        <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-brand-bg-warm text-brand-accent transition-colors group-hover:bg-brand-accent group-hover:text-brand-ink">
+                        <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop transition-colors group-hover:bg-brand-pop group-hover:text-white">
                           <Icon className="h-[18px] w-[18px]" />
                         </span>
-                        <span className="min-w-0">
-                          <span className="block text-[13px] font-bold uppercase tracking-wide text-brand-ink">{title}</span>
+                        <span className="min-w-0 flex-1">
+                          <span className="flex items-center justify-between gap-2">
+                            <span className="text-[13px] font-bold uppercase tracking-wide text-brand-ink transition-colors group-hover:text-brand-pop">{title}</span>
+                            <span className="flex-shrink-0 text-brand-pop opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden>→</span>
+                          </span>
                           <span className="mt-0.5 block text-xs leading-snug text-brand-ink-soft">{short}</span>
                         </span>
                       </Link>
@@ -82,10 +91,10 @@ export default function Nav() {
                   <Link
                     href="/about"
                     onClick={() => setServicesOpen(false)}
-                    className="flex items-center justify-between border-t border-brand-line bg-brand-bg-warm/50 px-5 py-3 text-sm font-semibold text-brand-ink hover:bg-brand-bg-warm"
+                    className="group flex items-center justify-between bg-brand-ink px-5 py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand-pop"
                   >
                     See how it all fits together
-                    <span aria-hidden>→</span>
+                    <span className="transition-transform group-hover:translate-x-0.5" aria-hidden>→</span>
                   </Link>
                 </div>
               </div>
