@@ -51,10 +51,11 @@ export function EmptyBedCalculator() {
   const [fee, setFee] = useState(1100)
   const [beds, setBeds] = useState(3)
   const [weeks, setWeeks] = useState(8)
-  // With TRG (editable assumptions)
-  const [costPerLead, setCostPerLead] = useState(50)
+  // With TRG — fixed fees, plus an editable conversion assumption
+  const COST_PER_LEAD = 100
+  const WEBSITE_COST = 5000
   const [leadsPerMoveIn, setLeadsPerMoveIn] = useState(4)
-  const [website, setWebsite] = useState(0)
+  const [includeWebsite, setIncludeWebsite] = useState(false)
 
   // Cost of doing nothing
   const perWeek = fee * beds
@@ -64,7 +65,7 @@ export function EmptyBedCalculator() {
 
   // With TRG
   const leadsNeeded = beds * leadsPerMoveIn
-  const trgCost = leadsNeeded * costPerLead + website
+  const trgCost = leadsNeeded * COST_PER_LEAD + (includeWebsite ? WEBSITE_COST : 0)
   const annualRevenue = perYear // revenue recovered in a full year once filled
   const netBenefit = annualRevenue - trgCost
   const roi = trgCost > 0 ? annualRevenue / trgCost : 0
@@ -93,12 +94,18 @@ export function EmptyBedCalculator() {
         <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-brand-pop">
           <TrendingUp className="h-4 w-4" /> What if you filled them with TRG?
         </p>
-        <details className="mt-3 rounded-xl border border-brand-line bg-brand-bg-warm/60 p-4">
-          <summary className="cursor-pointer text-sm font-semibold text-brand-ink">Your assumptions (edit these)</summary>
-          <div className="mt-4 grid gap-4 sm:grid-cols-3">
-            <Money label="Cost per qualified lead" value={costPerLead} onChange={setCostPerLead} />
+        <details className="mt-3 rounded-xl border border-brand-line bg-brand-bg-warm/60 p-4" open>
+          <summary className="cursor-pointer text-sm font-semibold text-brand-ink">Your assumptions</summary>
+          <div className="mt-4 space-y-3">
+            <div className="flex items-center justify-between rounded-lg border border-brand-line bg-white px-4 py-2.5 text-sm">
+              <span className="font-semibold text-brand-ink">Cost per qualified lead</span>
+              <span className="font-display font-bold text-brand-pop">{gbp(COST_PER_LEAD)}</span>
+            </div>
             <Stepper label="Leads per move-in" value={leadsPerMoveIn} onChange={setLeadsPerMoveIn} min={1} max={20} />
-            <Money label="New website (one-off)" value={website} onChange={setWebsite} />
+            <label className="flex cursor-pointer items-center justify-between rounded-lg border border-brand-line bg-white px-4 py-3 text-sm">
+              <span className="font-semibold text-brand-ink">Include a new website ({gbp(WEBSITE_COST)})</span>
+              <input type="checkbox" checked={includeWebsite} onChange={(e) => setIncludeWebsite(e.target.checked)} className="h-5 w-5 accent-brand-pop" />
+            </label>
           </div>
         </details>
 
@@ -107,7 +114,7 @@ export function EmptyBedCalculator() {
             <div>
               <p className="text-xs text-brand-ink-muted">Your investment with TRG</p>
               <p className="font-display text-2xl font-bold text-brand-ink">{gbp(trgCost)}</p>
-              <p className="mt-0.5 text-[11px] text-brand-ink-muted">{leadsNeeded} leads{website ? ' + website' : ''}</p>
+              <p className="mt-0.5 text-[11px] text-brand-ink-muted">{leadsNeeded} leads{includeWebsite ? ' + website' : ''}</p>
             </div>
             <div>
               <p className="text-xs text-brand-ink-muted">Revenue recovered / year</p>
