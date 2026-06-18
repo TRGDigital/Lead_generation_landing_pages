@@ -10,6 +10,7 @@ import { SERVICES } from '@/lib/services'
 
 const LINKS = [
   { href: '/about', label: 'About us' },
+  { href: '/tools', label: 'Free tools' },
   { href: '/blog', label: 'Blog' },
 ]
 
