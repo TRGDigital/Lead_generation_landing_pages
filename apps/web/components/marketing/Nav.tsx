@@ -24,9 +24,9 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-brand-line/60 bg-brand-bg/95 backdrop-blur supports-[backdrop-filter]:bg-brand-bg/80">
-      <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between px-6">
+      <div className="mx-auto flex h-[72px] max-w-7xl items-center gap-6 px-6">
         {/* Logo */}
-        <Link href="/" className="flex items-center" onClick={() => setOpen(false)} aria-label="TRG Digital home">
+        <Link href="/" className="flex shrink-0 items-center" onClick={() => setOpen(false)} aria-label="TRG Digital home">
           <Image
             src="/trg-digital-2025.png"
             alt="TRG Digital"
@@ -38,7 +38,7 @@ export default function Nav() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
+        <nav className="hidden flex-1 items-center justify-center gap-8 md:flex" aria-label="Main navigation">
           {/* Services mega-menu */}
           <div
             className="relative"
@@ -120,7 +120,7 @@ export default function Nav() {
         </nav>
 
         {/* Desktop contact + CTA */}
-        <div className="hidden items-center gap-5 md:flex">
+        <div className="hidden shrink-0 items-center gap-5 md:flex">
           <a href="mailto:hello@trgdigital.com" className="hidden items-center gap-2 text-base font-bold uppercase tracking-wide text-brand-ink-soft transition-colors hover:text-brand-pop xl:flex">
             <Mail className="h-4 w-4 text-brand-pop" /> hello@trgdigital.com
           </a>
@@ -134,7 +134,7 @@ export default function Nav() {
 
         {/* Mobile toggle */}
         <button
-          className="-mr-2 p-2 text-brand-ink-soft md:hidden"
+          className="-mr-2 ml-auto p-2 text-brand-ink-soft md:hidden"
           onClick={() => setOpen(!open)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
