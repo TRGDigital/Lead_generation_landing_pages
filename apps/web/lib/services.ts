@@ -13,7 +13,7 @@ export type Service = {
 export const SERVICES: Service[] = [
   {
     icon: Palette,
-    title: 'Rebranding',
+    title: 'Full Rebranding',
     short: 'New logo, identity & website',
     body: 'A complete rebrand — strategy, logo, full visual identity, guidelines and a redesigned, rebuilt website that families trust.',
     href: '/rebranding',

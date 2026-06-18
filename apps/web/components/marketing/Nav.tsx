@@ -37,7 +37,7 @@ export default function Nav() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-6 md:flex" aria-label="Main navigation">
+        <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
           {/* Services mega-menu */}
           <div
             className="relative"
@@ -47,8 +47,8 @@ export default function Nav() {
             <button
               type="button"
               className={cn(
-                'flex items-center gap-1 text-sm font-medium transition-colors',
-                servicesActive ? 'text-brand-ink' : 'text-brand-ink-soft hover:text-brand-ink',
+                'relative flex items-center gap-1 text-base font-bold uppercase tracking-wide transition-colors after:absolute after:-bottom-2 after:left-0 after:h-[3px] after:w-full after:rounded-full after:bg-brand-pop after:transition-opacity',
+                servicesActive ? 'text-brand-ink after:opacity-100' : 'text-brand-ink-soft hover:text-brand-ink after:opacity-0',
               )}
               aria-expanded={servicesOpen}
               aria-haspopup="true"
@@ -73,7 +73,7 @@ export default function Nav() {
                           <Icon className="h-[18px] w-[18px]" />
                         </span>
                         <span className="min-w-0">
-                          <span className="block text-sm font-semibold text-brand-ink">{title}</span>
+                          <span className="block text-[13px] font-bold uppercase tracking-wide text-brand-ink">{title}</span>
                           <span className="mt-0.5 block text-xs leading-snug text-brand-ink-soft">{short}</span>
                         </span>
                       </Link>
@@ -99,8 +99,8 @@ export default function Nav() {
                 key={href}
                 href={href}
                 className={cn(
-                  'text-sm font-medium transition-colors',
-                  active ? 'text-brand-ink' : 'text-brand-ink-soft hover:text-brand-ink',
+                  'relative text-base font-bold uppercase tracking-wide transition-colors after:absolute after:-bottom-2 after:left-0 after:h-[3px] after:w-full after:rounded-full after:bg-brand-pop after:transition-opacity',
+                  active ? 'text-brand-ink after:opacity-100' : 'text-brand-ink-soft hover:text-brand-ink after:opacity-0',
                 )}
               >
                 {label}
@@ -143,7 +143,7 @@ export default function Nav() {
           <button
             type="button"
             onClick={() => setMobileServices((v) => !v)}
-            className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-brand-ink-soft hover:bg-brand-line/40 hover:text-brand-ink"
+            className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-base font-bold uppercase tracking-wide text-brand-ink-soft hover:bg-brand-line/40 hover:text-brand-ink"
             aria-expanded={mobileServices}
           >
             Services
@@ -169,7 +169,7 @@ export default function Nav() {
             <Link
               key={href}
               href={href}
-              className="block rounded-lg px-3 py-2.5 text-sm font-medium text-brand-ink-soft hover:bg-brand-line/40 hover:text-brand-ink"
+              className="block rounded-lg px-3 py-2.5 text-base font-bold uppercase tracking-wide text-brand-ink-soft hover:bg-brand-line/40 hover:text-brand-ink"
               onClick={() => setOpen(false)}
             >
               {label}

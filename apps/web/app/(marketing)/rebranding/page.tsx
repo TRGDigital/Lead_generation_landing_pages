@@ -70,7 +70,7 @@ export default function RebrandingPage() {
         <Star className="absolute right-8 bottom-12 hidden h-12 w-12 rotate-12 text-brand-pop/60 lg:block" />
         <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Rebranding</p>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Full Rebranding</p>
             <h1 className="mt-4 font-display text-4xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-5xl lg:text-6xl">
               A brand families instantly <span className="text-brand-pop">trust</span>
             </h1>
