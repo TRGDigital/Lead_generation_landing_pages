@@ -120,10 +120,10 @@ export default function Nav() {
 
         {/* Desktop contact + CTA */}
         <div className="hidden items-center gap-5 md:flex">
-          <a href="mailto:hello@trgdigital.com" className="hidden items-center gap-2 text-sm font-semibold text-brand-ink-soft transition-colors hover:text-brand-pop xl:flex">
+          <a href="mailto:hello@trgdigital.com" className="hidden items-center gap-2 text-base font-bold uppercase tracking-wide text-brand-ink-soft transition-colors hover:text-brand-pop xl:flex">
             <Mail className="h-4 w-4 text-brand-pop" /> hello@trgdigital.com
           </a>
-          <a href="tel:+442070000000" className="flex items-center gap-2 text-sm font-semibold text-brand-ink-soft transition-colors hover:text-brand-pop">
+          <a href="tel:+442070000000" className="flex items-center gap-2 text-base font-bold uppercase tracking-wide text-brand-ink-soft transition-colors hover:text-brand-pop">
             <Phone className="h-4 w-4 text-brand-pop" /> 0207 000 0000
           </a>
           <Link href="/contact" className="btn-pop h-10 px-5 text-xs">
