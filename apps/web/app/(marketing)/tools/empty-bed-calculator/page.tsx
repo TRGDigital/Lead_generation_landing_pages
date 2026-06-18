@@ -80,7 +80,30 @@ export default function EmptyBedPage() {
 
       <section className="bg-brand-bg-warm px-6 py-24">
         <div className="mx-auto max-w-3xl">
-          <h2 className="mb-10 text-center font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
+          {/* About / how-to (SEO) */}
+          <h2 className="font-display text-2xl font-bold uppercase tracking-tight text-brand-ink sm:text-3xl">
+            About the cost of an empty bed calculator
+          </h2>
+          <div className="mt-4 space-y-4 text-base leading-relaxed text-brand-ink-soft">
+            <p>
+              Every empty bed in a care home is revenue that&apos;s gone for good — you can&apos;t sell last
+              week&apos;s vacancy. Yet because the cost is spread out and easy to overlook, many operators
+              underestimate just how much occupancy gaps are quietly costing them. Our free cost-of-an-empty-bed
+              calculator makes that number impossible to ignore, turning your weekly fee and current vacancies into
+              the real figure you&apos;re losing every week, every month and across a full year — the business case
+              for filling beds faster, in black and white.
+            </p>
+            <p>
+              Using it takes seconds. Enter the weekly fee you charge per bed, the number of beds currently empty,
+              and roughly how long they&apos;ve been vacant. The calculator instantly shows your lost revenue per
+              week, per month and annualised over a year, plus the total those current vacancies have already cost
+              you. Care home, nursing home and domiciliary care operators use it to justify proactive marketing —
+              because once you can see that a handful of empty beds adds up to tens of thousands of pounds a year,
+              filling them quickly becomes the obvious priority.
+            </p>
+          </div>
+
+          <h2 className="mb-10 mt-16 text-center font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
             Empty beds, explained
           </h2>
           <div className="space-y-3">

@@ -83,7 +83,32 @@ export default function FundingCalculatorPage() {
       {/* ── FAQ ───────────────────────────────────────────────────────── */}
       <section className="bg-brand-bg-warm px-6 py-24">
         <div className="mx-auto max-w-3xl">
-          <h2 className="mb-10 text-center font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
+          {/* About / how-to (SEO) */}
+          <h2 className="font-display text-2xl font-bold uppercase tracking-tight text-brand-ink sm:text-3xl">
+            About the care funding calculator
+          </h2>
+          <div className="mt-4 space-y-4 text-base leading-relaxed text-brand-ink-soft">
+            <p>
+              Working out who pays for care is one of the most confusing parts of arranging it. Care funding in the
+              UK is means-tested, and the rules — capital thresholds, the personal expenses allowance, tariff income
+              and NHS contributions like Funded Nursing Care — differ between England, Scotland, Wales and Northern
+              Ireland. Our free care funding calculator brings all of that together into a clear, personalised
+              estimate in under a minute, with no sign-up and no jargon, so families can understand roughly what
+              residential or nursing care will cost and who will pay before they ever speak to a local authority.
+            </p>
+            <p>
+              To use it, choose your nation, select residential or nursing care, then enter your savings, whether
+              you own your home (and whether a partner still lives there), your total weekly income and the weekly
+              care fee. The calculator applies the correct means-test thresholds for your nation, works out any
+              tariff income, factors in NHS or Funded Nursing Care contributions, and tells you whether you&apos;re
+              likely to be self-funding, in the partial-funding band or eligible for full council support — together
+              with a weekly breakdown of what you, the council and the NHS would each pay, and whether a Deferred
+              Payment Agreement might apply. It&apos;s a guide rather than financial advice, but it gives a realistic
+              picture before a formal financial assessment.
+            </p>
+          </div>
+
+          <h2 className="mb-10 mt-16 text-center font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
             Care funding, explained
           </h2>
           <div className="space-y-3">
