@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 const TOOLS = [
   { Icon: Calculator, title: 'Care Funding Calculator', desc: 'Estimate care costs and who pays — your contribution, council support and NHS funding, for all four UK nations.', href: '/tools/funding-calculator', live: true },
-  { Icon: BedDouble, title: 'Cost of an Empty Bed', desc: 'See exactly how much each empty bed costs you per week, month and year — and what filling them is worth.', live: false },
+  { Icon: BedDouble, title: 'Cost of an Empty Bed', desc: 'See exactly how much each empty bed costs you per week, month and year — and what filling them is worth.', href: '/tools/empty-bed-calculator', live: true },
   { Icon: Gauge, title: 'Your Care Website Grader', desc: 'Score your care website the way families judge it — CQC rating, fees, enquiry journey, speed and mobile.', live: false },
   { Icon: Award, title: 'CQC Rating Checker', desc: 'Look up a care provider’s latest CQC rating and inspection at a glance.', live: false },
   { Icon: FileText, title: 'Care Heading Checker', desc: 'Check whether your page headings use the words families actually search for — care types, location and more.', live: false },
