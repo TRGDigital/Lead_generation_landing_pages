@@ -2,33 +2,112 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { usePathname } from 'next/navigation'
-import { Menu, X, ChevronDown, Mail, Phone } from 'lucide-react'
+import { Menu, X, ChevronDown, Mail, Phone, type LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { SERVICES } from '@/lib/services'
+import { TOOLS } from '@/lib/tools'
 
 const LINKS = [
+  { href: '/work', label: 'Work' },
   { href: '/about', label: 'About us' },
-  { href: '/tools', label: 'Free tools' },
   { href: '/blog', label: 'Blog' },
 ]
+
+type MegaItem = { icon: LucideIcon; title: string; short: string; href: string }
+
+function DesktopMega({
+  label, active, open, setOpen, items, eyebrow, tagline, ctaHref, ctaLabel,
+}: {
+  label: string
+  active: boolean
+  open: boolean
+  setOpen: (v: boolean) => void
+  items: MegaItem[]
+  eyebrow: string
+  tagline: string
+  ctaHref: string
+  ctaLabel: string
+}) {
+  return (
+    <div className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <button
+        type="button"
+        className={cn(
+          'relative flex items-center gap-1 text-base font-bold uppercase tracking-wide transition-colors after:absolute after:-bottom-2 after:left-0 after:h-[3px] after:w-full after:rounded-full after:bg-brand-pop after:transition-opacity',
+          active ? 'text-brand-ink after:opacity-100' : 'text-brand-ink-soft hover:text-brand-ink after:opacity-0',
+        )}
+        aria-expanded={open}
+        aria-haspopup="true"
+        onClick={() => setOpen(!open)}
+      >
+        {label}
+        <ChevronDown className={cn('h-4 w-4 transition-transform', open && 'rotate-180')} />
+      </button>
+
+      {open && (
+        <div className="absolute left-1/2 top-full z-50 w-[37rem] -translate-x-1/2 pt-3">
+          <div className="relative overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card">
+            <div className="h-1.5 w-full bg-brand-pop" />
+            <div className="flex items-center justify-between px-4 pb-1 pt-4">
+              <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-pop">{eyebrow}</p>
+              <span className="font-display text-[11px] font-bold uppercase tracking-wide text-brand-ink-muted">{tagline}</span>
+            </div>
+            <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-2">
+              {items.map(({ icon: Icon, title, short, href }) => (
+                <Link
+                  key={title}
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  className="group flex items-start gap-3 rounded-xl border border-transparent p-3 transition-all hover:border-brand-pop/30 hover:bg-brand-bg-warm"
+                >
+                  <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop transition-colors group-hover:bg-brand-pop group-hover:text-white">
+                    <Icon className="h-[18px] w-[18px]" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="flex items-center justify-between gap-2">
+                      <span className="text-[13px] font-bold uppercase tracking-wide text-brand-ink transition-colors group-hover:text-brand-pop">{title}</span>
+                      <span className="flex-shrink-0 text-brand-pop opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden>→</span>
+                    </span>
+                    <span className="mt-0.5 block text-xs leading-snug text-brand-ink-soft">{short}</span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+            <Link
+              href={ctaHref}
+              onClick={() => setOpen(false)}
+              className="group flex items-center justify-between bg-brand-ink px-5 py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand-pop"
+            >
+              {ctaLabel}
+              <span className="transition-transform group-hover:translate-x-0.5" aria-hidden>→</span>
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  const [toolsOpen, setToolsOpen] = useState(false)
   const [mobileServices, setMobileServices] = useState(false)
+  const [mobileTools, setMobileTools] = useState(false)
   const pathname = usePathname()
 
   const servicesActive = SERVICES.some((s) => pathname === s.href || pathname.startsWith(s.href + '/'))
+  const toolsActive = pathname === '/tools' || pathname.startsWith('/tools/')
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-brand-line/60 bg-brand-bg/95 backdrop-blur supports-[backdrop-filter]:bg-brand-bg/80">
       <div className="mx-auto flex h-[72px] max-w-7xl items-center gap-6 px-6">
         {/* Logo */}
         <Link href="/" className="flex shrink-0 items-center" onClick={() => setOpen(false)} aria-label="TRG Digital home">
-          <Image
-            src="/trg-digital-2025.png"
+          <ManagedImage
+            src="/trg-digital-2025-t.png"
             alt="TRG Digital"
             width={4167}
             height={967}
@@ -39,68 +118,28 @@ export default function Nav() {
 
         {/* Desktop nav */}
         <nav className="hidden flex-1 items-center justify-center gap-8 md:flex" aria-label="Main navigation">
-          {/* Services mega-menu */}
-          <div
-            className="relative"
-            onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
-          >
-            <button
-              type="button"
-              className={cn(
-                'relative flex items-center gap-1 text-base font-bold uppercase tracking-wide transition-colors after:absolute after:-bottom-2 after:left-0 after:h-[3px] after:w-full after:rounded-full after:bg-brand-pop after:transition-opacity',
-                servicesActive ? 'text-brand-ink after:opacity-100' : 'text-brand-ink-soft hover:text-brand-ink after:opacity-0',
-              )}
-              aria-expanded={servicesOpen}
-              aria-haspopup="true"
-              onClick={() => setServicesOpen((v) => !v)}
-            >
-              Services
-              <ChevronDown className={cn('h-4 w-4 transition-transform', servicesOpen && 'rotate-180')} />
-            </button>
-
-            {servicesOpen && (
-              <div className="absolute left-1/2 top-full z-50 w-[37rem] -translate-x-1/2 pt-3">
-                <div className="relative overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card">
-                  {/* coral accent bar */}
-                  <div className="h-1.5 w-full bg-brand-pop" />
-                  <div className="flex items-center justify-between px-4 pb-1 pt-4">
-                    <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-pop">What we do</p>
-                    <span className="font-display text-[11px] font-bold uppercase tracking-wide text-brand-ink-muted">All under one roof</span>
-                  </div>
-                  <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-2">
-                    {SERVICES.map(({ icon: Icon, title, short, href }) => (
-                      <Link
-                        key={title}
-                        href={href}
-                        onClick={() => setServicesOpen(false)}
-                        className="group flex items-start gap-3 rounded-xl border border-transparent p-3 transition-all hover:border-brand-pop/30 hover:bg-brand-bg-warm"
-                      >
-                        <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop transition-colors group-hover:bg-brand-pop group-hover:text-white">
-                          <Icon className="h-[18px] w-[18px]" />
-                        </span>
-                        <span className="min-w-0 flex-1">
-                          <span className="flex items-center justify-between gap-2">
-                            <span className="text-[13px] font-bold uppercase tracking-wide text-brand-ink transition-colors group-hover:text-brand-pop">{title}</span>
-                            <span className="flex-shrink-0 text-brand-pop opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden>→</span>
-                          </span>
-                          <span className="mt-0.5 block text-xs leading-snug text-brand-ink-soft">{short}</span>
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                  <Link
-                    href="/about"
-                    onClick={() => setServicesOpen(false)}
-                    className="group flex items-center justify-between bg-brand-ink px-5 py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-brand-pop"
-                  >
-                    See how it all fits together
-                    <span className="transition-transform group-hover:translate-x-0.5" aria-hidden>→</span>
-                  </Link>
-                </div>
-              </div>
-            )}
-          </div>
+          <DesktopMega
+            label="Services"
+            active={servicesActive}
+            open={servicesOpen}
+            setOpen={setServicesOpen}
+            items={SERVICES}
+            eyebrow="What we do"
+            tagline="All under one roof"
+            ctaHref="/about"
+            ctaLabel="See how it all fits together"
+          />
+          <DesktopMega
+            label="Free tools"
+            active={toolsActive}
+            open={toolsOpen}
+            setOpen={setToolsOpen}
+            items={TOOLS}
+            eyebrow="The care toolkit"
+            tagline="Free, no sign-up"
+            ctaHref="/tools"
+            ctaLabel="See all free tools"
+          />
 
           {LINKS.map(({ href, label }) => {
             const active = pathname === href || pathname.startsWith(href + '/')
@@ -121,11 +160,11 @@ export default function Nav() {
 
         {/* Desktop contact + CTA */}
         <div className="hidden shrink-0 items-center gap-5 md:flex">
-          <a href="mailto:hello@trgdigital.com" className="hidden items-center gap-2 text-base font-bold uppercase tracking-wide text-brand-ink-soft transition-colors hover:text-brand-pop xl:flex">
-            <Mail className="h-4 w-4 text-brand-pop" /> hello@trgdigital.com
+          <a href="mailto:hello@trgdigital.co.uk" className="hidden items-center gap-2 text-base font-bold uppercase tracking-wide text-brand-ink-soft transition-colors hover:text-brand-pop xl:flex">
+            <Mail className="h-4 w-4 text-brand-pop" /> hello@trgdigital.co.uk
           </a>
-          <a href="tel:+442070000000" className="flex items-center gap-2 text-base font-bold uppercase tracking-wide text-brand-ink-soft transition-colors hover:text-brand-pop">
-            <Phone className="h-4 w-4 text-brand-pop" /> 0207 000 0000
+          <a href="tel:+442080641596" className="flex items-center gap-2 text-base font-bold uppercase tracking-wide text-brand-ink-soft transition-colors hover:text-brand-pop">
+            <Phone className="h-4 w-4 text-brand-pop" /> 020 8064 1596
           </a>
           <Link href="/contact" className="btn-pop h-10 px-5 text-xs">
             Contact us
@@ -175,6 +214,39 @@ export default function Nav() {
             </div>
           )}
 
+          {/* Free tools group */}
+          <button
+            type="button"
+            onClick={() => setMobileTools((v) => !v)}
+            className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-base font-bold uppercase tracking-wide text-brand-ink-soft hover:bg-brand-line/40 hover:text-brand-ink"
+            aria-expanded={mobileTools}
+          >
+            Free tools
+            <ChevronDown className={cn('h-4 w-4 transition-transform', mobileTools && 'rotate-180')} />
+          </button>
+          {mobileTools && (
+            <div className="space-y-0.5 pb-1 pl-3">
+              {TOOLS.map(({ icon: Icon, title, href }) => (
+                <Link
+                  key={title}
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-brand-ink-soft hover:bg-brand-line/40 hover:text-brand-ink"
+                >
+                  <Icon className="h-4 w-4 text-brand-accent" />
+                  {title}
+                </Link>
+              ))}
+              <Link
+                href="/tools"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-semibold text-brand-pop hover:bg-brand-line/40"
+              >
+                See all free tools →
+              </Link>
+            </div>
+          )}
+
           {[...LINKS, { href: '/contact', label: 'Contact' }].map(({ href, label }) => (
             <Link
               key={href}
@@ -186,11 +258,11 @@ export default function Nav() {
             </Link>
           ))}
           <div className="space-y-3 border-t border-brand-line/60 pt-3">
-            <a href="mailto:hello@trgdigital.com" className="flex items-center gap-2 px-3 text-sm font-medium text-brand-ink-soft">
-              <Mail className="h-4 w-4 text-brand-pop" /> hello@trgdigital.com
+            <a href="mailto:hello@trgdigital.co.uk" className="flex items-center gap-2 px-3 text-sm font-medium text-brand-ink-soft">
+              <Mail className="h-4 w-4 text-brand-pop" /> hello@trgdigital.co.uk
             </a>
-            <a href="tel:+442070000000" className="flex items-center gap-2 px-3 text-sm font-medium text-brand-ink-soft">
-              <Phone className="h-4 w-4 text-brand-pop" /> 0207 000 0000
+            <a href="tel:+442080641596" className="flex items-center gap-2 px-3 text-sm font-medium text-brand-ink-soft">
+              <Phone className="h-4 w-4 text-brand-pop" /> 020 8064 1596
             </a>
             <Link
               href="/contact"

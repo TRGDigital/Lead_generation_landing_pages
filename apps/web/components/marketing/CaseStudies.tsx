@@ -19,12 +19,16 @@ const WORK: Work[] = [
   {
     name: 'Crossways Care Home',
     blurb: 'A new, search-optimised website built to turn local searches into enquiries and visits.',
-    status: 'In build',
+    image: '/mockups/crossways.png',
+    href: '/work/crossways-care-home',
+    status: 'Live',
   },
   {
     name: 'Ferndale Nursing Home',
     blurb: 'A fresh site and enquiry funnel designed to showcase the home and fill available beds.',
-    status: 'In build',
+    image: '/mockups/ferndale.png',
+    href: '/work/ferndale-nursing-home',
+    status: 'Live',
   },
   {
     name: 'CareAssura',
@@ -84,16 +88,23 @@ export function CaseStudies() {
                   {result && <p className="mt-3 text-sm font-semibold text-brand-accent">{result}</p>}
                   {href && (
                     <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-ink">
-                      Visit site <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                      {href.startsWith('http') ? 'Visit site' : 'Read case study'}{' '}
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                     </span>
                   )}
                 </div>
               </div>
             )
             return href ? (
-              <a key={name} href={href} target="_blank" rel="noopener noreferrer" className="block">
-                {card}
-              </a>
+              href.startsWith('http') ? (
+                <a key={name} href={href} target="_blank" rel="noopener noreferrer" className="block">
+                  {card}
+                </a>
+              ) : (
+                <Link key={name} href={href} className="block">
+                  {card}
+                </Link>
+              )
             ) : (
               <div key={name}>{card}</div>
             )
