@@ -230,6 +230,7 @@ export async function saveAccessibility(id: string, formData: FormData) {
     .update({
       accessibility_enabled: formData.get('accessibility_enabled') === 'on',
       accessibility_position: ['bottom-right', 'bottom-left'].includes(position) ? position : 'bottom-right',
+      accessibility_intro: String(formData.get('accessibility_intro') ?? '').slice(0, 4000),
     })
     .eq('id', id)
   if (error) throw new Error(error.message)

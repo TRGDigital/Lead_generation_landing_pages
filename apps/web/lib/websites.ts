@@ -35,6 +35,7 @@ export type Website = {
   tools_la_slug: string
   accessibility_enabled: boolean
   accessibility_position: 'bottom-right' | 'bottom-left'
+  accessibility_intro: string
   callbar_enabled: boolean
   callbar_phone: string
   callbar_label: string
