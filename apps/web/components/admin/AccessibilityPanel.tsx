@@ -27,29 +27,10 @@ export default function AccessibilityPanel({ site, widgetOrigin }: { site: Websi
   }
 
   return (
-    <div className="space-y-5">
-      <p className="text-sm text-brand-ink-muted">
-        A floating “Accessibility” button that lets visitors make the site easier to use: bigger text, high contrast,
-        a readable font, highlighted links, a bigger cursor and reduced motion. Choices are remembered on their device.
-        Great for older families, and it helps the site pass accessibility checks.
-      </p>
-
-      <label className="flex items-start gap-2.5 rounded-xl border border-brand-line p-3">
-        <input type="checkbox" checked={enabled} onChange={(e) => setEnabled(e.target.checked)} className="mt-0.5" />
-        <span>
-          <span className="block text-sm font-semibold text-brand-ink">Enable the accessibility toolbar</span>
-          <span className="mt-0.5 block text-xs text-brand-ink-muted">Once the snippet below is on the site, the button only appears while this is on.</span>
-        </span>
-      </label>
-
-      <label className="block max-w-xs">
-        <span className="mb-1 block text-sm font-medium text-brand-ink">Button position</span>
-        <select value={position} onChange={(e) => setPosition(e.target.value as Website['accessibility_position'])} className="w-full rounded-lg border border-brand-line px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent/30">
-          <option value="bottom-right">Bottom right</option>
-          <option value="bottom-left">Bottom left</option>
-        </select>
-      </label>
-
+    <div className="space-y-6">
+      {/* Read-aloud welcome — applies to this site's accessibility bar,
+          including sites we build that have their own built-in bar (it is
+          fetched from /api/accessibility-config, not the snippet below). */}
       <div>
         <span className="mb-1 block text-sm font-medium text-brand-ink">Read-aloud welcome (spoken first)</span>
         <textarea
@@ -60,7 +41,7 @@ export default function AccessibilityPanel({ site, widgetOrigin }: { site: Websi
           placeholder="A warm welcome read aloud first when a visitor presses ‘Listen to page’. Never shown on screen. Leave blank to use the site’s built-in default."
           className="w-full rounded-lg border border-brand-line px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent/30"
         />
-        <p className="mt-1 text-xs text-brand-ink-muted">{intro.length.toLocaleString()} / 4,000 characters. Spoken first by the “Listen to page” button, before the page content. Never displayed on the page.</p>
+        <p className="mt-1 text-xs text-brand-ink-muted">{intro.length.toLocaleString()} / 4,000 characters. Spoken first by the “Listen to page” button, before the page content. Never shown on screen. This applies to the site’s accessibility bar — including sites we build that have their own built-in bar, so no snippet is needed.</p>
       </div>
 
       <div className="flex items-center gap-3">
@@ -70,10 +51,38 @@ export default function AccessibilityPanel({ site, widgetOrigin }: { site: Websi
         {saved && <span className="text-sm text-green-600">Saved</span>}
       </div>
 
-      <div className="border-t border-brand-line pt-5">
-        <p className="mb-1 text-sm font-semibold text-brand-ink">Install on {site.name}’s site</p>
-        <p className="mb-3 text-xs text-brand-ink-muted">Paste this once, just before the closing &lt;/body&gt; tag. The button is brand-coloured automatically.</p>
-        <EmbedSnippet snippet={snippet} />
+      {/* Embeddable toolbar — only for third-party sites without their own bar. */}
+      <div className="space-y-5 border-t border-brand-line pt-5">
+        <div>
+          <p className="text-sm font-semibold text-brand-ink">Embeddable accessibility toolbar</p>
+          <p className="mt-1 text-xs text-brand-ink-muted">
+            A floating “Accessibility” button (bigger text, high contrast, a readable font, highlighted links, a bigger cursor, reduced motion).
+            Only needed for third-party sites that don’t already have an accessibility bar. Sites we build (like {site.name}) already include one,
+            so you can ignore the toggle, position and snippet below — the welcome above still applies to them.
+          </p>
+        </div>
+
+        <label className="flex items-start gap-2.5 rounded-xl border border-brand-line p-3">
+          <input type="checkbox" checked={enabled} onChange={(e) => setEnabled(e.target.checked)} className="mt-0.5" />
+          <span>
+            <span className="block text-sm font-semibold text-brand-ink">Enable the embeddable toolbar</span>
+            <span className="mt-0.5 block text-xs text-brand-ink-muted">Once the snippet below is on the site, the button only appears while this is on.</span>
+          </span>
+        </label>
+
+        <label className="block max-w-xs">
+          <span className="mb-1 block text-sm font-medium text-brand-ink">Button position</span>
+          <select value={position} onChange={(e) => setPosition(e.target.value as Website['accessibility_position'])} className="w-full rounded-lg border border-brand-line px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent/30">
+            <option value="bottom-right">Bottom right</option>
+            <option value="bottom-left">Bottom left</option>
+          </select>
+        </label>
+
+        <div>
+          <p className="mb-1 text-sm font-semibold text-brand-ink">Install on {site.name}’s site</p>
+          <p className="mb-3 text-xs text-brand-ink-muted">Paste this once, just before the closing &lt;/body&gt; tag. The button is brand-coloured automatically.</p>
+          <EmbedSnippet snippet={snippet} />
+        </div>
       </div>
     </div>
   )
