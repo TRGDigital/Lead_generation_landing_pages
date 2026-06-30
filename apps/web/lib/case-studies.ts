@@ -1,11 +1,15 @@
 // Case-study content for /work/[slug]. All copy lives here so it's easy to edit.
-// Both homes are new builds, so the "results" section is framed as targets +
-// the real empty-bed economics — no fabricated metrics (live figures get added
-// as they come in). Keep two entries in sync structurally.
+// Both homes are new builds, so traffic/enquiry stats are clearly-flagged
+// placeholders (replace with live data) — only the "pages & articles" count is a
+// real, current figure. No fabricated performance metrics.
 
 export type CaseStudyFact = { label: string; value: string }
-export type ApproachStep = { title: string; body: string }
+export type ApproachStep = { title: string; body: string; points: string[] }
 export type Target = { goal: string; detail: string }
+
+export type ShowcaseTool = { name: string; desc: string; image: string }
+export type ShowcaseLocal = { label: string; image: string }
+export type Stat = { value: string; label: string; note?: string; placeholder?: boolean }
 
 export type CaseStudy = {
   slug: string
@@ -19,7 +23,7 @@ export type CaseStudy = {
   /** Hero */
   eyebrow: string
   title: string
-  titleAccent: string // the highlighted word(s), rendered in brand-pop
+  titleAccent: string
   lede: string
   facts: CaseStudyFact[]
   /** 01 — The brief */
@@ -28,6 +32,24 @@ export type CaseStudy = {
   /** 02 — The approach (exactly four pillars; icons applied in order) */
   approachIntro: string
   approach: ApproachStep[]
+  /** Showcase — the real pages we built */
+  tools: {
+    intro: string
+    featured: { name: string; desc: string; desktop: string; mobile: string }
+    others: ShowcaseTool[]
+  }
+  local: {
+    intro: string
+    mobile: string
+    items: ShowcaseLocal[]
+  }
+  blog: {
+    intro: string
+    image: string
+  }
+  /** Stats band */
+  stats: Stat[]
+  statsNote: string
   /** 03 — The economics + what success looks like */
   economicsLede: string
   economicsPoints: string[]
@@ -70,24 +92,81 @@ const crossways: CaseStudy = {
     {
       title: 'A new, search-built website',
       body:
-        'A fast, modern site engineered to convert. Click-to-call, callback requests, live room availability and an AI assistant make it effortless for a family to take the next step, on any device, day or night.',
+        'A fast, modern site engineered to convert, so it is effortless for a family to take the next step, on any device, day or night.',
+      points: [
+        'Server-rendered for instant loading and strong rankings',
+        'Click-to-call, callback forms, live room availability and an AI assistant on every page',
+        'Helpful funding tools that answer real questions and capture the enquiry',
+      ],
     },
     {
       title: 'Benchmarked with our CQC website grader',
       body:
-        'Our website grader scores a care site against what actually wins enquiries, using CQC-enriched data on the local market. Every design and content decision was evidence-led, not guesswork.',
+        'Our website grader scores a care site against what actually wins enquiries, so every decision was evidence-led, not guesswork.',
+      points: [
+        'Scored against the things that drive care enquiries',
+        'Uses CQC-enriched data on the local market to set the bar',
+        'Re-graded as we built, so nothing shipped below standard',
+      ],
     },
     {
       title: 'Local SEO that targets real searches',
       body:
-        'We optimised for the searches families genuinely make, “care home in Lindfield”, “respite care near me”, so the home earns a steady stream of organic enquiries instead of paying for every click.',
+        'Families do not search for “a care home”. They search by town and by type of care, so we built a page for each.',
+      points: [
+        'A dedicated, optimised page for every town and every care type',
+        'Technical SEO and structured data so Google trusts the site',
+        'A growing blog answering the questions families actually ask',
+      ],
     },
     {
       title: 'PPC landing pages that capture demand',
       body:
-        'For urgent, high-intent searches, our landing-page system turns paid clicks into booked visits, each campaign on a focused page built to convert, with every enquiry tracked.',
+        'For urgent, high-intent searches, paid clicks land on focused pages built to convert, with every enquiry tracked.',
+      points: [
+        'A dedicated landing page per campaign, built to convert',
+        'Budget aimed only at searches that lead to visits',
+        'Every call and form measured back to the click',
+      ],
     },
   ],
+  tools: {
+    intro:
+      'The website does more than look good. It answers the questions families are already Googling, with interactive tools that give a genuinely helpful answer and capture an enquiry at the same time, on desktop and on mobile.',
+    featured: {
+      name: 'Care funding calculator',
+      desc: 'Works out a guide to care costs and the funding a family may be entitled to, then offers a friendly callback. The same experience, built to convert, on every screen size.',
+      desktop: '/work/crossways/tool-funding-d.jpg',
+      mobile: '/work/crossways/tool-funding-m.jpg',
+    },
+    others: [
+      { name: 'Deferred payment calculator', desc: 'Shows how a deferred payment agreement could work against the value of a home.', image: '/work/crossways/tool-deferred-d.jpg' },
+      { name: 'Attendance Allowance guide', desc: 'Helps families check what they could claim, and how to apply.', image: '/work/crossways/tool-attendance-d.jpg' },
+      { name: 'Local council funding', desc: 'Explains means testing and what the council may contribute.', image: '/work/crossways/tool-council-d.jpg' },
+    ],
+  },
+  local: {
+    intro:
+      'A family does not search for “care home”. They search for “residential care in Haywards Heath” or “respite care near Burgess Hill”. So we built a dedicated, optimised page for every town and every type of care we offer, the searches that actually bring enquiries.',
+    mobile: '/work/crossways/local-1-m.jpg',
+    items: [
+      { label: 'Residential care in Haywards Heath', image: '/work/crossways/local-1-d.jpg' },
+      { label: 'Residential care in Burgess Hill', image: '/work/crossways/local-2-d.jpg' },
+      { label: 'Residential care in Horsham', image: '/work/crossways/local-3-d.jpg' },
+    ],
+  },
+  blog: {
+    intro:
+      'A steady stream of genuinely useful articles, on choosing a home, funding, visiting and dementia, keeps the site fresh, builds trust with families, and wins the long-tail searches that turn into enquiries.',
+    image: '/work/crossways/blog-d.jpg',
+  },
+  stats: [
+    { value: '46', label: 'New local pages & articles', note: '25 local-area pages + 21 articles, live now' },
+    { value: '+40%', label: 'Monthly organic traffic', note: 'Placeholder — update with live data', placeholder: true },
+    { value: '+12', label: 'New online enquiries a month', note: 'Placeholder — update with live data', placeholder: true },
+  ],
+  statsNote:
+    'Pages and articles are a live count. Traffic and enquiry figures are placeholders for now and will be updated with real data as the campaign runs.',
   economicsLede:
     'For a care home, marketing is not a cost, it is the cheapest bed-filler there is. The maths is simple and it is the home’s own.',
   economicsPoints: [
@@ -138,24 +217,80 @@ const ferndale: CaseStudy = {
     {
       title: 'A new, search-built website',
       body:
-        'A fast, reassuring site engineered to convert. Click-to-call, callback requests, live room availability and an AI assistant let an anxious family get answers and book a visit in seconds, on any device.',
+        'A fast, reassuring site engineered to convert, so an anxious family can get answers and book a visit in seconds, on any device.',
+      points: [
+        'Server-rendered for instant loading and strong rankings',
+        'Click-to-call, callback forms, live room availability and an AI assistant on every page',
+        'Helpful funding tools that answer real questions and capture the enquiry',
+      ],
     },
     {
       title: 'Benchmarked with our CQC website grader',
       body:
-        'Our website grader scores the site against what actually wins enquiries in care search, using CQC-enriched market data, so every decision about content and layout was driven by evidence.',
+        'Our website grader scores the site against what actually wins enquiries in care search, so every decision was driven by evidence.',
+      points: [
+        'Scored against the things that drive care enquiries',
+        'Uses CQC-enriched market data to set the bar',
+        'Re-graded as we built, so nothing shipped below standard',
+      ],
     },
     {
       title: 'Local SEO that targets real searches',
       body:
-        'We optimised for the searches that matter, “nursing home in Crawley”, “dementia care near me”, so Ferndale is found by the right families at the moment they are looking.',
+        'Families search by town and by type of care, so we built an optimised page for each one across the Crawley area.',
+      points: [
+        'A dedicated page for every town and every care type',
+        'Technical SEO and structured data so Google trusts the site',
+        'A growing blog answering the questions families actually ask',
+      ],
     },
     {
       title: 'PPC landing pages that capture demand',
       body:
-        'For urgent, high-intent searches, our landing-page system turns paid clicks into booked visits, each on a focused, fast-loading page built to convert, with every enquiry measured.',
+        'For urgent, high-intent searches, paid clicks land on focused, fast-loading pages built to convert, with every enquiry measured.',
+      points: [
+        'A dedicated landing page per campaign, built to convert',
+        'Budget aimed only at searches that lead to visits',
+        'Every call and form measured back to the click',
+      ],
     },
   ],
+  tools: {
+    intro:
+      'The website answers the questions families are already Googling, with interactive tools that give a genuinely helpful answer and capture an enquiry at the same time, on desktop and on mobile.',
+    featured: {
+      name: 'Care funding calculator',
+      desc: 'Works out a guide to nursing care costs and the funding a family may be entitled to, then offers a friendly callback. The same experience, built to convert, on every screen size.',
+      desktop: '/work/ferndale/tool-funding-d.jpg',
+      mobile: '/work/ferndale/tool-funding-m.jpg',
+    },
+    others: [
+      { name: 'Deferred payment calculator', desc: 'Shows how a deferred payment agreement could work against the value of a home.', image: '/work/ferndale/tool-deferred-d.jpg' },
+      { name: 'Local council funding', desc: 'Explains means testing and what the council may contribute towards nursing care.', image: '/work/ferndale/tool-council-d.jpg' },
+    ],
+  },
+  local: {
+    intro:
+      'A family does not search for “nursing home”. They search for “nursing care in Horsham” or “dementia care near East Grinstead”. So we built a dedicated, optimised page for every town and every type of care we offer.',
+    mobile: '/work/ferndale/local-1-m.jpg',
+    items: [
+      { label: 'Nursing care in Horsham', image: '/work/ferndale/local-1-d.jpg' },
+      { label: 'Nursing care in Maidenbower', image: '/work/ferndale/local-2-d.jpg' },
+      { label: 'Nursing care in East Grinstead', image: '/work/ferndale/local-3-d.jpg' },
+    ],
+  },
+  blog: {
+    intro:
+      'A steady stream of genuinely useful articles, on nursing and dementia care, funding and visiting, keeps the site fresh, builds trust with families, and wins the long-tail searches that turn into enquiries.',
+    image: '/work/ferndale/blog-d.jpg',
+  },
+  stats: [
+    { value: '51', label: 'New local pages & articles', note: '42 local-area pages + 9 articles, live now' },
+    { value: '+40%', label: 'Monthly organic traffic', note: 'Placeholder — update with live data', placeholder: true },
+    { value: '+10', label: 'New online enquiries a month', note: 'Placeholder — update with live data', placeholder: true },
+  ],
+  statsNote:
+    'Pages and articles are a live count. Traffic and enquiry figures are placeholders for now and will be updated with real data as the campaign runs.',
   economicsLede:
     'In nursing care the cost of an empty bed is even higher, which makes a working enquiry engine one of the best investments a home can make.',
   economicsPoints: [
