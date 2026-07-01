@@ -224,16 +224,28 @@ export async function saveCallbar(id: string, formData: FormData) {
 export async function saveAccessibility(id: string, formData: FormData) {
   await requireAdmin()
   const position = String(formData.get('accessibility_position') ?? 'bottom-right')
+  const intro = String(formData.get('accessibility_intro') ?? '').slice(0, 20000)
   const db = createServiceClient() as unknown as any
   const { error } = await db
     .from('websites')
     .update({
       accessibility_enabled: formData.get('accessibility_enabled') === 'on',
       accessibility_position: ['bottom-right', 'bottom-left'].includes(position) ? position : 'bottom-right',
-      accessibility_intro: String(formData.get('accessibility_intro') ?? '').slice(0, 4000),
+      accessibility_intro: intro,
     })
     .eq('id', id)
   if (error) throw new Error(error.message)
+
+  // Regenerate the neural "Listen to page" audio for the new welcome text and
+  // store it in Supabase, so the site immediately uses the saved version. Never
+  // let a TTS hiccup block the save (the site can still fall back / generate later).
+  try {
+    const { ensureWelcomeAudio } = await import('@/lib/tts-cache')
+    await ensureWelcomeAudio(id, intro)
+  } catch (e) {
+    console.error('saveAccessibility: TTS pre-warm failed', e)
+  }
+
   revalidatePath(`/admin/websites/${id}`)
 }
 

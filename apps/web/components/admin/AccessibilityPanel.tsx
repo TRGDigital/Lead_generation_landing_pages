@@ -36,12 +36,12 @@ export default function AccessibilityPanel({ site, widgetOrigin }: { site: Websi
         <textarea
           value={intro}
           onChange={(e) => setIntro(e.target.value)}
-          rows={6}
-          maxLength={4000}
-          placeholder="A warm welcome read aloud first when a visitor presses ‘Listen to page’. Never shown on screen. Leave blank to use the site’s built-in default."
+          rows={8}
+          maxLength={20000}
+          placeholder="The warm, natural text read aloud when a visitor presses ‘Listen to page’. Never shown on screen. Leave blank to use the site’s built-in default."
           className="w-full rounded-lg border border-brand-line px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent/30"
         />
-        <p className="mt-1 text-xs text-brand-ink-muted">{intro.length.toLocaleString()} / 4,000 characters. Spoken first by the “Listen to page” button, before the page content. Never shown on screen. This applies to the site’s accessibility bar — including sites we build that have their own built-in bar, so no snippet is needed.</p>
+        <p className="mt-1 text-xs text-brand-ink-muted">{intro.length.toLocaleString()} / 20,000 characters. This is the text the “Listen to page” button reads aloud (in a warm voice, saved and cached per site). Never shown on screen. Applies to the site’s accessibility bar — including sites we build that have their own built-in bar, so no snippet is needed.</p>
       </div>
 
       <div className="flex items-center gap-3">
