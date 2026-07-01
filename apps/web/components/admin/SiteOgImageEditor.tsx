@@ -3,6 +3,7 @@
 import { useRef, useState, useTransition } from 'react'
 import { ImageIcon, Upload, Loader2 } from 'lucide-react'
 import { saveSiteOgImage } from '@/app/admin/seo/actions'
+import { resizeImage } from '@/lib/image-resize'
 
 // Sets the site-wide social share image (og:image) shown when the site URL is
 // shared on LinkedIn, Facebook, X, WhatsApp, etc. Upload an image or paste a URL.
@@ -19,11 +20,16 @@ export default function SiteOgImageEditor({ initialUrl }: { initialUrl: string |
     if (!file) return
     setUploading(true); setError('')
     try {
+      // Downscale + re-encode to a ~1200px JPEG in the browser first: keeps the
+      // upload well under Vercel's ~4.5 MB limit and gives a clean social image.
+      const optimised = await resizeImage(file, 1200, 0.85, 'image/jpeg')
       const fd = new FormData()
-      fd.set('file', file)
+      fd.set('file', optimised)
       const res = await fetch('/api/admin/blog/upload-image', { method: 'POST', body: fd })
-      const body = await res.json()
-      if (!res.ok) throw new Error(body?.error ?? 'Upload failed')
+      // The response may be non-JSON (e.g. a plain "Request Entity Too Large" from
+      // the platform), so parse defensively rather than assuming JSON.
+      const body = await res.json().catch(() => ({} as any))
+      if (!res.ok || !body.url) throw new Error(body?.error || (res.status === 413 ? 'That image is too large. Please try a smaller one.' : 'Upload failed. Please try a JPG or PNG.'))
       setUrl(body.url)
     } catch (err: any) {
       setError(err?.message ?? 'Upload failed')
