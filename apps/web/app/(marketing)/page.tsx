@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
+import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { HomeHero } from '@/components/marketing/HomeHero'
 import { BrandStrip } from '@/components/marketing/BrandStrip'
 import { AgencyIntro } from '@/components/marketing/AgencyIntro'
+import { PrivatePayCase } from '@/components/marketing/PrivatePayCase'
 import { CoreServices } from '@/components/marketing/CoreServices'
 import { StatementBand } from '@/components/marketing/StatementBand'
 import { ScrollingBanner } from '@/components/marketing/ScrollingBanner'
@@ -23,7 +25,11 @@ export const revalidate = 60
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return applyPageSeo('/', META)
+}
+
+const META: Metadata = {
   title: 'TRG Digital | A Specialist Digital Agency for the Care Sector',
   description:
     'TRG Digital is a specialist agency for the UK care sector. We increase your enquiries, build your website, and develop custom software like CareStream and CareAssura.',
@@ -33,7 +39,7 @@ export const metadata: Metadata = {
     description: 'Marketing, websites and custom software, built only for the UK care sector.',
     type: 'website',
     url: SITE_URL,
-    images: [{ url: `${SITE_URL}/og-home.jpg`, width: 1200, height: 630 }],
+    // Social image is resolved by applyPageSeo: admin override > site default.
   },
   twitter: {
     card: 'summary_large_image',
@@ -48,28 +54,59 @@ export default async function HomePage() {
   const latest = posts.slice(0, 4)
   return (
     <>
-      {/* JSON-LD, Organization */}
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Organization',
-            name: 'TRG Digital',
-            url: SITE_URL,
-            description: 'A specialist digital agency for the UK care sector: marketing, website development and custom software.',
-            address: { '@type': 'PostalAddress', streetAddress: 'Suite Ra01, 195-197 Wood Street', addressLocality: 'London', postalCode: 'E17 3NU', addressCountry: 'GB' },
-            contactPoint: { '@type': 'ContactPoint', contactType: 'sales', url: `${SITE_URL}/contact` },
-          }),
-        }}
-      />
+      {/* JSON-LD, one block per type so every validator surfaces each clearly */}
+      {([
+        {
+          '@type': 'Organization',
+          '@id': `${SITE_URL}/#organization`,
+          name: 'TRG Digital',
+          url: SITE_URL,
+          logo: `${SITE_URL}/trg-digital-2025.png`,
+          image: `${SITE_URL}/trg-digital-2025.png`,
+          description: 'A specialist digital agency for the UK care sector: marketing, website development, enquiry generation and custom software, built only for care.',
+          email: 'hello@trgdigital.co.uk',
+          telephone: '+44 20 8064 1596',
+          address: { '@type': 'PostalAddress', streetAddress: 'Suite Ra01, 195-197 Wood Street', addressLocality: 'London', postalCode: 'E17 3NU', addressCountry: 'GB' },
+          areaServed: { '@type': 'Country', name: 'United Kingdom' },
+          knowsAbout: ['Care home marketing', 'Care sector SEO', 'Care website design', 'Pay-per-click advertising', 'Enquiry generation', 'Care technology'],
+          contactPoint: { '@type': 'ContactPoint', contactType: 'sales', telephone: '+44 20 8064 1596', email: 'hello@trgdigital.co.uk', areaServed: 'GB', url: `${SITE_URL}/contact` },
+          // Add your social profile URLs here for a richer knowledge panel.
+          sameAs: [],
+        },
+        {
+          '@type': 'WebSite',
+          '@id': `${SITE_URL}/#website`,
+          url: SITE_URL,
+          name: 'TRG Digital',
+          inLanguage: 'en-GB',
+          publisher: { '@id': `${SITE_URL}/#organization` },
+        },
+        {
+          '@type': 'SiteNavigationElement',
+          name: ['Home', 'Website development', 'SEO', 'Google Profile and Reviews', 'Care tools and technology', 'About', 'Knowledge Hub', 'Contact'],
+          url: [SITE_URL, `${SITE_URL}/website-development`, `${SITE_URL}/seo`, `${SITE_URL}/google-business-profile`, `${SITE_URL}/care-tools`, `${SITE_URL}/about`, `${SITE_URL}/blog`, `${SITE_URL}/contact`],
+        },
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${SITE_URL}/#breadcrumb`,
+          itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL }],
+        },
+      ] as Record<string, unknown>[]).map((schema, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({ '@context': 'https://schema.org', ...schema }) }}
+        />
+      ))}
 
       <HomeHero />
 
       <BrandStrip />
 
       <AgencyIntro />
+
+      <PrivatePayCase />
 
       <CoreServices />
 
