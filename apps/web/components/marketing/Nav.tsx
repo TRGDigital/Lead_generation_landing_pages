@@ -10,7 +10,8 @@ import { SERVICES } from '@/lib/services'
 import { TOOLS } from '@/lib/tools'
 
 const LINKS = [
-  { href: '/work', label: 'Work' },
+  // '/work' is hidden from nav while the case-study section is still in progress
+  // (the pages exist but aren't linked publicly yet).
   { href: '/about', label: 'About us' },
   { href: '/blog', label: 'Blog' },
 ]
