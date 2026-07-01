@@ -8,7 +8,9 @@ import { tts, cacheKey, ttsProvider } from '@/lib/tts'
 const BUCKET = 'tts-cache'
 const MAX_CHARS = 20000 // sane ceiling for a spoken welcome (~15 min of audio)
 const CHUNK_CHARS = 2000 // small enough to generate fast; well under OpenAI's 4096 limit
-const CONCURRENCY = 5 // generate chunks in parallel so long welcomes still finish quickly
+// Parallel chunk generation. Default 2 so we stay within ElevenLabs' free-tier
+// concurrent-request limit; raise via TTS_CONCURRENCY on a higher plan.
+const CONCURRENCY = Math.max(1, Number(process.env.TTS_CONCURRENCY) || 2)
 
 export function normaliseWelcome(text: string): string {
   return (text || '').replace(/\s+/g, ' ').trim().slice(0, MAX_CHARS)

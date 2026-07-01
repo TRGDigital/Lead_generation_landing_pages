@@ -16,7 +16,7 @@ export function ttsProvider(): TtsProvider | null {
 }
 
 // Warm, natural defaults (British where possible), overridable by env.
-const ELEVEN_VOICE = process.env.ELEVENLABS_VOICE_ID || 'Xb7hH8MSUJpSbSDYk0k2' // "Alice" — warm British female
+const ELEVEN_VOICE = process.env.ELEVENLABS_VOICE_ID || 'pFZP5JQG7iQjIQuC4Bku' // "Lily" — warm British female
 const ELEVEN_MODEL = process.env.ELEVENLABS_MODEL || 'eleven_multilingual_v2'
 const OPENAI_VOICE = process.env.OPENAI_TTS_VOICE || 'shimmer' // warm female
 const OPENAI_MODEL = process.env.OPENAI_TTS_MODEL || 'gpt-4o-mini-tts'
