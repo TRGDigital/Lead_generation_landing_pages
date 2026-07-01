@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { getWebsiteBySlug, AVAILABILITY_LABELS } from '@/lib/websites'
+import { getWebsiteBySlug } from '@/lib/websites'
 
 // The branded AI care-assistant. Answers families' questions about a client's care home
 // from the home's own content + structured facts, and nudges toward a callback. Uses Claude.
@@ -39,17 +39,29 @@ export async function POST(req: NextRequest) {
   }
 
   const phone = site.callbar_phone || site.lp_phone || ''
-  const avail = AVAILABILITY_LABELS[site.availability_status]?.label ?? ''
-  const availLine = site.availability_status === 'available' || site.availability_status === 'limited'
-    ? `${avail}${site.rooms_available > 0 ? ` (${site.rooms_available} room${site.rooms_available === 1 ? '' : 's'})` : ''}${site.availability_note ? `, ${site.availability_note}` : ''}`
-    : avail
+
+  // Live room availability — the SAME source the on-site availability badge
+  // (availability.js / /api/availability) reads, kept current by the home. Phrase
+  // it fully for every status so the assistant can state it directly and confidently.
+  const roomsTxt = site.rooms_available > 0
+    ? `${site.rooms_available} room${site.rooms_available === 1 ? '' : 's'} currently available`
+    : ''
+  const noteTxt = site.availability_note ? `. ${site.availability_note}` : ''
+  const availLine =
+    site.availability_status === 'available'
+      ? `Rooms available${roomsTxt ? ` (${roomsTxt})` : ''}${noteTxt}`
+      : site.availability_status === 'limited'
+        ? `Limited availability${roomsTxt ? ` (${roomsTxt})` : ''}${noteTxt}`
+        : site.availability_status === 'full'
+          ? `Currently full — no rooms available at present${noteTxt}`
+          : `Not published right now — invite the family to enquire for current availability`
 
   const facts = [
     `Care home name: ${site.name}`,
     `Website: ${site.url}`,
     phone ? `Phone: ${phone}` : '',
     site.lp_address ? `Address: ${site.lp_address}` : '',
-    availLine ? `Current room availability: ${availLine}` : '',
+    `Current room availability (LIVE, kept up to date by the home): ${availLine}`,
     site.lp_cqc_url ? `CQC report: ${site.lp_cqc_url}` : '',
     (site.tools_enabled || []).includes('funding') ? 'A free care funding calculator is available on the website.' : '',
   ].filter(Boolean).join('\n')
@@ -64,7 +76,8 @@ ${(site.chat_knowledge || '').slice(0, 8000) || '(No extra detail provided. Stic
 ${(site.chat_prompt || '').trim() ? `\nSpecific instructions for this home (follow these closely, within the rules below):\n${site.chat_prompt.trim().slice(0, 4000)}\n` : ''}
 Rules:
 - Only answer about ${site.name} and general UK care guidance (types of care, visiting, the move-in process, what to look for). Gently steer off-topic questions back.
-- Never invent specifics. If you are not certain of a detail (exact weekly fees, the CQC rating, anything medical), say you are not sure and offer to arrange a callback from the team.
+- ROOM AVAILABILITY: the "Current room availability (LIVE...)" line in the facts above is accurate right now and kept up to date by the home. When a family asks about rooms, vacancies or availability, tell them this current status directly and confidently — never say you cannot check availability. If a room count is given, you may state it. If it is currently full or not published, say so warmly and offer to arrange a callback or note their interest for when a room becomes free.
+- Never invent other specifics. If you are not certain of a detail (exact weekly fees, the CQC rating, anything medical), say you are not sure and offer to arrange a callback from the team.
 - Do not give medical or financial advice. For funding questions you may mention the free funding calculator on the website.
 - Where helpful, invite the family to request a callback${phone ? ` or call ${phone}` : ''}.
 - Plain, warm language. No markdown, no headings, no bullet lists unless truly needed.`
