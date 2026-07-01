@@ -33,6 +33,22 @@ export async function GET(req: NextRequest) {
 
   if (!site || !text) return json({ url: null, text })
 
+  // TEMP diagnostic (no secrets): ?debug=1 reports why generation may be failing.
+  if (req.nextUrl.searchParams.get('debug') === '1') {
+    const { ttsProvider, tts } = await import('@/lib/tts')
+    let generated = false
+    let err = ''
+    try { generated = !!(await tts(text.slice(0, 120))) } catch (e) { err = String(e).slice(0, 200) }
+    return json({
+      provider: ttsProvider(),
+      hasOpenAI: !!process.env.OPENAI_API_KEY,
+      hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+      hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
+      generatedShortSample: generated,
+      err,
+    })
+  }
+
   try {
     const url = await ensureWelcomeAudio(site.id, text)
     return json({ url, text })
