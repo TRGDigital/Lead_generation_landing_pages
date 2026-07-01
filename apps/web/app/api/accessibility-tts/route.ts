@@ -33,20 +33,24 @@ export async function GET(req: NextRequest) {
 
   if (!site || !text) return json({ url: null, text })
 
-  // TEMP diagnostic (no secrets): ?debug=1 reports why generation may be failing.
+  // TEMP diagnostic (no secrets): ?debug=1 runs the full generate + upload.
   if (req.nextUrl.searchParams.get('debug') === '1') {
     const { ttsProvider, tts } = await import('@/lib/tts')
-    let generated = false
-    let err = ''
-    try { generated = !!(await tts(text.slice(0, 120))) } catch (e) { err = String(e).slice(0, 200) }
-    return json({
-      provider: ttsProvider(),
-      hasOpenAI: !!process.env.OPENAI_API_KEY,
-      hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
-      hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
-      generatedShortSample: generated,
-      err,
-    })
+    const out: Record<string, unknown> = { provider: ttsProvider(), textLen: text.length }
+    const t0 = Date.now()
+    let audio: Buffer | null = null
+    try { audio = await tts(text) } catch (e) { out.genErr = String(e).slice(0, 300) }
+    out.genMs = Date.now() - t0
+    out.genBytes = audio?.length ?? 0
+    if (audio) {
+      try {
+        const { createServiceClient } = await import('@/lib/supabase/server')
+        const db = createServiceClient() as unknown as { storage: { from: (b: string) => { upload: (p: string, body: Buffer, o: Record<string, unknown>) => Promise<{ error: unknown }> } } }
+        const { error } = await db.storage.from('tts-cache').upload(`${site.id}/_debug.mp3`, audio, { contentType: 'audio/mpeg', upsert: true })
+        out.uploadErr = error ? String((error as { message?: string })?.message ?? JSON.stringify(error)).slice(0, 300) : null
+      } catch (e) { out.uploadErr = String(e).slice(0, 300) }
+    }
+    return json(out)
   }
 
   try {

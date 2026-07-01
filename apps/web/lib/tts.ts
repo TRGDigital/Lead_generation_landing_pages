@@ -39,7 +39,7 @@ export async function tts(text: string): Promise<Buffer | null> {
   const provider = ttsProvider()
   if (!provider || !text.trim()) return null
   const ctrl = new AbortController()
-  const timer = setTimeout(() => ctrl.abort(), 25_000)
+  const timer = setTimeout(() => ctrl.abort(), 55_000)
   try {
     if (provider === 'elevenlabs') {
       const res = await fetch(
