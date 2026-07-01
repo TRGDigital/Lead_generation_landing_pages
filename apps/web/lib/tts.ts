@@ -24,7 +24,7 @@ const OPENAI_MODEL = process.env.OPENAI_TTS_MODEL || 'gpt-4o-mini-tts'
 // to a warm British English accent (OpenAI voices are American otherwise).
 const OPENAI_INSTRUCTIONS =
   process.env.OPENAI_TTS_INSTRUCTIONS ||
-  'Speak in a warm, friendly British English accent (standard UK English / received pronunciation), at a calm, natural, unhurried pace.'
+  'Accent: you MUST speak with a natural British English accent from England — standard Received Pronunciation, like a BBC newsreader. Do NOT use an American accent under any circumstances. Use British pronunciation throughout: a long broad "a" in words like bath, grass, past and can\'t; a soft, non-rhotic "r" (do not harden r at the ends of words like water or here); a crisp British "t" (say "bottle" and "better" with clear t sounds, not a soft American d). Voice and tone: a warm, friendly, reassuring British woman, speaking calmly and unhurriedly, as if welcoming a family to a care home.'
 const OPENAI_USE_INSTRUCTIONS = /gpt-4o/i.test(OPENAI_MODEL)
 
 // A stable identifier for the current provider+voice, so cached audio is
