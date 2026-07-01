@@ -20,13 +20,19 @@ const ELEVEN_VOICE = process.env.ELEVENLABS_VOICE_ID || 'Xb7hH8MSUJpSbSDYk0k2' /
 const ELEVEN_MODEL = process.env.ELEVENLABS_MODEL || 'eleven_multilingual_v2'
 const OPENAI_VOICE = process.env.OPENAI_TTS_VOICE || 'shimmer' // warm female
 const OPENAI_MODEL = process.env.OPENAI_TTS_MODEL || 'gpt-4o-mini-tts'
+// gpt-4o-* TTS models take an `instructions` prompt to steer accent/tone. Default
+// to a warm British English accent (OpenAI voices are American otherwise).
+const OPENAI_INSTRUCTIONS =
+  process.env.OPENAI_TTS_INSTRUCTIONS ||
+  'Speak in a warm, friendly British English accent (standard UK English / received pronunciation), at a calm, natural, unhurried pace.'
+const OPENAI_USE_INSTRUCTIONS = /gpt-4o/i.test(OPENAI_MODEL)
 
 // A stable identifier for the current provider+voice, so cached audio is
 // regenerated if you switch provider or voice (it's part of the cache key).
 export function ttsVoiceTag(): string {
   const p = ttsProvider()
   if (p === 'elevenlabs') return `el:${ELEVEN_MODEL}:${ELEVEN_VOICE}`
-  if (p === 'openai') return `oa:${OPENAI_MODEL}:${OPENAI_VOICE}`
+  if (p === 'openai') return `oa:${OPENAI_MODEL}:${OPENAI_VOICE}:${OPENAI_USE_INSTRUCTIONS ? OPENAI_INSTRUCTIONS : ''}`
   return 'none'
 }
 
@@ -62,7 +68,13 @@ export async function tts(text: string): Promise<Buffer | null> {
     const res = await fetch('https://api.openai.com/v1/audio/speech', {
       method: 'POST',
       headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, 'content-type': 'application/json' },
-      body: JSON.stringify({ model: OPENAI_MODEL, voice: OPENAI_VOICE, input: text, response_format: 'mp3' }),
+      body: JSON.stringify({
+        model: OPENAI_MODEL,
+        voice: OPENAI_VOICE,
+        input: text,
+        response_format: 'mp3',
+        ...(OPENAI_USE_INSTRUCTIONS ? { instructions: OPENAI_INSTRUCTIONS } : {}),
+      }),
       signal: ctrl.signal,
     })
     if (!res.ok) { console.error('openai tts', res.status, await res.text().catch(() => '')); return null }
