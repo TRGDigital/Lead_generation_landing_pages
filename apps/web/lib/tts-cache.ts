@@ -7,7 +7,8 @@ import { tts, cacheKey, ttsProvider } from '@/lib/tts'
 
 const BUCKET = 'tts-cache'
 const MAX_CHARS = 20000 // sane ceiling for a spoken welcome (~15 min of audio)
-const CHUNK_CHARS = 3800 // stay under OpenAI TTS's 4096-char per-request limit
+const CHUNK_CHARS = 2000 // small enough to generate fast; well under OpenAI's 4096 limit
+const CONCURRENCY = 5 // generate chunks in parallel so long welcomes still finish quickly
 
 export function normaliseWelcome(text: string): string {
   return (text || '').replace(/\s+/g, ' ').trim().slice(0, MAX_CHARS)
@@ -55,15 +56,23 @@ export async function ensureWelcomeAudio(websiteId: string, rawText: string): Pr
     /* fall through to generate */
   }
 
-  // Generate each chunk and stitch the MP3s into one clip (browsers play back
-  // concatenated MP3 frames fine). Any chunk failing aborts to the browser voice.
-  const parts: Buffer[] = []
-  for (const chunk of chunkForTts(text)) {
-    const part = await tts(chunk)
-    if (!part) return null
-    parts.push(part)
+  // Generate chunks with bounded parallelism, then stitch the MP3s into one clip
+  // (browsers play concatenated MP3 frames fine). Any chunk failing aborts to the
+  // browser voice. Parallelism keeps even long welcomes inside the function limit.
+  const chunks = chunkForTts(text)
+  const parts: (Buffer | null)[] = new Array(chunks.length).fill(null)
+  let next = 0
+  async function worker() {
+    for (;;) {
+      const i = next++
+      const chunk = chunks[i]
+      if (chunk === undefined) return
+      parts[i] = await tts(chunk)
+    }
   }
-  const audio = Buffer.concat(parts)
+  await Promise.all(Array.from({ length: Math.min(CONCURRENCY, chunks.length) }, worker))
+  if (parts.some((p) => !p)) return null
+  const audio = Buffer.concat(parts as Buffer[])
   if (!audio.length) return null
   const db = createServiceClient() as unknown as {
     storage: { from: (b: string) => { upload: (p: string, body: Buffer, o: Record<string, unknown>) => Promise<{ error: unknown }> } }

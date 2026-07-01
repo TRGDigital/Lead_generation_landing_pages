@@ -33,26 +33,6 @@ export async function GET(req: NextRequest) {
 
   if (!site || !text) return json({ url: null, text })
 
-  // TEMP diagnostic (no secrets): ?debug=1 runs the full generate + upload.
-  if (req.nextUrl.searchParams.get('debug') === '1') {
-    const { ttsProvider, tts } = await import('@/lib/tts')
-    const out: Record<string, unknown> = { provider: ttsProvider(), textLen: text.length }
-    const t0 = Date.now()
-    let audio: Buffer | null = null
-    try { audio = await tts(text) } catch (e) { out.genErr = String(e).slice(0, 300) }
-    out.genMs = Date.now() - t0
-    out.genBytes = audio?.length ?? 0
-    if (audio) {
-      try {
-        const { createServiceClient } = await import('@/lib/supabase/server')
-        const db = createServiceClient() as unknown as { storage: { from: (b: string) => { upload: (p: string, body: Buffer, o: Record<string, unknown>) => Promise<{ error: unknown }> } } }
-        const { error } = await db.storage.from('tts-cache').upload(`${site.id}/_debug.mp3`, audio, { contentType: 'audio/mpeg', upsert: true })
-        out.uploadErr = error ? String((error as { message?: string })?.message ?? JSON.stringify(error)).slice(0, 300) : null
-      } catch (e) { out.uploadErr = String(e).slice(0, 300) }
-    }
-    return json(out)
-  }
-
   try {
     const url = await ensureWelcomeAudio(site.id, text)
     return json({ url, text })
