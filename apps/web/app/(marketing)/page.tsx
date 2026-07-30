@@ -60,6 +60,7 @@ export default async function HomePage() {
           '@type': 'Organization',
           '@id': `${SITE_URL}/#organization`,
           name: 'TRG Digital',
+          legalName: 'TRG Digital Ltd',
           url: SITE_URL,
           logo: `${SITE_URL}/trg-digital-2025.png`,
           image: `${SITE_URL}/trg-digital-2025.png`,
@@ -70,7 +71,16 @@ export default async function HomePage() {
           areaServed: { '@type': 'Country', name: 'United Kingdom' },
           knowsAbout: ['Care home marketing', 'Care sector SEO', 'Care website design', 'Pay-per-click advertising', 'Enquiry generation', 'Care technology'],
           contactPoint: { '@type': 'ContactPoint', contactType: 'sales', telephone: '+44 20 8064 1596', email: 'hello@trgdigital.co.uk', areaServed: 'GB', url: `${SITE_URL}/contact` },
-          // Add your social profile URLs here for a richer knowledge panel.
+          identifier: { '@type': 'PropertyValue', propertyID: 'Companies House', value: '11731704' },
+          founder: {
+            '@type': 'Person',
+            '@id': `${SITE_URL}/#len-burgess`,
+            name: 'Len Burgess',
+            jobTitle: 'Founder',
+            worksFor: { '@id': `${SITE_URL}/#organization` },
+            sameAs: ['https://www.linkedin.com/in/len-burgess-262b0833'],
+          },
+          // Add TRG Digital's own social profile URLs (LinkedIn company page, X, etc.) here for a richer knowledge panel.
           sameAs: [],
         },
         {

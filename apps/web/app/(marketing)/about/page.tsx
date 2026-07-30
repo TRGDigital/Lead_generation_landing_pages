@@ -1,16 +1,21 @@
 import type { Metadata } from 'next'
+import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
-import Image from 'next/image'
+import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { Check, ArrowRight, ShieldCheck, Users, Target } from 'lucide-react'
 import { SERVICES } from '@/lib/services'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { FloatingTechIcons } from '@/components/marketing/FloatingTechIcons'
 
-export const dynamic = 'force-static'
+export const revalidate = 3600
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return applyPageSeo('/about', META)
+}
+
+const META: Metadata = {
   title: 'About TRG Digital | A Specialist Care-Sector Agency',
   description:
     'TRG Digital is a digital agency built only for the UK care sector. We grow enquiries, build websites and develop custom software, including our own products CareStream and CareAssura.',
@@ -49,11 +54,27 @@ export default function AboutPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'AboutPage',
-            name: 'About TRG Digital',
-            url: `${SITE_URL}/about`,
-            description: 'A specialist digital agency for the UK care sector.',
-            publisher: { '@type': 'Organization', name: 'TRG Digital', url: SITE_URL },
+            '@graph': [
+              {
+                '@type': 'AboutPage',
+                '@id': `${SITE_URL}/about#webpage`,
+                name: 'About TRG Digital',
+                url: `${SITE_URL}/about`,
+                description: 'A specialist digital agency for the UK care sector.',
+                isPartOf: { '@id': `${SITE_URL}/#website` },
+                about: { '@id': `${SITE_URL}/#organization` },
+                mainEntity: { '@id': `${SITE_URL}/#organization` },
+                publisher: { '@id': `${SITE_URL}/#organization` },
+              },
+              {
+                '@type': 'Person',
+                '@id': `${SITE_URL}/#len-burgess`,
+                name: 'Len Burgess',
+                jobTitle: 'Founder',
+                worksFor: { '@id': `${SITE_URL}/#organization` },
+                sameAs: ['https://www.linkedin.com/in/len-burgess-262b0833'],
+              },
+            ],
           }),
         }}
       />
@@ -97,7 +118,7 @@ export default function AboutPage() {
           <div className="relative">
             <FloatingTechIcons />
             <div className="overflow-hidden rounded-2xl shadow-card">
-              <Image
+              <ManagedImage
                 src="/hero-resident.jpg"
                 alt="A care home resident relaxing in her room"
                 width={1600}
@@ -113,7 +134,7 @@ export default function AboutPage() {
                 <span className="h-1.5 w-1.5 rounded-full bg-amber-300" />
                 <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
               </div>
-              <Image src="/mockups/carestream.jpg" alt="CareStream, software we build for care" width={1320} height={940} className="w-full" />
+              <ManagedImage src="/mockups/carestream.jpg" alt="CareStream, software we build for care" width={1320} height={940} className="w-full" />
             </div>
           </div>
         </div>

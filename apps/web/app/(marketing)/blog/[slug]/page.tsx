@@ -2,14 +2,10 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Clock, ArrowLeft } from 'lucide-react'
-import { MDXRemote } from 'next-mdx-remote/rsc'
-import remarkGfm from 'remark-gfm'
-import rehypeSlug from 'rehype-slug'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypePrettyCode from 'rehype-pretty-code'
+import { Clock, ArrowLeft, ChevronDown } from 'lucide-react'
 import { getPostBySlug, getRelatedPosts, getAllPublishedSlugs, formatDate } from '@/lib/blog'
-import { mdxComponents } from '@/components/blog/MdxComponents'
+import { isHtmlBody, mdToHtml } from '@/lib/mdx-or-html'
+import { withToc } from '@/lib/blog-toc'
 import PostCard from '@/components/blog/PostCard'
 
 export const revalidate = 3600
@@ -61,6 +57,10 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post) notFound()
 
+  // Per-post FAQs (managed in admin). Empty -> no accordion, no schema.
+  const faqs = (((post as { faqs?: { q: string; a: string }[] | null }).faqs ?? []) as { q: string; a: string }[])
+    .filter((f) => f && f.q && f.a)
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -71,13 +71,17 @@ export default async function BlogPostPage({ params }: Props) {
     dateModified: post.updated_at,
     url: `${SITE_URL}/blog/${post.slug}`,
     author: post.author
-      ? { '@type': 'Person', name: post.author.name }
-      : { '@type': 'Organization', name: 'CareBeds' },
-    publisher: {
-      '@type': 'Organization',
-      name: 'CareBeds',
-      url: SITE_URL,
-    },
+      ? {
+          '@type': 'Person',
+          name: post.author.name,
+          ...(post.author.title ? { jobTitle: post.author.title } : {}),
+          ...(post.author.avatar_url ? { image: post.author.avatar_url } : {}),
+          ...(post.author.bio ? { description: post.author.bio } : {}),
+          ...(post.author.linkedin_url ? { sameAs: [post.author.linkedin_url] } : {}),
+          worksFor: { '@type': 'Organization', name: 'TRG Digital', '@id': `${SITE_URL}/#organization` },
+        }
+      : { '@type': 'Organization', name: 'TRG Digital', '@id': `${SITE_URL}/#organization` },
+    publisher: { '@type': 'Organization', name: 'TRG Digital', '@id': `${SITE_URL}/#organization`, url: SITE_URL },
   }
 
   return (
@@ -140,9 +144,24 @@ export default async function BlogPostPage({ params }: Props) {
                 </div>
               )}
               <div>
-                <p className="text-sm font-medium text-brand-ink">{post.author.name}</p>
+                <p className="text-sm font-medium text-brand-ink">
+                  Written by {post.author.name}
+                  {post.author.title && (
+                    <span className="text-brand-ink-muted">, {post.author.title}</span>
+                  )}
+                </p>
                 {post.author.bio && (
                   <p className="text-xs text-brand-ink-muted">{post.author.bio}</p>
+                )}
+                {post.author.linkedin_url && (
+                  <a
+                    href={post.author.linkedin_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-medium text-brand-accent hover:underline"
+                  >
+                    Connect on LinkedIn
+                  </a>
                 )}
               </div>
             </div>
@@ -154,7 +173,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="relative mb-10 h-64 w-full overflow-hidden rounded-2xl sm:h-80">
             <Image
               src={post.hero_image_url}
-              alt={post.title}
+              alt={(post as { hero_image_alt?: string | null }).hero_image_alt || post.title}
               fill
               priority
               className="object-cover"
@@ -163,23 +182,11 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         )}
 
-        {/* Body */}
-        <div className="prose-custom">
-          <MDXRemote
-            source={post.body_mdx}
-            components={mdxComponents}
-            options={{
-              mdxOptions: {
-                remarkPlugins: [remarkGfm],
-                rehypePlugins: [
-                  rehypeSlug,
-                  [rehypeAutolinkHeadings, { behavior: 'wrap' }],
-                  [rehypePrettyCode, { theme: 'github-light' }],
-                ],
-              },
-            }}
-          />
-        </div>
+        {/* Body — auto table of contents + content (HTML for new posts, converted for legacy markdown) */}
+        <div
+          className="blog-html"
+          dangerouslySetInnerHTML={{ __html: withToc(isHtmlBody(post.body_mdx) ? post.body_mdx : mdToHtml(post.body_mdx)) }}
+        />
 
         {/* Tags */}
         {post.tags.length > 0 && (
@@ -201,15 +208,48 @@ export default async function BlogPostPage({ params }: Props) {
             Ready to fill your empty beds?
           </p>
           <p className="mt-2 text-sm text-brand-ink/75">
-            Book a free demo and see how our marketing works for your home.
+            Get in touch and see how our marketing works for your home.
           </p>
-          <Link
-            href="/contact"
-            className="mt-5 inline-flex h-10 items-center rounded-xl bg-brand-ink px-6 text-sm font-semibold text-white transition-all hover:bg-brand-ink/90"
-          >
-            Book a demo
+          <Link href="/contact" className="btn-pop mt-6">
+            Contact us
+            <span className="btn-arrow" aria-hidden>→</span>
           </Link>
         </div>
+
+        {/* FAQs — only when added in admin */}
+        {faqs.length > 0 && (
+          <section className="mt-12">
+            <script
+              type="application/ld+json"
+              suppressHydrationWarning
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  '@context': 'https://schema.org',
+                  '@type': 'FAQPage',
+                  mainEntity: faqs.map((f) => ({
+                    '@type': 'Question',
+                    name: f.q,
+                    acceptedAnswer: { '@type': 'Answer', text: f.a },
+                  })),
+                }),
+              }}
+            />
+            <h2 className="mb-6 font-display text-2xl font-semibold text-brand-ink">
+              Frequently asked questions
+            </h2>
+            <div className="space-y-3">
+              {faqs.map((f) => (
+                <details key={f.q} className="group rounded-2xl border border-brand-line bg-white shadow-soft">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5">
+                    <span className="font-display text-base font-semibold text-brand-ink sm:text-lg">{f.q}</span>
+                    <ChevronDown className="h-5 w-5 flex-shrink-0 text-brand-pop transition-transform group-open:rotate-180" />
+                  </summary>
+                  <div className="px-6 pb-5 text-sm leading-relaxed text-brand-ink-soft sm:text-base">{f.a}</div>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
       </article>
 
       {/* Related posts */}

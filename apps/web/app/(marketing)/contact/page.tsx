@@ -1,11 +1,16 @@
 import type { Metadata } from 'next'
+import { applyPageSeo } from '@/lib/page-seo'
 import { Mail, Phone, MapPin } from 'lucide-react'
 import ContactForm from '@/components/marketing/ContactForm'
 import { Star, Squiggle, Dots } from '@/components/marketing/Decor'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return applyPageSeo('/contact', META)
+}
+
+const META: Metadata = {
   title: 'Contact TRG Digital, Start Your Project',
   description:
     'Get in touch with TRG Digital to start your project, ask about pricing, or discuss how we can fill empty beds in your care home.',
@@ -38,8 +43,12 @@ export default function ContactPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'ContactPage',
+            '@id': `${SITE_URL}/contact#webpage`,
             name: 'Contact TRG Digital',
             url: `${SITE_URL}/contact`,
+            isPartOf: { '@id': `${SITE_URL}/#website` },
+            about: { '@id': `${SITE_URL}/#organization` },
+            mainEntity: { '@id': `${SITE_URL}/#organization` },
           }),
         }}
       />
@@ -71,13 +80,13 @@ export default function ContactPage() {
               <div className="rounded-2xl bg-brand-ink p-7 text-white">
                 <h2 className="font-display text-lg font-bold uppercase tracking-tight text-brand-accent">Other ways to reach us</h2>
                 <div className="mt-5 space-y-4 text-sm">
-                  <a href="mailto:hello@trgdigital.com" className="flex items-center gap-3 text-white/85 transition-colors hover:text-white">
+                  <a href="mailto:hello@trgdigital.co.uk" className="flex items-center gap-3 text-white/85 transition-colors hover:text-white">
                     <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-brand-pop"><Mail className="h-4 w-4 text-white" /></span>
-                    hello@trgdigital.com
+                    hello@trgdigital.co.uk
                   </a>
-                  <a href="tel:+442070000000" className="flex items-center gap-3 text-white/85 transition-colors hover:text-white">
+                  <a href="tel:+442080641596" className="flex items-center gap-3 text-white/85 transition-colors hover:text-white">
                     <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-brand-pop"><Phone className="h-4 w-4 text-white" /></span>
-                    0207 000 0000
+                    020 8064 1596
                   </a>
                   <p className="flex items-start gap-3 text-white/70">
                     <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-white/10"><MapPin className="h-4 w-4 text-brand-accent" /></span>

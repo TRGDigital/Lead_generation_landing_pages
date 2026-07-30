@@ -1,14 +1,19 @@
 import type { Metadata } from 'next'
+import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
 import { BedDouble, Check } from 'lucide-react'
 import { EmptyBedCalculator } from '@/components/marketing/EmptyBedCalculator'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 
-export const dynamic = 'force-static'
+export const revalidate = 3600
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return applyPageSeo('/tools/empty-bed-calculator', META)
+}
+
+const META: Metadata = {
   title: 'Cost of an Empty Bed & Savings Calculator | Care Home Occupancy | TRG Digital',
   description:
     'Free calculator showing how much empty beds cost your care home per week, month and year, plus how much you could save and the return on investment by filling them with TRG Digital.',
@@ -40,6 +45,23 @@ export default function EmptyBedPage() {
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
             mainEntity: FAQS.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebApplication',
+            name: 'Empty Bed Calculator',
+            url: `${SITE_URL}/tools/empty-bed-calculator`,
+            applicationCategory: 'BusinessApplication',
+            operatingSystem: 'Web',
+            description: 'Free tool that shows what empty beds are costing a care home and the revenue of filling them.',
+            offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
+            provider: { '@type': 'Organization', name: 'TRG Digital', '@id': `${SITE_URL}/#organization` },
           }),
         }}
       />
