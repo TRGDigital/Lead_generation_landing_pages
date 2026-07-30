@@ -92,7 +92,7 @@ export default async function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <article className="mx-auto max-w-3xl px-6 py-12">
+      <article className="mx-auto max-w-4xl px-6 py-12">
         {/* Back */}
         <Link
           href="/blog"
@@ -214,6 +214,28 @@ export default async function BlogPostPage({ params }: Props) {
             Contact us
             <span className="btn-arrow" aria-hidden>→</span>
           </Link>
+        </div>
+
+        {/* Related services — descriptive internal links to the core service pages */}
+        <div className="mt-12 border-t border-brand-line pt-8">
+          <h2 className="mb-4 font-display text-xl font-semibold text-brand-ink">How we help care providers</h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              { href: '/seo', label: 'SEO for care homes and nursing homes' },
+              { href: '/local-seo', label: 'Local SEO for care providers' },
+              { href: '/website-development', label: 'Care home website development' },
+              { href: '/marketing', label: 'Care sector marketing and enquiry generation' },
+            ].map((s) => (
+              <Link
+                key={s.href}
+                href={s.href}
+                className="group flex items-center justify-between gap-3 rounded-xl border border-brand-line bg-white px-4 py-3 text-sm font-medium text-brand-ink transition-colors hover:border-brand-accent hover:text-brand-accent"
+              >
+                {s.label}
+                <span className="text-brand-pop transition-transform group-hover:translate-x-0.5" aria-hidden>→</span>
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* FAQs — only when added in admin */}

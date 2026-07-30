@@ -69,6 +69,35 @@ export async function saveSiteOgImage(formData: FormData) {
   revalidatePath('/admin/seo')
 }
 
+// The blog author entity (name, role, bio, photo, LinkedIn). Powers the byline,
+// the author card and the Person / author schema on every blog post.
+export async function saveAuthor(id: string, formData: FormData) {
+  await requireAdmin()
+  const name = String(formData.get('name') ?? '').trim()
+  const title = String(formData.get('title') ?? '').trim()
+  const bio = String(formData.get('bio') ?? '').trim()
+  const linkedin_url = String(formData.get('linkedin_url') ?? '').trim()
+  const avatar_url = String(formData.get('avatar_url') ?? '').trim()
+  if (!name) throw new Error('Author name is required.')
+
+  const db = createServiceClient() as unknown as any
+  const { error } = await db
+    .from('authors')
+    .update({
+      name,
+      title: title || null,
+      bio: bio || null,
+      linkedin_url: linkedin_url || null,
+      avatar_url: avatar_url || null,
+    })
+    .eq('id', id)
+  if (error) throw new Error(error.message)
+
+  // Every blog post embeds the author, so refresh the whole blog subtree.
+  revalidatePath('/blog', 'layout')
+  revalidatePath('/admin/seo')
+}
+
 export async function saveImageAlt(src: string, formData: FormData) {
   await requireAdmin()
   const alt = String(formData.get('alt') ?? '').trim().slice(0, 300)

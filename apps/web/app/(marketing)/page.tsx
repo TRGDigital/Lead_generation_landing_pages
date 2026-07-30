@@ -80,8 +80,7 @@ export default async function HomePage() {
             worksFor: { '@id': `${SITE_URL}/#organization` },
             sameAs: ['https://www.linkedin.com/in/len-burgess-262b0833'],
           },
-          // Add TRG Digital's own social profile URLs (LinkedIn company page, X, etc.) here for a richer knowledge panel.
-          sameAs: [],
+          sameAs: ['https://www.linkedin.com/company/trg-digital/'],
         },
         {
           '@type': 'WebSite',
