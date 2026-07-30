@@ -125,7 +125,6 @@ export default async function BlogPostPage({ params }: Props) {
           <h1 className="font-display text-4xl font-semibold leading-tight text-brand-ink sm:text-5xl">
             {post.title}
           </h1>
-          <p className="mt-4 text-xl leading-relaxed text-brand-ink-soft">{post.excerpt}</p>
 
           {/* Author */}
           {post.author && (
