@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { TrendingUp, ArrowDownRight } from 'lucide-react'
 import { Star, Dots, Squiggle, Burst } from './Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'

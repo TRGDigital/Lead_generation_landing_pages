@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { Search, RotateCcw, Globe, Copy, CheckCheck, CircleCheck, TriangleAlert, CircleX } from 'lucide-react'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 

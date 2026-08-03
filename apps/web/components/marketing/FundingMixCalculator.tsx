@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { Minus, Plus } from 'lucide-react'
 import { gbp } from '@/lib/funding'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
