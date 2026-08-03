@@ -90,15 +90,15 @@ export function GetMoreEnquiries() {
             {CAPABILITIES.map(({ icon: Icon, title, body }) => (
               <div
                 key={title}
-                className="group rounded-2xl border-2 border-brand-line bg-white/50 p-5 transition-all hover:-translate-y-0.5 hover:border-brand-pop/40 hover:shadow-[4px_4px_0_0_#2a2620]"
+                className="group rounded-2xl border-2 border-brand-line bg-white/50 p-5 transition-all hover:-translate-y-0.5 hover:border-brand-pop hover:bg-brand-pop hover:shadow-[4px_4px_0_0_#2a2620]"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-pop text-white transition-colors group-hover:bg-brand-pop-dark">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-pop text-white transition-colors group-hover:bg-white group-hover:text-brand-pop">
                   <Icon className="h-5 w-5" aria-hidden />
                 </span>
-                <h3 className="mt-4 font-display text-lg font-bold uppercase leading-tight tracking-tight text-brand-ink">
+                <h3 className="mt-4 font-display text-lg font-bold uppercase leading-tight tracking-tight text-brand-ink transition-colors group-hover:text-white">
                   {title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
+                <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft transition-colors group-hover:text-white/85">{body}</p>
               </div>
             ))}
           </div>
