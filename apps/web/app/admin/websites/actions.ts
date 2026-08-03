@@ -273,3 +273,28 @@ export async function deleteWebsite(id: string) {
   revalidatePath('/admin/websites')
   redirect('/admin/websites')
 }
+
+// ── Call tracking (DNI) — Phase 1: one static tracking number per site ───────
+export async function saveCallTracking(id: string, formData: FormData) {
+  await requireAdmin()
+  const canonical = String(formData.get('canonical_numbers') ?? '')
+    .split('\n')
+    .map((s) => s.trim())
+    .filter(Boolean)
+  const db = createServiceClient() as unknown as any
+  const { error } = await db.from('tracking_numbers').upsert(
+    {
+      website_id: id,
+      enabled: formData.get('enabled') === 'on',
+      twilio_number: String(formData.get('twilio_number') ?? '').trim(),
+      display_number: String(formData.get('display_number') ?? '').trim(),
+      forward_to: String(formData.get('forward_to') ?? '').trim(),
+      canonical_numbers: canonical,
+      notes: String(formData.get('notes') ?? '').trim(),
+      updated_at: new Date().toISOString(),
+    },
+    { onConflict: 'website_id' },
+  )
+  if (error) throw new Error(error.message)
+  revalidatePath(`/admin/websites/${id}`)
+}
