@@ -18,11 +18,11 @@ import {
   Inbox,
   Wrench,
 } from 'lucide-react'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Target, Linkedin, Tags } from 'lucide-react'
 import AdminNavLink from './AdminNavLink'
 import TrgLogo from './TrgLogo'
 
-type NavItem = { href: string; icon: React.ReactNode; label: string }
+type NavItem = { href: string; icon: React.ReactNode; label: string; external?: boolean }
 // `accent` colours the little dot next to a group title so the two sides of the
 // business are recognisable at a glance in the sidebar.
 type NavGroup = { title: string | null; accent?: string; items: NavItem[] }
@@ -61,6 +61,17 @@ const navGroups: NavGroup[] = [
       { href: '/admin/blog', icon: <BookOpen className="h-4 w-4" />, label: 'Blog' },
       { href: '/admin/seo', icon: <Search className="h-4 w-4" />, label: 'Page SEO' },
       { href: '/admin/legal', icon: <Scale className="h-4 w-4" />, label: 'Legal Pages' },
+    ],
+  },
+  {
+    // Standalone TRG apps — this admin is the hub for everything TRG, so the other
+    // internal tools are one click away (they open in a new tab, own logins).
+    title: 'TRG apps',
+    accent: 'bg-cyan-400',
+    items: [
+      { href: 'https://trg-lead-engine.vercel.app/', icon: <Target className="h-4 w-4" />, label: 'Lead Engine', external: true },
+      { href: 'https://trg-linkedin-content.vercel.app/', icon: <Linkedin className="h-4 w-4" />, label: 'LinkedIn Content', external: true },
+      { href: 'https://meta-generator-trgdigitals-projects.vercel.app/', icon: <Tags className="h-4 w-4" />, label: 'Meta Generator', external: true },
     ],
   },
   {
