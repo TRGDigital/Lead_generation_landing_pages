@@ -18,11 +18,14 @@ import {
   Inbox,
   Wrench,
 } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import AdminNavLink from './AdminNavLink'
 import TrgLogo from './TrgLogo'
 
 type NavItem = { href: string; icon: React.ReactNode; label: string }
-type NavGroup = { title: string | null; items: NavItem[] }
+// `accent` colours the little dot next to a group title so the two sides of the
+// business are recognisable at a glance in the sidebar.
+type NavGroup = { title: string | null; accent?: string; items: NavItem[] }
 
 const navGroups: NavGroup[] = [
   {
@@ -32,6 +35,7 @@ const navGroups: NavGroup[] = [
   {
     // The CareBeds lead-gen business: paid campaigns → landing pages → leads sold to buyers.
     title: 'Paid · CareBeds leads',
+    accent: 'bg-amber-400',
     items: [
       { href: '/admin/leads', icon: <Users className="h-4 w-4" />, label: 'Leads' },
       { href: '/admin/buyers', icon: <Send className="h-4 w-4" />, label: 'Buyers' },
@@ -48,6 +52,7 @@ const navGroups: NavGroup[] = [
     // Client websites we run: everything per-site lives under Websites; the rest is
     // cross-site (enquiries inbox, tool usage, TRG's own blog/SEO/legal pages).
     title: 'Organic · client websites',
+    accent: 'bg-emerald-400',
     items: [
       { href: '/admin/websites', icon: <Globe className="h-4 w-4" />, label: 'Websites' },
       { href: '/admin/marketing-leads', icon: <Inbox className="h-4 w-4" />, label: 'Site enquiries' },
@@ -66,25 +71,38 @@ const navGroups: NavGroup[] = [
 
 export default function AdminSidebar() {
   return (
-    <aside className="hidden lg:flex lg:flex-col lg:w-60 lg:shrink-0 border-r bg-background">
-      <div className="flex h-14 items-center border-b px-6">
+    <aside className="hidden lg:flex lg:flex-col lg:w-60 lg:shrink-0 border-r border-slate-800 bg-slate-900">
+      <div className="flex h-14 items-center border-b border-slate-800 px-6">
         <Link href="/admin">
-          <TrgLogo />
+          <TrgLogo dark />
         </Link>
       </div>
       <nav className="flex-1 space-y-1 overflow-y-auto p-4">
-        {navGroups.map((group, i) => (
-          <div key={i} className={group.title ? 'pt-3' : ''}>
-            {group.title && (
-              <p className="px-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/70">{group.title}</p>
-            )}
-            <div className="space-y-1">
+        {navGroups.map((group, i) =>
+          group.title ? (
+            // Collapsible group (native <details> — works without JS, open by default).
+            <details key={i} open className="group/side pt-3">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-2 rounded-lg px-3 py-1.5 hover:bg-white/5">
+                <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                  {group.accent && <span className={`h-2 w-2 rounded-full ${group.accent}`} />}
+                  {group.title}
+                </span>
+                <ChevronDown className="h-3.5 w-3.5 text-slate-500 transition-transform group-open/side:rotate-180" />
+              </summary>
+              <div className="mt-1 space-y-1">
+                {group.items.map((item) => (
+                  <AdminNavLink key={item.href} {...item} variant="dark" />
+                ))}
+              </div>
+            </details>
+          ) : (
+            <div key={i} className="space-y-1">
               {group.items.map((item) => (
-                <AdminNavLink key={item.href} {...item} />
+                <AdminNavLink key={item.href} {...item} variant="dark" />
               ))}
             </div>
-          </div>
-        ))}
+          ),
+        )}
       </nav>
     </aside>
   )

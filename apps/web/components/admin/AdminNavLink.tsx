@@ -9,9 +9,11 @@ interface AdminNavLinkProps {
   icon: React.ReactNode
   label: string
   onClick?: () => void
+  // 'dark' = the coloured desktop sidebar; 'light' (default) = the mobile drawer.
+  variant?: 'light' | 'dark'
 }
 
-export default function AdminNavLink({ href, icon, label, onClick }: AdminNavLinkProps) {
+export default function AdminNavLink({ href, icon, label, onClick, variant = 'light' }: AdminNavLinkProps) {
   const pathname = usePathname()
   const isActive = href === '/admin' ? pathname === '/admin' : pathname.startsWith(href)
 
@@ -21,9 +23,13 @@ export default function AdminNavLink({ href, icon, label, onClick }: AdminNavLin
       onClick={onClick}
       className={cn(
         'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
-        isActive
-          ? 'bg-primary/10 text-primary'
-          : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+        variant === 'dark'
+          ? isActive
+            ? 'bg-white/10 text-white'
+            : 'text-slate-300 hover:bg-white/5 hover:text-white'
+          : isActive
+            ? 'bg-primary/10 text-primary'
+            : 'text-muted-foreground hover:bg-muted hover:text-foreground'
       )}
     >
       {icon}
