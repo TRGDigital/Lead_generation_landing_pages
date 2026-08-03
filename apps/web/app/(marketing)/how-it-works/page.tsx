@@ -1,14 +1,19 @@
 import type { Metadata } from 'next'
+import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
-import Image from 'next/image'
+import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { Check, ArrowRight } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 
-export const dynamic = 'force-static'
+export const revalidate = 3600
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return applyPageSeo('/how-it-works', META)
+}
+
+const META: Metadata = {
   title: 'How TRG Digital Works, Managed Marketing for Care Homes',
   description:
     'See how TRG Digital fills empty care home beds: we build your landing page, run targeted ads, qualify every enquiry, and deliver qualified leads straight to your inbox.',
@@ -148,7 +153,7 @@ export default function HowItWorksPage() {
                 <span className="ml-2 truncate rounded bg-white px-2 py-0.5 text-[9px] text-brand-ink-muted">careassura.com</span>
               </div>
               <div className="relative aspect-[16/11] w-full">
-                <Image src="/mockups/haywards-landing.png" alt="A care landing page we build" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover object-top" priority />
+                <ManagedImage src="/mockups/haywards-landing.png" alt="A care landing page we build" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover object-top" priority />
               </div>
             </div>
             <div className="absolute -bottom-6 -left-6 hidden w-56 rounded-xl border border-brand-line bg-white p-4 shadow-card sm:block">
@@ -254,12 +259,12 @@ export default function HowItWorksPage() {
             specific home.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/contact" className="btn-cta">
-              Start your project
+            <Link href="/book-a-demo" className="btn-cta">
+              Book a free demo
               <span className="btn-arrow" aria-hidden>→</span>
             </Link>
-            <Link href="/pricing" className="inline-flex h-12 items-center gap-1 px-6 text-sm font-semibold uppercase tracking-wide text-white/90 transition-colors hover:text-white">
-              See pricing →
+            <Link href="/contact" className="btn-cta-outline">
+              Start your project
             </Link>
           </div>
         </div>

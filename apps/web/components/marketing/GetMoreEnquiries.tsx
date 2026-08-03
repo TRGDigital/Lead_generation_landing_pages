@@ -104,7 +104,7 @@ export function GetMoreEnquiries() {
 
         {/* CTA banner — ink on yellow (the section above already owns the orange CTA) */}
         <Link
-          href="/contact"
+          href="/book-a-demo"
           className="mt-10 flex items-center justify-center gap-3 rounded-2xl bg-brand-ink px-6 py-6 text-center font-display text-xl font-bold uppercase tracking-tight text-white shadow-[4px_4px_0_0_#F0532B] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0_0_#F0532B] sm:text-2xl"
         >
           Want more enquiries? Book a free demo

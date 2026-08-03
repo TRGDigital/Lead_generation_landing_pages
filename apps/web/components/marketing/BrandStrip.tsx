@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { Star } from './Decor'
 
 // "Brands that have chosen TRG Digital", a horizontal auto-scrolling logo strip.
@@ -23,12 +23,12 @@ export function BrandStrip() {
       <Star className="absolute -left-4 top-2 hidden h-16 w-16 -rotate-12 text-brand-pop/70 lg:block" />
       <Star className="absolute -right-4 bottom-2 hidden h-16 w-16 rotate-12 text-brand-accent lg:block" />
       <p className="relative px-6 text-center text-xs font-semibold uppercase tracking-widest text-brand-ink-muted">
-        Brands that have chosen TRG Digital
+        Care brands powered by TRG Digital
       </p>
       <div className="marquee-mask mt-8">
         <div className="animate-marquee flex w-max items-center gap-14 px-7">
           {[...CLIENTS, ...CLIENTS].map((c, i) => (
-            <Image
+            <ManagedImage
               key={i}
               src={c.src}
               alt={c.name}

@@ -39,7 +39,7 @@ export function StartProject() {
           </ul>
           <p className="mt-8 text-sm text-white/50">
             Prefer to talk? Call us or{' '}
-            <a href="/contact" className="font-semibold text-brand-accent hover:underline">book a free demo</a>.
+            <a href="/book-a-demo" className="font-semibold text-brand-accent hover:underline">book a free demo</a>.
           </p>
         </div>
 

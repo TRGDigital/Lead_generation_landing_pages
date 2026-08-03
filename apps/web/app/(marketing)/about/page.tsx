@@ -195,6 +195,68 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── The founder ───────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden px-6 py-24">
+        <Squiggle className="absolute left-1/3 top-10 hidden h-7 w-44 text-brand-accent lg:block" />
+        <div className="mx-auto max-w-6xl">
+          <div className="grid items-center gap-12 lg:grid-cols-[auto_1fr]">
+            <div className="relative mx-auto w-56 sm:w-64">
+              <span className="absolute -inset-3 rounded-full border-2 border-dashed border-brand-pop/40" aria-hidden />
+              <ManagedImage
+                src="/team/len-burgess.png"
+                alt="Len Burgess, founder of TRG Digital"
+                width={300}
+                height={300}
+                className="w-full rounded-full"
+              />
+              <ManagedImage
+                src="/signature/len-signature.png"
+                alt=""
+                width={304}
+                height={68}
+                className="mx-auto mt-5 h-9 w-auto"
+              />
+            </div>
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Who you&apos;ll be working with</p>
+              <h2 className="mt-2 font-display text-3xl font-bold uppercase leading-tight tracking-tight text-brand-ink sm:text-4xl">
+                Len Burgess, founder
+              </h2>
+              <div className="mt-5 space-y-4 text-base leading-relaxed text-brand-ink-soft">
+                <p>
+                  Len has spent more than a decade in SEO and digital marketing, working data-first: read the
+                  numbers, apply best practice, test, and repeat until it ranks. TRG Digital is that discipline
+                  pointed at one sector, care.
+                </p>
+                <p>
+                  The agency grew out of the care sector itself. Its first websites, tools and campaigns were
+                  built for Crossways Residential Care Home in Lindfield and Ferndale Nursing Home in Crawley,
+                  and that inside view, of CQC, funding routes, staffing pressures and the families behind every
+                  enquiry, still shapes everything we ship. The same team went on to build{' '}
+                  <a href="https://carestreamai.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-pop underline-offset-2 hover:underline">CareStream</a>{' '}
+                  and{' '}
+                  <a href="https://careassura.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-pop underline-offset-2 hover:underline">CareAssura</a>,
+                  both live across the sector today.
+                </p>
+                <p>
+                  When you work with TRG you work with Len and the team who build everything in-house, no
+                  account managers, no outsourcing, no hand-offs.
+                </p>
+              </div>
+              <a
+                href="https://www.linkedin.com/in/len-burgess-262b0833/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center gap-2 rounded-xl border-2 border-brand-ink px-5 py-2.5 font-display text-sm font-bold uppercase tracking-wide text-brand-ink transition-colors hover:bg-brand-ink hover:text-white"
+              >
+                Connect on LinkedIn
+                <span aria-hidden>→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── What we do (services) ─────────────────────────────────────── */}
       <section className="relative overflow-hidden px-6 py-24">
         <Star className="absolute right-10 top-12 hidden h-16 w-16 rotate-12 text-brand-accent lg:block" />

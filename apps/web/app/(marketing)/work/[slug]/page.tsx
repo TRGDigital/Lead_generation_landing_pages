@@ -298,7 +298,7 @@ export default async function CaseStudyPage({
         <div className="relative mx-auto max-w-6xl">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-accent">By the numbers</p>
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
-            {cs.stats.map((s) => (
+            {cs.stats.filter((s) => !s.placeholder).map((s) => (
               <div
                 key={s.label}
                 className={`rounded-2xl p-7 ${s.placeholder ? 'border border-dashed border-white/25 bg-white/[0.03]' : 'bg-white/[0.06]'}`}

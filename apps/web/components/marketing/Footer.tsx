@@ -1,15 +1,32 @@
 import Link from 'next/link'
-import Image from 'next/image'
+import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { MapPin } from 'lucide-react'
 import { SERVICES } from '@/lib/services'
+import { Star } from './Decor'
+
+const MARQUEE = ['More enquiries', 'Fewer empty beds', 'Built only for care']
+
+// One copy of the scrolling statement; two side by side make a seamless loop.
+function MarqueeTrack() {
+  return (
+    <div className="flex shrink-0 items-center">
+      {MARQUEE.concat(MARQUEE).map((t, i) => (
+        <span key={i} className="flex items-center">
+          <span className="px-6 font-display text-4xl font-bold uppercase tracking-tight text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.28)] sm:text-6xl">{t}</span>
+          <Star className="h-7 w-7 shrink-0 text-brand-pop sm:h-9 sm:w-9" />
+        </span>
+      ))}
+    </div>
+  )
+}
 
 const COMPANY = [
   { href: '/about', label: 'About us' },
   { href: '/tools', label: 'Free tools' },
   { href: '/blog', label: 'Knowledge Hub' },
   { href: '/contact', label: 'Contact' },
-  { href: '/pricing', label: 'Pricing' },
   { href: '/how-it-works', label: 'How it works' },
+  { href: '/refer', label: 'Refer a home' },
 ]
 const PRODUCTS = [
   { href: 'https://carestreamai.com', label: 'CareStream' },
@@ -47,12 +64,12 @@ function FLink({ href, label }: { href: string; label: string }) {
 export default function Footer() {
   return (
     <footer className="bg-brand-ink text-white">
-      <div className="mx-auto max-w-6xl px-6 py-16">
+      <div className="mx-auto max-w-6xl px-6 pt-16">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-6">
           {/* Brand */}
           <div className="col-span-2 lg:col-span-2">
             <Link href="/" className="inline-flex items-center" aria-label="TRG Digital home">
-              <Image src="/trg-digital-2025.png" alt="TRG Digital" width={4167} height={967} className="h-9 w-auto brightness-0 invert" />
+              <ManagedImage src="/trg-digital-footer.png" alt="TRG Digital" width={4167} height={967} className="h-9 w-auto" />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
               A specialist digital marketing agency for the UK care sector, more enquiries, fewer empty beds.
@@ -74,9 +91,19 @@ export default function Footer() {
           <Col title="Products">{PRODUCTS.map((l) => <FLink key={l.href} {...l} />)}</Col>
           <Col title="Legal">{LEGAL.map((l) => <FLink key={l.href} {...l} />)}</Col>
         </div>
+      </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 sm:flex-row">
-          <p className="text-xs text-white/50">© {new Date().getFullYear()} TRG Digital. All rights reserved.</p>
+      {/* Full-bleed scrolling brand statement, turns the dead space into a bold sign-off */}
+      <div className="relative mt-14 flex overflow-hidden border-y border-white/10 py-7" aria-hidden="true">
+        <div className="flex w-max animate-marquee">
+          <MarqueeTrack />
+          <MarqueeTrack />
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-6xl px-6 py-8">
+        <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
+          <p className="text-xs text-white/50">© {new Date().getFullYear()} TRG Digital Ltd. All rights reserved. Registered in England &amp; Wales, company no. 11731704. Suite Ra01, 195-197 Wood Street, London, E17 3NU.</p>
           <p className="text-xs text-white/50">Marketing, websites &amp; software, built only for UK care.</p>
         </div>
       </div>

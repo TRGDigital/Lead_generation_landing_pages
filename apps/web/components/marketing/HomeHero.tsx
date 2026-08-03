@@ -1,8 +1,9 @@
 import Link from 'next/link'
-import Image from 'next/image'
+import { ManagedImage } from '@/components/marketing/ManagedImage'
 import {
   AnalyticsCard, LighthouseCard, LeadsTableCard, GithubCard, VercelCard,
   GoogleSearchCard, BingSearchCard, RankingsCard, AdsCard, CmsCard,
+  EmptyBedCard, GraderCard,
 } from './HeroMockups'
 import { Squiggle, Star } from './Decor'
 
@@ -10,6 +11,7 @@ type Shot = { src: string; alt: string; url?: string }
 type Col =
   | { kind: 'desktop'; shot: Shot }
   | { kind: 'phone'; shot: Shot }
+  | { kind: 'tablet'; shot: Shot }
   | { kind: 'stack'; shots: [Shot, Shot] }
 
 const COLS: Col[] = [
@@ -26,6 +28,11 @@ const COLS: Col[] = [
     { src: '/mockups/haywards-landing.png', alt: 'A care home landing page', url: 'careassura.com' },
   ] },
   { kind: 'phone', shot: { src: '/mockups/carestream-pricing-mobile.png', alt: 'CareStream pricing on mobile' } },
+  { kind: 'desktop', shot: { src: '/mockups/tools-hub.png', alt: 'Our free care toolkit', url: 'trgdigital.com/tools' } },
+  { kind: 'desktop', shot: { src: '/mockups/crossways.png', alt: 'Crossways Care Home website', url: 'crosswayscarehome.co.uk' } },
+  { kind: 'tablet', shot: { src: '/mockups/crossways.png', alt: 'Crossways Care Home on a tablet', url: 'crosswayscarehome.co.uk' } },
+  { kind: 'tablet', shot: { src: '/mockups/haywards-landing.png', alt: 'A care home website on a tablet', url: 'careassura.com' } },
+  { kind: 'tablet', shot: { src: '/mockups/carestream-desktop.png', alt: 'CareStream on a tablet', url: 'carestreamai.com' } },
 ]
 
 function Browser({ shot, h, w }: { shot: Shot; h: string; w: string }) {
@@ -38,7 +45,7 @@ function Browser({ shot, h, w }: { shot: Shot; h: string; w: string }) {
         <span className="ml-2 truncate rounded bg-white px-2 py-0.5 text-[8px] text-brand-ink-muted">{shot.url}</span>
       </div>
       <div className={`relative ${h} w-full`}>
-        <Image src={shot.src} alt={shot.alt} fill sizes="420px" className="object-cover object-top" />
+        <ManagedImage src={shot.src} alt={shot.alt} fill sizes="500px" loading="eager" className="object-cover object-top" />
       </div>
     </div>
   )
@@ -48,7 +55,17 @@ function Phone({ shot }: { shot: Shot }) {
   return (
     <div className="h-[400px] w-[188px] flex-shrink-0 overflow-hidden rounded-[1.8rem] border-4 border-brand-ink bg-brand-ink shadow-card">
       <div className="relative h-full w-full overflow-hidden rounded-[1.25rem] bg-white">
-        <Image src={shot.src} alt={shot.alt} fill sizes="155px" className="object-cover object-top" />
+        <ManagedImage src={shot.src} alt={shot.alt} fill sizes="188px" loading="eager" className="object-cover object-top" />
+      </div>
+    </div>
+  )
+}
+
+function Tablet({ shot }: { shot: Shot }) {
+  return (
+    <div className="h-[300px] w-[420px] flex-shrink-0 overflow-hidden rounded-[1.6rem] border-[7px] border-brand-ink bg-brand-ink shadow-card">
+      <div className="relative h-full w-full overflow-hidden rounded-[0.7rem] bg-white">
+        <ManagedImage src={shot.src} alt={shot.alt} fill sizes="420px" loading="eager" className="object-cover object-top" />
       </div>
     </div>
   )
@@ -56,6 +73,7 @@ function Phone({ shot }: { shot: Shot }) {
 
 function Column({ col }: { col: Col }) {
   if (col.kind === 'phone') return <Phone shot={col.shot} />
+  if (col.kind === 'tablet') return <Tablet shot={col.shot} />
   if (col.kind === 'desktop') return <Browser shot={col.shot} w="w-[500px]" h="h-[312px]" />
   return (
     <div className="flex flex-col gap-5">
@@ -70,15 +88,22 @@ function Column({ col }: { col: Col }) {
 function band() {
   return [
     <Column key="c0" col={COLS[0]!} />,
+    <Column key="ccross" col={COLS[8]!} />,
+    <Column key="ctools" col={COLS[7]!} />,
+    <GraderCard key="grader" />,
+    <Column key="tab0" col={COLS[9]!} />,
     <LeadsTableCard key="leadstable" />,
     <Column key="c1" col={COLS[1]!} />,
     <GoogleSearchCard key="google" />,
+    <EmptyBedCard key="emptybed" />,
+    <Column key="tab1" col={COLS[10]!} />,
     <AnalyticsCard key="analytics" />,
     <Column key="c2" col={COLS[2]!} />,
     <BingSearchCard key="bing" />,
     <LighthouseCard key="lighthouse" />,
     <Column key="c3" col={COLS[3]!} />,
     <RankingsCard key="rankings" />,
+    <Column key="tab2" col={COLS[11]!} />,
     <GithubCard key="github" />,
     <Column key="c4" col={COLS[4]!} />,
     <AdsCard key="ads" />,
@@ -132,8 +157,8 @@ export function HomeHero() {
               Start your project
               <span className="btn-arrow" aria-hidden>→</span>
             </Link>
-            <Link href="/about" className="btn-cta-outline">
-              What we do
+            <Link href="/tools/website-grader" className="btn-cta-outline">
+              Get your free website grade
             </Link>
           </div>
           <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-brand-ink-soft">

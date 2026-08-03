@@ -166,7 +166,7 @@ const crossways: CaseStudy = {
     { value: '+12', label: 'New online enquiries a month', note: 'Placeholder — update with live data', placeholder: true },
   ],
   statsNote:
-    'Pages and articles are a live count. Traffic and enquiry figures are placeholders for now and will be updated with real data as the campaign runs.',
+    'Pages and articles are a live count. The site is newly launched, and live traffic and enquiry figures will be published here as they land.',
   economicsLede:
     'For a care home, marketing is not a cost, it is the cheapest bed-filler there is. The maths is simple and it is the home’s own.',
   economicsPoints: [
@@ -290,7 +290,7 @@ const ferndale: CaseStudy = {
     { value: '+10', label: 'New online enquiries a month', note: 'Placeholder — update with live data', placeholder: true },
   ],
   statsNote:
-    'Pages and articles are a live count. Traffic and enquiry figures are placeholders for now and will be updated with real data as the campaign runs.',
+    'Pages and articles are a live count. The site is newly launched, and live traffic and enquiry figures will be published here as they land.',
   economicsLede:
     'In nursing care the cost of an empty bed is even higher, which makes a working enquiry engine one of the best investments a home can make.',
   economicsPoints: [

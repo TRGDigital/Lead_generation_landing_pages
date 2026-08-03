@@ -7,7 +7,27 @@ const SERVICES = [
   {
     title: 'Search Engine Optimisation (SEO)',
     body: 'When a family searches for care in your area, you need to be the home they find first. We build a reliable, long-term SEO presence, local pages, content and technical fixes, so you rank for the searches that actually bring enquiries, not vanity keywords.',
-    href: '/marketing',
+    href: '/seo',
+  },
+  {
+    title: 'Local SEO',
+    body: 'Care is a local decision. We get you to the top of the map and the local results, Google Business Profile, local pages, citations and reviews, so families searching for care in your town find you and choose you first.',
+    href: '/local-seo',
+  },
+  {
+    title: 'Google Profile & Reviews',
+    body: 'Families judge you on Google before they ever reach your site. We fully manage your Google Business Profile and grow genuine reviews, keeping your listing accurate and active and responding to every review, so you win the local map and the trust that turns into enquiries.',
+    href: '/google-business-profile',
+  },
+  {
+    title: 'Content Creation',
+    body: 'Families research care long before they call. We plan and publish genuinely useful, care-aware content on a steady schedule, so your website earns Google’s trust and grows your organic traffic and enquiries month after month.',
+    href: '/content-creation',
+  },
+  {
+    title: 'Conversion Rate Optimisation',
+    body: 'Most care websites lose the majority of their visitors. We turn more of the traffic you already have into enquiries, clearer journeys, stronger calls to action, faster pages and rigorous testing, without spending more on advertising.',
+    href: '/conversion-rate-optimisation',
   },
   {
     title: 'Website Design & Development',
@@ -18,6 +38,11 @@ const SERVICES = [
     title: 'Paid Media Advertising & PPC',
     body: 'Wasting budget on clicks that never call? Our Google and Meta campaigns put you in front of families actively looking for care near you, and we measure success on enquiries and filled beds, not impressions.',
     href: '/marketing',
+  },
+  {
+    title: 'Care Tools & Technology',
+    body: 'Our proprietary family care tools, funding calculators, NHS Continuing Healthcare and Funded Nursing Care checkers, a local-council guide and more, plus live room availability and built-in accessibility. We add them to your site as gateway tools that bring searching families in and turn them into enquiries.',
+    href: '/care-tools',
   },
   {
     title: 'Custom Software Development',
@@ -59,7 +84,7 @@ export function CoreServices() {
 
           {/* CTA banner */}
           <Link
-            href="/contact"
+            href="/book-a-demo"
             className="mt-8 flex items-center justify-center gap-3 rounded-2xl bg-brand-pop px-6 py-6 text-center font-display text-xl font-bold uppercase tracking-tight text-white shadow-[4px_4px_0_0_#2a2620] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:bg-brand-pop-dark hover:shadow-[2px_2px_0_0_#2a2620] sm:text-2xl"
           >
             Know what you want? Book a free demo
