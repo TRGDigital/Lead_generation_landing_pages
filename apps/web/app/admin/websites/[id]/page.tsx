@@ -34,6 +34,58 @@ function when(s: string) {
   }
 }
 
+function OnOff({ on, onLabel = 'On', offLabel = 'Off' }: { on: boolean; onLabel?: string; offLabel?: string }) {
+  return (
+    <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${on ? 'bg-green-100 text-green-700' : 'bg-brand-bg-warm text-brand-ink-muted'}`}>
+      {on ? onLabel : offLabel}
+    </span>
+  )
+}
+
+// One collapsible feature panel. Keeps every accordion identical so the page reads as a tidy list.
+function Panel({
+  title,
+  badge,
+  open,
+  children,
+}: {
+  title: string
+  badge?: React.ReactNode
+  open?: boolean
+  children: React.ReactNode
+}) {
+  return (
+    <details open={open} className="group rounded-2xl border border-brand-line bg-white">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4">
+        <span className="flex flex-wrap items-center gap-2.5">
+          <span className="font-display text-base font-semibold text-brand-ink">{title}</span>
+          {badge}
+        </span>
+        <ChevronDown className="h-5 w-5 flex-shrink-0 text-brand-ink-muted transition-transform group-open:rotate-180" />
+      </summary>
+      <div className="border-t border-brand-line px-5 py-5">{children}</div>
+    </details>
+  )
+}
+
+// Section = a heading + short description over a stack of panels, so the page has a clear
+// visual hierarchy: what's performing → what captures leads → what runs on the site → install.
+function SectionHeading({ id, title, desc }: { id: string; title: string; desc: string }) {
+  return (
+    <div id={id} className="mt-10 mb-4 scroll-mt-24 first:mt-0">
+      <h2 className="font-display text-lg font-semibold text-brand-ink">{title}</h2>
+      <p className="mt-0.5 text-sm text-brand-ink-muted">{desc}</p>
+    </div>
+  )
+}
+
+const JUMP_LINKS = [
+  { href: '#performance', label: 'Performance' },
+  { href: '#lead-capture', label: 'Lead capture' },
+  { href: '#features', label: 'Site features' },
+  { href: '#install', label: 'Install' },
+]
+
 type Props = { params: { id: string } }
 
 export default async function WebsiteDetailPage({ params }: Props) {
@@ -95,82 +147,122 @@ export default async function WebsiteDetailPage({ params }: Props) {
         </div>
       </div>
 
-      {/* Overlay performance (collapsible, open by default) */}
-      <details open className="group mt-6 rounded-2xl border border-brand-line bg-white">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4">
-          <span className="flex items-center gap-2.5">
-            <span className="font-display text-base font-semibold text-brand-ink">Overlay performance</span>
+      {/* Jump links */}
+      <nav className="sticky top-0 z-10 -mx-2 mt-6 flex gap-2 overflow-x-auto bg-background/95 px-2 py-2 backdrop-blur" aria-label="Sections">
+        {JUMP_LINKS.map((j) => (
+          <a
+            key={j.href}
+            href={j.href}
+            className="whitespace-nowrap rounded-full border border-brand-line bg-white px-3.5 py-1.5 text-xs font-semibold text-brand-ink-soft hover:border-brand-accent/50 hover:text-brand-ink"
+          >
+            {j.label}
+          </a>
+        ))}
+      </nav>
+
+      {/* ── 1 · Performance ────────────────────────────────────────────── */}
+      <SectionHeading id="performance" title="Performance" desc="How this site is doing: overlay engagement and the enquiries it has captured." />
+      <div className="space-y-4">
+        <Panel
+          title="Overlay performance"
+          open
+          badge={
             <span className="rounded-full bg-brand-bg-warm px-2 py-0.5 text-[11px] font-semibold text-brand-ink-muted">
               {overlayStats.impressions > 0 ? `${overlayStats.impressions.toLocaleString()} views · 30d` : 'no views yet'}
             </span>
-          </span>
-          <ChevronDown className="h-5 w-5 flex-shrink-0 text-brand-ink-muted transition-transform group-open:rotate-180" />
-        </summary>
-        <div className="border-t border-brand-line px-5 py-5">
+          }
+        >
           <OverlayAnalytics stats={overlayStats} />
-        </div>
-      </details>
+        </Panel>
 
-      {/* Quiz questions (collapsible) */}
-      <details className="group mt-6 rounded-2xl border border-brand-line bg-white">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4">
-          <span className="flex items-center gap-2.5">
-            <span className="font-display text-base font-semibold text-brand-ink">Quiz questions</span>
+        <Panel
+          title="Organic leads"
+          open
+          badge={
+            <span className="rounded-full bg-brand-bg-warm px-2 py-0.5 text-[11px] font-semibold text-brand-ink-muted">
+              {leads.length > 0 ? `${leads.length} total · ${leads7d} this week` : 'none yet'}
+            </span>
+          }
+        >
+          {leads.length === 0 ? (
+            <div className="rounded-xl border border-dashed border-brand-line bg-brand-bg-warm/40 p-8 text-center text-sm text-brand-ink-muted">
+              No organic leads yet. Once the overlay is live on the site, captured enquiries appear here.
+            </div>
+          ) : (
+            <div className="-mx-5 -mb-5 overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-y border-brand-line bg-brand-bg-warm text-left">
+                    <th className="px-4 py-3 font-semibold text-brand-ink">Name</th>
+                    <th className="px-4 py-3 font-semibold text-brand-ink">Contact</th>
+                    <th className="px-4 py-3 font-semibold text-brand-ink hidden sm:table-cell">Via</th>
+                    <th className="px-4 py-3 font-semibold text-brand-ink hidden sm:table-cell">Consent</th>
+                    <th className="px-4 py-3 font-semibold text-brand-ink">When</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {leads.map((l) => (
+                    <tr key={l.id} className="border-b border-brand-line/50 last:border-0">
+                      <td className="px-4 py-3 font-medium text-brand-ink">{l.name || '—'}</td>
+                      <td className="px-4 py-3 text-brand-ink-soft">
+                        {l.email && <a href={`mailto:${l.email}`} className="text-brand-accent hover:underline">{l.email}</a>}
+                        {l.email && l.phone && <span className="text-brand-ink-muted"> · </span>}
+                        {l.phone && <span>{l.phone}</span>}
+                        {!l.email && !l.phone && '—'}
+                      </td>
+                      <td className="px-4 py-3 hidden text-brand-ink-muted sm:table-cell">{l.trigger || '—'}</td>
+                      <td className="px-4 py-3 hidden sm:table-cell">{l.consent ? <span className="text-green-600">✓ Yes</span> : <span className="text-brand-ink-muted">—</span>}</td>
+                      <td className="px-4 py-3 whitespace-nowrap text-brand-ink-muted">{when(l.created_at)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </Panel>
+      </div>
+
+      {/* ── 2 · Lead capture ───────────────────────────────────────────── */}
+      <SectionHeading id="lead-capture" title="Lead capture" desc="The pop overlay and landing page that turn visitors into enquiries." />
+      <div className="space-y-4">
+        <Panel title="Pop overlay" badge={<OnOff on={site.overlay_enabled} />}>
+          <WebsiteOverlayForm site={site} />
+        </Panel>
+
+        <Panel
+          title="Quiz questions"
+          badge={
             <span className="rounded-full bg-brand-bg-warm px-2 py-0.5 text-[11px] font-semibold text-brand-ink-muted">
               {site.overlay_gamified ? `${(site.overlay_questions?.length ?? 0) || 'default'} ${site.overlay_questions?.length ? 'questions' : ''}`.trim() : 'quiz off'}
             </span>
-          </span>
-          <ChevronDown className="h-5 w-5 flex-shrink-0 text-brand-ink-muted transition-transform group-open:rotate-180" />
-        </summary>
-        <div className="border-t border-brand-line px-5 py-5">
+          }
+        >
           <QuizQuestionsEditor websiteId={site.id} initial={site.overlay_questions ?? []} presets={presets} />
-        </div>
-      </details>
+        </Panel>
 
-      {/* Room availability (collapsible) */}
-      <details className="group mt-6 rounded-2xl border border-brand-line bg-white">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4">
-          <span className="flex items-center gap-2.5">
-            <span className="font-display text-base font-semibold text-brand-ink">Room availability</span>
+        <Panel title="Landing page" badge={<OnOff on={site.lp_enabled} onLabel="Live" />}>
+          <LandingPageForm site={site} widgetOrigin={WIDGET_ORIGIN} />
+        </Panel>
+      </div>
+
+      {/* ── 3 · Site features ──────────────────────────────────────────── */}
+      <SectionHeading id="features" title="Site features" desc="Everything else running on the site: availability, tools, chat, call bar and more." />
+      <div className="space-y-4">
+        <Panel
+          title="Room availability"
+          badge={
             <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${site.availability_status === 'available' ? 'bg-green-100 text-green-700' : site.availability_status === 'limited' ? 'bg-amber-100 text-amber-700' : site.availability_status === 'full' ? 'bg-red-100 text-red-700' : 'bg-brand-bg-warm text-brand-ink-muted'}`}>
               {site.availability_status !== 'unknown' && site.rooms_available > 0 ? `${site.rooms_available} available` : AVAILABILITY_LABELS[site.availability_status].label}
             </span>
-          </span>
-          <ChevronDown className="h-5 w-5 flex-shrink-0 text-brand-ink-muted transition-transform group-open:rotate-180" />
-        </summary>
-        <div className="border-t border-brand-line px-5 py-5">
+          }
+        >
           <AvailabilityPanel site={site} widgetOrigin={WIDGET_ORIGIN} />
-        </div>
-      </details>
+        </Panel>
 
-      {/* Landing page (collapsible) */}
-      <details className="group mt-4 rounded-2xl border border-brand-line bg-white">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4">
-          <span className="flex items-center gap-2.5">
-            <span className="font-display text-base font-semibold text-brand-ink">Landing page</span>
-            <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${site.lp_enabled ? 'bg-green-100 text-green-700' : 'bg-brand-bg-warm text-brand-ink-muted'}`}>
-              {site.lp_enabled ? 'Live' : 'Off'}
-            </span>
-          </span>
-          <ChevronDown className="h-5 w-5 flex-shrink-0 text-brand-ink-muted transition-transform group-open:rotate-180" />
-        </summary>
-        <div className="border-t border-brand-line px-5 py-5">
-          <LandingPageForm site={site} widgetOrigin={WIDGET_ORIGIN} />
-        </div>
-      </details>
-
-      {/* Family tools (collapsible) */}
-      <details className="group mt-4 rounded-2xl border border-brand-line bg-white">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4">
-          <span className="flex items-center gap-2.5">
-            <span className="font-display text-base font-semibold text-brand-ink">Family tools</span>
-            <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${(site.tools_enabled?.length ?? 0) > 0 ? 'bg-green-100 text-green-700' : 'bg-brand-bg-warm text-brand-ink-muted'}`}>
-              {(site.tools_enabled?.length ?? 0) > 0 ? `${site.tools_enabled.length} allocated` : 'none yet'}
-            </span>
-          </span>
-          <ChevronDown className="h-5 w-5 flex-shrink-0 text-brand-ink-muted transition-transform group-open:rotate-180" />
-        </summary>
-        <div className="border-t border-brand-line px-5 py-5">
+        <Panel
+          title="Family tools"
+          badge={<OnOff on={(site.tools_enabled?.length ?? 0) > 0} onLabel={`${site.tools_enabled?.length ?? 0} allocated`} offLabel="none yet" />}
+        >
           <ToolsAllocationPanel
             websiteId={site.id}
             slug={site.slug}
@@ -181,69 +273,20 @@ export default async function WebsiteDetailPage({ params }: Props) {
             brandColor={site.overlay_color}
             laOptions={LOCAL_AUTHORITIES.map((la) => ({ slug: la.slug, name: la.name, shortName: la.shortName, region: la.region, areas: la.areas }))}
           />
-        </div>
-      </details>
+        </Panel>
 
-      {/* Overlay settings (collapsible) */}
-      <details className="group mt-4 rounded-2xl border border-brand-line bg-white">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4">
-          <span className="flex items-center gap-2.5">
-            <span className="font-display text-base font-semibold text-brand-ink">Pop overlay</span>
-            <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${site.overlay_enabled ? 'bg-green-100 text-green-700' : 'bg-brand-bg-warm text-brand-ink-muted'}`}>
-              {site.overlay_enabled ? 'On' : 'Off'}
-            </span>
-          </span>
-          <ChevronDown className="h-5 w-5 flex-shrink-0 text-brand-ink-muted transition-transform group-open:rotate-180" />
-        </summary>
-        <div className="border-t border-brand-line px-5 py-5">
-          <WebsiteOverlayForm site={site} />
-        </div>
-      </details>
-
-      {/* AI chat assistant (collapsible) */}
-      <details className="group mt-4 rounded-2xl border border-brand-line bg-white">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4">
-          <span className="flex items-center gap-2.5">
-            <span className="font-display text-base font-semibold text-brand-ink">AI chat assistant</span>
-            <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${site.chat_enabled ? 'bg-green-100 text-green-700' : 'bg-brand-bg-warm text-brand-ink-muted'}`}>
-              {site.chat_enabled ? 'On' : 'Off'}
-            </span>
-          </span>
-          <ChevronDown className="h-5 w-5 flex-shrink-0 text-brand-ink-muted transition-transform group-open:rotate-180" />
-        </summary>
-        <div className="border-t border-brand-line px-5 py-5">
+        <Panel title="AI chat assistant" badge={<OnOff on={site.chat_enabled} />}>
           <ChatPanel site={site} widgetOrigin={WIDGET_ORIGIN} aiReady={!!process.env.ANTHROPIC_API_KEY} />
-        </div>
-      </details>
+        </Panel>
 
-      {/* Click-to-call bar (collapsible) */}
-      <details className="group mt-4 rounded-2xl border border-brand-line bg-white">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4">
-          <span className="flex items-center gap-2.5">
-            <span className="font-display text-base font-semibold text-brand-ink">Click-to-call bar</span>
-            <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${site.callbar_enabled ? 'bg-green-100 text-green-700' : 'bg-brand-bg-warm text-brand-ink-muted'}`}>
-              {site.callbar_enabled ? 'On' : 'Off'}
-            </span>
-          </span>
-          <ChevronDown className="h-5 w-5 flex-shrink-0 text-brand-ink-muted transition-transform group-open:rotate-180" />
-        </summary>
-        <div className="border-t border-brand-line px-5 py-5">
+        <Panel title="Click-to-call bar" badge={<OnOff on={site.callbar_enabled} />}>
           <CallbarPanel site={site} widgetOrigin={WIDGET_ORIGIN} />
-        </div>
-      </details>
+        </Panel>
 
-      {/* Call tracking / DNI (collapsible) */}
-      <details className="group mt-4 rounded-2xl border border-brand-line bg-white">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4">
-          <span className="flex items-center gap-2.5">
-            <span className="font-display text-base font-semibold text-brand-ink">Call tracking</span>
-            <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${tracking?.enabled ? 'bg-green-100 text-green-700' : 'bg-brand-bg-warm text-brand-ink-muted'}`}>
-              {tracking?.enabled ? `On · ${callStats.last30} calls · 30d` : 'Off'}
-            </span>
-          </span>
-          <ChevronDown className="h-5 w-5 flex-shrink-0 text-brand-ink-muted transition-transform group-open:rotate-180" />
-        </summary>
-        <div className="border-t border-brand-line px-5 py-5">
+        <Panel
+          title="Call tracking"
+          badge={<OnOff on={!!tracking?.enabled} onLabel={`On · ${callStats.last30} calls · 30d`} />}
+        >
           <CallTrackingPanel
             site={site}
             widgetOrigin={WIDGET_ORIGIN}
@@ -252,93 +295,33 @@ export default async function WebsiteDetailPage({ params }: Props) {
             stats={callStats}
             twilioReady={!!process.env.TWILIO_ACCOUNT_SID && !!process.env.TWILIO_AUTH_TOKEN}
           />
-        </div>
-      </details>
+        </Panel>
 
-      {/* Accessibility toolbar (collapsible) */}
-      <details className="group mt-4 rounded-2xl border border-brand-line bg-white">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4">
-          <span className="flex items-center gap-2.5">
-            <span className="font-display text-base font-semibold text-brand-ink">Accessibility toolbar</span>
-            <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${site.accessibility_enabled ? 'bg-green-100 text-green-700' : 'bg-brand-bg-warm text-brand-ink-muted'}`}>
-              {site.accessibility_enabled ? 'On' : 'Off'}
-            </span>
-          </span>
-          <ChevronDown className="h-5 w-5 flex-shrink-0 text-brand-ink-muted transition-transform group-open:rotate-180" />
-        </summary>
-        <div className="border-t border-brand-line px-5 py-5">
+        <Panel title="Accessibility toolbar" badge={<OnOff on={site.accessibility_enabled} />}>
           <AccessibilityPanel site={site} widgetOrigin={WIDGET_ORIGIN} />
-        </div>
-      </details>
+        </Panel>
 
-      {/* Funding & care options guide, premium (collapsible) */}
-      <details className="group mt-4 rounded-2xl border border-brand-line bg-white">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4">
-          <span className="flex items-center gap-2.5">
-            <span className="font-display text-base font-semibold text-brand-ink">Funding &amp; care guide</span>
-            <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">Premium</span>
-            <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${site.funding_guide_enabled ? 'bg-green-100 text-green-700' : 'bg-brand-bg-warm text-brand-ink-muted'}`}>
-              {site.funding_guide_enabled ? 'On' : 'Off'}
-            </span>
-          </span>
-          <ChevronDown className="h-5 w-5 flex-shrink-0 text-brand-ink-muted transition-transform group-open:rotate-180" />
-        </summary>
-        <div className="border-t border-brand-line px-5 py-5">
+        <Panel
+          title="Funding & care guide"
+          badge={
+            <>
+              <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">Premium</span>
+              <OnOff on={site.funding_guide_enabled} />
+            </>
+          }
+        >
           <FundingGuidePanel site={site} widgetOrigin={WIDGET_ORIGIN} />
-        </div>
-      </details>
+        </Panel>
+      </div>
 
-      {/* Embed snippet (collapsible) */}
-      <details className="group mt-4 rounded-2xl border border-brand-line bg-white">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4">
-          <span className="font-display text-base font-semibold text-brand-ink">Install on the site</span>
-          <ChevronDown className="h-5 w-5 flex-shrink-0 text-brand-ink-muted transition-transform group-open:rotate-180" />
-        </summary>
-        <div className="border-t border-brand-line px-5 py-5">
+      {/* ── 4 · Install ────────────────────────────────────────────────── */}
+      <SectionHeading id="install" title="Install" desc="The one-line snippet that powers everything above on the client site." />
+      <div className="space-y-4">
+        <Panel title="Install on the site">
           <p className="mb-3 text-sm text-brand-ink-muted">Add this one line just before the closing &lt;/body&gt; tag on {site.name}. The overlay then runs automatically and is controlled from the settings above.</p>
           <EmbedSnippet snippet={snippet} />
-        </div>
-      </details>
-
-      {/* Organic leads */}
-      <section className="mt-8">
-        <h2 className="mb-4 font-display text-lg font-semibold text-brand-ink">Organic leads</h2>
-        {leads.length === 0 ? (
-          <div className="rounded-2xl border border-brand-line bg-white p-10 text-center text-sm text-brand-ink-muted">
-            No organic leads yet. Once the overlay is live on the site, captured enquiries appear here.
-          </div>
-        ) : (
-          <div className="overflow-hidden rounded-2xl border border-brand-line bg-white">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-brand-line bg-brand-bg-warm text-left">
-                  <th className="px-4 py-3 font-semibold text-brand-ink">Name</th>
-                  <th className="px-4 py-3 font-semibold text-brand-ink">Contact</th>
-                  <th className="px-4 py-3 font-semibold text-brand-ink hidden sm:table-cell">Via</th>
-                  <th className="px-4 py-3 font-semibold text-brand-ink hidden sm:table-cell">Consent</th>
-                  <th className="px-4 py-3 font-semibold text-brand-ink">When</th>
-                </tr>
-              </thead>
-              <tbody>
-                {leads.map((l) => (
-                  <tr key={l.id} className="border-b border-brand-line/50 last:border-0">
-                    <td className="px-4 py-3 font-medium text-brand-ink">{l.name || '—'}</td>
-                    <td className="px-4 py-3 text-brand-ink-soft">
-                      {l.email && <a href={`mailto:${l.email}`} className="text-brand-accent hover:underline">{l.email}</a>}
-                      {l.email && l.phone && <span className="text-brand-ink-muted"> · </span>}
-                      {l.phone && <span>{l.phone}</span>}
-                      {!l.email && !l.phone && '—'}
-                    </td>
-                    <td className="px-4 py-3 hidden text-brand-ink-muted sm:table-cell">{l.trigger || '—'}</td>
-                    <td className="px-4 py-3 hidden sm:table-cell">{l.consent ? <span className="text-green-600">✓ Yes</span> : <span className="text-brand-ink-muted">—</span>}</td>
-                    <td className="px-4 py-3 whitespace-nowrap text-brand-ink-muted">{when(l.created_at)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </section>
+        </Panel>
+      </div>
     </div>
   )
 }

@@ -184,3 +184,82 @@ export async function getOrganicLeads(websiteId: string, limit = 200): Promise<O
     .limit(limit)
   return (data as OrganicLead[]) ?? []
 }
+
+export type OverlayEvent = {
+  event: 'impression' | 'start' | 'close' | 'submit' | 'preview'
+  via: string | null
+  device: string | null
+  path: string | null
+  visitor_id: string | null
+  created_at: string
+}
+
+export type OverlayStats = {
+  days: number
+  impressions: number
+  starts: number
+  closes: number
+  submits: number
+  previews: number // admin "Preview pop" views — shown separately, never counted in the metrics
+  uniqueVisitors: number
+  engagementRate: number // starts / impressions
+  submitRate: number // submits / impressions
+  byTrigger: { via: string; impressions: number }[]
+  byDevice: { device: string; impressions: number }[]
+  topPages: { path: string; impressions: number; starts: number; submits: number }[]
+}
+
+// How the pop overlay is performing on a site: impressions, engagement, closes, submissions.
+export async function getOverlayStats(websiteId: string, days = 30, pageLimit = 20): Promise<OverlayStats> {
+  const db = createServiceClient() as unknown as any
+  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString()
+  const { data } = await db
+    .from('overlay_events')
+    .select('event, via, device, path, visitor_id, created_at')
+    .eq('website_id', websiteId)
+    .gte('created_at', since)
+    .limit(20000)
+  const rows = (data as OverlayEvent[]) ?? []
+
+  const count = (e: string) => rows.reduce((n, r) => n + (r.event === e ? 1 : 0), 0)
+  const impressions = count('impression')
+  const starts = count('start')
+  const closes = count('close')
+  const submits = count('submit')
+  const previews = count('preview')
+  const uniqueVisitors = new Set(
+    rows.filter((r) => r.event !== 'preview').map((r) => r.visitor_id).filter(Boolean),
+  ).size
+
+  const triggerMap: Record<string, number> = {}
+  const deviceMap: Record<string, number> = {}
+  const pageMap: Record<string, { path: string; impressions: number; starts: number; submits: number }> = {}
+  for (const r of rows) {
+    if (r.event === 'impression') {
+      const v = r.via || 'unknown'
+      triggerMap[v] = (triggerMap[v] || 0) + 1
+      const d = r.device || 'unknown'
+      deviceMap[d] = (deviceMap[d] || 0) + 1
+    }
+    const p = r.path || '/'
+    const pm = (pageMap[p] ||= { path: p, impressions: 0, starts: 0, submits: 0 })
+    if (r.event === 'impression') pm.impressions++
+    else if (r.event === 'start') pm.starts++
+    else if (r.event === 'submit') pm.submits++
+  }
+
+  return {
+    days,
+    impressions,
+    starts,
+    closes,
+    submits,
+    previews,
+    uniqueVisitors,
+    engagementRate: impressions ? starts / impressions : 0,
+    submitRate: impressions ? submits / impressions : 0,
+    byTrigger: Object.entries(triggerMap).map(([via, impressions]) => ({ via, impressions })).sort((a, b) => b.impressions - a.impressions),
+    byDevice: Object.entries(deviceMap).map(([device, impressions]) => ({ device, impressions })).sort((a, b) => b.impressions - a.impressions),
+    topPages: Object.values(pageMap).sort((a, b) => b.impressions - a.impressions).slice(0, pageLimit),
+  }
+}
