@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { MonitorSmartphone, Check } from 'lucide-react'
 import { GooglePreview } from '@/components/marketing/GooglePreview'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import ToolTracker from '@/components/marketing/ToolTracker'
 
 export const revalidate = 3600
 
@@ -96,7 +97,7 @@ export default function GooglePreviewPage() {
               </ul>
             </div>
 
-            <GooglePreview />
+            <ToolTracker tool="google-preview"><GooglePreview /></ToolTracker>
           </div>
         </div>
       </section>

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { Check, ArrowRight } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
 export const revalidate = 3600
 
@@ -125,10 +126,10 @@ export default function HowItWorksPage() {
               focus on care; we fill your pipeline, and you only ever pay for qualified leads.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" className="btn-pop">
+              <EnquiryButton className="btn-pop">
                 Start your project
                 <span className="btn-arrow" aria-hidden>→</span>
-              </Link>
+              </EnquiryButton>
               <Link href="/marketing" className="btn-cta-outline">
                 See our marketing
               </Link>
@@ -263,9 +264,9 @@ export default function HowItWorksPage() {
               Book a free demo
               <span className="btn-arrow" aria-hidden>→</span>
             </Link>
-            <Link href="/contact" className="btn-cta-outline">
+            <EnquiryButton className="btn-cta-outline">
               Start your project
-            </Link>
+            </EnquiryButton>
           </div>
         </div>
       </section>

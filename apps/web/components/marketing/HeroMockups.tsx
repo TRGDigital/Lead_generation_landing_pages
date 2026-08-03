@@ -57,6 +57,84 @@ function Gauge({ label, score }: { label: string; score: number }) {
   )
 }
 
+// Result of the "Cost of an empty bed" tool: the yearly cost and the year-one ROI.
+export function EmptyBedCard() {
+  return (
+    <Shell url="trgdigital.com/tools">
+      <p className="text-xs font-medium text-brand-ink-muted">Cost of an empty bed</p>
+      <div className="mt-3 rounded-xl bg-brand-ink p-4 text-center text-white">
+        <p className="text-[9px] font-semibold uppercase tracking-widest text-brand-accent">Empty beds cost you / year</p>
+        <p className="mt-1 font-display text-3xl font-bold leading-none">£171,600</p>
+        <p className="mt-1.5 text-[10px] text-white/60">£3,300/wk · already lost £26,400</p>
+      </div>
+      <div className="mt-3 rounded-xl border-2 border-brand-pop/30 bg-brand-pop/5 p-4">
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <p className="text-[10px] text-brand-ink-muted">Invest with TRG</p>
+            <p className="font-display text-lg font-bold text-brand-ink">£1,200</p>
+          </div>
+          <div>
+            <p className="text-[10px] text-brand-ink-muted">Recovered / year</p>
+            <p className="font-display text-lg font-bold text-brand-ink">£171,600</p>
+          </div>
+        </div>
+        <div className="mt-3 rounded-lg bg-brand-pop p-3 text-center text-white">
+          <p className="text-[9px] font-semibold uppercase tracking-widest text-white/80">Net benefit in year one</p>
+          <p className="mt-0.5 font-display text-2xl font-bold leading-none">£170,400</p>
+          <p className="mt-1 text-[10px] text-white/90">About £143 back for every £1</p>
+        </div>
+      </div>
+    </Shell>
+  )
+}
+
+// Result of "Your Care Website Grader": the score ring and a few pass / warn / fail checks.
+function ScoreRing({ score, color }: { score: number; color: string }) {
+  const r = 26
+  const c = 2 * Math.PI * r
+  return (
+    <div className="relative h-20 w-20 flex-shrink-0">
+      <svg viewBox="0 0 64 64" className="h-20 w-20 -rotate-90">
+        <circle cx="32" cy="32" r={r} fill="none" stroke="#ebe9e4" strokeWidth="6" />
+        <circle cx="32" cy="32" r={r} fill="none" stroke={color} strokeWidth="6" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * (1 - score / 100)} />
+      </svg>
+      <span className="absolute inset-0 flex items-center justify-center font-display text-xl font-bold text-brand-ink">{score}</span>
+    </div>
+  )
+}
+
+export function GraderCard() {
+  const checks: Array<[string, 'pass' | 'warn' | 'fail']> = [
+    ['Mobile friendly', 'pass'],
+    ['Shows CQC rating', 'pass'],
+    ['Fast on mobile (62 / 100)', 'warn'],
+    ['Live CQC rating widget', 'fail'],
+    ['Mentions room availability', 'fail'],
+  ]
+  const dot = { pass: 'bg-green-500', warn: 'bg-amber-500', fail: 'bg-brand-pop' }
+  const mark = { pass: '✓', warn: '–', fail: '✕' }
+  return (
+    <Shell url="trgdigital.com/tools">
+      <p className="text-xs font-medium text-brand-ink-muted">Your care website grader</p>
+      <div className="mt-3 flex items-center gap-4">
+        <ScoreRing score={71} color="#D97706" />
+        <div>
+          <p className="font-display text-lg font-bold uppercase tracking-tight text-amber-600">Grade C</p>
+          <p className="text-[11px] text-brand-ink-soft">25 of 38 checks passed</p>
+        </div>
+      </div>
+      <div className="mt-4 space-y-2">
+        {checks.map(([label, status]) => (
+          <div key={label} className="flex items-center gap-2.5">
+            <span className={`flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full text-[9px] font-bold text-white ${dot[status]}`}>{mark[status]}</span>
+            <span className="text-xs text-brand-ink">{label}</span>
+          </div>
+        ))}
+      </div>
+    </Shell>
+  )
+}
+
 export function LighthouseCard() {
   return (
     <Shell url="pagespeed.web.dev">

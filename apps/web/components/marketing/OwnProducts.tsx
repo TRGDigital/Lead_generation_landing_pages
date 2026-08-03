@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { ManagedImage } from '@/components/marketing/ManagedImage'
 import Link from 'next/link'
 import { ArrowRight, Check } from 'lucide-react'
 import { Star, Dots, Squiggle } from './Decor'
@@ -52,7 +52,7 @@ export function OwnProducts() {
           {PRODUCTS.map(({ name, logo, logoW, logoH, shot, url, href, body, features }, i) => (
             <div key={name} className="grid items-center gap-8 lg:grid-cols-2">
               <div className={i % 2 === 1 ? 'lg:order-2' : ''}>
-                <Image src={logo} alt={name} width={logoW} height={logoH} className="h-12 w-auto" />
+                <ManagedImage src={logo} alt={name} width={logoW} height={logoH} className="h-12 w-auto" />
                 <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">{body}</p>
                 <ul className="mt-5 space-y-2.5">
                   {features.map((f) => (
@@ -81,7 +81,7 @@ export function OwnProducts() {
                     <span className="ml-2 truncate rounded bg-white px-2 py-0.5 text-[9px] text-brand-ink-muted">{url}</span>
                   </div>
                   <div className="relative aspect-[16/10] w-full">
-                    <Image src={shot} alt={`${name} screenshot`} fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover object-top" />
+                    <ManagedImage src={shot} alt={`${name} screenshot`} fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover object-top" />
                   </div>
                 </div>
               </div>

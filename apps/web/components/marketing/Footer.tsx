@@ -3,6 +3,7 @@ import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { MapPin } from 'lucide-react'
 import { SERVICES } from '@/lib/services'
 import { Star } from './Decor'
+import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
 const MARQUEE = ['More enquiries', 'Fewer empty beds', 'Built only for care']
 
@@ -78,10 +79,10 @@ export default function Footer() {
               <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-accent" />
               Suite Ra01, 195-197 Wood Street, London, E17 3NU
             </p>
-            <Link href="/contact" className="btn-pop btn-on-dark mt-6">
+            <EnquiryButton className="btn-pop btn-on-dark mt-6">
               Start your project
               <span className="btn-arrow" aria-hidden>→</span>
-            </Link>
+            </EnquiryButton>
           </div>
 
           <Col title="Services">

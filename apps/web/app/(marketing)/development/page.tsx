@@ -1,14 +1,20 @@
 import type { Metadata } from 'next'
+import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
-import Image from 'next/image'
+import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { ArrowUpRight, Check, Code2, Sparkles, LayoutDashboard, Plug, Workflow, Smartphone } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
-export const dynamic = 'force-static'
+export const revalidate = 3600
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return applyPageSeo('/development', META)
+}
+
+const META: Metadata = {
   title: 'Custom Software Development for Care | TRG Digital',
   description:
     'TRG Digital designs, builds and runs custom software for the UK care sector, the same capability behind our own products, CareStream and CareAssura.',
@@ -83,7 +89,7 @@ function BrowserMock({ src, alt, url, w, h }: { src: string; alt: string; url: s
         <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
         <span className="ml-2 hidden truncate rounded bg-white px-2 py-0.5 text-[10px] text-brand-ink-muted sm:block">{url}</span>
       </div>
-      <Image src={src} alt={alt} width={w} height={h} className="w-full" />
+      <ManagedImage src={src} alt={alt} width={w} height={h} className="w-full" />
     </div>
   )
 }
@@ -123,17 +129,17 @@ export default function DevelopmentPage() {
               live and used across the UK today, and we&apos;ll build the same way for you.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" className="btn-pop">
+              <EnquiryButton className="btn-pop">
                 Start your project
                 <span className="btn-arrow" aria-hidden>→</span>
-              </Link>
+              </EnquiryButton>
               <Link href="#products" className="btn-cta-outline">
                 See our products
               </Link>
             </div>
             <div className="mt-8 flex items-center gap-8">
-              <Image src="/products/carestream-logo.png" alt="CareStreamAI" width={700} height={210} className="h-10 w-auto sm:h-12" />
-              <Image src="/products/careassura-logo.webp" alt="CareAssura" width={364} height={91} className="h-10 w-auto sm:h-12" />
+              <ManagedImage src="/products/carestream-logo.png" alt="CareStreamAI" width={700} height={210} className="h-10 w-auto sm:h-12" />
+              <ManagedImage src="/products/careassura-logo.webp" alt="CareAssura" width={364} height={91} className="h-10 w-auto sm:h-12" />
             </div>
           </div>
 
@@ -192,10 +198,10 @@ export default function DevelopmentPage() {
               <p className="font-display text-xl font-bold uppercase leading-tight tracking-tight text-brand-ink">
                 Have a product in mind?
               </p>
-              <Link href="/contact" className="btn-pop mt-5">
+              <EnquiryButton className="btn-pop mt-5">
                 Submit a project enquiry
                 <span className="btn-arrow" aria-hidden>→</span>
-              </Link>
+              </EnquiryButton>
             </div>
           </div>
         </div>
@@ -240,7 +246,7 @@ export default function DevelopmentPage() {
               <div key={name} className="overflow-hidden rounded-3xl border border-brand-line bg-white shadow-soft">
                 <div className="grid gap-0 md:grid-cols-2">
                   <div className="p-8 sm:p-10">
-                    <Image src={logo} alt={name} width={logoW} height={logoH} className={`${logoClass} w-auto`} />
+                    <ManagedImage src={logo} alt={name} width={logoW} height={logoH} className={`${logoClass} w-auto`} />
                     <p className="mt-5 text-sm font-semibold text-brand-pop">{tagline}</p>
                     <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">{body}</p>
                     <a href={href} target="_blank" rel="noopener noreferrer" className="btn-pop mt-7">
@@ -303,10 +309,10 @@ export default function DevelopmentPage() {
             platform.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/contact" className="btn-cta">
+            <EnquiryButton className="btn-cta">
               Start your project
               <span className="btn-arrow" aria-hidden>→</span>
-            </Link>
+            </EnquiryButton>
             <Link href="/website-development" className="inline-flex h-12 items-center gap-1 px-6 text-sm font-semibold uppercase tracking-wide text-white/90 transition-colors hover:text-white">
               See website build →
             </Link>

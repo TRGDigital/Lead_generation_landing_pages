@@ -1,14 +1,20 @@
 import type { Metadata } from 'next'
+import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
-import Image from 'next/image'
+import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { CheckCircle, Zap, Shield, Check } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
-export const dynamic = 'force-static'
+export const revalidate = 3600
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return applyPageSeo('/marketing', META)
+}
+
+const META: Metadata = {
   title: 'Care Home Marketing & Enquiry Generation | TRG Digital',
   description:
     "TRG Digital fills empty beds for UK care providers with targeted advertising, high-converting landing pages and pre-qualified enquiries. Activate when beds are empty, pause when you're full.",
@@ -101,10 +107,10 @@ export default function MarketingPage() {
               qualified leads.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" className="btn-pop">
+              <EnquiryButton className="btn-pop">
                 Start your project
                 <span className="btn-arrow" aria-hidden>→</span>
-              </Link>
+              </EnquiryButton>
               <Link href="/how-it-works" className="btn-cta-outline">
                 See how it works
               </Link>
@@ -129,7 +135,7 @@ export default function MarketingPage() {
                 <span className="ml-2 truncate rounded bg-white px-2 py-0.5 text-[9px] text-brand-ink-muted">careassura.com</span>
               </div>
               <div className="relative aspect-[16/11] w-full">
-                <Image src="/mockups/haywards-landing.png" alt="A high-converting care landing page we built" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover object-top" priority />
+                <ManagedImage src="/mockups/haywards-landing.png" alt="A high-converting care landing page we built" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover object-top" priority />
               </div>
             </div>
             <div className="absolute -bottom-6 -left-6 hidden w-56 rounded-xl border border-brand-line bg-white p-4 shadow-card sm:block">
@@ -213,10 +219,10 @@ export default function MarketingPage() {
               <p className="font-display text-xl font-bold uppercase leading-tight tracking-tight text-brand-ink">
                 Ready to stop leaving beds empty?
               </p>
-              <Link href="/contact" className="btn-pop mt-5">
+              <EnquiryButton className="btn-pop mt-5">
                 Submit a project enquiry
                 <span className="btn-arrow" aria-hidden>→</span>
-              </Link>
+              </EnquiryButton>
             </div>
           </div>
         </div>
@@ -299,8 +305,8 @@ export default function MarketingPage() {
                 </div>
               ))}
             </div>
-            <Link href="/pricing" className="btn-pop mt-8">
-              See full pricing
+            <Link href="/contact" className="btn-pop mt-8">
+              Get a quote
               <span className="btn-arrow" aria-hidden>→</span>
             </Link>
           </div>
@@ -371,10 +377,10 @@ export default function MarketingPage() {
             your specific home.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/contact" className="btn-cta">
+            <EnquiryButton className="btn-cta">
               Start your project
               <span className="btn-arrow" aria-hidden>→</span>
-            </Link>
+            </EnquiryButton>
             <Link href="/how-it-works" className="inline-flex h-12 items-center gap-1 px-6 text-sm font-semibold uppercase tracking-wide text-white/90 transition-colors hover:text-white">
               Learn more first →
             </Link>

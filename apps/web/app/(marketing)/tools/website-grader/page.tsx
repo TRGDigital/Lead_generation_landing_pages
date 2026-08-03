@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Gauge, Check } from 'lucide-react'
 import { WebsiteGrader } from '@/components/marketing/WebsiteGrader'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import ToolTracker from '@/components/marketing/ToolTracker'
 
 export const revalidate = 3600
 
@@ -96,7 +97,7 @@ export default function WebsiteGraderPage() {
               </ul>
             </div>
 
-            <WebsiteGrader />
+            <ToolTracker tool="website-grader"><WebsiteGrader /></ToolTracker>
           </div>
         </div>
       </section>

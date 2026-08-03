@@ -1,14 +1,19 @@
 import type { Metadata } from 'next'
+import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
-import Image from 'next/image'
+import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { Compass, PenTool, Palette, BookOpen, MessageSquareText, Globe, Printer, Share2, Check } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 
-export const dynamic = 'force-static'
+export const revalidate = 3600
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return applyPageSeo('/rebranding', META)
+}
+
+const META: Metadata = {
   title: 'Care Home Rebranding | Logo, Identity & Website | TRG Digital',
   description:
     'A complete care-sector rebrand from TRG Digital, brand strategy, new logo and concepts, full visual identity, guidelines, tone of voice and a redesigned, rebuilt website.',
@@ -124,7 +129,7 @@ export default function RebrandingPage() {
                 <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
               </div>
               <div className="relative aspect-[16/12] w-full">
-                <Image src="/mockups/haywards-landing.png" alt="The rebuilt website" fill sizes="176px" className="object-cover object-top" />
+                <ManagedImage src="/mockups/haywards-landing.png" alt="The rebuilt website" fill sizes="176px" className="object-cover object-top" />
               </div>
             </div>
           </div>

@@ -1,14 +1,20 @@
 import type { Metadata } from 'next'
+import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
-import Image from 'next/image'
-import { Search, Smartphone, Gauge, ShieldCheck, MousePointerClick, Wrench, Check, ArrowRight } from 'lucide-react'
+import { ManagedImage } from '@/components/marketing/ManagedImage'
+import { Search, Smartphone, Gauge, ShieldCheck, MousePointerClick, Wrench, Check, ArrowRight, Bot, Sparkles } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
-export const dynamic = 'force-static'
+export const revalidate = 3600
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return applyPageSeo('/website-development', META)
+}
+
+const META: Metadata = {
   title: 'Care Sector Website Development | TRG Digital',
   description:
     'TRG Digital builds modern, fast, search-optimised websites for UK care providers, designed to increase your exposure and turn visitors into enquiries.',
@@ -66,10 +72,10 @@ export default function WebsiteDevelopmentPage() {
               fast, search-optimised sites that grow your exposure and turn quiet visits into real enquiries.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" className="btn-pop">
+              <EnquiryButton className="btn-pop">
                 Start your project
                 <span className="btn-arrow" aria-hidden>→</span>
-              </Link>
+              </EnquiryButton>
               <Link href="/marketing" className="btn-cta-outline">
                 See our marketing
               </Link>
@@ -86,20 +92,22 @@ export default function WebsiteDevelopmentPage() {
 
           {/* Visual, a real care website we built */}
           <div className="relative">
+            {/* Desktop */}
             <div className="overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card">
               <div className="flex items-center gap-1.5 border-b border-brand-line bg-brand-bg-warm px-3 py-2">
                 <span className="h-2 w-2 rounded-full bg-red-400" />
                 <span className="h-2 w-2 rounded-full bg-amber-300" />
                 <span className="h-2 w-2 rounded-full bg-green-400" />
-                <span className="ml-2 truncate rounded bg-white px-2 py-0.5 text-[9px] text-brand-ink-muted">careassura.com</span>
+                <span className="ml-2 truncate rounded bg-white px-2 py-0.5 text-[9px] text-brand-ink-muted">crosswayscarehome.co.uk</span>
               </div>
-              <div className="relative aspect-[16/11] w-full">
-                <Image src="/mockups/haywards-landing.png" alt="A care home website we built" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover object-top" priority />
+              <div className="relative aspect-[1522/916] w-full">
+                <ManagedImage src="/mockups/crossways.png" alt="The Crossways Care Home website we built, showing live room availability, click-to-call and the AI chat assistant" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" priority />
               </div>
             </div>
-            <div className="absolute -bottom-6 -left-6 hidden h-44 w-[88px] overflow-hidden rounded-[1.4rem] border-4 border-brand-ink bg-brand-ink shadow-card sm:block">
-              <div className="relative h-full w-full overflow-hidden rounded-[1.05rem] bg-white">
-                <Image src="/mockups/haywards-mobile.png" alt="The same site on mobile" fill sizes="88px" className="object-cover object-top" />
+            {/* iPhone, full phone screen (matches the screenshot aspect) */}
+            <div className="absolute -bottom-7 -left-5 hidden w-[102px] overflow-hidden rounded-[1.5rem] border-[5px] border-brand-ink bg-brand-ink shadow-card sm:block">
+              <div className="relative aspect-[390/844] w-full overflow-hidden rounded-[1.05rem] bg-white">
+                <ManagedImage src="/mockups/crossways-mobile.png" alt="Crossways on mobile, showing live room availability" fill sizes="102px" className="object-cover object-top" />
               </div>
             </div>
           </div>
@@ -159,10 +167,10 @@ export default function WebsiteDevelopmentPage() {
               <p className="font-display text-xl font-bold uppercase leading-tight tracking-tight text-brand-ink">
                 Want a website that does all this?
               </p>
-              <Link href="/contact" className="btn-pop mt-5">
+              <EnquiryButton className="btn-pop mt-5">
                 Submit a project enquiry
                 <span className="btn-arrow" aria-hidden>→</span>
-              </Link>
+              </EnquiryButton>
             </div>
           </div>
         </div>
@@ -207,10 +215,10 @@ export default function WebsiteDevelopmentPage() {
                 It&apos;s not about a prettier site, it&apos;s about more families finding you, trusting you and
                 getting in touch.
               </p>
-              <Link href="/contact" className="btn-cta btn-on-dark mt-8">
+              <EnquiryButton className="btn-cta btn-on-dark mt-8">
                 Start your project
                 <span className="btn-arrow" aria-hidden>→</span>
-              </Link>
+              </EnquiryButton>
             </div>
             <ul className="space-y-3">
               {[
@@ -255,6 +263,58 @@ export default function WebsiteDevelopmentPage() {
         </div>
       </section>
 
+      {/* ── Agentic browsing & WebMCP ─────────────────────────────────── */}
+      <section className="relative overflow-hidden px-6 py-24">
+        <Star className="absolute right-8 top-12 hidden h-16 w-16 rotate-12 text-brand-accent lg:block" />
+        <Dots className="absolute bottom-12 left-10 hidden h-20 w-20 text-brand-pop/40 lg:block" />
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Built for the AI era</p>
+            <h2 className="mt-2 font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-4xl">
+              Ready for agentic browsing &amp; WebMCP
+            </h2>
+            <Squiggle className="mt-5 h-6 w-56 text-brand-pop" />
+            <div className="mt-6 space-y-4 text-base leading-relaxed text-brand-ink-soft">
+              <p>
+                AI assistants like ChatGPT, Claude and Google&apos;s AI are starting to browse the web for people,
+                reading websites and even completing tasks on their behalf. The problem is that most websites are
+                invisible or unusable to them.
+              </p>
+              <p>
+                Every site we build is made AI ready. We add an <strong className="text-brand-ink">llms.txt</strong>, a
+                clear map of your site for AI, and <strong className="text-brand-ink">WebMCP</strong> (the new Web Model
+                Context Protocol), which hands AI agents a set of safe, structured tools. Instead of guessing their way
+                around your page, an agent can ask your site directly: what services do you offer, what is your CQC
+                rating, how do I get in touch. It runs live on this very site.
+              </p>
+            </div>
+            <Link href="/contact" className="btn-pop mt-8">
+              Get an AI-ready website
+              <span className="btn-arrow" aria-hidden>→</span>
+            </Link>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              { Icon: Bot, title: 'Found and understood by AI', body: 'A clean llms.txt and structure mean AI assistants can read your site accurately and recommend your home with confidence.' },
+              { Icon: Sparkles, title: 'Agents can act, not just read', body: 'WebMCP gives agents safe tools to fetch your services, contact details and content directly, the groundwork for AI-driven enquiries.' },
+              { Icon: ShieldCheck, title: 'Safe by design', body: 'The tools are read-only and feature-detected. They add zero risk and have no impact at all on your normal visitors.' },
+              { Icon: Gauge, title: 'Future-proof and ahead', body: 'As AI-driven traffic grows, your site is already built for it, while most of your competitors are not.' },
+            ].map(({ Icon, title, body }) => (
+              <div key={title} className="flex items-start gap-4 rounded-2xl border border-brand-line bg-white p-5 shadow-soft">
+                <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <div>
+                  <h3 className="font-display text-base font-semibold text-brand-ink">{title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── CTA ───────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-brand-pop px-6 py-16 text-center text-white">
         <Star className="absolute left-8 top-8 hidden h-16 w-16 text-white/50 sm:block" />
@@ -269,10 +329,10 @@ export default function WebsiteDevelopmentPage() {
             your enquiries.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/contact" className="btn-cta">
+            <EnquiryButton className="btn-cta">
               Start your project
               <span className="btn-arrow" aria-hidden>→</span>
-            </Link>
+            </EnquiryButton>
             <Link href="/marketing" className="inline-flex h-12 items-center gap-1 px-6 text-sm font-semibold uppercase tracking-wide text-white/90 transition-colors hover:text-white">
               See our marketing <ArrowRight className="h-4 w-4" />
             </Link>

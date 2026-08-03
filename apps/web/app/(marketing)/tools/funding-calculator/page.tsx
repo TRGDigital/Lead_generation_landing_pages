@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { Calculator, Check } from 'lucide-react'
 import { FundingCalculator } from '@/components/marketing/FundingCalculator'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import ToolTracker from '@/components/marketing/ToolTracker'
+import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
 export const revalidate = 3600
 
@@ -97,7 +99,7 @@ export default function FundingCalculatorPage() {
               </ul>
             </div>
 
-            <FundingCalculator />
+            <ToolTracker tool="funding-calculator"><FundingCalculator /></ToolTracker>
           </div>
         </div>
       </section>
@@ -159,10 +161,10 @@ export default function FundingCalculatorPage() {
             We build the websites and tools that turn confused enquirers into confident, qualified leads for your home.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/contact" className="btn-cta">
+            <EnquiryButton className="btn-cta">
               Start your project
               <span className="btn-arrow" aria-hidden>→</span>
-            </Link>
+            </EnquiryButton>
             <Link href="/tools" className="inline-flex h-12 items-center gap-1 px-6 text-sm font-semibold uppercase tracking-wide text-white/90 transition-colors hover:text-white">
               More free tools →
             </Link>

@@ -21,7 +21,7 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>
 
-export default function ContactForm() {
+export default function ContactForm({ bare = false }: { bare?: boolean }) {
   const [pending, startTransition] = useTransition()
   const [submitted, setSubmitted] = useState(false)
   const [serverError, setServerError] = useState<string | null>(null)
@@ -55,7 +55,13 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="flex flex-col items-center gap-4 rounded-2xl border border-brand-line bg-white p-10 text-center shadow-soft">
+      <div
+        className={
+          bare
+            ? 'flex flex-col items-center gap-4 py-6 text-center'
+            : 'flex flex-col items-center gap-4 rounded-2xl border border-brand-line bg-white p-10 text-center shadow-soft'
+        }
+      >
         <CheckCircle className="h-12 w-12 text-brand-sage" />
         <h2 className="font-display text-2xl font-semibold text-brand-ink">Thank you!</h2>
         <p className="max-w-sm text-brand-ink-soft">
@@ -68,10 +74,10 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="rounded-2xl border border-brand-line bg-white p-8 shadow-soft space-y-5"
+      className={bare ? 'space-y-5' : 'rounded-2xl border border-brand-line bg-white p-8 shadow-soft space-y-5'}
     >
-      {/* Honeypot, hidden from real users */}
-      <input {...register('website')} type="text" className="sr-only" tabIndex={-1} autoComplete="off" />
+      {/* Honeypot, hidden from real users, screen readers and AI agents */}
+      <input {...register('website')} type="text" className="sr-only" tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="space-y-1.5">

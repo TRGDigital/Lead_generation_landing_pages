@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Award, Check } from 'lucide-react'
 import { CqcChecker } from '@/components/marketing/CqcChecker'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import ToolTracker from '@/components/marketing/ToolTracker'
 
 export const revalidate = 3600
 
@@ -96,7 +97,7 @@ export default function CqcRatingPage() {
               </ul>
             </div>
 
-            <CqcChecker />
+            <ToolTracker tool="cqc-rating-checker"><CqcChecker /></ToolTracker>
           </div>
         </div>
       </section>

@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { Squiggle, Star } from './Decor'
 
 // An auto-scrolling showcase that tells the whole enquiry journey we build for a
@@ -24,7 +24,7 @@ function BrowserCard({ src, alt, url, caption, w = 'w-[360px]' }: { src: string;
         <span className="ml-2 truncate rounded bg-white px-2 py-0.5 text-[9px] text-brand-ink-muted">{url}</span>
       </div>
       <div className="relative h-[calc(100%-2rem)] w-full">
-        <Image src={src} alt={alt} fill sizes="360px" className="object-cover object-top" />
+        <ManagedImage src={src} alt={alt} fill sizes="360px" className="object-cover object-top" />
       </div>
     </div>
   )
@@ -35,7 +35,7 @@ function PhoneCard({ src, alt, caption }: { src: string; alt: string; caption: s
     <div className="relative h-full w-[148px] overflow-hidden rounded-[1.6rem] border-4 border-brand-ink bg-brand-ink shadow-card">
       <Caption>{caption}</Caption>
       <div className="relative h-full w-full overflow-hidden rounded-[1.25rem] bg-white">
-        <Image src={src} alt={alt} fill sizes="148px" className="object-cover object-top" />
+        <ManagedImage src={src} alt={alt} fill sizes="148px" className="object-cover object-top" />
       </div>
     </div>
   )

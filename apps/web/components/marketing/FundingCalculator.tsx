@@ -39,11 +39,12 @@ function OptionCard({ label, sub, selected, onClick }: { label: string; sub?: st
     <button
       type="button"
       onClick={onClick}
+      style={selected ? { borderColor: 'var(--tool-accent, #F0532B)', background: 'color-mix(in srgb, var(--tool-accent, #F0532B) 6%, white)' } : undefined}
       className={`flex flex-col rounded-xl border-2 px-4 py-3.5 text-left transition-all ${
-        selected ? 'border-brand-pop bg-brand-pop/5' : 'border-brand-line bg-white hover:border-brand-pop/40'
+        selected ? '' : 'border-brand-line bg-white hover:border-brand-ink/30'
       }`}
     >
-      <span className={`text-sm font-semibold ${selected ? 'text-brand-pop' : 'text-brand-ink'}`}>{label}</span>
+      <span className="text-sm font-semibold text-brand-ink" style={selected ? { color: 'var(--tool-accent, #F0532B)' } : undefined}>{label}</span>
       {sub && <span className="mt-0.5 text-xs text-brand-ink-soft">{sub}</span>}
     </button>
   )
@@ -169,10 +170,10 @@ export function FundingCalculator() {
     <div className="rounded-3xl border border-brand-line bg-white p-6 shadow-card sm:p-8">
       <div className="mb-1.5 flex items-center justify-between text-xs font-medium text-brand-ink-muted">
         <span>Step {step + 1} of {STEPS.length}</span>
-        {step > 0 && <button type="button" onClick={() => setStep((s) => s - 1)} className="font-semibold text-brand-pop hover:underline">Back</button>}
+        {step > 0 && <button type="button" onClick={() => setStep((s) => s - 1)} style={{ color: 'var(--tool-accent, #F0532B)' }} className="font-semibold hover:underline">Back</button>}
       </div>
       <div className="h-1.5 w-full overflow-hidden rounded-full bg-brand-bg-warm">
-        <div className="h-full rounded-full bg-brand-pop transition-all" style={{ width: `${((step + 1) / STEPS.length) * 100}%` }} />
+        <div className="h-full rounded-full transition-all" style={{ width: `${((step + 1) / STEPS.length) * 100}%`, background: 'var(--tool-accent, #F0532B)' }} />
       </div>
 
       <h3 className="mt-5 font-display text-xl font-bold uppercase tracking-tight text-brand-ink">{STEPS[step]}</h3>
@@ -231,7 +232,7 @@ export function FundingCalculator() {
         )}
       </div>
 
-      <button type="button" onClick={next} disabled={!canNext} className="btn-pop mt-7 w-full disabled:opacity-50">
+      <button type="button" onClick={next} disabled={!canNext} style={{ background: 'var(--tool-accent, #F0532B)' }} className="btn-pop mt-7 w-full disabled:opacity-50">
         {step < STEPS.length - 1 ? 'Continue' : 'See my result'}
         <span className="btn-arrow" aria-hidden>→</span>
       </button>

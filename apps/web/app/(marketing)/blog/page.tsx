@@ -1,16 +1,22 @@
 import type { Metadata } from 'next'
+import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Clock } from 'lucide-react'
 import { getPublishedPosts, getCategories, formatDate } from '@/lib/blog'
 import PostCard from '@/components/blog/PostCard'
 import { Star, Squiggle, Dots } from '@/components/marketing/Decor'
+import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
 export const revalidate = 3600
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return applyPageSeo('/blog', META)
+}
+
+const META: Metadata = {
   title: 'Knowledge Hub, Care Sector Marketing & Software Insights | TRG Digital',
   description:
     'Guides, analysis and practical advice for UK care providers, marketing, websites, SEO, enquiries and care software, from the TRG Digital team.',
@@ -201,10 +207,10 @@ export default async function BlogIndexPage({ searchParams }: Props) {
             <h2 className="font-display text-xl font-bold uppercase tracking-tight">Want this for your home?</h2>
             <p className="mt-1 text-sm text-white/70">Let&apos;s turn insight into enquiries.</p>
           </div>
-          <Link href="/contact" className="btn-cta btn-on-dark shrink-0">
+          <EnquiryButton className="btn-cta btn-on-dark shrink-0">
             Start your project
             <span className="btn-arrow" aria-hidden>→</span>
-          </Link>
+          </EnquiryButton>
         </div>
       </div>
     </>

@@ -19,7 +19,7 @@ const LINKS = [
 type MegaItem = { icon: LucideIcon; title: string; short: string; href: string }
 
 function DesktopMega({
-  label, active, open, setOpen, items, eyebrow, tagline, ctaHref, ctaLabel,
+  label, active, open, setOpen, items, eyebrow, tagline, ctaHref, ctaLabel, secondaryCta,
 }: {
   label: string
   active: boolean
@@ -30,6 +30,7 @@ function DesktopMega({
   tagline: string
   ctaHref: string
   ctaLabel: string
+  secondaryCta?: { href: string; label: string }
 }) {
   return (
     <div className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
@@ -76,6 +77,16 @@ function DesktopMega({
                 </Link>
               ))}
             </div>
+            {secondaryCta && (
+              <Link
+                href={secondaryCta.href}
+                onClick={() => setOpen(false)}
+                className="group flex items-center justify-between border-t border-brand-line bg-brand-pop/5 px-5 py-3 text-xs font-bold uppercase tracking-wide text-brand-pop transition-colors hover:bg-brand-pop/10"
+              >
+                {secondaryCta.label}
+                <span className="transition-transform group-hover:translate-x-0.5" aria-hidden>→</span>
+              </Link>
+            )}
             <Link
               href={ctaHref}
               onClick={() => setOpen(false)}
@@ -140,6 +151,7 @@ export default function Nav() {
             tagline="Free, no sign-up"
             ctaHref="/tools"
             ctaLabel="See all free tools"
+            secondaryCta={{ href: '/care-tools', label: 'Want these on your own site? See our care tools' }}
           />
 
           {LINKS.map(({ href, label }) => {
@@ -244,6 +256,13 @@ export default function Nav() {
                 className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-semibold text-brand-pop hover:bg-brand-line/40"
               >
                 See all free tools →
+              </Link>
+              <Link
+                href="/care-tools"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-semibold text-brand-pop hover:bg-brand-line/40"
+              >
+                Want these on your site? See our care tools →
               </Link>
             </div>
           )}

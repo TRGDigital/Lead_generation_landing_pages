@@ -6,6 +6,7 @@ import {
   EmptyBedCard, GraderCard,
 } from './HeroMockups'
 import { Squiggle, Star } from './Decor'
+import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
 type Shot = { src: string; alt: string; url?: string }
 type Col =
@@ -153,10 +154,10 @@ export function HomeHero() {
             build your website, and develop the software that sets you apart, all under one roof.
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-            <Link href="/contact" className="btn-pop">
+            <EnquiryButton className="btn-pop">
               Start your project
               <span className="btn-arrow" aria-hidden>→</span>
-            </Link>
+            </EnquiryButton>
             <Link href="/tools/website-grader" className="btn-cta-outline">
               Get your free website grade
             </Link>

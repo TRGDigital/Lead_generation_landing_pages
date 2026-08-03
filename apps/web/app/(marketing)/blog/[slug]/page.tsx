@@ -6,7 +6,10 @@ import { Clock, ArrowLeft, ChevronDown } from 'lucide-react'
 import { getPostBySlug, getRelatedPosts, getAllPublishedSlugs, formatDate } from '@/lib/blog'
 import { isHtmlBody, mdToHtml } from '@/lib/mdx-or-html'
 import { withToc } from '@/lib/blog-toc'
+import { splitHtmlForCtas } from '@/lib/blog-cta'
+import BlogCta from '@/components/marketing/BlogCta'
 import PostCard from '@/components/blog/PostCard'
+import { Fragment } from 'react'
 
 export const revalidate = 3600
 
@@ -181,11 +184,17 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         )}
 
-        {/* Body — auto table of contents + content (HTML for new posts, converted for legacy markdown) */}
-        <div
-          className="blog-html"
-          dangerouslySetInnerHTML={{ __html: withToc(isHtmlBody(post.body_mdx) ? post.body_mdx : mdToHtml(post.body_mdx)) }}
-        />
+        {/* Body — auto table of contents + content (HTML for new posts, converted for legacy markdown).
+            Split at paragraph boundaries so two "get in touch" CTAs sit evenly through the post. */}
+        {splitHtmlForCtas(
+          withToc(isHtmlBody(post.body_mdx) ? post.body_mdx : mdToHtml(post.body_mdx)),
+          2,
+        ).map((part, idx, parts) => (
+          <Fragment key={idx}>
+            <div className="blog-html" dangerouslySetInnerHTML={{ __html: part }} />
+            {idx < parts.length - 1 ? <BlogCta variant={idx} /> : null}
+          </Fragment>
+        ))}
 
         {/* Tags */}
         {post.tags.length > 0 && (

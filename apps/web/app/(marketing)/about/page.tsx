@@ -6,6 +6,7 @@ import { Check, ArrowRight, ShieldCheck, Users, Target } from 'lucide-react'
 import { SERVICES } from '@/lib/services'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { FloatingTechIcons } from '@/components/marketing/FloatingTechIcons'
+import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
 export const revalidate = 3600
 
@@ -96,10 +97,10 @@ export default function AboutPage() {
               really works.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" className="btn-pop">
+              <EnquiryButton className="btn-pop">
                 Work with us
                 <span className="btn-arrow" aria-hidden>→</span>
-              </Link>
+              </EnquiryButton>
               <Link href="/development" className="btn-cta-outline">
                 See our products
               </Link>
@@ -186,10 +187,10 @@ export default function AboutPage() {
               <p className="font-display text-xl font-bold uppercase leading-tight tracking-tight text-brand-ink">
                 Want to grow with a specialist?
               </p>
-              <Link href="/contact" className="btn-pop mt-5">
+              <EnquiryButton className="btn-pop mt-5">
                 Start your project
                 <span className="btn-arrow" aria-hidden>→</span>
-              </Link>
+              </EnquiryButton>
             </div>
           </div>
         </div>

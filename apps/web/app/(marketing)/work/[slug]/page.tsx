@@ -7,6 +7,7 @@ import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { StartProject } from '@/components/marketing/StartProject'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { CASE_STUDIES, getCaseStudy, otherCaseStudy } from '@/lib/case-studies'
+import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
 export const revalidate = 3600
 
@@ -112,9 +113,9 @@ export default async function CaseStudyPage({
                 Visit the live site
                 <span className="btn-arrow" aria-hidden>→</span>
               </a>
-              <Link href="/contact" className="btn-cta-outline">
+              <EnquiryButton className="btn-cta-outline">
                 Start your project
-              </Link>
+              </EnquiryButton>
             </div>
             <p className="mt-4 text-sm text-brand-ink-soft">
               {cs.type} · {cs.location}

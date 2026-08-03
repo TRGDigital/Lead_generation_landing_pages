@@ -1,13 +1,19 @@
 import type { Metadata } from 'next'
+import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
-import { Calculator, BedDouble, Gauge, Award, FileText, Code2, Zap, Network } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { TOOLS } from '@/lib/tools'
+import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
-export const dynamic = 'force-static'
+export const revalidate = 3600
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return applyPageSeo('/tools', META)
+}
+
+const META: Metadata = {
   title: 'Free Tools for Care Providers | The Care Toolkit | TRG Digital',
   description:
     'Free, care-specific tools for UK care homes, nursing homes and domiciliary care, a care funding calculator, website grader, CQC checker and more.',
@@ -15,16 +21,6 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-const TOOLS = [
-  { Icon: Calculator, title: 'Care Funding Calculator', desc: 'Estimate care costs and who pays, your contribution, council support and NHS funding, for all four UK nations.', href: '/tools/funding-calculator', live: true },
-  { Icon: BedDouble, title: 'Cost of an Empty Bed', desc: 'See exactly how much each empty bed costs you per week, month and year, and what filling them is worth.', href: '/tools/empty-bed-calculator', live: true },
-  { Icon: Gauge, title: 'Your Care Website Grader', desc: 'Score your care website the way families judge it, CQC rating, fees, enquiry journey, speed and mobile.', live: false },
-  { Icon: Award, title: 'CQC Rating Checker', desc: 'Look up a care provider’s latest CQC rating and inspection at a glance.', live: false },
-  { Icon: FileText, title: 'Care Heading Checker', desc: 'Check whether your page headings use the words families actually search for, care types, location and more.', live: false },
-  { Icon: Code2, title: 'Care Schema Checker', desc: 'See if your site has the structured data that wins rich results for care homes, reviews, FAQs and local business.', live: false },
-  { Icon: Zap, title: 'Website Speed Checker', desc: 'A slow site loses worried families. Check your speed on mobile and desktop, with a care-focused verdict.', live: false },
-  { Icon: Network, title: 'Sitemap Checker', desc: 'Make sure the pages families need, fees, care types, contact, locations, are actually in your sitemap.', live: false },
-]
 
 export default function ToolsPage() {
   return (
@@ -59,7 +55,7 @@ export default function ToolsPage() {
           </div>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-brand-ink-soft">
             Free, care-specific tools for care homes, nursing homes and domiciliary care, built by us, no sign-up
-            to use. More are landing all the time.
+            to use.
           </p>
         </div>
       </section>
@@ -67,27 +63,22 @@ export default function ToolsPage() {
       {/* ── Tools grid ────────────────────────────────────────────────── */}
       <section className="px-6 pb-24">
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {TOOLS.map(({ Icon, title, desc, href, live }) => (
-            <div
+          {TOOLS.map(({ icon: Icon, title, body, href }) => (
+            <Link
               key={title}
-              className={`group relative flex flex-col rounded-2xl border bg-white p-7 shadow-soft transition-all ${
-                live ? 'border-brand-line hover:-translate-y-1 hover:border-brand-pop/40 hover:shadow-card' : 'border-brand-line/70'
-              }`}
+              href={href}
+              className="group relative flex flex-col rounded-2xl border border-brand-line bg-white p-7 shadow-soft transition-all hover:-translate-y-1 hover:border-brand-pop/40 hover:shadow-card"
             >
-              <div className={`flex h-12 w-12 items-center justify-center rounded-xl transition-colors ${live ? 'bg-brand-pop/10 text-brand-pop group-hover:bg-brand-pop group-hover:text-white' : 'bg-brand-bg-warm text-brand-ink-muted'}`}>
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop transition-colors group-hover:bg-brand-pop group-hover:text-white">
                 <Icon className="h-6 w-6" />
               </div>
               <h2 className="mt-5 font-display text-lg font-bold uppercase tracking-tight text-brand-ink">{title}</h2>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-ink-soft">{desc}</p>
-              {live && href ? (
-                <Link href={href} className="btn-pop mt-5 w-fit">
-                  Try it now
-                  <span className="btn-arrow" aria-hidden>→</span>
-                </Link>
-              ) : (
-                <span className="mt-5 w-fit rounded-full bg-brand-bg-warm px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-brand-ink-muted">Coming soon</span>
-              )}
-            </div>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
+              <span className="btn-pop mt-5 w-fit">
+                Try it now
+                <span className="btn-arrow" aria-hidden>→</span>
+              </span>
+            </Link>
           ))}
         </div>
 
@@ -102,10 +93,10 @@ export default function ToolsPage() {
             The tools show you what&apos;s possible, we make it happen. Marketing, websites and software, built for care.
           </p>
           <div className="relative mt-7">
-            <Link href="/contact" className="btn-cta">
+            <EnquiryButton className="btn-cta">
               Start your project
               <span className="btn-arrow" aria-hidden>→</span>
-            </Link>
+            </EnquiryButton>
           </div>
         </div>
       </section>
