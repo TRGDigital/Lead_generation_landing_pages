@@ -19,6 +19,9 @@ import FundingGuidePanel from '@/components/admin/FundingGuidePanel'
 import { AVAILABILITY_LABELS } from '@/lib/websites'
 import { LOCAL_AUTHORITIES } from '@/lib/local-authorities'
 import EmbedSnippet from '@/components/admin/EmbedSnippet'
+import WordPressPanel from '@/components/admin/WordPressPanel'
+import ClientAreaPagesPanel from '@/components/admin/ClientAreaPagesPanel'
+import { getClientAreaPages } from '@/lib/client-content'
 import { deleteWebsite } from '../actions'
 
 export const metadata: Metadata = { title: 'Website — Admin' }
@@ -83,6 +86,7 @@ const JUMP_LINKS = [
   { href: '#performance', label: 'Performance' },
   { href: '#lead-capture', label: 'Lead capture' },
   { href: '#features', label: 'Site features' },
+  { href: '#content', label: 'Content & SEO' },
   { href: '#install', label: 'Install' },
 ]
 
@@ -92,14 +96,16 @@ export default async function WebsiteDetailPage({ params }: Props) {
   await requireAdmin()
   const site = await getWebsite(params.id)
   if (!site) notFound()
-  const [leads, presets, overlayStats, tracking, trackedCalls, callStats] = await Promise.all([
+  const [leads, presets, overlayStats, tracking, trackedCalls, callStats, areaPages] = await Promise.all([
     getOrganicLeads(site.id),
     getQuizPresets(),
     getOverlayStats(site.id, 30),
     getTrackingNumber(site.id),
     getTrackedCalls(site.id, 50),
     getCallStats(site.id),
+    getClientAreaPages(site.id),
   ])
+  const wpReady = !!(site.wp_api_url && site.wp_username && site.wp_app_password)
 
   const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000
   const leads7d = leads.filter((l) => new Date(l.created_at).getTime() >= weekAgo).length
@@ -314,7 +320,36 @@ export default async function WebsiteDetailPage({ params }: Props) {
         </Panel>
       </div>
 
-      {/* ── 4 · Install ────────────────────────────────────────────────── */}
+      {/* ── 4 · Content & SEO ──────────────────────────────────────────── */}
+      <SectionHeading
+        id="content"
+        title="Content & SEO"
+        desc="AI-drafted local area pages published onto the client's own website — the delivery route when we didn't build their site."
+      />
+      <div className="space-y-4">
+        <Panel
+          title="Area pages"
+          open={areaPages.length > 0}
+          badge={
+            <span className="rounded-full bg-brand-bg-warm px-2 py-0.5 text-[11px] font-semibold text-brand-ink-muted">
+              {areaPages.length > 0
+                ? `${areaPages.filter((p) => p.status === 'published').length} published · ${areaPages.length} total`
+                : 'none yet'}
+            </span>
+          }
+        >
+          <ClientAreaPagesPanel websiteId={site.id} pages={areaPages} wpReady={wpReady} />
+        </Panel>
+
+        <Panel
+          title="WordPress connection"
+          badge={<OnOff on={wpReady} onLabel="Connected" offLabel="Not connected" />}
+        >
+          <WordPressPanel site={site} />
+        </Panel>
+      </div>
+
+      {/* ── 5 · Install ────────────────────────────────────────────────── */}
       <SectionHeading id="install" title="Install" desc="The one-line snippet that powers everything above on the client site." />
       <div className="space-y-4">
         <Panel title="Install on the site">

@@ -298,3 +298,171 @@ export async function saveCallTracking(id: string, formData: FormData) {
   if (error) throw new Error(error.message)
   revalidatePath(`/admin/websites/${id}`)
 }
+
+// ── WordPress connection + client area pages (content/SEO on customer sites) ──
+
+export async function saveWordPress(id: string, formData: FormData) {
+  await requireAdmin()
+  const db = createServiceClient() as unknown as any
+  const { error } = await db
+    .from('websites')
+    .update({
+      wp_api_url: String(formData.get('wp_api_url') ?? '').trim().replace(/\/+$/, ''),
+      wp_username: String(formData.get('wp_username') ?? '').trim(),
+      wp_app_password: String(formData.get('wp_app_password') ?? '').trim(),
+      site_facts: String(formData.get('site_facts') ?? '').trim(),
+    })
+    .eq('id', id)
+  if (error) throw new Error(error.message)
+  revalidatePath(`/admin/websites/${id}`)
+}
+
+export async function testWordPress(id: string): Promise<{ ok: boolean; detail: string }> {
+  await requireAdmin()
+  const { getWebsite } = await import('@/lib/websites')
+  const site = await getWebsite(id)
+  if (!site) return { ok: false, detail: 'Unknown website' }
+  if (!site.wp_api_url || !site.wp_username || !site.wp_app_password) {
+    return { ok: false, detail: 'Fill in the site URL, username and application password first (and save).' }
+  }
+  const { testWordPressConnection } = await import('@/lib/wordpress')
+  return testWordPressConnection({ apiUrl: site.wp_api_url, username: site.wp_username, appPassword: site.wp_app_password })
+}
+
+export async function createAreaDraft(websiteId: string, formData: FormData) {
+  await requireAdmin()
+  const town = String(formData.get('town') ?? '').trim()
+  const service = String(formData.get('service') ?? '').trim()
+  const keyword = String(formData.get('keyword') ?? '').trim() || `${service.toLowerCase()} ${town}`.trim()
+  if (!town || !service) throw new Error('Town and service are required')
+  const db = createServiceClient() as unknown as any
+  const { error } = await db.from('client_area_pages').insert({
+    website_id: websiteId,
+    town,
+    service,
+    target_keyword: keyword,
+    slug: slugify(`${service} in ${town}`),
+    heading: `${service} in ${town}`,
+  })
+  if (error) throw new Error(error.message)
+  revalidatePath(`/admin/websites/${websiteId}`)
+}
+
+export async function generateAreaDraft(pageId: string): Promise<{ ok: boolean; detail: string }> {
+  await requireAdmin()
+  const db = createServiceClient() as unknown as any
+  const { data: page } = await db.from('client_area_pages').select('*').eq('id', pageId).maybeSingle()
+  if (!page) return { ok: false, detail: 'Draft not found' }
+  const { getWebsite } = await import('@/lib/websites')
+  const site = await getWebsite(page.website_id)
+  if (!site) return { ok: false, detail: 'Unknown website' }
+
+  try {
+    const { generateClientAreaContent } = await import('@/lib/client-content')
+    const gen = await generateClientAreaContent({
+      siteName: site.name,
+      siteUrl: site.url,
+      facts: site.site_facts,
+      town: page.town,
+      service: page.service,
+      keyword: page.target_keyword,
+    })
+    const { error } = await db
+      .from('client_area_pages')
+      .update({
+        meta_title: gen.metaTitle,
+        meta_description: gen.metaDescription,
+        heading: gen.heading,
+        intro_html: gen.intro,
+        body_html: gen.body,
+        offer_points: gen.offerPoints,
+        faqs: gen.faqs,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', pageId)
+    if (error) return { ok: false, detail: error.message }
+    revalidatePath(`/admin/websites/${page.website_id}`)
+    return { ok: true, detail: 'Draft content generated — review and edit before publishing.' }
+  } catch (e) {
+    return { ok: false, detail: e instanceof Error ? e.message : 'Generation failed' }
+  }
+}
+
+export async function saveAreaDraft(pageId: string, formData: FormData) {
+  await requireAdmin()
+  const db = createServiceClient() as unknown as any
+  let faqs: unknown = null
+  const faqsRaw = String(formData.get('faqs') ?? '').trim()
+  if (faqsRaw) {
+    try { faqs = JSON.parse(faqsRaw) } catch { throw new Error('FAQs must be valid JSON') }
+  }
+  const points = String(formData.get('offer_points') ?? '')
+    .split('\n').map((s) => s.trim()).filter(Boolean)
+  const { data: page, error } = await db
+    .from('client_area_pages')
+    .update({
+      town: String(formData.get('town') ?? '').trim(),
+      service: String(formData.get('service') ?? '').trim(),
+      target_keyword: String(formData.get('keyword') ?? '').trim(),
+      slug: slugify(String(formData.get('slug') ?? '')),
+      meta_title: String(formData.get('meta_title') ?? '').trim(),
+      meta_description: String(formData.get('meta_description') ?? '').trim(),
+      heading: String(formData.get('heading') ?? '').trim(),
+      intro_html: String(formData.get('intro_html') ?? '').trim(),
+      body_html: String(formData.get('body_html') ?? '').trim(),
+      offer_points: points.length ? points : null,
+      faqs,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', pageId)
+    .select('website_id')
+    .single()
+  if (error) throw new Error(error.message)
+  revalidatePath(`/admin/websites/${page.website_id}`)
+}
+
+export async function publishAreaDraft(pageId: string): Promise<{ ok: boolean; detail: string; link?: string }> {
+  await requireAdmin()
+  const db = createServiceClient() as unknown as any
+  const { data: page } = await db.from('client_area_pages').select('*').eq('id', pageId).maybeSingle()
+  if (!page) return { ok: false, detail: 'Draft not found' }
+  const { getWebsite } = await import('@/lib/websites')
+  const site = await getWebsite(page.website_id)
+  if (!site) return { ok: false, detail: 'Unknown website' }
+  if (!site.wp_api_url || !site.wp_username || !site.wp_app_password) {
+    return { ok: false, detail: 'Connect WordPress first (in the WordPress connection panel).' }
+  }
+  if (!page.heading || !page.intro_html) {
+    return { ok: false, detail: 'The draft has no content yet — generate or write it first.' }
+  }
+
+  const { publishWpPage, areaPageHtml } = await import('@/lib/wordpress')
+  const result = await publishWpPage(
+    { apiUrl: site.wp_api_url, username: site.wp_username, appPassword: site.wp_app_password },
+    {
+      title: page.heading,
+      slug: page.slug || '',
+      contentHtml: areaPageHtml(page),
+      metaTitle: page.meta_title,
+      metaDescription: page.meta_description,
+      wpPageId: page.wp_page_id,
+    },
+  )
+  if (!result.ok) return { ok: false, detail: result.error }
+
+  const { error } = await db
+    .from('client_area_pages')
+    .update({ status: 'published', wp_page_id: result.pageId, wp_link: result.link, updated_at: new Date().toISOString() })
+    .eq('id', pageId)
+  if (error) return { ok: false, detail: error.message }
+  revalidatePath(`/admin/websites/${page.website_id}`)
+  return { ok: true, detail: `Published to the client site.`, link: result.link }
+}
+
+export async function deleteAreaDraft(pageId: string) {
+  await requireAdmin()
+  const db = createServiceClient() as unknown as any
+  const { data: page, error } = await db.from('client_area_pages').delete().eq('id', pageId).select('website_id').single()
+  if (error) throw new Error(error.message)
+  revalidatePath(`/admin/websites/${page.website_id}`)
+}

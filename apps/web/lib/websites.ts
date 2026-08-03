@@ -70,6 +70,12 @@ export type Website = {
   funding_guide_calculator_url: string
   funding_guide_book_url: string
   funding_guide_content: FundingGuideContent
+  // WordPress connection (publishing content onto the client's own site) + the
+  // per-site facts that ground AI-generated content.
+  wp_api_url: string
+  wp_username: string
+  wp_app_password: string
+  site_facts: string
 }
 
 export type FundingGuideContent = {
