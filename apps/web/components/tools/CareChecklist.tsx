@@ -68,7 +68,7 @@ export function CareChecklist({ site }: { site?: string }) {
           <ul className="mt-2 space-y-1.5 text-sm text-brand-ink-soft">
             <li>• Talk it through with the home, honestly and with no pressure.</li>
             <li>• Arrange a visit to see what daily life there could look like.</li>
-            <li>• If health or memory is a worry, it's always worth speaking to a GP too.</li>
+            <li>• If health or memory is a worry, it&rsquo;s always worth speaking to a GP too.</li>
           </ul>
         </div>
 
@@ -83,7 +83,7 @@ export function CareChecklist({ site }: { site?: string }) {
         </button>
 
         <Disclaimer>
-          This checklist is a guide to help you reflect, not a medical or care assessment. It doesn't collect or
+          This checklist is a guide to help you reflect, not a medical or care assessment. It doesn&rsquo;t collect or
           store any personal details. Always speak to a GP about any health concern.
         </Disclaimer>
       </div>
