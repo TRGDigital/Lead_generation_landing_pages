@@ -149,6 +149,7 @@ export async function saveGoPage(slug: string, formData: FormData) {
     exit_heading: str('exit_heading'),
     exit_body: str('exit_body'),
     sticky_cta: str('sticky_cta'),
+    plan_items: str('plan_items').split('\n').map((b) => b.trim()).filter(Boolean).slice(0, 4),
     meta_title: str('meta_title'),
     meta_description: str('meta_description'),
     notify_emails: parseEmails(str('notify_emails')),
@@ -185,4 +186,29 @@ export async function deleteGoPage(slug: string) {
   if (error) throw new Error(error.message)
   revalidatePath('/admin/go-pages')
   redirect('/admin/go-pages')
+}
+
+// One-click A/B variant: copy a page to <slug>-b (-c, -d…) as a draft. Edit the
+// copy, publish, and let Google Ads rotate the two URLs as the split test.
+export async function duplicateGoPage(slug: string) {
+  await requireAdmin()
+  if (!slug) throw new Error('Invalid page')
+  const db = createServiceClient() as unknown as any
+  const { data: src } = await db.from('trg_go_pages').select('*').eq('slug', slug).maybeSingle()
+  if (!src) throw new Error('Page not found')
+
+  let newSlug = ''
+  for (const suffix of ['b', 'c', 'd', 'e']) {
+    const candidate = `${slug.replace(/-[b-e]$/, '')}-${suffix}`
+    const { data: exists } = await db.from('trg_go_pages').select('slug').eq('slug', candidate).maybeSingle()
+    if (!exists) { newSlug = candidate; break }
+  }
+  if (!newSlug) throw new Error('Variant limit reached (b–e all exist).')
+
+  const { id: _id, created_at: _c, updated_at: _u, ...rest } = src
+  const { error } = await db.from('trg_go_pages').insert({ ...rest, slug: newSlug, status: 'draft' })
+  if (error) throw new Error(error.message)
+
+  revalidatePath('/admin/go-pages')
+  redirect(`/admin/go-pages/${newSlug}`)
 }

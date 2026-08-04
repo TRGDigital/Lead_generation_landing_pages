@@ -44,3 +44,13 @@ export function Burst({ className = '' }: { className?: string }) {
     </svg>
   )
 }
+
+// Hand-drawn arrow used as a directional cue (points at the conversion element).
+export function SketchArrow({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 120 60" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <path d="M6 12c30 26 62 34 98 22" />
+      <path d="M89 27l16 6-9 14" />
+    </svg>
+  )
+}

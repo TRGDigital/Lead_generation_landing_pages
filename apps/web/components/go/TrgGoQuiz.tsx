@@ -86,8 +86,8 @@ export function TrgGoQuiz({
           Thank you, {name.split(' ')[0] || 'done'}!
         </h3>
         <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-brand-ink-soft">
-          Your answers are with our team. We&apos;ll come back to you within one working day with
-          honest, practical recommendations, no hard sell.
+          A care-sector specialist is reviewing your answers now. Your personalised action plan
+          will be with you within one working day, no hard sell.
         </p>
       </div>
     )
@@ -117,7 +117,7 @@ export function TrgGoQuiz({
             {intro || 'How many enquiries is your home missing?'}
           </h3>
           <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-brand-ink-soft">
-            Answer {total} quick questions and we&apos;ll tell you exactly where you stand. It takes
+            Answer {total} quick questions and get your free, personalised action plan. It takes
             under a minute.
           </p>
           <button
@@ -163,7 +163,7 @@ export function TrgGoQuiz({
       {contactStep && (
         <form onSubmit={submit} className="space-y-3">
           <h3 className="font-display text-xl font-bold leading-tight tracking-tight text-brand-ink">
-            Where should we send your results?
+            Where should we send your action plan?
           </h3>
           <p className="text-sm leading-relaxed text-brand-ink-soft">
             We&apos;ll review your answers and reply personally with what we&apos;d fix first.

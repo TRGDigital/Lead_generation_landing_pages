@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { createGoPage, setGoPageStatus } from '@/app/admin/go-pages/actions'
+import { createGoPage, duplicateGoPage, setGoPageStatus } from '@/app/admin/go-pages/actions'
 
 // Client bits for /admin/go-pages: the create form and the publish toggle.
 
@@ -115,5 +115,25 @@ export function GoPageStatusToggle({ slug, status }: { slug: string; status: str
     >
       {pending ? '…' : published ? 'Unpublish' : 'Publish'}
     </button>
+  )
+}
+
+// One-click A/B variant (copies to <slug>-b as a draft and opens its editor).
+export function GoPageDuplicate({ slug }: { slug: string }) {
+  const [pending, startTransition] = useTransition()
+  const [error, setError] = useState('')
+  return (
+    <span className="flex flex-col items-end">
+      <button
+        type="button"
+        disabled={pending}
+        onClick={() => { setError(''); startTransition(async () => { try { await duplicateGoPage(slug) } catch (e) { setError(e instanceof Error ? e.message : 'Failed') } }) }}
+        className="rounded-md border px-3 py-1.5 text-xs font-semibold hover:bg-slate-50 disabled:opacity-50"
+        title="Copy this page to a -b variant for A/B testing via Google Ads URL rotation"
+      >
+        {pending ? 'Duplicating…' : 'Duplicate (A/B)'}
+      </button>
+      {error && <span className="mt-1 text-[11px] font-medium text-red-600">{error}</span>}
+    </span>
   )
 }

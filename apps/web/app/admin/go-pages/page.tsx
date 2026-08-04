@@ -3,7 +3,7 @@ import { requireAdmin } from '@/lib/auth'
 import { getAllGoPages } from '@/lib/go-pages'
 import { GO_TEMPLATES } from '@/lib/go-templates'
 import { Badge } from '@/components/ui/badge'
-import { GoPageStatusToggle, NewGoPageForm } from '@/components/admin/GoPagesClient'
+import { GoPageDuplicate, GoPageStatusToggle, NewGoPageForm } from '@/components/admin/GoPagesClient'
 
 export const dynamic = 'force-dynamic'
 
@@ -58,6 +58,7 @@ export default async function GoPagesAdmin() {
                 >
                   Edit
                 </Link>
+                <GoPageDuplicate slug={p.slug} />
                 <GoPageStatusToggle slug={p.slug} status={p.status} />
               </div>
             </div>

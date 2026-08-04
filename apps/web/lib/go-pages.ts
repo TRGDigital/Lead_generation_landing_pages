@@ -27,6 +27,7 @@ export type GoPage = {
   exit_heading: string
   exit_body: string
   sticky_cta: string
+  plan_items: string[]
   meta_title: string
   meta_description: string
   notify_emails: string[]

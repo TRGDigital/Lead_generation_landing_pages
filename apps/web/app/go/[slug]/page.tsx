@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Check, Phone, Star } from 'lucide-react'
+import { SketchArrow } from '@/components/marketing/Decor'
 import { getGoPage } from '@/lib/go-pages'
 import { TrgGoQuiz } from '@/components/go/TrgGoQuiz'
 import { GoogleCloud, OpenAI, Claude, Supabase, Pinecone, GoogleAds, Aws } from '@/components/marketing/tech-logos'
@@ -163,7 +164,9 @@ export default async function GoLandingPage({ params }: Props) {
               ))}
             </ul>
 
-            <div className="mt-8 flex items-center gap-2 text-sm font-medium text-brand-ink-soft">
+            <SketchArrow className="mt-6 hidden h-14 w-28 text-brand-pop lg:block" />
+
+            <div className="mt-4 flex items-center gap-2 text-sm font-medium text-brand-ink-soft lg:mt-2">
               <span className="flex shrink-0 text-amber-400" aria-hidden>
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-4 w-4 fill-current" />
@@ -206,6 +209,19 @@ export default async function GoLandingPage({ params }: Props) {
             </div>
             {page.risk_reversal && (
               <p className="mt-4 px-2 text-center text-sm leading-relaxed text-brand-ink-soft">{page.risk_reversal}</p>
+            )}
+            {page.plan_items.length > 0 && (
+              <div className="mt-5 -rotate-1 rounded-2xl border-2 border-brand-line bg-white p-5 shadow-[4px_4px_0_0_#2a2620]">
+                <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-pop">Your action plan includes</p>
+                <ul className="mt-2.5 space-y-1.5">
+                  {page.plan_items.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm leading-snug text-brand-ink">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-pop" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
           </div>
         </div>

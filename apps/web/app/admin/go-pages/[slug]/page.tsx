@@ -104,6 +104,9 @@ export default async function EditGoPage({ params, searchParams }: Props) {
           <label className="mt-3 block space-y-1"><span className={label}>Risk-reversal line (under the quiz)</span>
             <input name="risk_reversal" defaultValue={page.risk_reversal} className={input} />
           </label>
+          <label className="mt-3 block space-y-1"><span className={label}>&ldquo;Your action plan includes&rdquo; items (one per line, max 4; blank = hide the card)</span>
+            <textarea name="plan_items" defaultValue={page.plan_items.join('\n')} rows={3} className={input} />
+          </label>
           <label className="mt-3 block space-y-1"><span className={label}>Sticky mobile button label</span>
             <input name="sticky_cta" defaultValue={page.sticky_cta} className={input} />
           </label>
