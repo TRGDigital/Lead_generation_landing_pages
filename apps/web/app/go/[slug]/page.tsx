@@ -6,7 +6,7 @@ import { Check, Phone, Star } from 'lucide-react'
 import { getGoPage } from '@/lib/go-pages'
 import { TrgGoQuiz } from '@/components/go/TrgGoQuiz'
 import { GoogleCloud, OpenAI, Claude, Supabase, Pinecone, GoogleAds, Aws } from '@/components/marketing/tech-logos'
-import { TESTIMONIALS } from '@/lib/testimonials'
+import { GoExitIntent } from '@/components/go/GoExitIntent'
 
 // TRG Google Ads landing page: /go/<slug>. Conversion-focused — slim header, the
 // gamified quiz above the fold over a bled-in care photo, then proof, steps,
@@ -200,8 +200,13 @@ export default async function GoLandingPage({ params }: Props) {
             </div>
           </div>
 
-          <div className="rounded-3xl border-2 border-brand-ink bg-white shadow-[8px_8px_0_0_#2a2620]">
-            <TrgGoQuiz slug={page.slug} intro={page.quiz_intro} questions={page.questions} ctaLabel={page.cta_label} />
+          <div>
+            <div className="rounded-3xl border-2 border-brand-ink bg-white shadow-[8px_8px_0_0_#2a2620]">
+              <TrgGoQuiz slug={page.slug} intro={page.quiz_intro} questions={page.questions} ctaLabel={page.cta_label} />
+            </div>
+            {page.risk_reversal && (
+              <p className="mt-4 px-2 text-center text-sm leading-relaxed text-brand-ink-soft">{page.risk_reversal}</p>
+            )}
           </div>
         </div>
       </section>
@@ -220,13 +225,13 @@ export default async function GoLandingPage({ params }: Props) {
         </section>
       )}
 
-      {/* Real client reviews — renders only when real, attributable quotes exist */}
-      {TESTIMONIALS.length > 0 && (
+      {/* Client reviews — per-page, edited in /admin/go-pages */}
+      {page.reviews.length > 0 && (
         <section className="bg-white px-6 py-14">
           <div className="mx-auto max-w-6xl">
             <p className="font-display text-sm font-bold uppercase tracking-widest text-brand-pop">What care providers say</p>
             <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
-              {TESTIMONIALS.slice(0, 3).map((t) => (
+              {page.reviews.slice(0, 3).map((t) => (
                 <figure key={t.name} className="flex flex-col rounded-2xl border-2 border-brand-line bg-brand-bg p-7">
                   <span className="flex text-amber-400" aria-hidden>
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -240,6 +245,25 @@ export default async function GoLandingPage({ params }: Props) {
                   </figcaption>
                 </figure>
               ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* The human behind the reply — reviewed by a real person */}
+      {page.founder_note && (
+        <section className="px-6 pb-2 pt-10">
+          <div className="mx-auto flex max-w-3xl items-center gap-5 rounded-3xl border-2 border-brand-line bg-white p-6 shadow-[4px_4px_0_0_#2a2620]">
+            <Image
+              src="/team/len-burgess.png"
+              alt="Len Burgess, founder of TRG Digital"
+              width={72}
+              height={72}
+              className="h-16 w-16 shrink-0 rounded-full border-2 border-brand-ink object-cover"
+            />
+            <div>
+              <p className="leading-relaxed text-brand-ink">{page.founder_note}</p>
+              <p className="mt-1.5 text-sm font-semibold text-brand-ink-muted">Len Burgess · Founder, TRG Digital</p>
             </div>
           </div>
         </section>
@@ -328,8 +352,29 @@ export default async function GoLandingPage({ params }: Props) {
         </section>
       )}
 
+      {/* Mobile: persistent action bar once the quiz is out of view */}
+      <div className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-2 border-t-2 border-brand-ink bg-white p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden">
+        <a
+          href="#quiz"
+          className="flex-1 rounded-xl bg-brand-pop px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-tight text-white"
+        >
+          {page.sticky_cta || 'Take the 60-second check'}
+        </a>
+        <a
+          href="tel:+442080641596"
+          aria-label="Call TRG Digital"
+          className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-ink text-white"
+        >
+          <Phone className="h-5 w-5" />
+        </a>
+      </div>
+
+      {page.exit_heading && (
+        <GoExitIntent heading={page.exit_heading} body={page.exit_body} ctaLabel={page.sticky_cta || 'Take the 60-second check'} />
+      )}
+
       {/* Slim footer */}
-      <footer className="border-t border-brand-line bg-white px-6 py-6">
+      <footer className="border-t border-brand-line bg-white px-6 py-6 pb-24 lg:pb-6">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 text-xs text-brand-ink-muted">
           <p>© {new Date().getFullYear()} TRG Digital Ltd · Registered in England 11731704</p>
           <p className="flex gap-4">

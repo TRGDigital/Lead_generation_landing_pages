@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import { createServiceClient } from '@/lib/supabase/server'
 import { requireAdmin } from '@/lib/auth'
 import { GO_TEMPLATES } from '@/lib/go-templates'
-import type { GoFaq, GoProofStat, GoQuizQuestion } from '@/lib/go-pages'
+import type { GoFaq, GoProofStat, GoQuizQuestion, GoReview } from '@/lib/go-pages'
 
 function slugify(s: string) {
   return s.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
@@ -53,6 +53,25 @@ function parseFaqs(raw: string): GoFaq[] {
     }
   }
   return out
+}
+
+// Blocks of "Quote: …" / "Name: …" / "Role: …" separated by blank lines.
+function parseReviews(raw: string): GoReview[] {
+  const out: GoReview[] = []
+  let cur: Partial<GoReview> = {}
+  const flush = () => {
+    if (cur.quote && cur.name) out.push({ quote: cur.quote, name: cur.name, role: cur.role ?? '' })
+    cur = {}
+  }
+  for (const line of raw.split('\n')) {
+    const t = line.trim()
+    if (!t) { flush(); continue }
+    if (/^quote\s*:/i.test(t)) { if (cur.quote) flush(); cur.quote = t.replace(/^quote\s*:/i, '').trim() }
+    else if (/^name\s*:/i.test(t)) cur.name = t.replace(/^name\s*:/i, '').trim()
+    else if (/^role\s*:/i.test(t)) cur.role = t.replace(/^role\s*:/i, '').trim()
+  }
+  flush()
+  return out.slice(0, 3)
 }
 
 // "stat | label" per line.
@@ -124,6 +143,12 @@ export async function saveGoPage(slug: string, formData: FormData) {
     faqs: parseFaqs(str('faqs')),
     quiz_intro: str('quiz_intro'),
     cta_label: str('cta_label') || 'See my results',
+    reviews: parseReviews(str('reviews')),
+    founder_note: str('founder_note'),
+    risk_reversal: str('risk_reversal'),
+    exit_heading: str('exit_heading'),
+    exit_body: str('exit_body'),
+    sticky_cta: str('sticky_cta'),
     meta_title: str('meta_title'),
     meta_description: str('meta_description'),
     notify_emails: parseEmails(str('notify_emails')),

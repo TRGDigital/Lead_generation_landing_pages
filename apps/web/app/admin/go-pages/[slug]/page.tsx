@@ -24,6 +24,7 @@ export default async function EditGoPage({ params, searchParams }: Props) {
   const questionsText = page.questions.map((q) => [`Q: ${q.q}`, ...q.options.map((o) => `- ${o}`)].join('\n')).join('\n\n')
   const faqsText = page.faqs.map((f) => `Q: ${f.q}\nA: ${f.a}`).join('\n\n')
   const proofText = page.proof.map((p) => `${p.stat} | ${p.label}`).join('\n')
+  const reviewsText = page.reviews.map((r) => `Quote: ${r.quote}\nName: ${r.name}\nRole: ${r.role}`).join('\n\n')
 
   return (
     <div className="max-w-3xl space-y-6">
@@ -90,6 +91,33 @@ export default async function EditGoPage({ params, searchParams }: Props) {
           <span className={hint}>One per line as “stat | label”, e.g. 100% | care sector only.</span>
           <textarea name="proof" defaultValue={proofText} rows={4} className={input} />
         </label>
+        <label className="block space-y-1"><span className={label}>Reviews (max 3 shown)</span>
+          <span className={hint}>Blocks of &ldquo;Quote: &hellip;&rdquo;, &ldquo;Name: &hellip;&rdquo;, &ldquo;Role: &hellip;&rdquo;; blank line between reviews. Replace the dummy ones with real quotes before running ads.</span>
+          <textarea name="reviews" defaultValue={reviewsText} rows={9} className={input} />
+        </label>
+
+        <div className="rounded-md border bg-slate-50 p-4">
+          <p className="mb-3 text-sm font-semibold">Trust &amp; capture</p>
+          <label className="block space-y-1"><span className={label}>Founder note (the personal-review card with Len&apos;s photo)</span>
+            <textarea name="founder_note" defaultValue={page.founder_note} rows={2} className={input} />
+          </label>
+          <label className="mt-3 block space-y-1"><span className={label}>Risk-reversal line (under the quiz)</span>
+            <input name="risk_reversal" defaultValue={page.risk_reversal} className={input} />
+          </label>
+          <label className="mt-3 block space-y-1"><span className={label}>Sticky mobile button label</span>
+            <input name="sticky_cta" defaultValue={page.sticky_cta} className={input} />
+          </label>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            <label className="space-y-1"><span className={label}>Exit pop-up heading</span>
+              <span className={hint}>Blank turns the exit pop-up off.</span>
+              <input name="exit_heading" defaultValue={page.exit_heading} className={input} />
+            </label>
+            <label className="space-y-1"><span className={label}>Exit pop-up text</span>
+              <textarea name="exit_body" defaultValue={page.exit_body} rows={2} className={input} />
+            </label>
+          </div>
+        </div>
+
         <label className="block space-y-1"><span className={label}>FAQs</span>
           <span className={hint}>Pairs of “Q: …” and “A: …” lines; blank line between FAQs.</span>
           <textarea name="faqs" defaultValue={faqsText} rows={8} className={input} />

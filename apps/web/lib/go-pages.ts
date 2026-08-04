@@ -6,6 +6,7 @@ import { createServiceClient } from '@/lib/supabase/server'
 export type GoQuizQuestion = { q: string; options: string[] }
 export type GoProofStat = { stat: string; label: string }
 export type GoFaq = { q: string; a: string }
+export type GoReview = { quote: string; name: string; role: string }
 
 export type GoPage = {
   id: string
@@ -20,6 +21,12 @@ export type GoPage = {
   quiz_intro: string
   questions: GoQuizQuestion[]
   cta_label: string
+  reviews: GoReview[]
+  founder_note: string
+  risk_reversal: string
+  exit_heading: string
+  exit_body: string
+  sticky_cta: string
   meta_title: string
   meta_description: string
   notify_emails: string[]
