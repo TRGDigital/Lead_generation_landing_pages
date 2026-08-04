@@ -78,6 +78,9 @@ export default async function LandingPagesAdmin({ searchParams }: { searchParams
                   </a>
                 </div>
                 <div className="flex shrink-0 items-center gap-3">
+                  <Link href={`/admin/pages/${p.slug}`} className="rounded-md border px-3 py-1.5 text-xs font-semibold hover:bg-slate-50">
+                    Edit content
+                  </Link>
                   <span className="text-xs text-muted-foreground">Quiz template</span>
                   <PageTemplateSelect slug={p.slug} current={p.question_set ?? 'residential'} />
                   <PageStatusToggle slug={p.slug} status={p.status} />
