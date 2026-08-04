@@ -25,8 +25,8 @@ export default function Analytics() {
 
     function grant() {
       try {
-        // eslint-disable-next-line @typescript-eslint/no-extra-semi
-        ;(window as any).gtag?.('consent', 'update', {
+        const w = window as unknown as { gtag?: (...args: unknown[]) => void }
+        w.gtag?.('consent', 'update', {
           ad_storage: 'granted',
           ad_user_data: 'granted',
           ad_personalization: 'granted',
