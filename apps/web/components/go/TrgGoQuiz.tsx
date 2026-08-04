@@ -41,8 +41,18 @@ export function TrgGoQuiz({
   const total = questions.length
   const contactStep = step >= total
 
+  // GA4 funnel events — shows exactly where people drop off, per page.
+  function track(event: string, extra?: Record<string, unknown>) {
+    try {
+      const w = window as unknown as { gtag?: (...args: unknown[]) => void }
+      w.gtag?.('event', event, { event_category: 'go-quiz', event_label: slug, ...extra })
+    } catch { /* never break the quiz */ }
+  }
+
   function pick(q: string, option: string) {
     setAnswers((a) => ({ ...a, [q]: option }))
+    track('quiz_question_answered', { step: step + 1, question: q.slice(0, 80) })
+    if (step + 1 >= total) track('quiz_contact_step', { step: total })
     setStep((s) => s + 1)
   }
 
@@ -80,15 +90,43 @@ export function TrgGoQuiz({
 
   if (done) {
     return (
-      <div className="p-8 text-center">
-        <CheckCircle2 className="mx-auto h-12 w-12 text-green-600" />
-        <h3 className="mt-4 font-display text-2xl font-bold uppercase tracking-tight text-brand-ink">
-          Thank you, {name.split(' ')[0] || 'done'}!
-        </h3>
-        <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-brand-ink-soft">
-          A care-sector specialist is reviewing your answers now. Your personalised action plan
-          will be with you within one working day, no hard sell.
-        </p>
+      <div className="p-8">
+        <div className="text-center">
+          <CheckCircle2 className="mx-auto h-12 w-12 text-green-600" />
+          <h3 className="mt-4 font-display text-2xl font-bold uppercase tracking-tight text-brand-ink">
+            Thank you, {name.split(' ')[0] || 'done'}!
+          </h3>
+          <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-brand-ink-soft">
+            A care-sector specialist is reviewing your answers now. Your personalised action plan
+            will be with you within one working day.
+          </p>
+        </div>
+        <div className="mt-6 rounded-2xl border-2 border-brand-line bg-brand-bg p-5">
+          <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-pop">
+            Want to skip the wait?
+          </p>
+          <p className="mt-1.5 text-sm leading-relaxed text-brand-ink-soft">
+            Talk it through with us right now, or see the care homes we&apos;ve already built for.
+          </p>
+          <div className="mt-4 flex flex-col gap-2.5">
+            <a
+              href="tel:+442080641596"
+              onClick={() => track('thankyou_call_click')}
+              className="rounded-xl bg-brand-ink px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-tight text-white"
+            >
+              Call us now · 020 8064 1596
+            </a>
+            <a
+              href="/work"
+              target="_blank"
+              rel="noopener"
+              onClick={() => track('thankyou_work_click')}
+              className="rounded-xl border-2 border-brand-ink px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-tight text-brand-ink hover:bg-brand-ink hover:text-white"
+            >
+              See our recent care home builds
+            </a>
+          </div>
+        </div>
       </div>
     )
   }
@@ -122,7 +160,7 @@ export function TrgGoQuiz({
           </p>
           <button
             type="button"
-            onClick={() => setStep(0)}
+            onClick={() => { track('quiz_start'); setStep(0) }}
             className="mt-6 w-full rounded-2xl bg-brand-pop px-6 py-4 font-display text-lg font-bold uppercase tracking-tight text-white shadow-[4px_4px_0_0_#2a2620] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:bg-brand-pop-dark hover:shadow-[2px_2px_0_0_#2a2620]"
           >
             Start the check →

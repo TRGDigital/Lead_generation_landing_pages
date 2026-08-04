@@ -15,7 +15,7 @@ import { GoExitIntent } from '@/components/go/GoExitIntent'
 // traffic only). Managed in /admin/go-pages.
 export const dynamic = 'force-dynamic'
 
-type Props = { params: { slug: string } }
+type Props = { params: { slug: string }; searchParams?: { h?: string } }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = await getGoPage(params.slug)
@@ -108,9 +108,15 @@ function CtaButton({ label = 'Take the 60-second check' }: { label?: string }) {
   )
 }
 
-export default async function GoLandingPage({ params }: Props) {
+export default async function GoLandingPage({ params, searchParams }: Props) {
   const page = await getGoPage(params.slug)
   if (!page || page.status !== 'published') notFound()
+
+  // Ad-group message match: ?h= overrides the headline per ad without extra
+  // pages (plain text, capped; React escaping keeps it safe). Meta/SEO always
+  // use the admin headline.
+  const headlineOverride = (searchParams?.h ?? '').replace(/<[^>]*>/g, '').trim().slice(0, 90)
+  const headline = headlineOverride || page.headline
 
   return (
     <div className="min-h-screen bg-brand-bg">
@@ -149,7 +155,7 @@ export default async function GoLandingPage({ params }: Props) {
               {page.service} · care sector only
             </span>
             <h1 className="mt-5 font-display text-4xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-5xl">
-              {page.headline}
+              {headline}
             </h1>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-brand-ink-soft">{page.subheadline}</p>
 
