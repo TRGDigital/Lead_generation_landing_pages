@@ -205,8 +205,11 @@ export async function duplicateGoPage(slug: string) {
   }
   if (!newSlug) throw new Error('Variant limit reached (b–e all exist).')
 
-  const { id: _id, created_at: _c, updated_at: _u, ...rest } = src
-  const { error } = await db.from('trg_go_pages').insert({ ...rest, slug: newSlug, status: 'draft' })
+  const copy: Record<string, unknown> = { ...src, slug: newSlug, status: 'draft' }
+  delete copy.id
+  delete copy.created_at
+  delete copy.updated_at
+  const { error } = await db.from('trg_go_pages').insert(copy)
   if (error) throw new Error(error.message)
 
   revalidatePath('/admin/go-pages')
