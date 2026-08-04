@@ -15,12 +15,13 @@ export type PageSeoRow = {
   description: string | null
   canonical: string | null
   og_image: string | null
+  og_image_alt: string | null
 }
 
 const loadAll = unstable_cache(
   async (): Promise<Record<string, PageSeoRow>> => {
     const db = createServiceClient() as unknown as any
-    const { data } = await db.from('page_seo').select('path, title, description, canonical, og_image')
+    const { data } = await db.from('page_seo').select('path, title, description, canonical, og_image, og_image_alt')
     const map: Record<string, PageSeoRow> = {}
     for (const r of (data ?? []) as PageSeoRow[]) map[r.path] = r
     return map
@@ -66,10 +67,13 @@ export async function applyPageSeo(path: string, defaults: Metadata): Promise<Me
 
   // Resolve the social image: this page's admin override > the page's built-in
   // openGraph image > the site-wide default. This guarantees every page shares a
-  // relevant, working image (never the missing /og-home.jpg).
+  // relevant, working image (never the missing /og-home.jpg). An admin-set alt
+  // rides along as the og:image:alt.
   const pageDefaultImages = (defaults.openGraph as any)?.images
   const ogImage = o?.og_image || undefined
-  const images = ogImage ? [ogImage] : (pageDefaultImages ?? [await getSiteOgImage()])
+  const images = ogImage
+    ? [o?.og_image_alt ? { url: ogImage, alt: o.og_image_alt } : ogImage]
+    : (pageDefaultImages ?? [await getSiteOgImage()])
 
   md.openGraph = {
     ...(defaults.openGraph ?? {}),

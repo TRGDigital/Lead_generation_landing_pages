@@ -31,6 +31,8 @@ export async function savePageSeo(path: string, formData: FormData) {
   const title = String(formData.get('title') ?? '').trim()
   const description = String(formData.get('description') ?? '').trim()
   const canonical = String(formData.get('canonical') ?? '').trim()
+  const ogImage = String(formData.get('og_image') ?? '').trim()
+  const ogImageAlt = String(formData.get('og_image_alt') ?? '').trim().slice(0, 300)
 
   const db = createServiceClient() as unknown as any
   const { error } = await db.from('page_seo').upsert(
@@ -39,6 +41,8 @@ export async function savePageSeo(path: string, formData: FormData) {
       title: title || null,
       description: description || null,
       canonical: canonical || null,
+      og_image: ogImage || null,
+      og_image_alt: ogImageAlt || null,
       updated_at: new Date().toISOString(),
     },
     { onConflict: 'path' },
