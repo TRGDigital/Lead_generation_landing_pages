@@ -6,6 +6,42 @@ import { saveGoPage, deleteGoPage } from '../actions'
 
 export const dynamic = 'force-dynamic'
 
+// The lead's quiz answers arrive as "Question: Answer" lines inside message —
+// render them as a tidy Q&A table with the tracking params as muted chips.
+function LeadAnswers({ message }: { message: string }) {
+  const lines = message.split('\n').map(l => l.trim()).filter(Boolean)
+  const qa: Array<{ q: string; a: string }> = []
+  let tracking = ''
+  for (const line of lines) {
+    if (/^quiz\s*:/i.test(line)) continue
+    if (/(?:^|\s)(utm_[a-z]+|gclid)=/i.test(line)) { tracking = line; continue }
+    const i = line.indexOf(':')
+    if (i > 0) qa.push({ q: line.slice(0, i).trim(), a: line.slice(i + 1).trim() })
+  }
+  return (
+    <div className="mt-2">
+      {qa.length > 0 && (
+        <div className="overflow-hidden rounded-md border">
+          {qa.map((row, i) => (
+            <div key={i} className={`flex flex-col gap-0.5 px-3 py-2 sm:flex-row sm:items-baseline sm:gap-4 ${i % 2 ? 'bg-white' : 'bg-slate-50'}`}>
+              <p className="text-xs text-muted-foreground sm:w-1/2">{row.q}</p>
+              <p className="text-sm font-medium sm:w-1/2">{row.a}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      {tracking && (
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {tracking.split(/\s+/).filter(Boolean).map(t => (
+            <span key={t} className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-medium text-slate-500">{t}</span>
+          ))}
+        </div>
+      )}
+      {qa.length === 0 && !tracking && <p className="text-sm text-muted-foreground">{message}</p>}
+    </div>
+  )
+}
+
 type Props = { params: { slug: string }; searchParams: { saved?: string; warn?: string; error?: string; tab?: string } }
 
 // Edit one TRG ad page. Friendly text formats: bullets one per line; proof as
@@ -126,7 +162,7 @@ export default async function EditGoPage({ params, searchParams }: Props) {
                   <p className="font-medium">{l.name} <span className="font-normal text-muted-foreground">· {l.email}{l.phone ? ` · ${l.phone}` : ''}{l.company ? ` · ${l.company}` : ''}</span></p>
                   <p className="text-xs text-muted-foreground">{new Date(l.created_at).toLocaleString('en-GB', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}</p>
                 </div>
-                <pre className="mt-2 whitespace-pre-wrap rounded bg-slate-50 p-3 text-xs text-slate-700">{l.message}</pre>
+                <LeadAnswers message={l.message} />
               </div>
             ))}
           </div>
