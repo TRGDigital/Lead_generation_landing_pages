@@ -191,6 +191,14 @@ export function CareFinderQuiz({
         <p className="mt-2 text-sm leading-relaxed text-slate-600">
           We have everything we need. We&apos;ll match you with local care homes that have availability and fit what you&apos;re looking for, and the right homes will be in touch shortly.
         </p>
+        <a
+          href="https://careassura.com?utm_source=landing&utm_medium=thankyou"
+          target="_blank"
+          rel="noopener"
+          className="mt-5 inline-block rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-95"
+        >
+          Browse care homes on CareAssura while you wait →
+        </a>
       </div>
     )
   }

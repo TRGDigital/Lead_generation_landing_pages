@@ -6,6 +6,7 @@ import { getQuestionSet, getRunningExperiment } from '@/lib/care-finder'
 import { CareFinderQuiz } from '@/components/careassura/CareFinderQuiz'
 import { GetMatchedModal } from '@/components/careassura/GetMatchedModal'
 import { LegalLinks } from '@/components/careassura/LegalLinks'
+import { LpHeadlineOverride, LpStickyCta, LpExitIntent } from '@/components/careassura/LpConversion'
 
 export const revalidate = 60
 
@@ -85,10 +86,12 @@ export default async function LocationLandingPage({ params }: { params: { locati
           <div>
             {hero.eyebrow && <p className="text-sm font-semibold uppercase tracking-widest text-violet-600">{hero.eyebrow}</p>}
             <h1 className="mt-3 text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 md:text-5xl">
-              {hero.headline ?? (
-                <>Find a brilliant care home in{' '}
-                  <span className="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">{area}</span>.</>
-              )}
+              <LpHeadlineOverride>
+                {hero.headline ?? (
+                  <>Find a brilliant care home in{' '}
+                    <span className="bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">{area}</span>.</>
+                )}
+              </LpHeadlineOverride>
             </h1>
             <p className="mt-5 max-w-xl text-xl leading-relaxed text-slate-600">
               {hero.subheadline ?? `Finding the right care home should not mean ringing round for hours. Tell us what you need and we will pass your details to care homes in the ${area} area that have genuine availability. The right homes then get in touch with you directly to arrange a visit. It is free, with no obligation.`}
@@ -125,6 +128,20 @@ export default async function LocationLandingPage({ params }: { params: { locati
           </div>
           <div className="lg:pl-4">
             <CareFinderQuiz locationSlug={page.slug} questions={questions} questionSetKey={page.question_set} variantQuestions={variantQuestions} experimentId={experimentId} anchorId="enquire" />
+            <p className="mt-4 text-center text-sm leading-relaxed text-slate-500">
+              Free for families · No obligation · Only homes with genuine availability will contact you
+            </p>
+            <div className="mt-5 rounded-2xl border border-violet-100 bg-white p-5 shadow-sm">
+              <p className="text-xs font-semibold uppercase tracking-widest text-violet-600">What you&apos;ll receive</p>
+              <ul className="mt-2.5 space-y-1.5">
+                {[`A shortlist of ${area} care homes matched to your needs`, 'Genuine availability, confirmed by the homes themselves', 'Visits arranged at your pace, with no pressure'].map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-sm leading-snug text-slate-700">
+                    <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-violet-600" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -292,7 +309,10 @@ export default async function LocationLandingPage({ params }: { params: { locati
             <p className="text-xs text-slate-400">© {new Date().getFullYear()} CareAssura. Free, impartial help finding care across the UK.</p>
           </div>
           <div className="flex w-full justify-center border-t border-slate-50 pt-4 sm:justify-end">
-            <LegalLinks />
+            <LpStickyCta />
+      <LpExitIntent area={area} />
+      <div className="h-16 lg:hidden" aria-hidden />
+      <LegalLinks />
           </div>
         </div>
       </footer>
