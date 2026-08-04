@@ -164,7 +164,7 @@ export default async function GoLandingPage({ params }: Props) {
               ))}
             </ul>
 
-            <SketchArrow className="mt-6 hidden h-14 w-28 text-brand-pop lg:block" />
+            <SketchArrow className="mt-6 hidden h-16 w-64 text-brand-pop lg:ml-auto lg:-mr-6 lg:block" />
 
             <div className="mt-4 flex items-center gap-2 text-sm font-medium text-brand-ink-soft lg:mt-2">
               <span className="flex shrink-0 text-amber-400" aria-hidden>
@@ -211,7 +211,7 @@ export default async function GoLandingPage({ params }: Props) {
               <p className="mt-4 px-2 text-center text-sm leading-relaxed text-brand-ink-soft">{page.risk_reversal}</p>
             )}
             {page.plan_items.length > 0 && (
-              <div className="mt-5 -rotate-1 rounded-2xl border-2 border-brand-line bg-white p-5 shadow-[4px_4px_0_0_#2a2620]">
+              <div className="mt-5 rounded-2xl border-2 border-brand-line bg-white p-5 shadow-[4px_4px_0_0_#2a2620]">
                 <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-pop">Your action plan includes</p>
                 <ul className="mt-2.5 space-y-1.5">
                   {page.plan_items.map((item) => (
