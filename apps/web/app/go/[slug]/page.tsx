@@ -170,7 +170,7 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
               ))}
             </ul>
 
-            <SketchArrow className="pointer-events-none mt-3 -mb-8 hidden h-auto w-[121%] text-brand-pop lg:block" />
+            <SketchArrow className="pointer-events-none -mt-4 -mb-14 hidden h-auto w-[121%] text-brand-pop lg:block" />
 
             <div className="mt-4 flex items-center gap-2 text-sm font-medium text-brand-ink-soft lg:mt-2">
               <span className="flex shrink-0 text-amber-400" aria-hidden>
