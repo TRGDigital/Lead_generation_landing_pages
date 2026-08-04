@@ -48,9 +48,9 @@ export function Burst({ className = '' }: { className?: string }) {
 // Hand-drawn arrow used as a directional cue (points at the conversion element).
 export function SketchArrow({ className = '' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 420 150" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
-      <path d="M10 78c70 46 180 58 268 22 46-19 84-52 106-92" />
-      <path d="M362 18 384 8 388 32" />
+    <svg viewBox="0 0 420 120" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <path d="M10 58c70 40 180 48 266 18 44-15 82-42 104-66" />
+      <path d="M360 16 382 8 386 30" />
     </svg>
   )
 }

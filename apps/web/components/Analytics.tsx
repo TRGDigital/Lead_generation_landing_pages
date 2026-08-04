@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react'
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID
 // Google Ads conversion tag — public ID, hardcoded fallback so the tag is always present.
 const GADS_ID = process.env.NEXT_PUBLIC_GADS_ID ?? 'AW-18370354696'
+// Microsoft Clarity (heatmaps + session recordings) — free; loads after cookie consent.
+const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID ?? 'xx64rq6ur7'
 
 // Google tag with Consent Mode v2: gtag.js loads on EVERY page immediately (so
 // Google Ads sees the tag and can model conversions), but ad/analytics storage
@@ -13,6 +15,7 @@ const GADS_ID = process.env.NEXT_PUBLIC_GADS_ID ?? 'AW-18370354696'
 // consent to granted, both for this page view and (via localStorage) future ones.
 export default function Analytics() {
   const [inFrame, setInFrame] = useState(true)
+  const [consented, setConsented] = useState(false)
 
   useEffect(() => {
     // Don't load analytics inside an embedded iframe (our tool widgets on client sites).
@@ -24,6 +27,7 @@ export default function Analytics() {
     setInFrame(false)
 
     function grant() {
+      setConsented(true)
       try {
         const w = window as unknown as { gtag?: (...args: unknown[]) => void }
         w.gtag?.('consent', 'update', {
@@ -66,6 +70,15 @@ export default function Analytics() {
         ${GA4_ID ? `gtag('config', '${GA4_ID}');` : ''}
         gtag('config', '${GADS_ID}');
       `}</Script>
+      {consented && CLARITY_ID && (
+        <Script id="ms-clarity" strategy="afterInteractive">{`
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "${CLARITY_ID}");
+        `}</Script>
+      )}
     </>
   )
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ArrowLeft, CheckCircle2, Loader2 } from 'lucide-react'
 import type { GoQuizQuestion } from '@/lib/go-pages'
 
@@ -49,10 +49,32 @@ export function TrgGoQuiz({
     } catch { /* never break the quiz */ }
   }
 
+  // First-party quiz analytics — powers the Performance tab in /admin/go-pages.
+  // Anonymous session id, no PII; sendBeacon so it survives navigation.
+  function beacon(event: string, extra?: { step?: number; question?: string; option?: string }) {
+    try {
+      let session = sessionStorage.getItem('go-session')
+      if (!session) {
+        session = crypto.randomUUID()
+        sessionStorage.setItem('go-session', session)
+      }
+      const payload = JSON.stringify({ slug, session, event, ...extra })
+      if (!navigator.sendBeacon?.('/api/go-events', new Blob([payload], { type: 'application/json' }))) {
+        fetch('/api/go-events', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true }).catch(() => {})
+      }
+    } catch { /* never break the quiz */ }
+  }
+
+  useEffect(() => {
+    beacon('view')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   function pick(q: string, option: string) {
     setAnswers((a) => ({ ...a, [q]: option }))
     track('quiz_question_answered', { step: step + 1, question: q.slice(0, 80) })
-    if (step + 1 >= total) track('quiz_contact_step', { step: total })
+    beacon('answer', { step: step + 1, question: q, option })
+    if (step + 1 >= total) { track('quiz_contact_step', { step: total }); beacon('contact', { step: total }) }
     setStep((s) => s + 1)
   }
 
@@ -77,6 +99,7 @@ export function TrgGoQuiz({
         const adsId = process.env.NEXT_PUBLIC_GADS_ID ?? 'AW-18370354696'
         if (label) w.gtag?.('event', 'conversion', { send_to: `${adsId}/${label}` })
       } catch { /* tracking must never break the form */ }
+      beacon('submit')
       setDone(true)
     } catch (err: any) {
       setError(err?.message ?? 'Something went wrong. Please try again.')
@@ -160,7 +183,7 @@ export function TrgGoQuiz({
           </p>
           <button
             type="button"
-            onClick={() => { track('quiz_start'); setStep(0) }}
+            onClick={() => { track('quiz_start'); beacon('start'); setStep(0) }}
             className="mt-6 w-full rounded-2xl bg-brand-pop px-6 py-4 font-display text-lg font-bold uppercase tracking-tight text-white shadow-[4px_4px_0_0_#2a2620] transition-all hover:translate-x-0.5 hover:translate-y-0.5 hover:bg-brand-pop-dark hover:shadow-[2px_2px_0_0_#2a2620]"
           >
             Start the check →
