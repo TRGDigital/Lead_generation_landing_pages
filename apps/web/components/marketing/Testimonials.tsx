@@ -4,9 +4,9 @@
 //
 // Example shape:
 //   { quote: 'They filled three beds in our first month.', name: 'Jane Smith', role: 'Manager, Sunrise Care' }
-type Testimonial = { quote: string; name: string; role: string }
+import { TESTIMONIALS } from '@/lib/testimonials'
 
-const TESTIMONIALS: Testimonial[] = []
+
 
 export function Testimonials() {
   if (TESTIMONIALS.length === 0) return null

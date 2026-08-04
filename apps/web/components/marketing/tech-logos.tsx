@@ -139,3 +139,31 @@ export const TECH = [
   { name: 'Stripe', Icon: Stripe },
   { name: 'Next.js', Icon: NextJs },
 ]
+export function GoogleAds() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-full w-full" aria-hidden>
+      <rect x="6.1" y="1.8" width="6.6" height="19.6" rx="3.3" fill="#FBBC04" transform="rotate(-30 9.4 11.6)" />
+      <rect x="11.3" y="1.8" width="6.6" height="19.6" rx="3.3" fill="#4285F4" transform="rotate(30 14.6 11.6)" />
+      <circle cx="4.6" cy="18.4" r="3.3" fill="#34A853" />
+    </svg>
+  )
+}
+export function Aws() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-full w-full" aria-hidden>
+      <text x="12" y="13.5" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="10.5" fontWeight="800" fill="#232F3E">aws</text>
+      <path d="M3.2 16.2c5.6 3.6 12 3.6 17.2.4" fill="none" stroke="#FF9900" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="M19 14.6l2.2 1.7-2.7.9" fill="none" stroke="#FF9900" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+export function Pinecone() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-full w-full" fill="none" stroke="#201D1E" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M8.5 6.5 12 3l3.5 3.5" />
+      <path d="M7 11.5 12 7l5 4.5" />
+      <path d="M7.5 16.5 12 12.5l4.5 4" />
+      <path d="M12 17.5V21" />
+    </svg>
+  )
+}

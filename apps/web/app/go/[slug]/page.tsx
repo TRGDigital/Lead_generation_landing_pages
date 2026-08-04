@@ -5,7 +5,8 @@ import { notFound } from 'next/navigation'
 import { Check, Phone, Star } from 'lucide-react'
 import { getGoPage } from '@/lib/go-pages'
 import { TrgGoQuiz } from '@/components/go/TrgGoQuiz'
-import { GoogleCloud, OpenAI, Claude, Supabase } from '@/components/marketing/tech-logos'
+import { GoogleCloud, OpenAI, Claude, Supabase, Pinecone, GoogleAds, Aws } from '@/components/marketing/tech-logos'
+import { TESTIMONIALS } from '@/lib/testimonials'
 
 // TRG Google Ads landing page: /go/<slug>. Conversion-focused — slim header, the
 // gamified quiz above the fold over a bled-in care photo, then proof, steps,
@@ -182,14 +183,12 @@ export default async function GoLandingPage({ params }: Props) {
                   { name: 'OpenAI', Icon: OpenAI },
                   { name: 'Claude', Icon: Claude },
                   { name: 'Supabase', Icon: Supabase },
+                  { name: 'Pinecone', Icon: Pinecone },
+                  { name: 'Google Ads', Icon: GoogleAds },
+                  { name: 'AWS', Icon: Aws },
                 ].map(({ name, Icon }) => (
                   <span key={name} className="inline-flex items-center gap-1.5 rounded-full border border-brand-line bg-white/80 px-3 py-1.5 text-xs font-semibold text-brand-ink">
                     <span className="h-3.5 w-3.5"><Icon /></span>
-                    {name}
-                  </span>
-                ))}
-                {['Pinecone', 'Google Ads', 'AWS'].map((name) => (
-                  <span key={name} className="inline-flex items-center rounded-full border border-brand-line bg-white/80 px-3 py-1.5 text-xs font-semibold text-brand-ink">
                     {name}
                   </span>
                 ))}
@@ -217,6 +216,31 @@ export default async function GoLandingPage({ params }: Props) {
                 <p className="mt-1 text-sm text-white/75">{p.label}</p>
               </div>
             ))}
+          </div>
+        </section>
+      )}
+
+      {/* Real client reviews — renders only when real, attributable quotes exist */}
+      {TESTIMONIALS.length > 0 && (
+        <section className="bg-white px-6 py-14">
+          <div className="mx-auto max-w-6xl">
+            <p className="font-display text-sm font-bold uppercase tracking-widest text-brand-pop">What care providers say</p>
+            <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+              {TESTIMONIALS.slice(0, 3).map((t) => (
+                <figure key={t.name} className="flex flex-col rounded-2xl border-2 border-brand-line bg-brand-bg p-7">
+                  <span className="flex text-amber-400" aria-hidden>
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-current" />
+                    ))}
+                  </span>
+                  <blockquote className="mt-4 flex-1 leading-relaxed text-brand-ink">&ldquo;{t.quote}&rdquo;</blockquote>
+                  <figcaption className="mt-5">
+                    <p className="font-semibold text-brand-ink">{t.name}</p>
+                    <p className="text-sm text-brand-ink-muted">{t.role}</p>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
         </section>
       )}
