@@ -49,8 +49,8 @@ export function Burst({ className = '' }: { className?: string }) {
 export function SketchArrow({ className = '' }: { className?: string }) {
   return (
     <svg viewBox="0 0 420 70" fill="none" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" className={`overflow-visible ${className}`} aria-hidden>
-      <path d="M10 30c70 30 180 38 266 14 44-15 88-74 96-96" />
-      <path d="M350 -34 372 -52 380 -22" />
+      <path d="M32 39c48 21 158 29 244 5 44-15 82-58 88-74" />
+      <path d="M342 -12 364 -30 372 0" />
     </svg>
   )
 }
