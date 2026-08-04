@@ -61,14 +61,19 @@ export type GoQuizStats = {
   questions: GoQuestionStat[]
 }
 
-export async function getGoQuizStats(slug: string, pageQuestions: GoQuizQuestion[]): Promise<GoQuizStats> {
+export async function getGoQuizStats(
+  slug: string,
+  pageQuestions: GoQuizQuestion[],
+  range?: { from?: string; to?: string }, // YYYY-MM-DD, inclusive
+): Promise<GoQuizStats> {
   const db = createServiceClient() as unknown as any
-  const { data } = await db
+  let q = db
     .from('go_quiz_events')
     .select('session_id, event, question, option')
     .eq('slug', slug)
-    .order('created_at', { ascending: false })
-    .limit(20000)
+  if (range?.from) q = q.gte('created_at', `${range.from}T00:00:00Z`)
+  if (range?.to) q = q.lte('created_at', `${range.to}T23:59:59Z`)
+  const { data } = await q.order('created_at', { ascending: false }).limit(20000)
   const rows = (data as Array<{ session_id: string; event: string; question: string | null; option: string | null }>) ?? []
 
   const uniq = (event: string) => new Set(rows.filter(r => r.event === event).map(r => r.session_id)).size

@@ -42,7 +42,7 @@ function LeadAnswers({ message }: { message: string }) {
   )
 }
 
-type Props = { params: { slug: string }; searchParams: { saved?: string; warn?: string; error?: string; tab?: string } }
+type Props = { params: { slug: string }; searchParams: { saved?: string; warn?: string; error?: string; tab?: string; from?: string; to?: string } }
 
 // Edit one TRG ad page. Friendly text formats: bullets one per line; proof as
 // "stat | label"; quiz as "Q: …" + "- option" blocks; FAQs as "Q: …" / "A: …".
@@ -52,7 +52,11 @@ export default async function EditGoPage({ params, searchParams }: Props) {
   if (!page) notFound()
 
   const tab = searchParams.tab === 'content' ? 'content' : searchParams.tab === 'leads' ? 'leads' : 'performance'
-  const stats = tab === 'performance' ? await getGoQuizStats(page.slug, page.questions) : null
+  const DATE_RE = /^\d{4}-\d{2}-\d{2}$/
+  const from = DATE_RE.test(searchParams.from ?? '') ? searchParams.from : undefined
+  const to = DATE_RE.test(searchParams.to ?? '') ? searchParams.to : undefined
+  const day = (offset: number) => new Date(Date.now() - offset * 86_400_000).toISOString().slice(0, 10)
+  const stats = tab === 'performance' ? await getGoQuizStats(page.slug, page.questions, { from, to }) : null
   const leads = tab === 'leads' ? await getGoLeads(page.slug) : []
 
   const save = saveGoPage.bind(null, page.slug)
@@ -97,6 +101,36 @@ export default async function EditGoPage({ params, searchParams }: Props) {
 
       {tab === 'performance' && stats && (
         <div className="space-y-6">
+          {/* Date range: quick presets + a custom calendar range */}
+          <div className="flex flex-wrap items-center gap-2 rounded-md border bg-white p-3">
+            {([
+              { label: 'Today', f: day(0), t: day(0) },
+              { label: 'Last 7 days', f: day(6), t: day(0) },
+              { label: 'Last 30 days', f: day(29), t: day(0) },
+              { label: 'All time', f: undefined, t: undefined },
+            ] as const).map(r => {
+              const active = from === r.f && to === r.t
+              const qs = r.f ? `?tab=performance&from=${r.f}&to=${r.t}` : '?tab=performance'
+              return (
+                <Link key={r.label} href={`/admin/go-pages/${page.slug}${qs}`}
+                  className={`rounded-full border px-3 py-1.5 text-xs font-semibold ${active ? 'border-slate-900 bg-slate-900 text-white' : 'text-muted-foreground hover:text-foreground'}`}>
+                  {r.label}
+                </Link>
+              )
+            })}
+            <form method="GET" className="ml-auto flex flex-wrap items-center gap-2">
+              <input type="hidden" name="tab" value="performance" />
+              <input type="date" name="from" defaultValue={from} className="rounded-md border px-2 py-1.5 text-xs" aria-label="From date" />
+              <span className="text-xs text-muted-foreground">to</span>
+              <input type="date" name="to" defaultValue={to} className="rounded-md border px-2 py-1.5 text-xs" aria-label="To date" />
+              <button className="rounded-md bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white">Apply</button>
+            </form>
+          </div>
+          {(from || to) && (
+            <p className="text-xs text-muted-foreground">
+              Showing {from ?? 'the beginning'} → {to ?? 'today'} · <Link href={`/admin/go-pages/${page.slug}?tab=performance`} className="underline">clear</Link>
+            </p>
+          )}
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {[
               { label: 'Page views', value: stats.views, sub: 'unique visitors' },
