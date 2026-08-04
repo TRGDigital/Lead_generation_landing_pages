@@ -8,7 +8,7 @@ import { careTypeLabel } from '@/lib/care-finder'
 // CareAssura location landing pages capture leads that are NOT yet tied to a
 // single care home — they land unassigned in /admin/leads, tagged by area, ready
 // for the distribution tool.
-type LocationRow = { area_name: string }
+type LocationRow = { area_name: string; notify_emails: string[] | null }
 type LeadRow = { id: string }
 
 export async function POST(req: NextRequest) {
@@ -53,7 +53,7 @@ async function handle(req: NextRequest) {
   // Resolve the area name from the published location page.
   const locResult = await supabase
     .from('location_pages')
-    .select('area_name')
+    .select('area_name, notify_emails')
     .eq('slug', data.locationSlug)
     .eq('status', 'published')
     .single()
@@ -100,22 +100,26 @@ async function handle(req: NextRequest) {
 
   if (data.idempotencyKey) await setIdempotency(data.idempotencyKey)
 
-  const notifyEmail = process.env.NOTIFY_EMAIL
+  // Per-page recipients (set in /admin/pages) win; blank falls back to the
+  // site-wide NOTIFY_EMAIL inbox.
+  const recipients = loc.notify_emails?.length ? loc.notify_emails : [process.env.NOTIFY_EMAIL].filter(Boolean) as string[]
   const leadTemplateId = process.env.SENDGRID_LEAD_TEMPLATE_ID
-  if (notifyEmail && leadTemplateId) {
-    void sendTemplateEmail({
-      to: notifyEmail,
-      templateId: leadTemplateId,
-      dynamicData: {
-        lead_id: lead.id,
-        care_home_name: `CareAssura — ${loc.area_name}`,
-        full_name: data.fullName,
-        email: data.email,
-        phone: data.phone,
-        care_type: data.careType ?? '',
-        move_in_timeframe: data.moveInTimeframe ?? '',
-      },
-    }).catch(() => {})
+  if (recipients.length && leadTemplateId) {
+    for (const to of recipients) {
+      void sendTemplateEmail({
+        to,
+        templateId: leadTemplateId,
+        dynamicData: {
+          lead_id: lead.id,
+          care_home_name: `CareAssura — ${loc.area_name}`,
+          full_name: data.fullName,
+          email: data.email,
+          phone: data.phone,
+          care_type: data.careType ?? '',
+          move_in_timeframe: data.moveInTimeframe ?? '',
+        },
+      }).catch(() => {})
+    }
   }
 
   // NOTE: auto-distribution does NOT happen here. The lead is created at the

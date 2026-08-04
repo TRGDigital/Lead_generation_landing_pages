@@ -11,6 +11,7 @@ export function NewPageForm() {
   const [slug, setSlug] = useState('')
   const [slugEdited, setSlugEdited] = useState(false)
   const [questionSet, setQuestionSet] = useState('residential')
+  const [notifyEmails, setNotifyEmails] = useState('')
   const [pending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
 
@@ -21,7 +22,7 @@ export function NewPageForm() {
     setError(null)
     startTransition(async () => {
       try {
-        await createLandingPage({ areaName, slug: slugEdited ? slug : areaName, questionSet })
+        await createLandingPage({ areaName, slug: slugEdited ? slug : areaName, questionSet, notifyEmails })
         // on success the action redirects to /admin/pages
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to create page')
@@ -71,6 +72,19 @@ export function NewPageForm() {
           <option value="residential">Residential care</option>
           <option value="nursing">Nursing care</option>
         </select>
+      </div>
+
+      <div className="space-y-1.5">
+        <label className="text-sm font-medium">Send leads to</label>
+        <Input
+          value={notifyEmails}
+          onChange={(e) => setNotifyEmails(e.target.value)}
+          placeholder="e.g. lenny@trgdigital.co.uk, manager@carehome.co.uk"
+        />
+        <p className="text-xs text-muted-foreground">
+          Email addresses that receive this page&apos;s leads (comma-separate for more than one). Leave blank to use
+          the default inbox. You can change this any time from the Landing Pages list.
+        </p>
       </div>
 
       <div className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2.5 text-xs text-amber-800">

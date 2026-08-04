@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { PageTemplateSelect } from '@/components/admin/PageTemplateSelect'
 import { PageStatusToggle } from '@/components/admin/PageStatusToggle'
+import PageNotifyEmails from '@/components/admin/PageNotifyEmails'
 
 export const dynamic = 'force-dynamic'
 
@@ -13,6 +14,7 @@ type PageRow = {
   area_name: string
   status: string
   question_set: string | null
+  notify_emails: string[] | null
 }
 
 export default async function LandingPagesAdmin({ searchParams }: { searchParams: { created?: string } }) {
@@ -22,7 +24,7 @@ export default async function LandingPagesAdmin({ searchParams }: { searchParams
   const db = createServiceClient() as any
   const { data } = await db
     .from('location_pages')
-    .select('slug, area_name, status, question_set')
+    .select('slug, area_name, status, question_set, notify_emails')
     .order('area_name', { ascending: true })
 
   const pages = (data ?? []) as unknown as PageRow[]
@@ -59,26 +61,29 @@ export default async function LandingPagesAdmin({ searchParams }: { searchParams
       ) : (
         <div className="divide-y rounded-md border">
           {pages.map((p) => (
-            <div key={p.slug} className="flex flex-wrap items-center justify-between gap-4 p-4">
-              <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="font-medium">{p.area_name}</span>
-                  {p.status !== 'published' && <Badge variant="secondary">{p.status}</Badge>}
+            <div key={p.slug} className="p-4">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">{p.area_name}</span>
+                    {p.status !== 'published' && <Badge variant="secondary">{p.status}</Badge>}
+                  </div>
+                  <a
+                    href={`https://${p.slug}.careassura.com/`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="truncate text-xs text-muted-foreground hover:text-foreground hover:underline"
+                  >
+                    {p.slug}.careassura.com
+                  </a>
                 </div>
-                <a
-                  href={`https://${p.slug}.careassura.com/`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="truncate text-xs text-muted-foreground hover:text-foreground hover:underline"
-                >
-                  {p.slug}.careassura.com
-                </a>
+                <div className="flex shrink-0 items-center gap-3">
+                  <span className="text-xs text-muted-foreground">Quiz template</span>
+                  <PageTemplateSelect slug={p.slug} current={p.question_set ?? 'residential'} />
+                  <PageStatusToggle slug={p.slug} status={p.status} />
+                </div>
               </div>
-              <div className="flex shrink-0 items-center gap-3">
-                <span className="text-xs text-muted-foreground">Quiz template</span>
-                <PageTemplateSelect slug={p.slug} current={p.question_set ?? 'residential'} />
-                <PageStatusToggle slug={p.slug} status={p.status} />
-              </div>
+              <PageNotifyEmails slug={p.slug} initial={p.notify_emails ?? []} />
             </div>
           ))}
         </div>
