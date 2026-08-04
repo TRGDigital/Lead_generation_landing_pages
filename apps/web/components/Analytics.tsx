@@ -4,41 +4,67 @@ import Script from 'next/script'
 import { useState, useEffect } from 'react'
 
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID
-const GADS_ID = process.env.NEXT_PUBLIC_GADS_ID
+// Google Ads conversion tag — public ID, hardcoded fallback so the tag is always present.
+const GADS_ID = process.env.NEXT_PUBLIC_GADS_ID ?? 'AW-18370354696'
 
+// Google tag with Consent Mode v2: gtag.js loads on EVERY page immediately (so
+// Google Ads sees the tag and can model conversions), but ad/analytics storage
+// stays denied until the visitor accepts the cookie banner. On accept we flip
+// consent to granted, both for this page view and (via localStorage) future ones.
 export default function Analytics() {
-  const [consented, setConsented] = useState(false)
+  const [inFrame, setInFrame] = useState(true)
 
   useEffect(() => {
+    // Don't load analytics inside an embedded iframe (our tool widgets on client sites).
     try {
-      if (localStorage.getItem('cookie_consent') === 'accepted') {
-        setConsented(true)
+      if (window.self !== window.top) return
+    } catch {
+      return
+    }
+    setInFrame(false)
+
+    function grant() {
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-extra-semi
+        ;(window as any).gtag?.('consent', 'update', {
+          ad_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted',
+          analytics_storage: 'granted',
+        })
+      } catch {
+        // ignore
       }
+    }
+
+    try {
+      if (localStorage.getItem('cookie_consent') === 'accepted') grant()
     } catch {
       // ignore
     }
-
-    function handleConsent() {
-      setConsented(true)
-    }
-    window.addEventListener('cookieConsentAccepted', handleConsent)
-    return () => window.removeEventListener('cookieConsentAccepted', handleConsent)
+    window.addEventListener('cookieConsentAccepted', grant)
+    return () => window.removeEventListener('cookieConsentAccepted', grant)
   }, [])
 
-  if (!consented || !GA4_ID) return null
+  const primaryId = GA4_ID || GADS_ID
+  if (inFrame || !primaryId) return null
 
   return (
     <>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}
-        strategy="afterInteractive"
-      />
+      <Script src={`https://www.googletagmanager.com/gtag/js?id=${primaryId}`} strategy="afterInteractive" />
       <Script id="gtag-init" strategy="afterInteractive">{`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', {
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          analytics_storage: 'denied',
+          wait_for_update: 500
+        });
         gtag('js', new Date());
-        gtag('config', '${GA4_ID}');
-        ${GADS_ID ? `gtag('config', '${GADS_ID}');` : ''}
+        ${GA4_ID ? `gtag('config', '${GA4_ID}');` : ''}
+        gtag('config', '${GADS_ID}');
       `}</Script>
     </>
   )

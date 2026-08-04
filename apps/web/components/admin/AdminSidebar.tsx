@@ -55,6 +55,7 @@ const navGroups: NavGroup[] = [
     accent: 'bg-emerald-400',
     items: [
       { href: '/admin/websites', icon: <Globe className="h-4 w-4" />, label: 'Websites' },
+      { href: '/admin/go-pages', icon: <Megaphone className="h-4 w-4" />, label: 'TRG Ad Pages' },
       { href: '/admin/marketing-leads', icon: <Inbox className="h-4 w-4" />, label: 'Site enquiries' },
       { href: '/admin/client-leads', icon: <Users className="h-4 w-4" />, label: 'Client leads' },
       { href: '/admin/tools', icon: <Wrench className="h-4 w-4" />, label: 'Tool usage' },
