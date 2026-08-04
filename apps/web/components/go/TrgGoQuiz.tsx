@@ -4,6 +4,8 @@ import { useEffect, useMemo, useState } from 'react'
 import { ArrowLeft, CheckCircle2, Loader2 } from 'lucide-react'
 import type { GoQuizQuestion } from '@/lib/go-pages'
 
+const BOOKING_URL = process.env.NEXT_PUBLIC_BOOKING_URL ?? ''
+
 // The gamified qualification quiz on TRG /go/ ad landing pages: one question per
 // step with a progress bar, then a contact step. Answers ride along with the lead.
 export function TrgGoQuiz({
@@ -150,6 +152,24 @@ export function TrgGoQuiz({
             </a>
           </div>
         </div>
+        {BOOKING_URL && (
+          <div className="mt-5">
+            <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-pop">
+              Or book your slot right now
+            </p>
+            <p className="mt-1 text-sm leading-relaxed text-brand-ink-soft">
+              Pick a time that suits you and we&apos;ll walk through your action plan together.
+            </p>
+            <div className="mt-3 overflow-hidden rounded-2xl border-2 border-brand-line">
+              <iframe
+                src={BOOKING_URL}
+                title="Book a meeting with TRG Digital"
+                className="h-[560px] w-full bg-white"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        )}
       </div>
     )
   }
