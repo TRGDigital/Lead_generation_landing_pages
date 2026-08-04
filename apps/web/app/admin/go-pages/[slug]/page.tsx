@@ -6,7 +6,7 @@ import { saveGoPage, deleteGoPage } from '../actions'
 
 export const dynamic = 'force-dynamic'
 
-type Props = { params: { slug: string }; searchParams: { saved?: string } }
+type Props = { params: { slug: string }; searchParams: { saved?: string; warn?: string; error?: string } }
 
 // Edit one TRG ad page. Friendly text formats: bullets one per line; proof as
 // "stat | label"; quiz as "Q: …" + "- option" blocks; FAQs as "Q: …" / "A: …".
@@ -41,7 +41,14 @@ export default async function EditGoPage({ params, searchParams }: Props) {
       </div>
 
       {searchParams.saved && (
-        <p className="rounded-md border border-emerald-200 bg-emerald-50 px-4 py-2.5 text-sm text-emerald-800">Saved.</p>
+        <p className="rounded-md border border-emerald-200 bg-emerald-50 px-4 py-2.5 text-sm text-emerald-800">
+          Saved.{searchParams.warn === 'quiz-format' && ' (The quiz questions could not be read, so the previous questions were kept — check the Q:/- format.)'}
+        </p>
+      )}
+      {searchParams.error && (
+        <p className="rounded-md border border-red-200 bg-red-50 px-4 py-2.5 text-sm text-red-700">
+          Could not save: {searchParams.error}
+        </p>
       )}
 
       <form action={save} className="space-y-5 rounded-md border bg-white p-5">
@@ -81,7 +88,7 @@ export default async function EditGoPage({ params, searchParams }: Props) {
 
         <label className="block space-y-1"><span className={label}>Proof stats</span>
           <span className={hint}>One per line as “stat | label”, e.g. 100% | care sector only.</span>
-          <textarea name="proof" defaultValue={proofText} rows={3} className={input} />
+          <textarea name="proof" defaultValue={proofText} rows={4} className={input} />
         </label>
         <label className="block space-y-1"><span className={label}>FAQs</span>
           <span className={hint}>Pairs of “Q: …” and “A: …” lines; blank line between FAQs.</span>

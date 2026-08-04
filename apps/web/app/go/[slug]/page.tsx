@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { Check, Phone, Star } from 'lucide-react'
 import { getGoPage } from '@/lib/go-pages'
 import { TrgGoQuiz } from '@/components/go/TrgGoQuiz'
+import { GoogleCloud, OpenAI, Claude, Supabase } from '@/components/marketing/tech-logos'
 
 // TRG Google Ads landing page: /go/<slug>. Conversion-focused — slim header, the
 // gamified quiz above the fold over a bled-in care photo, then proof, steps,
@@ -40,13 +41,36 @@ const STEPS = [
   },
 ]
 
-const SHOWCASE = [
+type ShowcaseItem = {
+  src: string
+  alt: string
+  eyebrow: string
+  title: string
+  body: string
+  bullets?: string[]
+}
+
+const SHOWCASE: ShowcaseItem[] = [
   {
     src: '/work/crossways/tool-funding-d.jpg',
     alt: 'A care funding calculator TRG built into a care home website',
     eyebrow: 'Tools families actually use',
     title: 'Websites that answer the questions families ask',
-    body: 'Funding calculators, fees guides, dementia checklists and visit booking, built into the care sites we make. Families get answers, you get warmer enquiries with contact details attached.',
+    body: 'Every care site we build comes loaded with the tools families search for. They get answers, you get warmer enquiries with contact details attached:',
+    bullets: [
+      'Care funding calculator',
+      'Deferred payment calculator',
+      'NHS Continuing Healthcare checker',
+      'Funded Nursing Care checker',
+      'Local council funding lookup',
+      'Dementia signs checklist',
+      '“Is it time for care?” checklist',
+      'Cost of care estimator',
+      'Book-a-visit scheduler',
+      'AI chat assistant, answers 24/7',
+      'Live room availability',
+      'Accessibility toolbar + tap-to-call',
+    ],
   },
   {
     src: '/work/ferndale/local-1-d.jpg',
@@ -54,6 +78,20 @@ const SHOWCASE = [
     eyebrow: 'Found first on Google',
     title: 'Local pages that put you above the directories',
     body: 'Purpose-built town and service pages that rank for the searches families in your area actually make, so enquiries come to you directly instead of through a paid middleman.',
+  },
+  {
+    src: '/work/crossways/enquiry-modal-d.jpg',
+    alt: 'An enquiry form opening over a care home website TRG built',
+    eyebrow: 'Built to generate enquiries',
+    title: 'Every page nudges families to get in touch',
+    body: 'Book-a-visit buttons, one-tap calling and friendly enquiry forms are never more than a click away, on every page, on every device. More of your visitors become tours, and more tours become residents.',
+  },
+  {
+    src: '/work/pagespeed-green-d.jpg',
+    alt: 'A page speed report showing 100 scores across performance, accessibility, best practices and SEO',
+    eyebrow: 'Fast on every device',
+    title: 'Green across the board, and Google notices',
+    body: 'Families leave slow websites, and Google ranks them lower. Our from-scratch builds score green on every page speed check: faster pages, better rankings, more enquiries from the traffic you already have.',
   },
 ]
 
@@ -125,12 +163,41 @@ export default async function GoLandingPage({ params }: Props) {
             </ul>
 
             <div className="mt-8 flex items-center gap-2 text-sm font-medium text-brand-ink-soft">
-              <span className="flex text-amber-400" aria-hidden>
+              <span className="flex shrink-0 text-amber-400" aria-hidden>
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} className="h-4 w-4 fill-current" />
                 ))}
               </span>
-              Trusted by UK care homes. We work with care providers and nobody else.
+              <span className="whitespace-nowrap text-xs sm:text-sm">Trusted by UK care homes. Care sector only.</span>
+            </div>
+
+            {/* The stack we build on */}
+            <div className="mt-6 border-t border-brand-ink/10 pt-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-brand-ink-muted">
+                Specialists in the technology behind it all
+              </p>
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                {[
+                  { name: 'Google Cloud', Icon: GoogleCloud },
+                  { name: 'OpenAI', Icon: OpenAI },
+                  { name: 'Claude', Icon: Claude },
+                  { name: 'Supabase', Icon: Supabase },
+                ].map(({ name, Icon }) => (
+                  <span key={name} className="inline-flex items-center gap-1.5 rounded-full border border-brand-line bg-white/80 px-3 py-1.5 text-xs font-semibold text-brand-ink">
+                    <span className="h-3.5 w-3.5"><Icon /></span>
+                    {name}
+                  </span>
+                ))}
+                {['Pinecone', 'Google Ads', 'AWS'].map((name) => (
+                  <span key={name} className="inline-flex items-center rounded-full border border-brand-line bg-white/80 px-3 py-1.5 text-xs font-semibold text-brand-ink">
+                    {name}
+                  </span>
+                ))}
+              </div>
+              <p className="mt-2.5 max-w-xl text-xs leading-relaxed text-brand-ink-muted">
+                From AI chat and search to rock-solid hosting and ad tracking, we build and run care marketing on the
+                same platforms the world&apos;s best products use.
+              </p>
             </div>
           </div>
 
@@ -196,6 +263,16 @@ export default async function GoLandingPage({ params }: Props) {
                 <p className="font-display text-sm font-bold uppercase tracking-widest text-brand-pop">{f.eyebrow}</p>
                 <h3 className="mt-2 font-display text-2xl font-bold uppercase leading-tight tracking-tight text-brand-ink">{f.title}</h3>
                 <p className="mt-3 leading-relaxed text-brand-ink-soft">{f.body}</p>
+                {f.bullets && (
+                  <ul className="mt-4 grid grid-cols-1 gap-x-6 gap-y-1.5 sm:grid-cols-2">
+                    {f.bullets.map((b) => (
+                      <li key={b} className="flex items-start gap-2 text-sm text-brand-ink">
+                        <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-pop" />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           ))}

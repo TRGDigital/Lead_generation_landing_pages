@@ -108,34 +108,37 @@ export async function saveGoPage(slug: string, formData: FormData) {
   if (!slug) throw new Error('Invalid page')
   const str = (k: string) => String(formData.get(k) ?? '').trim()
 
+  // Never let one field's parse failure nuke the whole save: if the quiz text
+  // doesn't parse, keep the existing questions and tell the user.
   const questions = parseQuestions(str('questions'))
-  if (!questions.length) throw new Error('The quiz needs at least one question (Q: … with - options).')
+  const warn = questions.length
+    ? ''
+    : 'quiz-format'
+
+  const update: Record<string, unknown> = {
+    service: str('service'),
+    headline: str('headline'),
+    subheadline: str('subheadline'),
+    bullets: str('bullets').split('\n').map((b) => b.trim()).filter(Boolean),
+    proof: parseProof(str('proof')),
+    faqs: parseFaqs(str('faqs')),
+    quiz_intro: str('quiz_intro'),
+    cta_label: str('cta_label') || 'See my results',
+    meta_title: str('meta_title'),
+    meta_description: str('meta_description'),
+    notify_emails: parseEmails(str('notify_emails')),
+    updated_at: new Date().toISOString(),
+  }
+  if (questions.length) update.questions = questions
 
   const db = createServiceClient() as unknown as any
-  const { error } = await db
-    .from('trg_go_pages')
-    .update({
-      service: str('service'),
-      headline: str('headline'),
-      subheadline: str('subheadline'),
-      bullets: str('bullets').split('\n').map((b) => b.trim()).filter(Boolean),
-      proof: parseProof(str('proof')),
-      faqs: parseFaqs(str('faqs')),
-      quiz_intro: str('quiz_intro'),
-      questions,
-      cta_label: str('cta_label') || 'See my results',
-      meta_title: str('meta_title'),
-      meta_description: str('meta_description'),
-      notify_emails: parseEmails(str('notify_emails')),
-      updated_at: new Date().toISOString(),
-    })
-    .eq('slug', slug)
-  if (error) throw new Error(error.message)
+  const { error } = await db.from('trg_go_pages').update(update).eq('slug', slug)
+  if (error) redirect(`/admin/go-pages/${slug}?error=${encodeURIComponent(error.message)}`)
 
   revalidatePath('/admin/go-pages')
   revalidatePath(`/admin/go-pages/${slug}`)
   revalidatePath(`/go/${slug}`)
-  redirect(`/admin/go-pages/${slug}?saved=1`)
+  redirect(`/admin/go-pages/${slug}?saved=1${warn ? `&warn=${warn}` : ''}`)
 }
 
 export async function setGoPageStatus(slug: string, status: 'published' | 'draft') {
