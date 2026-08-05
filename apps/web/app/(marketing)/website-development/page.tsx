@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
-import { Search, Smartphone, Gauge, ShieldCheck, MousePointerClick, Wrench, Check, ArrowRight, Bot, Sparkles } from 'lucide-react'
+import { Search, Smartphone, Gauge, ShieldCheck, MousePointerClick, Wrench, Check, ArrowRight, Bot, Sparkles, Code2, FileText, ListChecks } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
@@ -35,6 +35,54 @@ const STEPS = [
   { n: '01', title: 'Discovery', body: 'We learn your services, your settings and the families you want to reach, then map the site around them.' },
   { n: '02', title: 'Design & build', body: 'A bespoke, on-brand site designed to convert, built on a fast and secure modern stack.' },
   { n: '03', title: 'Launch & grow', body: 'We launch, measure and keep improving, so your site works harder for you over time.' },
+]
+
+// The SEO-safe migration checklist — grouped so it scans as reassurance, not jargon.
+const MIGRATION = [
+  {
+    phase: 'Before we touch anything',
+    items: [
+      'A full crawl and inventory of every existing page and URL',
+      'A review of your Google Search Console and analytics history',
+      'A complete backup and a clear rollback plan',
+    ],
+  },
+  {
+    phase: 'We preserve every detail',
+    items: [
+      'Your existing URLs, or a proper 301 redirect for any that must change',
+      'Page titles, meta descriptions and heading structure',
+      'Image alt text, canonical tags and structured data',
+      'Internal links and your indexing rules',
+      'Your service, location and blog pages',
+    ],
+  },
+  {
+    phase: 'Before it goes live',
+    items: [
+      'The staging site is locked out of Google, so it never gets indexed by accident',
+      'Broken-link and redirect testing across the whole site',
+      'Cross-browser and device quality-assurance',
+    ],
+  },
+  {
+    phase: 'After launch',
+    items: [
+      'A post-launch crawl and full SEO validation',
+      'Search Console and analytics monitoring',
+      'We watch your rankings and traffic, we don’t just hope',
+    ],
+  },
+]
+
+// What we improve once the foundations are protected — the "and then it gets better" story.
+const IMPROVEMENTS = [
+  { Icon: Code2, title: 'Richer structured data', body: 'We add and expand the schema search engines and AI read, LocalBusiness, FAQs, reviews and more, so your home is understood and shown properly, not just crawled.' },
+  { Icon: ListChecks, title: 'Cleaner indexability', body: 'A tidy sitemap, correct canonicals and crawl-friendly structure, so Google finds and ranks every page that should be found, and ignores the ones that should not.' },
+  { Icon: FileText, title: 'New, care-aware content', body: 'Fresh service and location pages written for the searches families actually make, expanding your reach well beyond what the old site ever ranked for.' },
+  { Icon: Gauge, title: 'Genuinely fast pages', body: 'We rebuild on a modern, lightweight stack and tune Core Web Vitals, so the site loads in a blink, which both families and Google reward.' },
+  { Icon: MousePointerClick, title: 'Conversion & form tracking', body: 'Clear booking, referral and contact pathways, with analytics and form-event tracking wired in, so you can see exactly what turns a visitor into an enquiry.' },
+  { Icon: ShieldCheck, title: 'Accessible by design', body: 'Better readability, contrast and structure, so the site works for every visitor and meets the standards a modern care website is expected to.' },
 ]
 
 export default function WebsiteDevelopmentPage() {
@@ -256,6 +304,84 @@ export default function WebsiteDevelopmentPage() {
               <div key={n} className="rounded-2xl border border-brand-line bg-white p-7 shadow-soft">
                 <p className="font-display text-5xl font-bold text-brand-pop">{n}</p>
                 <h3 className="mt-3 font-display text-xl font-semibold text-brand-ink">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SEO-safe migration ────────────────────────────────────────── */}
+      <section className="relative overflow-hidden px-6 py-24">
+        <Star className="absolute left-8 top-12 hidden h-16 w-16 -rotate-12 text-brand-accent lg:block" />
+        <Dots className="absolute bottom-12 right-10 hidden h-20 w-20 text-brand-pop/40 lg:block" />
+        <div className="mx-auto max-w-6xl">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Redesign without the risk</p>
+            <h2 className="mt-2 font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-4xl">
+              Move platforms without losing your rankings
+            </h2>
+            <Squiggle className="mt-5 h-6 w-56 text-brand-pop" />
+            <p className="mt-6 text-base leading-relaxed text-brand-ink-soft">
+              The scariest part of a redesign is the fear of losing the Google rankings you have spent years building.
+              We migrate you off WordPress, Wix or any other platform the careful way, so nothing that works today is
+              lost tomorrow. <strong className="text-brand-ink">Nothing is removed or materially changed without your
+              approval.</strong>
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {MIGRATION.map(({ phase, items }) => (
+              <div key={phase} className="rounded-2xl border border-brand-line bg-white p-6 shadow-soft">
+                <h3 className="font-display text-base font-bold uppercase tracking-tight text-brand-ink">{phase}</h3>
+                <ul className="mt-4 space-y-2.5">
+                  {items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm leading-snug text-brand-ink-soft">
+                      <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-pop" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-col items-start gap-4 rounded-2xl border border-brand-line bg-brand-bg-warm p-6 sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-2xl text-base leading-relaxed text-brand-ink">
+              <strong>We have done exactly this, twice.</strong> We moved two live care homes off WordPress onto a faster
+              custom platform, preserving every URL and mapping every redirect, with no loss of rankings.
+            </p>
+            <Link href="/work" className="btn-pop shrink-0">
+              See the case studies
+              <span className="btn-arrow" aria-hidden>→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Then we improve everything ────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-brand-bg-warm px-6 py-24">
+        <Squiggle className="absolute -left-6 top-16 hidden h-8 w-64 text-brand-accent lg:block" />
+        <Burst className="absolute -bottom-10 right-1/4 hidden h-40 w-40 text-brand-pop/10 lg:block" />
+        <div className="mx-auto max-w-6xl">
+          <div className="max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Then we raise the ceiling</p>
+            <h2 className="mt-2 font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-4xl">
+              Protected first, then made far better
+            </h2>
+            <p className="mt-6 text-base leading-relaxed text-brand-ink-soft">
+              Preserving what works is only half the job. Once the foundations are safe, we build on them, so you come
+              out of the redesign not just intact, but faster, better found and easier to enquire with than ever.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {IMPROVEMENTS.map(({ Icon, title, body }) => (
+              <div key={title} className="rounded-2xl border border-brand-line bg-white p-7 shadow-soft">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <h3 className="mt-4 font-display text-lg font-semibold text-brand-ink">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
               </div>
             ))}
