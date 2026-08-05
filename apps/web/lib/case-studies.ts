@@ -107,7 +107,7 @@ const crossways: CaseStudy = {
     why:
       'Local, specific searches are lower competition and far higher intent than "care home". A page that answers the exact question a family asked beats a generic homepage every time, and with a page for every town and every care type, Crossways has a front door on each of the searches that actually bring enquiries.',
     google:
-      'Each page carries its own optimised title and meta description, FAQ schema and LocalBusiness structured data, so Google understands precisely which searches it belongs in. And when a new search is worth owning, the team creates the page from the admin console, with AI-drafted, locally grounded content, live in minutes with no developer involved.',
+      'Each page carries its own optimised title and meta description, FAQ schema and LocalBusiness structured data, so Google understands precisely which searches it belongs in. And when a new search is worth owning, the team creates the page from the admin console, with locally grounded content, live in minutes with no developer involved.',
     searches: [
       'residential care in haywards heath',
       'respite care near burgess hill',
@@ -385,7 +385,10 @@ const crossways: CaseStudy = {
     image: '/work/crossways/blog-d.jpg',
   },
   stats: [
-    { value: '46', label: 'New local pages & articles', note: '25 local-area pages + 21 articles, live now' },
+    { value: '25', label: 'Local landing pages', note: 'One for every town and care type, new pages live from the admin in minutes' },
+    { value: '21', label: 'Articles migrated & live', note: 'Every original blog URL preserved, zero broken links' },
+    { value: '8', label: 'Family tools on the site', note: 'Calculators, checkers, AI chat and live room availability' },
+    { value: '40', label: 'Five-star family reviews', note: 'A 5.0 average, curated from carehome.co.uk' },
     { value: '+40%', label: 'Monthly organic traffic', note: 'Placeholder — update with live data', placeholder: true },
     { value: '+12', label: 'New online enquiries a month', note: 'Placeholder — update with live data', placeholder: true },
   ],

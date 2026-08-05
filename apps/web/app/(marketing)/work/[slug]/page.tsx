@@ -365,20 +365,6 @@ export default async function CaseStudyPage({
         </div>
       </section>
 
-      {/* ── Showcase: blog ────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden px-6 py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
-          <div>
-            <p className="font-display text-sm font-semibold uppercase tracking-widest text-brand-pop">What we built · Content</p>
-            <h2 className="mt-3 font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-4xl">
-              A blog that earns its rankings
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">{cs.blog.intro}</p>
-          </div>
-          <BrowserMock src={cs.blog.image} alt={`The ${cs.shortName} blog`} url={`${cs.liveLabel}/blog`} />
-        </div>
-      </section>
-
       {/* ── Stats band ────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-brand-ink px-6 py-20 text-white">
         <Burst className="absolute -bottom-12 -left-10 h-52 w-52 text-brand-pop/30" />
