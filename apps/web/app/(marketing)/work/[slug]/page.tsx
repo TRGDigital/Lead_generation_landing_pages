@@ -207,7 +207,7 @@ export default async function CaseStudyPage({
       </section>
 
       {/* ── Showcase: helpful tools ───────────────────────────────────── */}
-      <section className="relative overflow-hidden px-6 py-24">
+      <section className="relative px-6 py-24">
         <Star className="absolute right-6 top-14 hidden h-12 w-12 rotate-12 text-brand-accent lg:block" />
         <div className="mx-auto max-w-6xl">
           <div className="max-w-3xl">
