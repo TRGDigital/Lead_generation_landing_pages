@@ -129,9 +129,9 @@ export default async function HomePage() {
 
       <CareToolsFeature />
 
-      <WorkFeature />
-
       <ShowcaseMarquee />
+
+      <WorkFeature />
 
       <ComplicatedIndustry />
 
