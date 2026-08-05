@@ -421,6 +421,31 @@ const ferndale: CaseStudy = {
   liveUrl: 'https://www.ferndalenursinghome.co.uk',
   liveLabel: 'ferndalenursinghome.co.uk',
   mockup: '/mockups/ferndale-live.jpg',
+  localDetail: {
+    how: [
+      'A family types an urgent, specific search, "nursing home in Horsham" or "dementia care near East Grinstead", often with a hospital discharge date looming.',
+      'They land on a page built for exactly that search: their town in the heading, the right kind of nursing care, what Ferndale offers for it, and the funding answers that matter most in nursing care, from council support to NHS contributions.',
+      'Everything they need to act is on the same page, the phone number, the enquiry form and the live availability badge, because in nursing care the next call is often made the same day.',
+    ],
+    why:
+      'Nursing searches are more specific and more urgent than any other care query, and the searcher rarely has time to dig through a generic homepage. A page that answers the exact question, for the exact town, wins that moment, and with a page for every town and both types of care, Ferndale owns dozens of these moments instead of one.',
+    google:
+      'Each page carries its own optimised title and meta description, FAQ schema and LocalBusiness structured data, so Google knows precisely which searches it belongs in. And when a new search is worth owning, a new town, a new need, the team creates the page from the admin console, live in minutes with no developer involved.',
+    searches: [
+      'nursing home in horsham',
+      'dementia care in east grinstead',
+      'nursing care in haywards heath',
+      'nursing home near redhill',
+      'dementia care in reigate',
+      'nursing home crawley down',
+    ],
+    serp: {
+      query: 'nursing home in horsham',
+      title: 'Nursing Care in Horsham | Ferndale Nursing Home',
+      url: 'ferndalenursinghome.co.uk › horsham › nursing-care',
+      desc: 'Nursing Care for older people in Horsham and the surrounding area, from Ferndale Nursing Home in Crawley, West Sussex.',
+    },
+  },
   toolShowcase: [
     {
       key: 'funding-calculator',
