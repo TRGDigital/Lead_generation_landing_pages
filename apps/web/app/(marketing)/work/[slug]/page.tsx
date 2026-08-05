@@ -287,25 +287,81 @@ export default async function CaseStudyPage({
             <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">{cs.local.intro}</p>
           </div>
 
-          <div className="mt-12 grid items-start gap-6 lg:grid-cols-3">
-            {cs.local.items.map((item) => (
-              <figure key={item.label}>
-                <BrowserMock src={item.image} alt={item.label} />
-                <figcaption className="mt-3 text-center text-sm font-medium text-brand-ink">{item.label}</figcaption>
-              </figure>
-            ))}
-          </div>
+          {cs.localDetail ? (
+            <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-16">
+              {/* Left: the detailed story */}
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-widest text-brand-ink-muted">
+                  How families see it
+                </p>
+                <ol className="mt-2.5 space-y-2.5">
+                  {cs.localDetail.how.map((s, j) => (
+                    <li key={j} className="flex gap-3 text-sm leading-relaxed text-brand-ink-soft">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-pop/10 text-[11px] font-bold text-brand-pop">
+                        {j + 1}
+                      </span>
+                      <span>{s}</span>
+                    </li>
+                  ))}
+                </ol>
 
-          <div className="mt-12 flex flex-col items-center gap-6 rounded-2xl border border-brand-line bg-white p-8 sm:flex-row sm:gap-10">
-            <PhoneMock src={cs.local.mobile} alt="A local page on mobile" />
-            <div>
-              <h3 className="font-display text-xl font-semibold text-brand-ink">Built mobile-first</h3>
-              <p className="mt-2 max-w-md text-sm leading-relaxed text-brand-ink-soft">
-                Most family searches happen on a phone. Every local page is fast and effortless to use on mobile, with the
-                phone number and enquiry form always within reach.
-              </p>
+                <div className="mt-7 grid gap-4 rounded-2xl border border-brand-line bg-white/60 p-5">
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-widest text-brand-pop">Why it works</p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-brand-ink-soft">{cs.localDetail.why}</p>
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-widest text-brand-pop">On Google</p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-brand-ink-soft">{cs.localDetail.google}</p>
+                  </div>
+                </div>
+
+                <p className="mt-7 text-[11px] font-bold uppercase tracking-widest text-brand-ink-muted">
+                  The searches these pages compete for
+                </p>
+                <ul className="mt-2.5 flex flex-wrap gap-2">
+                  {cs.localDetail.searches.map((s) => (
+                    <li key={s} className="rounded-full border border-brand-line bg-white px-3 py-1 text-xs font-medium text-brand-ink-soft">
+                      {s}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Right: one real page + how it appears on Google */}
+              <div className="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
+                <BrowserMock src={cs.local.items[0]!.image} alt={cs.local.items[0]!.label} url={cs.liveLabel} />
+
+                {/* Google result mock */}
+                <div className="rounded-2xl border-2 border-brand-ink bg-white p-5 shadow-[4px_4px_0_0_#2a2620]">
+                  <div className="flex items-center gap-2 rounded-full border border-brand-line px-4 py-2">
+                    <svg viewBox="0 0 24 24" className="h-4 w-4 text-brand-ink-muted" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                      <circle cx="11" cy="11" r="7" />
+                      <path d="m20 20-3.5-3.5" />
+                    </svg>
+                    <span className="text-sm text-brand-ink">{cs.localDetail.serp.query}</span>
+                  </div>
+                  <div className="mt-4 px-1">
+                    <p className="text-xs text-brand-ink-muted">{cs.localDetail.serp.url}</p>
+                    <p className="mt-1 text-lg font-medium leading-snug text-[#1a0dab]">{cs.localDetail.serp.title}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-brand-ink-soft">{cs.localDetail.serp.desc}</p>
+                  </div>
+                  <p className="mt-4 border-t border-brand-line pt-3 text-xs text-brand-ink-muted">
+                    One page, one search, one front door. There is a page like this for every town and care type.
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="mt-12 grid items-start gap-6 lg:grid-cols-3">
+              {cs.local.items.map((item) => (
+                <figure key={item.label}>
+                  <BrowserMock src={item.image} alt={item.label} />
+                  <figcaption className="mt-3 text-center text-sm font-medium text-brand-ink">{item.label}</figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

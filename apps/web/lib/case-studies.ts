@@ -27,6 +27,15 @@ export type CaseToolShowcaseItem = {
   liveHref: string
 }
 
+// Detailed local-SEO writeup (replaces the repetitive 3-screenshot grid when present).
+export type CaseLocalDetail = {
+  how: string[]
+  why: string
+  google: string
+  searches: string[]
+  serp: { query: string; title: string; url: string; desc: string }
+}
+
 export type CaseStudy = {
   slug: string
   name: string
@@ -38,6 +47,8 @@ export type CaseStudy = {
   mockup: string
   /** Scrolling tool showcase (replaces the tools grid when present) */
   toolShowcase?: CaseToolShowcaseItem[]
+  /** Detailed local-SEO section content (new layout when present) */
+  localDetail?: CaseLocalDetail
   /** Hero */
   eyebrow: string
   title: string
@@ -87,6 +98,31 @@ const crossways: CaseStudy = {
   liveUrl: 'https://www.crosswayscarehome.co.uk',
   liveLabel: 'crosswayscarehome.co.uk',
   mockup: '/mockups/crossways-live.jpg',
+  localDetail: {
+    how: [
+      'A family types a real search, "residential care in Haywards Heath" or "respite care near Burgess Hill", not just "care home".',
+      'They land on a page built for exactly that search: their town in the heading, the right type of care, what Crossways offers for it, and honest answers to the questions that come next, including funding.',
+      'Everything they need to act is on the same page, the phone number, the enquiry form and the funding tools, no hunting through a generic homepage.',
+    ],
+    why:
+      'Local, specific searches are lower competition and far higher intent than "care home". A page that answers the exact question a family asked beats a generic homepage every time, and with a page for every town and every care type, Crossways has a front door on each of the searches that actually bring enquiries.',
+    google:
+      'Each page carries its own optimised title and meta description, FAQ schema and LocalBusiness structured data, so Google understands precisely which searches it belongs in. And when a new search is worth owning, the team creates the page from the admin console, with AI-drafted, locally grounded content, live in minutes with no developer involved.',
+    searches: [
+      'residential care in haywards heath',
+      'respite care near burgess hill',
+      'care home in cuckfield',
+      'respite care lindfield',
+      'residential care horsham',
+      'care home balcombe',
+    ],
+    serp: {
+      query: 'residential care in haywards heath',
+      title: 'Residential Care in Haywards Heath | Crossways',
+      url: 'crosswayscarehome.co.uk › haywards-heath › residential-care',
+      desc: 'Residential care for older people in Haywards Heath and the surrounding area, from Crossways Residential Care Home in Lindfield, West Sussex.',
+    },
+  },
   toolShowcase: [
     {
       key: 'ai-chat',
