@@ -11,6 +11,20 @@ export type ShowcaseTool = { name: string; desc: string; image: string }
 export type ShowcaseLocal = { label: string; image: string }
 export type Stat = { value: string; label: string; note?: string; placeholder?: boolean }
 
+// One tool in the scrolling case-study showcase (screenshot right, writeup left).
+export type CaseToolShowcaseItem = {
+  key: string
+  category: string
+  name: string
+  image: string
+  alt: string
+  blurb: string
+  how: string[]
+  why: string
+  gateway: string
+  liveHref: string
+}
+
 export type CaseStudy = {
   slug: string
   name: string
@@ -20,6 +34,8 @@ export type CaseStudy = {
   liveUrl: string
   liveLabel: string
   mockup: string
+  /** Scrolling tool showcase (replaces the tools grid when present) */
+  toolShowcase?: CaseToolShowcaseItem[]
   /** Hero */
   eyebrow: string
   title: string
@@ -69,6 +85,160 @@ const crossways: CaseStudy = {
   liveUrl: 'https://www.crosswayscarehome.co.uk',
   liveLabel: 'crosswayscarehome.co.uk',
   mockup: '/mockups/crossways-live.jpg',
+  toolShowcase: [
+    {
+      key: 'ai-chat',
+      category: 'Answers on demand',
+      name: 'Dedicated AI chat, built around Crossways',
+      image: '/work/crossways/showcase/ai-chat.jpg',
+      alt: 'The Crossways AI chat assistant open on the homepage',
+      blurb:
+        'An AI assistant trained on Crossways itself, its care types, visiting arrangements, fees guidance and live room availability. It answers in the warm tone of the home, around the clock, on every page of the site.',
+      how: [
+        'A family opens the chat bubble on any page, at any hour, most do it in the evening once the house is quiet.',
+        'They ask anything, from "do you offer respite?" to "can we visit on a Sunday?", and get an instant, accurate answer grounded in Crossways\u2019 own information.',
+        'When the conversation warms up, the chat offers a callback request, which lands in the enquiry inbox with the family\u2019s details.',
+      ],
+      why:
+        'Families research care at 10pm, after work and after visiting hours. The chat answers when the office cannot, so no question, and no family, is lost to an unanswered evening.',
+      gateway:
+        'Every conversation keeps a researching family on the Crossways site instead of bouncing back to Google, and turns anonymous readers into named, high-intent enquiries.',
+      liveHref: 'https://crosswayscarehome.co.uk/',
+    },
+    {
+      key: 'funding-calculator',
+      category: 'Paying for care',
+      name: 'Care funding calculator',
+      image: '/work/crossways/showcase/funding-calculator.jpg',
+      alt: 'The Crossways care funding calculator, step one of four',
+      blurb:
+        'A four-step guide to the biggest question in care: who pays. It covers all four UK nations, models the real means test, and shows each family a personalised split between what they pay, what the council pays, and where the NHS can help.',
+      how: [
+        'The family picks their UK nation, the rules differ in each, then answers a few plain-English questions about savings, property and income.',
+        'The calculator applies the real capital thresholds and shows their likely funding position, no jargon, no forms.',
+        'They can email themselves the results, which captures a warm, named enquiry with full context for the home to follow up.',
+      ],
+      why:
+        'Funding is the first and most stressful question every family has, and almost no care home answers it. Being the home that answers it honestly earns the trust that decides shortlists.',
+      gateway:
+        'Thousands of families search "who pays for care" every month. This tool gives Crossways a page that competes for all of that traffic and meets families at the very start of their journey, before they have shortlisted anyone.',
+      liveHref: 'https://crosswayscarehome.co.uk/funding-calculator/',
+    },
+    {
+      key: 'deferred-payment',
+      category: 'Paying for care',
+      name: 'Deferred payment calculator',
+      image: '/work/crossways/showcase/deferred-payment.jpg',
+      alt: 'The Crossways deferred payment calculator',
+      blurb:
+        'Answers the question that stalls more care decisions than any other: do we have to sell the house? It models a Deferred Payment Agreement, whether the family is likely to qualify, how much of the fee could be secured against the home, and how the amount grows over time at the real interest rate.',
+      how: [
+        'The family answers the eligibility questions, permanent move, home ownership, who still lives in the property, savings position.',
+        'They enter the property value and the share owned, and the calculator shows how much of the weekly fee could be deferred.',
+        'They see the honest picture, including how the deferred amount builds, so they can plan with confidence rather than fear.',
+      ],
+      why:
+        'The fear of losing the family home freezes decisions for months. Confronting it with real, honest numbers removes the single biggest blocker between an enquiry and a move-in.',
+      gateway:
+        'Almost no care home even mentions deferred payments. Owning this rare, genuinely useful answer wins long-tail searches and marks Crossways out as the home that tells families the truth about money.',
+      liveHref: 'https://crosswayscarehome.co.uk/deferred-payment-calculator/',
+    },
+    {
+      key: 'attendance-allowance',
+      category: 'Benefits and funding',
+      name: 'Attendance Allowance checker',
+      image: '/work/crossways/showcase/attendance-allowance.jpg',
+      alt: 'The Crossways Attendance Allowance checker',
+      blurb:
+        'A one-minute eligibility check for the benefit most families have never heard of: a tax-free, non-means-tested payment for over-66s who need help, worth up to £108.55 a week. The checker also knows the special rules that fast-track terminally ill applicants.',
+      how: [
+        'Five yes-or-no questions: age, health conditions, and whether help is needed during the day or night.',
+        'The checker shows instantly whether a claim looks likely, and at which weekly rate.',
+        'It then walks the family through the next steps to actually make the claim.',
+      ],
+      why:
+        'Handing a family a genuine win, money they are entitled to but were never told about, before any sales conversation, builds the kind of goodwill no brochure can buy.',
+      gateway:
+        'Benefit searches reach far beyond people actively choosing a care home, so this page introduces Crossways to families years before they need it, and they remember who helped.',
+      liveHref: 'https://crosswayscarehome.co.uk/attendance-allowance/',
+    },
+    {
+      key: 'local-council',
+      category: 'Local support',
+      name: 'Local council funding guide',
+      image: '/work/crossways/showcase/local-council.jpg',
+      alt: 'The Crossways local council and funding guide for West Sussex',
+      blurb:
+        'Everything a family needs to deal with West Sussex County Council in one place: the adult social care team\u2019s direct contact details, the exact council pages families actually need, and a plain-English explanation of the means test thresholds that decide who pays.',
+      how: [
+        'The family sees their council, its adult social care phone number and website, without hunting through a maze of council pages.',
+        'The means test is explained with the real numbers: the £23,250 upper limit and £14,250 lower limit, and what happens between them.',
+        'Direct links take them straight to the right council page for a financial assessment, so they arrive informed.',
+      ],
+      why:
+        'Council funding is a fog for most families. The home that clears the fog becomes the trusted guide, and trusted guides get the enquiry when the decision comes.',
+      gateway:
+        'Localised, genuinely useful council content wins the local searches families make early in their research, and keeps them on the Crossways site rather than lost in council websites.',
+      liveHref: 'https://crosswayscarehome.co.uk/local-council-funding/',
+    },
+    {
+      key: 'care-checklist',
+      category: 'Health and wellbeing',
+      name: 'Is it time to think about care?',
+      image: '/work/crossways/showcase/care-checklist.jpg',
+      alt: 'The Crossways is-it-time-to-think-about-care checklist',
+      blurb:
+        'A gentle, completely private eight-question self-check for families quietly worrying about a parent. It bands everyday signs, struggles with washing, falls, missed medication, isolation, into an honest suggestion about whether it is time to talk to someone. Nothing is stored, and it is clearly framed as a prompt, not a diagnosis.',
+      how: [
+        'The family answers eight questions honestly, Often, Sometimes or Rarely, about the person they are worried about.',
+        'The checklist bands the answers into a warm, honest reading of how their loved one is coping.',
+        'It suggests sensible next steps: talk it through with the home, arrange a visit, or speak to a GP if health is the worry.',
+      ],
+      why:
+        'It meets families at the very first worry, months before anyone types "care homes near me". A private, pressure-free answer at that moment builds a depth of trust no advert can reach.',
+      gateway:
+        'This is the earliest touchpoint a care home can own. Families arrive from worry-driven searches long before they are shortlisting, and Crossways is the name attached to the help they found.',
+      liveHref: 'https://crosswayscarehome.co.uk/is-it-time-for-care/',
+    },
+    {
+      key: 'cost-estimator',
+      category: 'Paying for care',
+      name: 'What will care cost?',
+      image: '/work/crossways/showcase/cost-estimator.jpg',
+      alt: 'The Crossways cost of care estimator showing a weekly figure',
+      blurb:
+        'An instant, honest answer to the question families are most afraid to ask. It starts from Crossways\u2019 real guide fees, lets the family adjust to their own situation, savings, property, Attendance Allowance, and shows the weekly, monthly and yearly cost alongside who is likely to pay it.',
+      how: [
+        'The family picks residential or respite care and sees the guide weekly fee, which they can replace with their own quote.',
+        'They add savings, property and any Attendance Allowance, and the estimator applies the England means test.',
+        'They get the full picture, cost per week, month and year, plus whether the council is likely to contribute, and one tap to request a personalised fee.',
+      ],
+      why:
+        'Most care homes hide their prices, so the home that is transparent wins the trust conversation instantly. Families reward the honesty with the enquiry.',
+      gateway:
+        'Cost searches carry the highest intent of any care query. This page captures them with real numbers, and its "get a personalised fee" step converts that intent into named enquiries.',
+      liveHref: 'https://crosswayscarehome.co.uk/cost-of-care/',
+    },
+    {
+      key: 'availability',
+      category: 'Live availability',
+      name: 'Live room availability',
+      image: '/work/crossways/showcase/availability.jpg',
+      alt: 'The one-tap room availability update panel the Crossways manager uses',
+      blurb:
+        'A live availability badge, "2 rooms available", shown across the whole site, the pop-up and the landing pages. Behind it sits a private one-tap update panel: the manager opens a link on their phone, taps the current status, and every surface updates instantly. No logins, no developer, no stale information.',
+      how: [
+        'The manager opens their private update link, on a phone, in seconds, whenever availability changes.',
+        'One tap sets the status, rooms available, limited, currently full, with an optional room count and note.',
+        'The website badge, enquiry pop-up and marketing landing pages all update at the same moment.',
+      ],
+      why:
+        '"Do you have space?" is the first question every family asks. Answering it before the phone call means the calls that do come are from families the home can actually help.',
+      gateway:
+        'Live availability adds honest urgency, a family seeing "2 rooms available" acts today rather than next month, and it makes every ad and landing page more believable than a competitor\u2019s silence.',
+      liveHref: 'https://crosswayscarehome.co.uk/',
+    },
+  ],
   eyebrow: 'Care home website · SEO · PPC',
   title: 'A new website built to fill',
   titleAccent: 'empty beds',

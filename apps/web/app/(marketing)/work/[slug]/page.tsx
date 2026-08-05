@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowUpRight, Globe2, Gauge, Search, MousePointerClick, Check } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
+import { CaseToolShowcase } from '@/components/marketing/CaseToolShowcase'
 import { StartProject } from '@/components/marketing/StartProject'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { CASE_STUDIES, getCaseStudy, otherCaseStudy } from '@/lib/case-studies'
@@ -217,30 +218,39 @@ export default async function CaseStudyPage({
             <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">{cs.tools.intro}</p>
           </div>
 
-          {/* Featured tool: desktop + mobile */}
-          <div className="mt-12 grid items-center gap-10 lg:grid-cols-[1.5fr_1fr]">
-            <BrowserMock src={cs.tools.featured.desktop} alt={`${cs.tools.featured.name} on desktop`} url={`${cs.liveLabel}`} />
-            <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center lg:flex-col">
-              <PhoneMock src={cs.tools.featured.mobile} alt={`${cs.tools.featured.name} on mobile`} />
-              <div>
-                <h3 className="font-display text-xl font-semibold text-brand-ink">{cs.tools.featured.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{cs.tools.featured.desc}</p>
-              </div>
+          {cs.toolShowcase ? (
+            /* Scrolling showcase: writeups left, pinned live screenshot right */
+            <div className="mt-6">
+              <CaseToolShowcase items={cs.toolShowcase} />
             </div>
-          </div>
-
-          {/* Other tools */}
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {cs.tools.others.map((t) => (
-              <div key={t.name} className="flex flex-col overflow-hidden rounded-2xl border border-brand-line bg-white shadow-soft">
-                <ManagedImage src={t.image} alt={t.name} width={1280} height={820} className="h-auto w-full border-b border-brand-line" />
-                <div className="p-5">
-                  <h3 className="font-display text-base font-semibold text-brand-ink">{t.name}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-brand-ink-soft">{t.desc}</p>
+          ) : (
+            <>
+              {/* Featured tool: desktop + mobile */}
+              <div className="mt-12 grid items-center gap-10 lg:grid-cols-[1.5fr_1fr]">
+                <BrowserMock src={cs.tools.featured.desktop} alt={`${cs.tools.featured.name} on desktop`} url={`${cs.liveLabel}`} />
+                <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center lg:flex-col">
+                  <PhoneMock src={cs.tools.featured.mobile} alt={`${cs.tools.featured.name} on mobile`} />
+                  <div>
+                    <h3 className="font-display text-xl font-semibold text-brand-ink">{cs.tools.featured.name}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{cs.tools.featured.desc}</p>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
+
+              {/* Other tools */}
+              <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {cs.tools.others.map((t) => (
+                  <div key={t.name} className="flex flex-col overflow-hidden rounded-2xl border border-brand-line bg-white shadow-soft">
+                    <ManagedImage src={t.image} alt={t.name} width={1280} height={820} className="h-auto w-full border-b border-brand-line" />
+                    <div className="p-5">
+                      <h3 className="font-display text-base font-semibold text-brand-ink">{t.name}</h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-brand-ink-soft">{t.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </section>
 
