@@ -69,6 +69,7 @@ export default async function EditGoPage({ params, searchParams }: Props) {
   const faqsText = page.faqs.map((f) => `Q: ${f.q}\nA: ${f.a}`).join('\n\n')
   const proofText = page.proof.map((p) => `${p.stat} | ${p.label}`).join('\n')
   const reviewsText = page.reviews.map((r) => `Quote: ${r.quote}\nName: ${r.name}\nRole: ${r.role}`).join('\n\n')
+  const migrationText = page.migration_groups.map((g) => [g.phase, ...g.items.map((i) => `- ${i}`)].join('\n')).join('\n\n')
 
   return (
     <div className="max-w-3xl space-y-6">
@@ -282,6 +283,20 @@ export default async function EditGoPage({ params, searchParams }: Props) {
               <textarea name="exit_body" defaultValue={page.exit_body} rows={2} className={input} />
             </label>
           </div>
+        </div>
+
+        <div className="rounded-md border bg-slate-50 p-4">
+          <p className="mb-3 text-sm font-semibold">SEO-safe migration section (blank = hidden)</p>
+          <label className="block space-y-1"><span className={label}>Heading</span>
+            <input name="migration_heading" defaultValue={page.migration_heading} className={input} />
+          </label>
+          <label className="mt-3 block space-y-1"><span className={label}>Intro</span>
+            <textarea name="migration_intro" defaultValue={page.migration_intro} rows={2} className={input} />
+          </label>
+          <label className="mt-3 block space-y-1"><span className={label}>Groups (max 4)</span>
+            <span className={hint}>A phase heading on its own line, then &ldquo;- item&rdquo; lines; blank line between groups.</span>
+            <textarea name="migration_groups" defaultValue={migrationText} rows={14} className={`${input} font-mono text-xs`} />
+          </label>
         </div>
 
         <label className="block space-y-1"><span className={label}>FAQs</span>

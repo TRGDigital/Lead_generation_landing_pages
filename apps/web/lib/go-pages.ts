@@ -7,6 +7,7 @@ export type GoQuizQuestion = { q: string; options: string[] }
 export type GoProofStat = { stat: string; label: string }
 export type GoFaq = { q: string; a: string }
 export type GoReview = { quote: string; name: string; role: string }
+export type GoMigrationGroup = { phase: string; items: string[] }
 
 export type GoPage = {
   id: string
@@ -28,6 +29,9 @@ export type GoPage = {
   exit_body: string
   sticky_cta: string
   plan_items: string[]
+  migration_heading: string
+  migration_intro: string
+  migration_groups: GoMigrationGroup[]
   meta_title: string
   meta_description: string
   notify_emails: string[]

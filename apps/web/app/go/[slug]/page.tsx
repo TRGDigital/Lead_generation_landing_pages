@@ -352,6 +352,39 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
         </div>
       </section>
 
+      {/* SEO-safe migration — admin-editable per page */}
+      {page.migration_groups.length > 0 && (
+        <section className="px-6 py-16">
+          <div className="mx-auto max-w-6xl">
+            <p className="font-display text-sm font-bold uppercase tracking-widest text-brand-pop">Redesign without the risk</p>
+            <h2 className="mt-2 max-w-3xl font-display text-3xl font-bold uppercase leading-tight tracking-tight text-brand-ink sm:text-4xl">
+              {page.migration_heading}
+            </h2>
+            {page.migration_intro && (
+              <p className="mt-4 max-w-2xl leading-relaxed text-brand-ink-soft">{page.migration_intro}</p>
+            )}
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {page.migration_groups.map((g) => (
+                <div key={g.phase} className="rounded-2xl border-2 border-brand-line bg-white p-6 shadow-[4px_4px_0_0_#2a2620]">
+                  <h3 className="font-display text-sm font-bold uppercase tracking-tight text-brand-ink">{g.phase}</h3>
+                  <ul className="mt-4 space-y-2.5">
+                    {g.items.map((item) => (
+                      <li key={item} className="flex items-start gap-2.5 text-sm leading-snug text-brand-ink-soft">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-pop" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <div className="mt-8 text-center">
+              <CtaButton label="See where you stand" />
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* FAQs */}
       {page.faqs.length > 0 && (
         <section className="px-6 py-14">

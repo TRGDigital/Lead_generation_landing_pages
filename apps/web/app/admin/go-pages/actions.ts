@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import { createServiceClient } from '@/lib/supabase/server'
 import { requireAdmin } from '@/lib/auth'
 import { GO_TEMPLATES } from '@/lib/go-templates'
-import type { GoFaq, GoProofStat, GoQuizQuestion, GoReview } from '@/lib/go-pages'
+import type { GoFaq, GoProofStat, GoQuizQuestion, GoReview, GoMigrationGroup } from '@/lib/go-pages'
 
 function slugify(s: string) {
   return s.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
@@ -72,6 +72,20 @@ function parseReviews(raw: string): GoReview[] {
   }
   flush()
   return out.slice(0, 3)
+}
+
+// Groups of "Phase heading" then "- item" lines, blocks separated by blank lines.
+function parseMigration(raw: string): GoMigrationGroup[] {
+  const out: GoMigrationGroup[] = []
+  let cur: GoMigrationGroup | null = null
+  for (const line of raw.split('\n')) {
+    const t = line.trim()
+    if (!t) { if (cur && cur.items.length) { out.push(cur); cur = null }; continue }
+    if (/^[-•*]\s+/.test(t)) { if (cur) cur.items.push(t.replace(/^[-•*]\s+/, '').trim()) }
+    else { if (cur && cur.items.length) out.push(cur); cur = { phase: t, items: [] } }
+  }
+  if (cur && cur.items.length) out.push(cur)
+  return out.slice(0, 4)
 }
 
 // "stat | label" per line.
@@ -150,6 +164,9 @@ export async function saveGoPage(slug: string, formData: FormData) {
     exit_body: str('exit_body'),
     sticky_cta: str('sticky_cta'),
     plan_items: str('plan_items').split('\n').map((b) => b.trim()).filter(Boolean).slice(0, 4),
+    migration_heading: str('migration_heading'),
+    migration_intro: str('migration_intro'),
+    migration_groups: parseMigration(str('migration_groups')),
     meta_title: str('meta_title'),
     meta_description: str('meta_description'),
     notify_emails: parseEmails(str('notify_emails')),
