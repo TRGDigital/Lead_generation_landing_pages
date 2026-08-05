@@ -31,11 +31,10 @@ export async function GET(req: NextRequest) {
         ? `${rooms} ${rooms === 1 ? 'room' : 'rooms'} available`
         : status === 'limited' ? 'Limited availability' : 'Rooms available'
 
-  // Show the badge for real availability AND when a home is "Currently full", so families
-  // still see an honest, up-to-date status (red, no pulse) rather than nothing. Only the
-  // "Enquire" (enquiries-only / unknown) state stays hidden.
+  // Only advertise availability when there genuinely is some. "Currently full"
+  // and "Enquire" (enquiries-only) are hidden from the site.
   return NextResponse.json(
-    { show: status === 'available' || status === 'limited' || status === 'full', status, rooms, note: site.availability_note, label, color: COLOR[status] || COLOR.unknown },
+    { show: status === 'available' || status === 'limited', status, rooms, note: site.availability_note, label, color: COLOR[status] || COLOR.unknown },
     { headers: { ...CORS, 'Cache-Control': 'public, max-age=30' } },
   )
 }
