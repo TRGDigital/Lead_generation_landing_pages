@@ -59,8 +59,9 @@ function Q({ n, text, options, picked }: { n: number; text: string; options: str
 
 const YND = ['Yes, a change', 'No', 'Not sure']
 const YN = ['Yes', 'No']
+const YSN = ['Yes', 'Sometimes', 'No']
 
-function Body({ toolKey }: { toolKey: FamilyToolKey }) {
+function Body({ toolKey }: { toolKey: FamilyToolKey | 'availability' }) {
   switch (toolKey) {
     case 'funding':
       return (
@@ -192,12 +193,90 @@ function Body({ toolKey }: { toolKey: FamilyToolKey }) {
           </div>
         </>
       )
+    case 'care-checklist':
+      return (
+        <>
+          <p className="text-xs text-brand-ink-muted">A few gentle questions about how they’re coping…</p>
+          <Q n={1} text="Are they managing meals and eating well?" options={YSN} picked={1} />
+          <Q n={2} text="Keeping up with washing and dressing?" options={YSN} picked={2} />
+          <Q n={3} text="Have there been falls or near-misses?" options={YSN} picked={0} />
+          <Badge tone="warn">A few signs suggest more support would help</Badge>
+          <p className="text-xs text-brand-ink-muted">A gentle prompt to talk it through, never a diagnosis.</p>
+        </>
+      )
+    case 'cost-estimator':
+      return (
+        <>
+          <p className="text-sm font-bold uppercase tracking-wide text-brand-ink">Your situation</p>
+          <div className="flex flex-wrap gap-1.5">
+            <Pill active>Residential</Pill>
+            <Pill>Nursing</Pill>
+            <Pill>Dementia</Pill>
+          </div>
+          <Row label="Guide weekly fee" value="£1,150" />
+          <Row label="Savings & investments" value="£40,000" />
+          <Row label="Attendance Allowance" value="£108.55" />
+          <div className="rounded-xl border border-brand-pop/30 bg-brand-pop/5 p-4 text-center">
+            <p className="text-xs text-brand-ink-muted">Estimated cost</p>
+            <p className="font-display text-3xl font-bold leading-none text-brand-ink">
+              £1,041<span className="text-sm font-normal text-brand-ink-muted">/week</span>
+            </p>
+            <p className="mt-1 text-xs text-brand-ink-muted">£4,512/month · £54,140/year</p>
+          </div>
+        </>
+      )
+    case 'book-visit':
+      return (
+        <>
+          <p className="text-sm font-bold uppercase tracking-wide text-brand-ink">Book a visit</p>
+          <p className="text-xs text-brand-ink-muted">Choose a day and time that suits you</p>
+          <div className="grid grid-cols-6 gap-1.5">
+            {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((d, i) => (
+              <div
+                key={d}
+                className={`rounded-lg border py-1.5 text-center text-[11px] ${
+                  i === 2 ? 'border-brand-pop bg-brand-pop/10 font-semibold text-brand-ink' : 'border-brand-line text-brand-ink-soft'
+                }`}
+              >
+                {d}
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            <Pill>10:00</Pill>
+            <Pill active>11:30</Pill>
+            <Pill>14:00</Pill>
+            <Pill>15:30</Pill>
+          </div>
+          <Row label="Name" value="Sarah Jones" />
+          <div className="rounded-xl bg-brand-pop py-2.5 text-center text-sm font-bold text-white">Request this visit →</div>
+        </>
+      )
+    case 'availability':
+      return (
+        <>
+          <p className="text-xs text-brand-ink-muted">Shown live on your site, updated by you in seconds</p>
+          <div className="flex items-center justify-center py-1.5">
+            <div className="inline-flex items-center gap-2 rounded-full border border-green-300 bg-green-50 px-4 py-2 text-sm font-semibold text-green-800">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-60" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
+              </span>
+              2 rooms available
+            </div>
+          </div>
+          <Row label="Status" value="Available" />
+          <Row label="Rooms free" value="2" />
+          <Row label="Last updated" value="Just now" />
+          <div className="rounded-xl bg-brand-pop py-2.5 text-center text-sm font-bold text-white">Update availability →</div>
+        </>
+      )
     default:
       return null
   }
 }
 
-export function ToolMock({ toolKey, name }: { toolKey: FamilyToolKey; name: string }) {
+export function ToolMock({ toolKey, name }: { toolKey: FamilyToolKey | 'availability'; name: string }) {
   return (
     <div className="mx-auto w-full max-w-lg overflow-hidden rounded-2xl border border-brand-line bg-white shadow-xl">
       <div className="flex items-center gap-2 border-b border-brand-line bg-brand-bg-warm px-4 py-3">

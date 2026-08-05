@@ -6,7 +6,7 @@ import { ToolMock } from './ToolMock'
 import { ToolPreviewProvider, ToolPreviewButton } from './ToolPreview'
 
 export type ShowcaseItem = {
-  key: FamilyToolKey
+  key: FamilyToolKey | 'availability'
   name: string
   category: string
   nursing: boolean
@@ -16,6 +16,9 @@ export type ShowcaseItem = {
   why: string
   unique: string
   site?: string
+  // Items that are not embeddable family tools (e.g. live availability) link to a
+  // live example instead of opening the /embed preview iframe.
+  demoHref?: string
 }
 
 export function ToolShowcase({ items }: { items: ShowcaseItem[] }) {
@@ -103,13 +106,20 @@ export function ToolShowcase({ items }: { items: ShowcaseItem[] }) {
               </div>
 
               <div className="mt-7">
-                <ToolPreviewButton
-                  preview={{ key: it.key, label: it.name, site: it.site }}
-                  className="btn-pop"
-                >
-                  See it in action
-                  <span className="btn-arrow" aria-hidden>→</span>
-                </ToolPreviewButton>
+                {it.demoHref ? (
+                  <a href={it.demoHref} target="_blank" rel="noopener noreferrer" className="btn-pop">
+                    See it live
+                    <span className="btn-arrow" aria-hidden>→</span>
+                  </a>
+                ) : (
+                  <ToolPreviewButton
+                    preview={{ key: it.key, label: it.name, site: it.site }}
+                    className="btn-pop"
+                  >
+                    See it in action
+                    <span className="btn-arrow" aria-hidden>→</span>
+                  </ToolPreviewButton>
+                )}
               </div>
             </div>
           ))}

@@ -146,22 +146,48 @@ const UNIQUE: Record<FamilyToolKey, string> = {
 // la-lookup needs a real council to render, so preview it on a live client site.
 const PREVIEW_SITE: Partial<Record<FamilyToolKey, string>> = { 'la-lookup': 'crossways' }
 
+// Live bed availability is a site feature, not an embeddable family tool, so it is not part of
+// FAMILY_TOOLS (which drives the embed + admin allocation). It leads the showcase so prospects
+// immediately see the "show families you have space" benefit; "See it live" points at a real
+// client site running the badge.
+const AVAILABILITY_ITEM: ShowcaseItem = {
+  key: 'availability',
+  name: 'Live bed availability',
+  category: 'Live availability',
+  nursing: false,
+  blurb:
+    'A live “rooms available” badge on your website that you keep current in seconds, so families see you have space the moment they land, and enquire while you can help.',
+  how: [
+    'A live availability badge sits in your site, in your colours',
+    'You update your rooms-free figure in seconds from a private link',
+    'Families see real, up-to-date availability and enquire there and then',
+  ],
+  points: ['Shows space at a glance', 'You update it in seconds', 'Turns availability into enquiries'],
+  why: 'Families enquire when they can see you can actually help. A live, up-to-the-minute availability badge removes the doubt and drives more enquiries the moment a room frees up, instead of a vague “call to check”.',
+  unique:
+    'It updates the instant you change it and is built right into your site and lead-capture pop, so the availability families see is always real, never a stale line nobody maintains.',
+  demoHref: 'https://crossways.vercel.app/',
+}
+
 // Ordered, self-contained data for the scrolling showcase (grouped by category).
 const CATEGORY_ORDER = CATEGORIES.map((c) => c.name)
-const SHOWCASE: ShowcaseItem[] = [...FAMILY_TOOLS]
-  .sort((a, b) => CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category))
-  .map((t) => ({
-    key: t.key,
-    name: t.name,
-    category: t.category,
-    nursing: !!t.nursingRelevant,
-    blurb: t.blurb,
-    how: HOW[t.key] ?? [],
-    points: POINTS[t.key] ?? [],
-    why: WHY[t.key],
-    unique: UNIQUE[t.key],
-    site: PREVIEW_SITE[t.key],
-  }))
+const SHOWCASE: ShowcaseItem[] = [
+  AVAILABILITY_ITEM,
+  ...[...FAMILY_TOOLS]
+    .sort((a, b) => CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category))
+    .map((t) => ({
+      key: t.key,
+      name: t.name,
+      category: t.category,
+      nursing: !!t.nursingRelevant,
+      blurb: t.blurb,
+      how: HOW[t.key] ?? [],
+      points: POINTS[t.key] ?? [],
+      why: WHY[t.key],
+      unique: UNIQUE[t.key],
+      site: PREVIEW_SITE[t.key],
+    })),
+]
 
 const HERO_POINTS = ['Built for families', 'Exclusive to our clients', 'More traffic, more enquiries']
 
