@@ -252,7 +252,7 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
         <section className="bg-white px-6 py-14">
           <div className="mx-auto max-w-6xl">
             <p className="font-display text-sm font-bold uppercase tracking-widest text-brand-pop">What care providers say</p>
-            <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className={`mt-8 grid grid-cols-1 gap-6 ${page.reviews.length === 2 ? 'mx-auto max-w-4xl sm:grid-cols-2' : page.reviews.length === 1 ? 'mx-auto max-w-xl' : 'md:grid-cols-3'}`}>
               {page.reviews.slice(0, 3).map((t) => (
                 <figure key={t.name} className="flex flex-col rounded-2xl border-2 border-brand-line bg-brand-bg p-7">
                   <span className="flex text-amber-400" aria-hidden>
