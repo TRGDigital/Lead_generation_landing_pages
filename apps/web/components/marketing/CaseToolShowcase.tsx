@@ -11,7 +11,7 @@ import type { CaseToolShowcaseItem } from '@/lib/case-studies'
 // collapses that, which is what broke the first version). On mobile each
 // screenshot sits above its writeup.
 
-function Frame({ item, priority }: { item: CaseToolShowcaseItem; priority?: boolean }) {
+function Frame({ item, domain, priority }: { item: CaseToolShowcaseItem; domain: string; priority?: boolean }) {
   const portrait = item.height > item.width
   return (
     <div className={`overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card ${portrait ? 'mx-auto w-full max-w-[380px]' : 'w-full'}`}>
@@ -20,7 +20,7 @@ function Frame({ item, priority }: { item: CaseToolShowcaseItem; priority?: bool
         <span className="h-2 w-2 rounded-full bg-amber-300" />
         <span className="h-2 w-2 rounded-full bg-green-400" />
         <span className="ml-2 truncate rounded bg-white px-2 py-0.5 text-[9px] text-brand-ink-muted">
-          crosswayscarehome.co.uk
+          {domain}
         </span>
       </div>
       <ManagedImage
@@ -36,7 +36,7 @@ function Frame({ item, priority }: { item: CaseToolShowcaseItem; priority?: bool
   )
 }
 
-export function CaseToolShowcase({ items }: { items: CaseToolShowcaseItem[] }) {
+export function CaseToolShowcase({ items, domain }: { items: CaseToolShowcaseItem[]; domain: string }) {
   const [active, setActive] = useState(0)
   const refs = useRef<(HTMLDivElement | null)[]>([])
 
@@ -69,7 +69,7 @@ export function CaseToolShowcase({ items }: { items: CaseToolShowcaseItem[] }) {
           >
             {/* Mobile: the screenshot sits above its writeup */}
             <div className="mb-7 lg:hidden">
-              <Frame item={it} priority={i === 0} />
+              <Frame item={it} domain={domain} priority={i === 0} />
             </div>
 
             <p className="text-xs font-semibold uppercase tracking-widest text-brand-pop">{it.category}</p>
@@ -128,7 +128,7 @@ export function CaseToolShowcase({ items }: { items: CaseToolShowcaseItem[] }) {
                 }`}
                 aria-hidden={i !== active}
               >
-                <Frame item={it} priority={i === 0} />
+                <Frame item={it} domain={domain} priority={i === 0} />
               </div>
             ))}
           </div>

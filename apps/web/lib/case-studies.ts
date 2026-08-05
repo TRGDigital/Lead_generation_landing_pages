@@ -421,6 +421,239 @@ const ferndale: CaseStudy = {
   liveUrl: 'https://www.ferndalenursinghome.co.uk',
   liveLabel: 'ferndalenursinghome.co.uk',
   mockup: '/mockups/ferndale-live.jpg',
+  toolShowcase: [
+    {
+      key: 'funding-calculator',
+      category: 'Paying for care',
+      name: 'Care funding calculator',
+      image: '/work/ferndale/showcase/funding-calculator.jpg',
+      width: 1400,
+      height: 921,
+      alt: 'The Ferndale care funding calculator, step one of four',
+      blurb:
+        'A four-step guide to the biggest question in nursing care: who pays. It covers all four UK nations, models the real means test, and shows each family a personalised split between what they pay, what the council pays, and where the NHS steps in, which matters far more in nursing care than anywhere else.',
+      how: [
+        'The family picks their UK nation, then answers plain-English questions about savings, property and income.',
+        'The calculator applies the real capital thresholds and shows their likely funding position, including where NHS nursing contributions fit.',
+        'They can email themselves the results, which lands a warm, named enquiry with full context for the home to follow up.',
+      ],
+      why:
+        'Nursing care is the most expensive care there is, so funding is the first conversation every family needs. Answering it honestly, before they even call, earns the trust that decides shortlists.',
+      gateway:
+        'Families searching "who pays for nursing care" are at the very start of their journey. This page meets them there, weeks before they compare homes, with Ferndale\u2019s name on the answer.',
+      liveHref: 'https://ferndalenursinghome.co.uk/funding-calculator/',
+    },
+    {
+      key: 'deferred-payment',
+      category: 'Paying for care',
+      name: 'Deferred payment calculator',
+      image: '/work/ferndale/showcase/deferred-payment.jpg',
+      width: 1400,
+      height: 927,
+      alt: 'The Ferndale deferred payment calculator',
+      blurb:
+        'Answers the fear that freezes more nursing care decisions than any other: do we have to sell the house? It models a Deferred Payment Agreement, whether the family is likely to qualify, how much of the fee could be secured against the home, and how the amount builds over time.',
+      how: [
+        'The family answers the eligibility questions, permanent move, home ownership, who still lives in the property, savings position.',
+        'They enter the property value and share owned, and see how much of the weekly fee could be deferred.',
+        'They get the honest picture, including how the deferred amount grows, so they can plan with confidence rather than fear.',
+      ],
+      why:
+        'Nursing fees make the sell-the-house fear sharper than anywhere else in care. Confronting it with real numbers removes the biggest single blocker between an enquiry and an admission.',
+      gateway:
+        'Almost no nursing home explains deferred payments. Owning this rare answer wins long-tail funding searches and marks Ferndale out as the home that tells families the truth about money.',
+      liveHref: 'https://ferndalenursinghome.co.uk/deferred-payment-calculator/',
+    },
+    {
+      key: 'fnc',
+      category: 'NHS funding',
+      name: 'Funded Nursing Care checker',
+      image: '/work/ferndale/showcase/fnc.jpg',
+      width: 1400,
+      height: 924,
+      alt: 'The Ferndale NHS-funded Nursing Care checker',
+      blurb:
+        'A tool only a nursing home can offer properly. If someone needs care from a registered nurse, the NHS may pay a weekly contribution toward their nursing home fees, NHS-funded Nursing Care, and huge numbers of eligible families have never heard of it. The checker shows in a minute whether it could apply.',
+      how: [
+        'The family picks their nation and where care is being provided, in a nursing home, moving to one, at home or in hospital.',
+        'They answer whether the person has needs that require a registered nurse.',
+        'The checker shows whether FNC looks likely, the current weekly NHS contribution, and how it connects to a full Continuing Healthcare assessment.',
+      ],
+      why:
+        'FNC is money on the table for almost every nursing resident, and most families find out late or never. The home that surfaces it first is the home families trust with everything else.',
+      gateway:
+        'FNC searches are made almost exclusively by families arranging nursing care right now, the highest intent audience there is, and this page puts Ferndale directly in front of them.',
+      liveHref: 'https://ferndalenursinghome.co.uk/funded-nursing-care/',
+    },
+    {
+      key: 'chc-checker',
+      category: 'NHS funding',
+      name: 'NHS Continuing Healthcare checker',
+      image: '/work/ferndale/showcase/chc-checker.jpg',
+      width: 1400,
+      height: 944,
+      alt: 'The Ferndale NHS Continuing Healthcare checker with care domains',
+      blurb:
+        'For people with significant ongoing health needs, NHS Continuing Healthcare can fund the full cost of care, every penny. This checker screens across the real NHS care domains, behaviour, cognition, communication and more, and shows whether a full assessment looks worth pursuing.',
+      how: [
+        'The family rates the person\u2019s needs across the same care domains the NHS itself assesses, high, moderate, low or none.',
+        'The checker weighs the answers the way the NHS Checklist does, including the priority domains.',
+        'They see whether a full CHC assessment looks warranted, and what to ask for next.',
+      ],
+      why:
+        'CHC can be worth the entire cost of nursing care, so families chasing it are deeply motivated. Screening against the real domains makes the result credible rather than a vague maybe.',
+      gateway:
+        'This is a nursing-only tool that residential competitors cannot meaningfully offer, so it wins searches, and trust, that belong almost exclusively to homes like Ferndale.',
+      liveHref: 'https://ferndalenursinghome.co.uk/nhs-continuing-healthcare/',
+    },
+    {
+      key: 'chc-dst',
+      category: 'NHS funding',
+      name: 'CHC Decision Support Tool guide',
+      image: '/work/ferndale/showcase/chc-dst.jpg',
+      width: 1400,
+      height: 945,
+      alt: 'The Ferndale CHC Decision Support Tool guide',
+      blurb:
+        'When the NHS agrees to a full Continuing Healthcare assessment, a multidisciplinary team scores the person\u2019s needs across twelve care domains using the Decision Support Tool. It is daunting and badly explained everywhere else. This guide walks families through every domain, what it covers and the evidence the assessors look for.',
+      how: [
+        'The family reads a plain-English explanation of each of the twelve domains, from behaviour and cognition to skin, breathing and medication.',
+        'For every domain they see the severity levels used and the evidence that helps, incident logs, assessments, specialist input.',
+        'They arrive at the assessment prepared, with the right records gathered and the right questions ready.',
+      ],
+      why:
+        'Families walk into CHC assessments unprepared and lose funding they deserved. The home that prepares them becomes their advocate, an entirely different relationship from a sales prospect.',
+      gateway:
+        'This depth of genuinely useful content is exactly what Google rewards with rankings, and exactly what makes families choose the home that clearly knows the system inside out.',
+      liveHref: 'https://ferndalenursinghome.co.uk/chc-decision-support-tool/',
+    },
+    {
+      key: 'dementia-signs',
+      category: 'Dementia support',
+      name: 'Dementia signs checklist',
+      image: '/work/ferndale/showcase/dementia-signs.jpg',
+      width: 1400,
+      height: 944,
+      alt: 'The Ferndale dementia signs checklist',
+      blurb:
+        'A short, private checklist built on the clinically recognised AD8 screen, for families who have noticed changes in a parent or relative. Eight questions about changes over recent years, judgement, repetition, appointments, day-to-day thinking, with an honest answer about whether it is worth speaking to a doctor. Nothing is stored.',
+      how: [
+        'The family answers eight questions about changes caused by memory or thinking problems, yes, no, or not sure.',
+        'The checklist scores the changes the way the AD8 screen does and gives an honest, gentle reading.',
+        'It points them to sensible next steps, a GP conversation first, and Ferndale\u2019s specialist dementia care team when the time is right.',
+      ],
+      why:
+        'Ferndale specialises in dementia care, and this reaches families at the very first worry, long before they search for a home. Sensitive, private help at that moment is never forgotten.',
+      gateway:
+        'Dementia sign searches reach a vast audience years ahead of any care decision. When that decision comes, the family already knows the nursing home that helped them first.',
+      liveHref: 'https://ferndalenursinghome.co.uk/dementia-signs/',
+    },
+    {
+      key: 'care-checklist',
+      category: 'Health and wellbeing',
+      name: 'Is it time to think about care?',
+      image: '/work/ferndale/showcase/care-checklist.jpg',
+      width: 1400,
+      height: 944,
+      alt: 'The Ferndale is-it-time-to-think-about-care checklist',
+      blurb:
+        'A gentle, completely private self-check for families quietly worrying about a parent. Eight questions about everyday life, washing, falls, medication, eating, isolation, banded into an honest suggestion about whether more support is worth discussing. Not a diagnosis, nothing saved, no pressure.',
+      how: [
+        'The family answers eight questions honestly, Often, Sometimes or Rarely, about the person they are worried about.',
+        'The checklist bands the answers into a warm, honest reading of how their loved one is coping.',
+        'It suggests next steps, talk it through with the home, arrange a visit, or speak to a GP if health is the concern.',
+      ],
+      why:
+        'Nursing care decisions often arrive in a crisis. This tool meets families before the crisis, while there is still time to plan, and positions Ferndale as the calm guide rather than the emergency option.',
+      gateway:
+        'It is the earliest touchpoint a home can own, arriving from worry-driven searches months before "nursing home near me", with Ferndale\u2019s name attached to the help.',
+      liveHref: 'https://ferndalenursinghome.co.uk/is-it-time-for-care/',
+    },
+    {
+      key: 'cost-estimator',
+      category: 'Paying for care',
+      name: 'What will care cost?',
+      image: '/work/ferndale/showcase/cost-estimator.jpg',
+      width: 1400,
+      height: 941,
+      alt: 'The Ferndale cost of care estimator',
+      blurb:
+        'An instant, honest answer to the question families are most afraid to ask about nursing care. The family picks residential, nursing or respite, starts from a realistic guide fee they can replace with their own quote, adds savings, property and Attendance Allowance, and sees the weekly, monthly and yearly cost alongside who is likely to pay it.',
+      how: [
+        'The family picks the care type, nursing fees differ from residential, and adjusts the guide weekly fee to their own quote.',
+        'They add savings, property and any Attendance Allowance, and the estimator applies the England means test.',
+        'They get the full picture, cost per week, month and year, plus whether the council or NHS is likely to contribute, and one tap to request a personalised fee.',
+      ],
+      why:
+        'Nursing costs shock unprepared families. Showing honest numbers up front, when competitors hide theirs, wins the transparency conversation instantly, and Ferndale\u2019s guide fees sit at or below the regional average.',
+      gateway:
+        'Cost searches carry the highest intent of any care query. This page captures them with real figures, and the personalised-fee step converts that intent into named enquiries.',
+      liveHref: 'https://ferndalenursinghome.co.uk/cost-of-care/',
+    },
+    {
+      key: 'local-council',
+      category: 'Local support',
+      name: 'Local council funding guide',
+      image: '/work/ferndale/showcase/local-council.jpg',
+      width: 1400,
+      height: 942,
+      alt: 'The Ferndale local council and funding guide for West Sussex',
+      blurb:
+        'Everything a family needs to deal with West Sussex County Council in one place: the adult social care team\u2019s direct contact details, the exact council pages families actually need, and a plain-English explanation of the means test thresholds that decide who pays.',
+      how: [
+        'The family sees their council, its adult social care phone number and website, without hunting through a maze of council pages.',
+        'The means test is explained with the real numbers, the £23,250 upper limit and £14,250 lower limit, and what happens between them.',
+        'Direct links take them straight to the right council page for a financial assessment, so they arrive informed.',
+      ],
+      why:
+        'Council funding is a fog for most families, and in nursing care the stakes are higher. The home that clears the fog becomes the trusted guide, and trusted guides get the enquiry.',
+      gateway:
+        'Localised, genuinely useful council content wins the local searches families make early in their research, and keeps them on Ferndale\u2019s site rather than lost in council websites.',
+      liveHref: 'https://ferndalenursinghome.co.uk/local-council-funding/',
+    },
+    {
+      key: 'ai-chat',
+      category: 'Answers on demand',
+      name: 'Dedicated AI chat, built around Ferndale',
+      image: '/work/ferndale/showcase/ai-chat.jpg',
+      width: 1400,
+      height: 929,
+      alt: 'The Ferndale AI chat assistant open on the site',
+      blurb:
+        'An AI assistant trained on Ferndale itself, its nursing care, dementia and Parkinson\u2019s specialisms, visiting arrangements, fees guidance and live room availability. It answers in the warm tone of the home, around the clock, on every page of the site.',
+      how: [
+        'A family opens the chat bubble on any page, at any hour, often during a stressful evening after a hospital conversation.',
+        'They ask anything, from "can you care for Parkinson\u2019s?" to "do you have a room this week?", and get an instant answer grounded in Ferndale\u2019s own information.',
+        'When the conversation warms up, the chat offers a callback request, which lands in the enquiry inbox with the family\u2019s details.',
+      ],
+      why:
+        'Nursing enquiries are urgent, often driven by a hospital discharge deadline. A home that answers at 10pm wins families that an unanswered phone loses forever.',
+      gateway:
+        'Every conversation keeps an urgent, researching family on Ferndale\u2019s site instead of bouncing back to Google, and converts anonymous readers into named, high-intent enquiries.',
+      liveHref: 'https://ferndalenursinghome.co.uk/',
+    },
+    {
+      key: 'availability',
+      category: 'Live availability',
+      name: 'Live room availability',
+      image: '/work/ferndale/showcase/availability.jpg',
+      width: 709,
+      height: 894,
+      alt: 'The one-tap room availability update panel the Ferndale manager uses',
+      blurb:
+        'A live availability badge, "2 rooms available", shown across the whole site, the pop-up and the landing pages. Behind it sits a private one-tap update panel: the manager opens a link on their phone, taps the current status, and every surface updates instantly. No logins, no developer, no stale information.',
+      how: [
+        'The manager opens their private update link, on a phone, in seconds, whenever availability changes.',
+        'One tap sets the status, rooms available, limited, currently full, with an optional room count and note.',
+        'The website badge, enquiry pop-up and marketing landing pages all update at the same moment.',
+      ],
+      why:
+        'In nursing care, families arranging a hospital discharge need an answer today. "Do you have a bed?" answered before the call means every enquiry that arrives is one Ferndale can actually help.',
+      gateway:
+        'Live availability adds honest urgency, a family seeing "2 rooms available" during a discharge deadline acts immediately, and it makes every ad and landing page more believable than a competitor\u2019s silence.',
+      liveHref: 'https://ferndalenursinghome.co.uk/',
+    },
+  ],
   eyebrow: 'Nursing home website · SEO · PPC',
   title: 'A nursing home website built to win',
   titleAccent: 'enquiries',
@@ -512,7 +745,9 @@ const ferndale: CaseStudy = {
     image: '/work/ferndale/blog-d.jpg',
   },
   stats: [
-    { value: '51', label: 'New local pages & articles', note: '42 local-area pages + 9 articles, live now' },
+    { value: '42', label: 'Local landing pages', note: 'One for every town and care type, new pages live from the admin in minutes' },
+    { value: '9', label: 'Articles migrated & live', note: 'Every original blog URL preserved, zero broken links' },
+    { value: '11', label: 'Family tools on the site', note: 'NHS funding checkers, calculators, AI chat and live room availability' },
     { value: '+40%', label: 'Monthly organic traffic', note: 'Placeholder — update with live data', placeholder: true },
     { value: '+10', label: 'New online enquiries a month', note: 'Placeholder — update with live data', placeholder: true },
   ],

@@ -242,7 +242,7 @@ export default async function CaseStudyPage({
           {cs.toolShowcase ? (
             /* Scrolling showcase: writeups left, pinned live screenshot right */
             <div className="mt-6">
-              <CaseToolShowcase items={cs.toolShowcase} />
+              <CaseToolShowcase items={cs.toolShowcase} domain={cs.liveLabel} />
             </div>
           ) : (
             <>
