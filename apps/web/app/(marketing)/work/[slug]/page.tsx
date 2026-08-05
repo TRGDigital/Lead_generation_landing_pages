@@ -131,14 +131,35 @@ export default async function CaseStudyPage({
       </section>
 
       {/* ── Facts strip ───────────────────────────────────────────────── */}
-      <section className="border-y border-brand-line bg-brand-bg-warm px-6 py-8">
-        <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-6 lg:grid-cols-4">
-          {cs.facts.map((f) => (
-            <div key={f.label}>
-              <dt className="text-xs font-semibold uppercase tracking-wider text-brand-pop">{f.label}</dt>
-              <dd className="mt-1 text-sm font-medium text-brand-ink">{f.value}</dd>
-            </div>
-          ))}
+      <section className="border-y border-brand-line bg-brand-bg-warm px-6 py-10">
+        <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-5">
+          {cs.facts.map((f) => {
+            // The CQC card shows the official rating badge instead of plain text.
+            const cqcBadge = f.label.toLowerCase().includes('cqc') && f.value === 'Good'
+            return (
+              <div
+                key={f.label}
+                className="flex flex-col rounded-2xl border-2 border-brand-ink bg-white p-5 shadow-[4px_4px_0_0_#2a2620]"
+              >
+                <dt className="text-[11px] font-bold uppercase tracking-widest text-brand-pop">{f.label}</dt>
+                {cqcBadge ? (
+                  <dd className="mt-3 flex flex-1 items-center">
+                    <ManagedImage
+                      src="/work/cqc-good.png"
+                      alt={`Care Quality Commission rating: ${f.value}`}
+                      width={662}
+                      height={377}
+                      className="h-auto w-full max-w-[150px]"
+                    />
+                  </dd>
+                ) : (
+                  <dd className="mt-2 flex flex-1 items-center font-display text-lg font-bold leading-snug text-brand-ink">
+                    {f.value}
+                  </dd>
+                )}
+              </div>
+            )
+          })}
         </dl>
       </section>
 
