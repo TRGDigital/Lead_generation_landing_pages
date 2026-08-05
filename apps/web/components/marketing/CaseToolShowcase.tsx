@@ -1,17 +1,15 @@
-'use client'
-
-import { useEffect, useRef, useState } from 'react'
 import { ManagedImage } from './ManagedImage'
 import type { CaseToolShowcaseItem } from '@/lib/case-studies'
 
-// Case-study tool showcase: the same scroll pattern as the /care-tools page,
-// writeups scroll on the left while a pinned browser frame on the right
-// crossfades to the active tool's real screenshot. On mobile each screenshot
-// sits above its writeup.
+// Case-study tool showcase: one row per tool — the writeup on the left, the tool's
+// real screenshot pinned on the right (sticky within its own row, so the image stays
+// in view while its text scrolls, then hands over to the next tool's image). Natural
+// aspect ratios, nothing cropped. On mobile the screenshot sits above its writeup.
 
 function Frame({ item, priority }: { item: CaseToolShowcaseItem; priority?: boolean }) {
+  const portrait = item.height > item.width
   return (
-    <div className="w-full overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card">
+    <div className={`overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card ${portrait ? 'mx-auto w-full max-w-[400px]' : 'w-full'}`}>
       <div className="flex items-center gap-1.5 border-b border-brand-line bg-brand-bg-warm px-3 py-2">
         <span className="h-2 w-2 rounded-full bg-red-400" />
         <span className="h-2 w-2 rounded-full bg-amber-300" />
@@ -20,51 +18,26 @@ function Frame({ item, priority }: { item: CaseToolShowcaseItem; priority?: bool
           crosswayscarehome.co.uk
         </span>
       </div>
-      <div className="relative aspect-[16/11] w-full bg-brand-bg-warm">
-        <ManagedImage
-          src={item.image}
-          alt={item.alt}
-          fill
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          priority={priority}
-          className="object-cover object-top"
-        />
-      </div>
+      <ManagedImage
+        src={item.image}
+        alt={item.alt}
+        width={item.width}
+        height={item.height}
+        sizes="(max-width: 1024px) 100vw, 50vw"
+        priority={priority}
+        className="h-auto w-full"
+      />
     </div>
   )
 }
 
 export function CaseToolShowcase({ items }: { items: CaseToolShowcaseItem[] }) {
-  const [active, setActive] = useState(0)
-  const refs = useRef<(HTMLDivElement | null)[]>([])
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) setActive(Number((e.target as HTMLElement).dataset.idx))
-        }
-      },
-      // Only the block crossing the middle band of the viewport counts as "active".
-      { rootMargin: '-48% 0px -48% 0px', threshold: 0 },
-    )
-    refs.current.forEach((r) => r && obs.observe(r))
-    return () => obs.disconnect()
-  }, [])
-
   return (
-    <div className="grid gap-8 lg:grid-cols-2 lg:gap-16">
-      {/* Left: scrolling writeups */}
-      <div>
-        {items.map((it, i) => (
-          <div
-            key={it.key}
-            data-idx={i}
-            ref={(el) => {
-              refs.current[i] = el
-            }}
-            className="flex flex-col justify-center border-b border-brand-line/60 py-12 last:border-0 lg:min-h-[80vh] lg:border-0 lg:py-14"
-          >
+    <div className="divide-y divide-brand-line/60">
+      {items.map((it, i) => (
+        <div key={it.key} className="grid gap-8 py-12 first:pt-6 lg:grid-cols-2 lg:gap-16 lg:py-16">
+          {/* Writeup */}
+          <div>
             {/* Mobile: the screenshot sits above its writeup */}
             <div className="mb-7 lg:hidden">
               <Frame item={it} priority={i === 0} />
@@ -109,27 +82,15 @@ export function CaseToolShowcase({ items }: { items: CaseToolShowcaseItem[] }) {
               </a>
             </div>
           </div>
-        ))}
-      </div>
 
-      {/* Right: pinned screenshot that crossfades to the active tool (desktop only) */}
-      <div className="hidden lg:block">
-        <div className="sticky top-24 h-[80vh]">
-          <div className="relative flex h-full items-center">
-            {items.map((it, i) => (
-              <div
-                key={it.key}
-                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
-                  i === active ? 'opacity-100' : 'pointer-events-none opacity-0'
-                }`}
-                aria-hidden={i !== active}
-              >
-                <Frame item={it} priority={i === 0} />
-              </div>
-            ))}
+          {/* Screenshot: sticky within its own row (desktop only) */}
+          <div className="hidden lg:block">
+            <div className="sticky top-24">
+              <Frame item={it} priority={i === 0} />
+            </div>
           </div>
         </div>
-      </div>
+      ))}
     </div>
   )
 }

@@ -18,6 +18,8 @@ export type CaseToolShowcaseItem = {
   name: string
   image: string
   alt: string
+  width: number
+  height: number
   blurb: string
   how: string[]
   why: string
@@ -91,6 +93,8 @@ const crossways: CaseStudy = {
       category: 'Answers on demand',
       name: 'Dedicated AI chat, built around Crossways',
       image: '/work/crossways/showcase/ai-chat.jpg',
+      width: 1400,
+      height: 935,
       alt: 'The Crossways AI chat assistant open on the homepage',
       blurb:
         'An AI assistant trained on Crossways itself, its care types, visiting arrangements, fees guidance and live room availability. It answers in the warm tone of the home, around the clock, on every page of the site.',
@@ -110,6 +114,8 @@ const crossways: CaseStudy = {
       category: 'Paying for care',
       name: 'Care funding calculator',
       image: '/work/crossways/showcase/funding-calculator.jpg',
+      width: 1400,
+      height: 937,
       alt: 'The Crossways care funding calculator, step one of four',
       blurb:
         'A four-step guide to the biggest question in care: who pays. It covers all four UK nations, models the real means test, and shows each family a personalised split between what they pay, what the council pays, and where the NHS can help.',
@@ -129,6 +135,8 @@ const crossways: CaseStudy = {
       category: 'Paying for care',
       name: 'Deferred payment calculator',
       image: '/work/crossways/showcase/deferred-payment.jpg',
+      width: 1400,
+      height: 946,
       alt: 'The Crossways deferred payment calculator',
       blurb:
         'Answers the question that stalls more care decisions than any other: do we have to sell the house? It models a Deferred Payment Agreement, whether the family is likely to qualify, how much of the fee could be secured against the home, and how the amount grows over time at the real interest rate.',
@@ -148,6 +156,8 @@ const crossways: CaseStudy = {
       category: 'Benefits and funding',
       name: 'Attendance Allowance checker',
       image: '/work/crossways/showcase/attendance-allowance.jpg',
+      width: 1400,
+      height: 937,
       alt: 'The Crossways Attendance Allowance checker',
       blurb:
         'A one-minute eligibility check for the benefit most families have never heard of: a tax-free, non-means-tested payment for over-66s who need help, worth up to £108.55 a week. The checker also knows the special rules that fast-track terminally ill applicants.',
@@ -167,6 +177,8 @@ const crossways: CaseStudy = {
       category: 'Local support',
       name: 'Local council funding guide',
       image: '/work/crossways/showcase/local-council.jpg',
+      width: 1400,
+      height: 937,
       alt: 'The Crossways local council and funding guide for West Sussex',
       blurb:
         'Everything a family needs to deal with West Sussex County Council in one place: the adult social care team\u2019s direct contact details, the exact council pages families actually need, and a plain-English explanation of the means test thresholds that decide who pays.',
@@ -186,6 +198,8 @@ const crossways: CaseStudy = {
       category: 'Health and wellbeing',
       name: 'Is it time to think about care?',
       image: '/work/crossways/showcase/care-checklist.jpg',
+      width: 1400,
+      height: 941,
       alt: 'The Crossways is-it-time-to-think-about-care checklist',
       blurb:
         'A gentle, completely private eight-question self-check for families quietly worrying about a parent. It bands everyday signs, struggles with washing, falls, missed medication, isolation, into an honest suggestion about whether it is time to talk to someone. Nothing is stored, and it is clearly framed as a prompt, not a diagnosis.',
@@ -205,6 +219,8 @@ const crossways: CaseStudy = {
       category: 'Paying for care',
       name: 'What will care cost?',
       image: '/work/crossways/showcase/cost-estimator.jpg',
+      width: 1400,
+      height: 933,
       alt: 'The Crossways cost of care estimator showing a weekly figure',
       blurb:
         'An instant, honest answer to the question families are most afraid to ask. It starts from Crossways\u2019 real guide fees, lets the family adjust to their own situation, savings, property, Attendance Allowance, and shows the weekly, monthly and yearly cost alongside who is likely to pay it.',
@@ -224,6 +240,8 @@ const crossways: CaseStudy = {
       category: 'Live availability',
       name: 'Live room availability',
       image: '/work/crossways/showcase/availability.jpg',
+      width: 630,
+      height: 840,
       alt: 'The one-tap room availability update panel the Crossways manager uses',
       blurb:
         'A live availability badge, "2 rooms available", shown across the whole site, the pop-up and the landing pages. Behind it sits a private one-tap update panel: the manager opens a link on their phone, taps the current status, and every surface updates instantly. No logins, no developer, no stale information.',
