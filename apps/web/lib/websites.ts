@@ -430,3 +430,56 @@ export async function getToolTimeSeries(slug: string, days = 28): Promise<{ seri
     .sort((a, b) => b.views - a.views)
   return { series: [...dayMap.values()], tools }
 }
+
+// ── Overlay questions daily time-series + per-question stats for the questions
+// performance chart. Answers per day (total + per-question keyed by step), plus
+// each question's drop-off and answer distribution.
+export async function getOverlayQuestionSeries(
+  websiteId: string,
+  days = 28,
+): Promise<{ starts: number; questions: OverlayQuestionStat[]; series: Array<{ date: string; total: number; [k: string]: number | string }> }> {
+  const db = createServiceClient() as unknown as any
+  const now = new Date()
+  const startMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) - (days - 1) * 86_400_000
+  const sinceIso = new Date(startMs).toISOString()
+
+  const { data } = await db
+    .from('overlay_events')
+    .select('event, visitor_id, step, question, option, created_at')
+    .eq('website_id', websiteId)
+    .in('event', ['start', 'question'])
+    .gte('created_at', sinceIso)
+    .limit(50000)
+  const rows = (data ?? []) as { event: string; visitor_id: string | null; step: number | null; question: string | null; option: string | null; created_at: string }[]
+
+  const starts = new Set(rows.filter((r) => r.event === 'start').map((r) => r.visitor_id).filter(Boolean)).size
+
+  const dayMap = new Map<string, { date: string; total: number; [k: string]: number | string }>()
+  for (let i = 0; i < days; i++) {
+    const key = new Date(startMs + i * 86_400_000).toISOString().slice(0, 10)
+    dayMap.set(key, { date: key, total: 0 })
+  }
+  const byQ = new Map<number, { step: number; question: string; visitors: Set<string>; opts: Map<string, number>; total: number }>()
+  for (const r of rows) {
+    if (r.event !== 'question' || !r.question) continue
+    const step = r.step ?? 999
+    const day = dayMap.get(String(r.created_at).slice(0, 10))
+    if (day) { day.total = (day.total as number) + 1; day['q' + step] = ((day['q' + step] as number) || 0) + 1 }
+    const g = byQ.get(step) ?? { step, question: r.question, visitors: new Set<string>(), opts: new Map<string, number>(), total: 0 }
+    if (r.visitor_id) g.visitors.add(r.visitor_id)
+    const opt = r.option || '—'
+    g.opts.set(opt, (g.opts.get(opt) ?? 0) + 1)
+    g.total++
+    byQ.set(step, g)
+  }
+  const questions: OverlayQuestionStat[] = [...byQ.values()]
+    .sort((a, b) => a.step - b.step)
+    .map((g) => ({
+      step: g.step,
+      question: g.question,
+      answered: g.visitors.size,
+      dropOffPct: starts > 0 ? Math.max(0, Math.round(((starts - g.visitors.size) / starts) * 100)) : 0,
+      options: [...g.opts.entries()].map(([option, count]) => ({ option, count, pct: g.total ? Math.round((count / g.total) * 100) : 0 })).sort((a, b) => b.count - a.count),
+    }))
+  return { starts, questions, series: [...dayMap.values()] }
+}

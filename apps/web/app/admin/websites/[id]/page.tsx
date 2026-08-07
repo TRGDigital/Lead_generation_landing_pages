@@ -3,10 +3,10 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ExternalLink, Trash2, ChevronDown } from 'lucide-react'
 import { requireAdmin } from '@/lib/auth'
-import { getWebsite, getOrganicLeads, getQuizPresets, getOverlayStats, getOverlayQuestionStats, getToolTimeSeries, getOverlayTimeSeries } from '@/lib/websites'
+import { getWebsite, getOrganicLeads, getQuizPresets, getOverlayStats, getOverlayQuestionSeries, getToolTimeSeries, getOverlayTimeSeries } from '@/lib/websites'
 import PerformanceChart from '@/components/admin/PerformanceChart'
 import ToolPerformance from '@/components/admin/ToolPerformance'
-import OverlayQuestionStats from '@/components/admin/OverlayQuestionStats'
+import OverlayQuestionPerformance from '@/components/admin/OverlayQuestionPerformance'
 import OverlayAnalytics from '@/components/admin/OverlayAnalytics'
 import WebsiteOverlayForm from '@/components/admin/WebsiteOverlayForm'
 import QuizQuestionsEditor from '@/components/admin/QuizQuestionsEditor'
@@ -98,7 +98,7 @@ export default async function WebsiteDetailPage({ params, searchParams }: Props)
     getOrganicLeads(site.id),
     getQuizPresets(),
     getOverlayStats(site.id, 30),
-    getOverlayQuestionStats(site.id, { days: 30 }),
+    getOverlayQuestionSeries(site.id, rangeDays),
     getToolTimeSeries(site.slug, rangeDays),
     getTrackingNumber(site.id),
     getTrackedCalls(site.id, 50),
@@ -208,11 +208,11 @@ export default async function WebsiteDetailPage({ params, searchParams }: Props)
             title="Overlay questions"
             badge={
               <span className="rounded-full bg-brand-bg-warm px-2 py-0.5 text-[11px] font-semibold text-brand-ink-muted">
-                {overlayQuestions.starts} started · 30d
+                {overlayQuestions.starts} started · {rangeDays}d
               </span>
             }
           >
-            <OverlayQuestionStats data={overlayQuestions} />
+            <OverlayQuestionPerformance data={overlayQuestions} />
           </Panel>
         )}
 
