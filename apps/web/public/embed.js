@@ -62,17 +62,23 @@
   }
   // Fire-and-forget engagement event (impression / start / close / submit). keepalive so it
   // still sends if the visitor navigates away right after closing.
-  function track(event, via) {
+  function track(event, via, detail) {
     try {
+      var payload = {
+        site: site, event: event, via: via || '',
+        pageUrl: location.href, path: location.pathname || '/',
+        device: deviceType(), vid: getVid(),
+      };
+      if (detail) {
+        if (typeof detail.step === 'number') payload.step = detail.step;
+        if (detail.question) payload.question = String(detail.question).slice(0, 300);
+        if (detail.option) payload.option = String(detail.option).slice(0, 300);
+      }
       fetch(origin + '/api/overlay-event', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         keepalive: true,
-        body: JSON.stringify({
-          site: site, event: event, via: via || '',
-          pageUrl: location.href, path: location.pathname || '/',
-          device: deviceType(), vid: getVid(),
-        }),
+        body: JSON.stringify(payload),
       }).catch(function () {});
     } catch (e) {}
   }
@@ -273,7 +279,7 @@
     // 'close' on dismiss without submitting, 'submit' on a completed enquiry.
     var doTrack = via !== 'preview';
     var started = false, submitted = false, closed = false;
-    function t(ev) { if (doTrack) track(ev, via); }
+    function t(ev, detail) { if (doTrack) track(ev, via, detail); }
     function markStart() { if (!started) { started = true; t('start'); } }
     var gamified = !!cfg.gamified;
     var hasImg = !!cfg.image;
@@ -387,7 +393,7 @@
           + '<div class="trglo-opts">' + q.options.map(function (o) { return '<button type="button" class="trglo-opt">' + esc(o) + '</button>'; }).join('') + '</div>'
           + (stepIdx > 0 ? '<button type="button" class="trglo-back">&#8592; Back</button>' : '');
         Array.prototype.forEach.call(panel.querySelectorAll('.trglo-opt'), function (b) {
-          b.addEventListener('click', function () { markStart(); answers[q.key] = b.textContent; stepIdx++; renderStep(); });
+          b.addEventListener('click', function () { markStart(); answers[q.key] = b.textContent; t('question', { step: stepIdx + 1, question: q.q, option: b.textContent }); stepIdx++; renderStep(); });
         });
         var back = panel.querySelector('.trglo-back');
         if (back) back.addEventListener('click', function () { stepIdx--; renderStep(); });

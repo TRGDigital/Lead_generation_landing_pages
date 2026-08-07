@@ -1,4 +1,5 @@
 import { createServiceClient } from '@/lib/supabase/server'
+import { getFamilyTool } from '@/lib/family-tools'
 
 export type Website = {
   id: string
@@ -268,4 +269,87 @@ export async function getOverlayStats(websiteId: string, days = 30, pageLimit = 
     byDevice: Object.entries(deviceMap).map(([device, impressions]) => ({ device, impressions })).sort((a, b) => b.impressions - a.impressions),
     topPages: Object.values(pageMap).sort((a, b) => b.impressions - a.impressions).slice(0, pageLimit),
   }
+}
+
+// ── Family-tools usage for one client site (embedded tools log to tool_events
+// with the site slug). Powers the "Tool usage" panel on the website detail page.
+export type SiteToolStat = { tool: string; toolName: string; views: number; engaged: number; ctas: number; engagementRate: number }
+
+export async function getSiteToolStats(slug: string, days = 30): Promise<{ tools: SiteToolStat[]; totalViews: number }> {
+  const db = createServiceClient() as unknown as any
+  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString()
+  const { data } = await db
+    .from('tool_events')
+    .select('tool, event, created_at')
+    .eq('site', slug)
+    .gte('created_at', since)
+    .limit(20000)
+  const events = (data ?? []) as { tool: string; event: string }[]
+
+  const map = new Map<string, SiteToolStat>()
+  for (const e of events) {
+    const row = map.get(e.tool) ?? { tool: e.tool, toolName: getFamilyTool(e.tool)?.name ?? e.tool, views: 0, engaged: 0, ctas: 0, engagementRate: 0 }
+    if (e.event === 'view') row.views++
+    else if (e.event === 'engaged') row.engaged++
+    else if (e.event === 'cta') row.ctas++
+    map.set(e.tool, row)
+  }
+  const tools = [...map.values()].map((r) => ({ ...r, engagementRate: r.views ? Math.round((r.engaged / r.views) * 100) : 0 }))
+    .sort((a, b) => b.views - a.views)
+  return { tools, totalViews: tools.reduce((n, t) => n + t.views, 0) }
+}
+
+// ── Per-question overlay quiz performance (drop-off + answer distribution).
+// Uses the 'question' events the widget fires on each option choice.
+export type OverlayQuestionStat = {
+  step: number
+  question: string
+  answered: number // unique visitors who answered this question
+  dropOffPct: number // % of quiz starters lost by this question
+  options: { option: string; count: number; pct: number }[]
+}
+
+export async function getOverlayQuestionStats(
+  websiteId: string,
+  range?: { from?: string; to?: string; days?: number },
+): Promise<{ starts: number; questions: OverlayQuestionStat[] }> {
+  const db = createServiceClient() as unknown as any
+  let q = db
+    .from('overlay_events')
+    .select('event, visitor_id, step, question, option, created_at')
+    .eq('website_id', websiteId)
+    .in('event', ['start', 'question'])
+  if (range?.from) q = q.gte('created_at', `${range.from}T00:00:00Z`)
+  else if (range?.days) q = q.gte('created_at', new Date(Date.now() - range.days * 86_400_000).toISOString())
+  if (range?.to) q = q.lte('created_at', `${range.to}T23:59:59Z`)
+  const { data } = await q.limit(20000)
+  const rows = (data ?? []) as { event: string; visitor_id: string | null; step: number | null; question: string | null; option: string | null }[]
+
+  const starts = new Set(rows.filter((r) => r.event === 'start').map((r) => r.visitor_id).filter(Boolean)).size
+
+  // Group by question, preserving step order.
+  const byQ = new Map<string, { step: number; question: string; visitors: Set<string>; opts: Map<string, number>; total: number }>()
+  for (const r of rows) {
+    if (r.event !== 'question' || !r.question) continue
+    const key = r.question
+    const g = byQ.get(key) ?? { step: r.step ?? 999, question: r.question, visitors: new Set<string>(), opts: new Map<string, number>(), total: 0 }
+    if (r.visitor_id) g.visitors.add(r.visitor_id)
+    const opt = r.option || '—'
+    g.opts.set(opt, (g.opts.get(opt) ?? 0) + 1)
+    g.total++
+    byQ.set(key, g)
+  }
+
+  const questions: OverlayQuestionStat[] = [...byQ.values()]
+    .sort((a, b) => a.step - b.step)
+    .map((g) => ({
+      step: g.step,
+      question: g.question,
+      answered: g.visitors.size,
+      dropOffPct: starts > 0 ? Math.max(0, Math.round(((starts - g.visitors.size) / starts) * 100)) : 0,
+      options: [...g.opts.entries()]
+        .map(([option, count]) => ({ option, count, pct: g.total ? Math.round((count / g.total) * 100) : 0 }))
+        .sort((a, b) => b.count - a.count),
+    }))
+  return { starts, questions }
 }

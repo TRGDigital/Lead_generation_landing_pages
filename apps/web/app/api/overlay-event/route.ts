@@ -13,12 +13,15 @@ const CORS = {
 
 const schema = z.object({
   site: z.string().min(1).max(80),
-  event: z.enum(['impression', 'start', 'close', 'submit', 'preview']),
+  event: z.enum(['impression', 'start', 'close', 'submit', 'preview', 'question']),
   via: z.string().max(40).optional(),
   pageUrl: z.string().max(500).optional(),
   path: z.string().max(300).optional(),
   device: z.enum(['desktop', 'mobile']).optional(),
   vid: z.string().max(64).optional(),
+  step: z.number().int().min(0).max(50).optional(),
+  question: z.string().max(300).optional(),
+  option: z.string().max(300).optional(),
 })
 
 export function OPTIONS() {
@@ -37,7 +40,7 @@ export async function POST(req: NextRequest) {
   const parsed = schema.safeParse(body)
   if (!parsed.success) return NextResponse.json({ error: 'Invalid data' }, { status: 422, headers: CORS })
 
-  const { site: slug, event, via, pageUrl, path, device, vid } = parsed.data
+  const { site: slug, event, via, pageUrl, path, device, vid, step, question, option } = parsed.data
   const site = await getWebsiteBySlug(slug)
   if (!site) return NextResponse.json({ error: 'Unknown site' }, { status: 404, headers: CORS })
 
@@ -50,6 +53,9 @@ export async function POST(req: NextRequest) {
     path: path ?? null,
     device: device ?? null,
     visitor_id: vid ?? null,
+    step: step ?? null,
+    question: question ?? null,
+    option: option ?? null,
   })
 
   return new NextResponse(null, { status: 204, headers: CORS })

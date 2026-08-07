@@ -3,7 +3,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ExternalLink, Trash2, ChevronDown } from 'lucide-react'
 import { requireAdmin } from '@/lib/auth'
-import { getWebsite, getOrganicLeads, getQuizPresets, getOverlayStats } from '@/lib/websites'
+import { getWebsite, getOrganicLeads, getQuizPresets, getOverlayStats, getOverlayQuestionStats, getSiteToolStats } from '@/lib/websites'
+import OverlayQuestionStats from '@/components/admin/OverlayQuestionStats'
+import SiteToolUsage from '@/components/admin/SiteToolUsage'
 import OverlayAnalytics from '@/components/admin/OverlayAnalytics'
 import WebsiteOverlayForm from '@/components/admin/WebsiteOverlayForm'
 import QuizQuestionsEditor from '@/components/admin/QuizQuestionsEditor'
@@ -96,10 +98,12 @@ export default async function WebsiteDetailPage({ params }: Props) {
   await requireAdmin()
   const site = await getWebsite(params.id)
   if (!site) notFound()
-  const [leads, presets, overlayStats, tracking, trackedCalls, callStats, areaPages] = await Promise.all([
+  const [leads, presets, overlayStats, overlayQuestions, toolStats, tracking, trackedCalls, callStats, areaPages] = await Promise.all([
     getOrganicLeads(site.id),
     getQuizPresets(),
     getOverlayStats(site.id, 30),
+    getOverlayQuestionStats(site.id, { days: 30 }),
+    getSiteToolStats(site.slug, 30),
     getTrackingNumber(site.id),
     getTrackedCalls(site.id, 50),
     getCallStats(site.id),
@@ -179,6 +183,30 @@ export default async function WebsiteDetailPage({ params }: Props) {
           }
         >
           <OverlayAnalytics stats={overlayStats} />
+        </Panel>
+
+        {overlayQuestions.questions.length > 0 && (
+          <Panel
+            title="Overlay questions"
+            badge={
+              <span className="rounded-full bg-brand-bg-warm px-2 py-0.5 text-[11px] font-semibold text-brand-ink-muted">
+                {overlayQuestions.starts} started · 30d
+              </span>
+            }
+          >
+            <OverlayQuestionStats data={overlayQuestions} />
+          </Panel>
+        )}
+
+        <Panel
+          title="Family tools usage"
+          badge={
+            <span className="rounded-full bg-brand-bg-warm px-2 py-0.5 text-[11px] font-semibold text-brand-ink-muted">
+              {toolStats.totalViews > 0 ? `${toolStats.totalViews.toLocaleString()} opens · 30d` : 'no opens yet'}
+            </span>
+          }
+        >
+          <SiteToolUsage tools={toolStats.tools} />
         </Panel>
 
         <Panel
