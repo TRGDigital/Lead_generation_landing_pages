@@ -203,18 +203,16 @@ export default async function WebsiteDetailPage({ params, searchParams }: Props)
           <OverlayAnalytics stats={overlayStats} />
         </Panel>
 
-        {overlayQuestions.questions.length > 0 && (
-          <Panel
-            title="Overlay questions"
-            badge={
-              <span className="rounded-full bg-brand-bg-warm px-2 py-0.5 text-[11px] font-semibold text-brand-ink-muted">
-                {overlayQuestions.starts} started · {rangeDays}d
-              </span>
-            }
-          >
-            <OverlayQuestionPerformance data={overlayQuestions} />
-          </Panel>
-        )}
+        <Panel
+          title="Overlay questions"
+          badge={
+            <span className="rounded-full bg-brand-bg-warm px-2 py-0.5 text-[11px] font-semibold text-brand-ink-muted">
+              {overlayQuestions.questions.length > 0 ? `${overlayQuestions.starts} started · ${rangeDays}d` : 'no answers yet'}
+            </span>
+          }
+        >
+          <OverlayQuestionPerformance data={overlayQuestions} />
+        </Panel>
 
         <Panel
           title="Family tools usage"
