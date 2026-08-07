@@ -389,3 +389,44 @@ export async function getOverlayTimeSeries(websiteId: string, days = 28): Promis
   }
   return [...map.values()]
 }
+
+// ── Family-tools daily time-series for the tools performance chart: total opens
+// per day, plus a per-tool breakdown embedded on each day (keyed by tool slug),
+// and the per-tool totals for the drill-down list.
+export type ToolPerfPoint = { date: string; total: number; [tool: string]: number | string }
+
+export async function getToolTimeSeries(slug: string, days = 28): Promise<{ series: ToolPerfPoint[]; tools: SiteToolStat[] }> {
+  const db = createServiceClient() as unknown as any
+  const now = new Date()
+  const startMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) - (days - 1) * 86_400_000
+  const sinceIso = new Date(startMs).toISOString()
+
+  const { data } = await db
+    .from('tool_events')
+    .select('tool, event, created_at')
+    .eq('site', slug)
+    .gte('created_at', sinceIso)
+    .limit(50000)
+  const events = (data ?? []) as { tool: string; event: string; created_at: string }[]
+
+  const dayMap = new Map<string, ToolPerfPoint>()
+  for (let i = 0; i < days; i++) {
+    const key = new Date(startMs + i * 86_400_000).toISOString().slice(0, 10)
+    dayMap.set(key, { date: key, total: 0 })
+  }
+  const toolMap = new Map<string, SiteToolStat>()
+  for (const e of events) {
+    const t = toolMap.get(e.tool) ?? { tool: e.tool, toolName: getFamilyTool(e.tool)?.name ?? e.tool, views: 0, engaged: 0, ctas: 0, engagementRate: 0 }
+    const day = dayMap.get(String(e.created_at).slice(0, 10))
+    if (e.event === 'view') {
+      t.views++
+      if (day) { day.total = (day.total as number) + 1; day[e.tool] = ((day[e.tool] as number) || 0) + 1 }
+    } else if (e.event === 'engaged') t.engaged++
+    else if (e.event === 'cta') t.ctas++
+    toolMap.set(e.tool, t)
+  }
+  const tools = [...toolMap.values()]
+    .map((t) => ({ ...t, engagementRate: t.views ? Math.round((t.engaged / t.views) * 100) : 0 }))
+    .sort((a, b) => b.views - a.views)
+  return { series: [...dayMap.values()], tools }
+}
