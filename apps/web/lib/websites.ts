@@ -353,3 +353,39 @@ export async function getOverlayQuestionStats(
     }))
   return { starts, questions }
 }
+
+// ── Daily performance time-series for the GSC-style chart: overlay funnel
+// (pop shown / started / submitted) plus captured leads, bucketed by UTC day.
+export type PerfDay = { date: string; impressions: number; starts: number; submits: number; leads: number }
+
+export async function getOverlayTimeSeries(websiteId: string, days = 28): Promise<PerfDay[]> {
+  const db = createServiceClient() as unknown as any
+  const now = new Date()
+  const startMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) - (days - 1) * 86_400_000
+  const sinceIso = new Date(startMs).toISOString()
+
+  const [ovRes, ldRes] = await Promise.all([
+    db.from('overlay_events').select('event, created_at').eq('website_id', websiteId).gte('created_at', sinceIso).limit(50000),
+    db.from('organic_leads').select('created_at').eq('website_id', websiteId).gte('created_at', sinceIso).limit(50000),
+  ])
+  const ov = (ovRes.data ?? []) as { event: string; created_at: string }[]
+  const ld = (ldRes.data ?? []) as { created_at: string }[]
+
+  const map = new Map<string, PerfDay>()
+  for (let i = 0; i < days; i++) {
+    const key = new Date(startMs + i * 86_400_000).toISOString().slice(0, 10)
+    map.set(key, { date: key, impressions: 0, starts: 0, submits: 0, leads: 0 })
+  }
+  for (const e of ov) {
+    const day = map.get(String(e.created_at).slice(0, 10))
+    if (!day) continue
+    if (e.event === 'impression') day.impressions++
+    else if (e.event === 'start') day.starts++
+    else if (e.event === 'submit') day.submits++
+  }
+  for (const l of ld) {
+    const day = map.get(String(l.created_at).slice(0, 10))
+    if (day) day.leads++
+  }
+  return [...map.values()]
+}

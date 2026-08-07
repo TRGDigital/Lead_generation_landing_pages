@@ -3,7 +3,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ExternalLink, Trash2, ChevronDown } from 'lucide-react'
 import { requireAdmin } from '@/lib/auth'
-import { getWebsite, getOrganicLeads, getQuizPresets, getOverlayStats, getOverlayQuestionStats, getSiteToolStats } from '@/lib/websites'
+import { getWebsite, getOrganicLeads, getQuizPresets, getOverlayStats, getOverlayQuestionStats, getSiteToolStats, getOverlayTimeSeries } from '@/lib/websites'
+import PerformanceChart from '@/components/admin/PerformanceChart'
 import OverlayQuestionStats from '@/components/admin/OverlayQuestionStats'
 import SiteToolUsage from '@/components/admin/SiteToolUsage'
 import OverlayAnalytics from '@/components/admin/OverlayAnalytics'
@@ -84,20 +85,15 @@ function SectionHeading({ id, title, desc }: { id: string; title: string; desc: 
   )
 }
 
-const JUMP_LINKS = [
-  { href: '#performance', label: 'Performance' },
-  { href: '#lead-capture', label: 'Lead capture' },
-  { href: '#features', label: 'Site features' },
-  { href: '#content', label: 'Content & SEO' },
-  { href: '#install', label: 'Install' },
-]
+type Props = { params: { id: string }; searchParams: { tab?: string; range?: string } }
 
-type Props = { params: { id: string } }
-
-export default async function WebsiteDetailPage({ params }: Props) {
+export default async function WebsiteDetailPage({ params, searchParams }: Props) {
   await requireAdmin()
   const site = await getWebsite(params.id)
   if (!site) notFound()
+  const tab = searchParams.tab === 'settings' ? 'settings' : 'performance'
+  const rangeDays = [7, 28, 90].includes(Number(searchParams.range)) ? Number(searchParams.range) : 28
+  const series = await getOverlayTimeSeries(site.id, rangeDays)
   const [leads, presets, overlayStats, overlayQuestions, toolStats, tracking, trackedCalls, callStats, areaPages] = await Promise.all([
     getOrganicLeads(site.id),
     getQuizPresets(),
@@ -157,25 +153,47 @@ export default async function WebsiteDetailPage({ params }: Props) {
         </div>
       </div>
 
-      {/* Jump links */}
-      <nav className="sticky top-0 z-10 -mx-2 mt-6 flex gap-2 overflow-x-auto bg-background/95 px-2 py-2 backdrop-blur" aria-label="Sections">
-        {JUMP_LINKS.map((j) => (
-          <a
-            key={j.href}
-            href={j.href}
-            className="whitespace-nowrap rounded-full border border-brand-line bg-white px-3.5 py-1.5 text-xs font-semibold text-brand-ink-soft hover:border-brand-accent/50 hover:text-brand-ink"
+      {/* Tabs */}
+      <nav className="mt-6 flex gap-1 rounded-xl border border-brand-line bg-white p-1 w-fit" aria-label="Views">
+        {([
+          { key: 'performance', label: 'Performance' },
+          { key: 'settings', label: 'Settings & features' },
+        ] as const).map((t) => (
+          <Link
+            key={t.key}
+            href={`/admin/websites/${site.id}?tab=${t.key}`}
+            className={`rounded-lg px-4 py-1.5 text-sm font-semibold transition-colors ${tab === t.key ? 'bg-brand-ink text-white' : 'text-brand-ink-soft hover:text-brand-ink'}`}
           >
-            {j.label}
-          </a>
+            {t.label}
+          </Link>
         ))}
       </nav>
 
-      {/* ── 1 · Performance ────────────────────────────────────────────── */}
-      <SectionHeading id="performance" title="Performance" desc="How this site is doing: overlay engagement and the enquiries it has captured." />
-      <div className="space-y-4">
+      {tab === 'performance' && (
+      <div className="mt-6 space-y-4">
+        {/* Hero performance chart */}
+        <Panel
+          title="Performance"
+          open
+          badge={
+            <span className="flex gap-1">
+              {[7, 28, 90].map((d) => (
+                <Link
+                  key={d}
+                  href={`/admin/websites/${site.id}?tab=performance&range=${d}`}
+                  className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${rangeDays === d ? 'bg-brand-ink text-white' : 'bg-brand-bg-warm text-brand-ink-muted hover:text-brand-ink'}`}
+                >
+                  {d}d
+                </Link>
+              ))}
+            </span>
+          }
+        >
+          <PerformanceChart series={series} />
+        </Panel>
+
         <Panel
           title="Overlay performance"
-          open
           badge={
             <span className="rounded-full bg-brand-bg-warm px-2 py-0.5 text-[11px] font-semibold text-brand-ink-muted">
               {overlayStats.impressions > 0 ? `${overlayStats.impressions.toLocaleString()} views · 30d` : 'no views yet'}
@@ -255,8 +273,11 @@ export default async function WebsiteDetailPage({ params }: Props) {
           )}
         </Panel>
       </div>
+      )}
 
-      {/* ── 2 · Lead capture ───────────────────────────────────────────── */}
+      {tab === 'settings' && (
+      <div className="mt-6">
+      {/* ── Lead capture ───────────────────────────────────────────────── */}
       <SectionHeading id="lead-capture" title="Lead capture" desc="The pop overlay and landing page that turn visitors into enquiries." />
       <div className="space-y-4">
         <Panel title="Pop overlay" badge={<OnOff on={site.overlay_enabled} />}>
@@ -385,6 +406,8 @@ export default async function WebsiteDetailPage({ params }: Props) {
           <EmbedSnippet snippet={snippet} />
         </Panel>
       </div>
+      </div>
+      )}
     </div>
   )
 }
