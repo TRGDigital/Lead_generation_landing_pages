@@ -113,7 +113,7 @@ export default async function WebsiteDetailPage({ params, searchParams }: Props)
   const snippet = `<script src="${WIDGET_ORIGIN}/embed.js" data-site="${site.slug}" defer></script>`
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
+    <div className="p-6 max-w-6xl mx-auto">
       <div className="mb-6 flex items-center justify-between gap-3">
         <Link href="/admin/websites" className="inline-flex items-center gap-1.5 text-sm text-brand-ink-muted hover:text-brand-ink">
           <ArrowLeft className="h-4 w-4" /> All websites
