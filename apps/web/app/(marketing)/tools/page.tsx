@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Free Tools for Care Providers | The Care Toolkit | TRG Digital',
+  title: 'Free Tools for Care Providers | The Care Toolkit',
   description:
     'Free, care-specific tools for UK care homes, nursing homes and domiciliary care, a care funding calculator, website grader, CQC checker and more.',
   alternates: { canonical: `${SITE_URL}/tools` },

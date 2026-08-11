@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'CQC Rating Checker | Look Up Any Care Home Rating | TRG Digital',
+  title: 'CQC Rating Checker | Look Up Any Care Home Rating',
   description:
     'Free CQC rating checker for care homes, nursing homes and home care agencies. Search by name and see the latest overall rating, the five key-question ratings and the report date, read live from the CQC register.',
   alternates: { canonical: `${SITE_URL}/tools/cqc-rating-checker` },

@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'How You Look on Google | Care Website Search Preview | TRG Digital',
+  title: 'How You Look on Google | Care Website Search Preview',
   description:
     'Free tool to see how your care home appears in Google search and when shared on social media, then write a better title and description with a live preview. Built for care homes, nursing homes and home care.',
   alternates: { canonical: `${SITE_URL}/tools/google-preview` },

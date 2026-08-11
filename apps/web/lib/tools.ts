@@ -1,4 +1,4 @@
-import { Calculator, BedDouble, Gauge, Award, MonitorSmartphone, Scale, Code2, ClipboardList, type LucideIcon } from 'lucide-react'
+import { Calculator, BedDouble, Gauge, Award, MonitorSmartphone, Scale, Code2, ClipboardList, UsersRound, Wallet, RefreshCw, PoundSterling, ShieldCheck, GraduationCap, type LucideIcon } from 'lucide-react'
 
 // The single source of truth for the free Care Toolkit, used by the nav mega-menu
 // and the /tools hub so they never drift apart.
@@ -17,6 +17,48 @@ export const TOOLS: Tool[] = [
     short: 'Measure resident dependency & care hours',
     body: 'Assess your residents across six care domains and see your home’s dependency mix and the care hours it requires, the basis for safe staffing.',
     href: '/tools/care-home-dependency-tool',
+  },
+  {
+    icon: UsersRound,
+    title: 'Staffing Calculator',
+    short: 'Turn care hours into staff numbers',
+    body: 'Turn your care hours into the care staff you need, in whole-time equivalents and on duty per shift, day and night.',
+    href: '/tools/staffing-calculator',
+  },
+  {
+    icon: Wallet,
+    title: 'Agency Cost Calculator',
+    short: 'What agency is really costing you',
+    body: 'See your annual agency spend, the premium over permanent staff, and what you could save by cutting reliance.',
+    href: '/tools/agency-staff-cost-calculator',
+  },
+  {
+    icon: RefreshCw,
+    title: 'Staff Turnover Cost',
+    short: 'The hidden cost of losing staff',
+    body: 'Reveal what staff turnover costs your home each year, and what reducing it would save.',
+    href: '/tools/staff-turnover-cost-calculator',
+  },
+  {
+    icon: PoundSterling,
+    title: 'Fee Break-Even Calculator',
+    short: 'The fee & occupancy you need',
+    body: 'Work out the weekly fee and occupancy your home needs to break even, and where you stand today.',
+    href: '/tools/care-fee-break-even-calculator',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'CQC Inspection Readiness',
+    short: 'How ready are you to be inspected?',
+    body: 'Self-assess against the five CQC key questions and see where the gaps are before the inspector does.',
+    href: '/tools/cqc-inspection-readiness',
+  },
+  {
+    icon: GraduationCap,
+    title: 'Mandatory Training Checker',
+    short: 'Are your staff up to date?',
+    body: 'Check staff compliance across the mandatory training topics and see exactly where the gaps are.',
+    href: '/tools/mandatory-training-checker',
   },
   {
     icon: Calculator,

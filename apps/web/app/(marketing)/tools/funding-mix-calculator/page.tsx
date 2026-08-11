@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Local Authority vs Private Fees Calculator | Care Home Funding | TRG Digital',
+  title: 'Local Authority vs Private Fees Calculator | Care Home Funding',
   description:
     'Free calculator showing how much less local-authority (social services) funded residents earn your care home than private residents, per month, quarter, 6 months and year, and how your funding mix affects the bottom line.',
   alternates: { canonical: `${SITE_URL}/tools/funding-mix-calculator` },

@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Your Care Website Grader | Free Care Home Website Audit | TRG Digital',
+  title: 'Your Care Website Grader | Free Care Home Website Audit',
   description:
     'Free website grader for care homes, nursing homes and domiciliary care. Get an instant score and a checklist of the things families and Google look for, with clear tips to win more enquiries.',
   alternates: { canonical: `${SITE_URL}/tools/website-grader` },
