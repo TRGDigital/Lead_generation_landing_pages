@@ -12,6 +12,17 @@ export const maxDuration = 120
 // Auth: an admin session, or the cron secret (Bearer) so it can be triggered server-side.
 export async function POST(req: NextRequest) {
   let authed = verifyCronSecret(req)
+
+  // Fixed preview trigger: a ?token matching NURTURE_PREVIEW_TOKEN can send, but ONLY
+  // ever to lenny@trgdigital.co.uk, so a leaked token cannot email anyone else.
+  let lockedTo: string | null = null
+  const previewToken = process.env.NURTURE_PREVIEW_TOKEN
+  const provided = req.nextUrl.searchParams.get('token')
+  if (!authed && previewToken && provided && provided === previewToken) {
+    authed = true
+    lockedTo = 'lenny@trgdigital.co.uk'
+  }
+
   if (!authed) {
     try {
       await requireAdmin()
@@ -31,6 +42,7 @@ export async function POST(req: NextRequest) {
   } catch {
     // no body — use defaults
   }
+  if (lockedTo) to = lockedTo
 
   const results: { id: string; day: number; ok: boolean; error?: string }[] = []
   for (const e of SEQUENCE) {
