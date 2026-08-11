@@ -147,14 +147,194 @@ export const SEQUENCE: NurtureEmail[] = [
       small(`Want the same for your home? Just reply to this email and tell me a bit about it.`),
   },
   {
+    id: 'svc-website',
+    day: 17,
+    subject: 'Your website: your hardest-working member of staff',
+    preheader: 'It works 24/7, never calls in sick, and it is the first thing families judge you on.',
+    body: ({ name }) =>
+      h('Your website should fill beds, not just exist') +
+      hi(name) +
+      p('For most homes the website is the first impression and the first point of enquiry, yet it is often the most neglected thing in the building. A slow, dated or hard-to-navigate site quietly sends families to your competitors before they ever pick up the phone.') +
+      p('When we build a care website, it is designed to convert:') +
+      bullets([
+        'Fast, mobile-first and accessible, so nobody bounces',
+        'CQC rating, fees and a clear enquiry journey front and centre',
+        'Built to be found on Google, not just to look nice',
+      ]) +
+      btn(`${SITE}/website-development`, 'See how we build care websites') +
+      small(`Want us to look at your current site first? ${link(`${SITE}/tools/website-grader`, 'Grade it free')} or ${link(`${SITE}/book-a-demo`, 'book a quick chat')}.`),
+  },
+  {
+    id: 'svc-seo',
+    day: 19,
+    subject: 'Show up when families search, without paying for every click',
+    preheader: 'Good SEO keeps earning you enquiries long after an ad budget stops.',
+    body: ({ name }) =>
+      h('Be found before your competitors are') +
+      hi(name) +
+      p('Paid ads stop the moment you stop paying. Search engine optimisation is the opposite: the work compounds, and a page that ranks keeps bringing in enquiries month after month with no extra cost per click.') +
+      p('Our care-focused SEO covers the three things that actually move rankings:') +
+      bullets([
+        'Technical health, so Google can crawl and trust your site',
+        'The right content, answering what families really search for',
+        'Authority and local signals that lift you above the aggregators',
+      ]) +
+      btn(`${SITE}/seo`, 'Explore our SEO service') +
+      small(`Not sure where you stand today? ${link(`${SITE}/book-a-demo`, 'Book a quick chat')} and we will take a look.`),
+  },
+  {
+    id: 'svc-local-seo',
+    day: 21,
+    subject: 'Winning the “care home near me” search',
+    preheader: 'Almost every care enquiry is local. Here is how to own your patch.',
+    body: ({ name }) =>
+      h('Most care enquiries are local. Own your area.') +
+      hi(name) +
+      p('When someone searches for care near them, Google shows a local map and a shortlist before anything else. If your home is not in it, you are invisible for exactly the searches that matter most.') +
+      p('Local SEO puts you on that map:') +
+      bullets([
+        'A fully optimised Google Business Profile that earns the click',
+        'Location pages that rank for the towns you serve',
+        'Consistent listings and reviews that build local trust',
+      ]) +
+      btn(`${SITE}/local-seo`, 'See our local SEO service') +
+      small(`Curious how you appear right now? ${link(`${SITE}/book-a-demo`, 'Book a quick chat')}.`),
+  },
+  {
+    id: 'svc-gbp',
+    day: 23,
+    subject: 'Your Google profile is your new front door',
+    preheader: 'Reviews, photos and the right details decide whether they call or scroll past.',
+    body: ({ name }) =>
+      h('Families judge you on Google before they visit') +
+      hi(name) +
+      p('Your Google Business Profile is often the very first thing a family sees: your rating, your reviews, your photos, your opening hours. Get it right and you earn the call. Leave it half finished and you lose it to the home next door.') +
+      p('We turn your profile into a proper shop window:') +
+      bullets([
+        'A complete, optimised profile that shows you at your best',
+        'A simple system for winning and responding to reviews',
+        'Regular posts and photos that keep you active and visible',
+      ]) +
+      btn(`${SITE}/google-business-profile`, 'See how we manage your Google profile') +
+      small(`Want a second opinion on yours? ${link(`${SITE}/book-a-demo`, 'Book a quick chat')}.`),
+  },
+  {
+    id: 'svc-content',
+    day: 25,
+    subject: 'Content that reassures families and ranks on Google',
+    preheader: 'The guides and pages that answer the questions families are already asking.',
+    body: ({ name }) =>
+      h('Answer the questions families are already asking') +
+      hi(name) +
+      p('Choosing care is stressful, and families arrive with a lot of questions: fees, funding, what good looks like, how to move a loved one. Homes that answer those questions well earn trust, and earn rankings, because Google rewards genuinely helpful content.') +
+      p('Our content team writes for both at once:') +
+      bullets([
+        'Clear, reassuring guides that build trust with families',
+        'Service and location pages that bring in search traffic',
+        'A steady drumbeat of content that keeps your site fresh',
+      ]) +
+      btn(`${SITE}/content-creation`, 'See our content service') +
+      small(`Short on time to write? That is exactly what we are for. ${link(`${SITE}/book-a-demo`, 'Book a quick chat')}.`),
+  },
+  {
+    id: 'svc-cro',
+    day: 27,
+    subject: 'More enquiries from the visitors you already have',
+    preheader: 'You do not always need more traffic. Sometimes you need a better journey.',
+    body: ({ name }) =>
+      h('Turn more of your visitors into enquiries') +
+      hi(name) +
+      p('Getting people to your website is only half the job. If the enquiry journey is confusing, slow or hidden, that hard-won traffic leaves without ever getting in touch. Conversion rate optimisation fixes the leaks.') +
+      p('We find and remove the friction:') +
+      bullets([
+        'A clear, obvious way to enquire on every page',
+        'Faster load times and a smoother experience on mobile',
+        'Calls to action and forms designed to get a response',
+      ]) +
+      btn(`${SITE}/conversion-rate-optimisation`, 'See our CRO service') +
+      small(`Wondering where you are losing enquiries? ${link(`${SITE}/book-a-demo`, 'Book a quick chat')}.`),
+  },
+  {
+    id: 'svc-marketing',
+    day: 29,
+    subject: 'A marketing partner who actually understands care',
+    preheader: 'One team joining up your website, search, content and enquiries.',
+    body: ({ name }) =>
+      h('Joined-up marketing, built for care') +
+      hi(name) +
+      p('Website here, SEO there, a bit of social from someone’s nephew: piecemeal marketing rarely moves the needle. What fills beds is a joined-up plan where every part pulls in the same direction, run by people who understand the sector.') +
+      p('As your marketing partner we bring it all together:') +
+      bullets([
+        'One strategy across website, search, content and reviews',
+        'Real care-sector experience, so we speak your language',
+        'Reporting tied to enquiries and admissions, not vanity metrics',
+      ]) +
+      btn(`${SITE}/marketing`, 'See how we can help') +
+      small(`Ready to talk it through? ${link(`${SITE}/book-a-demo`, 'Book a quick chat')}.`),
+  },
+  {
+    id: 'svc-rebrand',
+    day: 31,
+    subject: 'When your brand no longer matches how good your care is',
+    preheader: 'A tired look undersells a home that deserves better.',
+    body: ({ name }) =>
+      h('Does your brand do your care justice?') +
+      hi(name) +
+      p('Sometimes the care is excellent but the brand is stuck in the past: a dated logo, mismatched signage, a look that quietly says “ordinary” when the home is anything but. That gap costs you enquiries, and a little pride too.') +
+      p('A considered rebrand closes it:') +
+      bullets([
+        'A fresh identity and logo that reflect the quality of your care',
+        'Consistent signage, brochures and printed collateral',
+        'A refreshed website that carries the new look all the way through',
+      ]) +
+      btn(`${SITE}/rebranding`, 'See our rebranding work') +
+      small(`Thinking it might be time? ${link(`${SITE}/book-a-demo`, 'Book a quick chat')}.`),
+  },
+  {
+    id: 'svc-care-tools',
+    day: 33,
+    subject: 'The care technology that saves your team hours every week',
+    preheader: 'Training, compliance and admin, made lighter.',
+    body: ({ name }) =>
+      h('Give your team their time back') +
+      hi(name) +
+      p('Your staff should be spending their time on residents, not wrestling spreadsheets and paperwork. The right care technology quietly takes the admin load off their shoulders, and keeps you inspection ready at the same time.') +
+      p('We help you put the right tools in place, including our own:') +
+      bullets([
+        'Staff training and compliance that runs itself and evidences everything',
+        'Systems that turn your policies into action, not filing',
+        'Tools chosen for care, not generic software bent to fit',
+      ]) +
+      btn(`${SITE}/care-tools`, 'Explore care tools & technology') +
+      small(`Our sister product CareStream is a good place to start: ${link(CARESTREAM, 'take a look')}.`),
+  },
+  {
+    id: 'svc-development',
+    day: 35,
+    subject: 'Need something custom built? We do that too',
+    preheader: 'Bespoke tools, integrations and software for care providers.',
+    body: ({ name }) =>
+      h('When off-the-shelf does not fit') +
+      hi(name) +
+      p('Sometimes the thing you need does not come in a box: a portal for families, an integration between two systems that refuse to talk to each other, a dashboard that finally pulls your numbers into one place. That is where our development team comes in.') +
+      p('We design and build software around how you actually work:') +
+      bullets([
+        'Bespoke tools and portals for staff, families or referrers',
+        'Integrations that connect the systems you already use',
+        'Dashboards and automations that cut out manual work',
+      ]) +
+      btn(`${SITE}/development`, 'See our software development') +
+      small(`Have something in mind? ${link(`${SITE}/book-a-demo`, 'Tell us about it')}.`),
+  },
+  {
     id: 'offer',
-    day: 15,
+    day: 38,
     subject: 'A free 20-minute review of how your home shows up online',
     preheader: 'No pitch. We look at your website, Google presence and fees, and send you the quickest wins.',
     body: ({ name }) =>
-      h('One last thing: a free review, on us') +
+      h('A free review of how your home shows up online') +
       hi(name) +
-      p('You have spent the last couple of weeks measuring your home with our tools. Let us return the favour.') +
+      p('Over the past few weeks we have shared our tools and the way we think about growing a care home. Let us return the favour with something practical.') +
       p('Book a free 20-minute review and we will look at how your home shows up to the families searching for care near you, then send you a short, honest list of the three quickest wins. You will get value whether or not we ever work together.') +
       bullets([
         'How your website compares to the homes you compete with',
