@@ -51,13 +51,13 @@ export default function DependencyToolPage() {
         provider: { '@type': 'Organization', name: 'TRG Digital', '@id': `${SITE_URL}/#organization` },
       }) }} />
 
-      <section className="relative overflow-hidden px-6 pb-16 pt-14">
+      <section className="relative px-6 pb-16 pt-14">
         <Star className="absolute left-6 top-10 hidden h-14 w-14 -rotate-12 text-brand-accent lg:block" />
         <Dots className="absolute bottom-10 right-8 hidden h-16 w-16 text-brand-pop/30 lg:block" />
         <div className="mx-auto max-w-6xl">
           <Link href="/tools" className="text-sm font-semibold text-brand-pop hover:underline">← The Care Toolkit</Link>
           <div className="mt-4 grid items-start gap-12 lg:grid-cols-2">
-            <div className="lg:pt-6">
+            <div className="lg:sticky lg:top-24 lg:self-start lg:pt-6">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop">
                 <ClipboardList className="h-6 w-6" />
               </div>

@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Cost of an Empty Bed & Savings Calculator | Care Home Occupancy | TRG Digital',
+  title: 'Cost of an Empty Bed & Savings Calculator | Care Home Occupancy',
   description:
     'Free calculator showing how much empty beds cost your care home per week, month and year, plus how much you could save and the return on investment by filling them with TRG Digital.',
   alternates: { canonical: `${SITE_URL}/tools/empty-bed-calculator` },
@@ -67,13 +67,13 @@ export default function EmptyBedPage() {
         }}
       />
 
-      <section className="relative overflow-hidden px-6 pb-16 pt-14">
+      <section className="relative px-6 pb-16 pt-14">
         <Star className="absolute left-6 top-10 hidden h-14 w-14 -rotate-12 text-brand-accent lg:block" />
         <Dots className="absolute bottom-10 right-8 hidden h-16 w-16 text-brand-pop/30 lg:block" />
         <div className="mx-auto max-w-6xl">
           <Link href="/tools" className="text-sm font-semibold text-brand-pop hover:underline">← The Care Toolkit</Link>
           <div className="mt-4 grid items-start gap-12 lg:grid-cols-2">
-            <div className="lg:pt-6">
+            <div className="lg:sticky lg:top-24 lg:self-start lg:pt-6">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop">
                 <BedDouble className="h-6 w-6" />
               </div>
