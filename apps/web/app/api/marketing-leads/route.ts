@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import sgMail from '@sendgrid/mail'
 import { createServiceClient } from '@/lib/supabase/server'
+import { enrollLead, sendNurtureEmail } from '@/lib/tool-nurture/send'
 
 const schema = z.object({
   name: z.string().min(2).max(100),
@@ -56,19 +57,47 @@ export async function POST(req: NextRequest) {
   }
 
   // Insert lead
-  const { error: insertError } = await db.from('marketing_leads').insert({
-    name,
-    email,
-    company: company ?? null,
-    phone: phone ?? null,
-    message,
-    ip_address: ip,
-    source: req.headers.get('referer') ?? null,
-  })
+  const { data: lead, error: insertError } = await db
+    .from('marketing_leads')
+    .insert({
+      name,
+      email,
+      company: company ?? null,
+      phone: phone ?? null,
+      message,
+      ip_address: ip,
+      source: req.headers.get('referer') ?? null,
+    })
+    .select('id')
+    .single()
 
   if (insertError) {
     console.error('marketing_leads insert error', insertError)
     return NextResponse.json({ error: 'Server error' }, { status: 500 })
+  }
+
+  // Tool-signup nurture: enrol the lead and fire the day-0 welcome now; the rest of
+  // the sequence goes out via the daily cron. Gated by NURTURE_ENABLED so live sending
+  // only starts once it is switched on in the environment. ToolLeadGate sends a message
+  // beginning "Used the <tool>." which is how we identify a tool signup.
+  if (process.env.NURTURE_ENABLED === 'true' && /^used the /i.test(message)) {
+    try {
+      const toolSlug = (req.headers.get('referer') ?? '').match(/\/tools\/([a-z0-9-]+)/i)?.[1] ?? null
+      const { enrollment, isNew } = await enrollLead({ db, leadId: lead?.id ?? null, email, name, toolSlug })
+      if (enrollment && isNew && enrollment.status === 'active') {
+        await sendNurtureEmail({
+          db,
+          emailId: 'welcome',
+          to: email,
+          name,
+          enrollmentId: enrollment.id,
+          unsubscribeToken: enrollment.unsubscribe_token,
+        })
+      }
+    } catch (err) {
+      console.error('nurture enroll error', err)
+      // Never fail the lead capture because of the nurture step.
+    }
   }
 
   // SendGrid alert — always send (uses a template if one is configured, otherwise a plain HTML email)

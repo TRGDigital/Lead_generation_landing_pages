@@ -1,10 +1,15 @@
 {
   "buildCommand": "NODE_OPTIONS='--max-old-space-size=4096' next build && rm -rf .next/cache",
   "outputDirectory": ".next",
+  "functions": {
+    "app/api/funding-guide/route.ts": { "maxDuration": 60 }
+  },
   "crons": [
     { "path": "/api/cron/google-ads-sync", "schedule": "0 8 * * *" },
     { "path": "/api/cron/daily-summary",   "schedule": "0 8 * * *" },
     { "path": "/api/cron/sla-alerts",      "schedule": "0 9 * * *" },
-    { "path": "/api/cron/data-retention",  "schedule": "0 2 * * *" }
+    { "path": "/api/cron/data-retention",  "schedule": "0 2 * * *" },
+    { "path": "/api/cron/client-monthly-summary", "schedule": "0 8 1 * *" },
+    { "path": "/api/cron/tool-nurture",    "schedule": "0 9 * * 1-5" }
   ]
 }

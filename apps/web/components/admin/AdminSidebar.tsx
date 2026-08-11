@@ -17,6 +17,7 @@ import {
   Search,
   Inbox,
   Wrench,
+  Mail,
 } from 'lucide-react'
 import { ChevronDown, Target, Linkedin, Tags } from 'lucide-react'
 import AdminNavLink from './AdminNavLink'
@@ -59,6 +60,7 @@ const navGroups: NavGroup[] = [
       { href: '/admin/marketing-leads', icon: <Inbox className="h-4 w-4" />, label: 'Site enquiries' },
       { href: '/admin/client-leads', icon: <Users className="h-4 w-4" />, label: 'Client leads' },
       { href: '/admin/tools', icon: <Wrench className="h-4 w-4" />, label: 'Tool usage' },
+      { href: '/admin/email-nurture', icon: <Mail className="h-4 w-4" />, label: 'Email nurture' },
       { href: '/admin/blog', icon: <BookOpen className="h-4 w-4" />, label: 'Blog' },
       { href: '/admin/seo', icon: <Search className="h-4 w-4" />, label: 'Page SEO' },
       { href: '/admin/legal', icon: <Scale className="h-4 w-4" />, label: 'Legal Pages' },

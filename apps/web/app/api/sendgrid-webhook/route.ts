@@ -16,11 +16,25 @@ const EVENT_COLUMN: Record<string, 'delivered_at' | 'opened_at' | 'clicked_at'> 
   click: 'clicked_at',
 }
 
+// Nurture emails carry custom_args { nsend } (a nurture_sends id). Map each event
+// type to the timestamp column stamped on that row.
+const NURTURE_COLUMN: Record<string, string> = {
+  delivered: 'delivered_at',
+  open: 'opened_at',
+  click: 'clicked_at',
+  bounce: 'bounced_at',
+  dropped: 'dropped_at',
+  spamreport: 'spamreport_at',
+  unsubscribe: 'unsubscribed_at',
+  group_unsubscribe: 'unsubscribed_at',
+}
+
 type SendGridEvent = {
   event?: string
   timestamp?: number
   lead_id?: string
   buyer_id?: string
+  nsend?: string
 }
 
 export async function POST(req: NextRequest) {
@@ -42,9 +56,31 @@ export async function POST(req: NextRequest) {
   let processed = 0
 
   for (const ev of events as SendGridEvent[]) {
+    const ts = ev.timestamp ? new Date(ev.timestamp * 1000).toISOString() : new Date().toISOString()
+
+    // Nurture-sequence events (tie back via the nurture_sends id).
+    if (ev.nsend && ev.event) {
+      const ncol = NURTURE_COLUMN[ev.event]
+      if (!ncol) continue
+      await db.from('nurture_sends').update({ [ncol]: ts }).eq('id', ev.nsend).is(ncol, null)
+      if (ev.event === 'open' || ev.event === 'click') {
+        const cntCol = ev.event === 'open' ? 'open_count' : 'click_count'
+        const { data: cur } = await db.from('nurture_sends').select(cntCol).eq('id', ev.nsend).maybeSingle()
+        await db.from('nurture_sends').update({ [cntCol]: ((cur?.[cntCol] as number) ?? 0) + 1 }).eq('id', ev.nsend)
+      }
+      if (ncol === 'unsubscribed_at') {
+        const { data: s } = await db.from('nurture_sends').select('enrollment_id').eq('id', ev.nsend).maybeSingle()
+        if (s?.enrollment_id) {
+          await db.from('nurture_enrollments').update({ status: 'unsubscribed', updated_at: ts }).eq('id', s.enrollment_id)
+        }
+      }
+      processed++
+      continue
+    }
+
+    // CareBeds lead-distribution events.
     const col = ev.event ? EVENT_COLUMN[ev.event] : undefined
     if (!col || !ev.lead_id || !ev.buyer_id) continue
-    const ts = ev.timestamp ? new Date(ev.timestamp * 1000).toISOString() : new Date().toISOString()
     // Record the FIRST occurrence only (keeps the earliest event time).
     await db
       .from('lead_distributions')
