@@ -3,7 +3,7 @@ import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
 import { GraduationCap, Check } from 'lucide-react'
 import { TrainingComplianceTool } from '@/components/marketing/TrainingComplianceTool'
-import { CareCertificateDemo } from '@/components/marketing/CareCertificateDemo'
+import { CareCertificateDemo, type TrainingDemoData } from '@/components/marketing/CareCertificateDemo'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import ToolTracker from '@/components/marketing/ToolTracker'
 
@@ -36,7 +36,20 @@ const FAQS = [
   { q: 'What does CQC expect on training?', a: 'CQC expects providers to make sure staff have the skills, competence and up-to-date training to carry out their roles safely, and to be able to evidence this. Inspectors look for a training matrix or system that shows completion and refresher dates, competency checks, and clear action where training is outstanding. This tool is an indicative guide; check your own training matrix and CQC requirements.' },
 ]
 
-export default function MandatoryTrainingCheckerPage() {
+// Pull the same live Care Certificate taster lesson CareStream shows, so the demo
+// on this page always matches the real training module.
+async function getCareCertDemo(): Promise<TrainingDemoData | null> {
+  try {
+    const res = await fetch('https://api.carestreamai.com/public/training/standard-modules/care-certificate/demo?v=2', { next: { revalidate: 3600 } })
+    if (!res.ok) return null
+    return ((await res.json())?.data?.demo ?? null) as TrainingDemoData | null
+  } catch {
+    return null
+  }
+}
+
+export default async function MandatoryTrainingCheckerPage() {
+  const careCertDemo = await getCareCertDemo()
   return (
     <>
       <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={{ __html: JSON.stringify({
@@ -107,7 +120,7 @@ export default function MandatoryTrainingCheckerPage() {
               ))}
             </ul>
           </div>
-          <CareCertificateDemo />
+          <CareCertificateDemo demo={careCertDemo} />
         </div>
       </section>
 
