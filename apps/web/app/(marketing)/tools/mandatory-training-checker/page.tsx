@@ -3,6 +3,7 @@ import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
 import { GraduationCap, Check } from 'lucide-react'
 import { TrainingComplianceTool } from '@/components/marketing/TrainingComplianceTool'
+import { CareCertificateDemo } from '@/components/marketing/CareCertificateDemo'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import ToolTracker from '@/components/marketing/ToolTracker'
 
@@ -81,6 +82,32 @@ export default function MandatoryTrainingCheckerPage() {
 
             <ToolTracker tool="mandatory-training-checker"><TrainingComplianceTool /></ToolTracker>
           </div>
+        </div>
+      </section>
+
+      {/* See the training in action — CareStream Care Certificate demo lesson */}
+      <section className="relative px-6 py-20">
+        <Dots className="absolute left-8 top-12 hidden h-16 w-16 text-brand-pop/25 lg:block" />
+        <div className="mx-auto grid max-w-6xl items-start gap-12 lg:grid-cols-2">
+          <div className="lg:sticky lg:top-24 lg:self-start lg:pt-6">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Close the gaps</p>
+            <h2 className="mt-2 font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-4xl">
+              Found gaps? See how the training actually works
+            </h2>
+            <p className="mt-5 max-w-md text-lg leading-relaxed text-brand-ink-soft">
+              CareStream turns your policies into role-based training your staff will actually finish, mapped to the
+              Care Certificate and mandatory topics, with tracking and evidence built in. Here’s a real lesson to try.
+            </p>
+            <ul className="mt-6 space-y-2.5">
+              {['All 15 Care Certificate standards', 'Available in 60+ languages', 'Adaptive follow-ups for wrong answers', 'Certificates + a live compliance dashboard'].map((p) => (
+                <li key={p} className="flex items-center gap-2.5 text-sm font-medium text-brand-ink">
+                  <span className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand-pop/10"><Check className="h-3 w-3 text-brand-pop" /></span>
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <CareCertificateDemo />
         </div>
       </section>
 

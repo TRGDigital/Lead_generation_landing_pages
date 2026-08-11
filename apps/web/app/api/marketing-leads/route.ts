@@ -71,20 +71,41 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Server error' }, { status: 500 })
   }
 
-  // SendGrid alert
+  // SendGrid alert — always send (uses a template if one is configured, otherwise a plain HTML email)
   const apiKey = process.env.SENDGRID_API_KEY
   const templateId = process.env.SENDGRID_TPL_MARKETING_LEAD
-  const toEmail = process.env.MARKETING_ALERT_EMAIL ?? 'len@crosswayscarehome.co.uk'
+  // Always alert lenny@trgdigital.co.uk, plus any additionally-configured alert address.
+  const configuredAlert = process.env.MARKETING_ALERT_EMAIL?.trim()
+  const toEmail = Array.from(new Set(['lenny@trgdigital.co.uk', ...(configuredAlert ? [configuredAlert] : [])]))
+  const fromEmail = process.env.TRG_FROM_EMAIL ?? process.env.SENDGRID_FROM_EMAIL ?? 'leads@careassura.com'
+  const fromName = 'TRG Digital'
 
-  if (apiKey && templateId) {
+  if (apiKey) {
     sgMail.setApiKey(apiKey)
+    const esc = (s: string) => s.replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c] as string))
+    const common = {
+      to: toEmail,
+      from: { email: fromEmail, name: fromName },
+      replyTo: email,
+    }
     try {
-      await sgMail.send({
-        to: toEmail,
-        from: { email: 'hello@carebeds.co.uk', name: 'CareBeds' },
-        templateId,
-        dynamicTemplateData: { name, email, company, phone, message },
-      })
+      if (templateId) {
+        await sgMail.send({ ...common, templateId, dynamicTemplateData: { name, email, company, phone, message } })
+      } else {
+        await sgMail.send({
+          ...common,
+          subject: `New website enquiry from ${name}${company ? ` (${company})` : ''}`,
+          html: `<h2 style="font-family:sans-serif">New enquiry from the TRG Digital website</h2>
+<table style="font-family:sans-serif;font-size:14px;border-collapse:collapse">
+<tr><td style="padding:4px 12px 4px 0"><strong>Name</strong></td><td>${esc(name)}</td></tr>
+<tr><td style="padding:4px 12px 4px 0"><strong>Email</strong></td><td><a href="mailto:${esc(email)}">${esc(email)}</a></td></tr>
+<tr><td style="padding:4px 12px 4px 0"><strong>Company</strong></td><td>${esc(company ?? '—')}</td></tr>
+<tr><td style="padding:4px 12px 4px 0"><strong>Phone</strong></td><td>${esc(phone ?? '—')}</td></tr>
+</table>
+<p style="font-family:sans-serif;font-size:14px"><strong>Message</strong></p>
+<p style="font-family:sans-serif;font-size:14px;white-space:pre-wrap">${esc(message)}</p>`,
+        })
+      }
     } catch (err) {
       console.error('SendGrid error', err)
       // Don't fail the request — lead is already saved
