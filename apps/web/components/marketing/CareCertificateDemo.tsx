@@ -1,7 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { GraduationCap, Check, X, ArrowLeft, RotateCcw, Globe } from 'lucide-react'
+import { GraduationCap, Check, X, ArrowLeft, RotateCcw, Globe, Send } from 'lucide-react'
+
+const CS_LOGO = 'https://www.carestreamai.com/logo-color.svg'
 
 // Renders the exact same Care Certificate taster lesson CareStream shows on its
 // staff-training page. The data is fetched live from the CareStream API by the page
@@ -30,7 +32,9 @@ export function CareCertificateDemo({ demo }: { demo: TrainingDemoData | null })
   if (!demo?.lesson || !demo?.question) {
     return (
       <div className="rounded-3xl border border-brand-line bg-brand-ink p-8 text-center text-white">
-        <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-white/10"><GraduationCap className="h-5 w-5" /></span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="https://www.carestreamai.com/logo-white.png" alt="CareStream" className="mx-auto h-6 w-auto" />
+        <span className="mx-auto mt-5 flex h-11 w-11 items-center justify-center rounded-xl bg-white/10"><GraduationCap className="h-5 w-5" /></span>
         <p className="mt-4 font-display text-xl font-bold">CareStream Care Certificate training</p>
         <p className="mx-auto mt-2 max-w-sm text-sm text-white/80">All 15 standards, 60+ languages, adaptive follow-ups, certificates and a live compliance dashboard.</p>
         <a href={CS_TRAINING} target="_blank" rel="noopener noreferrer" className="btn-cta mt-5 inline-flex">Try the training <span className="btn-arrow" aria-hidden>→</span></a>
@@ -49,6 +53,11 @@ export function CareCertificateDemo({ demo }: { demo: TrainingDemoData | null })
 
   return (
     <div className="overflow-hidden rounded-3xl border border-brand-line bg-white shadow-card">
+      <div className="flex items-center justify-between gap-3 border-b border-brand-line bg-brand-bg-warm px-5 py-3">
+        <span className="text-[11px] font-bold uppercase tracking-widest text-brand-ink-muted">Demo lesson</span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={CS_LOGO} alt="CareStream" className="h-5 w-auto" />
+      </div>
       {availableLangs.length > 0 && (
         <div className="flex items-center gap-1.5 border-b border-brand-line bg-brand-bg-warm px-5 py-2.5">
           <span className="mr-auto flex items-center gap-1.5 text-xs font-semibold text-brand-ink-muted"><Globe className="h-3.5 w-3.5" /> This lesson in</span>
@@ -133,6 +142,21 @@ export function CareCertificateDemo({ demo }: { demo: TrainingDemoData | null })
           <span className="font-bold">The correct answer is “{Q.options[Q.correct]}”.</span>{' '}
           {Q.explanation ?? 'In the full module, a wrong answer triggers a short follow-up lesson and a fresh question, so the gap is always closed before completion.'}
         </div>
+
+        {answered && !isCorrect && (
+          <div className="mt-3 rounded-xl border border-brand-pop/25 bg-brand-pop/5 p-4">
+            <div className="flex items-center gap-2">
+              <Send className="h-4 w-4 flex-shrink-0 text-brand-pop" />
+              <span className="text-sm font-semibold text-brand-ink">A follow-up has been sent to this staff member.</span>
+            </div>
+            <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">
+              In the CareStream hub, getting a question wrong automatically sends the staff member a short follow-up
+              lesson and a fresh question on the same point. They close the gap before they can finish the module, and
+              every attempt is recorded as evidence for your CQC file.
+            </p>
+          </div>
+        )}
+
         <div className="mt-5 border-t border-brand-line pt-5">
           <p className="text-sm font-semibold text-brand-ink">That’s how the training works, all {demo.total_sections} lessons and {demo.total_questions} questions, in 60+ languages, with certificates.</p>
           <div className="mt-4 flex flex-col gap-3 sm:flex-row">
