@@ -10,7 +10,8 @@ export const metadata: Metadata = {
   description:
     'How TRG Digital commits to its customers: clear promises, how we encourage and act on feedback, how we put things right, and how we protect your data.',
   alternates: { canonical: `${SITE_URL}/our-commitment` },
-  robots: { index: true, follow: true },
+  // Noindexed while it's a demo for approval; flip to index on go-live.
+  robots: { index: false, follow: false },
 }
 
 const PROMISES = [
