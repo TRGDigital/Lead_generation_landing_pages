@@ -27,6 +27,7 @@ const COMPANY = [
   { href: '/blog', label: 'Knowledge Hub' },
   { href: '/contact', label: 'Contact' },
   { href: '/how-it-works', label: 'How it works' },
+  { href: '/our-commitment', label: 'Our commitment' },
   { href: '/refer', label: 'Refer a home' },
 ]
 const PRODUCTS = [

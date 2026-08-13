@@ -14,6 +14,7 @@ export type StaticPage = {
 export const STATIC_PAGES: StaticPage[] = [
   { url: '/', priority: 1.0, changeFrequency: 'weekly' },
   { url: '/how-it-works', priority: 0.8, changeFrequency: 'monthly' },
+  { url: '/our-commitment', priority: 0.5, changeFrequency: 'yearly' },
   { url: '/book-a-demo', priority: 0.8, changeFrequency: 'monthly' },
   { url: '/work', priority: 0.8, changeFrequency: 'monthly' },
   { url: '/work/crossways-care-home', priority: 0.7, changeFrequency: 'monthly' },
@@ -35,6 +36,7 @@ export const STATIC_PAGES: StaticPage[] = [
   { url: '/tools/website-grader', priority: 0.7, changeFrequency: 'monthly' },
   { url: '/tools/cqc-rating-checker', priority: 0.7, changeFrequency: 'monthly' },
   { url: '/tools/google-preview', priority: 0.7, changeFrequency: 'monthly' },
+  { url: '/tools/care-schema-generator', priority: 0.7, changeFrequency: 'monthly' },
   { url: '/about', priority: 0.7, changeFrequency: 'monthly' },
   { url: '/contact', priority: 0.7, changeFrequency: 'monthly' },
   { url: '/blog', priority: 0.9, changeFrequency: 'daily' },
