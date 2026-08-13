@@ -179,29 +179,6 @@ export default function OurCommitmentPage() {
         </div>
       </section>
 
-      {/* Good Business Charter */}
-      <section className="relative overflow-hidden px-6 py-20">
-        <Star className="absolute right-10 top-10 hidden h-14 w-14 rotate-12 text-brand-accent lg:block" />
-        <div className="mx-auto max-w-3xl rounded-2xl border-2 border-brand-ink bg-brand-accent p-8 text-center shadow-[6px_6px_0_0_#2a2620] sm:p-10">
-          <h2 className="font-display text-2xl font-bold uppercase tracking-tight text-brand-ink sm:text-3xl">
-            Held to a higher standard
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-brand-ink/80">
-            We are proud to align our business with the Good Business Charter, a set of ten
-            commitments covering how we treat our customers, our people and our wider community. It is
-            our public promise to do business the right way, and to keep being held to account for it.
-          </p>
-          <a
-            href="https://www.goodbusinesscharter.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-ink px-7 text-sm font-bold uppercase tracking-wide text-white transition-all hover:translate-x-0.5"
-          >
-            About the Good Business Charter
-            <span aria-hidden className="text-brand-accent">→</span>
-          </a>
-        </div>
-      </section>
     </main>
   )
 }
