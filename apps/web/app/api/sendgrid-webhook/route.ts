@@ -35,6 +35,24 @@ type SendGridEvent = {
   lead_id?: string
   buyer_id?: string
   nsend?: string
+  site?: string   // custom_args.site: 'careassura' marks CareAssura's emails (same SendGrid account)
+  csend?: string  // CareAssura claim_nurture_sends id
+}
+
+// SendGrid allows two event webhooks per account and both are taken, so CareAssura's emails share
+// this one. Events tagged site=careassura are forwarded to careassura.com and not processed here.
+async function forwardToCareAssura(events: SendGridEvent[]) {
+  const secret = process.env.NURTURE_FORWARD_SECRET
+  if (!events.length || !secret) return
+  try {
+    await fetch('https://careassura.com/api/claim-nurture?action=sendgrid-event', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-forward-secret': secret },
+      body: JSON.stringify(events),
+    })
+  } catch (e) {
+    console.error('[sendgrid-webhook] forward to careassura failed', e)
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -54,8 +72,10 @@ export async function POST(req: NextRequest) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const db = createServiceClient() as any
   let processed = 0
+  const careassura: SendGridEvent[] = []
 
   for (const ev of events as SendGridEvent[]) {
+    if (ev.site === 'careassura') { careassura.push(ev); continue }
     const ts = ev.timestamp ? new Date(ev.timestamp * 1000).toISOString() : new Date().toISOString()
 
     // Nurture-sequence events (tie back via the nurture_sends id).
@@ -91,5 +111,6 @@ export async function POST(req: NextRequest) {
     processed++
   }
 
-  return NextResponse.json({ ok: true, processed })
+  await forwardToCareAssura(careassura)
+  return NextResponse.json({ ok: true, processed, forwarded: careassura.length })
 }
