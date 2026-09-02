@@ -215,6 +215,18 @@ export async function saveCallbar(id: string, formData: FormData) {
       callbar_phone: String(formData.get('callbar_phone') ?? '').trim(),
       callbar_label: String(formData.get('callbar_label') ?? '').trim() || 'Speak to our team',
       callbar_desktop: formData.get('callbar_desktop') === 'on',
+      callbar_callback_enabled: formData.get('callbar_callback_enabled') === 'on',
+      callbar_callback_note: String(formData.get('callbar_callback_note') ?? '').trim() || null,
+      // Opening hours drive whether a call would actually be answered right now. Stored as
+      // {mon:["09:00","17:00"], ...}; a missing or null day means closed that day.
+      callbar_hours: (() => {
+        const raw = String(formData.get('callbar_hours') ?? '').trim()
+        if (!raw) return null
+        try {
+          const parsed = JSON.parse(raw)
+          return parsed && typeof parsed === 'object' ? parsed : null
+        } catch { return null }
+      })(),
     })
     .eq('id', id)
   if (error) throw new Error(error.message)

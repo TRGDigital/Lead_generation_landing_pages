@@ -41,6 +41,9 @@ export type Website = {
   callbar_phone: string
   callbar_label: string
   callbar_desktop: boolean
+  callbar_callback_enabled: boolean
+  callbar_hours: Record<string, [string, string] | null> | null
+  callbar_callback_note: string | null
   chat_enabled: boolean
   chat_greeting: string
   chat_knowledge: string
