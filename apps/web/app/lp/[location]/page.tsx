@@ -18,10 +18,16 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { location: string } }): Promise<Metadata> {
   const page = await getLocationPage(params.location)
   if (!page) return { title: 'Care homes near you | CareAssura' }
+  // `absolute` stops the root layout appending "| TRG Digital": these pages sit on
+  // careassura.com and speak to families, not to agency clients.
+  const title = page.meta_title ? `${page.meta_title} | CareAssura` : `Care homes in ${page.area_name} | CareAssura`
   return {
-    title: page.meta_title ?? `Care homes in ${page.area_name} | CareAssura`,
+    title: { absolute: title },
     description: page.meta_description ?? `Find and compare brilliant care homes in ${page.area_name}. Free, impartial help from CareAssura.`,
-    robots: { index: true, follow: true },
+    // Promoted pages are destinations for paid traffic. Letting them rank would put them in
+    // competition with careassura.com's own area pages, on the same root domain, for the same
+    // searches, which would undercut the organic growth these pages exist to bridge.
+    robots: page.noindex === false ? { index: true, follow: true } : { index: false, follow: true },
   }
 }
 

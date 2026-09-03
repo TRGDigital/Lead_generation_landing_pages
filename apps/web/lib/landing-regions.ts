@@ -9,6 +9,8 @@
 // town would have missed. Matching on the postcode district (RH16) puts it on the Haywards
 // Heath page where it belongs.
 
+import { buildLandingContent, buildMeta } from '@/lib/landing-content'
+
 export type CareType = 'residential' | 'nursing' | 'homecare'
 
 export type MatchInput = {
@@ -103,9 +105,11 @@ export async function createPageFor(db: any, input: MatchInput) {
       question_set: input.care_type,
       postcode_districts: district ? [district] : null,
       noindex: true,
-      meta_title: `${LABEL[input.care_type]} in ${town}`.replace(/^./, (c) => c.toUpperCase()),
-      meta_description: `Find ${LABEL[input.care_type]} places in ${town}. Tell us what you need and we will match you with homes that have availability.`,
-      content: {},
+      ...buildMeta(town, input.care_type),
+      // Start from the structure that already converts, filled in for this town and care
+      // type, so a new page is never blank. It still wants editing: local detail is what
+      // makes a page feel local.
+      content: buildLandingContent(town, input.care_type),
     })
     .select('id, slug, area_name, care_type, status')
     .single()

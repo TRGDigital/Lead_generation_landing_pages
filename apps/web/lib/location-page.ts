@@ -17,13 +17,15 @@ export type LocationPage = {
   meta_description: string | null
   content: LocationContent
   question_set: string
+  noindex: boolean | null
+  care_type: string | null
 }
 
 export async function getLocationPage(slug: string): Promise<LocationPage | null> {
   const db = createServiceClient() as unknown as any
   const { data } = await db
     .from('location_pages')
-    .select('slug, area_name, meta_title, meta_description, content, question_set')
+    .select('slug, area_name, meta_title, meta_description, content, question_set, noindex, care_type')
     .eq('slug', slug)
     .eq('status', 'published')
     .single()
