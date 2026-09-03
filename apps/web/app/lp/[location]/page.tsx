@@ -28,6 +28,9 @@ export async function generateMetadata({ params }: { params: { location: string 
     // competition with careassura.com's own area pages, on the same root domain, for the same
     // searches, which would undercut the organic growth these pages exist to bridge.
     robots: page.noindex === false ? { index: true, follow: true } : { index: false, follow: true },
+    // CareAssura's own icon, not the agency's: to a family this is a CareAssura page and the
+    // tab should say so.
+    icons: { icon: '/careassura-favicon.webp', apple: '/careassura-favicon.webp' },
   }
 }
 
