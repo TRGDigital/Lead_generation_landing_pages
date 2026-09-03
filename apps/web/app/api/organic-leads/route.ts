@@ -97,6 +97,13 @@ export async function POST(req: NextRequest) {
 
   const leadId: string | null = inserted?.id ?? null
 
+  // A call back is emailed once, complete with the follow-up answers, either when the visitor
+  // finishes the questions or when /api/cron/callback-notify stops waiting. Emailing here would
+  // send a half-finished notification and then a second one with the useful part.
+  if (trigger === 'callback') {
+    return NextResponse.json({ ok: true, id: leadId }, { headers: CORS })
+  }
+
   // Email alert — organic enquiries are TRG-branded, sent to TRG and to the client
   const apiKey = process.env.SENDGRID_API_KEY
   // Prefer a TRG sender once trgdigital.co.uk is authenticated in SendGrid; fall back to the verified CareAssura sender.

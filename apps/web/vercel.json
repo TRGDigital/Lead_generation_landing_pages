@@ -5,6 +5,7 @@
     "app/api/funding-guide/route.ts": { "maxDuration": 60 }
   },
   "crons": [
+    { "path": "/api/cron/callback-notify", "schedule": "* * * * *" },
     { "path": "/api/cron/google-ads-sync", "schedule": "0 8 * * *" },
     { "path": "/api/cron/daily-summary",   "schedule": "0 8 * * *" },
     { "path": "/api/cron/sla-alerts",      "schedule": "0 9 * * *" },
