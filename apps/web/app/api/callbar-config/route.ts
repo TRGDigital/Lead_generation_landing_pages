@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
   const slug = req.nextUrl.searchParams.get('site') || ''
   const site = slug ? await getWebsiteBySlug(slug) : null
   if (!site || !site.callbar_enabled || !site.callbar_phone) {
-    return NextResponse.json({ enabled: false }, { headers: { ...CORS, 'Cache-Control': 'public, max-age=120' } })
+    return NextResponse.json({ enabled: false }, { headers: { ...CORS, 'Cache-Control': 'public, max-age=30' } })
   }
   return NextResponse.json(
     {
@@ -34,6 +34,6 @@ export async function GET(req: NextRequest) {
       callbackNote: site.callbar_callback_note || null,
       orgName: site.name || null,
     },
-    { headers: { ...CORS, 'Cache-Control': 'public, max-age=120' } },
+    { headers: { ...CORS, 'Cache-Control': 'public, max-age=30' } },
   )
 }

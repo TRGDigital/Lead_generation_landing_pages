@@ -272,9 +272,12 @@
         body: JSON.stringify({
           site: site,
           trigger: 'callback',
-          name: f.name.value.trim(),
-          phone: f.phone.value.trim(),
-          message: f.message.value.trim() || null,
+          // Read by id, not f.name: on a form element `.name` is the form's own name
+          // attribute, not the field called "name", so f.name.value threw and the request
+          // was never sent.
+          name: (f.querySelector('#trgcb-n') || {}).value.trim(),
+          phone: (f.querySelector('#trgcb-p') || {}).value.trim(),
+          message: ((f.querySelector('#trgcb-m') || {}).value || '').trim() || null,
           consent: true,
           pageUrl: location.href,
           answers: { via: via, office: open === false ? 'closed' : open === true ? 'open' : 'unknown' },
