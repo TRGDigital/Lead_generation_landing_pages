@@ -10,11 +10,22 @@ import PageNotifyEmails from '@/components/admin/PageNotifyEmails'
 export const dynamic = 'force-dynamic'
 
 type PageRow = {
+  id: string
   slug: string
   area_name: string
   status: string
   question_set: string | null
   notify_emails: string[] | null
+  postcode_districts: string[] | null
+}
+
+type SeatRow = {
+  page_id: string
+  home_name: string | null
+  town: string | null
+  active: boolean
+  leads_total: number
+  last_lead_at: string | null
 }
 
 export default async function LandingPagesAdmin({ searchParams }: { searchParams: { created?: string } }) {
@@ -24,10 +35,20 @@ export default async function LandingPagesAdmin({ searchParams }: { searchParams
   const db = createServiceClient() as any
   const { data } = await db
     .from('location_pages')
-    .select('slug, area_name, status, question_set, notify_emails')
+    .select('id, slug, area_name, status, question_set, notify_emails, postcode_districts')
     .order('area_name', { ascending: true })
 
   const pages = (data ?? []) as unknown as PageRow[]
+
+  // Which claimed homes each page serves. This is the answer to "who is this page working
+  // for", which is otherwise buried in the database.
+  const { data: seatData } = await db
+    .from('location_page_homes')
+    .select('page_id, home_name, town, active, leads_total, last_lead_at')
+    .order('last_lead_at', { ascending: true, nullsFirst: true })
+  const seats = (seatData ?? []) as unknown as SeatRow[]
+  const seatsByPage = new Map<string, SeatRow[]>()
+  for (const s of seats) seatsByPage.set(s.page_id, [...(seatsByPage.get(s.page_id) ?? []), s])
   const created = searchParams?.created
 
   return (
@@ -139,6 +160,40 @@ export default async function LandingPagesAdmin({ searchParams }: { searchParams
                   <PageTemplateSelect slug={p.slug} current={p.question_set ?? 'residential'} />
                   <PageStatusToggle slug={p.slug} status={p.status} />
                 </div>
+              </div>
+              {/* The claimed homes this page serves, in rota order: next to receive a lead
+                  is first. Blank means the page is running for nobody yet. */}
+              <div className="mt-3 border-t pt-3 text-xs">
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <span className="font-semibold text-slate-700">Claimed profiles on this page</span>
+                  {p.postcode_districts?.length ? (
+                    <span className="text-muted-foreground">covers {p.postcode_districts.join(', ')}</span>
+                  ) : (
+                    <span className="text-amber-700">no postcode area set, so no new claim can match it</span>
+                  )}
+                </div>
+                {(seatsByPage.get(p.id) ?? []).length === 0 ? (
+                  <p className="mt-1 text-muted-foreground">
+                    None yet. Leads from this page have nobody to go to and will wait in Leads to be placed by hand.
+                  </p>
+                ) : (
+                  <ul className="mt-1.5 space-y-1">
+                    {(seatsByPage.get(p.id) ?? []).map((s, i) => (
+                      <li key={`${p.id}-${s.home_name}-${i}`} className="flex flex-wrap items-center gap-2">
+                        <span className={s.active ? 'font-medium text-slate-800' : 'text-muted-foreground line-through'}>
+                          {s.home_name || 'Unnamed home'}
+                        </span>
+                        {s.town && <span className="text-muted-foreground">{s.town}</span>}
+                        {s.active && i === 0 && <span className="rounded-full bg-green-100 px-2 py-0.5 text-[11px] font-medium text-green-800">next in the rota</span>}
+                        {!s.active && <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] text-slate-600">paused</span>}
+                        <span className="text-muted-foreground">
+                          {s.leads_total} lead{s.leads_total === 1 ? '' : 's'}
+                          {s.last_lead_at ? ` · last ${new Date(s.last_lead_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}` : ' · none yet'}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
               <PageNotifyEmails slug={p.slug} initial={p.notify_emails ?? []} />
             </div>
