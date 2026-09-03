@@ -4,11 +4,12 @@ import { LocationLeadSchema } from '@lib/schemas'
 import { sendTemplateEmail } from '@lib/sendgrid'
 import { checkRateLimit, checkIdempotency, setIdempotency } from '@/lib/rate-limit'
 import { careTypeLabel } from '@/lib/care-finder'
+import { pickHomeForLead, recordLeadSent } from '@/lib/landing-distribute'
 
 // CareAssura location landing pages capture leads that are NOT yet tied to a
 // single care home — they land unassigned in /admin/leads, tagged by area, ready
 // for the distribution tool.
-type LocationRow = { area_name: string; notify_emails: string[] | null }
+type LocationRow = { id: string; area_name: string; notify_emails: string[] | null }
 type LeadRow = { id: string }
 
 export async function POST(req: NextRequest) {
@@ -53,7 +54,7 @@ async function handle(req: NextRequest) {
   // Resolve the area name from the published location page.
   const locResult = await supabase
     .from('location_pages')
-    .select('area_name, notify_emails')
+    .select('id, area_name, notify_emails')
     .eq('slug', data.locationSlug)
     .eq('status', 'published')
     .single()
@@ -100,6 +101,41 @@ async function handle(req: NextRequest) {
 
   if (data.idempotencyKey) await setIdempotency(data.idempotencyKey)
 
+  // Hand the lead to a claimed home in this area: the one with availability that has waited
+  // longest. It goes through CareAssura's own enquiry route, so the client gets it in their
+  // dashboard and their inbox exactly like any other enquiry, with the source marked as a
+  // promoted page rather than dressed up as organic.
+  let assigned: { home_id: string; home_name: string | null } | null = null
+  try {
+    const pick = await pickHomeForLead(supabase, loc.id)
+    if (pick) {
+      const base = process.env.CAREASSURA_URL || 'https://careassura.com'
+      const r = await fetch(`${base}/api/enquiry`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          care_home_id: pick.home_id,
+          sender_name: data.fullName,
+          sender_email: data.email,
+          sender_phone: data.phone,
+          message: data.message ?? `Enquiry from the ${loc.area_name} page.`,
+          care_type_required: data.careType ?? null,
+          source: 'landing',
+          extra: { area: loc.area_name, page: data.locationSlug, timeframe: data.moveInTimeframe ?? null },
+        }),
+      })
+      if (r.ok) {
+        await recordLeadSent(supabase, pick.id)
+        assigned = { home_id: pick.home_id, home_name: pick.home_name }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await (supabase.from('leads') as any).update({ care_home_id: pick.home_id }).eq('id', lead.id)
+      }
+    }
+  } catch (e) {
+    // The lead is already saved and still shows in /admin/leads for distribution by hand.
+    console.error('[api/location-leads] distribution failed:', e)
+  }
+
   // Per-page recipients (set in /admin/pages) win; blank falls back to the
   // site-wide NOTIFY_EMAIL inbox.
   const recipients = loc.notify_emails?.length ? loc.notify_emails : [process.env.NOTIFY_EMAIL].filter(Boolean) as string[]
@@ -127,5 +163,7 @@ async function handle(req: NextRequest) {
   // buyers an incomplete enquiry. Distribution fires on quiz COMPLETION in
   // /api/location-leads/enrich (completed=true), once all answers are saved.
 
-  return NextResponse.json({ success: true, leadId: lead.id })
+  // `assigned` says which home the rota gave it to, or null when nobody in the area had a
+  // bed free — in which case it stays unassigned in /admin/leads for you to place by hand.
+  return NextResponse.json({ success: true, leadId: lead.id, assigned })
 }
