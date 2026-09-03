@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429, headers: CORS })
   }
 
-  const { error } = await db.from('organic_leads').insert({
+  const { data: inserted, error } = await db.from('organic_leads').insert({
     website_id: site.id,
     name: name ?? null,
     email: email || null,
@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
     consent: !!consent,
     answers: answers && Object.keys(answers).length ? answers : null,
     ip_address: ip,
-  })
+  }).select('id').single()
   if (error) {
     console.error('organic_leads insert error', error)
     return NextResponse.json({ error: 'Server error' }, { status: 500, headers: CORS })
@@ -94,6 +94,8 @@ export async function POST(req: NextRequest) {
   if (trigger === 'call') {
     return NextResponse.json({ ok: true }, { headers: CORS })
   }
+
+  const leadId: string | null = inserted?.id ?? null
 
   // Email alert — organic enquiries are TRG-branded, sent to TRG and to the client
   const apiKey = process.env.SENDGRID_API_KEY
@@ -167,5 +169,5 @@ ${message ? `<p style="margin:16px 0 4px;font-size:13px;color:#6b6358"><strong>M
     }
   }
 
-  return NextResponse.json({ ok: true }, { headers: CORS })
+  return NextResponse.json({ ok: true, id: leadId }, { headers: CORS })
 }

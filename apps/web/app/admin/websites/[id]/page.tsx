@@ -109,7 +109,10 @@ export default async function WebsiteDetailPage({ params, searchParams }: Props)
 
   const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000
   const leads7d = leads.filter((l) => new Date(l.created_at).getTime() >= weekAgo).length
+  // A tap on a phone number is not proof of a call: the visitor may never have pressed dial.
+  // Call backs are the ones with a name and number attached, which is what you can act on.
   const callClicks = leads.filter((l) => l.trigger === 'call').length
+  const callbacks = leads.filter((l) => l.trigger === 'callback').length
   const snippet = `<script src="${WIDGET_ORIGIN}/embed.js" data-site="${site.slug}" defer></script>`
 
   return (
@@ -141,7 +144,11 @@ export default async function WebsiteDetailPage({ params, searchParams }: Props)
         </div>
         <div className="rounded-2xl border border-brand-line bg-white p-4">
           <p className="font-display text-2xl font-bold text-brand-ink">{callClicks}</p>
-          <p className="text-xs text-brand-ink-muted">Phone calls (call bar)</p>
+          <p className="text-xs text-brand-ink-muted">Taps on the phone number</p>
+        </div>
+        <div className="rounded-2xl border border-brand-line bg-white p-4">
+          <p className="font-display text-2xl font-bold text-brand-ink">{callbacks}</p>
+          <p className="text-xs text-brand-ink-muted">Call backs requested</p>
         </div>
         <div className="rounded-2xl border border-brand-line bg-white p-4">
           <p className="font-display text-2xl font-bold text-brand-ink">{leads7d}</p>
@@ -253,7 +260,22 @@ export default async function WebsiteDetailPage({ params, searchParams }: Props)
                 <tbody>
                   {leads.map((l) => (
                     <tr key={l.id} className="border-b border-brand-line/50 last:border-0">
-                      <td className="px-4 py-3 font-medium text-brand-ink">{l.name || '—'}</td>
+                      <td className="px-4 py-3 font-medium text-brand-ink">
+                        {l.name || '—'}
+                        {/* What they told us after asking for a call back, so the manager can
+                            see the picture without opening their email. */}
+                        {l.answers && Object.keys(l.answers).filter((k) => !['via', 'office', '_sent'].includes(k)).length > 0 && (
+                          <span className="mt-1 block text-xs font-normal text-brand-ink-muted">
+                            {Object.entries(l.answers)
+                              .filter(([k]) => !['via', 'office', '_sent'].includes(k))
+                              .map(([k, v]) => `${k}: ${v}`)
+                              .join(' · ')}
+                          </span>
+                        )}
+                        {l.trigger === 'callback' && l.answers?.office === 'closed' && (
+                          <span className="mt-1 block text-xs font-normal text-amber-700">Came in while closed</span>
+                        )}
+                      </td>
                       <td className="px-4 py-3 text-brand-ink-soft">
                         {l.email && <a href={`mailto:${l.email}`} className="text-brand-accent hover:underline">{l.email}</a>}
                         {l.email && l.phone && <span className="text-brand-ink-muted"> · </span>}

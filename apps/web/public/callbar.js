@@ -109,6 +109,78 @@
     openModal(cfg, tel, via);
   }
 
+
+  // ── Enrichment ────────────────────────────────────────────────────────────
+  // Asked only AFTER the call back is safely captured. Each answer is saved as it is tapped,
+  // so someone who stops half way still leaves behind what they did tell us. Four questions,
+  // one tap each: any more and it stops being a conversation and becomes a form.
+  var QUESTIONS = [
+    { k: 'Who is the care for', a: ['My mum', 'My dad', 'My husband or wife', 'Myself', 'Someone else'] },
+    { k: 'When is it needed', a: ['As soon as possible', 'Within a month', 'In 1 to 3 months', 'Just looking ahead'] },
+    { k: 'Had a needs assessment', a: ['Yes', 'No', 'Not sure'] },
+    { k: 'How it will be paid for', a: ['Self funding', 'Help from the council', 'NHS funded', 'Not sure yet'] },
+  ];
+
+  function saveDetail(leadId, answers, final) {
+    try {
+      fetch(origin + '/api/lead-detail', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({ site: site, leadId: leadId, answers: answers, final: !!final }),
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
+  function runEnrichment(box, cfg, leadId, when, open, close) {
+    var idx = 0;
+    var given = {};
+    var color = cfg.color || '#F0532B';
+
+    // Leaving early still counts: send whatever they answered so it reaches the provider.
+    var finish = function () {
+      if (Object.keys(given).length) saveDetail(leadId, {}, true);
+      thanks();
+    };
+    var thanks = function () {
+      box.innerHTML =
+        '<div class="done"><h2>Thank you</h2><p class="sub">' + esc(cfg.orgName || 'The team') + ' will call you back'
+        + (when && open === false ? ' ' + esc(when) : ' shortly') + '.</p></div>';
+      setTimeout(close, 2600);
+    };
+
+    var render = function () {
+      if (idx >= QUESTIONS.length) { finish(); return; }
+      var q = QUESTIONS[idx];
+      box.innerHTML =
+        '<button class="x" aria-label="Close">&times;</button>'
+        + '<p class="step">Question ' + (idx + 1) + ' of ' + QUESTIONS.length + '</p>'
+        + '<h2>' + esc(q.k) + '?</h2>'
+        + '<p class="sub">This is optional, it just helps them prepare before they ring.</p>'
+        + '<div class="opts">' + q.a.map(function (o, i) {
+            return '<button class="opt" data-i="' + i + '">' + esc(o) + '</button>';
+          }).join('') + '</div>'
+        + '<button class="skip">Skip, that’s everything</button>';
+
+      box.querySelectorAll('.opt').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var val = q.a[+b.getAttribute('data-i')];
+          given[q.k] = val;
+          var patch = {}; patch[q.k] = val;
+          // Saved immediately, one answer at a time.
+          saveDetail(leadId, patch, idx === QUESTIONS.length - 1);
+          idx++;
+          render();
+        });
+      });
+      var sk = box.querySelector('.skip');
+      if (sk) sk.addEventListener('click', finish);
+      var x = box.querySelector('.x');
+      if (x) x.addEventListener('click', finish);
+    };
+    render();
+  }
+
   function openModal(cfg, tel, via) {
     if (document.getElementById('trgcb-modal')) return;
     var open = officeOpen(cfg);
@@ -138,7 +210,12 @@
       + '#trgcb-modal button.send[disabled]{opacity:.6;cursor:default}'
       + '#trgcb-modal .x{float:right;background:none;border:0;font-size:22px;line-height:1;color:#a8a29e;cursor:pointer;padding:0 0 0 12px}'
       + '#trgcb-modal .closed{background:#fef3c7;color:#92400e;border-radius:8px;padding:8px 10px;font-size:12.5px;margin:0 0 14px}'
-      + '#trgcb-modal .done{text-align:center;padding:18px 4px}';
+      + '#trgcb-modal .done{text-align:center;padding:18px 4px}'
+      + '#trgcb-modal .step{margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#a8a29e}'
+      + '#trgcb-modal .opts{display:flex;flex-direction:column;gap:8px;margin-top:14px}'
+      + '#trgcb-modal .opt{width:100%;text-align:left;background:#fff;border:1.5px solid #d6d3d1;border-radius:10px;padding:13px 14px;font-size:15px;font-family:inherit;color:#1c1917;cursor:pointer}'
+      + '#trgcb-modal .opt:hover{border-color:' + color + ';background:#fafaf9}'
+      + '#trgcb-modal .skip{display:block;width:100%;margin-top:14px;background:none;border:0;color:#78716c;font-size:13px;text-decoration:underline;cursor:pointer;font-family:inherit}';
     document.head.appendChild(st);
 
     var callBtn = '<a class="call ' + (preferCallback ? 'secondary' : 'primary') + '" href="tel:' + esc(tel) + '" data-act="call">Call ' + esc(cfg.phone) + ' now</a>';
@@ -184,19 +261,33 @@
       e.preventDefault();
       var btn = f.querySelector('button.send');
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
-      track({
-        site: site,
-        trigger: 'callback',
-        name: f.name.value.trim(),
-        phone: f.phone.value.trim(),
-        message: f.message.value.trim() || null,
-        consent: true,
-        pageUrl: location.href,
-        answers: { via: via, office: open === false ? 'closed' : open === true ? 'open' : 'unknown' },
-      });
       var box = wrap.querySelector('.box');
-      if (box) box.innerHTML = '<div class="done"><h2>Thank you</h2><p class="sub">' + esc(cfg.orgName || 'The team') + ' will call you back' + (when && open === false ? ' ' + esc(when) : ' shortly') + '.</p></div>';
-      setTimeout(close, 3200);
+
+      // Capture first. The lead is saved and emailed on this request alone, so the extra
+      // questions below can never cost us the lead.
+      fetch(origin + '/api/organic-leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+          site: site,
+          trigger: 'callback',
+          name: f.name.value.trim(),
+          phone: f.phone.value.trim(),
+          message: f.message.value.trim() || null,
+          consent: true,
+          pageUrl: location.href,
+          answers: { via: via, office: open === false ? 'closed' : open === true ? 'open' : 'unknown' },
+        }),
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (out) {
+          if (box && out && out.id) runEnrichment(box, cfg, out.id, when, open, close);
+          else if (box) { box.innerHTML = '<div class="done"><h2>Thank you</h2><p class="sub">' + esc(cfg.orgName || 'The team') + ' will call you back' + (when && open === false ? ' ' + esc(when) : ' shortly') + '.</p></div>'; setTimeout(close, 3000); }
+        })
+        .catch(function () {
+          if (box) { box.innerHTML = '<div class="done"><h2>Thank you</h2><p class="sub">' + esc(cfg.orgName || 'The team') + ' will call you back shortly.</p></div>'; setTimeout(close, 3000); }
+        });
     });
   }
 

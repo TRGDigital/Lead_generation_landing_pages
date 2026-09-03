@@ -109,6 +109,7 @@ export type OrganicLead = {
   trigger: string | null
   page_url: string | null
   consent: boolean
+  answers: Record<string, string> | null
   created_at: string
 }
 
