@@ -19,7 +19,7 @@ import {
   Wrench,
   Mail,
 } from 'lucide-react'
-import { ChevronDown, Target, Linkedin, Tags } from 'lucide-react'
+import { ChevronDown, Target, Linkedin, Tags, Wallet, Trophy, ListTodo } from 'lucide-react'
 import AdminNavLink from './AdminNavLink'
 import TrgLogo from './TrgLogo'
 
@@ -75,6 +75,9 @@ const navGroups: NavGroup[] = [
       { href: 'https://trg-lead-engine.vercel.app/', icon: <Target className="h-4 w-4" />, label: 'Lead Engine', external: true },
       { href: 'https://trg-linkedin-content.vercel.app/', icon: <Linkedin className="h-4 w-4" />, label: 'LinkedIn Content', external: true },
       { href: 'https://meta-generator-trgdigitals-projects.vercel.app/', icon: <Tags className="h-4 w-4" />, label: 'Meta Generator', external: true },
+      { href: 'https://taskboard-five-roan.vercel.app/', icon: <ListTodo className="h-4 w-4" />, label: 'Taskboard', external: true },
+      { href: 'https://cpd-keyword-tool.vercel.app/leaderboard', icon: <Trophy className="h-4 w-4" />, label: 'CPD Leaderboard', external: true },
+      { href: 'https://budget-planner-lilac-two.vercel.app/', icon: <Wallet className="h-4 w-4" />, label: 'Budget Planner', external: true },
     ],
   },
   {
