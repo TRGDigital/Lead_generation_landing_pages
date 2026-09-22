@@ -12,7 +12,7 @@ export const revalidate = 3600
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.trgdigital.co.uk'
 
 const META: Metadata = {
-  title: 'Our Work — Care Home Case Studies | TRG Digital',
+  title: 'Our Work: Care Provider Case Studies',
   description:
     'How TRG Digital builds new websites for care and nursing homes and uses the CQC website grader, local SEO and PPC landing pages to turn online searches into enquiries and fill empty beds faster.',
   alternates: { canonical: `${SITE_URL}/work` },

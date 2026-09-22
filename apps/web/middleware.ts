@@ -19,6 +19,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
+  // Blog addresses are lowercase; permanently redirect any older capitalised links.
+  if (pathname.startsWith('/blog/') && pathname !== pathname.toLowerCase() && !pathname.startsWith('/blog/category/')) {
+    const url = request.nextUrl.clone()
+    url.pathname = pathname.toLowerCase()
+    return NextResponse.redirect(url, 308)
+  }
+
   if (!pathname.startsWith('/admin') && !pathname.startsWith('/portal')) {
     return NextResponse.next()
   }

@@ -4,7 +4,7 @@ import { CheckCircle2, PhoneCall, Mail } from 'lucide-react'
 import { Star, Squiggle } from '@/components/marketing/Decor'
 
 export const metadata: Metadata = {
-  title: 'Book a free demo — TRG Digital',
+  title: 'Book a Free Demo',
   description:
     'Pick a time that suits you and we will walk you through exactly what TRG Digital would look like for your care home: websites, SEO, enquiry tools and software.',
   alternates: { canonical: 'https://www.trgdigital.co.uk/book-a-demo' },

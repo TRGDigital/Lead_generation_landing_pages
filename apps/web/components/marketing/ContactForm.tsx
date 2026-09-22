@@ -8,12 +8,14 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { CheckCircle } from 'lucide-react'
+import { getAttribution, HEARD_ABOUT_OPTIONS } from '@/lib/attribution'
 
 const schema = z.object({
   name: z.string().min(2, 'Please enter your name'),
   email: z.string().email('Please enter a valid email address'),
   company: z.string().optional(),
   phone: z.string().optional(),
+  heard_about: z.string().optional(),
   message: z.string().min(10, 'Please tell us a bit more (at least 10 characters)'),
   // honeypot, must stay empty
   website: z.string().max(0, 'Bot detected').optional(),
@@ -39,7 +41,7 @@ export default function ContactForm({ bare = false }: { bare?: boolean }) {
         const res = await fetch('/api/marketing-leads', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(values),
+          body: JSON.stringify({ ...values, heard_about: values.heard_about || undefined, ...getAttribution() }),
         })
         const json = await res.json()
         if (!res.ok) {
@@ -94,7 +96,7 @@ export default function ContactForm({ bare = false }: { bare?: boolean }) {
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="space-y-1.5">
-          <Label htmlFor="company">Care home / group name</Label>
+          <Label htmlFor="company">Care provider or group name</Label>
           <Input id="company" {...register('company')} placeholder="Sunrise Care Group" />
         </div>
         <div className="space-y-1.5">
@@ -108,10 +110,25 @@ export default function ContactForm({ bare = false }: { bare?: boolean }) {
         <Textarea
           id="message"
           {...register('message')}
-          placeholder="Tell us about your home, how many beds you have, and what you'd like help with..."
+          placeholder="Tell us about your care service and what you'd like help with..."
           rows={5}
         />
         {errors.message && <p className="text-xs text-destructive">{errors.message.message}</p>}
+      </div>
+
+      <div className="space-y-1.5">
+        <Label htmlFor="heard_about">How did you hear about us?</Label>
+        <select
+          id="heard_about"
+          {...register('heard_about')}
+          defaultValue=""
+          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        >
+          <option value="">Please choose (optional)</option>
+          {HEARD_ABOUT_OPTIONS.map((o) => (
+            <option key={o} value={o}>{o}</option>
+          ))}
+        </select>
       </div>
 
       {serverError && (

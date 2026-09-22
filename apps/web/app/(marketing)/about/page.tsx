@@ -72,6 +72,9 @@ export default function AboutPage() {
                 '@id': `${SITE_URL}/#len-burgess`,
                 name: 'Len Burgess',
                 jobTitle: 'Founder',
+                description:
+                  'Founder of TRG Digital, with more than 20 years in the digital sector and experience working in the care sector with nursing homes and care homes.',
+                knowsAbout: ['Website development', 'Search engine optimisation', 'Digital marketing', 'UK care sector'],
                 worksFor: { '@id': `${SITE_URL}/#organization` },
                 sameAs: ['https://www.linkedin.com/in/len-burgess-262b0833'],
               },
@@ -225,9 +228,10 @@ export default function AboutPage() {
               </h2>
               <div className="mt-5 space-y-4 text-base leading-relaxed text-brand-ink-soft">
                 <p>
-                  Len has spent more than a decade in SEO and digital marketing, working data-first: read the
-                  numbers, apply best practice, test, and repeat until it ranks. TRG Digital is that discipline
-                  pointed at one sector, care.
+                  Len has worked in the digital sector for more than 20 years, across websites, SEO and digital
+                  marketing, and in the care sector for a number of years, with nursing homes and care homes. He
+                  works data-first: read the numbers, apply best practice, test, and repeat until it ranks. TRG
+                  Digital is that discipline pointed at one sector, care.
                 </p>
                 <p>
                   The agency grew out of the care sector itself. Its first websites, tools and campaigns were

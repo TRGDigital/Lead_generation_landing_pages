@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { Check, ArrowRight } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
-import { SECTORS, COLLECTION_SERVICES, getSector, getCollectionService } from '@/lib/sectors'
+import { SECTORS, COLLECTION_SERVICES, getSector, getCollectionService, titleCase } from '@/lib/sectors'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 
 export const revalidate = 3600
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: { sector: string; s
   if (!sector || !svc) return {}
   const lower = sector.name.toLowerCase()
   return applyPageSeo(`/${sector.slug}/${svc.slug}`, {
-    title: `${svc.name} for ${sector.name}`,
+    title: `${titleCase(svc.name)} for ${titleCase(sector.name)}`,
     description: `Specialist ${svc.name.toLowerCase()} for ${lower}. ${svc.intro}`,
     alternates: { canonical: `${SITE_URL}/${sector.slug}/${svc.slug}` },
     robots: { index: true, follow: true },
@@ -114,11 +114,11 @@ export default function SectorService({ params }: { params: { sector: string; se
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
           <div>
             <h2 className="font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-4xl">
-              {svc.name} that fills places
+              {svc.name} that {sector.outcome}
             </h2>
             <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">
               We tailor our {svc.name.toLowerCase()} to the realities of {lower}, so the work goes straight to the
-              outcome that matters: more quality enquiries, and more filled places. Explore the detail on our{' '}
+              outcome that matters: more quality enquiries, and {sector.results}. Explore the detail on our{' '}
               <Link href={svc.mainHref} className="font-semibold text-brand-pop underline-offset-2 hover:underline">{svc.name.toLowerCase()} page</Link>,
               or see everything we do for{' '}
               <Link href={`/${sector.slug}`} className="font-semibold text-brand-pop underline-offset-2 hover:underline">{lower}</Link>.

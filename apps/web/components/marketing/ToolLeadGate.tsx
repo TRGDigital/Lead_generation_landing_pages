@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, type ReactNode } from 'react'
+import { getAttribution } from '@/lib/attribution'
 import { Lock, Loader2, Printer, Check } from 'lucide-react'
 
 // Reusable email gate for the care-manager tools. The headline result stays free
@@ -40,6 +41,7 @@ export function ToolLeadGate({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          ...getAttribution(),
           name: name.trim(),
           email: email.trim(),
           company: company.trim() || undefined,

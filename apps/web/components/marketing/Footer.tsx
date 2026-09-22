@@ -5,7 +5,7 @@ import { SERVICES } from '@/lib/services'
 import { Star } from './Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
-const MARQUEE = ['More enquiries', 'Fewer empty beds', 'Built only for care']
+const MARQUEE = ['More enquiries', 'Fewer empty beds', 'More carers', 'Built only for care']
 
 // One copy of the scrolling statement; two side by side make a seamless loop.
 function MarqueeTrack() {
@@ -74,7 +74,7 @@ export default function Footer() {
               <ManagedImage src="/trg-digital-footer.png" alt="TRG Digital" width={4167} height={967} className="h-9 w-auto" />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
-              A specialist digital marketing agency for the UK care sector, more enquiries, fewer empty beds.
+              A specialist digital marketing agency for the UK care sector: more enquiries from families, fewer empty beds and more carers.
             </p>
             <p className="mt-4 flex items-start gap-2 text-sm text-white/60">
               <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-accent" />

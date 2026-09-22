@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { ArrowRight } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
-import { SECTORS, COLLECTION_SERVICES, getSector } from '@/lib/sectors'
+import { SECTORS, COLLECTION_SERVICES, getSector, titleCase } from '@/lib/sectors'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 
 export const revalidate = 3600
@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: { params: { sector: string } 
   const sector = getSector(params.sector)
   if (!sector) return {}
   return applyPageSeo(`/${sector.slug}`, {
-    title: `${sector.name} marketing & websites`,
-    description: `Specialist marketing, websites and enquiry generation for ${sector.name.toLowerCase()}. We help ${sector.audience} get found, build trust and fill places with quality enquiries.`,
+    title: `${titleCase(sector.name)} Marketing & Websites`,
+    description: `Specialist marketing, websites and enquiry generation for ${sector.name.toLowerCase()}. We help ${sector.audience} get found, build trust and win quality enquiries.`,
     alternates: { canonical: `${SITE_URL}/${sector.slug}` },
     robots: { index: true, follow: true },
   })
@@ -69,14 +69,14 @@ export default function SectorHub({ params }: { params: { sector: string } }) {
               src="/hero-resident.jpg"
               width={1200}
               height={686}
-              alt="A resident enjoying their care home, the families we help providers reach"
+              alt={`Marketing and websites for ${sector.name.toLowerCase()}`}
               sizes="(max-width:1024px) 100vw, 50vw"
               className="h-auto w-full rounded-2xl border border-brand-line object-cover shadow-card"
               priority
             />
             <div className="absolute -bottom-5 -left-5 hidden rounded-xl border border-brand-line bg-white px-4 py-3 shadow-card sm:block">
               <p className="font-display text-lg font-bold text-brand-ink">More enquiries</p>
-              <p className="text-xs text-brand-ink-muted">Fewer empty places</p>
+              <p className="text-xs text-brand-ink-muted">{sector.badge}</p>
             </div>
           </div>
         </div>
@@ -133,7 +133,7 @@ export default function SectorHub({ params }: { params: { sector: string } }) {
         <Burst className="absolute -bottom-10 right-1/4 hidden h-40 w-40 text-white/15 sm:block" />
         <div className="relative mx-auto max-w-3xl">
           <h2 className="font-display text-3xl font-bold uppercase leading-[1.05] tracking-tight sm:text-4xl">
-            Ready to fill more places?
+            {sector.cta}
           </h2>
           <p className="mx-auto mt-5 max-w-xl leading-relaxed text-white/85">
             Tell us about your {sector.singular} and we will show you exactly how to get found and grow your enquiries.

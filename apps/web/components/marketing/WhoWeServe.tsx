@@ -20,7 +20,7 @@ export function WhoWeServe() {
             We work with care providers right across the sector. Find the marketing, websites and enquiry generation built for yours.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-7">
           {SECTORS.map((s) => (
             <Link
               key={s.slug}

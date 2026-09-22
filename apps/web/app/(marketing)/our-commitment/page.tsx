@@ -6,7 +6,7 @@ import { Star, Squiggle, Dots } from '@/components/marketing/Decor'
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.trgdigital.co.uk'
 
 export const metadata: Metadata = {
-  title: 'Our Commitment to Customers | TRG Digital',
+  title: 'Our Commitment to Customers',
   description:
     'How TRG Digital commits to its customers: clear promises, how we encourage and act on feedback, how we put things right, and how we protect your data.',
   alternates: { canonical: `${SITE_URL}/our-commitment` },

@@ -29,7 +29,7 @@ export async function generateMetadata({
   const cs = getCaseStudy(slug)
   if (!cs) return {}
   const META: Metadata = {
-    title: `${cs.name} — Case Study | TRG Digital`,
+    title: `${cs.name} Case Study`,
     description: `How TRG Digital built a new website for ${cs.name} and used the CQC website grader, local SEO and PPC landing pages to turn online searches into enquiries and fill empty beds faster.`,
     alternates: { canonical: `${SITE_URL}/work/${cs.slug}` },
     robots: { index: true, follow: true },

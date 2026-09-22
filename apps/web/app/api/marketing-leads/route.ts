@@ -11,7 +11,30 @@ const schema = z.object({
   phone: z.string().max(30).optional(),
   message: z.string().min(10).max(2000),
   website: z.string().max(0, 'Bot detected').optional(),
+  heard_about: z.string().max(80).optional(),
+  landing_page: z.string().max(500).optional(),
+  first_referrer: z.string().max(500).optional(),
+  utm_source: z.string().max(120).optional(),
+  utm_medium: z.string().max(120).optional(),
+  utm_campaign: z.string().max(200).optional(),
 })
+
+// A plain-English channel for the alert email, from the first-touch referrer and UTM tags.
+function describeChannel(a: { first_referrer?: string; utm_source?: string; utm_medium?: string }): string {
+  if (a.utm_medium === 'cpc' || a.utm_medium === 'ppc' || a.utm_medium === 'paid') return `Paid (${a.utm_source ?? 'ads'})`
+  if (a.utm_source) return `Campaign (${a.utm_source}${a.utm_medium ? ` / ${a.utm_medium}` : ''})`
+  const ref = a.first_referrer ?? ''
+  let host = ''
+  try { host = ref ? new URL(ref).hostname.replace(/^www\./, '') : '' } catch { host = '' }
+  if (!host) return 'Direct or unknown'
+  if (/chatgpt\.com|openai\.com|perplexity\.ai|gemini\.google|claude\.ai|copilot\.microsoft/.test(host)) return `AI assistant (${host})`
+  if (/(^|\.)google\./.test(host)) return 'Google (organic)'
+  if (/(^|\.)bing\.com$/.test(host)) return 'Bing (organic)'
+  if (/duckduckgo|yahoo|ecosia/.test(host)) return `Search (${host})`
+  if (/linkedin\.com|lnkd\.in/.test(host)) return 'LinkedIn'
+  if (/facebook\.com|instagram\.com|t\.co$|x\.com/.test(host)) return `Social (${host})`
+  return `Referral (${host})`
+}
 
 function getIp(req: NextRequest): string {
   return (
@@ -34,7 +57,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: parsed.error.flatten() }, { status: 422 })
   }
 
-  const { name, email, company, phone, message, website } = parsed.data
+  const { name, email, company, phone, message, website, heard_about, landing_page, first_referrer, utm_source, utm_medium, utm_campaign } = parsed.data
+  const channel = describeChannel({ first_referrer, utm_source, utm_medium })
 
   // Honeypot
   if (website) {
@@ -67,6 +91,13 @@ export async function POST(req: NextRequest) {
       message,
       ip_address: ip,
       source: req.headers.get('referer') ?? null,
+      user_agent: req.headers.get('user-agent')?.slice(0, 500) ?? null,
+      heard_about: heard_about ?? null,
+      landing_page: landing_page ?? null,
+      first_referrer: first_referrer ?? null,
+      utm_source: utm_source ?? null,
+      utm_medium: utm_medium ?? null,
+      utm_campaign: utm_campaign ?? null,
     })
     .select('id')
     .single()
@@ -119,7 +150,7 @@ export async function POST(req: NextRequest) {
     }
     try {
       if (templateId) {
-        await sgMail.send({ ...common, templateId, dynamicTemplateData: { name, email, company, phone, message } })
+        await sgMail.send({ ...common, templateId, dynamicTemplateData: { name, email, company, phone, message, heard_about, channel, landing_page } })
       } else {
         await sgMail.send({
           ...common,
@@ -130,6 +161,10 @@ export async function POST(req: NextRequest) {
 <tr><td style="padding:4px 12px 4px 0"><strong>Email</strong></td><td><a href="mailto:${esc(email)}">${esc(email)}</a></td></tr>
 <tr><td style="padding:4px 12px 4px 0"><strong>Company</strong></td><td>${esc(company ?? '—')}</td></tr>
 <tr><td style="padding:4px 12px 4px 0"><strong>Phone</strong></td><td>${esc(phone ?? '—')}</td></tr>
+<tr><td style="padding:4px 12px 4px 0"><strong>Heard about us</strong></td><td>${esc(heard_about ?? 'Not answered')}</td></tr>
+<tr><td style="padding:4px 12px 4px 0"><strong>Channel</strong></td><td>${esc(channel)}</td></tr>
+<tr><td style="padding:4px 12px 4px 0"><strong>First page</strong></td><td>${esc(landing_page ?? 'Unknown')}</td></tr>
+<tr><td style="padding:4px 12px 4px 0"><strong>Sent from</strong></td><td>${esc(req.headers.get('referer') ?? 'Unknown')}</td></tr>
 </table>
 <p style="font-family:sans-serif;font-size:14px"><strong>Message</strong></p>
 <p style="font-family:sans-serif;font-size:14px;white-space:pre-wrap">${esc(message)}</p>`,
