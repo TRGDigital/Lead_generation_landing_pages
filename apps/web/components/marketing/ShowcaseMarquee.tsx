@@ -1,5 +1,6 @@
 import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { Squiggle, Star } from './Decor'
+import { DecorativeClientOnly } from './DecorativeClientOnly'
 
 // An auto-scrolling showcase that tells the whole enquiry journey we build for a
 // client: a desktop site → a mobile site → how it appears on Google → on Bing →
@@ -140,7 +141,7 @@ export function ShowcaseMarquee() {
         <Squiggle className="mt-6 h-7 w-72 text-brand-pop" />
       </div>
 
-      <div className="marquee-mask">
+      <DecorativeClientOnly className="marquee-mask" minHeight="18rem">
         <div className="animate-marquee flex w-max gap-5 px-2.5">
           {[...cards, ...cards].map((card, i) => (
             <div key={i} className="h-72 shrink-0">
@@ -148,7 +149,7 @@ export function ShowcaseMarquee() {
             </div>
           ))}
         </div>
-      </div>
+      </DecorativeClientOnly>
     </section>
   )
 }

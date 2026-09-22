@@ -7,6 +7,7 @@ import {
 } from './HeroMockups'
 import { Squiggle, Star } from './Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
+import { DecorativeClientOnly } from './DecorativeClientOnly'
 
 type Shot = { src: string; alt: string; url?: string }
 type Col =
@@ -130,9 +131,9 @@ export function HomeHero() {
   return (
     <section className="relative overflow-hidden">
       {/* Right-to-left scrolling band of real work, behind the text */}
-      <div className="pointer-events-none absolute inset-0 hidden items-center lg:flex">
+      <DecorativeClientOnly className="pointer-events-none absolute inset-0 hidden items-center lg:flex">
         <HeroScroller />
-      </div>
+      </DecorativeClientOnly>
       {/* Fade the frames out as they reach the headline on the left */}
       <div className="absolute inset-y-0 left-0 z-10 hidden w-[58%] bg-gradient-to-r from-brand-bg from-45% via-brand-bg/85 to-transparent lg:block" />
       <Star className="absolute bottom-8 left-2 z-[11] hidden h-20 w-20 text-brand-accent lg:block" />

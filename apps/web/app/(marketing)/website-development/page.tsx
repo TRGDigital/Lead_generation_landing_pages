@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Care Sector Website Development | TRG Digital',
+  title: 'Care Sector Website Development',
   description:
     'TRG Digital builds modern, fast, search-optimised websites for UK care providers, designed to increase your exposure and turn visitors into enquiries.',
   alternates: { canonical: `${SITE_URL}/website-development` },
@@ -124,8 +124,8 @@ export default function WebsiteDevelopmentPage() {
                 Start your project
                 <span className="btn-arrow" aria-hidden>→</span>
               </EnquiryButton>
-              <Link href="/marketing" className="btn-cta-outline">
-                See our marketing
+              <Link href="/website-build" className="btn-cta-outline">
+                What&apos;s included
               </Link>
             </div>
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-brand-ink-soft">

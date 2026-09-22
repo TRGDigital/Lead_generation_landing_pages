@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { Check, ArrowRight } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
-import { SECTORS, COLLECTION_SERVICES, getSector, getCollectionService, titleCase } from '@/lib/sectors'
+import { SECTORS, COLLECTION_SERVICES, getSector, getCollectionService, titleCase, firstSentence, inSentence } from '@/lib/sectors'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 
 export const revalidate = 3600
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: { sector: string; s
   const lower = sector.name.toLowerCase()
   return applyPageSeo(`/${sector.slug}/${svc.slug}`, {
     title: `${titleCase(svc.name)} for ${titleCase(sector.name)}`,
-    description: `Specialist ${svc.name.toLowerCase()} for ${lower}. ${svc.intro}`,
+    description: `Specialist ${inSentence(svc.name)} for ${lower}. ${firstSentence(sector.focus[svc.slug]?.body ?? svc.intro)}`,
     alternates: { canonical: `${SITE_URL}/${sector.slug}/${svc.slug}` },
     robots: { index: true, follow: true },
   })
@@ -70,7 +70,7 @@ export default function SectorService({ params }: { params: { sector: string; se
             <p className="mt-4 max-w-xl text-base leading-relaxed text-brand-ink-soft">{svc.angle(sector)}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/contact" className="btn-pop">Get a free review<span className="btn-arrow" aria-hidden>→</span></Link>
-              <Link href={svc.mainHref} className="btn-cta-outline">More on {svc.name.toLowerCase()}</Link>
+              <Link href={svc.mainHref} className="btn-cta-outline">More on {inSentence(svc.name)}</Link>
             </div>
           </div>
           <div className="relative">
@@ -86,6 +86,29 @@ export default function SectorService({ params }: { params: { sector: string; se
           </div>
         </div>
       </section>
+
+      {/* What this service means for this care setting: unique per sector × service page */}
+      {sector.focus[svc.slug] && (
+        <section className="relative overflow-hidden px-6 pb-20">
+          <div className="mx-auto grid max-w-6xl gap-10 rounded-2xl border border-brand-line bg-white p-8 shadow-soft sm:p-10 lg:grid-cols-5">
+            <div className="lg:col-span-3">
+              <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">For {lower}</p>
+              <h2 className="mt-2 font-display text-2xl font-bold uppercase leading-tight tracking-tight text-brand-ink sm:text-3xl">
+                What {inSentence(svc.name)} means for {lower}
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">{sector.focus[svc.slug]!.body}</p>
+            </div>
+            <ul className="space-y-3 lg:col-span-2">
+              {sector.focus[svc.slug]!.points.map((pt) => (
+                <li key={pt} className="flex items-start gap-3 rounded-xl bg-brand-bg-warm px-4 py-3 text-sm font-semibold text-brand-ink">
+                  <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-pop" />
+                  {pt}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {/* Why this sector needs this service (from sector challenges) */}
       <section className="relative overflow-hidden bg-brand-bg-warm px-6 py-20">
@@ -117,9 +140,9 @@ export default function SectorService({ params }: { params: { sector: string; se
               {svc.name} that {sector.outcome}
             </h2>
             <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">
-              We tailor our {svc.name.toLowerCase()} to the realities of {lower}, so the work goes straight to the
+              We tailor our {inSentence(svc.name)} to the realities of {lower}, so the work goes straight to the
               outcome that matters: more quality enquiries, and {sector.results}. Explore the detail on our{' '}
-              <Link href={svc.mainHref} className="font-semibold text-brand-pop underline-offset-2 hover:underline">{svc.name.toLowerCase()} page</Link>,
+              <Link href={svc.mainHref} className="font-semibold text-brand-pop underline-offset-2 hover:underline">{inSentence(svc.name)} page</Link>,
               or see everything we do for{' '}
               <Link href={`/${sector.slug}`} className="font-semibold text-brand-pop underline-offset-2 hover:underline">{lower}</Link>.
             </p>
@@ -162,7 +185,7 @@ export default function SectorService({ params }: { params: { sector: string; se
             {svc.name} for your {sector.singular}
           </h2>
           <p className="mx-auto mt-5 max-w-xl leading-relaxed text-white/85">
-            Get a free review and we will show you exactly how {svc.name.toLowerCase()} can grow your enquiries.
+            Get a free review and we will show you exactly how {inSentence(svc.name)} can grow your enquiries.
           </p>
           <Link href="/contact" className="btn-cta mt-8 inline-flex">Get a free review<span className="btn-arrow" aria-hidden>→</span></Link>
         </div>

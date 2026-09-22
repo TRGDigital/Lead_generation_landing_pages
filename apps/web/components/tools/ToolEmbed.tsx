@@ -13,6 +13,9 @@ import { FundingGuideTool } from './FundingGuideTool'
 import { CareChecklist } from './CareChecklist'
 import { CostEstimator } from './CostEstimator'
 import { BookVisit } from './BookVisit'
+import { LiveInCompare } from './LiveInCompare'
+import { VisitPlanner } from './VisitPlanner'
+import { LiveInReady } from './LiveInReady'
 import { ToolLeadCapture } from './ui'
 import type { FamilyToolKey } from '@/lib/family-tools'
 import type { LocalAuthority } from '@/lib/local-authorities'
@@ -35,6 +38,9 @@ function renderTool(key: FamilyToolKey, site: string | undefined, la: LocalAutho
     case 'cost-estimator': return <CostEstimator site={site} />
     case 'book-visit': return <BookVisit site={site} />
     case 'funding-guide': return <FundingGuideTool site={site} />
+    case 'live-in-compare': return <LiveInCompare site={site} />
+    case 'visit-planner': return <VisitPlanner site={site} />
+    case 'live-in-ready': return <LiveInReady site={site} />
   }
 }
 

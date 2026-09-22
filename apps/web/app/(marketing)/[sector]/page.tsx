@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { ArrowRight } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
-import { SECTORS, COLLECTION_SERVICES, getSector, titleCase } from '@/lib/sectors'
+import { SECTORS, COLLECTION_SERVICES, getSector, titleCase, firstSentence } from '@/lib/sectors'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 
 export const revalidate = 3600
@@ -117,7 +117,7 @@ export default function SectorHub({ params }: { params: { sector: string } }) {
             {COLLECTION_SERVICES.map((svc) => (
               <Link key={svc.slug} href={`/${sector.slug}/${svc.slug}`} className="group flex flex-col rounded-2xl border border-brand-line bg-white p-7 shadow-soft transition-all hover:-translate-y-1 hover:border-brand-pop/40 hover:shadow-card">
                 <h3 className="font-display text-lg font-semibold text-brand-ink">{svc.name} for {sector.name.toLowerCase()}</h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-ink-soft">{svc.intro}</p>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-ink-soft">{sector.focus[svc.slug] ? firstSentence(sector.focus[svc.slug]!.body) : svc.intro}</p>
                 <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-pop">
                   Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>

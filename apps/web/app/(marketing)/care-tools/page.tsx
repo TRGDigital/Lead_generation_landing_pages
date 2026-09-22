@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
-import { Calculator, HeartPulse, HandCoins, Landmark, Check, BedDouble, Accessibility, TrendingUp, Sparkles, MousePointerClick, Brain } from 'lucide-react'
+import { Calculator, HeartPulse, HandCoins, Landmark, Check, BedDouble, Accessibility, TrendingUp, Sparkles, MousePointerClick, Brain, Home } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { FAMILY_TOOLS, type FamilyTool, type FamilyToolKey } from '@/lib/family-tools'
 import { ToolShowcase, type ShowcaseItem } from '@/components/marketing/ToolShowcase'
@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Care Tools & Technology | Family Tools, Availability & Accessibility | TRG Digital',
+  title: 'Care Tools & Technology | Family Tools, Availability & Accessibility',
   description:
     'Our proprietary care tools for your website: funding calculators, NHS Continuing Healthcare and Funded Nursing Care checkers, a local-council guide, live room availability and built-in accessibility, gateway tools that grow your traffic and enquiries.',
   alternates: { canonical: `${SITE_URL}/care-tools` },
@@ -30,6 +30,7 @@ const CATEGORIES: { name: FamilyTool['category']; Icon: typeof Calculator; blurb
   { name: 'Benefits', Icon: HandCoins, blurb: 'Support families may be entitled to but never claim.' },
   { name: 'Local support', Icon: Landmark, blurb: 'The right council, and what it pays towards care.' },
   { name: 'Health & wellbeing', Icon: Brain, blurb: 'Everyday wellbeing checks that help families notice changes early.' },
+  { name: 'Home & live-in care', Icon: Home, blurb: 'Planning tools for families arranging care at home or live-in care.' },
 ]
 
 // Three-step "how it works" for each tool, shown under its screenshot.
@@ -94,6 +95,21 @@ const HOW: Record<FamilyToolKey, string[]> = {
     'They receive a branded “your care options” PDF by email',
     'You capture a warm, high-intent enquiry',
   ],
+  'live-in-compare': [
+    'The family enters a live-in quote and a care home fee',
+    'They see the weekly and yearly difference, for one or two people',
+    'They learn how the home is treated in the means test, then enquire',
+  ],
+  'visit-planner': [
+    'The family chooses morning, lunch, tea and bedtime visits for each day',
+    'They see the total weekly hours and an optional cost',
+    'The plan is sent to you as a ready-made enquiry',
+  ],
+  'live-in-ready': [
+    'The family answers eight practical questions',
+    'Anything not ready becomes a personalised to do list',
+    'They can ask you to talk it through',
+  ],
 }
 
 // Why each tool earns its place on a client's site (owner-facing benefit chips).
@@ -110,6 +126,9 @@ const POINTS: Record<FamilyToolKey, string[]> = {
   'cost-estimator': ['Answers “what will it cost?” honestly', 'Families use their own quote', 'High-intent results capture'],
   'book-visit': ['Turns interest into booked tours', 'Requests land as enquiries', 'No phone tag'],
   'funding-guide': ['Emails a branded options PDF', 'Captures a warm, named lead', 'Makes you the trusted guide'],
+  'live-in-compare': ['Answers “live-in or a care home?”', 'Shows the home and means test point', 'Built for live-in providers'],
+  'visit-planner': ['Turns “how much care?” into hours', 'The plan arrives as an enquiry', 'Built for home care providers'],
+  'live-in-ready': ['Prepares families for a placement', 'A practical, personal to do list', 'Warm, ready-to-start enquiries'],
 }
 
 // Why each tool converts, and what sets it apart (shown per tool in the showcase).
@@ -126,6 +145,9 @@ const WHY: Record<FamilyToolKey, string> = {
   'cost-estimator': 'Cost is the question families are most afraid to ask. Answering it openly, with their own numbers, builds the trust that wins the enquiry.',
   'book-visit': 'A visit is the single biggest step toward a move-in. Removing every scrap of friction from booking one directly grows admissions.',
   'funding-guide': 'A personalised, branded PDF is worth giving an email address for, so it captures warm, named enquiries the other tools cannot.',
+  'live-in-compare': 'Most families considering live-in care are weighing it up against a care home. Helping them compare, with their own figures, puts you at the centre of that decision.',
+  'visit-planner': '“How much care will Mum need?” is where most home care enquiries begin. A plan with real hours gives the family clarity and gives you a detailed, ready-to-quote enquiry.',
+  'live-in-ready': 'Families who have thought through the room, the food and the breaks are ready to start. The checklist does that thinking with them and brings you enquiries close to a decision.',
 }
 
 const UNIQUE: Record<FamilyToolKey, string> = {
@@ -141,6 +163,9 @@ const UNIQUE: Record<FamilyToolKey, string> = {
   'cost-estimator': 'It combines the England means test, Attendance Allowance and the family’s own fee quote into one clear weekly figure.',
   'book-visit': 'Requests arrive with a preferred date, time and party size, so confirming a tour takes one call instead of five.',
   'funding-guide': 'It blends a needs check, an indicative cost and your live CQC rating into one tailored document, branded entirely as you.',
+  'live-in-compare': 'It uses the family’s own quotes and shows the means test difference for care at home, the point most families and most websites miss.',
+  'visit-planner': 'It uses the real shape of a home care day, morning, lunch, tea and bedtime visits, so the result reads like a care plan, not a guess.',
+  'live-in-ready': 'It covers the practical details only live-in care raises, such as the carer’s room, daily breaks and night-time needs.',
 }
 
 // la-lookup needs a real council to render, so preview it on a live client site.
