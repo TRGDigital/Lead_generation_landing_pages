@@ -2,6 +2,7 @@ import { createServiceClient } from '@/lib/supabase/server'
 import { TOOLS } from '@/lib/tools'
 import { getFamilyTool } from '@/lib/family-tools'
 import { getWebsites } from '@/lib/websites'
+import { getToolLeadCounts } from '@/lib/tool-leads'
 
 export const dynamic = 'force-dynamic'
 export const metadata = { title: 'Tool usage' }
@@ -80,7 +81,11 @@ const slugOf = (href: string) => href.split('/').filter(Boolean).pop() || href
 
 export default async function ToolUsagePage() {
   const supabase = createServiceClient() as unknown as any
-  const [{ data }, websites] = await Promise.all([supabase.rpc('tool_usage_stats'), getWebsites()])
+  const [{ data }, websites, toolLeads] = await Promise.all([
+    supabase.rpc('tool_usage_stats'),
+    getWebsites(),
+    getToolLeadCounts(supabase),
+  ])
   const stats = new Map<string, Stat>(((data ?? []) as Stat[]).map((r) => [r.tool, r]))
   const siteNames = new Map(websites.map((w) => [w.slug, w.name]))
   const { rows: siteRows, totals: siteTotals } = await getSiteToolUsage(supabase, siteNames)
@@ -90,7 +95,10 @@ export default async function ToolUsagePage() {
     const s = stats.get(slug)
     const views = n(s?.views_all)
     const engaged = n(s?.engaged_all)
+    const leads = toolLeads.get(slug)
     return {
+      leads: leads?.total ?? 0,
+      leads28: leads?.last28 ?? 0,
       title: t.title,
       href: t.href,
       slug,
@@ -106,6 +114,7 @@ export default async function ToolUsagePage() {
   const totalViews = rows.reduce((sum, r) => sum + r.views, 0)
   const totalEngaged = rows.reduce((sum, r) => sum + r.engaged, 0)
   const totalSessions = rows.reduce((sum, r) => sum + r.sessions, 0)
+  const totalLeads = rows.reduce((sum, r) => sum + r.leads, 0)
 
   return (
     <div className="space-y-8">
@@ -116,11 +125,12 @@ export default async function ToolUsagePage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
         <Card label="Total tool views" value={fmt(totalViews)} />
         <Card label="Total interactions" value={fmt(totalEngaged)} />
         <Card label="Unique visitors" value={fmt(totalSessions)} />
         <Card label="Engagement rate" value={totalViews ? `${Math.round((totalEngaged / totalViews) * 100)}%` : '—'} />
+        <Card label="Leads captured" value={fmt(totalLeads)} />
       </div>
 
       <div className="overflow-x-auto rounded-lg border bg-white">
@@ -134,6 +144,7 @@ export default async function ToolUsagePage() {
               <th className="px-4 py-3 text-right font-medium">Used</th>
               <th className="px-4 py-3 text-right font-medium">Engagement</th>
               <th className="px-4 py-3 text-right font-medium">Unique visitors</th>
+              <th className="px-4 py-3 text-right font-medium">Leads captured</th>
             </tr>
           </thead>
           <tbody>
@@ -151,6 +162,16 @@ export default async function ToolUsagePage() {
                 <td className="px-4 py-3 text-right tabular-nums">{fmt(r.engaged)}</td>
                 <td className="px-4 py-3 text-right tabular-nums">{r.views ? `${r.rate}%` : '—'}</td>
                 <td className="px-4 py-3 text-right tabular-nums">{fmt(r.sessions)}</td>
+                <td className="px-4 py-3 text-right tabular-nums">
+                  {r.leads > 0 ? (
+                    <a href="/admin/marketing-leads" className="font-semibold text-[#F0532B] hover:underline">
+                      {fmt(r.leads)}
+                    </a>
+                  ) : (
+                    <span className="text-muted-foreground">0</span>
+                  )}
+                  {r.leads28 > 0 && <span className="ml-1 text-xs text-muted-foreground">({fmt(r.leads28)} in 28d)</span>}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -158,6 +179,8 @@ export default async function ToolUsagePage() {
       </div>
 
       <p className="text-xs text-muted-foreground">
+        &ldquo;Leads captured&rdquo; counts people who left their details on that tool&rsquo;s page. Their email
+        addresses are listed under Email nurture, on the Sign-ups tab, ready for outreach.
         &ldquo;Used&rdquo; counts visitors who interacted with a tool (changed an input or pressed a control), not just
         opened the page, so it&rsquo;s the truest signal of whether the gateway tools are working. Tracking is
         anonymous, with no personal data stored.

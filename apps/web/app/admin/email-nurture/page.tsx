@@ -2,6 +2,8 @@ import { requireAdmin } from '@/lib/auth'
 import { createServiceClient } from '@/lib/supabase/server'
 import { SEQUENCE } from '@/lib/tool-nurture/sequence'
 import NurturePreviewButton from '@/components/admin/NurturePreviewButton'
+import NurtureSubscribersCsv, { type SubscriberRow } from '@/components/admin/NurtureSubscribersCsv'
+import { TOOLS } from '@/lib/tools'
 
 export const dynamic = 'force-dynamic'
 export const metadata = { title: 'Email nurture' }
@@ -30,8 +32,19 @@ function Card({ label, value, hint }: { label: string; value: string; hint?: str
 
 const pct = (n: number, d: number) => (d > 0 ? `${Math.round((n / d) * 100)}%` : '—')
 
-export default async function EmailNurtureAdmin() {
+type Props = { searchParams?: { tab?: string } }
+
+const toolName = (slug: string) => {
+  const t = TOOLS.find((x) => x.href.split('/').filter(Boolean).pop() === slug)
+  return t?.title ?? slug.replace(/-/g, ' ')
+}
+
+const fmtDate = (iso: string) =>
+  new Date(iso).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+
+export default async function EmailNurtureAdmin({ searchParams }: Props) {
   await requireAdmin()
+  const tab = searchParams?.tab === 'signups' ? 'signups' : 'performance'
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const db = createServiceClient() as any
 
@@ -40,7 +53,11 @@ export default async function EmailNurtureAdmin() {
       .from('nurture_sends')
       .select('email_id, is_preview, delivered_at, opened_at, clicked_at, bounced_at, unsubscribed_at')
       .limit(20000),
-    db.from('nurture_enrollments').select('status'),
+    db
+      .from('nurture_enrollments')
+      .select('id, email, name, tool_slug, status, enrolled_at')
+      .order('enrolled_at', { ascending: false })
+      .limit(5000),
   ])
 
   const rows = (sends ?? []) as SendRow[]
@@ -69,11 +86,47 @@ export default async function EmailNurtureAdmin() {
   )
   const denomAll = totals.delivered || totals.sent
 
-  const enrolments = (enr ?? []) as { status: string }[]
+  const enrolments = (enr ?? []) as {
+    id: string
+    email: string
+    name: string | null
+    tool_slug: string | null
+    status: string
+    enrolled_at: string
+  }[]
   const enrTotal = enrolments.length
   const enrActive = enrolments.filter((e) => e.status === 'active').length
   const enrUnsub = enrolments.filter((e) => e.status === 'unsubscribed').length
   const enrDone = enrolments.filter((e) => e.status === 'completed').length
+
+  // Per-person engagement, so the warmest sign-ups can be approached first.
+  const { data: perPerson } = await db
+    .from('nurture_sends')
+    .select('enrollment_id, opened_at, clicked_at, is_preview')
+    .limit(20000)
+  const engagement = new Map<string, { sent: number; opened: number; clicked: number }>()
+  for (const r of (perPerson ?? []) as { enrollment_id: string; opened_at: string | null; clicked_at: string | null; is_preview: boolean }[]) {
+    if (r.is_preview || !r.enrollment_id) continue
+    const e = engagement.get(r.enrollment_id) ?? { sent: 0, opened: 0, clicked: 0 }
+    e.sent++
+    if (r.opened_at) e.opened++
+    if (r.clicked_at) e.clicked++
+    engagement.set(r.enrollment_id, e)
+  }
+
+  const subscribers: SubscriberRow[] = enrolments.map((e) => {
+    const eng = engagement.get(e.id) ?? { sent: 0, opened: 0, clicked: 0 }
+    return {
+      name: e.name ?? '',
+      email: e.email,
+      tool: e.tool_slug ? toolName(e.tool_slug) : 'Unknown',
+      status: e.status,
+      enrolled_at: e.enrolled_at,
+      sent: eng.sent,
+      opened: eng.opened,
+      clicked: eng.clicked,
+    }
+  })
 
   const nurtureLive = process.env.NURTURE_ENABLED === 'true'
 
@@ -110,6 +163,26 @@ export default async function EmailNurtureAdmin() {
         <Card label="Click rate" value={pct(totals.clicked, denomAll)} hint={`${totals.clicked} clicked`} />
       </div>
 
+      <div className="flex gap-1 border-b">
+        {[
+          { id: 'performance', label: 'Sequence performance' },
+          { id: 'signups', label: `Sign-ups (${subscribers.length})` },
+        ].map((t) => (
+          <a
+            key={t.id}
+            href={t.id === 'performance' ? '/admin/email-nurture' : `/admin/email-nurture?tab=${t.id}`}
+            className={`-mb-px border-b-2 px-4 py-2 text-sm font-medium ${
+              tab === t.id
+                ? 'border-[#F0532B] text-[#F0532B]'
+                : 'border-transparent text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            {t.label}
+          </a>
+        ))}
+      </div>
+
+      {tab === 'performance' && (
       <div className="rounded-lg border bg-white">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b px-4 py-3">
           <div>
@@ -173,6 +246,86 @@ export default async function EmailNurtureAdmin() {
           </table>
         </div>
       </div>
+
+      )}
+
+      {tab === 'signups' && (
+        <div className="rounded-lg border bg-white">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b px-4 py-3">
+            <div>
+              <div className="text-sm font-semibold">Everyone who signed up through a free tool</div>
+              <div className="text-xs text-muted-foreground">
+                Newest first, with the tool they used and how they have engaged with the emails so far. Worth
+                approaching the ones who have opened or clicked first.
+              </div>
+            </div>
+            <NurtureSubscribersCsv rows={subscribers} />
+          </div>
+
+          {subscribers.length === 0 ? (
+            <div className="p-8 text-center text-sm text-muted-foreground">
+              Nobody has signed up through a tool yet. As soon as someone leaves their details on a tool page they
+              appear here.
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b text-left text-xs uppercase tracking-wide text-muted-foreground">
+                    <th className="px-4 py-3 font-medium">Name</th>
+                    <th className="px-4 py-3 font-medium">Email</th>
+                    <th className="px-4 py-3 font-medium">Tool used</th>
+                    <th className="px-4 py-3 font-medium">Signed up</th>
+                    <th className="px-4 py-3 font-medium">Status</th>
+                    <th className="px-4 py-3 text-right font-medium">Sent</th>
+                    <th className="px-4 py-3 text-right font-medium">Opened</th>
+                    <th className="px-4 py-3 text-right font-medium">Clicked</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {subscribers.map((r) => (
+                    <tr key={`${r.email}-${r.enrolled_at}`} className="border-b last:border-0 hover:bg-muted/30">
+                      <td className="px-4 py-3 font-medium">{r.name || <span className="text-muted-foreground">—</span>}</td>
+                      <td className="px-4 py-3">
+                        <a href={`mailto:${r.email}`} className="text-[#F0532B] hover:underline">
+                          {r.email}
+                        </a>
+                      </td>
+                      <td className="px-4 py-3">{r.tool}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{fmtDate(r.enrolled_at)}</td>
+                      <td className="px-4 py-3">
+                        <span
+                          className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                            r.status === 'active'
+                              ? 'bg-emerald-50 text-emerald-700'
+                              : r.status === 'unsubscribed'
+                                ? 'bg-red-50 text-red-700'
+                                : 'bg-muted text-muted-foreground'
+                          }`}
+                        >
+                          {r.status}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-right tabular-nums">{r.sent}</td>
+                      <td className="px-4 py-3 text-right tabular-nums">
+                        {r.opened > 0 ? <span className="font-semibold text-emerald-700">{r.opened}</span> : 0}
+                      </td>
+                      <td className="px-4 py-3 text-right tabular-nums">
+                        {r.clicked > 0 ? <span className="font-semibold text-emerald-700">{r.clicked}</span> : 0}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          <p className="border-t px-4 py-3 text-xs text-muted-foreground">
+            These people gave their details to get a tool result, so they expect to hear from TRG. Anyone marked
+            unsubscribed has opted out and must not be contacted again.
+          </p>
+        </div>
+      )}
 
       <p className="text-xs text-muted-foreground">
         Open and click tracking depends on SendGrid&apos;s Event Webhook and open/click tracking being enabled. Rates are
