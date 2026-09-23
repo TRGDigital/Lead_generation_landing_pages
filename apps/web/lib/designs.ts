@@ -76,6 +76,54 @@ export const DESIGNS: Design[] = [
     },
     highlights: ['Written for families and discharge teams', 'Fast admissions enquiry', 'Clinical services set out clearly'],
   },
+  {
+    slug: 'willow-court',
+    name: 'Willow Court',
+    style: 'Bright and calm. Soft indigo and sunshine yellow, plain language, easy read throughout.',
+    setting: 'Supported living',
+    provider: {
+      name: 'Willow Court',
+      strapline: 'Your own front door, with support when you want it',
+      town: 'Tarnside',
+      county: 'Lancashire',
+      phone: '01524 000 000',
+      intro:
+        'Willow Court is supported living for adults with a learning disability or autism. You have your own tenancy and your own flat, and our team is there for as much or as little as you need.',
+    },
+    highlights: ['Written in plain, easy read language', 'Current vacancies shown clearly', 'A referral route for professionals'],
+  },
+  {
+    slug: 'marchmont-gardens',
+    name: 'Marchmont Gardens',
+    style: 'Premium and editorial. Charcoal and champagne, large photography, generous space.',
+    setting: 'Retirement living',
+    provider: {
+      name: 'Marchmont Gardens',
+      strapline: 'Retirement living, without giving anything up',
+      town: 'Bramfield',
+      county: 'Oxfordshire',
+      phone: '01865 000 000',
+      intro:
+        'Forty two one and two bedroom apartments set in six acres of gardens, with a restaurant, a wellness suite and care on hand if you ever need it.',
+    },
+    highlights: ['Apartment availability and floor plans', 'Brochure request built in', 'Lifestyle led, with care in the background'],
+  },
+  {
+    slug: 'ravenswood-group',
+    name: 'Ravenswood Group',
+    style: 'Confident and organised. Navy and sage, built for a group with several homes.',
+    setting: 'Care group, several homes',
+    provider: {
+      name: 'Ravenswood Care Group',
+      strapline: 'Four homes across the South West, one standard of care',
+      town: 'Exeter',
+      county: 'Devon',
+      phone: '01392 000 000',
+      intro:
+        'Ravenswood runs four care homes across Devon and Somerset, offering residential, nursing and dementia care, with the same approach and the same standards in every one.',
+    },
+    highlights: ['A find a home search by town and care type', 'Group wide careers section', 'One brand across every home'],
+  },
 ]
 
 export function getDesign(slug: string): Design | undefined {

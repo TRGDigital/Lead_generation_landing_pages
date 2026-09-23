@@ -35,6 +35,22 @@ const COLS: Col[] = [
   { kind: 'tablet', shot: { src: '/mockups/crossways.png', alt: 'Crossways Care Home on a tablet', url: 'crosswayscarehome.co.uk' } },
   { kind: 'tablet', shot: { src: '/mockups/haywards-landing.png', alt: 'A care home website on a tablet', url: 'careassura.com' } },
   { kind: 'tablet', shot: { src: '/mockups/carestream-desktop.png', alt: 'CareStream on a tablet', url: 'carestreamai.com' } },
+  // 12 onwards: our design examples and free tools
+  { kind: 'desktop', shot: { src: '/mockups/designs/oakfield-house.jpg', alt: 'Oakfield House, a care home website design', url: 'trgdigital.co.uk/designs' } },
+  { kind: 'desktop', shot: { src: '/mockups/designs/brightpath-care.jpg', alt: 'Brightpath, a home care website design', url: 'trgdigital.co.uk/designs' } },
+  { kind: 'desktop', shot: { src: '/mockups/designs/st-aidans.jpg', alt: "St Aidan's, a nursing home website design", url: 'trgdigital.co.uk/designs' } },
+  { kind: 'tablet', shot: { src: '/mockups/designs/willow-court.jpg', alt: 'Willow Court, a supported living website design', url: 'trgdigital.co.uk/designs' } },
+  { kind: 'desktop', shot: { src: '/mockups/designs/marchmont-gardens.jpg', alt: 'Marchmont Gardens, a retirement living website design', url: 'trgdigital.co.uk/designs' } },
+  { kind: 'tablet', shot: { src: '/mockups/designs/ravenswood-group.jpg', alt: 'Ravenswood, a care group website design', url: 'trgdigital.co.uk/designs' } },
+  { kind: 'stack', shots: [
+    { src: '/mockups/tools/funding-calculator.jpg', alt: 'Our care funding calculator', url: 'trgdigital.co.uk/tools' },
+    { src: '/mockups/tools/cqc-rating-checker.jpg', alt: 'Our CQC rating checker', url: 'trgdigital.co.uk/tools' },
+  ] },
+  { kind: 'desktop', shot: { src: '/mockups/tools/website-grader.jpg', alt: 'Our care website grader', url: 'trgdigital.co.uk/tools' } },
+  { kind: 'stack', shots: [
+    { src: '/mockups/tools/empty-bed-calculator.jpg', alt: 'Our cost of an empty bed calculator', url: 'trgdigital.co.uk/tools' },
+    { src: '/mockups/tools/google-preview.jpg', alt: 'How you look on Google', url: 'trgdigital.co.uk/tools' },
+  ] },
 ]
 
 function Browser({ shot, h, w }: { shot: Shot; h: string; w: string }) {
@@ -90,19 +106,26 @@ function Column({ col }: { col: Col }) {
 function band() {
   return [
     <Column key="c0" col={COLS[0]!} />,
+    <Column key="d-oakfield" col={COLS[12]!} />,
     <Column key="ccross" col={COLS[8]!} />,
+    <Column key="d-brightpath" col={COLS[13]!} />,
+    <Column key="t-stack1" col={COLS[18]!} />,
     <Column key="ctools" col={COLS[7]!} />,
+    <Column key="d-staidans" col={COLS[14]!} />,
     <GraderCard key="grader" />,
     <Column key="tab0" col={COLS[9]!} />,
     <LeadsTableCard key="leadstable" />,
     <Column key="c1" col={COLS[1]!} />,
     <GoogleSearchCard key="google" />,
     <EmptyBedCard key="emptybed" />,
+    <Column key="d-willow" col={COLS[15]!} />,
     <Column key="tab1" col={COLS[10]!} />,
     <AnalyticsCard key="analytics" />,
     <Column key="c2" col={COLS[2]!} />,
     <BingSearchCard key="bing" />,
     <LighthouseCard key="lighthouse" />,
+    <Column key="d-marchmont" col={COLS[16]!} />,
+    <Column key="t-grader" col={COLS[19]!} />,
     <Column key="c3" col={COLS[3]!} />,
     <RankingsCard key="rankings" />,
     <Column key="tab2" col={COLS[11]!} />,
@@ -110,6 +133,8 @@ function band() {
     <Column key="c4" col={COLS[4]!} />,
     <AdsCard key="ads" />,
     <VercelCard key="vercel" />,
+    <Column key="d-ravenswood" col={COLS[17]!} />,
+    <Column key="t-stack2" col={COLS[20]!} />,
     <Column key="c5" col={COLS[5]!} />,
     <CmsCard key="cms" />,
     <Column key="c6" col={COLS[6]!} />,

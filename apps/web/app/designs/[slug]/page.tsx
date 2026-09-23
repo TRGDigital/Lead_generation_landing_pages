@@ -4,6 +4,9 @@ import { DESIGNS, getDesign } from '@/lib/designs'
 import OakfieldDesign from '@/components/designs/OakfieldDesign'
 import BrightpathDesign from '@/components/designs/BrightpathDesign'
 import StAidansDesign from '@/components/designs/StAidansDesign'
+import WillowDesign from '@/components/designs/WillowDesign'
+import MarchmontDesign from '@/components/designs/MarchmontDesign'
+import RavenswoodDesign from '@/components/designs/RavenswoodDesign'
 
 export const revalidate = 3600
 export const dynamicParams = false
@@ -36,6 +39,12 @@ export default function DesignExamplePage({ params }: { params: { slug: string }
       return <BrightpathDesign design={design} />
     case 'st-aidans':
       return <StAidansDesign design={design} />
+    case 'willow-court':
+      return <WillowDesign design={design} />
+    case 'marchmont-gardens':
+      return <MarchmontDesign design={design} />
+    case 'ravenswood-group':
+      return <RavenswoodDesign design={design} />
     default:
       notFound()
   }

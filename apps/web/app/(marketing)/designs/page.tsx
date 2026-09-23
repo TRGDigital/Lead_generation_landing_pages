@@ -54,7 +54,7 @@ export default function DesignsPage() {
       </section>
 
       <section className="px-6 pb-16">
-        <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {DESIGNS.map((d) => (
             <article key={d.slug} className="flex flex-col rounded-2xl border border-brand-line bg-white p-7 shadow-soft">
               <p className="text-xs font-semibold uppercase tracking-widest text-brand-pop">{d.setting}</p>

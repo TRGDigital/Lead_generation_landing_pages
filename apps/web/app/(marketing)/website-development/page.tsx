@@ -5,6 +5,7 @@ import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { Search, Smartphone, Gauge, ShieldCheck, MousePointerClick, Wrench, Check, ArrowRight, Bot, Sparkles, Code2, FileText, ListChecks } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
+import { DESIGNS } from '@/lib/designs'
 
 export const revalidate = 3600
 
@@ -284,6 +285,54 @@ export default function WebsiteDevelopmentPage() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Design examples ───────────────────────────────────────────── */}
+      <section className="relative overflow-hidden px-6 py-24">
+        <Star className="absolute right-10 top-12 hidden h-16 w-16 rotate-12 text-brand-accent lg:block" />
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Design examples</p>
+            <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
+              See what your new website could look like
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">
+              Every build starts with a choice of homepage designs. These are complete, clickable examples, each shown
+              with content for a different kind of care service. Any design can be applied to any service, and every
+              provider shown is fictional.
+            </p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {DESIGNS.map((d) => (
+              <Link
+                key={d.slug}
+                href={`/designs/${d.slug}`}
+                className="group overflow-hidden rounded-2xl border border-brand-line bg-white shadow-soft transition-all hover:-translate-y-1 hover:border-brand-pop/40 hover:shadow-card"
+              >
+                <div className="relative h-48 w-full overflow-hidden border-b border-brand-line">
+                  <ManagedImage
+                    src={`/mockups/designs/${d.slug}.jpg`}
+                    alt={`${d.name}, an example ${d.setting.toLowerCase()} website design`}
+                    fill
+                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                    className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-brand-pop">{d.setting}</p>
+                  <h3 className="mt-1.5 font-display text-xl font-semibold text-brand-ink">{d.name}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{d.style}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-pop">
+                    View the design <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-8">
+            <Link href="/designs" className="btn-cta-outline">See all design examples</Link>
           </div>
         </div>
       </section>
