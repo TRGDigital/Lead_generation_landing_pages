@@ -21,7 +21,7 @@ const STATIC_PAGES: SitePage[] = [
   { path: '/content-creation', label: 'Content creation', group: 'Services' },
   { path: '/conversion-rate-optimisation', label: 'Conversion rate optimisation', group: 'Services' },
   { path: '/website-development', label: 'Website development', group: 'Services' },
-  { path: '/free-site-audit', label: 'Free site audit', group: 'Services' },
+  { path: '/site-audit', label: 'Website audit', group: 'Services' },
   { path: '/website-build', label: "What's included in a website build", group: 'Services' },
   { path: '/designs', label: 'Design examples', group: 'Services' },
   { path: '/carer-recruitment', label: 'Carer recruitment', group: 'Services' },

@@ -26,7 +26,7 @@ export const STATIC_PAGES: StaticPage[] = [
   { url: '/content-creation', priority: 0.8, changeFrequency: 'monthly' },
   { url: '/conversion-rate-optimisation', priority: 0.8, changeFrequency: 'monthly' },
   { url: '/website-development', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/free-site-audit', priority: 0.9, changeFrequency: 'monthly' },
+  { url: '/site-audit', priority: 0.9, changeFrequency: 'monthly' },
   { url: '/website-build', priority: 0.8, changeFrequency: 'monthly' },
   { url: '/designs', priority: 0.8, changeFrequency: 'monthly' },
   { url: '/designs/oakfield-house', priority: 0.6, changeFrequency: 'monthly' },

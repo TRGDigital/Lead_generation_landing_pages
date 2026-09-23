@@ -89,7 +89,7 @@ function DesktopMega({
                       </span>
                       {highlight ? (
                         <span className="flex-shrink-0 rounded-full bg-brand-ink px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-accent">
-                          Free
+                          Start here
                         </span>
                       ) : (
                         <span className="flex-shrink-0 text-brand-pop opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden>→</span>
@@ -252,7 +252,7 @@ export default function Nav() {
                   {title}
                   {highlight && (
                     <span className="ml-auto rounded-full bg-brand-ink px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-accent">
-                      Free
+                      Start here
                     </span>
                   )}
                 </Link>

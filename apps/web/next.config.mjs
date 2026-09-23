@@ -7,6 +7,18 @@ const __dirname = path.dirname(__filename)
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    instrumentationHook: true,
+    serverComponentsExternalPackages: ['@sparticuz/chromium-min', 'puppeteer-core'],
+    // Proposal PDFs live outside public/ and are streamed to admins only; bundle them
+    // with the route that serves them.
+    outputFileTracingIncludes: { '/admin/proposals/[slug]/pdf': ['./private/proposals/**'] },
+  },
+  // The audit page launched briefly at /free-site-audit before the pricing was
+  // settled. Permanent redirect so any link already shared still lands.
+  async redirects() {
+    return [{ source: '/free-site-audit', destination: '/site-audit', permanent: true }]
+  },
   transpilePackages: ['@uiw/react-md-editor', '@uiw/react-markdown-preview'],
   images: {
     remotePatterns: [

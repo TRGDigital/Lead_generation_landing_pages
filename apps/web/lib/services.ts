@@ -15,10 +15,10 @@ export type Service = {
 export const SERVICES: Service[] = [
   {
     icon: ClipboardCheck,
-    title: 'Free site audit',
-    short: 'A full report on your website, free',
-    body: 'A complete technical, content and accessibility audit of your website, written in plain English, with what we would fix first and why. No charge and no obligation.',
-    href: '/free-site-audit',
+    title: 'Website audit',
+    short: '62 checks, written by a human',
+    body: 'A complete technical, content and accessibility audit of your website, written in plain English, with what we would fix first and why. Fixed price, agreed before we start.',
+    href: '/site-audit',
     highlight: true,
   },
   {

@@ -87,7 +87,7 @@ export default function Footer() {
           </div>
 
           <Col title="Services">
-            {SERVICES.map((s) => <FLink key={s.title} href={s.href} label={s.highlight ? `${s.title} (free)` : s.title} />)}
+            {SERVICES.map((s) => <FLink key={s.title} href={s.href} label={s.title} />)}
           </Col>
           <Col title="Company">{COMPANY.map((l) => <FLink key={l.href} {...l} />)}</Col>
           <Col title="Products">{PRODUCTS.map((l) => <FLink key={l.href} {...l} />)}</Col>
