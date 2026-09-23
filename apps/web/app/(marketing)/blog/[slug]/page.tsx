@@ -3,9 +3,10 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Clock, ArrowLeft, ChevronDown } from 'lucide-react'
-import { getPostBySlug, getRelatedPosts, getAllPublishedSlugs, formatDate } from '@/lib/blog'
+import { getPostBySlug, getRelatedPostsFor, getAllPublishedSlugs, formatDate } from '@/lib/blog'
 import { isHtmlBody, mdToHtml } from '@/lib/mdx-or-html'
 import { withToc } from '@/lib/blog-toc'
+import { autolinkHtml } from '@/lib/blog-autolink'
 import { splitHtmlForCtas } from '@/lib/blog-cta'
 import BlogCta from '@/components/marketing/BlogCta'
 import PostCard from '@/components/blog/PostCard'
@@ -51,14 +52,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const [post, related] = await Promise.all([
-    getPostBySlug(params.slug),
-    getPostBySlug(params.slug).then((p) =>
-      p ? getRelatedPosts(p.category, p.id) : []
-    ),
-  ])
-
+  const post = await getPostBySlug(params.slug)
   if (!post) notFound()
+  const related = await getRelatedPostsFor(post)
 
   // Per-post FAQs (managed in admin). Empty -> no accordion, no schema.
   const faqs = (((post as { faqs?: { q: string; a: string }[] | null }).faqs ?? []) as { q: string; a: string }[])
@@ -187,7 +183,7 @@ export default async function BlogPostPage({ params }: Props) {
         {/* Body — auto table of contents + content (HTML for new posts, converted for legacy markdown).
             Split at paragraph boundaries so two "get in touch" CTAs sit evenly through the post. */}
         {splitHtmlForCtas(
-          withToc(isHtmlBody(post.body_mdx) ? post.body_mdx : mdToHtml(post.body_mdx)),
+          withToc(autolinkHtml(isHtmlBody(post.body_mdx) ? post.body_mdx : mdToHtml(post.body_mdx), `/blog/${post.slug}`)),
           2,
         ).map((part, idx, parts) => (
           <Fragment key={idx}>
