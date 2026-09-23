@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = await getGoPage(params.slug)
   if (!page || page.status !== 'published') return { robots: { index: false, follow: false } }
   return {
-    title: page.meta_title || `${page.service} for Care Homes | TRG Digital`,
+    title: page.meta_title || `${page.service} for Care Homes`,
     description: page.meta_description || page.subheadline,
     robots: { index: false, follow: true },
   }
@@ -425,7 +425,14 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
       </div>
 
       {page.exit_heading && (
-        <GoExitIntent heading={page.exit_heading} body={page.exit_body} ctaLabel={page.sticky_cta || 'Take the 60-second check'} />
+        <GoExitIntent
+          heading={page.exit_heading}
+          body={page.exit_body}
+          ctaLabel={page.sticky_cta || 'Take the 60-second check'}
+          slug={page.slug}
+          intro={page.quiz_intro}
+          questions={page.questions}
+        />
       )}
 
       {/* Slim footer */}

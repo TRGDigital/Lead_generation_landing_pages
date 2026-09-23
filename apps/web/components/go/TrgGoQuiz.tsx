@@ -7,6 +7,36 @@ import type { GoQuizQuestion } from '@/lib/go-pages'
 
 const BOOKING_URL = process.env.NEXT_PUBLIC_BOOKING_URL ?? ''
 
+type Progress = { step: number; answers: Record<string, string> }
+
+const progressKey = (slug: string) => `go-quiz:${slug}`
+
+function readProgress(slug: string): Progress | null {
+  try {
+    const raw = sessionStorage.getItem(progressKey(slug))
+    return raw ? (JSON.parse(raw) as Progress) : null
+  } catch {
+    return null
+  }
+}
+
+function saveProgress(slug: string, step: number, answers: Record<string, string>) {
+  try {
+    sessionStorage.setItem(progressKey(slug), JSON.stringify({ step, answers }))
+  } catch {
+    /* private mode */
+  }
+}
+
+function clearProgress(slug: string) {
+  try {
+    sessionStorage.setItem(progressKey(slug), JSON.stringify({ step: -1, answers: {} }))
+    sessionStorage.setItem('go-quiz-done', '1')
+  } catch {
+    /* private mode */
+  }
+}
+
 // The gamified qualification quiz on TRG /go/ ad landing pages: one question per
 // step with a progress bar, then a contact step. Answers ride along with the lead.
 export function TrgGoQuiz({
@@ -14,14 +44,21 @@ export function TrgGoQuiz({
   intro,
   questions,
   ctaLabel,
+  // The exit overlay renders this same quiz, picking up wherever the visitor got to on
+  // the page, so nobody is made to start again at the moment they are about to leave.
+  resumeFromSaved = false,
+  onSubmitted,
 }: {
   slug: string
   intro: string
   questions: GoQuizQuestion[]
   ctaLabel: string
+  resumeFromSaved?: boolean
+  onSubmitted?: () => void
 }) {
-  const [step, setStep] = useState(-1) // -1 intro, 0..n-1 questions, n contact
-  const [answers, setAnswers] = useState<Record<string, string>>({})
+  const saved = resumeFromSaved ? readProgress(slug) : null
+  const [step, setStep] = useState(saved?.step ?? -1) // -1 intro, 0..n-1 questions, n contact
+  const [answers, setAnswers] = useState<Record<string, string>>(saved?.answers ?? {})
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -68,6 +105,11 @@ export function TrgGoQuiz({
     } catch { /* never break the quiz */ }
   }
 
+  // Remember where the visitor got to, for the exit overlay. Session only, no PII.
+  useEffect(() => {
+    saveProgress(slug, step, answers)
+  }, [slug, step, answers])
+
   useEffect(() => {
     beacon('view')
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -102,7 +144,9 @@ export function TrgGoQuiz({
         reportAdsConversion(GO_LEAD_LABEL, { event_label: slug })
       } catch { /* tracking must never break the form */ }
       beacon('submit')
+      clearProgress(slug)
       setDone(true)
+      onSubmitted?.()
     } catch (err: any) {
       setError(err?.message ?? 'Something went wrong. Please try again.')
     } finally {
