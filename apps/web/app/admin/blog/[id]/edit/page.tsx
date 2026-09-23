@@ -3,7 +3,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 import { requireAdmin } from '@/lib/auth'
-import { getPostByIdForAdmin, getAllAuthors } from '@/lib/blog'
+import { getPostByIdForAdmin, getAllAuthors, getPostChoices, DEFAULT_POST_SERVICE_LINKS } from '@/lib/blog'
+import { SITE_PAGES } from '@/lib/site-pages'
 import BlogEditor from '@/components/admin/BlogEditor'
 import { publishBlogPost, unpublishBlogPost } from '../../actions'
 
@@ -13,9 +14,10 @@ type Props = { params: { id: string } }
 
 export default async function EditBlogPostPage({ params }: Props) {
   await requireAdmin()
-  const [post, authors] = await Promise.all([
+  const [post, authors, postChoices] = await Promise.all([
     getPostByIdForAdmin(params.id),
     getAllAuthors(),
+    getPostChoices(params.id),
   ])
 
   if (!post) notFound()
@@ -58,7 +60,13 @@ export default async function EditBlogPostPage({ params }: Props) {
       </div>
 
       <h1 className="mb-6 font-display text-2xl font-semibold text-brand-ink">Edit post</h1>
-      <BlogEditor post={post} authors={authors} />
+      <BlogEditor
+        post={post}
+        authors={authors}
+        postChoices={postChoices}
+        serviceChoices={SITE_PAGES.filter((p) => p.group === 'Services').map((p) => ({ value: p.path, label: p.label }))}
+        defaultServiceLinks={DEFAULT_POST_SERVICE_LINKS}
+      />
     </div>
   )
 }

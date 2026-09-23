@@ -3,7 +3,9 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Clock, ArrowLeft, ChevronDown } from 'lucide-react'
-import { getPostBySlug, getRelatedPostsFor, getAllPublishedSlugs, formatDate } from '@/lib/blog'
+import { getPostBySlug, getRelatedPostsFor, getPostsBySlugs, getAdjacentPosts, getAllPublishedSlugs, formatDate, DEFAULT_POST_SERVICE_LINKS, POST_SERVICE_LABELS } from '@/lib/blog'
+import { SITE_PAGES } from '@/lib/site-pages'
+import { topicsForPost } from '@/lib/blog-topics'
 import { isHtmlBody, mdToHtml } from '@/lib/mdx-or-html'
 import { withToc } from '@/lib/blog-toc'
 import { autolinkHtml } from '@/lib/blog-autolink'
@@ -54,7 +56,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BlogPostPage({ params }: Props) {
   const post = await getPostBySlug(params.slug)
   if (!post) notFound()
-  const related = await getRelatedPostsFor(post)
+  const { prev, next } = await getAdjacentPosts(post)
+  const topics = topicsForPost(post.slug)
+
+  // Admin picks win; otherwise the closest three by shared tags, category and title.
+  const chosen = ((post as { related_slugs?: string[] | null }).related_slugs ?? []).filter(Boolean)
+  const related = chosen.length ? await getPostsBySlugs(chosen) : await getRelatedPostsFor(post)
+
+  // Same idea for the service links under the post.
+  const servicePaths = (((post as { service_links?: string[] | null }).service_links ?? []).filter(Boolean).length
+    ? ((post as { service_links?: string[] | null }).service_links as string[])
+    : DEFAULT_POST_SERVICE_LINKS
+  ).filter((path) => path !== `/blog/${post.slug}`)
+  const serviceLinks = servicePaths.map((path) => ({
+    href: path,
+    label: POST_SERVICE_LABELS[path] ?? SITE_PAGES.find((p) => p.path === path)?.label ?? path,
+  }))
 
   // Per-post FAQs (managed in admin). Empty -> no accordion, no schema.
   const faqs = (((post as { faqs?: { q: string; a: string }[] | null }).faqs ?? []) as { q: string; a: string }[])
@@ -220,16 +237,47 @@ export default async function BlogPostPage({ params }: Props) {
           </Link>
         </div>
 
+        {/* The topic hubs this post belongs to */}
+        {topics.length > 0 && (
+          <p className="mt-12 rounded-xl bg-brand-bg-warm px-4 py-3 text-sm text-brand-ink-soft">
+            Part of our guide to{' '}
+            {topics.map((t, i) => (
+              <Fragment key={t.slug}>
+                {i > 0 ? (i === topics.length - 1 ? ' and ' : ', ') : ''}
+                <Link href={`/blog/topics/${t.slug}`} className="font-semibold text-brand-pop underline-offset-2 hover:underline">
+                  {t.shortLabel}
+                </Link>
+              </Fragment>
+            ))}
+            .
+          </p>
+        )}
+
+        {/* Previous and next, shown as full cards so they stand out */}
+        {(prev || next) && (
+          <nav className="mt-8" aria-label="More posts">
+            <div className="grid gap-6 sm:grid-cols-2">
+              {prev && (
+                <div>
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-brand-pop">Previous post</p>
+                  <PostCard post={prev} />
+                </div>
+              )}
+              {next && (
+                <div className={prev ? '' : 'sm:col-start-2'}>
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-brand-pop">Next post</p>
+                  <PostCard post={next} />
+                </div>
+              )}
+            </div>
+          </nav>
+        )}
+
         {/* Related services — descriptive internal links to the core service pages */}
         <div className="mt-12 border-t border-brand-line pt-8">
           <h2 className="mb-4 font-display text-xl font-semibold text-brand-ink">How we help care providers</h2>
           <div className="grid gap-3 sm:grid-cols-2">
-            {[
-              { href: '/seo', label: 'SEO for care homes and nursing homes' },
-              { href: '/local-seo', label: 'Local SEO for care providers' },
-              { href: '/website-development', label: 'Care home website development' },
-              { href: '/marketing', label: 'Care sector marketing and enquiry generation' },
-            ].map((s) => (
+            {serviceLinks.map((s) => (
               <Link
                 key={s.href}
                 href={s.href}

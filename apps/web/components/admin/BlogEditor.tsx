@@ -1,23 +1,30 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import { useRef, useState, useEffect, useTransition } from 'react'
 import { saveBlogPost } from '@/app/admin/blog/actions'
 import type { PostWithAuthor, Author } from '@/lib/blog'
-import '@uiw/react-md-editor/dist/markdown-editor.css'
-
-// react-md-editor v3 (CJS) — v4 pulls ESM-only rehype deps that break Next 14's
-// webpack with "Cannot read properties of undefined (reading 'call')".
-const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
+import RichEditor from '@/components/admin/RichEditor'
+import BlogImageAltEditor from '@/components/admin/BlogImageAltEditor'
+import BlogFaqEditor, { type BlogFaq } from '@/components/admin/BlogFaqEditor'
+import BlogLinksEditor, { type LinkChoice } from '@/components/admin/BlogLinksEditor'
+import { isHtmlBody, mdToHtml } from '@/lib/mdx-or-html'
+import { resizeImage } from '@/lib/image-resize'
 
 type Props = {
   post: PostWithAuthor | null
   authors: Author[]
+  postChoices: LinkChoice[]
+  serviceChoices: LinkChoice[]
+  defaultServiceLinks: string[]
 }
 
-export default function BlogEditor({ post, authors }: Props) {
-  const [body, setBody] = useState(post?.body_mdx ?? '')
+export default function BlogEditor({ post, authors, postChoices, serviceChoices, defaultServiceLinks }: Props) {
+  // Body is stored as HTML. Legacy markdown posts are converted on load so the
+  // visual editor shows them formatted rather than as raw markdown.
+  const initialBody = post?.body_mdx ?? ''
+  const [body, setBody] = useState(isHtmlBody(initialBody) ? initialBody : mdToHtml(initialBody))
   const [heroUrl, setHeroUrl] = useState(post?.hero_image_url ?? '')
+  const [heroAlt, setHeroAlt] = useState((post as { hero_image_alt?: string | null } | null)?.hero_image_alt ?? '')
   const [uploading, setUploading] = useState(false)
   const [uploadError, setUploadError] = useState('')
   const [saved, setSaved] = useState(false)
@@ -52,8 +59,9 @@ export default function BlogEditor({ post, authors }: Props) {
     setUploadError('')
     setUploading(true)
     try {
+      const optimised = await resizeImage(file)
       const fd = new FormData()
-      fd.append('file', file)
+      fd.append('file', optimised)
       const res = await fetch('/api/admin/blog/upload-image', { method: 'POST', body: fd })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) throw new Error(data?.error || 'Upload failed')
@@ -135,7 +143,7 @@ export default function BlogEditor({ post, authors }: Props) {
           <label className="block text-sm font-medium text-brand-ink mb-1">Hero image</label>
           {heroUrl && (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={heroUrl} alt="" className="mb-2 h-32 w-full rounded-lg border border-brand-line object-cover" />
+            <img src={heroUrl} alt={heroAlt} className="mb-2 h-32 w-full rounded-lg border border-brand-line object-cover" />
           )}
           <div className="mb-2 flex items-center gap-3">
             <label className="cursor-pointer rounded-lg border border-brand-line px-3 py-2 text-sm hover:bg-brand-line/20">
@@ -167,21 +175,58 @@ export default function BlogEditor({ post, authors }: Props) {
             placeholder="…or paste an image URL"
             className="w-full rounded-xl border border-brand-line px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent/30"
           />
+          {heroUrl && (
+            <input
+              name="hero_image_alt"
+              value={heroAlt}
+              onChange={(e) => setHeroAlt(e.target.value)}
+              placeholder="Hero image alt text (describe the image)"
+              className="mt-2 w-full rounded-xl border border-brand-line px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-accent/30"
+            />
+          )}
         </div>
       </div>
 
-      {/* MDX body — full width */}
+      {/* Body — visual editor (stores HTML) */}
       <div>
-        <label className="block text-sm font-medium text-brand-ink mb-1">Body (MDX)</label>
-        <div data-color-mode="light">
-          <MDEditor
-            value={body}
-            onChange={(v) => setBody(v ?? '')}
-            height={520}
-            preview="live"
+        <label className="block text-sm font-medium text-brand-ink mb-1">Body</label>
+        <RichEditor
+          value={body}
+          onChange={setBody}
+          rows={20}
+          placeholder="Write your post here. Use the Style dropdown for headings, and the toolbar for bold, lists, links and quotes."
+        />
+      </div>
+
+      {/* Image alt text */}
+      <details className="rounded-xl border border-brand-line">
+        <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-brand-ink">Image alt text</summary>
+        <div className="px-4 pb-4 pt-2">
+          <BlogImageAltEditor body={body} onChange={setBody} />
+        </div>
+      </details>
+
+      {/* FAQs (shown in an accordion below the CTA on the live post) */}
+      <details className="rounded-xl border border-brand-line">
+        <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-brand-ink">FAQs</summary>
+        <div className="px-4 pb-4 pt-2">
+          <BlogFaqEditor initial={(post as { faqs?: BlogFaq[] } | null)?.faqs ?? []} />
+        </div>
+      </details>
+
+      {/* Internal links shown at the foot of the live post */}
+      <details className="rounded-xl border border-brand-line">
+        <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-brand-ink">Related posts &amp; service links</summary>
+        <div className="px-4 pb-4 pt-2">
+          <BlogLinksEditor
+            posts={postChoices}
+            services={serviceChoices}
+            initialPosts={(post as { related_slugs?: string[] | null } | null)?.related_slugs ?? []}
+            initialServices={(post as { service_links?: string[] | null } | null)?.service_links ?? []}
+            defaultServices={defaultServiceLinks}
           />
         </div>
-      </div>
+      </details>
 
       {/* SEO */}
       <details className="rounded-xl border border-brand-line">

@@ -125,6 +125,69 @@ export async function getRelatedPostsFor(post: PostWithAuthor, limit = 3): Promi
   return scoreRelated(post, (data ?? []) as PostWithAuthor[], limit)
 }
 
+// The service links shown under every post unless a post overrides them in the admin.
+export const DEFAULT_POST_SERVICE_LINKS = ['/seo', '/local-seo', '/website-development', '/marketing']
+
+// Descriptive anchor text for the links under a post: "SEO for care homes and nursing homes"
+// tells Google (and the reader) far more than "SEO". Anything not listed falls back to the
+// page's own label from the site page registry.
+export const POST_SERVICE_LABELS: Record<string, string> = {
+  '/seo': 'SEO for care homes and nursing homes',
+  '/local-seo': 'Local SEO for care providers',
+  '/website-development': 'Care home website development',
+  '/website-build': "What's included in a care website build",
+  '/marketing': 'Care sector marketing and enquiry generation',
+  '/carer-recruitment': 'Carer recruitment websites',
+  '/accessible-websites': 'Accessible websites for care providers',
+  '/google-business-profile': 'Google Business Profile and reviews',
+  '/content-creation': 'Content creation for care providers',
+  '/conversion-rate-optimisation': 'Turning more visitors into enquiries',
+  '/care-tools': 'Family care tools for your website',
+  '/rebranding': 'Care home rebranding',
+  '/development': 'Custom software for the care sector',
+}
+
+/** Post titles for the admin "related posts" picker. */
+export async function getPostChoices(excludeId?: string): Promise<{ value: string; label: string }[]> {
+  const db = createServiceClient() as unknown as any
+  const { data } = await db
+    .from('blog_posts')
+    .select('id, slug, title')
+    .order('published_at', { ascending: false })
+    .limit(200)
+  return ((data ?? []) as { id: string; slug: string; title: string }[])
+    .filter((p) => p.id !== excludeId)
+    .map((p) => ({ value: p.slug, label: p.title }))
+}
+
+/** Posts for an explicit list of slugs, kept in the order the admin chose them. */
+export async function getPostsBySlugs(slugs: string[]): Promise<PostWithAuthor[]> {
+  if (!slugs.length) return []
+  const db = createServiceClient() as unknown as any
+  const { data } = await db
+    .from('blog_posts')
+    .select('*, author:authors(*)')
+    .eq('is_published', true)
+    .in('slug', slugs)
+  const found = (data ?? []) as PostWithAuthor[]
+  return slugs.map((s) => found.find((p) => p.slug === s)).filter(Boolean) as PostWithAuthor[]
+}
+
+/** The posts either side of this one by date, so every post links on to two more. */
+export async function getAdjacentPosts(post: PostWithAuthor): Promise<{ prev: PostWithAuthor | null; next: PostWithAuthor | null }> {
+  const db = createServiceClient() as unknown as any
+  const { data } = await db
+    .from('blog_posts')
+    .select('*, author:authors(*)')
+    .eq('is_published', true)
+    .order('published_at', { ascending: false })
+    .limit(200)
+  const all = (data ?? []) as PostWithAuthor[]
+  const i = all.findIndex((p) => p.id === post.id)
+  if (i === -1) return { prev: null, next: null }
+  return { prev: all[i + 1] ?? null, next: all[i - 1] ?? null }
+}
+
 export async function getAllPublishedSlugs(): Promise<string[]> {
   const db = createServiceClient() as unknown as any
   const { data } = await db

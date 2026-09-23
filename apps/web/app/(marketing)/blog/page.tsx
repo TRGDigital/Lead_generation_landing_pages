@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { TOPICS } from '@/lib/blog-topics'
 import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -17,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Knowledge Hub, Care Sector Marketing & Software Insights | TRG Digital',
+  title: 'Knowledge Hub, Care Sector Marketing & Software Insights',
   description:
     'Guides, analysis and practical advice for UK care providers, marketing, websites, SEO, enquiries and care software, from the TRG Digital team.',
   alternates: { canonical: `${SITE_URL}/blog` },
@@ -93,6 +94,21 @@ export default async function BlogIndexPage({ searchParams }: Props) {
       </section>
 
       <div className="mx-auto max-w-6xl px-6 pb-24">
+        {/* Topic hubs: the three subjects the blog covers, each gathering its own posts */}
+        <div className="mb-10 grid gap-3 sm:grid-cols-3">
+          {TOPICS.map((t) => (
+            <Link
+              key={t.slug}
+              href={`/blog/topics/${t.slug}`}
+              className="group rounded-2xl border border-brand-line bg-white px-5 py-4 shadow-soft transition-all hover:-translate-y-0.5 hover:border-brand-pop/40"
+            >
+              <span className="text-xs font-semibold uppercase tracking-widest text-brand-pop">Topic</span>
+              <span className="mt-1 block font-display text-lg font-semibold text-brand-ink">{t.title}</span>
+              <span className="mt-1 block text-sm text-brand-ink-soft">{t.posts.length} articles</span>
+            </Link>
+          ))}
+        </div>
+
         {/* Search + category filter */}
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center">
           <form method="get" action="/blog" className="relative max-w-sm flex-1">
