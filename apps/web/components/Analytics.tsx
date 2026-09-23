@@ -2,10 +2,11 @@
 
 import Script from 'next/script'
 import { useState, useEffect } from 'react'
+import { GADS_ID } from '@/lib/ads'
 
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID
 // Google Ads conversion tag — public ID, hardcoded fallback so the tag is always present.
-const GADS_ID = process.env.NEXT_PUBLIC_GADS_ID ?? 'AW-18370354696'
+
 // Microsoft Clarity (heatmaps + session recordings) — free; loads after cookie consent.
 const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID ?? 'xx64rq6ur7'
 

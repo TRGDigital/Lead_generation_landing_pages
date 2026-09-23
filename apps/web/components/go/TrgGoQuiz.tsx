@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import { GO_LEAD_LABEL, reportAdsConversion } from '@/lib/ads'
 import { ArrowLeft, CheckCircle2, Loader2 } from 'lucide-react'
 import type { GoQuizQuestion } from '@/lib/go-pages'
 
@@ -92,14 +93,13 @@ export function TrgGoQuiz({
       })
       const body = await res.json().catch(() => ({}))
       if (!res.ok) throw new Error(body?.error || 'Something went wrong. Please try again.')
-      // Tell Google the lead happened: a GA4 lead event always, and a Google Ads
-      // conversion when the Ads conversion label env is configured.
+      // Tell Google the lead happened: a GA4 lead event, and the Google Ads
+      // conversion "TRG Go page quiz lead". Fired on a successful submission, not on
+      // the button click, so a failed or abandoned form is never counted.
       try {
         const w = window as unknown as { gtag?: (...args: unknown[]) => void }
         w.gtag?.('event', 'generate_lead', { event_category: 'go-page', event_label: slug })
-        const label = process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL
-        const adsId = process.env.NEXT_PUBLIC_GADS_ID ?? 'AW-18370354696'
-        if (label) w.gtag?.('event', 'conversion', { send_to: `${adsId}/${label}` })
+        reportAdsConversion(GO_LEAD_LABEL, { event_label: slug })
       } catch { /* tracking must never break the form */ }
       beacon('submit')
       setDone(true)
