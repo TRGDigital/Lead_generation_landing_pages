@@ -29,6 +29,7 @@ export type FamilyTool = {
   nursingRelevant?: boolean // surfaced as a hint in admin (nursing homes get more value)
   captures?: boolean // tool ends with an optional "email my results" lead step
   standalone?: boolean // premium tool gated by its own panel, not the standard tools grid
+  hidden?: boolean // built but not yet public: left off /care-tools, and the embed only loads for a site it is allocated to
 }
 
 export const FAMILY_TOOLS: FamilyTool[] = [
@@ -151,6 +152,7 @@ export const FAMILY_TOOLS: FamilyTool[] = [
       'Families compare the weekly cost of live-in care with care home fees, for one person or a couple, using their own quotes, and see how the value of the home is treated differently in the council means test when care is given at home.',
     category: 'Home & live-in care',
     captures: true,
+    hidden: true,
   },
   {
     key: 'visit-planner',
@@ -160,6 +162,7 @@ export const FAMILY_TOOLS: FamilyTool[] = [
       'Families build a week of home care visits, morning, lunch, tea and bedtime, day by day, and see the total weekly hours, with an optional estimated cost from a provider’s hourly rate. The plan can be sent straight to the provider.',
     category: 'Home & live-in care',
     captures: true,
+    hidden: true,
   },
   {
     key: 'live-in-ready',
@@ -169,6 +172,7 @@ export const FAMILY_TOOLS: FamilyTool[] = [
       'A short, practical checklist covering the carer’s room, food, daily breaks, nights and getting around, which turns anything not yet in place into a personalised to do list.',
     category: 'Home & live-in care',
     captures: true,
+    hidden: true,
   },
 ]
 

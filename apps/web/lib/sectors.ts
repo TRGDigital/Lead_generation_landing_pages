@@ -172,8 +172,8 @@ export const SECTORS: Sector[] = [
         points: ["Campaigns limited to areas with capacity", "Switch between client and carer campaigns", "Cost per enquiry and per applicant reported"],
       },
       'lead-generation': {
-        body: "Your website has two jobs: winning clients and recruiting carers. We build both journeys properly, with a visit planner and funding tools for families, and a careers section with job pages and a quick application for carers.",
-        points: ["A visit planner and funding tools for families", "A careers section with a fast application", "Client and carer enquiries kept separate"],
+        body: "Your website has two jobs: winning clients and recruiting carers. We build both journeys properly, with funding tools and a simple care assessment request for families, and a careers section with job pages and a quick application for carers.",
+        points: ["Funding tools and assessment requests for families", "A careers section with a fast application", "Client and carer enquiries kept separate"],
       },
     },
   },  {
@@ -210,8 +210,8 @@ export const SECTORS: Sector[] = [
         points: ["Campaigns across your coverage area", "Recruitment campaigns for live-in carers", "Measured on placements and applicants"],
       },
       'lead-generation': {
-        body: "Families need help deciding before they enquire. A live-in care or care home cost comparison and an is our home ready for live-in care checklist turn that research into a warm enquiry, while a dedicated careers route brings in live-in carers.",
-        points: ["A live-in vs care home cost comparison", "A live-in readiness checklist for families", "A careers route for experienced live-in carers"],
+        body: "Families need help deciding before they enquire. Clear guidance on how live-in care works, funding tools and a gentle callback option turn that research into a warm enquiry, while a dedicated careers route brings in live-in carers.",
+        points: ["Guidance on how live-in care works", "Funding tools and a callback option", "A careers route for experienced live-in carers"],
       },
     },
   },

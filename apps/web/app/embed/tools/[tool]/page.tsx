@@ -20,6 +20,9 @@ export default async function ToolEmbedPage({ params, searchParams }: Props) {
   const slug = (searchParams.site || '').trim()
   const site = slug ? await getWebsiteBySlug(slug) : null
 
+  // Hidden tools are not public yet: they only load for a client site they are allocated to.
+  if (tool.hidden && !(site && (site.tools_enabled || []).includes(params.tool))) notFound()
+
   // The funding guide is a premium standalone tool gated by its own flag; every other tool
   // must be allocated to the site in the admin tools grid.
   const isAllowed = site

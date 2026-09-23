@@ -198,7 +198,7 @@ const AVAILABILITY_ITEM: ShowcaseItem = {
 const CATEGORY_ORDER = CATEGORIES.map((c) => c.name)
 const SHOWCASE: ShowcaseItem[] = [
   AVAILABILITY_ITEM,
-  ...[...FAMILY_TOOLS]
+  ...[...FAMILY_TOOLS.filter((t) => !t.hidden)]
     .sort((a, b) => CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category))
     .map((t) => ({
       key: t.key,
