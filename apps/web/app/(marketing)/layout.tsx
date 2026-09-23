@@ -1,6 +1,7 @@
 import Script from 'next/script'
 import Nav from '@/components/marketing/Nav'
 import Footer from '@/components/marketing/Footer'
+import { Accreditations } from '@/components/marketing/Accreditations'
 import { WhoWeServe } from '@/components/marketing/WhoWeServe'
 import { HomeFaqs } from '@/components/marketing/HomeFaqs'
 import { FloatingCta } from '@/components/marketing/FloatingCta'
@@ -20,6 +21,7 @@ export default async function MarketingLayout({ children }: { children: React.Re
         <main className="flex-1">{children}</main>
         <WhoWeServe />
         <HomeFaqs />
+        <Accreditations />
         <Footer />
         <FloatingCta />
         {/* WebMCP tools for AI agents (no-ops where unsupported) */}
