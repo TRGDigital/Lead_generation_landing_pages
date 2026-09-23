@@ -27,21 +27,98 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-// Generic across services — how working with TRG goes.
-const STEPS = [
-  {
-    title: 'Take the 60-second check',
-    body: 'Answer a handful of quick questions about your home. No forms to download, no sales call to book.',
+// The setting the page is aimed at. A home care agency does not fill beds and a
+// retirement village does not run tours, so the few places that name the outcome
+// change with the slug. Everything else is genuinely generic.
+type Setting = {
+  /** "a handful of quick questions about ___" */
+  subject: string
+  /** Step three: the outcome the operator actually wants. */
+  outcome: string
+  outcomeBody: string
+  trust: string
+  showcase: string
+}
+
+const DEFAULT_SETTING: Setting = {
+  subject: 'your home',
+  outcome: 'We build, you fill beds',
+  outcomeBody:
+    'Like the plan? We implement it end to end and report in enquiries, tours and filled beds, never vanity clicks.',
+  trust: 'Trusted by UK care homes. Care sector only.',
+  showcase: 'Real work from real care homes',
+}
+
+const PROVIDER_TRUST = 'Trusted by UK care providers. Care sector only.'
+const PROVIDER_SHOWCASE = 'Real work from real care providers'
+
+const SETTINGS: Record<string, Setting> = {
+  'nursing-home-websites': {
+    subject: 'your home',
+    outcome: 'We build, you fill beds',
+    outcomeBody:
+      'Like the plan? We implement it end to end and report in enquiries, visits and filled beds, never vanity clicks.',
+    trust: 'Trusted by UK nursing homes. Care sector only.',
+    showcase: 'Real work from real nursing homes',
   },
-  {
-    title: 'Get your action plan',
-    body: 'A care-sector specialist (a real person) reviews your answers and replies within one working day with what we would fix first, and why.',
+  'home-care-websites': {
+    subject: 'your agency',
+    outcome: 'We build, you win clients and carers',
+    outcomeBody:
+      'Like the plan? We implement it end to end and report in enquiries, packages started and carers hired, never vanity clicks.',
+    trust: PROVIDER_TRUST,
+    showcase: PROVIDER_SHOWCASE,
   },
-  {
-    title: 'We build, you fill beds',
-    body: 'Like the plan? We implement it end to end and report in enquiries, tours and filled beds, never vanity clicks.',
+  'domiciliary-care-websites': {
+    subject: 'your agency',
+    outcome: 'We build, you grow your hours',
+    outcomeBody:
+      'Like the plan? We implement it end to end and report in enquiries, private hours and carers hired, never vanity clicks.',
+    trust: PROVIDER_TRUST,
+    showcase: PROVIDER_SHOWCASE,
   },
-]
+  'live-in-care-websites': {
+    subject: 'your service',
+    outcome: 'We build, you fill placements',
+    outcomeBody:
+      'Like the plan? We implement it end to end and report in enquiries, placements started and carers hired, never vanity clicks.',
+    trust: PROVIDER_TRUST,
+    showcase: PROVIDER_SHOWCASE,
+  },
+  'supported-living-websites': {
+    subject: 'your service',
+    outcome: 'We build, you fill vacancies',
+    outcomeBody:
+      'Like the plan? We implement it end to end and report in referrals, visits and filled vacancies, never vanity clicks.',
+    trust: PROVIDER_TRUST,
+    showcase: PROVIDER_SHOWCASE,
+  },
+  'retirement-living-websites': {
+    subject: 'your scheme',
+    outcome: 'We build, you fill apartments',
+    outcomeBody:
+      'Like the plan? We implement it end to end and report in enquiries, viewings booked and apartments filled, never vanity clicks.',
+    trust: 'Trusted by UK care and later living operators. Care sector only.',
+    showcase: 'Real work from real care and later living operators',
+  },
+}
+
+function stepsFor(setting: Setting) {
+  return [
+    {
+      title: 'Take the 60-second check',
+      body: `Answer a handful of quick questions about ${setting.subject}. No forms to download, no sales call to book.`,
+    },
+    {
+      title: 'Get your action plan',
+      body: 'A care-sector specialist (a real person) reviews your answers and replies within one working day with what we would fix first, and why.',
+    },
+    {
+      title: setting.outcome,
+      body: setting.outcomeBody,
+    },
+  ]
+}
 
 type ShowcaseItem = {
   src: string
@@ -118,6 +195,9 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
   const headlineOverride = (searchParams?.h ?? '').replace(/<[^>]*>/g, '').trim().slice(0, 90)
   const headline = headlineOverride || page.headline
 
+  const setting = SETTINGS[params.slug] ?? DEFAULT_SETTING
+  const steps = stepsFor(setting)
+
   return (
     <div className="min-h-screen bg-brand-bg">
       {/* Slim header: logo + phone, no nav to leak clicks */}
@@ -178,7 +258,7 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
                   <Star key={i} className="h-4 w-4 fill-current" />
                 ))}
               </span>
-              <span className="whitespace-nowrap text-xs sm:text-sm">Trusted by UK care homes. Care sector only.</span>
+              <span className="whitespace-nowrap text-xs sm:text-sm">{setting.trust}</span>
             </div>
 
             {/* The stack we build on */}
@@ -299,7 +379,7 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
             Three simple steps to more enquiries
           </h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {STEPS.map((s, i) => (
+            {steps.map((s, i) => (
               <div key={s.title} className="rounded-2xl border-2 border-brand-line bg-white p-7 shadow-[4px_4px_0_0_#2a2620]">
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-pop font-display text-lg font-bold text-white">
                   {i + 1}
@@ -321,7 +401,7 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
           <div className="max-w-2xl">
             <p className="font-display text-sm font-bold uppercase tracking-widest text-brand-pop">Built for care, proven in care</p>
             <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
-              Real work from real care homes
+              {setting.showcase}
             </h2>
           </div>
           {SHOWCASE.map((f, i) => (
