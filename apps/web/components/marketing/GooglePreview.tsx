@@ -1,8 +1,8 @@
 'use client'
+import { ToolLeadPrompt } from '@/components/marketing/ToolLeadPrompt'
 
 import { useState } from 'react'
 import { Search, RotateCcw, Globe, Copy, CheckCheck, CircleCheck, TriangleAlert, CircleX } from 'lucide-react'
-import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
 type Tip = { level: 'good' | 'warn' | 'bad'; text: string }
 type Result = {
@@ -146,14 +146,14 @@ export function GooglePreview() {
           </div>
         </div>
 
-        <div className="mt-6 rounded-2xl bg-brand-ink p-5 text-center text-white">
-          <p className="font-display text-base font-bold uppercase tracking-tight">Want us to make it all work?</p>
-          <p className="mt-1 text-sm text-white/70">We write and build care websites that win the click and turn it into an enquiry.</p>
-          <EnquiryButton className="btn-cta btn-on-dark mt-4">
-            Get a free action plan
-            <span className="btn-arrow" aria-hidden>→</span>
-          </EnquiryButton>
-        </div>
+        <ToolLeadPrompt
+          toolName="Google preview tool"
+          summary={`Previewed ${result.url ?? url}.`}
+          heading="Want us to make it all work?"
+          body="Leave your details and we will send you how care websites win the click, and what we would change on yours first."
+          cta="Send me the action plan"
+          tone="dark"
+        />
 
         <button type="button" onClick={() => { setResult(null); setUrl('') }} className="btn-cta-outline mt-4 w-full">
           <RotateCcw className="h-4 w-4" /> Check another site

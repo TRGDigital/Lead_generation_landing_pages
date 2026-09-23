@@ -1,7 +1,7 @@
 'use client'
+import { ToolLeadPrompt } from '@/components/marketing/ToolLeadPrompt'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { Search, Star, ExternalLink, RotateCcw, MapPin } from 'lucide-react'
 
 type KeyRating = { name: string; rating: string }
@@ -111,14 +111,14 @@ export function CqcChecker() {
               </div>
             </div>
 
-            <div className="mt-6 rounded-2xl bg-brand-ink p-5 text-center text-white">
-              <p className="font-display text-base font-bold uppercase tracking-tight">A great rating deserves to be seen</p>
-              <p className="mt-1 text-sm text-white/70">Most family searches start online. We build care websites that show your rating off and turn it into enquiries.</p>
-              <Link href="/contact" className="btn-cta btn-on-dark mt-4">
-                Get a website that shows this off
-                <span className="btn-arrow" aria-hidden>→</span>
-              </Link>
-            </div>
+            <ToolLeadPrompt
+              toolName="CQC rating checker"
+              summary={`Checked ${m.name} (${m.postcode}), rated ${m.overall}.`}
+              heading="A great rating deserves to be seen"
+              body="Most family searches start online. Leave your details and we will send you what homes with a rating like this do to turn it into enquiries."
+              cta="Send me the rundown"
+              tone="dark"
+            />
           </>
         )}
 

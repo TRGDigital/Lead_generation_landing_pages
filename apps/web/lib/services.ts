@@ -1,4 +1,4 @@
-import { Globe, Search, Target, MessageSquareText, Code2, Palette, MapPin, PenLine, MousePointerClick, Boxes, Star, Users, Accessibility, LayoutTemplate, type LucideIcon } from 'lucide-react'
+import { ClipboardCheck, Globe, Search, Target, MessageSquareText, Code2, Palette, MapPin, PenLine, MousePointerClick, Boxes, Star, Users, Accessibility, LayoutTemplate, type LucideIcon } from 'lucide-react'
 
 // The single source of truth for TRG Digital's services, used by the nav mega-menu,
 // the homepage, and the About page so they never drift apart.
@@ -8,9 +8,19 @@ export type Service = {
   short: string // one-liner for the nav dropdown
   body: string // fuller description for cards
   href: string
+  /** Picked out in a different colour in the nav and footer: this is the way in, not a service like the others. */
+  highlight?: boolean
 }
 
 export const SERVICES: Service[] = [
+  {
+    icon: ClipboardCheck,
+    title: 'Free site audit',
+    short: 'A full report on your website, free',
+    body: 'A complete technical, content and accessibility audit of your website, written in plain English, with what we would fix first and why. No charge and no obligation.',
+    href: '/free-site-audit',
+    highlight: true,
+  },
   {
     icon: Palette,
     title: 'Full Rebranding',

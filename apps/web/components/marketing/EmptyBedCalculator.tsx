@@ -1,7 +1,7 @@
 'use client'
+import { ToolLeadPrompt } from '@/components/marketing/ToolLeadPrompt'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { Minus, Plus, TrendingUp } from 'lucide-react'
 import { gbp } from '@/lib/funding'
 
@@ -131,10 +131,13 @@ export function EmptyBedCalculator() {
         </div>
       </div>
 
-      <Link href="/contact" className="btn-pop mt-6 w-full">
-        Get a tailored quote
-        <span className="btn-arrow" aria-hidden>→</span>
-      </Link>
+      <ToolLeadPrompt
+        toolName="empty bed calculator"
+        summary={`${beds} empty bed(s) at ${gbp(fee)}/wk for ${weeks} weeks.`}
+        heading="See what this looks like for your home"
+        body="Leave your details and we will send you how homes fill beds faster, and a tailored quote if you want one."
+        cta="Send me the numbers"
+      />
       <p className="mt-3 text-center text-xs text-brand-ink-muted">An estimate based on the figures and assumptions you enter, not a guarantee.</p>
     </div>
   )

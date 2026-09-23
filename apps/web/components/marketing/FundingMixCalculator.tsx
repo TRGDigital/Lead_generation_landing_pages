@@ -1,9 +1,9 @@
 'use client'
+import { ToolLeadPrompt } from '@/components/marketing/ToolLeadPrompt'
 
 import { useState } from 'react'
 import { Minus, Plus } from 'lucide-react'
 import { gbp } from '@/lib/funding'
-import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 import {
   computeFundingMix,
   DEFAULTS,
@@ -210,10 +210,13 @@ export function FundingMixCalculator() {
         </p>
       </div>
 
-      <EnquiryButton className="btn-pop mt-6 w-full">
-        Talk to us about filling beds privately
-        <span className="btn-arrow" aria-hidden>→</span>
-      </EnquiryButton>
+      <ToolLeadPrompt
+        toolName="funding mix calculator"
+        summary={`Breaks even at ${r.maxLaBeds} of ${r.occupied} occupied beds on social services funding.`}
+        heading="Talk to us about filling beds privately"
+        body="Leave your details and we will send you how homes shift their mix towards private payers, with the numbers behind it."
+        cta="Send me the detail"
+      />
       <p className="mt-3 text-center text-xs text-brand-ink-muted">An estimate based on the figures you enter, not a guarantee. Costs vary by home.</p>
     </div>
   )

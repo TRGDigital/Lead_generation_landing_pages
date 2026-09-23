@@ -1,8 +1,8 @@
 'use client'
+import { ToolLeadPrompt } from '@/components/marketing/ToolLeadPrompt'
 
 import { useMemo, useState } from 'react'
 import { Copy, CheckCheck, Building2, Stethoscope, Home, ShieldCheck, ExternalLink, Info } from 'lucide-react'
-import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
 // Deterministic, client-side schema.org (JSON-LD) generator tailored to the care sector.
 // No AI, no API, no cost, instant. The one thing this tool does that generic generators get
@@ -512,16 +512,14 @@ export function CareSchemaGenerator() {
             </div>
           </div>
 
-          <div className="mt-3 rounded-2xl bg-brand-ink p-4 text-center text-white">
-            <p className="font-display text-sm font-bold uppercase tracking-tight">Want this done for you?</p>
-            <p className="mt-1 text-xs text-white/70">
-              We build care websites with all the right schema baked in, so families and Google both see your rating, fees and services correctly.
-            </p>
-            <EnquiryButton className="btn-cta btn-on-dark mt-3 text-xs">
-              Get a free website review
-              <span className="btn-arrow" aria-hidden>→</span>
-            </EnquiryButton>
-          </div>
+          <ToolLeadPrompt
+            toolName="care schema generator"
+            summary={`Generated ${TYPE_META[type].label} schema for ${f.name || 'an unnamed service'}.`}
+            heading="Want this done for you?"
+            body="Leave your details and we will send you how to install it, and what else Google should be reading on your site."
+            cta="Send me the install guide"
+            tone="dark"
+          />
         </div>
       </div>
     </div>

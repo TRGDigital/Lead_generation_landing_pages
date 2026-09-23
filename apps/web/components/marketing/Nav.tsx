@@ -16,7 +16,7 @@ const LINKS = [
   { href: '/blog', label: 'Blog' },
 ]
 
-type MegaItem = { icon: LucideIcon; title: string; short: string; href: string }
+type MegaItem = { icon: LucideIcon; title: string; short: string; href: string; highlight?: boolean }
 
 function DesktopMega({
   label, active, open, setOpen, items, eyebrow, tagline, ctaHref, ctaLabel, secondaryCta,
@@ -57,20 +57,43 @@ function DesktopMega({
               <span className="font-display text-[11px] font-bold uppercase tracking-wide text-brand-ink-muted">{tagline}</span>
             </div>
             <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-2 lg:grid-cols-3">
-              {items.map(({ icon: Icon, title, short, href }) => (
+              {items.map(({ icon: Icon, title, short, href, highlight }) => (
                 <Link
                   key={title}
                   href={href}
                   onClick={() => setOpen(false)}
-                  className="group flex items-start gap-3 rounded-xl border border-transparent p-3 transition-all hover:border-brand-pop/30 hover:bg-brand-bg-warm"
+                  className={cn(
+                    'group flex items-start gap-3 rounded-xl border p-3 transition-all',
+                    highlight
+                      ? 'border-brand-accent bg-brand-accent/15 hover:bg-brand-accent/25'
+                      : 'border-transparent hover:border-brand-pop/30 hover:bg-brand-bg-warm',
+                  )}
                 >
-                  <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop transition-colors group-hover:bg-brand-pop group-hover:text-white">
+                  <span
+                    className={cn(
+                      'mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl transition-colors',
+                      highlight
+                        ? 'bg-brand-ink text-brand-accent'
+                        : 'bg-brand-pop/10 text-brand-pop group-hover:bg-brand-pop group-hover:text-white',
+                    )}
+                  >
                     <Icon className="h-[18px] w-[18px]" />
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="flex items-center justify-between gap-2">
-                      <span className="text-[13px] font-bold uppercase tracking-wide text-brand-ink transition-colors group-hover:text-brand-pop">{title}</span>
-                      <span className="flex-shrink-0 text-brand-pop opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden>→</span>
+                      <span className={cn(
+                        'text-[13px] font-bold uppercase tracking-wide text-brand-ink transition-colors',
+                        highlight ? '' : 'group-hover:text-brand-pop',
+                      )}>
+                        {title}
+                      </span>
+                      {highlight ? (
+                        <span className="flex-shrink-0 rounded-full bg-brand-ink px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-accent">
+                          Free
+                        </span>
+                      ) : (
+                        <span className="flex-shrink-0 text-brand-pop opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden>→</span>
+                      )}
                     </span>
                     <span className="mt-0.5 block text-xs leading-snug text-brand-ink-soft">{short}</span>
                   </span>
@@ -213,15 +236,25 @@ export default function Nav() {
           </button>
           {mobileServices && (
             <div className="space-y-0.5 pb-1 pl-3">
-              {SERVICES.map(({ icon: Icon, title, href }) => (
+              {SERVICES.map(({ icon: Icon, title, href, highlight }) => (
                 <Link
                   key={title}
                   href={href}
                   onClick={() => setOpen(false)}
-                  className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-brand-ink-soft hover:bg-brand-line/40 hover:text-brand-ink"
+                  className={cn(
+                    'flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm hover:bg-brand-line/40 hover:text-brand-ink',
+                    highlight
+                      ? 'bg-brand-accent/20 font-bold text-brand-ink'
+                      : 'text-brand-ink-soft',
+                  )}
                 >
-                  <Icon className="h-4 w-4 text-brand-accent" />
+                  <Icon className={cn('h-4 w-4', highlight ? 'text-brand-ink' : 'text-brand-accent')} />
                   {title}
+                  {highlight && (
+                    <span className="ml-auto rounded-full bg-brand-ink px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-accent">
+                      Free
+                    </span>
+                  )}
                 </Link>
               ))}
             </div>

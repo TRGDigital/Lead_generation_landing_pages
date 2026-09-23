@@ -1,4 +1,5 @@
 'use client'
+import { ToolLeadPrompt } from '@/components/marketing/ToolLeadPrompt'
 
 import { useState } from 'react'
 import { Check, AlertCircle, Info, RotateCcw } from 'lucide-react'
@@ -157,6 +158,14 @@ export function FundingCalculator() {
         <p className="mt-5 text-xs leading-relaxed text-brand-ink-muted">
           This is a guide only, based on {result.nation} thresholds and not financial advice. A full local authority financial assessment may give a different result.
         </p>
+
+        <ToolLeadPrompt
+          toolName="care funding calculator"
+          summary={`${result.nation}: contribution ${gbp(result.yourWeekly)}/wk of a ${gbp(fee)} fee.`}
+          heading="Want this explained properly?"
+          body="Leave your details and we will send you what this result means in practice, including deferred payments and what to ask your council."
+          cta="Send me the explainer"
+        />
 
         <button type="button" onClick={reset} className="btn-cta-outline mt-6 w-full">
           <RotateCcw className="h-4 w-4" /> Start again
