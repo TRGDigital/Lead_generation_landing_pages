@@ -20,6 +20,7 @@ TRG Digital works exclusively with the UK care sector. Our services are measured
 - [Full Rebranding](${u('/rebranding')}): New logo, identity and a redesigned, rebuilt website.
 - [Website Design & Development](${u('/website-development')}): Fast, modern, search-optimised care websites built to convert.
 - [What's Included in a Website Build](${u('/website-build')}): Everything in a TRG care website build, from design to launch.
+- [Care Website Design Examples](${u('/designs')}): Clickable example designs for a care home, a home care service and a nursing home.
 - [Carer Recruitment](${u('/carer-recruitment')}): Careers pages, Google for Jobs listings and mobile applications with CV upload.
 - [Accessible Websites](${u('/accessible-websites')}): WCAG 2.2 AA websites with an accessibility bar for older visitors.
 - [Search Engine Optimisation (SEO)](${u('/seo')}): Grow organic visibility so families find you before competitors.

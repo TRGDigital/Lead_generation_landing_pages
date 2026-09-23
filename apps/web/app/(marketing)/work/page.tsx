@@ -74,6 +74,23 @@ export default function WorkIndexPage() {
         </div>
       </section>
 
+      <section className="px-6 pb-16">
+        <div className="mx-auto max-w-6xl rounded-2xl border border-brand-line bg-brand-bg-warm p-8 sm:p-10">
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Design examples</p>
+          <h2 className="mt-2 font-display text-2xl font-bold uppercase tracking-tight text-brand-ink sm:text-3xl">
+            Not in care homes? See the designs
+          </h2>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-brand-ink-soft">
+            Clickable example designs for a residential care home, a home care and live-in service and a nursing home,
+            each built the way we build a real site.
+          </p>
+          <Link href="/designs" className="btn-pop mt-6 h-11 px-6 text-xs">
+            See the design examples
+            <span className="btn-arrow" aria-hidden>→</span>
+          </Link>
+        </div>
+      </section>
+
       <StartProject />
     </>
   )

@@ -1,4 +1,4 @@
-import { Globe, Search, Target, MessageSquareText, Code2, Palette, MapPin, PenLine, MousePointerClick, Boxes, Star, Users, Accessibility, type LucideIcon } from 'lucide-react'
+import { Globe, Search, Target, MessageSquareText, Code2, Palette, MapPin, PenLine, MousePointerClick, Boxes, Star, Users, Accessibility, LayoutTemplate, type LucideIcon } from 'lucide-react'
 
 // The single source of truth for TRG Digital's services, used by the nav mega-menu,
 // the homepage, and the About page so they never drift apart.
@@ -24,6 +24,13 @@ export const SERVICES: Service[] = [
     short: 'Fast, modern sites built to convert',
     body: 'Fast, modern, search-optimised sites built around the questions families actually ask, designed to turn visitors into enquiries.',
     href: '/website-development',
+  },
+  {
+    icon: LayoutTemplate,
+    title: 'Design examples',
+    short: 'See what your new site could look like',
+    body: 'Complete, clickable example designs for a care home, a home care service and a nursing home, each built the way we build a real site.',
+    href: '/designs',
   },
   {
     icon: Users,
