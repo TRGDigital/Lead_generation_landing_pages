@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import type { Design } from '@/lib/designs'
+import { BrightpathLogo } from './logos'
 
 // Design 2: friendly and modern. Teal and white, rounded shapes, a sans face, and a layout
 // built around the two jobs a home care site has to do: win clients and recruit carers.
@@ -23,6 +24,18 @@ const CARE = [
   { title: 'After hospital', body: 'Extra support for a few weeks while you get back on your feet, arranged quickly.' },
 ]
 
+const TOOLS = [
+  { title: 'How much care do we need?', body: 'Plan a week of visits and see the hours, before you speak to anyone.' },
+  { title: 'Attendance Allowance checker', body: 'A benefit most people receiving care at home never claim.' },
+  { title: 'Local council and funding', body: 'What your council may pay towards care at home, and how to ask.' },
+]
+
+const POSTS = [
+  { title: 'Live-in care or a care home? How families decide', date: '17 September 2026', tag: 'Live-in care', img: '/designs/live-in-care.jpg' },
+  { title: 'What happens at a care assessment', date: '4 September 2026', tag: 'Getting started', img: '/designs/care-manager.jpg' },
+  { title: 'Meet Jodie, one of our live-in carers', date: '21 August 2026', tag: 'Our team', img: '/designs/group-care.jpg' },
+]
+
 export default function BrightpathDesign({ design }: { design: Design }) {
   const p = design.provider
   return (
@@ -37,12 +50,9 @@ export default function BrightpathDesign({ design }: { design: Design }) {
 
       <header className="border-b" style={{ borderColor: '#e6eceb' }}>
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4">
-          <div className="flex items-center gap-2.5">
-            <span className="grid h-10 w-10 place-items-center rounded-2xl text-lg font-black text-white" style={{ background: TEAL }}>B</span>
-            <span className="text-[19px] font-extrabold tracking-tight">{p.name}</span>
-          </div>
+          <BrightpathLogo primary={TEAL} accent={SUN} />
           <nav className="hidden items-center gap-6 text-[15px] font-medium md:flex" style={{ color: '#3d4b4a' }}>
-            {['Home care', 'Live-in care', 'Areas we cover', 'Careers', 'Contact'].map((l) => (
+            {['Home care', 'Live-in care', 'Areas we cover', 'Careers', 'Blog', 'Contact'].map((l) => (
               <span key={l} className="cursor-default">{l}</span>
             ))}
           </nav>
@@ -126,6 +136,50 @@ export default function BrightpathDesign({ design }: { design: Design }) {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-14">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 className="text-[30px] font-extrabold tracking-tight">Free tools for families</h2>
+            <p className="mt-2 max-w-2xl text-[16px] leading-relaxed" style={{ color: '#5a6968' }}>
+              Work out the hours, the cost and what help you may be entitled to, with no sign up and no phone call.
+            </p>
+          </div>
+          <span className="text-[14px] font-bold" style={{ color: TEAL }}>See all tools →</span>
+        </div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          {TOOLS.map((t) => (
+            <div key={t.title} className="rounded-3xl p-6" style={{ background: TEAL_SOFT }}>
+              <h3 className="text-[17.5px] font-bold">{t.title}</h3>
+              <p className="mt-2 text-[14.5px] leading-relaxed" style={{ color: '#41504f' }}>{t.body}</p>
+              <p className="mt-4 text-[14px] font-bold" style={{ color: TEAL }}>Start →</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="px-6 py-14" style={{ background: '#f7fbfa' }}>
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <h2 className="text-[30px] font-extrabold tracking-tight">Advice and news</h2>
+            <span className="text-[14px] font-bold" style={{ color: TEAL }}>Read the blog →</span>
+          </div>
+          <div className="mt-8 grid gap-6 sm:grid-cols-3">
+            {POSTS.map((post) => (
+              <article key={post.title} className="overflow-hidden rounded-3xl bg-white" style={{ border: '1px solid #e6eceb' }}>
+                <div className="relative h-40 w-full">
+                  <Image src={post.img} alt="" fill className="object-cover" sizes="(min-width:768px) 33vw, 100vw" />
+                </div>
+                <div className="p-5">
+                  <span className="rounded-full px-2.5 py-1 text-[11.5px] font-bold" style={{ background: TEAL_SOFT, color: TEAL }}>{post.tag}</span>
+                  <h3 className="mt-3 text-[16.5px] font-bold leading-snug">{post.title}</h3>
+                  <p className="mt-2 text-[12.5px]" style={{ color: '#6b7a79' }}>{post.date}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-14">
         <div className="rounded-[2.5rem] p-10 text-center text-white" style={{ background: TEAL }}>
           <h2 className="text-[32px] font-extrabold leading-tight">Care can start this week</h2>
           <p className="mx-auto mt-4 max-w-xl text-[16.5px] leading-relaxed" style={{ color: '#cfe9e5' }}>
@@ -141,16 +195,16 @@ export default function BrightpathDesign({ design }: { design: Design }) {
       <footer className="px-6 py-10 text-[13px]" style={{ background: INK, color: '#a9bab8' }}>
         <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-6">
           <div>
-            <p className="text-[17px] font-extrabold text-white">{p.name}</p>
-            <p className="mt-1">Unit 4, Green Lane, {p.town}, {p.county}</p>
+            <BrightpathLogo primary="#ffffff" accent={SUN} onDark />
+            <p className="mt-3">Unit 4, Green Lane, {p.town}, {p.county}</p>
             <p>{p.phone}</p>
           </div>
           <div className="flex flex-wrap gap-x-10 gap-y-2">
-            {['Home care', 'Live-in care', 'Areas we cover', 'Careers', 'Privacy'].map((l) => <span key={l}>{l}</span>)}
+            {['Home care', 'Live-in care', 'Areas we cover', 'Careers', 'Blog', 'Privacy'].map((l) => <span key={l}>{l}</span>)}
           </div>
         </div>
         <p className="mx-auto mt-8 max-w-6xl text-[12px]" style={{ color: '#6f8280' }}>
-          Example website design. {p.name} is a fictional care provider, and the rating and details shown are examples.
+          Example website design. {p.name} is a fictional care provider, and the rating, details and articles shown are examples.
         </p>
       </footer>
     </div>

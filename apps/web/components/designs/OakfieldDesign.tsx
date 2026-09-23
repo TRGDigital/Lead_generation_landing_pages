@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import type { Design } from '@/lib/designs'
+import { OakfieldLogo } from './logos'
 
 // Design 1: traditional and warm. Deep green and cream, serif headings, photography led,
 // the look most residential homes are reaching for. Fictional content throughout.
@@ -13,6 +14,18 @@ const SERVICES = [
   { title: 'Respite stays', body: 'A short stay from one week, for a break, a recovery after hospital, or a trial of life here.' },
   { title: 'Dementia care', body: 'Familiar faces, calm surroundings and a team trained to support memory loss with patience.' },
   { title: 'Day visits', body: 'Company, activities and a proper lunch, one or two days a week, with transport arranged.' },
+]
+
+const TOOLS = [
+  { title: 'Care funding calculator', body: 'Who pays for care, and how much: you, the council or the NHS.' },
+  { title: 'Is it time for care?', body: 'A gentle, private checklist for families wondering whether now is the time.' },
+  { title: 'Attendance Allowance checker', body: 'A benefit many families are entitled to and never claim.' },
+]
+
+const POSTS = [
+  { title: 'What to look for on your first visit to a care home', date: '15 September 2026', tag: 'Choosing a home', img: '/designs/care-manager.jpg' },
+  { title: 'Respite care explained, and when it helps most', date: '2 September 2026', tag: 'Respite', img: '/designs/live-in-care.jpg' },
+  { title: 'Our gardening club, one year on', date: '20 August 2026', tag: 'Life at Oakfield', img: '/designs/group-care.jpg' },
 ]
 
 const DAY = [
@@ -36,12 +49,9 @@ export default function OakfieldDesign({ design }: { design: Design }) {
 
       <header className="border-b" style={{ borderColor: '#e2dac9', background: '#fffdf8' }}>
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-5">
-          <div>
-            <p className="text-2xl font-bold tracking-tight" style={{ color: GREEN }}>{p.name}</p>
-            <p className="text-[11px] uppercase tracking-[0.2em]" style={{ color: GOLD }}>{p.town} · {p.county}</p>
-          </div>
+          <OakfieldLogo primary={GREEN} accent={GOLD} />
           <nav className="hidden items-center gap-6 text-[15px] md:flex">
-            {['Our home', 'Our care', 'Life here', 'Fees', 'Contact'].map((l) => (
+            {['Our home', 'Our care', 'Life here', 'Fees', 'Blog', 'Contact'].map((l) => (
               <span key={l} className="cursor-default">{l}</span>
             ))}
           </nav>
@@ -125,6 +135,50 @@ export default function OakfieldDesign({ design }: { design: Design }) {
         </div>
       </section>
 
+      <section className="border-t py-14" style={{ borderColor: '#e2dac9', background: '#fffdf8' }}>
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 className="text-[30px]" style={{ color: GREEN }}>Work out what care will cost</h2>
+              <p className="mt-2 max-w-2xl text-[15.5px] leading-relaxed" style={{ color: '#4c463d' }}>
+                Free tools on our website, with no sign up, so you can get an honest answer before you call anyone.
+              </p>
+            </div>
+            <span className="text-[13px] font-bold" style={{ color: GOLD }}>See all tools →</span>
+          </div>
+          <div className="mt-8 grid gap-5 sm:grid-cols-3">
+            {TOOLS.map((t) => (
+              <div key={t.title} className="rounded-2xl border p-6" style={{ borderColor: '#e2dac9', background: CREAM }}>
+                <h3 className="text-[18px]" style={{ color: GREEN }}>{t.title}</h3>
+                <p className="mt-2 text-[14.5px] leading-relaxed" style={{ color: '#4c463d' }}>{t.body}</p>
+                <p className="mt-4 text-[13px] font-bold" style={{ color: GOLD }}>Start →</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-14">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <h2 className="text-[30px]" style={{ color: GREEN }}>News and advice</h2>
+          <span className="text-[13px] font-bold" style={{ color: GOLD }}>Read the blog →</span>
+        </div>
+        <div className="mt-8 grid gap-6 sm:grid-cols-3">
+          {POSTS.map((post) => (
+            <article key={post.title} className="overflow-hidden rounded-2xl border" style={{ borderColor: '#e2dac9', background: '#fffdf8' }}>
+              <div className="relative h-40 w-full">
+                <Image src={post.img} alt="" fill className="object-cover" sizes="(min-width:768px) 33vw, 100vw" />
+              </div>
+              <div className="p-5">
+                <span className="text-[11px] uppercase tracking-[0.18em]" style={{ color: GOLD }}>{post.tag}</span>
+                <h3 className="mt-2 text-[17px] leading-snug" style={{ color: GREEN }}>{post.title}</h3>
+                <p className="mt-2 text-[12.5px]" style={{ color: '#6b6355' }}>{post.date}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="py-14 text-center text-white" style={{ background: GREEN }}>
         <div className="mx-auto max-w-2xl px-6">
           <h2 className="text-[32px]">Come and see us</h2>
@@ -141,16 +195,16 @@ export default function OakfieldDesign({ design }: { design: Design }) {
       <footer className="py-10 text-[13px]" style={{ background: '#22352a', color: '#c9d6c9' }}>
         <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-6 px-6">
           <div>
-            <p className="text-[17px] font-bold text-white">{p.name}</p>
-            <p className="mt-1">Church Lane, {p.town}, {p.county}</p>
+            <OakfieldLogo primary="#ffffff" accent="#d8b478" />
+            <p className="mt-3">Church Lane, {p.town}, {p.county}</p>
             <p>{p.phone}</p>
           </div>
           <div className="flex flex-wrap gap-x-10 gap-y-2">
-            {['Our home', 'Our care', 'Fees', 'Careers', 'Privacy'].map((l) => <span key={l}>{l}</span>)}
+            {['Our home', 'Our care', 'Fees', 'Careers', 'Blog', 'Privacy'].map((l) => <span key={l}>{l}</span>)}
           </div>
         </div>
         <p className="mx-auto mt-8 max-w-6xl px-6 text-[12px]" style={{ color: '#8ea08e' }}>
-          Example website design. {p.name} is a fictional care home, and the review, rating and fees shown are examples.
+          Example website design. {p.name} is a fictional care home, and the review, rating, fees and articles shown are examples.
         </p>
       </footer>
     </div>
