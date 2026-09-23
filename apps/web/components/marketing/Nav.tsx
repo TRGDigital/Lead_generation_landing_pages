@@ -49,14 +49,14 @@ function DesktopMega({
       </button>
 
       {open && (
-        <div className="absolute left-1/2 top-full z-50 w-[37rem] -translate-x-1/2 pt-3">
+        <div className="absolute left-1/2 top-full z-50 w-[37rem] -translate-x-1/2 pt-3 lg:w-[54rem]">
           <div className="relative overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card">
             <div className="h-1.5 w-full bg-brand-pop" />
             <div className="flex items-center justify-between px-4 pb-1 pt-4">
               <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-pop">{eyebrow}</p>
               <span className="font-display text-[11px] font-bold uppercase tracking-wide text-brand-ink-muted">{tagline}</span>
             </div>
-            <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-2 lg:grid-cols-3">
               {items.map(({ icon: Icon, title, short, href }) => (
                 <Link
                   key={title}
