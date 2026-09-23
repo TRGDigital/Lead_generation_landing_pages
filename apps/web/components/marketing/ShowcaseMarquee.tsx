@@ -1,6 +1,7 @@
 import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { Squiggle, Star } from './Decor'
 import { DecorativeClientOnly } from './DecorativeClientOnly'
+import { MotionToggle } from './MotionToggle'
 
 // An auto-scrolling showcase that tells the whole enquiry journey we build for a
 // client: a desktop site → a mobile site → how it appears on Google → on Bing →
@@ -139,6 +140,7 @@ export function ShowcaseMarquee() {
           straight to you. Here&apos;s what that looks like.
         </p>
         <Squiggle className="mt-6 h-7 w-72 text-brand-pop" />
+        <div className="mt-6"><MotionToggle /></div>
       </div>
 
       <DecorativeClientOnly className="marquee-mask" minHeight="18rem">

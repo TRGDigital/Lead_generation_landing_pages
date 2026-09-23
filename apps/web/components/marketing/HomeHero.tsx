@@ -8,6 +8,7 @@ import {
 import { Squiggle, Star } from './Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 import { DecorativeClientOnly } from './DecorativeClientOnly'
+import { MotionToggle } from './MotionToggle'
 
 type Shot = { src: string; alt: string; url?: string }
 type Col =
@@ -197,6 +198,11 @@ export function HomeHero() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Anyone can stop the movement, next to the thing that moves */}
+      <div className="pointer-events-auto absolute bottom-4 right-4 z-30 hidden lg:block">
+        <MotionToggle />
       </div>
 
       {/* Mobile visual, a scrolling band under the text */}

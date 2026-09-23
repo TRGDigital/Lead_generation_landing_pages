@@ -84,6 +84,72 @@ export default function AccessibleWebsitesPage() {
           { Icon: ImageIcon, title: 'Described images and contrast', body: 'Alt text on every image and text colours that meet the AA contrast standard throughout.' },
         ],
       }}
+      extra={
+        <section className="relative overflow-hidden bg-brand-bg-warm px-6 py-24">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-10 max-w-3xl">
+              <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Dementia friendly design</p>
+              <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
+                The principles stop at the front door
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">
+                Dementia friendly design is well established for the physical environment: good contrast, clear
+                signage, avoiding visual confusion, avoiding unnecessary movement and reflective surfaces. Almost none
+                of it gets applied to the digital environment, even though the family carer doing the searching is
+                usually on a phone, often late at night and under pressure, and people living with dementia use these
+                sites too.
+              </p>
+              <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">
+                We build to the same principles on screen. In practice that means:
+              </p>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { title: 'No moving imagery on a homepage', body: 'Nothing slides, fades or auto-plays while someone is trying to read. Movement pulls attention away and makes text harder to follow.' },
+                { title: 'No carousels', body: 'A carousel hides content behind movement and timing. Everything that matters gets its own place on the page instead.' },
+                { title: 'Contrast that survives a bright room', body: 'Text that still reads on a phone in daylight, not pale grey on white, and never colour alone to carry meaning.' },
+                { title: 'Plain language, not sector vocabulary', body: 'Domiciliary, respite, CHC and FNC all get explained. A family should never need the jargon to find what they need.' },
+                { title: 'Forms that do not time out', body: 'No session expiring mid enquiry, no losing what was typed, and no puzzle to prove you are human.' },
+                { title: 'One clear next step', body: 'A phone number and one obvious action per page, in the same place every time, so there is nothing to relearn.' },
+              ].map((c) => (
+                <div key={c.title} className="rounded-2xl border border-brand-line bg-white p-7 shadow-soft">
+                  <h3 className="font-display text-lg font-semibold text-brand-ink">{c.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{c.body}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 rounded-2xl border border-brand-line bg-white p-7 shadow-soft">
+              <h3 className="font-display text-lg font-semibold text-brand-ink">Where we have not managed it yet</h3>
+              <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">
+                Our own homepage has a moving band of screenshots, which by this standard should not be there. Until it
+                goes, the system setting for reduced motion stops it automatically, and there is a pause button in the
+                accessibility bar at the top of every page and beside the band itself. We would rather say that than
+                pretend otherwise.
+              </p>
+            </div>
+
+            <div className="mt-8 rounded-2xl border-l-4 border-brand-pop bg-white p-7 shadow-soft">
+              <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">A warning worth hearing</p>
+              <h3 className="mt-2 font-display text-xl font-semibold text-brand-ink">
+                Free accessibility checkers can be measuring nothing at all
+              </h3>
+              <p className="mt-3 text-base leading-relaxed text-brand-ink-soft">
+                On one large care directory we work on, scanners reported thousands of images with missing alternative
+                text. The text was there. The page the scanner downloaded simply contained no images at all, because
+                the browser builds them after the page loads, and the scanner never got that far.
+              </p>
+              <p className="mt-3 text-base leading-relaxed text-brand-ink-soft">
+                A provider can pass that report and still be unusable for someone with sight loss. The reverse happens
+                too: a perfectly accessible site can be marked down for faults it does not have. We test the way a
+                person actually uses a site, with a keyboard, a screen reader and real contrast checks, and we tell you
+                which of a report&apos;s findings are real.
+              </p>
+            </div>
+          </div>
+        </section>
+      }
       steps={{
         title: 'Accessible from the foundations up',
         items: [

@@ -77,9 +77,16 @@
   -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
 }
+/* Movement off: either the visitor's operating system asks for less motion, or they
+   pressed pause. Dementia friendly design removes unnecessary movement, so this stops
+   every band on the site, not just one of them. */
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee { animation: none; }
+  .animate-marquee,
+  .animate-marquee-hero { animation: none; }
 }
+html.no-motion .animate-marquee,
+html.no-motion .animate-marquee-hero { animation-play-state: paused !important; }
+html.no-motion .animate-floaty { animation: none !important; }
 
 /* Unique CTA buttons — bold, with a sliding arrow + colour-flip on hover. */
 @layer components {
@@ -172,4 +179,42 @@
   .tool-print, .tool-print * { visibility: visible; }
   .tool-print { position: absolute; left: 0; top: 0; width: 100%; }
   .no-print { display: none !important; }
+}
+
+/* ── Accessibility bar modes ──────────────────────────────────────────────────
+   Applied to <html> by components/marketing/AccessibilityBar and re-applied
+   before paint by the script in app/layout.tsx. */
+
+/* High contrast: pure white behind near-black text, and underlined links. */
+html.hc {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 4%;
+  --muted: 0 0% 100%;
+  --muted-foreground: 0 0% 18%;
+  --card: 0 0% 100%;
+  --border: 0 0% 25%;
+}
+html.hc body,
+html.hc .bg-brand-bg,
+html.hc .bg-brand-bg-warm,
+html.hc .bg-white { background-color: #ffffff !important; }
+html.hc .text-brand-ink-soft,
+html.hc .text-brand-ink-muted { color: #1a1a1a !important; }
+html.hc .text-brand-ink { color: #000000 !important; }
+html.hc .border-brand-line { border-color: #6b6b6b !important; }
+html.hc a:not([class*="btn"]):not([class*="rounded-full"]) { text-decoration: underline; }
+
+/* Readable font: a plainer face with roomier spacing, which many people with
+   dyslexia find easier. */
+html.readable,
+html.readable body,
+html.readable h1,
+html.readable h2,
+html.readable h3,
+html.readable h4 {
+  font-family: Verdana, Tahoma, "Trebuchet MS", sans-serif !important;
+}
+html.readable {
+  letter-spacing: 0.01em;
+  line-height: 1.75;
 }

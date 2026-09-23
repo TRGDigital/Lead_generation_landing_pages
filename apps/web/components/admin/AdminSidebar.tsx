@@ -18,8 +18,9 @@ import {
   Inbox,
   Wrench,
   Mail,
+  Volume2,
 } from 'lucide-react'
-import { ChevronDown, Target, Linkedin, Tags, Wallet, Trophy, ListTodo } from 'lucide-react'
+import { ChevronDown, FileSignature, Target, Linkedin, Tags, Wallet, Trophy, ListTodo, ClipboardCheck, Gift, Gavel, GraduationCap, Smartphone, Apple } from 'lucide-react'
 import AdminNavLink from './AdminNavLink'
 import TrgLogo from './TrgLogo'
 
@@ -31,7 +32,10 @@ type NavGroup = { title: string | null; accent?: string; items: NavItem[] }
 const navGroups: NavGroup[] = [
   {
     title: null,
-    items: [{ href: '/admin', icon: <LayoutDashboard className="h-4 w-4" />, label: 'Overview' }],
+    items: [
+      { href: '/admin', icon: <LayoutDashboard className="h-4 w-4" />, label: 'Overview' },
+      { href: '/admin/proposals', icon: <FileSignature className="h-4 w-4" />, label: 'Proposals' },
+    ],
   },
   {
     // The CareBeds lead-gen business: paid campaigns → landing pages → leads sold to buyers.
@@ -63,6 +67,7 @@ const navGroups: NavGroup[] = [
       { href: '/admin/email-nurture', icon: <Mail className="h-4 w-4" />, label: 'Email nurture' },
       { href: '/admin/blog', icon: <BookOpen className="h-4 w-4" />, label: 'Blog' },
       { href: '/admin/seo', icon: <Search className="h-4 w-4" />, label: 'Page SEO' },
+      { href: '/admin/accessibility', icon: <Volume2 className="h-4 w-4" />, label: 'Listen to page' },
       { href: '/admin/legal', icon: <Scale className="h-4 w-4" />, label: 'Legal Pages' },
     ],
   },
@@ -77,6 +82,13 @@ const navGroups: NavGroup[] = [
       { href: 'https://meta-generator-trgdigitals-projects.vercel.app/', icon: <Tags className="h-4 w-4" />, label: 'Meta Generator', external: true },
       { href: 'https://taskboard-five-roan.vercel.app/', icon: <ListTodo className="h-4 w-4" />, label: 'Taskboard', external: true },
       { href: 'https://cpd-keyword-tool.vercel.app/leaderboard', icon: <Trophy className="h-4 w-4" />, label: 'CPD Leaderboard', external: true },
+      { href: 'https://claude.ai/artifact/PuiyXdoUVyKkHafaS94Z5x', icon: <ClipboardCheck className="h-4 w-4" />, label: 'CPD Submission Playbook', external: true },
+      { href: 'https://claude.ai/artifact/SA1ahyZ3RzFjyavPM3q2Jg', icon: <Gift className="h-4 w-4" />, label: 'CareStream Free Plan', external: true },
+      { href: 'https://claude.ai/artifact/CT1HdZxLUxibxF9wVSaySD', icon: <Gavel className="h-4 w-4" />, label: 'CareStream Gap Judges', external: true },
+      { href: 'https://claude.ai/artifact/592aZVpmSugH1JvYDSHNEz', icon: <GraduationCap className="h-4 w-4" />, label: 'CareStream Adhoc Training', external: true },
+      { href: 'https://claude.ai/artifact/6KsHz3ocYQ1UnjiLvHtxwd', icon: <Smartphone className="h-4 w-4" />, label: 'App: Google Play', external: true },
+      { href: 'https://claude.ai/artifact/BYvWBqnV6SoCCuGn3y3WDW', icon: <Smartphone className="h-4 w-4" />, label: 'App: Samsung Store', external: true },
+      { href: 'https://claude.ai/artifact/QJf9TrJ4oBCewGd6tNmqkF', icon: <Apple className="h-4 w-4" />, label: 'App: Apple App Store', external: true },
       { href: 'https://budget-planner-lilac-two.vercel.app/', icon: <Wallet className="h-4 w-4" />, label: 'Budget Planner', external: true },
     ],
   },
@@ -97,8 +109,9 @@ export default function AdminSidebar() {
       <nav className="flex-1 space-y-1 overflow-y-auto p-4">
         {navGroups.map((group, i) =>
           group.title ? (
-            // Collapsible group (native <details> — works without JS, open by default).
-            <details key={i} open className="group/side pt-3">
+            // Collapsible group (native <details>, works without JS). Closed by default so the
+            // sidebar opens compact; click a group title to expand it.
+            <details key={i} className="group/side pt-3">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-2 rounded-lg px-3 py-1.5 hover:bg-white/5">
                 <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
                   {group.accent && <span className={`h-2 w-2 rounded-full ${group.accent}`} />}

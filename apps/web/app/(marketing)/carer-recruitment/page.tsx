@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Briefcase, Search, Smartphone, Lock, MapPin, Inbox } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
 import { ServiceLanding } from '@/components/marketing/ServiceLanding'
+import { SerpJobs, SchemaCode } from '@/components/marketing/SerpMock'
 
 export const revalidate = 3600
 
@@ -77,6 +78,100 @@ export default function CarerRecruitmentPage() {
           { Icon: Inbox, title: 'Every application in one place', body: 'Applications land in your content management system and your inbox straight away, with the role and page they came from.' },
         ],
       }}
+      extra={
+        <section className="relative overflow-hidden bg-brand-bg-warm px-6 py-24">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-10 max-w-2xl">
+              <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">What carers see</p>
+              <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
+                A job page that answers the pay question first
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">
+                Carers compare roles in minutes, usually on a phone between shifts. This is the shape of a job page we
+                build, and the markup behind it that puts the same role into Google&apos;s own job results.
+              </p>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-2">
+              {/* A job page as we build it */}
+              <div className="overflow-hidden rounded-2xl border border-brand-line bg-white shadow-soft">
+                <div className="flex items-center gap-1.5 border-b border-brand-line bg-brand-bg-warm px-3 py-2">
+                  <span className="h-2 w-2 rounded-full bg-red-400" />
+                  <span className="h-2 w-2 rounded-full bg-amber-300" />
+                  <span className="h-2 w-2 rounded-full bg-green-400" />
+                  <span className="ml-2 truncate rounded bg-white px-2 py-0.5 text-[9px] text-brand-ink-muted">
+                    oakfieldhouse.co.uk/careers/care-assistant-days
+                  </span>
+                </div>
+                <div className="p-6">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-brand-pop">Now recruiting</p>
+                  <h3 className="mt-1 font-display text-2xl font-semibold text-brand-ink">Care Assistant, days</h3>
+                  <div className="mt-4 grid grid-cols-2 gap-3">
+                    {[
+                      ['Pay', '£12.60 an hour'],
+                      ['Hours', 'Full time, 8am to 8pm'],
+                      ['Shifts', 'Three days on, three off'],
+                      ['Based', 'Alderbury, Wiltshire'],
+                      ['Holiday', '28 days, pro rata'],
+                      ['Experience', 'Not essential, training given'],
+                    ].map(([k, v]) => (
+                      <div key={k} className="rounded-xl bg-brand-bg-warm px-4 py-3">
+                        <p className="text-[11px] font-semibold uppercase tracking-wide text-brand-ink-muted">{k}</p>
+                        <p className="text-sm font-semibold text-brand-ink">{v}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-5 rounded-xl border border-brand-line p-4">
+                    <p className="text-sm font-semibold text-brand-ink">Apply in about five minutes</p>
+                    <div className="mt-3 space-y-2">
+                      {['Your name', 'Phone or email', 'Which shifts suit you', 'Upload a CV (optional)'].map((f) => (
+                        <div key={f} className="rounded-lg bg-brand-bg-warm px-3 py-2 text-[13px] text-brand-ink-soft">{f}</div>
+                      ))}
+                    </div>
+                    <span className="mt-3 inline-block rounded-full bg-brand-pop px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-white">
+                      Send application
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* The same role in Google, and the markup that puts it there */}
+              <div className="space-y-6">
+                <SerpJobs
+                  heading="Care jobs near Alderbury"
+                  jobs={[
+                    { title: 'Care Assistant, days', meta: 'Oakfield House · Alderbury, Wiltshire', chips: ['£12.60 an hour', 'Full time', 'Posted 2 days ago'] },
+                    { title: 'Live-in Carer', meta: 'Brightpath Care · Melrose Green, Suffolk', chips: ['From £143 a day', 'Live-in'] },
+                    { title: 'Registered Nurse, nights', meta: "St Aidan's Nursing Home · Northbrook", chips: ['£21.40 an hour', 'Nights'] },
+                  ]}
+                />
+                <SchemaCode
+                  lines={[
+                    { text: '<script type="application/ld+json">', tone: 'tag' },
+                    { text: '{' },
+                    { text: '  "@type": "JobPosting",', tone: 'key' },
+                    { text: '  "title": "Care Assistant, days",', tone: 'value' },
+                    { text: '  "hiringOrganization": { "name": "Oakfield House" },', tone: 'value' },
+                    { text: '  "jobLocation": { "addressLocality": "Alderbury", "addressRegion": "Wiltshire" },', tone: 'value' },
+                    { text: '  "baseSalary": { "currency": "GBP", "value": 12.60, "unitText": "HOUR" },', tone: 'value' },
+                    { text: '  "employmentType": "FULL_TIME",', tone: 'value' },
+                    { text: '  "datePosted": "2026-09-21", "validThrough": "2026-11-21"', tone: 'value' },
+                    { text: '}' },
+                    { text: '</script>', tone: 'tag' },
+                    { text: '' },
+                    { text: '// written for you each time a vacancy is added, and removed when it is filled', tone: 'comment' },
+                  ]}
+                />
+                <p className="text-sm leading-relaxed text-brand-ink-muted">
+                  Illustrations. The providers shown are the fictional ones from our{' '}
+                  <Link href="/designs" className="font-semibold text-brand-pop underline-offset-2 hover:underline">design examples</Link>,
+                  and Google decides which listings to show for each search.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      }
       steps={{
         title: 'From hard to find to hired',
         items: [

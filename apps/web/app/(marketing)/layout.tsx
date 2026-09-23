@@ -1,5 +1,6 @@
 import Script from 'next/script'
 import Nav from '@/components/marketing/Nav'
+import { AccessibilityBar } from '@/components/marketing/AccessibilityBar'
 import Footer from '@/components/marketing/Footer'
 import { Accreditations } from '@/components/marketing/Accreditations'
 import { WhoWeServe } from '@/components/marketing/WhoWeServe'
@@ -17,6 +18,7 @@ export default async function MarketingLayout({ children }: { children: React.Re
     <AltMapProvider map={altMap}>
       <EnquiryProvider>
       <div className="flex min-h-screen flex-col bg-brand-bg">
+        <AccessibilityBar />
         <Nav />
         <main className="flex-1">{children}</main>
         <WhoWeServe />

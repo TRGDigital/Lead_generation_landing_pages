@@ -44,7 +44,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       className={`${bricolage.variable} ${manrope.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        {/* Re-apply the visitor's accessibility choices before paint, so the page
+            never flashes at the default size or contrast. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var d=document.documentElement,ls=localStorage;var k=ls.getItem('trg_textsize')||'base',m={base:'100%',lg:'112.5%',xl:'125%'};d.style.fontSize=m[k]||'100%';d.dataset.textsize=k;if(ls.getItem('trg_contrast')==='1')d.classList.add('hc');if(ls.getItem('trg_font')==='1')d.classList.add('readable');if(ls.getItem('trg_motion')==='1')d.classList.add('no-motion');}catch(e){}})();",
+          }}
+        />
+      </head>
       <body className="min-h-screen bg-background text-foreground antialiased">
         {children}
         <CookieBanner />
