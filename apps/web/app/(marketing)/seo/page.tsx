@@ -3,6 +3,7 @@ import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
 import { Search, FileText, Settings, MapPin, PenLine, BarChart3, Check } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { SerpResult, SerpJobs, SchemaCode } from '@/components/marketing/SerpMock'
 
 export const revalidate = 3600
 
@@ -13,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Care Sector SEO | Get Found First | TRG Digital',
+  title: 'Care Sector SEO | Get Found First',
   description:
     'Specialist SEO for UK care providers. We grow your organic visibility, local, technical and on-page SEO, so families find your care home first, and enquiries come in month after month.',
   alternates: { canonical: `${SITE_URL}/seo` },
@@ -203,6 +204,164 @@ export default function SeoPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── What schema markup actually does ──────────────────────────── */}
+      <section className="relative overflow-hidden bg-brand-bg-warm px-6 py-24">
+        <Dots className="absolute right-10 top-12 hidden h-20 w-20 text-brand-pop/40 lg:block" />
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 max-w-2xl">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Schema markup</p>
+            <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
+              The difference structured data makes
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">
+              Schema markup is information written into a page, in a format called JSON-LD, that tells Google exactly
+              what it is looking at. Visitors never see it. Google reads it on every visit, and it decides whether you
+              appear as a plain blue link or as a result that answers half the question before anyone clicks.
+            </p>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div>
+              <p className="mb-3 inline-block rounded-full bg-red-50 px-3 py-1 text-xs font-bold uppercase tracking-wide text-red-700">
+                Without schema markup
+              </p>
+              <SerpResult
+                site="Oakfield House"
+                url="https://www.oakfieldhouse.co.uk"
+                title="Oakfield House | Home"
+                description="Welcome to Oakfield House. We are a family run care home providing quality care. Please contact us for more information about our services and availability."
+              />
+              <p className="mt-3 text-sm leading-relaxed text-brand-ink-soft">
+                A plain link. No rating, no questions answered, nothing that says where you are or what you offer.
+              </p>
+            </div>
+
+            <div>
+              <p className="mb-3 inline-block rounded-full bg-green-50 px-3 py-1 text-xs font-bold uppercase tracking-wide text-green-700">
+                With schema markup
+              </p>
+              <SerpResult
+                site="Oakfield House"
+                url="oakfieldhouse.co.uk › residential-care › alderbury"
+                title="Residential Care Home in Alderbury | CQC Good | Oakfield House"
+                description="Family run residential and respite care in Alderbury, Wiltshire. 32 bedrooms, rooms available this month, weekly fees from £1,150. Book a visit any day."
+                rating={{ stars: 'Rating 4.9', text: '27 reviews' }}
+                faqs={[
+                  'How much does a room at Oakfield House cost?',
+                  'Do you have any rooms available?',
+                  'Can we visit before we decide?',
+                ]}
+              />
+              <p className="mt-3 text-sm leading-relaxed text-brand-ink-soft">
+                The same home, with breadcrumbs, review stars and the questions families actually ask, answered in the
+                result itself.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            <div>
+              <h3 className="font-display text-xl font-semibold text-brand-ink">This is what Google reads</h3>
+              <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">
+                The markup behind the result above. We write it for every page of your site and keep it accurate as
+                your rooms, fees and reviews change.
+              </p>
+              <div className="mt-4">
+                <SchemaCode
+                  lines={[
+                    { text: '<script type="application/ld+json">', tone: 'tag' },
+                    { text: '{' },
+                    { text: '  "@type": "ResidentialCareFacility",', tone: 'key' },
+                    { text: '  "name": "Oakfield House",', tone: 'value' },
+                    { text: '  "address": { "addressLocality": "Alderbury", "addressRegion": "Wiltshire" },', tone: 'value' },
+                    { text: '  "telephone": "01722 000 000",', tone: 'value' },
+                    { text: '  "aggregateRating": { "ratingValue": 4.9, "reviewCount": 27 },', tone: 'value' },
+                    { text: '  "makesOffer": { "name": "Residential care", "priceSpecification": "£1,150 per week" }', tone: 'value' },
+                    { text: '}' },
+                    { text: '</script>', tone: 'tag' },
+                    { text: '' },
+                    { text: '// plus FAQPage, BreadcrumbList and Review on the same page', tone: 'comment' },
+                  ]}
+                />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-display text-xl font-semibold text-brand-ink">Your vacancies, listed free</h3>
+              <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">
+                Job posting markup puts your roles into Google&apos;s own job search, alongside the paid job boards,
+                at no cost. Carers see the pay and the location before they click.
+              </p>
+              <div className="mt-4">
+                <SerpJobs
+                  heading="Care jobs near Alderbury"
+                  jobs={[
+                    { title: 'Care Assistant, days', meta: 'Oakfield House · Alderbury, Wiltshire', chips: ['£12.60 an hour', 'Full time', 'Posted 2 days ago'] },
+                    { title: 'Live-in Carer', meta: 'Brightpath Care · Melrose Green, Suffolk', chips: ['From £143 a day', 'Live-in'] },
+                    { title: 'Registered Nurse, nights', meta: "St Aidan's Nursing Home · Northbrook", chips: ['£21.40 an hour', 'Nights'] },
+                  ]}
+                />
+              </div>
+              <div className="mt-4">
+                <SchemaCode
+                  lines={[
+                    { text: '"@type": "JobPosting",', tone: 'key' },
+                    { text: '"title": "Care Assistant, days",', tone: 'value' },
+                    { text: '"hiringOrganization": { "name": "Oakfield House" },', tone: 'value' },
+                    { text: '"jobLocation": { "addressLocality": "Alderbury" },', tone: 'value' },
+                    { text: '"baseSalary": { "value": 12.60, "unitText": "HOUR" }', tone: 'value' },
+                  ]}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            <div>
+              <h3 className="font-display text-xl font-semibold text-brand-ink">Home care, by the town you cover</h3>
+              <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">
+                Service and area markup tells Google which services you provide and where, so a town page appears for
+                the searches made in that town.
+              </p>
+              <div className="mt-4">
+                <SerpResult
+                  site="Brightpath Care"
+                  url="brightpathcare.co.uk › home-care › melrose-green"
+                  title="Home Care in Melrose Green | Nurse-led | Brightpath Care"
+                  description="Hourly home care and live-in care in Melrose Green and the surrounding villages. Visits from 30 minutes, planned by a nurse. Free care assessment."
+                  rating={{ stars: 'Rating 4.8', text: '41 reviews' }}
+                  sitelinks={['Live-in care', 'Areas we cover', 'Care jobs', 'Fees']}
+                />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-display text-xl font-semibold text-brand-ink">A group, with every home found</h3>
+              <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">
+                For a group, each home gets its own organisation and location markup, so all four appear for their own
+                towns rather than competing as one entry.
+              </p>
+              <div className="mt-4">
+                <SerpResult
+                  site="Ravenswood Care Group"
+                  url="ravenswoodcare.co.uk › our-homes › aller-brook"
+                  title="Aller Brook Nursing Home, Newton Abbot | Ravenswood Care Group"
+                  description="Nursing and residential care in Newton Abbot, Devon. 2 rooms available now. Part of Ravenswood Care Group, four homes across Devon and Somerset."
+                  rating={{ stars: 'Rating 4.7', text: '18 reviews' }}
+                  faqs={['What care does Aller Brook provide?', 'Do you have availability?']}
+                />
+              </div>
+            </div>
+          </div>
+
+          <p className="mt-8 text-sm leading-relaxed text-brand-ink-muted">
+            Illustrations of what structured data makes possible. The providers shown are the fictional ones from our{' '}
+            <Link href="/designs" className="font-semibold text-brand-pop underline-offset-2 hover:underline">design examples</Link>,
+            and Google decides which enhancements to show for each search.
+          </p>
         </div>
       </section>
 
