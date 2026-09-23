@@ -2,7 +2,7 @@
 
 import Script from 'next/script'
 import { useState, useEffect } from 'react'
-import { GADS_ID } from '@/lib/ads'
+import { GADS_ID, GADS_PHONE_CONVERSION, PHONE_DISPLAY, PHONE_CLASS } from '@/lib/ads'
 
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID
 // Google Ads conversion tag — public ID, hardcoded fallback so the tag is always present.
@@ -70,6 +70,12 @@ export default function Analytics() {
         gtag('js', new Date());
         ${GA4_ID ? `gtag('config', '${GA4_ID}');` : ''}
         gtag('config', '${GADS_ID}');
+        // Call tracking: Google shows a forwarding number to visitors who arrived from an
+        // ad, in elements with the class below only, and counts the calls as conversions.
+        gtag('config', '${GADS_PHONE_CONVERSION}', {
+          phone_conversion_number: '${PHONE_DISPLAY}',
+          phone_conversion_css_class: '${PHONE_CLASS}'
+        });
       `}</Script>
       {consented && CLARITY_ID && (
         <Script id="ms-clarity" strategy="afterInteractive">{`

@@ -176,7 +176,7 @@ export default function Nav() {
           <a href="mailto:hello@trgdigital.co.uk" className="hidden items-center gap-2 text-base font-bold uppercase tracking-wide text-brand-ink-soft transition-colors hover:text-brand-pop xl:flex">
             <Mail className="h-4 w-4 text-brand-pop" /> hello@trgdigital.co.uk
           </a>
-          <a href="tel:+442080641596" className="flex items-center gap-2 text-base font-bold uppercase tracking-wide text-brand-ink-soft transition-colors hover:text-brand-pop">
+          <a href="tel:+442080641596" className="gads-phone flex items-center gap-2 text-base font-bold uppercase tracking-wide text-brand-ink-soft transition-colors hover:text-brand-pop">
             <Phone className="h-4 w-4 text-brand-pop" /> 020 8064 1596
           </a>
           <Link href="/contact" className="btn-pop h-10 px-5 text-xs">
@@ -281,7 +281,7 @@ export default function Nav() {
             <a href="mailto:hello@trgdigital.co.uk" className="flex items-center gap-2 px-3 text-sm font-medium text-brand-ink-soft">
               <Mail className="h-4 w-4 text-brand-pop" /> hello@trgdigital.co.uk
             </a>
-            <a href="tel:+442080641596" className="flex items-center gap-2 px-3 text-sm font-medium text-brand-ink-soft">
+            <a href="tel:+442080641596" className="gads-phone flex items-center gap-2 px-3 text-sm font-medium text-brand-ink-soft">
               <Phone className="h-4 w-4 text-brand-pop" /> 020 8064 1596
             </a>
             <Link

@@ -126,7 +126,7 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
           <Image src="/trg-digital-2025.png" alt="TRG Digital" width={130} height={36} className="h-8 w-auto" priority />
           <a
             href="tel:+442080641596"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-ink px-4 py-2 text-sm font-bold text-white"
+            className="gads-phone inline-flex items-center gap-2 rounded-full bg-brand-ink px-4 py-2 text-sm font-bold text-white"
           >
             <Phone className="h-4 w-4" /> 020 8064 1596
           </a>
@@ -418,7 +418,7 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
         <a
           href="tel:+442080641596"
           aria-label="Call TRG Digital"
-          className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-ink text-white"
+          className="gads-phone flex h-11 w-11 items-center justify-center rounded-xl bg-brand-ink text-white"
         >
           <Phone className="h-5 w-5" />
         </a>

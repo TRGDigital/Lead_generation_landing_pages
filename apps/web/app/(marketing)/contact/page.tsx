@@ -84,7 +84,7 @@ export default function ContactPage() {
                     <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-brand-pop"><Mail className="h-4 w-4 text-white" /></span>
                     hello@trgdigital.co.uk
                   </a>
-                  <a href="tel:+442080641596" className="flex items-center gap-3 text-white/85 transition-colors hover:text-white">
+                  <a href="tel:+442080641596" className="gads-phone flex items-center gap-3 text-white/85 transition-colors hover:text-white">
                     <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-brand-pop"><Phone className="h-4 w-4 text-white" /></span>
                     020 8064 1596
                   </a>

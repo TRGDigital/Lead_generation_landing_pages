@@ -137,7 +137,7 @@ export default function OurCommitmentPage() {
             <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm font-semibold text-brand-ink">
               <a href="mailto:hello@trgdigital.co.uk" className="hover:text-brand-pop">hello@trgdigital.co.uk</a>
               <span className="text-brand-ink-muted">·</span>
-              <a href="tel:+442080641596" className="hover:text-brand-pop">020 8064 1596</a>
+              <a href="tel:+442080641596" className="gads-phone hover:text-brand-pop">020 8064 1596</a>
               <span className="text-brand-ink-muted">·</span>
               <Link href="/contact" className="hover:text-brand-pop">Contact us</Link>
             </div>

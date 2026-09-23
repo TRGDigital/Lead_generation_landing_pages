@@ -59,7 +59,7 @@ export default function BookADemoPage() {
                   Prefer to talk right now?
                 </p>
                 <div className="mt-4 space-y-2.5 text-sm font-semibold text-brand-ink">
-                  <a href="tel:+442080641596" className="flex items-center gap-2.5 hover:underline">
+                  <a href="tel:+442080641596" className="gads-phone flex items-center gap-2.5 hover:underline">
                     <PhoneCall className="h-4 w-4" /> 020 8064 1596
                   </a>
                   <a href="mailto:hello@trgdigital.co.uk" className="flex items-center gap-2.5 hover:underline">

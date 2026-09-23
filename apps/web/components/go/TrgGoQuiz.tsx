@@ -181,7 +181,7 @@ export function TrgGoQuiz({
             <a
               href="tel:+442080641596"
               onClick={() => track('thankyou_call_click')}
-              className="rounded-xl bg-brand-ink px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-tight text-white"
+              className="gads-phone rounded-xl bg-brand-ink px-4 py-3 text-center font-display text-sm font-bold uppercase tracking-tight text-white"
             >
               Call us now · 020 8064 1596
             </a>
