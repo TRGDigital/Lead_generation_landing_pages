@@ -138,7 +138,7 @@ export default function AboutPage() {
                 <span className="h-1.5 w-1.5 rounded-full bg-amber-300" />
                 <span className="h-1.5 w-1.5 rounded-full bg-green-400" />
               </div>
-              <ManagedImage src="/mockups/carestream.jpg" alt="CareStream, software we build for care" width={1320} height={940} className="w-full" />
+              <ManagedImage src="/mockups/carestream-2026.jpg" alt="CareStream, software we build for care" width={1320} height={940} className="w-full" />
             </div>
           </div>
         </div>

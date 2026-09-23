@@ -40,7 +40,7 @@ const WORK: Work[] = [
   {
     name: 'CareStream',
     blurb: 'An AI policy, training and CQC platform used by care teams, answering staff in 60+ languages.',
-    image: '/mockups/carestream.jpg',
+    image: '/mockups/carestream-2026.jpg',
     href: 'https://carestreamai.com',
     status: 'Live',
   },

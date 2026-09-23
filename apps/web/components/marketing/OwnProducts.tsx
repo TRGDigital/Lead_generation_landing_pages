@@ -11,7 +11,7 @@ const PRODUCTS = [
     logo: '/products/carestream-logo.png',
     logoW: 700,
     logoH: 210,
-    shot: '/mockups/carestream-desktop.png',
+    shot: '/mockups/carestream-2026.jpg',
     url: 'carestreamai.com',
     href: 'https://carestreamai.com',
     body: 'An AI policy, training and CQC platform built for care teams. CareStream answers staff questions in over 60 languages, grounded in the provider’s own policies and documents, turning compliance from a burden into something your team can actually use day to day.',

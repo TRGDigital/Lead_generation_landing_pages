@@ -478,3 +478,25 @@ export async function deleteAreaDraft(pageId: string) {
   if (error) throw new Error(error.message)
   revalidatePath(`/admin/websites/${page.website_id}`)
 }
+
+// ── "Listen to page" scripts for our own site ────────────────────────────────────
+// One script per page, written for the ear. Saving pre-warms the neural audio so the
+// first visitor to press play hears it instantly.
+export async function saveListenScriptAction(path: string, script: string) {
+  await requireAdmin()
+  const { saveListenScript, normalisePath } = await import('@/lib/listen-scripts')
+  const clean = normalisePath(path)
+  await saveListenScript(clean, script)
+
+  try {
+    const { getWebsiteBySlug } = await import('@/lib/websites')
+    const { ensureWelcomeAudio } = await import('@/lib/tts-cache')
+    const site = await getWebsiteBySlug('trgdigital')
+    if (site && script.trim()) await ensureWelcomeAudio(site.id, script)
+  } catch (e) {
+    console.error('listen script pre-warm', e)
+  }
+
+  revalidatePath('/admin/accessibility')
+  return { ok: true }
+}

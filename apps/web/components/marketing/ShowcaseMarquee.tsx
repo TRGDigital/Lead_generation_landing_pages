@@ -124,7 +124,7 @@ export function ShowcaseMarquee() {
     <BingCard key="b" />,
     <LeadCard key="l" />,
     <BrowserCard key="ca" src="/mockups/careassura.jpg" alt="CareAssura" url="careassura.co.uk" caption="CareAssura" />,
-    <BrowserCard key="cs" src="/mockups/carestream.jpg" alt="CareStream" url="carestreamai.com" caption="CareStream" />,
+    <BrowserCard key="cs" src="/mockups/carestream-2026.jpg" alt="CareStream" url="carestreamai.com" caption="CareStream" />,
   ]
 
   return (

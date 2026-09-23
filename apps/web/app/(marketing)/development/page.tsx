@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Custom Software Development for Care | TRG Digital',
+  title: 'Custom Software Development for Care',
   description:
     'TRG Digital designs, builds and runs custom software for the UK care sector, the same capability behind our own products, CareStream and CareAssura.',
   alternates: { canonical: `${SITE_URL}/development` },
@@ -146,7 +146,7 @@ export default function DevelopmentPage() {
           {/* Layered product mockups */}
           <div className="relative pb-8 lg:pb-16">
             <div className="lg:mr-10">
-              <BrowserMock src="/mockups/carestream.jpg" alt="The CareStream homepage" url="carestreamai.com" w={1320} h={940} />
+              <BrowserMock src="/mockups/carestream-2026.jpg" alt="The CareStream homepage" url="carestreamai.com" w={1320} h={940} />
             </div>
             <div className="ml-auto mt-[-2.5rem] w-[82%] lg:absolute lg:bottom-0 lg:right-0 lg:mt-0 lg:w-[72%]">
               <BrowserMock src="/mockups/careassura.jpg" alt="The CareAssura homepage" url="careassura.co.uk" w={1320} h={895} />

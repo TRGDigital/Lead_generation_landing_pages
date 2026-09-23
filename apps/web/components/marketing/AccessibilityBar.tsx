@@ -10,6 +10,7 @@
 // the admin, cached on the platform, and falls back to the browser voice.
 
 import { useRef, useState, useSyncExternalStore } from 'react'
+import { usePathname } from 'next/navigation'
 import { toggleMotion } from './MotionToggle'
 import { Volume2, Square, Loader2, Accessibility, Pause, Play } from 'lucide-react'
 
@@ -49,6 +50,27 @@ function toggleClass(cls: string, lsKey: string) {
   fire()
 }
 
+/** What this page actually says, for pages with no written script yet.
+    Headings and body text from <main>, in order, skipping navigation, the footer and
+    anything decorative, so the reading matches the page a visitor is looking at. */
+function readPageAloudText(): string {
+  const main = document.querySelector('main')
+  if (!main) return ''
+  const parts: string[] = []
+  const nodes = main.querySelectorAll('h1, h2, h3, p, li')
+  nodes.forEach((el) => {
+    if (parts.join(' ').length > 9000) return
+    if (el.closest('[aria-hidden="true"], [data-nosnippet], nav, footer, form, pre, code')) return
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim()
+    if (!text || text.length < 3) return
+    // A heading introduces what follows, so give it a full stop and a breath.
+    const isHeading = /^H[123]$/.test(el.tagName)
+    parts.push(isHeading && !/[.!?]$/.test(text) ? `${text}.` : text)
+  })
+  // Collapse the odd duplicate (a heading repeated in a card, say).
+  return Array.from(new Set(parts)).join(' ')
+}
+
 /** The warmest British voice the browser offers, for the fallback reading. */
 function pickWarmVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null {
   if (!voices.length) return null
@@ -67,6 +89,7 @@ function pickWarmVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | n
 }
 
 export function AccessibilityBar() {
+  const pathname = usePathname()
   const state = useSyncExternalStore(subscribe, snapshot, () => 'base|0|0|0')
   const [size, hc, readable, stillness] = state.split('|')
   const [speaking, setSpeaking] = useState(false)
@@ -124,10 +147,12 @@ export function AccessibilityBar() {
     const myId = ++playIdRef.current
     setLoading(true)
     try {
-      const r = await fetch('/api/accessibility-tts?site=trgdigital')
+      const r = await fetch(`/api/accessibility-tts?site=trgdigital&path=${encodeURIComponent(pathname || '/')}`)
       const data = (await r.json().catch(() => ({}))) as { url?: string | null; text?: string }
       if (myId !== playIdRef.current) return
-      const text = (data.text || '').trim()
+      // No script written for this page yet: read the page itself rather than the
+      // homepage welcome, which would describe the wrong thing entirely.
+      const text = (data.text || '').trim() || readPageAloudText()
       setLoading(false)
       if (data.url) {
         let audio = audioRef.current
