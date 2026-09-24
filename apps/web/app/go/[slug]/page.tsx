@@ -125,6 +125,30 @@ const SETTINGS: Record<string, Setting> = {
     trust: 'Care sector only. Homes, home care and hospices.',
     showcase: 'Real work from real care providers',
   },
+  'domiciliary-care-seo': {
+    subject: 'your agency',
+    outcome: 'We do the work, you get found',
+    outcomeBody:
+      'Like the plan? We run it month to month across every area you cover and report in enquiries, private hours and carer applications, never in keyword positions nobody can spend.',
+    trust: PROVIDER_TRUST,
+    showcase: PROVIDER_SHOWCASE,
+  },
+  'supported-living-seo': {
+    subject: 'your service',
+    outcome: 'We do the work, you get found',
+    outcomeBody:
+      'Like the plan? We run it month to month and report in referrals and filled vacancies, never in keyword positions nobody can spend.',
+    trust: PROVIDER_TRUST,
+    showcase: PROVIDER_SHOWCASE,
+  },
+  'retirement-living-seo': {
+    subject: 'your scheme',
+    outcome: 'We do the work, you get found',
+    outcomeBody:
+      'Like the plan? We run it month to month and report in enquiries and viewings booked, never in keyword positions nobody can spend.',
+    trust: 'Trusted by UK care and later living operators. Care sector only.',
+    showcase: 'Real work from real care and later living operators',
+  },
   'local-seo-for-care': {
     subject: 'your service',
     outcome: 'We do the work, you get found',
