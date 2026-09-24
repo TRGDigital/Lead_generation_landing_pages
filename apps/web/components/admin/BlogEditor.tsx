@@ -27,6 +27,7 @@ export default function BlogEditor({ post, authors, postChoices, serviceChoices,
   const [heroAlt, setHeroAlt] = useState((post as { hero_image_alt?: string | null } | null)?.hero_image_alt ?? '')
   const [uploading, setUploading] = useState(false)
   const [uploadError, setUploadError] = useState('')
+  const [saveError, setSaveError] = useState('')
   const [saved, setSaved] = useState(false)
   const [isPending, startTransition] = useTransition()
   const autoSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -49,7 +50,13 @@ export default function BlogEditor({ post, authors, postChoices, serviceChoices,
     const fd = new FormData(formRef.current)
     fd.set('body_mdx', body)
     startTransition(async () => {
-      await saveBlogPost(post?.id ?? null, fd)
+      setSaveError('')
+      const result = await saveBlogPost(post?.id ?? null, fd)
+      // A new post redirects, so nothing comes back on that path.
+      if (result && !result.ok) {
+        setSaveError(result.error)
+        return
+      }
       setSaved(true)
       setTimeout(() => setSaved(false), 2000)
     })
@@ -262,6 +269,11 @@ export default function BlogEditor({ post, authors, postChoices, serviceChoices,
       </details>
 
       {/* Actions */}
+      {saveError && (
+        <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+          Not saved: {saveError}
+        </p>
+      )}
       <div className="flex items-center gap-3 pt-2">
         <button
           type="submit"

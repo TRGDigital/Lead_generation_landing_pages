@@ -41,13 +41,23 @@ function parseFaqs(raw?: string): { q: string; a: string }[] {
   }
 }
 
-export async function saveBlogPost(postId: string | null, formData: FormData) {
+export type SaveResult = { ok: true } | { ok: false; error: string }
+
+export async function saveBlogPost(
+  postId: string | null,
+  formData: FormData,
+): Promise<SaveResult> {
   await requireAdmin()
 
   const raw = Object.fromEntries(formData.entries())
   const parsed = postSchema.safeParse(raw)
   if (!parsed.success) {
-    throw new Error('Invalid form data: ' + JSON.stringify(parsed.error.flatten()))
+    // Name the fields. Next hides the message of a thrown server action error in
+    // production, so anything thrown here reaches the admin as "an error occurred".
+    const fields = Object.entries(parsed.error.flatten().fieldErrors)
+      .map(([field, errs]) => `${field} (${(errs ?? []).join(', ')})`)
+      .join('; ')
+    return { ok: false, error: `Check these fields: ${fields || 'unknown field'}` }
   }
 
   const { title, body_mdx = '', ...rest } = parsed.data
@@ -63,7 +73,9 @@ export async function saveBlogPost(postId: string | null, formData: FormData) {
   const payload = {
     title,
     slug,
-    excerpt: rest.excerpt ?? null,
+    // NOT NULL in the database, with an empty-string default: passing null overrides
+    // the default and the insert fails, which is what an empty excerpt box used to do.
+    excerpt: rest.excerpt ?? '',
     body_mdx,
     category: rest.category ?? null,
     tags,
@@ -82,23 +94,27 @@ export async function saveBlogPost(postId: string | null, formData: FormData) {
 
   const db = createServiceClient() as unknown as any
 
+  let newId = ''
   if (postId) {
     const { error } = await db.from('blog_posts').update(payload).eq('id', postId)
-    if (error) throw new Error(error.message)
+    if (error) return { ok: false, error: error.message }
   } else {
     const { data, error } = await db
       .from('blog_posts')
       .insert({ ...payload, is_published: false })
       .select('id')
       .single()
-    if (error) throw new Error(error.message)
-    revalidatePath('/admin/blog')
-    redirect(`/admin/blog/${data.id}/edit`)
+    if (error) return { ok: false, error: error.message }
+    newId = data.id as string
   }
 
   revalidatePath('/admin/blog')
   revalidatePath(`/blog/${slug}`)
   revalidatePath('/blog')
+  // redirect() throws NEXT_REDIRECT internally, so it stays out of any try/catch and
+  // happens once everything else has succeeded.
+  if (newId) redirect(`/admin/blog/${newId}/edit`)
+  return { ok: true }
 }
 
 export async function publishBlogPost(postId: string) {
