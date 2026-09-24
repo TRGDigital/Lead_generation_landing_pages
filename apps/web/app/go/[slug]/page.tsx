@@ -93,6 +93,46 @@ const SETTINGS: Record<string, Setting> = {
     trust: PROVIDER_TRUST,
     showcase: PROVIDER_SHOWCASE,
   },
+  'nursing-home-seo': {
+    subject: 'your home',
+    outcome: 'We do the work, you get found',
+    outcomeBody:
+      'Like the plan? We run it month to month and report in enquiries, referrals and calls, never in keyword positions nobody can spend.',
+    trust: 'Trusted by UK nursing homes. Care sector only.',
+    showcase: 'Real work from real nursing homes',
+  },
+  'home-care-seo': {
+    subject: 'your agency',
+    outcome: 'We do the work, you get found',
+    outcomeBody:
+      'Like the plan? We run it month to month across every town you cover and report in enquiries, calls and carer applications, never in keyword positions nobody can spend.',
+    trust: PROVIDER_TRUST,
+    showcase: PROVIDER_SHOWCASE,
+  },
+  'live-in-care-seo': {
+    subject: 'your service',
+    outcome: 'We do the work, you get found',
+    outcomeBody:
+      'Like the plan? We run it month to month and report in enquiries, placements and carer applications, never in keyword positions nobody can spend.',
+    trust: PROVIDER_TRUST,
+    showcase: PROVIDER_SHOWCASE,
+  },
+  'hospice-seo': {
+    subject: 'your hospice',
+    outcome: 'We do the work, you get found',
+    outcomeBody:
+      'Like the plan? We run it month to month and report in referrals, enquiries and donations, never in keyword positions nobody can spend.',
+    trust: 'Care sector only. Homes, home care and hospices.',
+    showcase: 'Real work from real care providers',
+  },
+  'local-seo-for-care': {
+    subject: 'your service',
+    outcome: 'We do the work, you get found',
+    outcomeBody:
+      'Like the plan? We run it month to month and report in enquiries and calls, never in keyword positions nobody can spend.',
+    trust: PROVIDER_TRUST,
+    showcase: PROVIDER_SHOWCASE,
+  },
   'retirement-living-websites': {
     subject: 'your scheme',
     outcome: 'We build, you fill apartments',
