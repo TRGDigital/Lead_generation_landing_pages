@@ -38,9 +38,21 @@ type Setting = {
   outcomeBody: string
   trust: string
   showcase: string
+  /**
+   * Which "real work" band to show. The care home one sells a build to a care home,
+   * so it was wrong on every SEO page (it advertises a website to someone who came
+   * looking for SEO) and wrong on the provider pages (it offers a care fees
+   * calculator to a placing officer). Defaults to the care home band.
+   */
+  band?: 'care-home' | 'provider' | 'seo'
+  /** Ends the "every page nudges them to get in touch" item, which is not tours everywhere. */
+  conversionLine?: string
+  /** Overrides the tools list on the provider band, where the useful tools differ. */
+  tools?: string[]
 }
 
 const DEFAULT_SETTING: Setting = {
+  band: 'care-home',
   subject: 'your home',
   outcome: 'We build, you fill beds',
   outcomeBody:
@@ -54,6 +66,9 @@ const PROVIDER_SHOWCASE = 'Real work from real care providers'
 
 const SETTINGS: Record<string, Setting> = {
   'nursing-home-websites': {
+    band: 'care-home',
+    conversionLine:
+      'More of your visitors become visits, and more visits become residents.',
     subject: 'your home',
     outcome: 'We build, you fill beds',
     outcomeBody:
@@ -62,6 +77,10 @@ const SETTINGS: Record<string, Setting> = {
     showcase: 'Real work from real nursing homes',
   },
   'home-care-websites': {
+    band: 'provider',
+    conversionLine:
+      'More of your visitors become enquiries, and more enquiries become packages of care.',
+    tools: ['Care funding calculator','Cost of care estimator','Attendance Allowance checker','“Is it time for care?” checklist','Areas we cover, town by town','Careers section with pay up front','Enquiry forms built for a phone','AI chat assistant, answers 24/7','Accessibility toolbar + tap-to-call'],
     subject: 'your agency',
     outcome: 'We build, you win clients and carers',
     outcomeBody:
@@ -70,6 +89,10 @@ const SETTINGS: Record<string, Setting> = {
     showcase: PROVIDER_SHOWCASE,
   },
   'domiciliary-care-websites': {
+    band: 'provider',
+    conversionLine:
+      'More of your visitors become enquiries, and more enquiries become hours on the rota.',
+    tools: ['Care funding calculator','Cost of care estimator','Local council funding lookup','CQC rating shown properly','Areas we cover, town by town','Careers section with pay up front','Enquiry forms built for a phone','Accessibility toolbar + tap-to-call'],
     subject: 'your agency',
     outcome: 'We build, you grow your hours',
     outcomeBody:
@@ -78,6 +101,10 @@ const SETTINGS: Record<string, Setting> = {
     showcase: PROVIDER_SHOWCASE,
   },
   'live-in-care-websites': {
+    band: 'provider',
+    conversionLine:
+      'More of your visitors become enquiries, and more enquiries become placements.',
+    tools: ['Live-in care cost guide','Live-in versus a care home, compared','Care funding calculator','Attendance Allowance checker','“Is it time for care?” checklist','Careers built for experienced live-in carers','Enquiry forms built for a phone','Accessibility toolbar + tap-to-call'],
     subject: 'your service',
     outcome: 'We build, you fill placements',
     outcomeBody:
@@ -86,6 +113,10 @@ const SETTINGS: Record<string, Setting> = {
     showcase: PROVIDER_SHOWCASE,
   },
   'supported-living-websites': {
+    band: 'provider',
+    conversionLine:
+      'More of your visitors become referrals, and more referrals become filled vacancies.',
+    tools: ['Live vacancy listings','A referral form a professional can complete in minutes','Easy read versions of the pages that matter','Who we support, set out plainly','Accessibility toolbar, WCAG 2.2 AA','Careers section with pay up front','Enquiry forms built for a phone'],
     subject: 'your service',
     outcome: 'We build, you fill vacancies',
     outcomeBody:
@@ -94,6 +125,7 @@ const SETTINGS: Record<string, Setting> = {
     showcase: PROVIDER_SHOWCASE,
   },
   'nursing-home-seo': {
+    band: 'seo',
     subject: 'your home',
     outcome: 'We do the work, you get found',
     outcomeBody:
@@ -102,6 +134,7 @@ const SETTINGS: Record<string, Setting> = {
     showcase: 'Real work from real nursing homes',
   },
   'home-care-seo': {
+    band: 'seo',
     subject: 'your agency',
     outcome: 'We do the work, you get found',
     outcomeBody:
@@ -110,6 +143,7 @@ const SETTINGS: Record<string, Setting> = {
     showcase: PROVIDER_SHOWCASE,
   },
   'live-in-care-seo': {
+    band: 'seo',
     subject: 'your service',
     outcome: 'We do the work, you get found',
     outcomeBody:
@@ -118,6 +152,7 @@ const SETTINGS: Record<string, Setting> = {
     showcase: PROVIDER_SHOWCASE,
   },
   'hospice-seo': {
+    band: 'seo',
     subject: 'your hospice',
     outcome: 'We do the work, you get found',
     outcomeBody:
@@ -126,6 +161,7 @@ const SETTINGS: Record<string, Setting> = {
     showcase: 'Real work from real care providers',
   },
   'domiciliary-care-seo': {
+    band: 'seo',
     subject: 'your agency',
     outcome: 'We do the work, you get found',
     outcomeBody:
@@ -134,6 +170,7 @@ const SETTINGS: Record<string, Setting> = {
     showcase: PROVIDER_SHOWCASE,
   },
   'supported-living-seo': {
+    band: 'seo',
     subject: 'your service',
     outcome: 'We do the work, you get found',
     outcomeBody:
@@ -142,6 +179,7 @@ const SETTINGS: Record<string, Setting> = {
     showcase: PROVIDER_SHOWCASE,
   },
   'retirement-living-seo': {
+    band: 'seo',
     subject: 'your scheme',
     outcome: 'We do the work, you get found',
     outcomeBody:
@@ -150,6 +188,7 @@ const SETTINGS: Record<string, Setting> = {
     showcase: 'Real work from real care and later living operators',
   },
   'local-seo-for-care': {
+    band: 'seo',
     subject: 'your service',
     outcome: 'We do the work, you get found',
     outcomeBody:
@@ -158,6 +197,10 @@ const SETTINGS: Record<string, Setting> = {
     showcase: PROVIDER_SHOWCASE,
   },
   'retirement-living-websites': {
+    band: 'provider',
+    conversionLine:
+      'More of your visitors become viewings, and more viewings become reservations.',
+    tools: ['Live availability by apartment type','Floor plans as pages, not just a PDF','Price from, and what the service charge covers','Brochure request and viewing booking','Tenure and event fees explained honestly','Accessibility toolbar, bigger text and contrast','Enquiry forms built for a phone'],
     subject: 'your scheme',
     outcome: 'We build, you fill apartments',
     outcomeBody:
@@ -193,7 +236,7 @@ type ShowcaseItem = {
   bullets?: string[]
 }
 
-const SHOWCASE: ShowcaseItem[] = [
+const SHOWCASE_CARE_HOME: ShowcaseItem[] = [
   {
     src: '/work/crossways/tool-funding-d.jpg',
     alt: 'A care funding calculator TRG built into a care home website',
@@ -238,6 +281,90 @@ const SHOWCASE: ShowcaseItem[] = [
   },
 ]
 
+// The provider band: same structure, but the tools and the closing line are the ones
+// that matter to a home care agency, a supported living provider or a retirement
+// scheme. A placing officer does not want a care fees calculator.
+function providerShowcase(setting: Setting): ShowcaseItem[] {
+  return [
+    {
+      src: '/work/crossways/tool-funding-d.jpg',
+      alt: 'A care planning tool TRG built into a care provider website',
+      eyebrow: 'Tools and content people actually use',
+      title: 'A website that answers the questions you get asked',
+      body: 'Every site we build comes loaded with the things your visitors are looking for. They get answers, you get warmer enquiries with contact details attached:',
+      bullets: setting.tools ?? [
+        'Care funding calculator',
+        'Cost of care estimator',
+        '“Is it time for care?” checklist',
+        'Areas we cover, town by town',
+        'Careers section with pay up front',
+        'Enquiry forms built for a phone',
+        'Accessibility toolbar + tap-to-call',
+      ],
+    },
+    {
+      src: '/work/ferndale/local-1-d.jpg',
+      alt: 'A local area landing page TRG built for a care provider',
+      eyebrow: 'Found first on Google',
+      title: 'Local pages that put you above the directories',
+      body: 'Purpose-built town and service pages that rank for the searches people in your area actually make, so enquiries come to you directly instead of through a paid middleman.',
+    },
+    {
+      src: '/work/crossways/enquiry-modal-d.jpg',
+      alt: 'An enquiry form opening over a care website TRG built',
+      eyebrow: 'Built to generate enquiries',
+      title: 'Every page makes it easy to get in touch',
+      body: `Enquiry buttons, one-tap calling and friendly forms are never more than a click away, on every page, on every device. ${setting.conversionLine ?? 'More of your visitors become enquiries.'}`,
+    },
+    {
+      src: '/work/pagespeed-green-d.jpg',
+      alt: 'A page speed report showing 100 scores across performance, accessibility, best practices and SEO',
+      eyebrow: 'Fast on every device',
+      title: 'Green across the board, and Google notices',
+      body: 'People leave slow websites, and Google ranks them lower. Our from-scratch builds score green on every page speed check: faster pages, better rankings, more enquiries from the traffic you already have.',
+    },
+  ]
+}
+
+// The SEO band. The care home band advertises a build, which is the wrong offer for
+// somebody who arrived searching for SEO, so this one shows the work itself.
+const SHOWCASE_SEO: ShowcaseItem[] = [
+  {
+    src: '/work/ferndale/local-1-d.jpg',
+    alt: 'A local area landing page TRG built and ranked for a care provider',
+    eyebrow: 'The pages that do the ranking',
+    title: 'Local pages built for the searches people actually make',
+    body: 'Not twenty near-identical pages with the town name swapped, which is what most agencies deliver and what Google ignores. Genuinely useful pages for the places that matter commercially, each one written to answer the questions that come with that search.',
+  },
+  {
+    src: '/work/cqc-good.png',
+    alt: 'A CQC rating displayed correctly on a care website',
+    eyebrow: 'Your profile, reviews and rating',
+    title: 'The half of local SEO that happens off your website',
+    body: 'Google Business Profile kept complete and current, reviews asked for properly and answered, and your CQC rating marked up the honest way, as an award rather than as review stars, which is the shortcut that earns manual penalties.',
+  },
+  {
+    src: '/work/pagespeed-green-d.jpg',
+    alt: 'A page speed report showing 100 scores across performance, accessibility, best practices and SEO',
+    eyebrow: 'The technical work',
+    title: 'Core Web Vitals, crawlability and the things nobody checks',
+    body: 'Indexing, canonicals, redirects, structured data, and speed on a real phone. Unglamorous, invisible to you, and usually the reason a site that reads well still does not rank.',
+  },
+  {
+    src: '/work/crossways/blog-d.jpg',
+    alt: 'A care sector article TRG wrote and published',
+    eyebrow: 'Content with a job to do',
+    title: 'Answers to what your buyers search, not filler',
+    body: 'Written around what families, referrers and commissioners actually type, and linked so the pages that convert get the benefit. Reported in enquiries and calls, never in a list of positions nobody can spend.',
+  },
+]
+
+function showcaseFor(setting: Setting): ShowcaseItem[] {
+  if (setting.band === 'seo') return SHOWCASE_SEO
+  if (setting.band === 'provider') return providerShowcase(setting)
+  return SHOWCASE_CARE_HOME
+}
+
 function CtaButton({ label = 'Take the 60-second check' }: { label?: string }) {
   return (
     <a
@@ -261,6 +388,7 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
 
   const setting = SETTINGS[params.slug] ?? DEFAULT_SETTING
   const steps = stepsFor(setting)
+  const showcase = showcaseFor(setting)
 
   return (
     <div className="min-h-screen bg-brand-bg">
@@ -468,7 +596,7 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
               {setting.showcase}
             </h2>
           </div>
-          {SHOWCASE.map((f, i) => (
+          {showcase.map((f, i) => (
             <div key={f.title} className="grid items-center gap-8 lg:grid-cols-2">
               <div className={`relative aspect-[16/10] overflow-hidden rounded-2xl border-2 border-brand-ink shadow-[6px_6px_0_0_#2a2620] ${i % 2 ? 'lg:order-2' : ''}`}>
                 <Image src={f.src} alt={f.alt} fill sizes="(min-width: 1024px) 560px, 100vw" className="object-cover object-top" />
