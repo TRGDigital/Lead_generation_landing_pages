@@ -32,6 +32,14 @@ const ACTIONABLE = new Set(['critical', 'high', 'medium', 'low'])
 export const DAILY_AUDIT_TARGET = 6
 
 /**
+ * The content task, which is the bar minimum every weekday: one piece for whichever
+ * site it is the turn of. Five sites, five weekdays, so each gets one a week. It sits
+ * in the list rather than above it, because a thing in a banner is a thing you stop
+ * seeing, and this is the work that compounds.
+ */
+export const CONTENT_TASK_TITLE = 'New content: a blog post or a collection page'
+
+/**
  * One property per weekday, because a piece of content for all five every day was
  * never going to happen. Sunday and Saturday are deliberately empty.
  */
@@ -173,6 +181,27 @@ export async function getManualTasks(): Promise<Task[]> {
     doneAt: (r.done_at as string) ?? null,
     doneNote: (r.done_note as string) ?? null,
   }))
+}
+
+/** The content slot as a task, so it can sit in the same list as everything else. */
+export function contentTask(
+  slot: { key: string; label: string; url?: string },
+  fingerprint: string,
+): Task {
+  return {
+    id: null,
+    fingerprint,
+    kind: 'content',
+    host: null,
+    clientName: slot.label,
+    title: CONTENT_TASK_TITLE,
+    detail: 'The minimum for today. One piece per site per week, so this is the only one owed.',
+    category: 'content',
+    severity: null,
+    status: 'open',
+    doneAt: null,
+    doneNote: null,
+  }
 }
 
 /** Whose turn it is to get a piece of content today, and whether it has been done. */

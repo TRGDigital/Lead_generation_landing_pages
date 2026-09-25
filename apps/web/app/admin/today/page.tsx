@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { requireAdmin } from '@/lib/auth'
 import {
   DAILY_AUDIT_TARGET,
+  contentTask,
   getAuditTasks,
   getCompleted,
   getContentSlot,
@@ -21,7 +22,7 @@ const SEVERITY_STYLE: Record<string, string> = {
   low: 'bg-neutral-100 text-neutral-600',
 }
 
-function TaskRow({ task }: { task: Task }) {
+function TaskRow({ task, link }: { task: Task; link?: string }) {
   const hidden = (
     <>
       <input type="hidden" name="fingerprint" value={task.fingerprint} />
@@ -57,17 +58,29 @@ function TaskRow({ task }: { task: Task }) {
           <span className="text-xs text-brand-ink-muted">{task.clientName ?? 'Internal'}</span>
           {task.category && <span className="text-xs text-brand-ink-muted">· {task.category}</span>}
         </div>
-        <p className="mt-1 text-sm font-medium text-brand-ink">{task.title}</p>
+        <p className="mt-1 text-sm font-medium text-brand-ink">
+          {task.title}
+          {link && (
+            <a href={link} target="_blank" rel="noopener" className="ml-2 text-xs text-brand-pop underline">
+              open the blog
+            </a>
+          )}
+        </p>
         {task.detail && <p className="mt-0.5 text-sm leading-snug text-brand-ink-soft">{task.detail}</p>}
       </div>
 
-      <form action={snoozeTask} className="pt-0.5">
-        {hidden}
-        <input type="hidden" name="days" value="7" />
-        <button type="submit" className="text-xs text-brand-ink-muted underline hover:text-brand-ink">
-          Not this week
-        </button>
-      </form>
+      {task.kind === 'content' ? (
+        // No snoozing the minimum. It is one piece a week per site.
+        <span className="pt-0.5 text-xs text-brand-ink-muted">minimum</span>
+      ) : (
+        <form action={snoozeTask} className="pt-0.5">
+          {hidden}
+          <input type="hidden" name="days" value="7" />
+          <button type="submit" className="text-xs text-brand-ink-muted underline hover:text-brand-ink">
+            Not this week
+          </button>
+        </form>
+      )}
     </li>
   )
 }
@@ -84,6 +97,12 @@ export default async function TodayPage() {
 
   const open = auditTasks.filter((t) => t.status === 'open')
   const todays = open.slice(0, DAILY_AUDIT_TARGET)
+  // The content piece leads, because it is the minimum for the day and the work that
+  // compounds. Six audit items behind it, so seven in total.
+  const dayList: Task[] =
+    content.slot && !content.done
+      ? [contentTask(content.slot, content.fingerprint), ...todays]
+      : todays
   const doneToday = completed.filter(
     (t) => t.doneAt && new Date(t.doneAt).toDateString() === new Date().toDateString(),
   )
@@ -108,61 +127,36 @@ export default async function TodayPage() {
         </p>
       </div>
 
-      {/* Content slot: one property a day, not five */}
-      <section className="mt-6 rounded-xl border-2 border-brand-ink bg-brand-bg-warm p-4">
-        <p className="text-xs font-semibold uppercase tracking-widest text-brand-ink-muted">Content</p>
-        {content.slot ? (
-          content.done ? (
-            <p className="mt-1 text-sm text-brand-ink">
-              <span className="font-semibold">{content.slot.label}</span> done this week. Nothing else owed today.
-            </p>
-          ) : (
-            <form action={completeTask} className="mt-1 flex flex-wrap items-center gap-3">
-              <input type="hidden" name="fingerprint" value={content.fingerprint} />
-              <input type="hidden" name="kind" value="content" />
-              <input type="hidden" name="title" value={`Content: ${content.slot.label}`} />
-              <input type="hidden" name="clientName" value={content.slot.label} />
-              <input type="hidden" name="category" value="content" />
-              <p className="text-sm text-brand-ink">
-                Today is <span className="font-semibold">{content.slot.label}</span>.{' '}
-                {content.slot.url && (
-                  <a href={content.slot.url} target="_blank" rel="noopener" className="text-brand-pop underline">
-                    Open the blog
-                  </a>
-                )}
-              </p>
-              <button
-                type="submit"
-                className="rounded-lg bg-brand-ink px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-ink/90"
-              >
-                Mark this week&apos;s content done
-              </button>
-            </form>
-          )
-        ) : (
-          <p className="mt-1 text-sm text-brand-ink-soft">No content slot at the weekend. Enjoy it.</p>
-        )}
-      </section>
-
-      {/* The six */}
+      {/* Today's work: the content piece, then the six */}
       <section className="mt-6">
         <div className="flex items-baseline justify-between">
           <h2 className="font-display text-lg font-semibold text-brand-ink">
-            Audit work, {Math.min(DAILY_AUDIT_TARGET, todays.length)} of {open.length} open
+            {dayList.length} to do today
           </h2>
-          <span className="text-xs text-brand-ink-muted">Worst first. Anything left is still here tomorrow.</span>
+          <span className="text-xs text-brand-ink-muted">
+            {open.length} audit items open. Worst first. Anything left is still here tomorrow.
+          </span>
         </div>
 
-        {todays.length === 0 ? (
+        {dayList.length === 0 ? (
           <p className="mt-3 rounded-xl border border-dashed border-brand-line p-6 text-center text-sm text-brand-ink-soft">
             Nothing open. Either run an audit, or take the afternoon off.
           </p>
         ) : (
           <ul className="mt-2 rounded-xl border border-brand-line bg-white px-4">
-            {todays.map((t) => (
-              <TaskRow key={t.fingerprint} task={t} />
+            {dayList.map((t) => (
+              <TaskRow key={t.fingerprint} task={t} link={t.kind === 'content' ? content.slot?.url : undefined} />
             ))}
           </ul>
+        )}
+
+        {content.slot && content.done && (
+          <p className="mt-2 text-xs text-brand-ink-soft">
+            Content for {content.slot.label} is done this week. Nothing else owed there until next week.
+          </p>
+        )}
+        {!content.slot && (
+          <p className="mt-2 text-xs text-brand-ink-soft">No content slot at the weekend. Enjoy it.</p>
         )}
       </section>
 

@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { sendHtmlEmail } from '@lib/sendgrid'
 import { verifyCronSecret, logCronRun } from '@/lib/cron'
-import { DAILY_AUDIT_TARGET, getAuditTasks, getContentSlot, getManualTasks } from '@/lib/daily'
+import {
+  CONTENT_TASK_TITLE,
+  DAILY_AUDIT_TARGET,
+  getAuditTasks,
+  getContentSlot,
+  getManualTasks,
+} from '@/lib/daily'
 import { getAreaPageTasks, careSitesConfigured } from '@/lib/care-sites'
 
 // The day's work, in an inbox at eight, because an admin page you have to remember to
@@ -48,11 +54,24 @@ export async function GET(req: NextRequest) {
     const byClient = new Map<string, number>()
     for (const t of open) byClient.set(t.clientName ?? 'Internal', (byClient.get(t.clientName ?? 'Internal') ?? 0) + 1)
 
-    const contentLine = content.slot
-      ? content.done
-        ? `<p style="margin:0 0 6px"><strong>Content:</strong> ${esc(content.slot.label)}, already done this week.</p>`
-        : `<p style="margin:0 0 6px"><strong>Content today:</strong> ${esc(content.slot.label)}.</p>`
+    // The content piece is the first of the seven, not a footnote above them.
+    const contentOwed = !!content.slot && !content.done
+    const contentRow = contentOwed
+      ? `<tr>
+          <td style="padding:7px 10px 7px 0;vertical-align:top;white-space:nowrap">
+            <span style="font-size:11px;text-transform:uppercase;color:#166534">minimum</span>
+          </td>
+          <td style="padding:7px 10px 7px 0;vertical-align:top;white-space:nowrap;font-size:12px;color:#6b7280">${esc(content.slot!.label)}</td>
+          <td style="padding:7px 0;vertical-align:top">
+            <div style="font-size:14px;color:#111">${esc(CONTENT_TASK_TITLE)}</div>
+            <div style="font-size:12.5px;color:#555;line-height:1.5">One piece per site per week, so this is the only one owed today.${content.slot!.url ? ` <a href="${content.slot!.url}" style="color:#F0532B">Open the blog</a>` : ''}</div>
+          </td>
+        </tr>`
       : ''
+    const contentDoneLine =
+      content.slot && content.done
+        ? `<p style="font-size:12.5px;color:#6b7280;margin:6px 0 0">Content for ${esc(content.slot.label)} is already done this week.</p>`
+        : ''
 
     const auditRows = todays
       .map(
@@ -94,10 +113,10 @@ export async function GET(req: NextRequest) {
   <p style="font-size:13px;color:#6b7280;margin:0 0 2px">${esc(dayName)}</p>
   <h1 style="font-size:20px;margin:0 0 14px">Today</h1>
 
-  ${contentLine}
-
-  <h2 style="font-size:15px;margin:18px 0 4px">Audit work, ${todays.length} of ${open.length} open</h2>
-  ${todays.length ? `<table style="border-collapse:collapse;width:100%">${auditRows}</table>` : '<p style="font-size:14px;color:#555">Nothing open. Run an audit, or take the afternoon off.</p>'}
+  <h2 style="font-size:15px;margin:18px 0 4px">${(contentOwed ? 1 : 0) + todays.length} to do today</h2>
+  ${contentOwed || todays.length ? `<table style="border-collapse:collapse;width:100%">${contentRow}${auditRows}</table>` : '<p style="font-size:14px;color:#555">Nothing open. Run an audit, or take the afternoon off.</p>'}
+  ${contentDoneLine}
+  <p style="font-size:12px;color:#6b7280;margin:6px 0 0">${open.length} audit items open in total.</p>
 
   ${areaRows ? `<h2 style="font-size:15px;margin:18px 0 4px">Local area pages</h2><ul style="font-size:13.5px;color:#333;padding-left:18px;margin:0">${areaRows}</ul><p style="font-size:12px;color:#6b7280;margin:4px 0 0">${areas.length} with work outstanding.</p>` : ''}
 
@@ -110,7 +129,7 @@ export async function GET(req: NextRequest) {
 
     await sendHtmlEmail({
       to: TO,
-      subject: `Today: ${todays.length} audit items${content.slot && !content.done ? `, content for ${content.slot.label}` : ''}`,
+      subject: `Today: ${(contentOwed ? 1 : 0) + todays.length} tasks${contentOwed ? `, content for ${content.slot!.label}` : ''}`,
       html,
     })
 
