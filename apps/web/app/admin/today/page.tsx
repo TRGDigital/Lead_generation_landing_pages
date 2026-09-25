@@ -8,6 +8,7 @@ import {
   getManualTasks,
   type Task,
 } from '@/lib/daily'
+import { getAreaPageTasks, careSitesConfigured } from '@/lib/care-sites'
 import { completeTask, reopenTask, snoozeTask, addManualTask } from './actions'
 
 export const metadata: Metadata = { title: 'Today — Admin' }
@@ -73,11 +74,12 @@ function TaskRow({ task }: { task: Task }) {
 
 export default async function TodayPage() {
   await requireAdmin()
-  const [auditTasks, manual, content, completed] = await Promise.all([
+  const [auditTasks, manual, content, completed, areaTasks] = await Promise.all([
     getAuditTasks(),
     getManualTasks(),
     getContentSlot(),
     getCompleted(undefined, 40),
+    careSitesConfigured() ? getAreaPageTasks() : Promise.resolve([]),
   ])
 
   const open = auditTasks.filter((t) => t.status === 'open')
@@ -189,6 +191,62 @@ export default async function TodayPage() {
             Add
           </button>
         </form>
+      </section>
+
+      {/* Area pages on the care sites: in the mix, but not competing with today's six */}
+      <section className="mt-6">
+        <div className="flex items-baseline justify-between">
+          <h2 className="font-display text-lg font-semibold text-brand-ink">Local area pages</h2>
+          <span className="text-xs text-brand-ink-muted">
+            {areaTasks.length} with work outstanding, across Crossways and Ferndale
+          </span>
+        </div>
+        {areaTasks.length === 0 ? (
+          <p className="mt-2 text-sm text-brand-ink-soft">
+            Nothing outstanding, or the care databases are not reachable from here.
+          </p>
+        ) : (
+          <>
+            <ul className="mt-2 rounded-xl border border-brand-line bg-white px-4">
+              {areaTasks.slice(0, 3).map((a) => (
+                <li
+                  key={`${a.site.key}${a.path}`}
+                  className="flex items-center justify-between gap-3 border-b border-brand-line py-2.5 text-sm last:border-0"
+                >
+                  <span className="min-w-0 truncate">
+                    <span className="text-brand-ink-muted">{a.site.label}</span>{' '}
+                    <span className="font-mono text-xs text-brand-ink">{a.path}</span>
+                  </span>
+                  <span className="flex shrink-0 items-center gap-3">
+                    <span
+                      className={`rounded px-1.5 py-0.5 text-[11px] ${
+                        a.need === 'no local facts'
+                          ? 'bg-amber-100 text-amber-800'
+                          : a.need === 'unpublished'
+                            ? 'bg-red-100 text-red-700'
+                            : 'bg-neutral-100 text-neutral-600'
+                      }`}
+                    >
+                      {a.need}
+                    </span>
+                    <a
+                      href={a.site.adminUrl}
+                      target="_blank"
+                      rel="noopener"
+                      className="text-xs text-brand-pop underline"
+                    >
+                      Open
+                    </a>
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-2 text-xs text-brand-ink-muted">
+              Ordered by what actually changes the page: local facts first, then pages never refreshed. Three shown
+              so they stay in the mix without crowding out the audit work.
+            </p>
+          </>
+        )}
       </section>
 
       {/* The record, which is the bit clients pay attention to */}

@@ -78,7 +78,7 @@ export async function getAuditTasks(): Promise<Task[]> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const db = createServiceClient() as any
 
-  const [{ data: audits }, { data: saved }] = await Promise.all([
+  const [{ data: audits }, { data: saved }, { data: sites }] = await Promise.all([
     db
       .from('site_audits')
       .select('id, host, client_name, findings, created_at')
@@ -86,7 +86,19 @@ export async function getAuditTasks(): Promise<Task[]> {
       .order('created_at', { ascending: false })
       .limit(50),
     db.from('daily_tasks').select('*').eq('kind', 'audit'),
+    db.from('websites').select('url'),
   ])
+
+  // The audit tool is also run over prospects. Only sites we actually run belong in
+  // the day's work, and the websites table is the list of those.
+  const ours = new Set<string>()
+  for (const w of (sites ?? []) as { url: string }[]) {
+    try {
+      ours.add(new URL(w.url).hostname.replace(/^www\./, '').toLowerCase())
+    } catch {
+      /* a malformed url in the table should not break the page */
+    }
+  }
 
   const savedByFingerprint = new Map<string, Record<string, unknown>>()
   for (const row of (saved ?? []) as Record<string, unknown>[]) {
@@ -96,8 +108,9 @@ export async function getAuditTasks(): Promise<Task[]> {
   // Newest audit per host wins; older runs are history.
   const latestPerHost = new Map<string, Record<string, unknown>>()
   for (const a of (audits ?? []) as Record<string, unknown>[]) {
-    const host = (a.host as string) ?? ''
-    if (host && !latestPerHost.has(host)) latestPerHost.set(host, a)
+    const host = ((a.host as string) ?? '').replace(/^www\./, '').toLowerCase()
+    if (!host || !ours.has(host)) continue
+    if (!latestPerHost.has(host)) latestPerHost.set(host, a)
   }
 
   const tasks: Task[] = []
