@@ -19,8 +19,9 @@ import {
   Wrench,
   Mail,
   Volume2,
+  CalendarCheck,
 } from 'lucide-react'
-import { ChevronDown, FileSignature, Target, Linkedin, Tags, Wallet, Trophy, ListTodo, ClipboardCheck, Gift, Gavel, GraduationCap, Smartphone, Apple } from 'lucide-react'
+import { ChevronDown, FileSignature, Target, Linkedin, Tags, Wallet, Trophy, ListTodo, ClipboardCheck, Gift, Gavel, GraduationCap, Smartphone, Apple, Stethoscope, ScanSearch } from 'lucide-react'
 import AdminNavLink from './AdminNavLink'
 import TrgLogo from './TrgLogo'
 
@@ -33,6 +34,7 @@ const navGroups: NavGroup[] = [
   {
     title: null,
     items: [
+      { href: '/admin/today', icon: <CalendarCheck className="h-4 w-4" />, label: 'Today' },
       { href: '/admin', icon: <LayoutDashboard className="h-4 w-4" />, label: 'Overview' },
       { href: '/admin/proposals', icon: <FileSignature className="h-4 w-4" />, label: 'Proposals' },
     ],
@@ -64,6 +66,8 @@ const navGroups: NavGroup[] = [
       { href: '/admin/marketing-leads', icon: <Inbox className="h-4 w-4" />, label: 'Site enquiries' },
       { href: '/admin/client-leads', icon: <Users className="h-4 w-4" />, label: 'Client leads' },
       { href: '/admin/tools', icon: <Wrench className="h-4 w-4" />, label: 'Tool usage' },
+      { href: '/admin/site-audit', icon: <ScanSearch className="h-4 w-4" />, label: 'Simple Site Audit' },
+      { href: '/admin/site-audit/detailed', icon: <Stethoscope className="h-4 w-4" />, label: 'Detailed Site Audit' },
       { href: '/admin/email-nurture', icon: <Mail className="h-4 w-4" />, label: 'Email nurture' },
       { href: '/admin/blog', icon: <BookOpen className="h-4 w-4" />, label: 'Blog' },
       { href: '/admin/seo', icon: <Search className="h-4 w-4" />, label: 'Page SEO' },

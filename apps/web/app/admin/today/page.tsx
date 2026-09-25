@@ -1,0 +1,248 @@
+import type { Metadata } from 'next'
+import { requireAdmin } from '@/lib/auth'
+import {
+  DAILY_AUDIT_TARGET,
+  getAuditTasks,
+  getCompleted,
+  getContentSlot,
+  getManualTasks,
+  type Task,
+} from '@/lib/daily'
+import { completeTask, reopenTask, snoozeTask, addManualTask } from './actions'
+
+export const metadata: Metadata = { title: 'Today — Admin' }
+export const dynamic = 'force-dynamic'
+
+const SEVERITY_STYLE: Record<string, string> = {
+  critical: 'bg-red-100 text-red-700',
+  high: 'bg-orange-100 text-orange-700',
+  medium: 'bg-amber-100 text-amber-800',
+  low: 'bg-neutral-100 text-neutral-600',
+}
+
+function TaskRow({ task }: { task: Task }) {
+  const hidden = (
+    <>
+      <input type="hidden" name="fingerprint" value={task.fingerprint} />
+      <input type="hidden" name="kind" value={task.kind} />
+      <input type="hidden" name="host" value={task.host ?? ''} />
+      <input type="hidden" name="clientName" value={task.clientName ?? ''} />
+      <input type="hidden" name="title" value={task.title} />
+      <input type="hidden" name="detail" value={task.detail} />
+      <input type="hidden" name="category" value={task.category} />
+      <input type="hidden" name="severity" value={task.severity ?? ''} />
+    </>
+  )
+
+  return (
+    <li className="flex items-start gap-3 border-b border-brand-line py-3 last:border-0">
+      <form action={completeTask} className="pt-0.5">
+        {hidden}
+        <button
+          type="submit"
+          title="Mark as done"
+          aria-label={`Mark done: ${task.title}`}
+          className="h-5 w-5 rounded border-2 border-brand-line hover:border-brand-pop hover:bg-brand-pop/10"
+        />
+      </form>
+
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-wrap items-center gap-2">
+          {task.severity && (
+            <span className={`rounded px-1.5 py-0.5 text-[11px] font-medium uppercase ${SEVERITY_STYLE[task.severity]}`}>
+              {task.severity}
+            </span>
+          )}
+          <span className="text-xs text-brand-ink-muted">{task.clientName ?? 'Internal'}</span>
+          {task.category && <span className="text-xs text-brand-ink-muted">· {task.category}</span>}
+        </div>
+        <p className="mt-1 text-sm font-medium text-brand-ink">{task.title}</p>
+        {task.detail && <p className="mt-0.5 text-sm leading-snug text-brand-ink-soft">{task.detail}</p>}
+      </div>
+
+      <form action={snoozeTask} className="pt-0.5">
+        {hidden}
+        <input type="hidden" name="days" value="7" />
+        <button type="submit" className="text-xs text-brand-ink-muted underline hover:text-brand-ink">
+          Not this week
+        </button>
+      </form>
+    </li>
+  )
+}
+
+export default async function TodayPage() {
+  await requireAdmin()
+  const [auditTasks, manual, content, completed] = await Promise.all([
+    getAuditTasks(),
+    getManualTasks(),
+    getContentSlot(),
+    getCompleted(undefined, 40),
+  ])
+
+  const open = auditTasks.filter((t) => t.status === 'open')
+  const todays = open.slice(0, DAILY_AUDIT_TARGET)
+  const doneToday = completed.filter(
+    (t) => t.doneAt && new Date(t.doneAt).toDateString() === new Date().toDateString(),
+  )
+
+  // Per client, so the numbers can be read out loud on a call.
+  const byClient = new Map<string, { open: number; done: number }>()
+  for (const t of auditTasks) {
+    const key = t.clientName ?? 'Internal'
+    const row = byClient.get(key) ?? { open: 0, done: 0 }
+    if (t.status === 'done') row.done++
+    else row.open++
+    byClient.set(key, row)
+  }
+
+  return (
+    <div className="mx-auto max-w-4xl p-6">
+      <div className="flex flex-wrap items-baseline justify-between gap-3">
+        <h1 className="font-display text-2xl font-semibold text-brand-ink">Today</h1>
+        <p className="text-sm text-brand-ink-soft">
+          {new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })}
+          {doneToday.length > 0 && ` · ${doneToday.length} done so far`}
+        </p>
+      </div>
+
+      {/* Content slot: one property a day, not five */}
+      <section className="mt-6 rounded-xl border-2 border-brand-ink bg-brand-bg-warm p-4">
+        <p className="text-xs font-semibold uppercase tracking-widest text-brand-ink-muted">Content</p>
+        {content.slot ? (
+          content.done ? (
+            <p className="mt-1 text-sm text-brand-ink">
+              <span className="font-semibold">{content.slot.label}</span> done this week. Nothing else owed today.
+            </p>
+          ) : (
+            <form action={completeTask} className="mt-1 flex flex-wrap items-center gap-3">
+              <input type="hidden" name="fingerprint" value={content.fingerprint} />
+              <input type="hidden" name="kind" value="content" />
+              <input type="hidden" name="title" value={`Content: ${content.slot.label}`} />
+              <input type="hidden" name="clientName" value={content.slot.label} />
+              <input type="hidden" name="category" value="content" />
+              <p className="text-sm text-brand-ink">
+                Today is <span className="font-semibold">{content.slot.label}</span>.{' '}
+                {content.slot.url && (
+                  <a href={content.slot.url} target="_blank" rel="noopener" className="text-brand-pop underline">
+                    Open the blog
+                  </a>
+                )}
+              </p>
+              <button
+                type="submit"
+                className="rounded-lg bg-brand-ink px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-ink/90"
+              >
+                Mark this week&apos;s content done
+              </button>
+            </form>
+          )
+        ) : (
+          <p className="mt-1 text-sm text-brand-ink-soft">No content slot at the weekend. Enjoy it.</p>
+        )}
+      </section>
+
+      {/* The six */}
+      <section className="mt-6">
+        <div className="flex items-baseline justify-between">
+          <h2 className="font-display text-lg font-semibold text-brand-ink">
+            Audit work, {Math.min(DAILY_AUDIT_TARGET, todays.length)} of {open.length} open
+          </h2>
+          <span className="text-xs text-brand-ink-muted">Worst first. Anything left is still here tomorrow.</span>
+        </div>
+
+        {todays.length === 0 ? (
+          <p className="mt-3 rounded-xl border border-dashed border-brand-line p-6 text-center text-sm text-brand-ink-soft">
+            Nothing open. Either run an audit, or take the afternoon off.
+          </p>
+        ) : (
+          <ul className="mt-2 rounded-xl border border-brand-line bg-white px-4">
+            {todays.map((t) => (
+              <TaskRow key={t.fingerprint} task={t} />
+            ))}
+          </ul>
+        )}
+      </section>
+
+      {/* Anything added by hand */}
+      <section className="mt-6">
+        <h2 className="font-display text-lg font-semibold text-brand-ink">Your own list</h2>
+        {manual.length > 0 && (
+          <ul className="mt-2 rounded-xl border border-brand-line bg-white px-4">
+            {manual.map((t) => (
+              <TaskRow key={t.fingerprint} task={t} />
+            ))}
+          </ul>
+        )}
+        <form action={addManualTask} className="mt-2 flex flex-wrap gap-2">
+          <input
+            name="title"
+            placeholder="Something that is not in an audit"
+            className="min-w-[240px] flex-1 rounded-lg border border-brand-line px-3 py-2 text-sm"
+          />
+          <input
+            name="clientName"
+            placeholder="Client (optional)"
+            className="w-44 rounded-lg border border-brand-line px-3 py-2 text-sm"
+          />
+          <button type="submit" className="rounded-lg bg-brand-ink px-3 py-2 text-sm font-semibold text-white">
+            Add
+          </button>
+        </form>
+      </section>
+
+      {/* The record, which is the bit clients pay attention to */}
+      <section className="mt-8">
+        <h2 className="font-display text-lg font-semibold text-brand-ink">Completed</h2>
+        <p className="mt-1 text-sm text-brand-ink-soft">
+          Dated, per client, so a month of work can be shown rather than described.
+        </p>
+
+        <div className="mt-3 flex flex-wrap gap-2">
+          {[...byClient.entries()].map(([client, n]) => (
+            <span key={client} className="rounded-lg border border-brand-line bg-white px-3 py-1.5 text-xs">
+              <span className="font-semibold text-brand-ink">{client}</span>
+              <span className="text-brand-ink-muted">
+                {' '}
+                · {n.done} done · {n.open} open
+              </span>
+            </span>
+          ))}
+        </div>
+
+        {completed.length > 0 && (
+          <ul className="mt-3 rounded-xl border border-brand-line bg-white px-4">
+            {completed.slice(0, 15).map((t) => (
+              <li
+                key={t.fingerprint}
+                className="flex items-start justify-between gap-3 border-b border-brand-line py-2.5 text-sm last:border-0"
+              >
+                <div className="min-w-0">
+                  <span className="text-brand-ink">{t.title}</span>
+                  <span className="ml-2 text-xs text-brand-ink-muted">{t.clientName}</span>
+                </div>
+                <div className="flex shrink-0 items-center gap-3">
+                  <span className="text-xs text-brand-ink-muted">
+                    {t.doneAt && new Date(t.doneAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
+                  </span>
+                  <form action={reopenTask}>
+                    <input type="hidden" name="fingerprint" value={t.fingerprint} />
+                    <input type="hidden" name="kind" value={t.kind} />
+                    <input type="hidden" name="host" value={t.host ?? ''} />
+                    <input type="hidden" name="clientName" value={t.clientName ?? ''} />
+                    <input type="hidden" name="title" value={t.title} />
+                    <input type="hidden" name="category" value={t.category} />
+                    <input type="hidden" name="severity" value={t.severity ?? ''} />
+                    <button type="submit" className="text-xs text-brand-ink-muted underline hover:text-brand-ink">
+                      Reopen
+                    </button>
+                  </form>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+    </div>
+  )
+}
