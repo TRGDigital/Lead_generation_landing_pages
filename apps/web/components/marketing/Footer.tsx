@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { MapPin } from 'lucide-react'
 import { SERVICES } from '@/lib/services'
+import { TOOLS } from '@/lib/tools'
 import { Star } from './Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
@@ -25,6 +26,9 @@ const COMPANY = [
   { href: '/about', label: 'About us' },
   { href: '/tools', label: 'Free tools' },
   { href: '/blog', label: 'Knowledge Hub' },
+  { href: '/research', label: 'Research' },
+  { href: '/care-groups', label: 'For care groups' },
+  { href: '/why-a-care-specialist', label: 'Why a care specialist' },
   { href: '/contact', label: 'Contact' },
   { href: '/how-it-works', label: 'How it works' },
   { href: '/our-commitment', label: 'Our commitment' },
@@ -89,9 +93,20 @@ export default function Footer() {
           <Col title="Services">
             {SERVICES.map((s) => <FLink key={s.title} href={s.href} label={s.title} />)}
           </Col>
+          <Col title="Free tools">
+            {TOOLS.map((t) => <FLink key={t.href} href={t.href} label={t.title} />)}
+            <li>
+              <Link href="/tools" className="text-sm font-semibold text-brand-accent transition-colors hover:text-white">
+                All free tools →
+              </Link>
+            </li>
+          </Col>
           <Col title="Company">{COMPANY.map((l) => <FLink key={l.href} {...l} />)}</Col>
-          <Col title="Products">{PRODUCTS.map((l) => <FLink key={l.href} {...l} />)}</Col>
-          <Col title="Legal">{LEGAL.map((l) => <FLink key={l.href} {...l} />)}</Col>
+          {/* Products and Legal share a column: five links between them, and it keeps the grid at six. */}
+          <div className="space-y-10">
+            <Col title="Products">{PRODUCTS.map((l) => <FLink key={l.href} {...l} />)}</Col>
+            <Col title="Legal">{LEGAL.map((l) => <FLink key={l.href} {...l} />)}</Col>
+          </div>
         </div>
       </div>
 

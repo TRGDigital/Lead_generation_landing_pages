@@ -4,7 +4,10 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { usePathname } from 'next/navigation'
-import { Menu, X, ChevronDown, Mail, Phone, type LucideIcon } from 'lucide-react'
+import {
+  Menu, X, ChevronDown, Mail, Phone, Users, Workflow, HeartHandshake, Scale, Building2, BarChart3,
+  type LucideIcon,
+} from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { SERVICES } from '@/lib/services'
 import { TOOLS } from '@/lib/tools'
@@ -12,8 +15,17 @@ import { TOOLS } from '@/lib/tools'
 const LINKS = [
   // '/work' is hidden from nav while the case-study section is still in progress
   // (the pages exist but aren't linked publicly yet).
-  { href: '/about', label: 'About us' },
   { href: '/blog', label: 'Blog' },
+]
+
+// Who we are and how we work, plus the pages a buyer reads before choosing an agency.
+const ABOUT: MegaItem[] = [
+  { icon: Users, title: 'About us', short: 'Who we are, and why we only work in care.', href: '/about' },
+  { icon: Workflow, title: 'How it works', short: 'From first call to a site that brings enquiries.', href: '/how-it-works' },
+  { icon: HeartHandshake, title: 'Our commitment', short: 'What we promise, and how to hold us to it.', href: '/our-commitment' },
+  { icon: Scale, title: 'Why a care specialist', short: 'Specialist, generalist, DIY or directory, compared.', href: '/why-a-care-specialist' },
+  { icon: Building2, title: 'For care groups', short: 'One system for every home in your group.', href: '/care-groups' },
+  { icon: BarChart3, title: 'Research', short: 'The care market in numbers, from our own data.', href: '/research' },
 ]
 
 type MegaItem = { icon: LucideIcon; title: string; short: string; href: string; highlight?: boolean }
@@ -33,7 +45,11 @@ function DesktopMega({
   secondaryCta?: { href: string; label: string }
 }) {
   return (
-    <div className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+    // Not relative: the panel positions against the sticky header, so it is centred on the
+    // page rather than under its own label. Centred under "Services", which sits near the
+    // left edge, a 54rem panel ran off the left of a laptop screen. The wrapper fills the
+    // header's height so the pointer never leaves it on the way down into the panel.
+    <div className="flex h-full items-center" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <button
         type="button"
         className={cn(
@@ -48,8 +64,13 @@ function DesktopMega({
         <ChevronDown className={cn('h-4 w-4 transition-transform', open && 'rotate-180')} />
       </button>
 
-      {open && (
-        <div className="absolute left-1/2 top-full z-50 w-[37rem] -translate-x-1/2 pt-3 lg:w-[54rem]">
+      {/* Always in the HTML, hidden until opened, so crawlers see every link in the menu. */}
+      <div
+        className={cn(
+          'absolute left-1/2 top-full z-50 w-[min(37rem,calc(100vw-2rem))] -translate-x-1/2 pt-2 lg:w-[min(54rem,calc(100vw-2rem))]',
+          !open && 'hidden',
+        )}
+      >
           <div className="relative overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card">
             <div className="h-1.5 w-full bg-brand-pop" />
             <div className="flex items-center justify-between px-4 pb-1 pt-4">
@@ -120,7 +141,6 @@ function DesktopMega({
             </Link>
           </div>
         </div>
-      )}
     </div>
   )
 }
@@ -129,12 +149,15 @@ export default function Nav() {
   const [open, setOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [toolsOpen, setToolsOpen] = useState(false)
+  const [aboutOpen, setAboutOpen] = useState(false)
+  const [mobileAbout, setMobileAbout] = useState(false)
   const [mobileServices, setMobileServices] = useState(false)
   const [mobileTools, setMobileTools] = useState(false)
   const pathname = usePathname()
 
   const servicesActive = SERVICES.some((s) => pathname === s.href || pathname.startsWith(s.href + '/'))
   const toolsActive = pathname === '/tools' || pathname.startsWith('/tools/')
+  const aboutActive = ABOUT.some((a) => pathname === a.href)
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-brand-line/60 bg-brand-bg/95 backdrop-blur supports-[backdrop-filter]:bg-brand-bg/80">
@@ -152,7 +175,7 @@ export default function Nav() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden flex-1 items-center justify-center gap-8 md:flex" aria-label="Main navigation">
+        <nav className="hidden h-full flex-1 items-center justify-center gap-8 md:flex" aria-label="Main navigation">
           <DesktopMega
             label="Services"
             active={servicesActive}
@@ -175,6 +198,17 @@ export default function Nav() {
             ctaHref="/tools"
             ctaLabel="See all free tools"
             secondaryCta={{ href: '/care-tools', label: 'Want these on your own site? See our care tools' }}
+          />
+          <DesktopMega
+            label="About us"
+            active={aboutActive}
+            open={aboutOpen}
+            setOpen={setAboutOpen}
+            items={ABOUT}
+            eyebrow="About TRG Digital"
+            tagline="Only care, nothing else"
+            ctaHref="/contact"
+            ctaLabel="Talk to someone who only works in care"
           />
 
           {LINKS.map(({ href, label }) => {
@@ -297,6 +331,32 @@ export default function Nav() {
               >
                 Want these on your site? See our care tools →
               </Link>
+            </div>
+          )}
+
+          {/* About group */}
+          <button
+            type="button"
+            onClick={() => setMobileAbout((v) => !v)}
+            className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-base font-bold uppercase tracking-wide text-brand-ink-soft hover:bg-brand-line/40 hover:text-brand-ink"
+            aria-expanded={mobileAbout}
+          >
+            About us
+            <ChevronDown className={cn('h-4 w-4 transition-transform', mobileAbout && 'rotate-180')} />
+          </button>
+          {mobileAbout && (
+            <div className="space-y-0.5 pb-1 pl-3">
+              {ABOUT.map(({ icon: Icon, title, href }) => (
+                <Link
+                  key={title}
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-brand-ink-soft hover:bg-brand-line/40 hover:text-brand-ink"
+                >
+                  <Icon className="h-4 w-4 text-brand-accent" />
+                  {title}
+                </Link>
+              ))}
             </div>
           )}
 

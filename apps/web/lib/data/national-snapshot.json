@@ -1,0 +1,1008 @@
+{
+  "countedAt": "2026-09-27",
+  "services": 29050,
+  "noWebsite": 13517,
+  "types": {
+    "residential": {
+      "services": 10500,
+      "noWebsite": 4679
+    },
+    "nursing": {
+      "services": 4488,
+      "noWebsite": 1922
+    },
+    "homeCare": {
+      "services": 14250,
+      "noWebsite": 6974
+    },
+    "dementia": {
+      "services": 19504,
+      "noWebsite": 9209
+    }
+  },
+  "ratings": {
+    "outstanding": 1022,
+    "good": 17732,
+    "requiresImprovement": 3257,
+    "inadequate": 175,
+    "notRated": 6864
+  },
+  "regions": [
+    {
+      "name": "South East",
+      "services": 5285,
+      "noWebsite": 2050
+    },
+    {
+      "name": "London",
+      "services": 3692,
+      "noWebsite": 1868
+    },
+    {
+      "name": "East",
+      "services": 3463,
+      "noWebsite": 1582
+    },
+    {
+      "name": "North West",
+      "services": 3440,
+      "noWebsite": 1739
+    },
+    {
+      "name": "West Midlands",
+      "services": 3273,
+      "noWebsite": 1613
+    },
+    {
+      "name": "South West",
+      "services": 3134,
+      "noWebsite": 1338
+    },
+    {
+      "name": "East Midlands",
+      "services": 2878,
+      "noWebsite": 1296
+    },
+    {
+      "name": "Yorkshire & Humberside",
+      "services": 2710,
+      "noWebsite": 1459
+    },
+    {
+      "name": "North East",
+      "services": 1153,
+      "noWebsite": 561
+    },
+    {
+      "name": "Wales",
+      "services": 2,
+      "noWebsite": 0
+    }
+  ],
+  "areas": [
+    {
+      "slug": "kent",
+      "name": "Kent",
+      "services": 896,
+      "noWebsite": 340
+    },
+    {
+      "slug": "essex",
+      "name": "Essex",
+      "services": 878,
+      "noWebsite": 413
+    },
+    {
+      "slug": "hampshire",
+      "name": "Hampshire",
+      "services": 832,
+      "noWebsite": 301
+    },
+    {
+      "slug": "lancashire",
+      "name": "Lancashire",
+      "services": 695,
+      "noWebsite": 342
+    },
+    {
+      "slug": "surrey",
+      "name": "Surrey",
+      "services": 663,
+      "noWebsite": 233
+    },
+    {
+      "slug": "birmingham",
+      "name": "Birmingham",
+      "services": 594,
+      "noWebsite": 307
+    },
+    {
+      "slug": "hertfordshire",
+      "name": "Hertfordshire",
+      "services": 585,
+      "noWebsite": 244
+    },
+    {
+      "slug": "west-sussex",
+      "name": "West Sussex",
+      "services": 545,
+      "noWebsite": 231
+    },
+    {
+      "slug": "norfolk",
+      "name": "Norfolk",
+      "services": 502,
+      "noWebsite": 225
+    },
+    {
+      "slug": "nottinghamshire",
+      "name": "Nottinghamshire",
+      "services": 481,
+      "noWebsite": 192
+    },
+    {
+      "slug": "devon",
+      "name": "Devon",
+      "services": 457,
+      "noWebsite": 197
+    },
+    {
+      "slug": "staffordshire",
+      "name": "Staffordshire",
+      "services": 436,
+      "noWebsite": 218
+    },
+    {
+      "slug": "lincolnshire",
+      "name": "Lincolnshire",
+      "services": 414,
+      "noWebsite": 143
+    },
+    {
+      "slug": "suffolk",
+      "name": "Suffolk",
+      "services": 406,
+      "noWebsite": 188
+    },
+    {
+      "slug": "leeds",
+      "name": "Leeds",
+      "services": 398,
+      "noWebsite": 223
+    },
+    {
+      "slug": "east-sussex",
+      "name": "East Sussex",
+      "services": 393,
+      "noWebsite": 159
+    },
+    {
+      "slug": "derbyshire",
+      "name": "Derbyshire",
+      "services": 392,
+      "noWebsite": 176
+    },
+    {
+      "slug": "gloucestershire",
+      "name": "Gloucestershire",
+      "services": 376,
+      "noWebsite": 162
+    },
+    {
+      "slug": "north-yorkshire",
+      "name": "North Yorkshire",
+      "services": 361,
+      "noWebsite": 171
+    },
+    {
+      "slug": "leicestershire",
+      "name": "Leicestershire",
+      "services": 326,
+      "noWebsite": 131
+    },
+    {
+      "slug": "wiltshire",
+      "name": "Wiltshire",
+      "services": 315,
+      "noWebsite": 122
+    },
+    {
+      "slug": "oxfordshire",
+      "name": "Oxfordshire",
+      "services": 314,
+      "noWebsite": 96
+    },
+    {
+      "slug": "somerset",
+      "name": "Somerset",
+      "services": 313,
+      "noWebsite": 124
+    },
+    {
+      "slug": "cornwall",
+      "name": "Cornwall",
+      "services": 310,
+      "noWebsite": 152
+    },
+    {
+      "slug": "warwickshire",
+      "name": "Warwickshire",
+      "services": 309,
+      "noWebsite": 115
+    },
+    {
+      "slug": "worcestershire",
+      "name": "Worcestershire",
+      "services": 291,
+      "noWebsite": 136
+    },
+    {
+      "slug": "leicester",
+      "name": "Leicester",
+      "services": 285,
+      "noWebsite": 150
+    },
+    {
+      "slug": "croydon",
+      "name": "Croydon",
+      "services": 281,
+      "noWebsite": 144
+    },
+    {
+      "slug": "west-northamptonshire",
+      "name": "West Northamptonshire",
+      "services": 277,
+      "noWebsite": 145
+    },
+    {
+      "slug": "cambridgeshire",
+      "name": "Cambridgeshire",
+      "services": 275,
+      "noWebsite": 109
+    },
+    {
+      "slug": "buckinghamshire",
+      "name": "Buckinghamshire",
+      "services": 270,
+      "noWebsite": 105
+    },
+    {
+      "slug": "bournemouth-christchurch-and-poole",
+      "name": "Bournemouth, Christchurch and Poole",
+      "services": 259,
+      "noWebsite": 104
+    },
+    {
+      "slug": "north-northamptonshire",
+      "name": "North Northamptonshire",
+      "services": 259,
+      "noWebsite": 117
+    },
+    {
+      "slug": "sheffield",
+      "name": "Sheffield",
+      "services": 251,
+      "noWebsite": 141
+    },
+    {
+      "slug": "milton-keynes",
+      "name": "Milton Keynes",
+      "services": 227,
+      "noWebsite": 96
+    },
+    {
+      "slug": "nottingham",
+      "name": "Nottingham",
+      "services": 224,
+      "noWebsite": 124
+    },
+    {
+      "slug": "coventry",
+      "name": "Coventry",
+      "services": 213,
+      "noWebsite": 97
+    },
+    {
+      "slug": "bradford",
+      "name": "Bradford",
+      "services": 212,
+      "noWebsite": 107
+    },
+    {
+      "slug": "county-durham",
+      "name": "County Durham",
+      "services": 212,
+      "noWebsite": 99
+    },
+    {
+      "slug": "kirklees",
+      "name": "Kirklees",
+      "services": 211,
+      "noWebsite": 110
+    },
+    {
+      "slug": "manchester",
+      "name": "Manchester",
+      "services": 209,
+      "noWebsite": 111
+    },
+    {
+      "slug": "east-riding-of-yorkshire",
+      "name": "East Riding of Yorkshire",
+      "services": 208,
+      "noWebsite": 123
+    },
+    {
+      "slug": "wolverhampton",
+      "name": "Wolverhampton",
+      "services": 206,
+      "noWebsite": 113
+    },
+    {
+      "slug": "dorset",
+      "name": "Dorset",
+      "services": 200,
+      "noWebsite": 86
+    },
+    {
+      "slug": "redbridge",
+      "name": "Redbridge",
+      "services": 200,
+      "noWebsite": 120
+    },
+    {
+      "slug": "shropshire",
+      "name": "Shropshire",
+      "services": 200,
+      "noWebsite": 97
+    },
+    {
+      "slug": "enfield",
+      "name": "Enfield",
+      "services": 197,
+      "noWebsite": 108
+    },
+    {
+      "slug": "cheshire-east",
+      "name": "Cheshire East",
+      "services": 196,
+      "noWebsite": 92
+    },
+    {
+      "slug": "derby",
+      "name": "Derby",
+      "services": 196,
+      "noWebsite": 106
+    },
+    {
+      "slug": "liverpool",
+      "name": "Liverpool",
+      "services": 193,
+      "noWebsite": 109
+    },
+    {
+      "slug": "sandwell",
+      "name": "Sandwell",
+      "services": 189,
+      "noWebsite": 101
+    },
+    {
+      "slug": "bristol-city-of",
+      "name": "Bristol, City of",
+      "services": 185,
+      "noWebsite": 65
+    },
+    {
+      "slug": "wakefield",
+      "name": "Wakefield",
+      "services": 181,
+      "noWebsite": 107
+    },
+    {
+      "slug": "barnet",
+      "name": "Barnet",
+      "services": 180,
+      "noWebsite": 78
+    },
+    {
+      "slug": "barking-and-dagenham",
+      "name": "Barking and Dagenham",
+      "services": 179,
+      "noWebsite": 89
+    },
+    {
+      "slug": "medway",
+      "name": "Medway",
+      "services": 177,
+      "noWebsite": 81
+    },
+    {
+      "slug": "havering",
+      "name": "Havering",
+      "services": 170,
+      "noWebsite": 87
+    },
+    {
+      "slug": "stoke-on-trent",
+      "name": "Stoke-on-Trent",
+      "services": 165,
+      "noWebsite": 83
+    },
+    {
+      "slug": "wirral",
+      "name": "Wirral",
+      "services": 164,
+      "noWebsite": 72
+    },
+    {
+      "slug": "peterborough",
+      "name": "Peterborough",
+      "services": 162,
+      "noWebsite": 82
+    },
+    {
+      "slug": "south-gloucestershire",
+      "name": "South Gloucestershire",
+      "services": 161,
+      "noWebsite": 72
+    },
+    {
+      "slug": "southend-on-sea",
+      "name": "Southend-on-Sea",
+      "services": 161,
+      "noWebsite": 92
+    },
+    {
+      "slug": "cheshire-west-and-chester",
+      "name": "Cheshire West and Chester",
+      "services": 160,
+      "noWebsite": 79
+    },
+    {
+      "slug": "sefton",
+      "name": "Sefton",
+      "services": 160,
+      "noWebsite": 79
+    },
+    {
+      "slug": "bedford",
+      "name": "Bedford",
+      "services": 157,
+      "noWebsite": 64
+    },
+    {
+      "slug": "walsall",
+      "name": "Walsall",
+      "services": 157,
+      "noWebsite": 85
+    },
+    {
+      "slug": "dudley",
+      "name": "Dudley",
+      "services": 154,
+      "noWebsite": 85
+    },
+    {
+      "slug": "ealing",
+      "name": "Ealing",
+      "services": 154,
+      "noWebsite": 92
+    },
+    {
+      "slug": "southampton",
+      "name": "Southampton",
+      "services": 153,
+      "noWebsite": 77
+    },
+    {
+      "slug": "doncaster",
+      "name": "Doncaster",
+      "services": 151,
+      "noWebsite": 95
+    },
+    {
+      "slug": "greenwich",
+      "name": "Greenwich",
+      "services": 145,
+      "noWebsite": 92
+    },
+    {
+      "slug": "brighton-and-hove",
+      "name": "Brighton and Hove",
+      "services": 144,
+      "noWebsite": 75
+    },
+    {
+      "slug": "harrow",
+      "name": "Harrow",
+      "services": 142,
+      "noWebsite": 62
+    },
+    {
+      "slug": "bromley",
+      "name": "Bromley",
+      "services": 140,
+      "noWebsite": 62
+    },
+    {
+      "slug": "cumberland",
+      "name": "Cumberland",
+      "services": 140,
+      "noWebsite": 87
+    },
+    {
+      "slug": "brent",
+      "name": "Brent",
+      "services": 139,
+      "noWebsite": 64
+    },
+    {
+      "slug": "plymouth",
+      "name": "Plymouth",
+      "services": 138,
+      "noWebsite": 67
+    },
+    {
+      "slug": "rotherham",
+      "name": "Rotherham",
+      "services": 138,
+      "noWebsite": 71
+    },
+    {
+      "slug": "stockport",
+      "name": "Stockport",
+      "services": 138,
+      "noWebsite": 57
+    },
+    {
+      "slug": "northumberland",
+      "name": "Northumberland",
+      "services": 136,
+      "noWebsite": 72
+    },
+    {
+      "slug": "herefordshire-county-of",
+      "name": "Herefordshire, County of",
+      "services": 134,
+      "noWebsite": 57
+    },
+    {
+      "slug": "north-somerset",
+      "name": "North Somerset",
+      "services": 134,
+      "noWebsite": 46
+    },
+    {
+      "slug": "kingston-upon-hull-city-of",
+      "name": "Kingston upon Hull, City of",
+      "services": 133,
+      "noWebsite": 65
+    },
+    {
+      "slug": "lewisham",
+      "name": "Lewisham",
+      "services": 133,
+      "noWebsite": 79
+    },
+    {
+      "slug": "sunderland",
+      "name": "Sunderland",
+      "services": 130,
+      "noWebsite": 54
+    },
+    {
+      "slug": "barnsley",
+      "name": "Barnsley",
+      "services": 127,
+      "noWebsite": 75
+    },
+    {
+      "slug": "hillingdon",
+      "name": "Hillingdon",
+      "services": 127,
+      "noWebsite": 60
+    },
+    {
+      "slug": "bolton",
+      "name": "Bolton",
+      "services": 122,
+      "noWebsite": 66
+    },
+    {
+      "slug": "newcastle-upon-tyne",
+      "name": "Newcastle upon Tyne",
+      "services": 122,
+      "noWebsite": 58
+    },
+    {
+      "slug": "sutton",
+      "name": "Sutton",
+      "services": 121,
+      "noWebsite": 57
+    },
+    {
+      "slug": "central-bedfordshire",
+      "name": "Central Bedfordshire",
+      "services": 120,
+      "noWebsite": 51
+    },
+    {
+      "slug": "trafford",
+      "name": "Trafford",
+      "services": 119,
+      "noWebsite": 52
+    },
+    {
+      "slug": "solihull",
+      "name": "Solihull",
+      "services": 118,
+      "noWebsite": 59
+    },
+    {
+      "slug": "rochdale",
+      "name": "Rochdale",
+      "services": 115,
+      "noWebsite": 64
+    },
+    {
+      "slug": "newham",
+      "name": "Newham",
+      "services": 114,
+      "noWebsite": 75
+    },
+    {
+      "slug": "luton",
+      "name": "Luton",
+      "services": 111,
+      "noWebsite": 53
+    },
+    {
+      "slug": "oldham",
+      "name": "Oldham",
+      "services": 111,
+      "noWebsite": 67
+    },
+    {
+      "slug": "telford-and-wrekin",
+      "name": "Telford and Wrekin",
+      "services": 107,
+      "noWebsite": 60
+    },
+    {
+      "slug": "thurrock",
+      "name": "Thurrock",
+      "services": 106,
+      "noWebsite": 61
+    },
+    {
+      "slug": "bury",
+      "name": "Bury",
+      "services": 104,
+      "noWebsite": 58
+    },
+    {
+      "slug": "hounslow",
+      "name": "Hounslow",
+      "services": 104,
+      "noWebsite": 48
+    },
+    {
+      "slug": "waltham-forest",
+      "name": "Waltham Forest",
+      "services": 104,
+      "noWebsite": 52
+    },
+    {
+      "slug": "bexley",
+      "name": "Bexley",
+      "services": 103,
+      "noWebsite": 53
+    },
+    {
+      "slug": "torbay",
+      "name": "Torbay",
+      "services": 103,
+      "noWebsite": 54
+    },
+    {
+      "slug": "westmorland-and-furness",
+      "name": "Westmorland and Furness",
+      "services": 103,
+      "noWebsite": 56
+    },
+    {
+      "slug": "wigan",
+      "name": "Wigan",
+      "services": 103,
+      "noWebsite": 45
+    },
+    {
+      "slug": "swindon",
+      "name": "Swindon",
+      "services": 101,
+      "noWebsite": 47
+    },
+    {
+      "slug": "salford",
+      "name": "Salford",
+      "services": 100,
+      "noWebsite": 49
+    },
+    {
+      "slug": "stockton-on-tees",
+      "name": "Stockton-on-Tees",
+      "services": 100,
+      "noWebsite": 52
+    },
+    {
+      "slug": "blackpool",
+      "name": "Blackpool",
+      "services": 99,
+      "noWebsite": 53
+    },
+    {
+      "slug": "isle-of-wight",
+      "name": "Isle of Wight",
+      "services": 99,
+      "noWebsite": 48
+    },
+    {
+      "slug": "warrington",
+      "name": "Warrington",
+      "services": 99,
+      "noWebsite": 51
+    },
+    {
+      "slug": "reading",
+      "name": "Reading",
+      "services": 97,
+      "noWebsite": 36
+    },
+    {
+      "slug": "merton",
+      "name": "Merton",
+      "services": 96,
+      "noWebsite": 44
+    },
+    {
+      "slug": "wokingham",
+      "name": "Wokingham",
+      "services": 95,
+      "noWebsite": 34
+    },
+    {
+      "slug": "calderdale",
+      "name": "Calderdale",
+      "services": 94,
+      "noWebsite": 56
+    },
+    {
+      "slug": "gateshead",
+      "name": "Gateshead",
+      "services": 94,
+      "noWebsite": 39
+    },
+    {
+      "slug": "lambeth",
+      "name": "Lambeth",
+      "services": 92,
+      "noWebsite": 49
+    },
+    {
+      "slug": "portsmouth",
+      "name": "Portsmouth",
+      "services": 92,
+      "noWebsite": 33
+    },
+    {
+      "slug": "kingston-upon-thames",
+      "name": "Kingston upon Thames",
+      "services": 91,
+      "noWebsite": 45
+    },
+    {
+      "slug": "haringey",
+      "name": "Haringey",
+      "services": 86,
+      "noWebsite": 47
+    },
+    {
+      "slug": "tower-hamlets",
+      "name": "Tower Hamlets",
+      "services": 86,
+      "noWebsite": 39
+    },
+    {
+      "slug": "slough",
+      "name": "Slough",
+      "services": 85,
+      "noWebsite": 44
+    },
+    {
+      "slug": "west-berkshire",
+      "name": "West Berkshire",
+      "services": 85,
+      "noWebsite": 24
+    },
+    {
+      "slug": "york",
+      "name": "York",
+      "services": 84,
+      "noWebsite": 45
+    },
+    {
+      "slug": "north-east-lincolnshire",
+      "name": "North East Lincolnshire",
+      "services": 83,
+      "noWebsite": 36
+    },
+    {
+      "slug": "north-tyneside",
+      "name": "North Tyneside",
+      "services": 83,
+      "noWebsite": 45
+    },
+    {
+      "slug": "st-helens",
+      "name": "St. Helens",
+      "services": 82,
+      "noWebsite": 42
+    },
+    {
+      "slug": "bath-and-north-east-somerset",
+      "name": "Bath and North East Somerset",
+      "services": 80,
+      "noWebsite": 39
+    },
+    {
+      "slug": "north-lincolnshire",
+      "name": "North Lincolnshire",
+      "services": 77,
+      "noWebsite": 34
+    },
+    {
+      "slug": "southwark",
+      "name": "Southwark",
+      "services": 76,
+      "noWebsite": 39
+    },
+    {
+      "slug": "middlesbrough",
+      "name": "Middlesbrough",
+      "services": 75,
+      "noWebsite": 43
+    },
+    {
+      "slug": "windsor-and-maidenhead",
+      "name": "Windsor and Maidenhead",
+      "services": 74,
+      "noWebsite": 25
+    },
+    {
+      "slug": "blackburn-with-darwen",
+      "name": "Blackburn with Darwen",
+      "services": 72,
+      "noWebsite": 26
+    },
+    {
+      "slug": "richmond-upon-thames",
+      "name": "Richmond upon Thames",
+      "services": 70,
+      "noWebsite": 29
+    },
+    {
+      "slug": "wandsworth",
+      "name": "Wandsworth",
+      "services": 67,
+      "noWebsite": 25
+    },
+    {
+      "slug": "tameside",
+      "name": "Tameside",
+      "services": 66,
+      "noWebsite": 29
+    },
+    {
+      "slug": "islington",
+      "name": "Islington",
+      "services": 64,
+      "noWebsite": 26
+    },
+    {
+      "slug": "redcar-and-cleveland",
+      "name": "Redcar and Cleveland",
+      "services": 62,
+      "noWebsite": 38
+    },
+    {
+      "slug": "camden",
+      "name": "Camden",
+      "services": 57,
+      "noWebsite": 23
+    },
+    {
+      "slug": "hackney",
+      "name": "Hackney",
+      "services": 53,
+      "noWebsite": 25
+    },
+    {
+      "slug": "hammersmith-and-fulham",
+      "name": "Hammersmith and Fulham",
+      "services": 53,
+      "noWebsite": 22
+    },
+    {
+      "slug": "knowsley",
+      "name": "Knowsley",
+      "services": 53,
+      "noWebsite": 38
+    },
+    {
+      "slug": "darlington",
+      "name": "Darlington",
+      "services": 52,
+      "noWebsite": 22
+    },
+    {
+      "slug": "south-tyneside",
+      "name": "South Tyneside",
+      "services": 50,
+      "noWebsite": 21
+    },
+    {
+      "slug": "bracknell-forest",
+      "name": "Bracknell Forest",
+      "services": 44,
+      "noWebsite": 12
+    },
+    {
+      "slug": "halton",
+      "name": "Halton",
+      "services": 37,
+      "noWebsite": 15
+    },
+    {
+      "slug": "hartlepool",
+      "name": "Hartlepool",
+      "services": 37,
+      "noWebsite": 18
+    },
+    {
+      "slug": "westminster",
+      "name": "Westminster",
+      "services": 30,
+      "noWebsite": 14
+    },
+    {
+      "slug": "kensington-and-chelsea",
+      "name": "Kensington and Chelsea",
+      "services": 25,
+      "noWebsite": 12
+    },
+    {
+      "slug": "rutland",
+      "name": "Rutland",
+      "services": 24,
+      "noWebsite": 12
+    },
+    {
+      "slug": "city-of-london",
+      "name": "City of London",
+      "services": 13,
+      "noWebsite": 7
+    },
+    {
+      "slug": "flintshire",
+      "name": "Flintshire",
+      "services": 2,
+      "noWebsite": 0
+    },
+    {
+      "slug": "isles-of-scilly",
+      "name": "Isles of Scilly",
+      "services": 1,
+      "noWebsite": 0
+    }
+  ]
+}
