@@ -36,7 +36,7 @@ const COMPANY = [
 ]
 const PRODUCTS = [
   { href: 'https://carestreamai.com', label: 'CareStream' },
-  { href: 'https://careassura.co.uk', label: 'CareAssura' },
+  { href: 'https://careassura.com', label: 'CareAssura' },
 ]
 const LEGAL = [
   { href: '/privacy', label: 'Privacy policy' },

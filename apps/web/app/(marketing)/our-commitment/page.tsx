@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Check, MessageSquare, ShieldCheck, RefreshCw } from 'lucide-react'
 import { Star, Squiggle, Dots } from '@/components/marketing/Decor'
+import { ManagedImage } from '@/components/marketing/ManagedImage'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.trgdigital.co.uk'
 
@@ -65,17 +66,45 @@ export default function OurCommitmentPage() {
       <section className="relative overflow-hidden px-6 pb-16 pt-16">
         <Star className="absolute left-4 top-10 hidden h-16 w-16 -rotate-12 text-brand-accent lg:block" />
         <Star className="absolute right-8 bottom-8 hidden h-12 w-12 rotate-12 text-brand-pop/60 lg:block" />
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Our promise to you</p>
-          <h1 className="mt-4 font-display text-4xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-5xl">
-            Our commitment to customers
-          </h1>
-          <Squiggle className="mx-auto mt-5 h-6 w-56 text-brand-pop" />
-          <p className="mt-6 text-lg leading-relaxed text-brand-ink-soft">
-            TRG Digital exists to help care providers grow. That means being straight with you, doing
-            what we say, listening when it matters most, and protecting the information you trust us
-            with. Here is what you can expect from us, and how to hold us to it.
-          </p>
+        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Our promise to you</p>
+            <h1 className="mt-4 font-display text-4xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-5xl">
+              Our commitment to <span className="text-brand-pop">customers</span>
+            </h1>
+            <Squiggle className="mt-5 h-6 w-56 text-brand-pop" />
+            <p className="mt-6 text-lg leading-relaxed text-brand-ink-soft">
+              TRG Digital exists to help care providers grow. That means being straight with you, doing
+              what we say, listening when it matters most, and protecting the information you trust us
+              with. Here is what you can expect from us, and how to hold us to it.
+            </p>
+          </div>
+
+          {/* The promises from the section below, signed, as the hero card. */}
+          <div className="rounded-3xl border-2 border-brand-ink bg-white p-6 shadow-[6px_6px_0_0_#2a2620] sm:p-7">
+            <p className="text-xs font-semibold uppercase tracking-wider text-brand-ink-muted">Our promise</p>
+            <p className="mt-1 font-display text-lg font-bold uppercase tracking-tight text-brand-ink">
+              What every customer can hold us to
+            </p>
+            <ul className="mt-5 space-y-3">
+              {PROMISES.map((p) => (
+                <li key={p.title} className="flex items-start gap-3">
+                  <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-pop text-white">
+                    <Check className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="text-sm font-semibold leading-snug text-brand-ink">{p.title}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 flex items-end justify-between gap-4 border-t border-brand-line pt-5">
+              <div>
+                <ManagedImage src="/signature/len-signature.png" alt="" width={304} height={68} className="h-9 w-auto" />
+                <p className="mt-2 text-sm font-semibold text-brand-ink">Len Burgess</p>
+                <p className="text-xs text-brand-ink-muted">Founder, TRG Digital</p>
+              </div>
+              <ShieldCheck className="h-10 w-10 text-brand-pop/70" aria-hidden />
+            </div>
+          </div>
         </div>
       </section>
 

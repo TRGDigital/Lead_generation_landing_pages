@@ -21,7 +21,7 @@ const COLS: Col[] = [
   { kind: 'desktop', shot: { src: '/mockups/haywards-landing.png', alt: 'A care home website we built', url: 'careassura.com' } },
   { kind: 'phone', shot: { src: '/mockups/haywards-mobile.png', alt: 'The same site on mobile' } },
   { kind: 'stack', shots: [
-    { src: '/mockups/careassura.jpg', alt: 'CareAssura', url: 'careassura.co.uk' },
+    { src: '/mockups/careassura.jpg', alt: 'CareAssura', url: 'careassura.com' },
     { src: '/mockups/carestream-2026.jpg', alt: 'CareStream', url: 'carestreamai.com' },
   ] },
   { kind: 'desktop', shot: { src: '/mockups/carestream-2026.jpg', alt: 'CareStream platform', url: 'carestreamai.com' } },

@@ -34,7 +34,7 @@ const WORK: Work[] = [
     name: 'CareAssura',
     blurb: 'A UK care home directory that helps families find, compare and choose the right care.',
     image: '/mockups/careassura.jpg',
-    href: 'https://careassura.co.uk',
+    href: 'https://careassura.com',
     status: 'Live',
   },
   {

@@ -111,6 +111,47 @@ function Block({ eyebrow, heading, intro, children, warm }: { eyebrow: string; h
   )
 }
 
+/**
+ * The hero card: share of services with no website, by region, highest first. One series,
+ * so one colour and no legend; the region table further down is the accessible version,
+ * and each bar carries its figures on hover.
+ */
+function RegionCard({ regions }: { regions: Group[] }) {
+  const max = Math.max(...regions.map((r) => r.noWebsite / r.services))
+  return (
+    <div className="rounded-3xl border-2 border-brand-ink bg-white p-5 shadow-[6px_6px_0_0_#2a2620] sm:p-6">
+      <p className="text-xs font-semibold uppercase tracking-wider text-brand-ink-muted">England, counted {counted}</p>
+      <p className="mt-1 font-display text-lg font-bold uppercase tracking-tight text-brand-ink">
+        Services with no website, by region
+      </p>
+      <p className="mt-3 flex items-baseline gap-2">
+        <span className="font-display text-5xl font-bold text-brand-pop">{pct(N.noWebsite, N.services)}%</span>
+        <span className="text-sm text-brand-ink-soft">
+          of {fmt(N.services)} services, {fmt(N.noWebsite)} in all
+        </span>
+      </p>
+      <ul className="mt-5 space-y-[2px]" aria-label="Share of services with no website, by region">
+        {regions.map((r) => {
+          const share = r.noWebsite / r.services
+          return (
+            <li
+              key={r.name}
+              className="grid grid-cols-[8.5rem_1fr_2.5rem] items-center gap-3 py-1 text-sm"
+              title={`${r.name}: ${fmt(r.noWebsite)} of ${fmt(r.services)} services have no website`}
+            >
+              <span className="truncate text-brand-ink-soft">{r.name.replace('Yorkshire & Humberside', 'Yorkshire and Humber')}</span>
+              <span className="h-3 rounded-r bg-brand-bg-warm">
+                <span className="block h-3 rounded-r bg-brand-pop" style={{ width: `${(share / max) * 100}%` }} />
+              </span>
+              <span className="text-right font-semibold tabular-nums text-brand-ink">{pct(r.noWebsite, r.services)}%</span>
+            </li>
+          )
+        })}
+      </ul>
+    </div>
+  )
+}
+
 export default async function ResearchPage() {
   const live = new Set(await countySlugs())
   const areaName = (a: Area) =>
@@ -167,7 +208,8 @@ export default async function ResearchPage() {
       <section className="relative overflow-hidden px-6 pb-14 pt-16">
         <Star className="absolute left-4 top-10 hidden h-16 w-16 -rotate-12 text-brand-accent lg:block" />
         <Dots className="absolute right-10 bottom-8 hidden h-20 w-20 text-brand-pop/40 lg:block" />
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+          <div>
           <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-brand-pop">
             <BarChart3 className="h-4 w-4" />
             Research
@@ -187,6 +229,8 @@ export default async function ResearchPage() {
               free to use with a credit. Counted {counted}.
             </p>
           </div>
+          </div>
+          <RegionCard regions={regionsByGap} />
         </div>
       </section>
 

@@ -50,7 +50,7 @@ const PRODUCTS = [
       'Tools to shortlist and compare homes with confidence',
       'Built to connect families with the right providers',
     ],
-    href: 'https://careassura.co.uk',
+    href: 'https://careassura.com',
     cta: 'Visit CareAssura',
   },
 ]
@@ -149,7 +149,7 @@ export default function DevelopmentPage() {
               <BrowserMock src="/mockups/carestream-2026.jpg" alt="The CareStream homepage" url="carestreamai.com" w={1320} h={940} />
             </div>
             <div className="ml-auto mt-[-2.5rem] w-[82%] lg:absolute lg:bottom-0 lg:right-0 lg:mt-0 lg:w-[72%]">
-              <BrowserMock src="/mockups/careassura.jpg" alt="The CareAssura homepage" url="careassura.co.uk" w={1320} h={895} />
+              <BrowserMock src="/mockups/careassura.jpg" alt="The CareAssura homepage" url="careassura.com" w={1320} h={895} />
             </div>
           </div>
         </div>
@@ -171,7 +171,7 @@ export default function DevelopmentPage() {
                 same capability behind our own products,{' '}
                 <a href="https://carestreamai.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-pop underline-offset-2 hover:underline">CareStream</a>{' '}
                 and{' '}
-                <a href="https://careassura.co.uk" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-pop underline-offset-2 hover:underline">CareAssura</a>.
+                <a href="https://careassura.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-pop underline-offset-2 hover:underline">CareAssura</a>.
               </p>
               <p>
                 Because we design, build and run it ourselves, nothing falls between agencies. We integrate with the
