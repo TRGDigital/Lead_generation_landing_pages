@@ -81,23 +81,86 @@ const FAQS: [string, string][] = [
   ],
 ]
 
-function MarkIcon({ m }: { m: Mark }) {
+function MarkIcon({ m, small }: { m: Mark; small?: boolean }) {
+  const box = small ? 'h-6 w-6' : 'h-7 w-7'
+  const icon = small ? 'h-3.5 w-3.5' : 'h-4 w-4'
   if (m === 'yes')
     return (
-      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand-pop text-white" aria-label="Yes">
-        <Check className="h-4 w-4" />
+      <span className={`inline-flex ${box} items-center justify-center rounded-full bg-brand-pop text-white`} aria-label="Yes">
+        <Check className={icon} />
       </span>
     )
   if (m === 'some')
     return (
-      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand-accent/40 text-brand-ink" aria-label="Partly">
-        <Minus className="h-4 w-4" />
+      <span className={`inline-flex ${box} items-center justify-center rounded-full bg-brand-accent/40 text-brand-ink`} aria-label="Partly">
+        <Minus className={icon} />
       </span>
     )
   return (
-    <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand-line text-brand-ink-muted" aria-label="No">
-      <X className="h-4 w-4" />
+    <span className={`inline-flex ${box} items-center justify-center rounded-full bg-brand-line text-brand-ink-muted`} aria-label="No">
+      <X className={icon} />
     </span>
+  )
+}
+
+// The hero card: five rows of the comparison table, in short. Read from ROWS so the card
+// can never disagree with the table, and it keeps "Lowest upfront cost", where the
+// specialist loses, because a scorecard that only has ticks for us is not believable.
+const SCORECARD: { short: string; label: string }[] = [
+  { short: 'Knows how families choose', label: 'Understands how families choose care' },
+  { short: 'Knows CQC', label: 'Knows CQC and what you must show' },
+  { short: 'Family tools', label: 'Family tools built in' },
+  { short: 'You own the enquiries', label: 'You own the site and the enquiries' },
+  { short: 'Lowest upfront cost', label: 'Lowest upfront cost' },
+]
+// Phone labels are shorter: four full names do not fit beside the row labels at 390px.
+const SHORT_OPTIONS = [
+  { phone: 'Care', full: 'Specialist' },
+  { phone: 'Agency', full: 'Agency' },
+  { phone: 'DIY', full: 'DIY' },
+  { phone: 'Listing', full: 'Directory' },
+]
+
+function ScorecardMock() {
+  const rows = SCORECARD.flatMap(({ short, label }) => {
+    const row = ROWS.find((r) => r.label === label)
+    return row ? [{ short, marks: row.marks }] : []
+  })
+  return (
+    <div className="rounded-3xl border-2 border-brand-ink bg-white p-4 shadow-[6px_6px_0_0_#2a2620] sm:p-6">
+      <p className="text-xs font-semibold uppercase tracking-wider text-brand-ink-muted">Scorecard</p>
+      <p className="mt-1 font-display text-lg font-bold uppercase tracking-tight text-brand-ink">Four ways to get a care website</p>
+      <div className="mt-4 overflow-hidden rounded-2xl border border-brand-line">
+        <div className="grid grid-cols-[1fr_repeat(4,2.6rem)] items-end gap-x-1 bg-brand-bg-warm px-2.5 py-2 sm:gap-x-0 sm:px-3 sm:grid-cols-[1fr_repeat(4,4rem)]">
+          <span />
+          {SHORT_OPTIONS.map((o, i) => (
+            <span
+              key={o.full}
+              className={`text-center text-[10px] font-bold uppercase tracking-wide sm:text-[11px] ${i === 0 ? 'text-brand-pop' : 'text-brand-ink-muted'}`}
+            >
+              <span className="sm:hidden">{o.phone}</span>
+              <span className="hidden sm:inline">{o.full}</span>
+            </span>
+          ))}
+        </div>
+        {rows.map((r) => (
+          <div
+            key={r.short}
+            className="grid grid-cols-[1fr_repeat(4,2.6rem)] items-center gap-x-1 border-t border-brand-line px-2.5 py-2.5 sm:gap-x-0 sm:px-3 sm:grid-cols-[1fr_repeat(4,4rem)]"
+          >
+            <span className="text-xs font-semibold leading-tight text-brand-ink sm:text-sm">{r.short}</span>
+            {r.marks.map((m, i) => (
+              <span key={i} className={`flex justify-center ${i === 0 ? 'rounded-md bg-brand-pop/5 py-0.5' : ''}`}>
+                <MarkIcon m={m} small />
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-sm leading-relaxed text-brand-ink-soft">
+        Judged on what brings a family to your door, not on how the site looks in a pitch.
+      </p>
+    </div>
   )
 }
 
@@ -124,6 +187,7 @@ export default function WhyACareSpecialistPage() {
         points={['An honest comparison', 'What to ask any agency', 'When not to use us']}
         primary={{ label: 'See the comparison', href: '#compare' }}
         secondary={{ label: 'Free audit', href: '/site-audit' }}
+        mock={<ScorecardMock />}
       />
 
       <section id="compare" className="scroll-mt-24 bg-brand-bg-warm px-6 py-14">
