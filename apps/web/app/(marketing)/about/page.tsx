@@ -7,6 +7,8 @@ import { SERVICES } from '@/lib/services'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { Faqs, FaqJsonLd } from '@/components/marketing/county/CountySections'
 import national from '@/lib/data/national-snapshot.json'
+import { FAMILY_TOOLS } from '@/lib/family-tools'
+import { TOOLS } from '@/lib/tools'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
 export const revalidate = 3600
@@ -44,12 +46,18 @@ const fmt = (n: number) => n.toLocaleString('en-GB')
 const NATIONAL = national as unknown as { services: number; noWebsite: number; areas: unknown[] }
 const NO_SITE_PCT = Math.round((NATIONAL.noWebsite / NATIONAL.services) * 100)
 
+// Tools we have built: the family tools that go on care providers' sites, plus the free
+// tools for care teams on ours. Counted from the two lists so it never goes stale, and a
+// tool in both (the funding calculator) is counted once.
+const TOOL_COUNT = new Set([...FAMILY_TOOLS.map((t) => t.name), ...TOOLS.map((t) => t.title)].map((n) => n.toLowerCase())).size
+
 // The hero card. Every line is checkable, which is the point: no stock photo, no logos of
 // other companies' tools, just what makes this agency different.
 const FACTS = [
   { n: '20+', l: 'years in digital: websites, search and marketing' },
   { n: '10', l: 'years in care, as a digital consultant across multiple care settings' },
   { n: fmt(NATIONAL.services), l: 'CQC registered services in our own data' },
+  { n: String(TOOL_COUNT), l: 'care tools built, for families on care websites and for care teams' },
   { n: '2', l: 'products of our own, live in care: CareStream and CareAssura' },
 ]
 
