@@ -1,3 +1,6 @@
+import { settingLabel, type SettingKey } from '@/lib/design-settings'
+import { MODERN } from '@/lib/design-families/modern'
+
 // Design examples: complete homepage designs a prospect can click through, each shown with
 // content for a different kind of care service.
 //
@@ -14,6 +17,10 @@ export type Design = {
   style: string
   /** The care setting the example content is written for. */
   setting: string
+  /** The setting it is filed under on /designs and on that setting's page. */
+  settingKey: SettingKey
+  /** A design family template, when it is one (bespoke designs have their own component). */
+  family?: 'modern'
   /** The fictional provider shown in the design. */
   provider: {
     name: string
@@ -27,9 +34,10 @@ export type Design = {
   highlights: string[]
 }
 
-export const DESIGNS: Design[] = [
+const BESPOKE: Design[] = [
   {
     slug: 'oakfield-house',
+    settingKey: 'care-homes',
     name: 'Oakfield',
     style: 'Traditional and warm. Serif type, deep green and cream, photography led.',
     setting: 'Residential care home',
@@ -46,6 +54,7 @@ export const DESIGNS: Design[] = [
   },
   {
     slug: 'brightpath-care',
+    settingKey: 'home-care',
     name: 'Brightpath',
     style: 'Friendly and modern. Rounded shapes, teal and white, built around two audiences.',
     setting: 'Home care and live-in care',
@@ -62,6 +71,7 @@ export const DESIGNS: Design[] = [
   },
   {
     slug: 'st-aidans',
+    settingKey: 'nursing-homes',
     name: "St Aidan's",
     style: 'Clean and clinical. Navy and sky blue, crisp grid, built for trust at speed.',
     setting: 'Nursing home',
@@ -78,6 +88,7 @@ export const DESIGNS: Design[] = [
   },
   {
     slug: 'willow-court',
+    settingKey: 'supported-living',
     name: 'Willow Court',
     style: 'Bright and calm. Soft indigo and sunshine yellow, plain language, easy read throughout.',
     setting: 'Supported living',
@@ -94,6 +105,7 @@ export const DESIGNS: Design[] = [
   },
   {
     slug: 'marchmont-gardens',
+    settingKey: 'retirement-living',
     name: 'Marchmont Gardens',
     style: 'Premium and editorial. Charcoal and champagne, large photography, generous space.',
     setting: 'Retirement living',
@@ -110,6 +122,7 @@ export const DESIGNS: Design[] = [
   },
   {
     slug: 'ravenswood-group',
+    settingKey: 'care-groups',
     name: 'Ravenswood Group',
     style: 'Confident and organised. Navy and sage, built for a group with several homes.',
     setting: 'Care group, several homes',
@@ -125,6 +138,27 @@ export const DESIGNS: Design[] = [
     highlights: ['A find a home search by town and care type', 'Group wide careers section', 'One brand across every home'],
   },
 ]
+
+// The Modern family, one design per setting, rendered by components/designs/families/ModernTemplate.
+const MODERN_DESIGNS: Design[] = MODERN.map((m) => ({
+  slug: m.slug,
+  name: m.name,
+  style: m.style,
+  setting: settingLabel(m.setting),
+  settingKey: m.setting,
+  family: 'modern',
+  provider: {
+    name: m.provider.name,
+    strapline: m.provider.strapline,
+    town: m.provider.town,
+    county: m.provider.county,
+    phone: m.provider.phone,
+    intro: m.provider.intro,
+  },
+  highlights: m.highlights,
+}))
+
+export const DESIGNS: Design[] = [...BESPOKE, ...MODERN_DESIGNS]
 
 export function getDesign(slug: string): Design | undefined {
   return DESIGNS.find((d) => d.slug === slug)

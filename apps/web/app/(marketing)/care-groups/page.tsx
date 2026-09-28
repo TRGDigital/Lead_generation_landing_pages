@@ -13,6 +13,7 @@ import {
   Steps,
 } from '@/components/marketing/county/CountySections'
 import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
+import { SettingDesigns } from '@/components/marketing/SettingDesigns'
 
 // For operators running several services. Every other page on the site speaks to a single
 // home, and a group is a different buyer: one decision maker, many managers, many local
@@ -172,6 +173,8 @@ export default function CareGroupsPage() {
         ]}
         form={<CountyLeadForm mode="group" context="Care groups page" defaultNeed="Both, and I do not know where to start" />}
       />
+
+      <SettingDesigns path="/care-groups" />
 
       <EndCta
         title="Not sure where to start?"

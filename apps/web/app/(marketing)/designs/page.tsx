@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Check } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
 import { DESIGNS } from '@/lib/designs'
+import { DESIGN_SETTINGS } from '@/lib/design-settings'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { JsonLd } from '@/components/JsonLd'
 import { ORG_REF, WEBSITE_REF, SCHEMA_SITE } from '@/lib/schema'
@@ -15,7 +16,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.trgdigital.co.
 const META: Metadata = {
   title: 'Care Website Design Examples',
   description:
-    'Example care website designs you can click through: a residential care home, a home care and live-in service and a nursing home. Every design can be applied to any care service.',
+    'Example care website designs you can click through, for care homes, nursing homes, dementia care, home care, live-in care, supported living, retirement living and care groups.',
   alternates: { canonical: `${SITE_URL}/designs` },
   robots: { index: true, follow: true },
 }
@@ -32,6 +33,10 @@ const INCLUDED = [
   'Family care tools that win search traffic',
   'Our content management system behind it',
 ]
+
+const GROUPS = DESIGN_SETTINGS.map((s) => ({ ...s, designs: DESIGNS.filter((d) => d.settingKey === s.key) })).filter(
+  (g) => g.designs.length > 0,
+)
 
 export default function DesignsPage() {
   return (
@@ -58,29 +63,52 @@ export default function DesignsPage() {
         </div>
       </section>
 
-      <section className="px-6 pb-16">
-        <div className="mx-auto grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {DESIGNS.map((d) => (
-            <article key={d.slug} className="flex flex-col rounded-2xl border border-brand-line bg-white p-7 shadow-soft">
-              <p className="text-xs font-semibold uppercase tracking-widest text-brand-pop">{d.setting}</p>
-              <h2 className="mt-2 font-display text-2xl font-semibold text-brand-ink">{d.name}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{d.style}</p>
-              <ul className="mt-5 flex-1 space-y-2">
-                {d.highlights.map((h) => (
-                  <li key={h} className="flex items-start gap-2 text-sm text-brand-ink-soft">
-                    <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-pop" />
-                    {h}
-                  </li>
-                ))}
-              </ul>
-              <Link href={`/designs/${d.slug}`} className="btn-pop mt-6 h-11 px-5 text-xs">
-                View the design
-                <span className="btn-arrow" aria-hidden>→</span>
-              </Link>
-            </article>
+      {/* One group per care setting, with chips that jump to each. Server rendered, so every
+          design link is in the HTML. */}
+      <nav aria-label="Filter designs by care setting" className="px-6 pb-8">
+        <ul className="mx-auto flex max-w-6xl flex-wrap gap-2">
+          {GROUPS.map((g) => (
+            <li key={g.key}>
+              <a
+                href={`#${g.key}`}
+                className="inline-flex items-center gap-2 rounded-full border border-brand-line bg-white px-4 py-2 text-sm font-semibold text-brand-ink transition-colors hover:border-brand-pop hover:text-brand-pop"
+              >
+                {g.label}
+                <span className="rounded-full bg-brand-pop/10 px-2 text-xs text-brand-pop">{g.designs.length}</span>
+              </a>
+            </li>
           ))}
-        </div>
-      </section>
+        </ul>
+      </nav>
+
+      <div className="space-y-14 px-6 pb-16">
+        {GROUPS.map((g) => (
+          <section key={g.key} id={g.key} className="mx-auto max-w-6xl scroll-mt-28">
+            <h2 className="font-display text-2xl font-bold uppercase tracking-tight text-brand-ink">Designs for {g.label.toLowerCase()}</h2>
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {g.designs.map((d) => (
+                <article key={d.slug} className="flex flex-col rounded-2xl border border-brand-line bg-white p-7 shadow-soft">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-brand-pop">{d.family ? `${d.family} family` : 'Signature design'}</p>
+                  <h3 className="mt-2 font-display text-2xl font-semibold text-brand-ink">{d.name}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{d.style}</p>
+                  <ul className="mt-5 flex-1 space-y-2">
+                    {d.highlights.map((h) => (
+                      <li key={h} className="flex items-start gap-2 text-sm text-brand-ink-soft">
+                        <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-pop" />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href={`/designs/${d.slug}`} className="btn-pop mt-6 h-11 px-5 text-xs">
+                    View the design
+                    <span className="btn-arrow" aria-hidden>→</span>
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
 
       <section className="relative overflow-hidden bg-brand-bg-warm px-6 py-16">
         <Dots className="absolute right-10 top-12 hidden h-20 w-20 text-brand-pop/40 lg:block" />

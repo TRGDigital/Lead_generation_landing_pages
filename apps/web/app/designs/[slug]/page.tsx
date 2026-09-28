@@ -8,6 +8,8 @@ import WillowDesign from '@/components/designs/WillowDesign'
 import MarchmontDesign from '@/components/designs/MarchmontDesign'
 import RavenswoodDesign from '@/components/designs/RavenswoodDesign'
 import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
+import ModernTemplate from '@/components/designs/families/ModernTemplate'
+import { MODERN } from '@/lib/design-families/modern'
 import { JsonLd } from '@/components/JsonLd'
 import { ORG_REF, WEBSITE_REF, SCHEMA_SITE } from '@/lib/schema'
 
@@ -55,8 +57,11 @@ export default function DesignExamplePage({ params }: { params: { slug: string }
     case 'ravenswood-group':
       page = <RavenswoodDesign design={design} />
       break
-    default:
-      notFound()
+    default: {
+      const modern = design.family === 'modern' ? MODERN.find((m) => m.slug === design.slug) : undefined
+      if (!modern) notFound()
+      page = <ModernTemplate c={modern} />
+    }
   }
   return (
     <>
