@@ -58,7 +58,7 @@ const TARGETS: Target[] = [
   // ── Comparison pages and the newer tools ──────────────────────────────────────────
   { href: '/compare/wix-squarespace-for-care-homes', rank: 1, phrases: ['Wix', 'Squarespace'] },
   { href: '/compare/wordpress-theme-or-freelancer', rank: 1, phrases: ['WordPress theme', 'WordPress freelancer', 'freelancer'] },
-  { href: '/compare/general-web-agency', rank: 1, phrases: ['general agency', 'generalist agency', 'digital agency'] },
+  { href: '/compare/general-web-agency', rank: 1, phrases: ['general agency', 'generalist agency', 'general web agency'] },
   { href: '/compare/own-website-vs-directory-listing', rank: 1, phrases: ['directory listing', 'directory listings', 'paid directories'] },
   { href: '/tools/cqc-rating-display-checker', rank: 1, phrases: ['CQC widget', 'display your CQC rating', 'CQC rating on your website', 'Regulation 20A'] },
   { href: '/tools/care-competitor-snapshot', rank: 1, phrases: ['local competitors', 'nearby competitors', 'your competitors'] },
