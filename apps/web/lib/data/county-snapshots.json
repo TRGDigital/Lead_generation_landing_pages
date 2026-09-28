@@ -149,6 +149,134 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "barnsley": {
+    "services": 127,
+    "towns": 2,
+    "residential": 58,
+    "nursing": 13,
+    "homeCare": 56,
+    "dementia": 86,
+    "learningDisability": 55,
+    "mentalHealth": 64,
+    "youngerAdults": 108,
+    "outstanding": 6,
+    "good": 90,
+    "requiresImprovement": 13,
+    "notRated": 18,
+    "noWebsite": 75,
+    "noWebsiteByType": {
+      "residential": 29,
+      "nursing": 8,
+      "homeCare": 38,
+      "dementia": 54
+    },
+    "topTowns": [
+      {
+        "key": "rotherham",
+        "services": 5
+      },
+      {
+        "key": "sheffield",
+        "services": 2
+      }
+    ],
+    "busiestTown": {
+      "key": "rotherham",
+      "services": 5
+    },
+    "townPoints": [
+      {
+        "key": "rotherham",
+        "services": 5,
+        "noWebsite": 2,
+        "lat": 53.5456,
+        "lng": -1.3143
+      },
+      {
+        "key": "sheffield",
+        "services": 2,
+        "noWebsite": 2,
+        "lat": 53.5263,
+        "lng": -1.6312
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "bath-and-north-east-somerset": {
+    "services": 80,
+    "towns": 4,
+    "residential": 32,
+    "nursing": 20,
+    "homeCare": 28,
+    "dementia": 49,
+    "learningDisability": 29,
+    "mentalHealth": 28,
+    "youngerAdults": 62,
+    "outstanding": 0,
+    "good": 54,
+    "requiresImprovement": 16,
+    "notRated": 10,
+    "noWebsite": 39,
+    "noWebsiteByType": {
+      "residential": 18,
+      "nursing": 8,
+      "homeCare": 13,
+      "dementia": 24
+    },
+    "topTowns": [
+      {
+        "key": "bath",
+        "services": 45
+      },
+      {
+        "key": "bristol",
+        "services": 20
+      },
+      {
+        "key": "radstock",
+        "services": 14
+      },
+      {
+        "key": "midsomer norton",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "bath",
+      "services": 45
+    },
+    "townPoints": [
+      {
+        "key": "bath",
+        "services": 45,
+        "noWebsite": 22,
+        "lat": 51.3632,
+        "lng": -2.3535
+      },
+      {
+        "key": "bristol",
+        "services": 20,
+        "noWebsite": 12,
+        "lat": 51.3672,
+        "lng": -2.5801
+      },
+      {
+        "key": "radstock",
+        "services": 14,
+        "noWebsite": 5,
+        "lat": 51.2785,
+        "lng": -2.4731
+      },
+      {
+        "key": "midsomer norton",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.283,
+        "lng": -2.4872
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "bedford": {
     "services": 157,
     "towns": 2,
@@ -201,6 +329,114 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "bexley": {
+    "services": 103,
+    "towns": 7,
+    "residential": 21,
+    "nursing": 11,
+    "homeCare": 72,
+    "dementia": 71,
+    "learningDisability": 41,
+    "mentalHealth": 46,
+    "youngerAdults": 92,
+    "outstanding": 2,
+    "good": 40,
+    "requiresImprovement": 19,
+    "notRated": 41,
+    "noWebsite": 53,
+    "noWebsiteByType": {
+      "residential": 11,
+      "nursing": 5,
+      "homeCare": 37,
+      "dementia": 33
+    },
+    "topTowns": [
+      {
+        "key": "erith",
+        "services": 31
+      },
+      {
+        "key": "sidcup",
+        "services": 24
+      },
+      {
+        "key": "bexleyheath",
+        "services": 20
+      },
+      {
+        "key": "dartford",
+        "services": 12
+      },
+      {
+        "key": "welling",
+        "services": 8
+      },
+      {
+        "key": "belvedere",
+        "services": 3
+      },
+      {
+        "key": "london",
+        "services": 3
+      }
+    ],
+    "busiestTown": {
+      "key": "erith",
+      "services": 31
+    },
+    "townPoints": [
+      {
+        "key": "erith",
+        "services": 31,
+        "noWebsite": 14,
+        "lat": 51.4959,
+        "lng": 0.1422
+      },
+      {
+        "key": "sidcup",
+        "services": 24,
+        "noWebsite": 13,
+        "lat": 51.4307,
+        "lng": 0.1084
+      },
+      {
+        "key": "bexleyheath",
+        "services": 20,
+        "noWebsite": 11,
+        "lat": 51.4589,
+        "lng": 0.1361
+      },
+      {
+        "key": "dartford",
+        "services": 12,
+        "noWebsite": 6,
+        "lat": 51.4637,
+        "lng": 0.1861
+      },
+      {
+        "key": "welling",
+        "services": 8,
+        "noWebsite": 2,
+        "lat": 51.4639,
+        "lng": 0.0997
+      },
+      {
+        "key": "belvedere",
+        "services": 3,
+        "noWebsite": 2,
+        "lat": 51.4857,
+        "lng": 0.1442
+      },
+      {
+        "key": "london",
+        "services": 3,
+        "noWebsite": 3,
+        "lat": 51.4946,
+        "lng": 0.124
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "birmingham": {
     "services": 594,
@@ -299,6 +535,143 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "blackburn-with-darwen": {
+    "services": 72,
+    "towns": 2,
+    "residential": 25,
+    "nursing": 10,
+    "homeCare": 37,
+    "dementia": 48,
+    "learningDisability": 29,
+    "mentalHealth": 36,
+    "youngerAdults": 52,
+    "outstanding": 0,
+    "good": 46,
+    "requiresImprovement": 7,
+    "notRated": 19,
+    "noWebsite": 26,
+    "noWebsiteByType": {
+      "residential": 7,
+      "nursing": 1,
+      "homeCare": 18,
+      "dementia": 19
+    },
+    "topTowns": [
+      {
+        "key": "blackburn",
+        "services": 58
+      },
+      {
+        "key": "darwen",
+        "services": 14
+      }
+    ],
+    "busiestTown": {
+      "key": "blackburn",
+      "services": 58
+    },
+    "townPoints": [
+      {
+        "key": "blackburn",
+        "services": 58,
+        "noWebsite": 22,
+        "lat": 53.7516,
+        "lng": -2.467
+      },
+      {
+        "key": "darwen",
+        "services": 14,
+        "noWebsite": 4,
+        "lat": 53.7,
+        "lng": -2.4723
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "blackpool": {
+    "services": 99,
+    "towns": 1,
+    "residential": 55,
+    "nursing": 16,
+    "homeCare": 28,
+    "dementia": 68,
+    "learningDisability": 27,
+    "mentalHealth": 39,
+    "youngerAdults": 67,
+    "outstanding": 7,
+    "good": 62,
+    "requiresImprovement": 14,
+    "notRated": 16,
+    "noWebsite": 53,
+    "noWebsiteByType": {
+      "residential": 36,
+      "nursing": 3,
+      "homeCare": 14,
+      "dementia": 33
+    },
+    "topTowns": [
+      {
+        "key": "thornton cleveleys",
+        "services": 5
+      }
+    ],
+    "busiestTown": {
+      "key": "thornton cleveleys",
+      "services": 5
+    },
+    "townPoints": [
+      {
+        "key": "thornton cleveleys",
+        "services": 5,
+        "noWebsite": 3,
+        "lat": 53.8648,
+        "lng": -3.0417
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "bolton": {
+    "services": 122,
+    "towns": 1,
+    "residential": 43,
+    "nursing": 19,
+    "homeCare": 62,
+    "dementia": 77,
+    "learningDisability": 53,
+    "mentalHealth": 70,
+    "youngerAdults": 92,
+    "outstanding": 5,
+    "good": 83,
+    "requiresImprovement": 10,
+    "notRated": 24,
+    "noWebsite": 66,
+    "noWebsiteByType": {
+      "residential": 31,
+      "nursing": 8,
+      "homeCare": 28,
+      "dementia": 39
+    },
+    "topTowns": [
+      {
+        "key": "manchester",
+        "services": 2
+      }
+    ],
+    "busiestTown": {
+      "key": "manchester",
+      "services": 2
+    },
+    "townPoints": [
+      {
+        "key": "manchester",
+        "services": 2,
+        "noWebsite": 2,
+        "lat": 53.5338,
+        "lng": -2.4743
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "bournemouth-christchurch-and-poole": {
     "services": 259,
     "towns": 5,
@@ -384,6 +757,81 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "bracknell-forest": {
+    "services": 44,
+    "towns": 4,
+    "residential": 11,
+    "nursing": 6,
+    "homeCare": 27,
+    "dementia": 31,
+    "learningDisability": 16,
+    "mentalHealth": 21,
+    "youngerAdults": 30,
+    "outstanding": 2,
+    "good": 22,
+    "requiresImprovement": 7,
+    "notRated": 12,
+    "noWebsite": 12,
+    "noWebsiteByType": {
+      "residential": 1,
+      "nursing": 2,
+      "homeCare": 9,
+      "dementia": 9
+    },
+    "topTowns": [
+      {
+        "key": "bracknell",
+        "services": 32
+      },
+      {
+        "key": "crowthorne",
+        "services": 8
+      },
+      {
+        "key": "ascot",
+        "services": 2
+      },
+      {
+        "key": "sandhurst",
+        "services": 2
+      }
+    ],
+    "busiestTown": {
+      "key": "bracknell",
+      "services": 32
+    },
+    "townPoints": [
+      {
+        "key": "bracknell",
+        "services": 32,
+        "noWebsite": 9,
+        "lat": 51.4153,
+        "lng": -0.7577
+      },
+      {
+        "key": "crowthorne",
+        "services": 8,
+        "noWebsite": 2,
+        "lat": 51.3661,
+        "lng": -0.8174
+      },
+      {
+        "key": "ascot",
+        "services": 2,
+        "noWebsite": 0,
+        "lat": 51.4174,
+        "lng": -0.7074
+      },
+      {
+        "key": "sandhurst",
+        "services": 2,
+        "noWebsite": 1,
+        "lat": 51.3483,
+        "lng": -0.8054
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "bradford": {
     "services": 212,
@@ -493,6 +941,189 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "brent": {
+    "services": 139,
+    "towns": 7,
+    "residential": 39,
+    "nursing": 9,
+    "homeCare": 91,
+    "dementia": 89,
+    "learningDisability": 77,
+    "mentalHealth": 73,
+    "youngerAdults": 118,
+    "outstanding": 0,
+    "good": 101,
+    "requiresImprovement": 14,
+    "notRated": 24,
+    "noWebsite": 64,
+    "noWebsiteByType": {
+      "residential": 15,
+      "nursing": 4,
+      "homeCare": 45,
+      "dementia": 43
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 72
+      },
+      {
+        "key": "wembley",
+        "services": 54
+      },
+      {
+        "key": "harrow",
+        "services": 8
+      },
+      {
+        "key": "stanmore",
+        "services": 2
+      },
+      {
+        "key": "edgware",
+        "services": 1
+      },
+      {
+        "key": "north wembley",
+        "services": 1
+      },
+      {
+        "key": "sudbury",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 72
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 72,
+        "noWebsite": 29,
+        "lat": 51.5632,
+        "lng": -0.2474
+      },
+      {
+        "key": "wembley",
+        "services": 54,
+        "noWebsite": 31,
+        "lat": 51.552,
+        "lng": -0.3012
+      },
+      {
+        "key": "harrow",
+        "services": 8,
+        "noWebsite": 2,
+        "lat": 51.5744,
+        "lng": -0.2931
+      },
+      {
+        "key": "stanmore",
+        "services": 2,
+        "noWebsite": 1,
+        "lat": 51.5941,
+        "lng": -0.2873
+      },
+      {
+        "key": "edgware",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.5994,
+        "lng": -0.2673
+      },
+      {
+        "key": "north wembley",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.5571,
+        "lng": -0.3136
+      },
+      {
+        "key": "sudbury",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.561,
+        "lng": -0.3219
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "brighton-and-hove": {
+    "services": 144,
+    "towns": 4,
+    "residential": 61,
+    "nursing": 28,
+    "homeCare": 57,
+    "dementia": 72,
+    "learningDisability": 53,
+    "mentalHealth": 48,
+    "youngerAdults": 93,
+    "outstanding": 4,
+    "good": 104,
+    "requiresImprovement": 14,
+    "notRated": 22,
+    "noWebsite": 75,
+    "noWebsiteByType": {
+      "residential": 39,
+      "nursing": 15,
+      "homeCare": 22,
+      "dementia": 35
+    },
+    "topTowns": [
+      {
+        "key": "hove",
+        "services": 73
+      },
+      {
+        "key": "brighton",
+        "services": 69
+      },
+      {
+        "key": "portslade",
+        "services": 1
+      },
+      {
+        "key": "rottingdean",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "hove",
+      "services": 73
+    },
+    "townPoints": [
+      {
+        "key": "hove",
+        "services": 73,
+        "noWebsite": 38,
+        "lat": 50.8407,
+        "lng": -0.1906
+      },
+      {
+        "key": "brighton",
+        "services": 69,
+        "noWebsite": 37,
+        "lat": 50.8565,
+        "lng": -0.151
+      },
+      {
+        "key": "portslade",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 50.8422,
+        "lng": -0.2102
+      },
+      {
+        "key": "rottingdean",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 50.8054,
+        "lng": -0.0562
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "bristol-city-of": {
     "services": 185,
     "towns": 1,
@@ -534,6 +1165,114 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "bromley": {
+    "services": 140,
+    "towns": 7,
+    "residential": 32,
+    "nursing": 23,
+    "homeCare": 88,
+    "dementia": 98,
+    "learningDisability": 60,
+    "mentalHealth": 64,
+    "youngerAdults": 111,
+    "outstanding": 4,
+    "good": 89,
+    "requiresImprovement": 10,
+    "notRated": 37,
+    "noWebsite": 62,
+    "noWebsiteByType": {
+      "residential": 11,
+      "nursing": 8,
+      "homeCare": 44,
+      "dementia": 44
+    },
+    "topTowns": [
+      {
+        "key": "orpington",
+        "services": 31
+      },
+      {
+        "key": "london",
+        "services": 18
+      },
+      {
+        "key": "beckenham",
+        "services": 15
+      },
+      {
+        "key": "chislehurst",
+        "services": 12
+      },
+      {
+        "key": "west wickham",
+        "services": 4
+      },
+      {
+        "key": "keston",
+        "services": 1
+      },
+      {
+        "key": "westerham",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "orpington",
+      "services": 31
+    },
+    "townPoints": [
+      {
+        "key": "orpington",
+        "services": 31,
+        "noWebsite": 17,
+        "lat": 51.3454,
+        "lng": 0.1079
+      },
+      {
+        "key": "london",
+        "services": 18,
+        "noWebsite": 9,
+        "lat": 51.4121,
+        "lng": -0.0675
+      },
+      {
+        "key": "beckenham",
+        "services": 15,
+        "noWebsite": 6,
+        "lat": 51.3945,
+        "lng": -0.0203
+      },
+      {
+        "key": "chislehurst",
+        "services": 12,
+        "noWebsite": 2,
+        "lat": 51.4197,
+        "lng": 0.0669
+      },
+      {
+        "key": "west wickham",
+        "services": 4,
+        "noWebsite": 1,
+        "lat": 51.3639,
+        "lng": -0.0042
+      },
+      {
+        "key": "keston",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.3666,
+        "lng": 0.0393
+      },
+      {
+        "key": "westerham",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.3091,
+        "lng": 0.0381
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "buckinghamshire": {
     "services": 270,
@@ -787,6 +1526,167 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "bury": {
+    "services": 104,
+    "towns": 3,
+    "residential": 38,
+    "nursing": 16,
+    "homeCare": 52,
+    "dementia": 62,
+    "learningDisability": 41,
+    "mentalHealth": 53,
+    "youngerAdults": 81,
+    "outstanding": 4,
+    "good": 69,
+    "requiresImprovement": 9,
+    "notRated": 21,
+    "noWebsite": 58,
+    "noWebsiteByType": {
+      "residential": 25,
+      "nursing": 8,
+      "homeCare": 26,
+      "dementia": 36
+    },
+    "topTowns": [
+      {
+        "key": "manchester",
+        "services": 33
+      },
+      {
+        "key": "bolton",
+        "services": 1
+      },
+      {
+        "key": "radcliffe",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "manchester",
+      "services": 33
+    },
+    "townPoints": [
+      {
+        "key": "manchester",
+        "services": 33,
+        "noWebsite": 19,
+        "lat": 53.5324,
+        "lng": -2.2861
+      },
+      {
+        "key": "bolton",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 53.5735,
+        "lng": -2.3715
+      },
+      {
+        "key": "radcliffe",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.564,
+        "lng": -2.331
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "calderdale": {
+    "services": 94,
+    "towns": 6,
+    "residential": 31,
+    "nursing": 16,
+    "homeCare": 47,
+    "dementia": 58,
+    "learningDisability": 53,
+    "mentalHealth": 44,
+    "youngerAdults": 70,
+    "outstanding": 3,
+    "good": 61,
+    "requiresImprovement": 12,
+    "notRated": 17,
+    "noWebsite": 56,
+    "noWebsiteByType": {
+      "residential": 20,
+      "nursing": 10,
+      "homeCare": 26,
+      "dementia": 36
+    },
+    "topTowns": [
+      {
+        "key": "halifax",
+        "services": 67
+      },
+      {
+        "key": "brighouse",
+        "services": 10
+      },
+      {
+        "key": "todmorden",
+        "services": 6
+      },
+      {
+        "key": "elland",
+        "services": 5
+      },
+      {
+        "key": "hebden bridge",
+        "services": 5
+      },
+      {
+        "key": "sowerby bridge",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "halifax",
+      "services": 67
+    },
+    "townPoints": [
+      {
+        "key": "halifax",
+        "services": 67,
+        "noWebsite": 39,
+        "lat": 53.7346,
+        "lng": -1.8746
+      },
+      {
+        "key": "brighouse",
+        "services": 10,
+        "noWebsite": 4,
+        "lat": 53.702,
+        "lng": -1.7787
+      },
+      {
+        "key": "todmorden",
+        "services": 6,
+        "noWebsite": 4,
+        "lat": 53.7159,
+        "lng": -2.0982
+      },
+      {
+        "key": "elland",
+        "services": 5,
+        "noWebsite": 5,
+        "lat": 53.6828,
+        "lng": -1.8432
+      },
+      {
+        "key": "hebden bridge",
+        "services": 5,
+        "noWebsite": 3,
+        "lat": 53.7296,
+        "lng": -1.9827
+      },
+      {
+        "key": "sowerby bridge",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 53.7059,
+        "lng": -1.9208
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "cambridgeshire": {
     "services": 275,
     "towns": 20,
@@ -989,6 +1889,258 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "camden": {
+    "services": 57,
+    "towns": 1,
+    "residential": 7,
+    "nursing": 6,
+    "homeCare": 45,
+    "dementia": 44,
+    "learningDisability": 26,
+    "mentalHealth": 29,
+    "youngerAdults": 43,
+    "outstanding": 3,
+    "good": 32,
+    "requiresImprovement": 8,
+    "notRated": 14,
+    "noWebsite": 23,
+    "noWebsiteByType": {
+      "residential": 3,
+      "nursing": 2,
+      "homeCare": 19,
+      "dementia": 18
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 57
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 57
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 57,
+        "noWebsite": 23,
+        "lat": 51.5541,
+        "lng": -0.1416
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "central-bedfordshire": {
+    "services": 120,
+    "towns": 21,
+    "residential": 45,
+    "nursing": 22,
+    "homeCare": 55,
+    "dementia": 79,
+    "learningDisability": 49,
+    "mentalHealth": 38,
+    "youngerAdults": 87,
+    "outstanding": 6,
+    "good": 60,
+    "requiresImprovement": 16,
+    "notRated": 37,
+    "noWebsite": 51,
+    "noWebsiteByType": {
+      "residential": 19,
+      "nursing": 10,
+      "homeCare": 24,
+      "dementia": 38
+    },
+    "topTowns": [
+      {
+        "key": "dunstable",
+        "services": 37
+      },
+      {
+        "key": "bedford",
+        "services": 29
+      },
+      {
+        "key": "leighton buzzard",
+        "services": 11
+      },
+      {
+        "key": "biggleswade",
+        "services": 7
+      },
+      {
+        "key": "milton keynes",
+        "services": 5
+      },
+      {
+        "key": "sandy",
+        "services": 5
+      },
+      {
+        "key": "shefford",
+        "services": 5
+      },
+      {
+        "key": "flitwick",
+        "services": 4
+      }
+    ],
+    "busiestTown": {
+      "key": "dunstable",
+      "services": 37
+    },
+    "townPoints": [
+      {
+        "key": "dunstable",
+        "services": 37,
+        "noWebsite": 18,
+        "lat": 51.8958,
+        "lng": -0.5154
+      },
+      {
+        "key": "bedford",
+        "services": 29,
+        "noWebsite": 7,
+        "lat": 52.0678,
+        "lng": -0.633
+      },
+      {
+        "key": "leighton buzzard",
+        "services": 11,
+        "noWebsite": 4,
+        "lat": 51.9069,
+        "lng": -0.657
+      },
+      {
+        "key": "biggleswade",
+        "services": 7,
+        "noWebsite": 2,
+        "lat": 52.1003,
+        "lng": -0.2469
+      },
+      {
+        "key": "milton keynes",
+        "services": 5,
+        "noWebsite": 2,
+        "lat": 51.9782,
+        "lng": -0.5189
+      },
+      {
+        "key": "sandy",
+        "services": 5,
+        "noWebsite": 3,
+        "lat": 52.1248,
+        "lng": -0.2925
+      },
+      {
+        "key": "shefford",
+        "services": 5,
+        "noWebsite": 2,
+        "lat": 52.0318,
+        "lng": -0.3302
+      },
+      {
+        "key": "flitwick",
+        "services": 4,
+        "noWebsite": 2,
+        "lat": 52.0092,
+        "lng": -0.4903
+      },
+      {
+        "key": "arlesey",
+        "services": 2,
+        "noWebsite": 2,
+        "lat": 52.019,
+        "lng": -0.2603
+      },
+      {
+        "key": "henlow",
+        "services": 2,
+        "noWebsite": 1,
+        "lat": 52.0286,
+        "lng": -0.288
+      },
+      {
+        "key": "houghton regis",
+        "services": 2,
+        "noWebsite": 2,
+        "lat": 51.9047,
+        "lng": -0.5001
+      },
+      {
+        "key": "luton",
+        "services": 2,
+        "noWebsite": 2,
+        "lat": 51.8558,
+        "lng": -0.4694
+      },
+      {
+        "key": "berkhamsted",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.8149,
+        "lng": -0.5357
+      },
+      {
+        "key": "harpenden",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.8333,
+        "lng": -0.3763
+      },
+      {
+        "key": "hitchin",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 52.0036,
+        "lng": -0.242
+      },
+      {
+        "key": "langford",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 52.06,
+        "lng": -0.2707
+      },
+      {
+        "key": "meppershall",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 52.0229,
+        "lng": -0.3329
+      },
+      {
+        "key": "potton",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 52.1288,
+        "lng": -0.2281
+      },
+      {
+        "key": "silsoe",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 52.0003,
+        "lng": -0.4262
+      },
+      {
+        "key": "steppingley",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 52.0123,
+        "lng": -0.5118
+      },
+      {
+        "key": "studham",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.8428,
+        "lng": -0.5247
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "cheshire-east": {
     "services": 196,
@@ -1332,6 +2484,48 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "city-of-london": {
+    "services": 13,
+    "towns": 1,
+    "residential": 0,
+    "nursing": 2,
+    "homeCare": 13,
+    "dementia": 12,
+    "learningDisability": 4,
+    "mentalHealth": 10,
+    "youngerAdults": 11,
+    "outstanding": 1,
+    "good": 1,
+    "requiresImprovement": 0,
+    "notRated": 11,
+    "noWebsite": 7,
+    "noWebsiteByType": {
+      "residential": 0,
+      "nursing": 1,
+      "homeCare": 7,
+      "dementia": 7
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 13
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 13
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 13,
+        "noWebsite": 7,
+        "lat": 51.5128,
+        "lng": -0.1081
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "cornwall": {
     "services": 310,
@@ -1981,6 +3175,193 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "cumberland": {
+    "services": 140,
+    "towns": 14,
+    "residential": 63,
+    "nursing": 16,
+    "homeCare": 62,
+    "dementia": 97,
+    "learningDisability": 46,
+    "mentalHealth": 54,
+    "youngerAdults": 88,
+    "outstanding": 3,
+    "good": 91,
+    "requiresImprovement": 15,
+    "notRated": 31,
+    "noWebsite": 87,
+    "noWebsiteByType": {
+      "residential": 35,
+      "nursing": 8,
+      "homeCare": 44,
+      "dementia": 70
+    },
+    "topTowns": [
+      {
+        "key": "carlisle",
+        "services": 58
+      },
+      {
+        "key": "workington",
+        "services": 24
+      },
+      {
+        "key": "maryport",
+        "services": 14
+      },
+      {
+        "key": "whitehaven",
+        "services": 12
+      },
+      {
+        "key": "wigton",
+        "services": 12
+      },
+      {
+        "key": "millom",
+        "services": 5
+      },
+      {
+        "key": "cockermouth",
+        "services": 4
+      },
+      {
+        "key": "cleator moor",
+        "services": 3
+      }
+    ],
+    "busiestTown": {
+      "key": "carlisle",
+      "services": 58
+    },
+    "townPoints": [
+      {
+        "key": "carlisle",
+        "services": 58,
+        "noWebsite": 41,
+        "lat": 54.839,
+        "lng": -2.8245
+      },
+      {
+        "key": "workington",
+        "services": 24,
+        "noWebsite": 10,
+        "lat": 54.6426,
+        "lng": -3.5479
+      },
+      {
+        "key": "maryport",
+        "services": 14,
+        "noWebsite": 9,
+        "lat": 54.6871,
+        "lng": -3.516
+      },
+      {
+        "key": "whitehaven",
+        "services": 12,
+        "noWebsite": 9,
+        "lat": 54.5569,
+        "lng": -3.5503
+      },
+      {
+        "key": "wigton",
+        "services": 12,
+        "noWebsite": 8,
+        "lat": 54.8697,
+        "lng": -3.3883
+      },
+      {
+        "key": "millom",
+        "services": 5,
+        "noWebsite": 3,
+        "lat": 54.2089,
+        "lng": -3.268
+      },
+      {
+        "key": "cockermouth",
+        "services": 4,
+        "noWebsite": 3,
+        "lat": 54.6549,
+        "lng": -3.3734
+      },
+      {
+        "key": "cleator moor",
+        "services": 3,
+        "noWebsite": 3,
+        "lat": 54.5213,
+        "lng": -3.5148
+      },
+      {
+        "key": "brampton",
+        "services": 2,
+        "noWebsite": 1,
+        "lat": 54.9416,
+        "lng": -2.7349
+      },
+      {
+        "key": "keswick",
+        "services": 2,
+        "noWebsite": 0,
+        "lat": 54.6021,
+        "lng": -3.129
+      },
+      {
+        "key": "cleator",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 54.5099,
+        "lng": -3.5181
+      },
+      {
+        "key": "egremont",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 54.4875,
+        "lng": -3.5339
+      },
+      {
+        "key": "seascale",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 54.4191,
+        "lng": -3.4333
+      },
+      {
+        "key": "st bees",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 54.4962,
+        "lng": -3.5911
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "darlington": {
+    "services": 52,
+    "towns": 0,
+    "residential": 22,
+    "nursing": 11,
+    "homeCare": 20,
+    "dementia": 31,
+    "learningDisability": 25,
+    "mentalHealth": 26,
+    "youngerAdults": 42,
+    "outstanding": 3,
+    "good": 38,
+    "requiresImprovement": 4,
+    "notRated": 6,
+    "noWebsite": 22,
+    "noWebsiteByType": {
+      "residential": 10,
+      "nursing": 5,
+      "homeCare": 8,
+      "dementia": 14
+    },
+    "topTowns": [],
+    "busiestTown": null,
+    "townPoints": [],
+    "countedAt": "2026-09-28"
   },
   "derby": {
     "services": 196,
@@ -4223,6 +5604,145 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "flintshire": {
+    "services": 2,
+    "towns": 2,
+    "residential": 0,
+    "nursing": 0,
+    "homeCare": 2,
+    "dementia": 2,
+    "learningDisability": 2,
+    "mentalHealth": 2,
+    "youngerAdults": 1,
+    "outstanding": 1,
+    "good": 1,
+    "requiresImprovement": 0,
+    "notRated": 0,
+    "noWebsite": 0,
+    "noWebsiteByType": {
+      "residential": 0,
+      "nursing": 0,
+      "homeCare": 0,
+      "dementia": 0
+    },
+    "topTowns": [
+      {
+        "key": "caer",
+        "services": 1
+      },
+      {
+        "key": "chester",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "caer",
+      "services": 1
+    },
+    "townPoints": [
+      {
+        "key": "caer",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.18,
+        "lng": -2.9305
+      },
+      {
+        "key": "chester",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.2022,
+        "lng": -2.9485
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "gateshead": {
+    "services": 94,
+    "towns": 5,
+    "residential": 28,
+    "nursing": 22,
+    "homeCare": 44,
+    "dementia": 69,
+    "learningDisability": 46,
+    "mentalHealth": 56,
+    "youngerAdults": 71,
+    "outstanding": 2,
+    "good": 78,
+    "requiresImprovement": 4,
+    "notRated": 10,
+    "noWebsite": 39,
+    "noWebsiteByType": {
+      "residential": 7,
+      "nursing": 8,
+      "homeCare": 24,
+      "dementia": 27
+    },
+    "topTowns": [
+      {
+        "key": "blaydon on tyne",
+        "services": 7
+      },
+      {
+        "key": "newcastle upon tyne",
+        "services": 7
+      },
+      {
+        "key": "chester le street",
+        "services": 6
+      },
+      {
+        "key": "ryton",
+        "services": 3
+      },
+      {
+        "key": "rowlands gill",
+        "services": 2
+      }
+    ],
+    "busiestTown": {
+      "key": "blaydon on tyne",
+      "services": 7
+    },
+    "townPoints": [
+      {
+        "key": "blaydon on tyne",
+        "services": 7,
+        "noWebsite": 2,
+        "lat": 54.9624,
+        "lng": -1.7151
+      },
+      {
+        "key": "newcastle upon tyne",
+        "services": 7,
+        "noWebsite": 4,
+        "lat": 54.9634,
+        "lng": -1.6825
+      },
+      {
+        "key": "chester le street",
+        "services": 6,
+        "noWebsite": 2,
+        "lat": 54.9002,
+        "lng": -1.5786
+      },
+      {
+        "key": "ryton",
+        "services": 3,
+        "noWebsite": 0,
+        "lat": 54.9646,
+        "lng": -1.7929
+      },
+      {
+        "key": "rowlands gill",
+        "services": 2,
+        "noWebsite": 0,
+        "lat": 54.9293,
+        "lng": -1.7841
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "gloucestershire": {
     "services": 376,
     "towns": 39,
@@ -4558,6 +6078,193 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "greenwich": {
+    "services": 145,
+    "towns": 1,
+    "residential": 33,
+    "nursing": 11,
+    "homeCare": 102,
+    "dementia": 94,
+    "learningDisability": 74,
+    "mentalHealth": 87,
+    "youngerAdults": 127,
+    "outstanding": 0,
+    "good": 66,
+    "requiresImprovement": 23,
+    "notRated": 55,
+    "noWebsite": 92,
+    "noWebsiteByType": {
+      "residential": 25,
+      "nursing": 5,
+      "homeCare": 63,
+      "dementia": 55
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 145
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 145
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 145,
+        "noWebsite": 92,
+        "lat": 51.481,
+        "lng": -0.0219
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "hackney": {
+    "services": 53,
+    "towns": 1,
+    "residential": 9,
+    "nursing": 4,
+    "homeCare": 40,
+    "dementia": 35,
+    "learningDisability": 28,
+    "mentalHealth": 34,
+    "youngerAdults": 43,
+    "outstanding": 0,
+    "good": 34,
+    "requiresImprovement": 5,
+    "notRated": 14,
+    "noWebsite": 25,
+    "noWebsiteByType": {
+      "residential": 3,
+      "nursing": 2,
+      "homeCare": 20,
+      "dementia": 17
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 53
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 53
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 53,
+        "noWebsite": 25,
+        "lat": 51.5258,
+        "lng": -0.081
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "halton": {
+    "services": 37,
+    "towns": 3,
+    "residential": 18,
+    "nursing": 7,
+    "homeCare": 12,
+    "dementia": 22,
+    "learningDisability": 20,
+    "mentalHealth": 16,
+    "youngerAdults": 27,
+    "outstanding": 0,
+    "good": 24,
+    "requiresImprovement": 7,
+    "notRated": 6,
+    "noWebsite": 15,
+    "noWebsiteByType": {
+      "residential": 7,
+      "nursing": 5,
+      "homeCare": 3,
+      "dementia": 10
+    },
+    "topTowns": [
+      {
+        "key": "widnes",
+        "services": 21
+      },
+      {
+        "key": "runcorn",
+        "services": 15
+      },
+      {
+        "key": "liverpool",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "widnes",
+      "services": 21
+    },
+    "townPoints": [
+      {
+        "key": "widnes",
+        "services": 21,
+        "noWebsite": 7,
+        "lat": 53.3622,
+        "lng": -2.7623
+      },
+      {
+        "key": "liverpool",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.3374,
+        "lng": -2.8028
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "hammersmith-and-fulham": {
+    "services": 53,
+    "towns": 2,
+    "residential": 4,
+    "nursing": 7,
+    "homeCare": 42,
+    "dementia": 44,
+    "learningDisability": 20,
+    "mentalHealth": 29,
+    "youngerAdults": 43,
+    "outstanding": 4,
+    "good": 30,
+    "requiresImprovement": 2,
+    "notRated": 17,
+    "noWebsite": 22,
+    "noWebsiteByType": {
+      "residential": 1,
+      "nursing": 3,
+      "homeCare": 18,
+      "dementia": 18
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 52
+      },
+      {
+        "key": "hammersmith",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 52
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 52,
+        "noWebsite": 21,
+        "lat": 51.4687,
+        "lng": -0.1855
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "hampshire": {
     "services": 832,
@@ -4972,6 +6679,216 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "haringey": {
+    "services": 86,
+    "towns": 1,
+    "residential": 23,
+    "nursing": 2,
+    "homeCare": 62,
+    "dementia": 52,
+    "learningDisability": 40,
+    "mentalHealth": 54,
+    "youngerAdults": 66,
+    "outstanding": 1,
+    "good": 53,
+    "requiresImprovement": 8,
+    "notRated": 24,
+    "noWebsite": 47,
+    "noWebsiteByType": {
+      "residential": 13,
+      "nursing": 1,
+      "homeCare": 33,
+      "dementia": 29
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 86
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 86
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 86,
+        "noWebsite": 47,
+        "lat": 51.6075,
+        "lng": -0.079
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "harrow": {
+    "services": 142,
+    "towns": 9,
+    "residential": 37,
+    "nursing": 16,
+    "homeCare": 89,
+    "dementia": 108,
+    "learningDisability": 75,
+    "mentalHealth": 74,
+    "youngerAdults": 110,
+    "outstanding": 3,
+    "good": 98,
+    "requiresImprovement": 6,
+    "notRated": 35,
+    "noWebsite": 62,
+    "noWebsiteByType": {
+      "residential": 13,
+      "nursing": 9,
+      "homeCare": 40,
+      "dementia": 47
+    },
+    "topTowns": [
+      {
+        "key": "stanmore",
+        "services": 22
+      },
+      {
+        "key": "pinner",
+        "services": 11
+      },
+      {
+        "key": "edgware",
+        "services": 8
+      },
+      {
+        "key": "london",
+        "services": 4
+      },
+      {
+        "key": "north harrow",
+        "services": 2
+      },
+      {
+        "key": "bushey",
+        "services": 1
+      },
+      {
+        "key": "kenton",
+        "services": 1
+      },
+      {
+        "key": "middlesex",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "stanmore",
+      "services": 22
+    },
+    "townPoints": [
+      {
+        "key": "stanmore",
+        "services": 22,
+        "noWebsite": 16,
+        "lat": 51.61,
+        "lng": -0.3294
+      },
+      {
+        "key": "pinner",
+        "services": 11,
+        "noWebsite": 0,
+        "lat": 51.591,
+        "lng": -0.3723
+      },
+      {
+        "key": "edgware",
+        "services": 8,
+        "noWebsite": 3,
+        "lat": 51.6066,
+        "lng": -0.275
+      },
+      {
+        "key": "london",
+        "services": 4,
+        "noWebsite": 1,
+        "lat": 51.6017,
+        "lng": -0.3946
+      },
+      {
+        "key": "north harrow",
+        "services": 2,
+        "noWebsite": 1,
+        "lat": 51.5815,
+        "lng": -0.3627
+      },
+      {
+        "key": "bushey",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.6303,
+        "lng": -0.3397
+      },
+      {
+        "key": "kenton",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.584,
+        "lng": -0.3178
+      },
+      {
+        "key": "middlesex",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.5634,
+        "lng": -0.3805
+      },
+      {
+        "key": "south harrow",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.5662,
+        "lng": -0.3643
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "hartlepool": {
+    "services": 37,
+    "towns": 1,
+    "residential": 18,
+    "nursing": 9,
+    "homeCare": 10,
+    "dementia": 22,
+    "learningDisability": 18,
+    "mentalHealth": 17,
+    "youngerAdults": 24,
+    "outstanding": 0,
+    "good": 35,
+    "requiresImprovement": 2,
+    "notRated": 0,
+    "noWebsite": 18,
+    "noWebsiteByType": {
+      "residential": 8,
+      "nursing": 5,
+      "homeCare": 5,
+      "dementia": 15
+    },
+    "topTowns": [
+      {
+        "key": "billingham",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "billingham",
+      "services": 1
+    },
+    "townPoints": [
+      {
+        "key": "billingham",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 54.6407,
+        "lng": -1.357
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "havering": {
     "services": 170,
     "towns": 5,
@@ -5057,6 +6974,181 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "herefordshire-county-of": {
+    "services": 134,
+    "towns": 16,
+    "residential": 57,
+    "nursing": 30,
+    "homeCare": 49,
+    "dementia": 85,
+    "learningDisability": 61,
+    "mentalHealth": 55,
+    "youngerAdults": 100,
+    "outstanding": 7,
+    "good": 92,
+    "requiresImprovement": 13,
+    "notRated": 20,
+    "noWebsite": 57,
+    "noWebsiteByType": {
+      "residential": 19,
+      "nursing": 8,
+      "homeCare": 30,
+      "dementia": 41
+    },
+    "topTowns": [
+      {
+        "key": "hereford",
+        "services": 59
+      },
+      {
+        "key": "leominster",
+        "services": 16
+      },
+      {
+        "key": "ross on wye",
+        "services": 16
+      },
+      {
+        "key": "ledbury",
+        "services": 14
+      },
+      {
+        "key": "bromyard",
+        "services": 8
+      },
+      {
+        "key": "kington",
+        "services": 8
+      },
+      {
+        "key": "malvern",
+        "services": 3
+      },
+      {
+        "key": "monmouth",
+        "services": 2
+      }
+    ],
+    "busiestTown": {
+      "key": "hereford",
+      "services": 59
+    },
+    "townPoints": [
+      {
+        "key": "hereford",
+        "services": 59,
+        "noWebsite": 27,
+        "lat": 52.0386,
+        "lng": -2.6862
+      },
+      {
+        "key": "leominster",
+        "services": 16,
+        "noWebsite": 8,
+        "lat": 52.2225,
+        "lng": -2.7236
+      },
+      {
+        "key": "ross on wye",
+        "services": 16,
+        "noWebsite": 8,
+        "lat": 51.8643,
+        "lng": -2.5943
+      },
+      {
+        "key": "ledbury",
+        "services": 14,
+        "noWebsite": 4,
+        "lat": 52.0288,
+        "lng": -2.4288
+      },
+      {
+        "key": "bromyard",
+        "services": 8,
+        "noWebsite": 2,
+        "lat": 52.1695,
+        "lng": -2.5849
+      },
+      {
+        "key": "kington",
+        "services": 8,
+        "noWebsite": 4,
+        "lat": 52.2035,
+        "lng": -3.0277
+      },
+      {
+        "key": "malvern",
+        "services": 3,
+        "noWebsite": 1,
+        "lat": 52.0692,
+        "lng": -2.3568
+      },
+      {
+        "key": "monmouth",
+        "services": 2,
+        "noWebsite": 1,
+        "lat": 51.8483,
+        "lng": -2.6812
+      },
+      {
+        "key": "craven arms",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 52.3614,
+        "lng": -2.8764
+      },
+      {
+        "key": "hampton bishop",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 52.0497,
+        "lng": -2.6744
+      },
+      {
+        "key": "ludlow",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 52.3303,
+        "lng": -2.6673
+      },
+      {
+        "key": "lugwardine",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 52.0687,
+        "lng": -2.6564
+      },
+      {
+        "key": "near leominster",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 52.3154,
+        "lng": -2.8574
+      },
+      {
+        "key": "wellington",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 52.123,
+        "lng": -2.742
+      },
+      {
+        "key": "withington",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 52.0826,
+        "lng": -2.6375
+      },
+      {
+        "key": "wormelow",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.9678,
+        "lng": -2.7463
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "hertfordshire": {
     "services": 585,
@@ -5428,6 +7520,450 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "hillingdon": {
+    "services": 127,
+    "towns": 8,
+    "residential": 28,
+    "nursing": 19,
+    "homeCare": 80,
+    "dementia": 92,
+    "learningDisability": 64,
+    "mentalHealth": 67,
+    "youngerAdults": 104,
+    "outstanding": 0,
+    "good": 82,
+    "requiresImprovement": 4,
+    "notRated": 41,
+    "noWebsite": 60,
+    "noWebsiteByType": {
+      "residential": 15,
+      "nursing": 7,
+      "homeCare": 38,
+      "dementia": 39
+    },
+    "topTowns": [
+      {
+        "key": "uxbridge",
+        "services": 46
+      },
+      {
+        "key": "hayes",
+        "services": 41
+      },
+      {
+        "key": "west drayton",
+        "services": 14
+      },
+      {
+        "key": "northwood",
+        "services": 10
+      },
+      {
+        "key": "ruislip",
+        "services": 8
+      },
+      {
+        "key": "pinner",
+        "services": 5
+      },
+      {
+        "key": "eastcote",
+        "services": 1
+      },
+      {
+        "key": "harefield",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "uxbridge",
+      "services": 46
+    },
+    "townPoints": [
+      {
+        "key": "uxbridge",
+        "services": 46,
+        "noWebsite": 24,
+        "lat": 51.5435,
+        "lng": -0.4768
+      },
+      {
+        "key": "hayes",
+        "services": 41,
+        "noWebsite": 21,
+        "lat": 51.5258,
+        "lng": -0.4373
+      },
+      {
+        "key": "west drayton",
+        "services": 14,
+        "noWebsite": 7,
+        "lat": 51.4825,
+        "lng": -0.4838
+      },
+      {
+        "key": "northwood",
+        "services": 10,
+        "noWebsite": 2,
+        "lat": 51.6116,
+        "lng": -0.439
+      },
+      {
+        "key": "ruislip",
+        "services": 8,
+        "noWebsite": 4,
+        "lat": 51.576,
+        "lng": -0.3975
+      },
+      {
+        "key": "pinner",
+        "services": 5,
+        "noWebsite": 2,
+        "lat": 51.5917,
+        "lng": -0.3978
+      },
+      {
+        "key": "eastcote",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.5687,
+        "lng": -0.3912
+      },
+      {
+        "key": "harefield",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.6026,
+        "lng": -0.4824
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "hounslow": {
+    "services": 104,
+    "towns": 4,
+    "residential": 20,
+    "nursing": 12,
+    "homeCare": 72,
+    "dementia": 75,
+    "learningDisability": 63,
+    "mentalHealth": 55,
+    "youngerAdults": 88,
+    "outstanding": 4,
+    "good": 62,
+    "requiresImprovement": 6,
+    "notRated": 32,
+    "noWebsite": 48,
+    "noWebsiteByType": {
+      "residential": 9,
+      "nursing": 6,
+      "homeCare": 33,
+      "dementia": 38
+    },
+    "topTowns": [
+      {
+        "key": "feltham",
+        "services": 20
+      },
+      {
+        "key": "brentford",
+        "services": 16
+      },
+      {
+        "key": "isleworth",
+        "services": 12
+      },
+      {
+        "key": "london",
+        "services": 6
+      }
+    ],
+    "busiestTown": {
+      "key": "feltham",
+      "services": 20
+    },
+    "townPoints": [
+      {
+        "key": "feltham",
+        "services": 20,
+        "noWebsite": 13,
+        "lat": 51.4395,
+        "lng": -0.3745
+      },
+      {
+        "key": "brentford",
+        "services": 16,
+        "noWebsite": 5,
+        "lat": 51.4847,
+        "lng": -0.3195
+      },
+      {
+        "key": "isleworth",
+        "services": 12,
+        "noWebsite": 5,
+        "lat": 51.4775,
+        "lng": -0.3401
+      },
+      {
+        "key": "london",
+        "services": 6,
+        "noWebsite": 1,
+        "lat": 51.4823,
+        "lng": -0.2688
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "isle-of-wight": {
+    "services": 99,
+    "towns": 11,
+    "residential": 50,
+    "nursing": 13,
+    "homeCare": 36,
+    "dementia": 75,
+    "learningDisability": 33,
+    "mentalHealth": 46,
+    "youngerAdults": 67,
+    "outstanding": 8,
+    "good": 68,
+    "requiresImprovement": 11,
+    "notRated": 9,
+    "noWebsite": 48,
+    "noWebsiteByType": {
+      "residential": 27,
+      "nursing": 4,
+      "homeCare": 17,
+      "dementia": 32
+    },
+    "topTowns": [
+      {
+        "key": "ryde",
+        "services": 28
+      },
+      {
+        "key": "newport",
+        "services": 19
+      },
+      {
+        "key": "sandown",
+        "services": 15
+      },
+      {
+        "key": "shanklin",
+        "services": 9
+      },
+      {
+        "key": "east cowes",
+        "services": 5
+      },
+      {
+        "key": "freshwater",
+        "services": 5
+      },
+      {
+        "key": "totland bay",
+        "services": 5
+      },
+      {
+        "key": "cowes",
+        "services": 4
+      }
+    ],
+    "busiestTown": {
+      "key": "ryde",
+      "services": 28
+    },
+    "townPoints": [
+      {
+        "key": "ryde",
+        "services": 28,
+        "noWebsite": 14,
+        "lat": 50.7216,
+        "lng": -1.1604
+      },
+      {
+        "key": "newport",
+        "services": 19,
+        "noWebsite": 7,
+        "lat": 50.6888,
+        "lng": -1.2948
+      },
+      {
+        "key": "sandown",
+        "services": 15,
+        "noWebsite": 7,
+        "lat": 50.6608,
+        "lng": -1.1501
+      },
+      {
+        "key": "shanklin",
+        "services": 9,
+        "noWebsite": 4,
+        "lat": 50.6351,
+        "lng": -1.1711
+      },
+      {
+        "key": "east cowes",
+        "services": 5,
+        "noWebsite": 4,
+        "lat": 50.7566,
+        "lng": -1.2746
+      },
+      {
+        "key": "freshwater",
+        "services": 5,
+        "noWebsite": 2,
+        "lat": 50.6815,
+        "lng": -1.5154
+      },
+      {
+        "key": "totland bay",
+        "services": 5,
+        "noWebsite": 3,
+        "lat": 50.6819,
+        "lng": -1.5414
+      },
+      {
+        "key": "cowes",
+        "services": 4,
+        "noWebsite": 2,
+        "lat": 50.7638,
+        "lng": -1.3137
+      },
+      {
+        "key": "bembridge",
+        "services": 3,
+        "noWebsite": 1,
+        "lat": 50.6895,
+        "lng": -1.0875
+      },
+      {
+        "key": "ventnor",
+        "services": 3,
+        "noWebsite": 2,
+        "lat": 50.5977,
+        "lng": -1.2002
+      },
+      {
+        "key": "wootton bridge",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 50.7366,
+        "lng": -1.2177
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "isles-of-scilly": {
+    "services": 1,
+    "towns": 0,
+    "residential": 1,
+    "nursing": 0,
+    "homeCare": 0,
+    "dementia": 1,
+    "learningDisability": 0,
+    "mentalHealth": 1,
+    "youngerAdults": 0,
+    "outstanding": 0,
+    "good": 0,
+    "requiresImprovement": 1,
+    "notRated": 0,
+    "noWebsite": 0,
+    "noWebsiteByType": {
+      "residential": 0,
+      "nursing": 0,
+      "homeCare": 0,
+      "dementia": 0
+    },
+    "topTowns": [],
+    "busiestTown": null,
+    "townPoints": [],
+    "countedAt": "2026-09-28"
+  },
+  "islington": {
+    "services": 64,
+    "towns": 1,
+    "residential": 9,
+    "nursing": 10,
+    "homeCare": 46,
+    "dementia": 45,
+    "learningDisability": 34,
+    "mentalHealth": 41,
+    "youngerAdults": 48,
+    "outstanding": 2,
+    "good": 39,
+    "requiresImprovement": 2,
+    "notRated": 21,
+    "noWebsite": 26,
+    "noWebsiteByType": {
+      "residential": 1,
+      "nursing": 4,
+      "homeCare": 21,
+      "dementia": 21
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 64
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 64
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 64,
+        "noWebsite": 26,
+        "lat": 51.5605,
+        "lng": -0.1128
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "kensington-and-chelsea": {
+    "services": 25,
+    "towns": 1,
+    "residential": 5,
+    "nursing": 6,
+    "homeCare": 14,
+    "dementia": 16,
+    "learningDisability": 10,
+    "mentalHealth": 7,
+    "youngerAdults": 14,
+    "outstanding": 1,
+    "good": 17,
+    "requiresImprovement": 3,
+    "notRated": 4,
+    "noWebsite": 12,
+    "noWebsiteByType": {
+      "residential": 2,
+      "nursing": 3,
+      "homeCare": 7,
+      "dementia": 6
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 25
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 25
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 25,
+        "noWebsite": 12,
+        "lat": 51.5237,
+        "lng": -0.2195
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "kent": {
     "services": 896,
@@ -5856,6 +8392,156 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "kingston-upon-hull-city-of": {
+    "services": 133,
+    "towns": 3,
+    "residential": 63,
+    "nursing": 15,
+    "homeCare": 55,
+    "dementia": 82,
+    "learningDisability": 64,
+    "mentalHealth": 54,
+    "youngerAdults": 108,
+    "outstanding": 3,
+    "good": 75,
+    "requiresImprovement": 22,
+    "notRated": 33,
+    "noWebsite": 65,
+    "noWebsiteByType": {
+      "residential": 28,
+      "nursing": 9,
+      "homeCare": 28,
+      "dementia": 49
+    },
+    "topTowns": [
+      {
+        "key": "hull",
+        "services": 130
+      },
+      {
+        "key": "kingston upon hull",
+        "services": 2
+      },
+      {
+        "key": "sutton on hull",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "hull",
+      "services": 130
+    },
+    "townPoints": [
+      {
+        "key": "hull",
+        "services": 130,
+        "noWebsite": 65,
+        "lat": 53.7589,
+        "lng": -0.305
+      },
+      {
+        "key": "kingston upon hull",
+        "services": 2,
+        "noWebsite": 0,
+        "lat": 53.7533,
+        "lng": -0.298
+      },
+      {
+        "key": "sutton on hull",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.7779,
+        "lng": -0.302
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "kingston-upon-thames": {
+    "services": 91,
+    "towns": 5,
+    "residential": 21,
+    "nursing": 23,
+    "homeCare": 47,
+    "dementia": 71,
+    "learningDisability": 43,
+    "mentalHealth": 40,
+    "youngerAdults": 73,
+    "outstanding": 6,
+    "good": 62,
+    "requiresImprovement": 4,
+    "notRated": 19,
+    "noWebsite": 45,
+    "noWebsiteByType": {
+      "residential": 12,
+      "nursing": 13,
+      "homeCare": 20,
+      "dementia": 38
+    },
+    "topTowns": [
+      {
+        "key": "surbiton",
+        "services": 26
+      },
+      {
+        "key": "new malden",
+        "services": 24
+      },
+      {
+        "key": "chessington",
+        "services": 13
+      },
+      {
+        "key": "london",
+        "services": 4
+      },
+      {
+        "key": "worcester park",
+        "services": 3
+      }
+    ],
+    "busiestTown": {
+      "key": "surbiton",
+      "services": 26
+    },
+    "townPoints": [
+      {
+        "key": "surbiton",
+        "services": 26,
+        "noWebsite": 12,
+        "lat": 51.3833,
+        "lng": -0.3052
+      },
+      {
+        "key": "new malden",
+        "services": 24,
+        "noWebsite": 11,
+        "lat": 51.402,
+        "lng": -0.271
+      },
+      {
+        "key": "chessington",
+        "services": 13,
+        "noWebsite": 8,
+        "lat": 51.3726,
+        "lng": -0.2924
+      },
+      {
+        "key": "london",
+        "services": 4,
+        "noWebsite": 3,
+        "lat": 51.4333,
+        "lng": -0.2575
+      },
+      {
+        "key": "worcester park",
+        "services": 3,
+        "noWebsite": 2,
+        "lat": 51.3841,
+        "lng": -0.2504
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "kirklees": {
     "services": 211,
     "towns": 9,
@@ -5981,6 +8667,123 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "knowsley": {
+    "services": 53,
+    "towns": 4,
+    "residential": 17,
+    "nursing": 10,
+    "homeCare": 26,
+    "dementia": 41,
+    "learningDisability": 21,
+    "mentalHealth": 28,
+    "youngerAdults": 37,
+    "outstanding": 1,
+    "good": 31,
+    "requiresImprovement": 6,
+    "notRated": 13,
+    "noWebsite": 38,
+    "noWebsiteByType": {
+      "residential": 14,
+      "nursing": 6,
+      "homeCare": 18,
+      "dementia": 30
+    },
+    "topTowns": [
+      {
+        "key": "liverpool",
+        "services": 36
+      },
+      {
+        "key": "prescot",
+        "services": 13
+      },
+      {
+        "key": "kirkby",
+        "services": 2
+      },
+      {
+        "key": "huyton",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "liverpool",
+      "services": 36
+    },
+    "townPoints": [
+      {
+        "key": "liverpool",
+        "services": 36,
+        "noWebsite": 26,
+        "lat": 53.4828,
+        "lng": -2.896
+      },
+      {
+        "key": "prescot",
+        "services": 13,
+        "noWebsite": 9,
+        "lat": 53.4211,
+        "lng": -2.7958
+      },
+      {
+        "key": "kirkby",
+        "services": 2,
+        "noWebsite": 2,
+        "lat": 53.4749,
+        "lng": -2.8795
+      },
+      {
+        "key": "huyton",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 53.4184,
+        "lng": -2.836
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "lambeth": {
+    "services": 92,
+    "towns": 1,
+    "residential": 27,
+    "nursing": 9,
+    "homeCare": 58,
+    "dementia": 50,
+    "learningDisability": 47,
+    "mentalHealth": 55,
+    "youngerAdults": 72,
+    "outstanding": 1,
+    "good": 59,
+    "requiresImprovement": 9,
+    "notRated": 23,
+    "noWebsite": 49,
+    "noWebsiteByType": {
+      "residential": 16,
+      "nursing": 4,
+      "homeCare": 29,
+      "dementia": 24
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 92
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 92
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 92,
+        "noWebsite": 49,
+        "lat": 51.4271,
+        "lng": -0.1151
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "lancashire": {
     "services": 695,
@@ -6753,6 +9556,59 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "lewisham": {
+    "services": 133,
+    "towns": 2,
+    "residential": 42,
+    "nursing": 8,
+    "homeCare": 83,
+    "dementia": 83,
+    "learningDisability": 57,
+    "mentalHealth": 86,
+    "youngerAdults": 104,
+    "outstanding": 1,
+    "good": 68,
+    "requiresImprovement": 20,
+    "notRated": 42,
+    "noWebsite": 79,
+    "noWebsiteByType": {
+      "residential": 25,
+      "nursing": 5,
+      "homeCare": 49,
+      "dementia": 47
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 130
+      },
+      {
+        "key": "bromley",
+        "services": 3
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 130
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 130,
+        "noWebsite": 76,
+        "lat": 51.4628,
+        "lng": -0.0077
+      },
+      {
+        "key": "bromley",
+        "services": 3,
+        "noWebsite": 3,
+        "lat": 51.421,
+        "lng": 0.0038
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "lincolnshire": {
     "services": 414,
     "towns": 29,
@@ -7045,6 +9901,32 @@
     "townPoints": [],
     "countedAt": "2026-09-26"
   },
+  "luton": {
+    "services": 111,
+    "towns": 0,
+    "residential": 30,
+    "nursing": 6,
+    "homeCare": 76,
+    "dementia": 75,
+    "learningDisability": 52,
+    "mentalHealth": 58,
+    "youngerAdults": 95,
+    "outstanding": 3,
+    "good": 49,
+    "requiresImprovement": 23,
+    "notRated": 36,
+    "noWebsite": 53,
+    "noWebsiteByType": {
+      "residential": 15,
+      "nursing": 2,
+      "homeCare": 36,
+      "dementia": 33
+    },
+    "topTowns": [],
+    "busiestTown": null,
+    "townPoints": [],
+    "countedAt": "2026-09-28"
+  },
   "manchester": {
     "services": 209,
     "towns": 2,
@@ -7184,6 +10066,123 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "merton": {
+    "services": 96,
+    "towns": 4,
+    "residential": 21,
+    "nursing": 16,
+    "homeCare": 59,
+    "dementia": 70,
+    "learningDisability": 50,
+    "mentalHealth": 51,
+    "youngerAdults": 77,
+    "outstanding": 1,
+    "good": 75,
+    "requiresImprovement": 1,
+    "notRated": 19,
+    "noWebsite": 44,
+    "noWebsiteByType": {
+      "residential": 12,
+      "nursing": 7,
+      "homeCare": 25,
+      "dementia": 32
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 40
+      },
+      {
+        "key": "mitcham",
+        "services": 30
+      },
+      {
+        "key": "morden",
+        "services": 24
+      },
+      {
+        "key": "new malden",
+        "services": 2
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 40
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 40,
+        "noWebsite": 18,
+        "lat": 51.4189,
+        "lng": -0.1913
+      },
+      {
+        "key": "mitcham",
+        "services": 30,
+        "noWebsite": 16,
+        "lat": 51.3989,
+        "lng": -0.1791
+      },
+      {
+        "key": "morden",
+        "services": 24,
+        "noWebsite": 9,
+        "lat": 51.3917,
+        "lng": -0.2195
+      },
+      {
+        "key": "new malden",
+        "services": 2,
+        "noWebsite": 1,
+        "lat": 51.4011,
+        "lng": -0.2428
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "middlesbrough": {
+    "services": 75,
+    "towns": 1,
+    "residential": 36,
+    "nursing": 15,
+    "homeCare": 26,
+    "dementia": 47,
+    "learningDisability": 34,
+    "mentalHealth": 32,
+    "youngerAdults": 50,
+    "outstanding": 2,
+    "good": 55,
+    "requiresImprovement": 4,
+    "notRated": 14,
+    "noWebsite": 43,
+    "noWebsiteByType": {
+      "residential": 20,
+      "nursing": 10,
+      "homeCare": 14,
+      "dementia": 27
+    },
+    "topTowns": [
+      {
+        "key": "middlesborough",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "middlesborough",
+      "services": 1
+    },
+    "townPoints": [
+      {
+        "key": "middlesborough",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 54.5457,
+        "lng": -1.254
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "milton-keynes": {
     "services": 227,
     "towns": 3,
@@ -7247,6 +10246,85 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "newcastle-upon-tyne": {
+    "services": 122,
+    "towns": 0,
+    "residential": 35,
+    "nursing": 40,
+    "homeCare": 48,
+    "dementia": 78,
+    "learningDisability": 51,
+    "mentalHealth": 60,
+    "youngerAdults": 86,
+    "outstanding": 11,
+    "good": 83,
+    "requiresImprovement": 7,
+    "notRated": 19,
+    "noWebsite": 58,
+    "noWebsiteByType": {
+      "residential": 17,
+      "nursing": 17,
+      "homeCare": 24,
+      "dementia": 37
+    },
+    "topTowns": [],
+    "busiestTown": null,
+    "townPoints": [],
+    "countedAt": "2026-09-28"
+  },
+  "newham": {
+    "services": 114,
+    "towns": 2,
+    "residential": 18,
+    "nursing": 6,
+    "homeCare": 90,
+    "dementia": 83,
+    "learningDisability": 68,
+    "mentalHealth": 64,
+    "youngerAdults": 101,
+    "outstanding": 1,
+    "good": 60,
+    "requiresImprovement": 6,
+    "notRated": 47,
+    "noWebsite": 75,
+    "noWebsiteByType": {
+      "residential": 12,
+      "nursing": 4,
+      "homeCare": 59,
+      "dementia": 52
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 113
+      },
+      {
+        "key": "victoria dock",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 113
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 113,
+        "noWebsite": 74,
+        "lat": 51.5478,
+        "lng": 0.0206
+      },
+      {
+        "key": "victoria dock",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.5139,
+        "lng": 0.0365
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "norfolk": {
     "services": 502,
@@ -7528,6 +10606,214 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "north-east-lincolnshire": {
+    "services": 83,
+    "towns": 4,
+    "residential": 42,
+    "nursing": 14,
+    "homeCare": 27,
+    "dementia": 57,
+    "learningDisability": 28,
+    "mentalHealth": 31,
+    "youngerAdults": 64,
+    "outstanding": 6,
+    "good": 54,
+    "requiresImprovement": 8,
+    "notRated": 15,
+    "noWebsite": 36,
+    "noWebsiteByType": {
+      "residential": 22,
+      "nursing": 3,
+      "homeCare": 11,
+      "dementia": 33
+    },
+    "topTowns": [
+      {
+        "key": "grimsby",
+        "services": 71
+      },
+      {
+        "key": "cleethorpes",
+        "services": 8
+      },
+      {
+        "key": "immingham",
+        "services": 3
+      },
+      {
+        "key": "humberston",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "grimsby",
+      "services": 71
+    },
+    "townPoints": [
+      {
+        "key": "grimsby",
+        "services": 71,
+        "noWebsite": 29,
+        "lat": 53.5507,
+        "lng": -0.093
+      },
+      {
+        "key": "cleethorpes",
+        "services": 8,
+        "noWebsite": 4,
+        "lat": 53.5634,
+        "lng": -0.0379
+      },
+      {
+        "key": "immingham",
+        "services": 3,
+        "noWebsite": 3,
+        "lat": 53.6137,
+        "lng": -0.2186
+      },
+      {
+        "key": "humberston",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.5374,
+        "lng": -0.04
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "north-lincolnshire": {
+    "services": 77,
+    "towns": 10,
+    "residential": 52,
+    "nursing": 9,
+    "homeCare": 17,
+    "dementia": 53,
+    "learningDisability": 27,
+    "mentalHealth": 27,
+    "youngerAdults": 53,
+    "outstanding": 6,
+    "good": 50,
+    "requiresImprovement": 12,
+    "notRated": 8,
+    "noWebsite": 34,
+    "noWebsiteByType": {
+      "residential": 22,
+      "nursing": 5,
+      "homeCare": 8,
+      "dementia": 28
+    },
+    "topTowns": [
+      {
+        "key": "scunthorpe",
+        "services": 44
+      },
+      {
+        "key": "brigg",
+        "services": 14
+      },
+      {
+        "key": "barton upon humber",
+        "services": 7
+      },
+      {
+        "key": "doncaster",
+        "services": 4
+      },
+      {
+        "key": "barrow upon humber",
+        "services": 3
+      },
+      {
+        "key": "gainsborough",
+        "services": 1
+      },
+      {
+        "key": "kirton in lindsey",
+        "services": 1
+      },
+      {
+        "key": "kirton lindsey",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "scunthorpe",
+      "services": 44
+    },
+    "townPoints": [
+      {
+        "key": "scunthorpe",
+        "services": 44,
+        "noWebsite": 19,
+        "lat": 53.5654,
+        "lng": -0.6523
+      },
+      {
+        "key": "brigg",
+        "services": 14,
+        "noWebsite": 7,
+        "lat": 53.5672,
+        "lng": -0.5253
+      },
+      {
+        "key": "barton upon humber",
+        "services": 7,
+        "noWebsite": 3,
+        "lat": 53.6868,
+        "lng": -0.4443
+      },
+      {
+        "key": "doncaster",
+        "services": 4,
+        "noWebsite": 3,
+        "lat": 53.49,
+        "lng": -0.8466
+      },
+      {
+        "key": "barrow upon humber",
+        "services": 3,
+        "noWebsite": 1,
+        "lat": 53.6712,
+        "lng": -0.383
+      },
+      {
+        "key": "gainsborough",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 53.4883,
+        "lng": -0.5352
+      },
+      {
+        "key": "kirton in lindsey",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.4721,
+        "lng": -0.5936
+      },
+      {
+        "key": "kirton lindsey",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.4761,
+        "lng": -0.5892
+      },
+      {
+        "key": "nr scunthorpe",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.687,
+        "lng": -0.6628
+      },
+      {
+        "key": "winterton",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.6552,
+        "lng": -0.5997
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "north-northamptonshire": {
     "services": 259,
     "towns": 8,
@@ -7646,6 +10932,236 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "north-somerset": {
+    "services": 134,
+    "towns": 10,
+    "residential": 63,
+    "nursing": 34,
+    "homeCare": 39,
+    "dementia": 78,
+    "learningDisability": 46,
+    "mentalHealth": 56,
+    "youngerAdults": 93,
+    "outstanding": 1,
+    "good": 109,
+    "requiresImprovement": 5,
+    "notRated": 19,
+    "noWebsite": 46,
+    "noWebsiteByType": {
+      "residential": 21,
+      "nursing": 7,
+      "homeCare": 18,
+      "dementia": 29
+    },
+    "topTowns": [
+      {
+        "key": "weston super mare",
+        "services": 89
+      },
+      {
+        "key": "clevedon",
+        "services": 20
+      },
+      {
+        "key": "bristol",
+        "services": 16
+      },
+      {
+        "key": "portishead",
+        "services": 2
+      },
+      {
+        "key": "winscombe",
+        "services": 2
+      },
+      {
+        "key": "abbots leigh",
+        "services": 1
+      },
+      {
+        "key": "backwell",
+        "services": 1
+      },
+      {
+        "key": "banwell",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "weston super mare",
+      "services": 89
+    },
+    "townPoints": [
+      {
+        "key": "weston super mare",
+        "services": 89,
+        "noWebsite": 29,
+        "lat": 51.3372,
+        "lng": -2.9741
+      },
+      {
+        "key": "clevedon",
+        "services": 20,
+        "noWebsite": 8,
+        "lat": 51.4503,
+        "lng": -2.8522
+      },
+      {
+        "key": "bristol",
+        "services": 16,
+        "noWebsite": 7,
+        "lat": 51.4337,
+        "lng": -2.7653
+      },
+      {
+        "key": "portishead",
+        "services": 2,
+        "noWebsite": 0,
+        "lat": 51.4831,
+        "lng": -2.7946
+      },
+      {
+        "key": "winscombe",
+        "services": 2,
+        "noWebsite": 1,
+        "lat": 51.3316,
+        "lng": -2.8392
+      },
+      {
+        "key": "abbots leigh",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.469,
+        "lng": -2.6598
+      },
+      {
+        "key": "backwell",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.4167,
+        "lng": -2.7302
+      },
+      {
+        "key": "banwell",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.3431,
+        "lng": -2.9004
+      },
+      {
+        "key": "claverham",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.3885,
+        "lng": -2.7964
+      },
+      {
+        "key": "sandford",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.3321,
+        "lng": -2.8389
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "north-tyneside": {
+    "services": 83,
+    "towns": 6,
+    "residential": 26,
+    "nursing": 17,
+    "homeCare": 40,
+    "dementia": 61,
+    "learningDisability": 33,
+    "mentalHealth": 39,
+    "youngerAdults": 64,
+    "outstanding": 3,
+    "good": 52,
+    "requiresImprovement": 10,
+    "notRated": 17,
+    "noWebsite": 45,
+    "noWebsiteByType": {
+      "residential": 15,
+      "nursing": 11,
+      "homeCare": 19,
+      "dementia": 35
+    },
+    "topTowns": [
+      {
+        "key": "newcastle upon tyne",
+        "services": 22
+      },
+      {
+        "key": "north shields",
+        "services": 22
+      },
+      {
+        "key": "whitley bay",
+        "services": 20
+      },
+      {
+        "key": "wallsend",
+        "services": 16
+      },
+      {
+        "key": "cramlington",
+        "services": 1
+      },
+      {
+        "key": "cullercoats",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "newcastle upon tyne",
+      "services": 22
+    },
+    "townPoints": [
+      {
+        "key": "newcastle upon tyne",
+        "services": 22,
+        "noWebsite": 9,
+        "lat": 55.0352,
+        "lng": -1.5807
+      },
+      {
+        "key": "north shields",
+        "services": 22,
+        "noWebsite": 10,
+        "lat": 55.0276,
+        "lng": -1.4634
+      },
+      {
+        "key": "whitley bay",
+        "services": 20,
+        "noWebsite": 15,
+        "lat": 55.0412,
+        "lng": -1.476
+      },
+      {
+        "key": "wallsend",
+        "services": 16,
+        "noWebsite": 9,
+        "lat": 55.0157,
+        "lng": -1.5014
+      },
+      {
+        "key": "cramlington",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 55.0608,
+        "lng": -1.5809
+      },
+      {
+        "key": "cullercoats",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 55.032,
+        "lng": -1.4315
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "north-yorkshire": {
     "services": 361,
@@ -7962,6 +11478,195 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "northumberland": {
+    "services": 136,
+    "towns": 18,
+    "residential": 60,
+    "nursing": 36,
+    "homeCare": 42,
+    "dementia": 97,
+    "learningDisability": 45,
+    "mentalHealth": 41,
+    "youngerAdults": 95,
+    "outstanding": 13,
+    "good": 104,
+    "requiresImprovement": 10,
+    "notRated": 9,
+    "noWebsite": 72,
+    "noWebsiteByType": {
+      "residential": 34,
+      "nursing": 19,
+      "homeCare": 20,
+      "dementia": 49
+    },
+    "topTowns": [
+      {
+        "key": "blyth",
+        "services": 17
+      },
+      {
+        "key": "morpeth",
+        "services": 17
+      },
+      {
+        "key": "cramlington",
+        "services": 16
+      },
+      {
+        "key": "ashington",
+        "services": 13
+      },
+      {
+        "key": "hexham",
+        "services": 13
+      },
+      {
+        "key": "bedlington",
+        "services": 10
+      },
+      {
+        "key": "berwick upon tweed",
+        "services": 10
+      },
+      {
+        "key": "alnwick",
+        "services": 8
+      }
+    ],
+    "busiestTown": {
+      "key": "blyth",
+      "services": 17
+    },
+    "townPoints": [
+      {
+        "key": "blyth",
+        "services": 17,
+        "noWebsite": 10,
+        "lat": 55.1313,
+        "lng": -1.5226
+      },
+      {
+        "key": "morpeth",
+        "services": 17,
+        "noWebsite": 11,
+        "lat": 55.1717,
+        "lng": -1.6777
+      },
+      {
+        "key": "cramlington",
+        "services": 16,
+        "noWebsite": 8,
+        "lat": 55.0997,
+        "lng": -1.5991
+      },
+      {
+        "key": "ashington",
+        "services": 13,
+        "noWebsite": 7,
+        "lat": 55.1849,
+        "lng": -1.5823
+      },
+      {
+        "key": "hexham",
+        "services": 13,
+        "noWebsite": 7,
+        "lat": 55.1647,
+        "lng": -2.5318
+      },
+      {
+        "key": "bedlington",
+        "services": 10,
+        "noWebsite": 3,
+        "lat": 55.1359,
+        "lng": -1.5988
+      },
+      {
+        "key": "berwick upon tweed",
+        "services": 10,
+        "noWebsite": 6,
+        "lat": 55.7566,
+        "lng": -1.9924
+      },
+      {
+        "key": "alnwick",
+        "services": 8,
+        "noWebsite": 5,
+        "lat": 55.4087,
+        "lng": -1.7073
+      },
+      {
+        "key": "newcastle upon tyne",
+        "services": 7,
+        "noWebsite": 2,
+        "lat": 55.05,
+        "lng": -1.7471
+      },
+      {
+        "key": "corbridge",
+        "services": 5,
+        "noWebsite": 1,
+        "lat": 54.9663,
+        "lng": -2.0204
+      },
+      {
+        "key": "prudhoe",
+        "services": 5,
+        "noWebsite": 4,
+        "lat": 54.9659,
+        "lng": -1.8732
+      },
+      {
+        "key": "stocksfield",
+        "services": 4,
+        "noWebsite": 1,
+        "lat": 54.9532,
+        "lng": -1.8825
+      },
+      {
+        "key": "choppington",
+        "services": 3,
+        "noWebsite": 3,
+        "lat": 55.1502,
+        "lng": -1.604
+      },
+      {
+        "key": "newbiggin by the sea",
+        "services": 3,
+        "noWebsite": 2,
+        "lat": 55.18,
+        "lng": -1.5161
+      },
+      {
+        "key": "whitley bay",
+        "services": 2,
+        "noWebsite": 1,
+        "lat": 55.0645,
+        "lng": -1.502
+      },
+      {
+        "key": "belford",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 55.5979,
+        "lng": -1.8322
+      },
+      {
+        "key": "riding mill",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 54.9452,
+        "lng": -1.9677
+      },
+      {
+        "key": "wooler",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 55.5512,
+        "lng": -2.0161
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "nottingham": {
     "services": 224,
     "towns": 1,
@@ -8171,6 +11876,48 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "oldham": {
+    "services": 111,
+    "towns": 1,
+    "residential": 36,
+    "nursing": 11,
+    "homeCare": 65,
+    "dementia": 97,
+    "learningDisability": 37,
+    "mentalHealth": 59,
+    "youngerAdults": 90,
+    "outstanding": 3,
+    "good": 62,
+    "requiresImprovement": 9,
+    "notRated": 37,
+    "noWebsite": 67,
+    "noWebsiteByType": {
+      "residential": 26,
+      "nursing": 4,
+      "homeCare": 38,
+      "dementia": 61
+    },
+    "topTowns": [
+      {
+        "key": "manchester",
+        "services": 18
+      }
+    ],
+    "busiestTown": {
+      "key": "manchester",
+      "services": 18
+    },
+    "townPoints": [
+      {
+        "key": "manchester",
+        "services": 18,
+        "noWebsite": 13,
+        "lat": 53.5343,
+        "lng": -2.174
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "oxfordshire": {
     "services": 314,
@@ -8457,6 +12204,127 @@
     "townPoints": [],
     "countedAt": "2026-09-26"
   },
+  "plymouth": {
+    "services": 138,
+    "towns": 0,
+    "residential": 71,
+    "nursing": 20,
+    "homeCare": 50,
+    "dementia": 79,
+    "learningDisability": 64,
+    "mentalHealth": 56,
+    "youngerAdults": 96,
+    "outstanding": 15,
+    "good": 79,
+    "requiresImprovement": 21,
+    "notRated": 22,
+    "noWebsite": 67,
+    "noWebsiteByType": {
+      "residential": 37,
+      "nursing": 7,
+      "homeCare": 23,
+      "dementia": 35
+    },
+    "topTowns": [],
+    "busiestTown": null,
+    "townPoints": [],
+    "countedAt": "2026-09-28"
+  },
+  "portsmouth": {
+    "services": 92,
+    "towns": 1,
+    "residential": 23,
+    "nursing": 10,
+    "homeCare": 60,
+    "dementia": 71,
+    "learningDisability": 36,
+    "mentalHealth": 50,
+    "youngerAdults": 74,
+    "outstanding": 2,
+    "good": 43,
+    "requiresImprovement": 12,
+    "notRated": 33,
+    "noWebsite": 33,
+    "noWebsiteByType": {
+      "residential": 6,
+      "nursing": 3,
+      "homeCare": 25,
+      "dementia": 26
+    },
+    "topTowns": [
+      {
+        "key": "southsea",
+        "services": 22
+      }
+    ],
+    "busiestTown": {
+      "key": "southsea",
+      "services": 22
+    },
+    "townPoints": [
+      {
+        "key": "southsea",
+        "services": 22,
+        "noWebsite": 7,
+        "lat": 50.7897,
+        "lng": -1.0843
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "reading": {
+    "services": 97,
+    "towns": 2,
+    "residential": 25,
+    "nursing": 7,
+    "homeCare": 65,
+    "dementia": 63,
+    "learningDisability": 50,
+    "mentalHealth": 42,
+    "youngerAdults": 75,
+    "outstanding": 2,
+    "good": 42,
+    "requiresImprovement": 16,
+    "notRated": 37,
+    "noWebsite": 36,
+    "noWebsiteByType": {
+      "residential": 4,
+      "nursing": 1,
+      "homeCare": 31,
+      "dementia": 27
+    },
+    "topTowns": [
+      {
+        "key": "berkshire",
+        "services": 1
+      },
+      {
+        "key": "caversham",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "berkshire",
+      "services": 1
+    },
+    "townPoints": [
+      {
+        "key": "berkshire",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.4246,
+        "lng": -0.9675
+      },
+      {
+        "key": "caversham",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.4791,
+        "lng": -0.9668
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "redbridge": {
     "services": 200,
     "towns": 9,
@@ -8575,6 +12443,482 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "redcar-and-cleveland": {
+    "services": 62,
+    "towns": 6,
+    "residential": 33,
+    "nursing": 12,
+    "homeCare": 18,
+    "dementia": 44,
+    "learningDisability": 23,
+    "mentalHealth": 27,
+    "youngerAdults": 42,
+    "outstanding": 1,
+    "good": 46,
+    "requiresImprovement": 7,
+    "notRated": 8,
+    "noWebsite": 38,
+    "noWebsiteByType": {
+      "residential": 19,
+      "nursing": 7,
+      "homeCare": 13,
+      "dementia": 30
+    },
+    "topTowns": [
+      {
+        "key": "middlesbrough",
+        "services": 19
+      },
+      {
+        "key": "redcar",
+        "services": 19
+      },
+      {
+        "key": "saltburn by the sea",
+        "services": 14
+      },
+      {
+        "key": "guisborough",
+        "services": 7
+      },
+      {
+        "key": "stockton on tees",
+        "services": 2
+      },
+      {
+        "key": "middlesborough",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "middlesbrough",
+      "services": 19
+    },
+    "townPoints": [
+      {
+        "key": "middlesbrough",
+        "services": 19,
+        "noWebsite": 13,
+        "lat": 54.571,
+        "lng": -1.1773
+      },
+      {
+        "key": "redcar",
+        "services": 19,
+        "noWebsite": 10,
+        "lat": 54.6166,
+        "lng": -1.0779
+      },
+      {
+        "key": "saltburn by the sea",
+        "services": 14,
+        "noWebsite": 10,
+        "lat": 54.5795,
+        "lng": -0.9771
+      },
+      {
+        "key": "guisborough",
+        "services": 7,
+        "noWebsite": 4,
+        "lat": 54.5361,
+        "lng": -1.0503
+      },
+      {
+        "key": "stockton on tees",
+        "services": 2,
+        "noWebsite": 0,
+        "lat": 54.6166,
+        "lng": -1.0779
+      },
+      {
+        "key": "middlesborough",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 54.5616,
+        "lng": -1.1315
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "richmond-upon-thames": {
+    "services": 70,
+    "towns": 9,
+    "residential": 32,
+    "nursing": 13,
+    "homeCare": 25,
+    "dementia": 46,
+    "learningDisability": 40,
+    "mentalHealth": 21,
+    "youngerAdults": 47,
+    "outstanding": 1,
+    "good": 54,
+    "requiresImprovement": 2,
+    "notRated": 13,
+    "noWebsite": 29,
+    "noWebsiteByType": {
+      "residential": 15,
+      "nursing": 5,
+      "homeCare": 9,
+      "dementia": 20
+    },
+    "topTowns": [
+      {
+        "key": "twickenham",
+        "services": 22
+      },
+      {
+        "key": "richmond",
+        "services": 12
+      },
+      {
+        "key": "hampton",
+        "services": 10
+      },
+      {
+        "key": "teddington",
+        "services": 10
+      },
+      {
+        "key": "london",
+        "services": 7
+      },
+      {
+        "key": "whitton",
+        "services": 4
+      },
+      {
+        "key": "hounslow",
+        "services": 2
+      },
+      {
+        "key": "kingston upon thames",
+        "services": 2
+      }
+    ],
+    "busiestTown": {
+      "key": "twickenham",
+      "services": 22
+    },
+    "townPoints": [
+      {
+        "key": "twickenham",
+        "services": 22,
+        "noWebsite": 8,
+        "lat": 51.4499,
+        "lng": -0.3248
+      },
+      {
+        "key": "richmond",
+        "services": 12,
+        "noWebsite": 3,
+        "lat": 51.456,
+        "lng": -0.2906
+      },
+      {
+        "key": "teddington",
+        "services": 10,
+        "noWebsite": 6,
+        "lat": 51.4231,
+        "lng": -0.3353
+      },
+      {
+        "key": "london",
+        "services": 7,
+        "noWebsite": 2,
+        "lat": 51.446,
+        "lng": -0.3384
+      },
+      {
+        "key": "whitton",
+        "services": 4,
+        "noWebsite": 0,
+        "lat": 51.4494,
+        "lng": -0.378
+      },
+      {
+        "key": "hounslow",
+        "services": 2,
+        "noWebsite": 2,
+        "lat": 51.4562,
+        "lng": -0.3655
+      },
+      {
+        "key": "kingston upon thames",
+        "services": 2,
+        "noWebsite": 2,
+        "lat": 51.4157,
+        "lng": -0.3176
+      },
+      {
+        "key": "surrey",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.4192,
+        "lng": -0.3113
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "rochdale": {
+    "services": 115,
+    "towns": 3,
+    "residential": 48,
+    "nursing": 14,
+    "homeCare": 53,
+    "dementia": 79,
+    "learningDisability": 35,
+    "mentalHealth": 51,
+    "youngerAdults": 88,
+    "outstanding": 1,
+    "good": 58,
+    "requiresImprovement": 24,
+    "notRated": 32,
+    "noWebsite": 64,
+    "noWebsiteByType": {
+      "residential": 30,
+      "nursing": 7,
+      "homeCare": 27,
+      "dementia": 43
+    },
+    "topTowns": [
+      {
+        "key": "manchester",
+        "services": 19
+      },
+      {
+        "key": "heywood",
+        "services": 15
+      },
+      {
+        "key": "littleborough",
+        "services": 10
+      }
+    ],
+    "busiestTown": {
+      "key": "manchester",
+      "services": 19
+    },
+    "townPoints": [
+      {
+        "key": "manchester",
+        "services": 19,
+        "noWebsite": 10,
+        "lat": 53.5539,
+        "lng": -2.1942
+      },
+      {
+        "key": "heywood",
+        "services": 15,
+        "noWebsite": 10,
+        "lat": 53.5922,
+        "lng": -2.2076
+      },
+      {
+        "key": "littleborough",
+        "services": 10,
+        "noWebsite": 7,
+        "lat": 53.6452,
+        "lng": -2.0891
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "rotherham": {
+    "services": 138,
+    "towns": 4,
+    "residential": 56,
+    "nursing": 24,
+    "homeCare": 58,
+    "dementia": 83,
+    "learningDisability": 67,
+    "mentalHealth": 57,
+    "youngerAdults": 124,
+    "outstanding": 8,
+    "good": 85,
+    "requiresImprovement": 13,
+    "notRated": 30,
+    "noWebsite": 71,
+    "noWebsiteByType": {
+      "residential": 28,
+      "nursing": 14,
+      "homeCare": 29,
+      "dementia": 49
+    },
+    "topTowns": [
+      {
+        "key": "sheffield",
+        "services": 16
+      },
+      {
+        "key": "mexborough",
+        "services": 4
+      },
+      {
+        "key": "barnsley",
+        "services": 3
+      },
+      {
+        "key": "dinnington",
+        "services": 2
+      }
+    ],
+    "busiestTown": {
+      "key": "sheffield",
+      "services": 16
+    },
+    "townPoints": [
+      {
+        "key": "sheffield",
+        "services": 16,
+        "noWebsite": 10,
+        "lat": 53.3666,
+        "lng": -1.3574
+      },
+      {
+        "key": "mexborough",
+        "services": 4,
+        "noWebsite": 2,
+        "lat": 53.4785,
+        "lng": -1.307
+      },
+      {
+        "key": "barnsley",
+        "services": 3,
+        "noWebsite": 2,
+        "lat": 53.5098,
+        "lng": -1.3786
+      },
+      {
+        "key": "dinnington",
+        "services": 2,
+        "noWebsite": 1,
+        "lat": 53.3753,
+        "lng": -1.2344
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "rutland": {
+    "services": 24,
+    "towns": 2,
+    "residential": 8,
+    "nursing": 3,
+    "homeCare": 13,
+    "dementia": 16,
+    "learningDisability": 8,
+    "mentalHealth": 7,
+    "youngerAdults": 18,
+    "outstanding": 3,
+    "good": 15,
+    "requiresImprovement": 5,
+    "notRated": 1,
+    "noWebsite": 12,
+    "noWebsiteByType": {
+      "residential": 4,
+      "nursing": 0,
+      "homeCare": 8,
+      "dementia": 7
+    },
+    "topTowns": [
+      {
+        "key": "oakham",
+        "services": 21
+      },
+      {
+        "key": "stamford",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "oakham",
+      "services": 21
+    },
+    "townPoints": [
+      {
+        "key": "oakham",
+        "services": 21,
+        "noWebsite": 12,
+        "lat": 52.5875,
+        "lng": -0.7314
+      },
+      {
+        "key": "stamford",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 52.6711,
+        "lng": -0.5236
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "salford": {
+    "services": 100,
+    "towns": 4,
+    "residential": 29,
+    "nursing": 14,
+    "homeCare": 57,
+    "dementia": 68,
+    "learningDisability": 36,
+    "mentalHealth": 47,
+    "youngerAdults": 79,
+    "outstanding": 1,
+    "good": 56,
+    "requiresImprovement": 9,
+    "notRated": 34,
+    "noWebsite": 49,
+    "noWebsiteByType": {
+      "residential": 14,
+      "nursing": 7,
+      "homeCare": 28,
+      "dementia": 34
+    },
+    "topTowns": [
+      {
+        "key": "manchester",
+        "services": 47
+      },
+      {
+        "key": "eccles",
+        "services": 5
+      },
+      {
+        "key": "cadishead",
+        "services": 1
+      },
+      {
+        "key": "lancashire",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "manchester",
+      "services": 47
+    },
+    "townPoints": [
+      {
+        "key": "manchester",
+        "services": 47,
+        "noWebsite": 22,
+        "lat": 53.4848,
+        "lng": -2.3376
+      },
+      {
+        "key": "cadishead",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.4285,
+        "lng": -2.4349
+      },
+      {
+        "key": "lancashire",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.4848,
+        "lng": -2.3376
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "sandwell": {
     "services": 189,
@@ -9010,6 +13354,112 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "slough": {
+    "services": 85,
+    "towns": 1,
+    "residential": 10,
+    "nursing": 6,
+    "homeCare": 69,
+    "dementia": 68,
+    "learningDisability": 40,
+    "mentalHealth": 45,
+    "youngerAdults": 76,
+    "outstanding": 0,
+    "good": 22,
+    "requiresImprovement": 12,
+    "notRated": 51,
+    "noWebsite": 44,
+    "noWebsiteByType": {
+      "residential": 3,
+      "nursing": 1,
+      "homeCare": 40,
+      "dementia": 34
+    },
+    "topTowns": [
+      {
+        "key": "maidenhead",
+        "services": 2
+      }
+    ],
+    "busiestTown": {
+      "key": "maidenhead",
+      "services": 2
+    },
+    "townPoints": [
+      {
+        "key": "maidenhead",
+        "services": 2,
+        "noWebsite": 0,
+        "lat": 51.5193,
+        "lng": -0.6561
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "solihull": {
+    "services": 118,
+    "towns": 3,
+    "residential": 44,
+    "nursing": 16,
+    "homeCare": 58,
+    "dementia": 70,
+    "learningDisability": 55,
+    "mentalHealth": 49,
+    "youngerAdults": 87,
+    "outstanding": 2,
+    "good": 87,
+    "requiresImprovement": 11,
+    "notRated": 18,
+    "noWebsite": 59,
+    "noWebsiteByType": {
+      "residential": 19,
+      "nursing": 6,
+      "homeCare": 34,
+      "dementia": 36
+    },
+    "topTowns": [
+      {
+        "key": "birmingham",
+        "services": 42
+      },
+      {
+        "key": "coventry",
+        "services": 3
+      },
+      {
+        "key": "shirley",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "birmingham",
+      "services": 42
+    },
+    "townPoints": [
+      {
+        "key": "birmingham",
+        "services": 42,
+        "noWebsite": 25,
+        "lat": 52.4318,
+        "lng": -1.8175
+      },
+      {
+        "key": "coventry",
+        "services": 3,
+        "noWebsite": 0,
+        "lat": 52.3855,
+        "lng": -1.6483
+      },
+      {
+        "key": "shirley",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 52.3917,
+        "lng": -1.7831
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "somerset": {
     "services": 313,
     "towns": 32,
@@ -9416,6 +13866,92 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "south-tyneside": {
+    "services": 50,
+    "towns": 5,
+    "residential": 22,
+    "nursing": 11,
+    "homeCare": 17,
+    "dementia": 37,
+    "learningDisability": 23,
+    "mentalHealth": 24,
+    "youngerAdults": 36,
+    "outstanding": 3,
+    "good": 41,
+    "requiresImprovement": 2,
+    "notRated": 4,
+    "noWebsite": 21,
+    "noWebsiteByType": {
+      "residential": 4,
+      "nursing": 7,
+      "homeCare": 10,
+      "dementia": 17
+    },
+    "topTowns": [
+      {
+        "key": "south shields",
+        "services": 25
+      },
+      {
+        "key": "jarrow",
+        "services": 11
+      },
+      {
+        "key": "hebburn",
+        "services": 7
+      },
+      {
+        "key": "boldon colliery",
+        "services": 6
+      },
+      {
+        "key": "east boldon",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "south shields",
+      "services": 25
+    },
+    "townPoints": [
+      {
+        "key": "south shields",
+        "services": 25,
+        "noWebsite": 8,
+        "lat": 54.9884,
+        "lng": -1.4314
+      },
+      {
+        "key": "jarrow",
+        "services": 11,
+        "noWebsite": 7,
+        "lat": 54.9799,
+        "lng": -1.4932
+      },
+      {
+        "key": "hebburn",
+        "services": 7,
+        "noWebsite": 2,
+        "lat": 54.9737,
+        "lng": -1.5262
+      },
+      {
+        "key": "boldon colliery",
+        "services": 6,
+        "noWebsite": 3,
+        "lat": 54.9431,
+        "lng": -1.4712
+      },
+      {
+        "key": "east boldon",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 54.9464,
+        "lng": -1.4402
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "southampton": {
     "services": 153,
     "towns": 0,
@@ -9549,6 +14085,134 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "southwark": {
+    "services": 76,
+    "towns": 1,
+    "residential": 11,
+    "nursing": 3,
+    "homeCare": 62,
+    "dementia": 57,
+    "learningDisability": 34,
+    "mentalHealth": 40,
+    "youngerAdults": 68,
+    "outstanding": 1,
+    "good": 27,
+    "requiresImprovement": 11,
+    "notRated": 36,
+    "noWebsite": 39,
+    "noWebsiteByType": {
+      "residential": 5,
+      "nursing": 2,
+      "homeCare": 32,
+      "dementia": 32
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 76
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 76
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 76,
+        "noWebsite": 39,
+        "lat": 51.4807,
+        "lng": -0.095
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "st-helens": {
+    "services": 82,
+    "towns": 5,
+    "residential": 27,
+    "nursing": 14,
+    "homeCare": 41,
+    "dementia": 56,
+    "learningDisability": 30,
+    "mentalHealth": 36,
+    "youngerAdults": 53,
+    "outstanding": 2,
+    "good": 57,
+    "requiresImprovement": 5,
+    "notRated": 16,
+    "noWebsite": 42,
+    "noWebsiteByType": {
+      "residential": 11,
+      "nursing": 10,
+      "homeCare": 21,
+      "dementia": 29
+    },
+    "topTowns": [
+      {
+        "key": "newton le willows",
+        "services": 7
+      },
+      {
+        "key": "prescot",
+        "services": 6
+      },
+      {
+        "key": "wigan",
+        "services": 3
+      },
+      {
+        "key": "newton le williows",
+        "services": 1
+      },
+      {
+        "key": "warrington",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "newton le willows",
+      "services": 7
+    },
+    "townPoints": [
+      {
+        "key": "newton le willows",
+        "services": 7,
+        "noWebsite": 3,
+        "lat": 53.4525,
+        "lng": -2.6393
+      },
+      {
+        "key": "prescot",
+        "services": 6,
+        "noWebsite": 4,
+        "lat": 53.4159,
+        "lng": -2.7781
+      },
+      {
+        "key": "wigan",
+        "services": 3,
+        "noWebsite": 1,
+        "lat": 53.4844,
+        "lng": -2.6676
+      },
+      {
+        "key": "newton le williows",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.4694,
+        "lng": -2.6268
+      },
+      {
+        "key": "warrington",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 53.4267,
+        "lng": -2.7234
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "staffordshire": {
     "services": 436,
@@ -9801,6 +14465,123 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "stockport": {
+    "services": 138,
+    "towns": 3,
+    "residential": 47,
+    "nursing": 20,
+    "homeCare": 72,
+    "dementia": 99,
+    "learningDisability": 49,
+    "mentalHealth": 62,
+    "youngerAdults": 97,
+    "outstanding": 1,
+    "good": 83,
+    "requiresImprovement": 24,
+    "notRated": 30,
+    "noWebsite": 57,
+    "noWebsiteByType": {
+      "residential": 17,
+      "nursing": 6,
+      "homeCare": 35,
+      "dementia": 38
+    },
+    "topTowns": [
+      {
+        "key": "cheadle",
+        "services": 24
+      },
+      {
+        "key": "manchester",
+        "services": 2
+      },
+      {
+        "key": "gatley",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "cheadle",
+      "services": 24
+    },
+    "townPoints": [
+      {
+        "key": "cheadle",
+        "services": 24,
+        "noWebsite": 9,
+        "lat": 53.377,
+        "lng": -2.1867
+      },
+      {
+        "key": "manchester",
+        "services": 2,
+        "noWebsite": 0,
+        "lat": 53.429,
+        "lng": -2.1246
+      },
+      {
+        "key": "gatley",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.3927,
+        "lng": -2.2327
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "stockton-on-tees": {
+    "services": 100,
+    "towns": 2,
+    "residential": 42,
+    "nursing": 17,
+    "homeCare": 42,
+    "dementia": 64,
+    "learningDisability": 51,
+    "mentalHealth": 54,
+    "youngerAdults": 80,
+    "outstanding": 4,
+    "good": 69,
+    "requiresImprovement": 5,
+    "notRated": 22,
+    "noWebsite": 52,
+    "noWebsiteByType": {
+      "residential": 20,
+      "nursing": 8,
+      "homeCare": 24,
+      "dementia": 33
+    },
+    "topTowns": [
+      {
+        "key": "billingham",
+        "services": 7
+      },
+      {
+        "key": "yarm",
+        "services": 4
+      }
+    ],
+    "busiestTown": {
+      "key": "billingham",
+      "services": 7
+    },
+    "townPoints": [
+      {
+        "key": "billingham",
+        "services": 7,
+        "noWebsite": 2,
+        "lat": 54.6012,
+        "lng": -1.2656
+      },
+      {
+        "key": "yarm",
+        "services": 4,
+        "noWebsite": 1,
+        "lat": 54.4819,
+        "lng": -1.339
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "stoke-on-trent": {
     "services": 165,
@@ -10099,6 +14880,81 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "sunderland": {
+    "services": 130,
+    "towns": 4,
+    "residential": 60,
+    "nursing": 30,
+    "homeCare": 43,
+    "dementia": 87,
+    "learningDisability": 54,
+    "mentalHealth": 47,
+    "youngerAdults": 95,
+    "outstanding": 8,
+    "good": 110,
+    "requiresImprovement": 4,
+    "notRated": 8,
+    "noWebsite": 54,
+    "noWebsiteByType": {
+      "residential": 20,
+      "nursing": 13,
+      "homeCare": 21,
+      "dementia": 41
+    },
+    "topTowns": [
+      {
+        "key": "houghton le spring",
+        "services": 19
+      },
+      {
+        "key": "washington",
+        "services": 10
+      },
+      {
+        "key": "hetton le hole",
+        "services": 1
+      },
+      {
+        "key": "new herrington",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "houghton le spring",
+      "services": 19
+    },
+    "townPoints": [
+      {
+        "key": "houghton le spring",
+        "services": 19,
+        "noWebsite": 12,
+        "lat": 54.8254,
+        "lng": -1.4501
+      },
+      {
+        "key": "washington",
+        "services": 10,
+        "noWebsite": 4,
+        "lat": 54.8957,
+        "lng": -1.5005
+      },
+      {
+        "key": "hetton le hole",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 54.8294,
+        "lng": -1.4513
+      },
+      {
+        "key": "new herrington",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 54.8677,
+        "lng": -1.483
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "surrey": {
     "services": 663,
@@ -10611,6 +15467,631 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "sutton": {
+    "services": 121,
+    "towns": 8,
+    "residential": 49,
+    "nursing": 22,
+    "homeCare": 52,
+    "dementia": 72,
+    "learningDisability": 63,
+    "mentalHealth": 54,
+    "youngerAdults": 99,
+    "outstanding": 4,
+    "good": 99,
+    "requiresImprovement": 4,
+    "notRated": 14,
+    "noWebsite": 57,
+    "noWebsiteByType": {
+      "residential": 21,
+      "nursing": 7,
+      "homeCare": 30,
+      "dementia": 39
+    },
+    "topTowns": [
+      {
+        "key": "wallington",
+        "services": 26
+      },
+      {
+        "key": "carshalton",
+        "services": 18
+      },
+      {
+        "key": "worcester park",
+        "services": 4
+      },
+      {
+        "key": "mitcham",
+        "services": 2
+      },
+      {
+        "key": "morden",
+        "services": 2
+      },
+      {
+        "key": "cheam",
+        "services": 1
+      },
+      {
+        "key": "coulsdon",
+        "services": 1
+      },
+      {
+        "key": "croydon",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "wallington",
+      "services": 26
+    },
+    "townPoints": [
+      {
+        "key": "wallington",
+        "services": 26,
+        "noWebsite": 16,
+        "lat": 51.3599,
+        "lng": -0.1322
+      },
+      {
+        "key": "carshalton",
+        "services": 18,
+        "noWebsite": 10,
+        "lat": 51.3583,
+        "lng": -0.1578
+      },
+      {
+        "key": "worcester park",
+        "services": 4,
+        "noWebsite": 0,
+        "lat": 51.3776,
+        "lng": -0.2393
+      },
+      {
+        "key": "mitcham",
+        "services": 2,
+        "noWebsite": 2,
+        "lat": 51.3841,
+        "lng": -0.1649
+      },
+      {
+        "key": "morden",
+        "services": 2,
+        "noWebsite": 1,
+        "lat": 51.3871,
+        "lng": -0.1833
+      },
+      {
+        "key": "cheam",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.3398,
+        "lng": -0.2079
+      },
+      {
+        "key": "coulsdon",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.3296,
+        "lng": -0.1529
+      },
+      {
+        "key": "croydon",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.3891,
+        "lng": -0.1389
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "swindon": {
+    "services": 101,
+    "towns": 1,
+    "residential": 33,
+    "nursing": 13,
+    "homeCare": 55,
+    "dementia": 70,
+    "learningDisability": 54,
+    "mentalHealth": 44,
+    "youngerAdults": 75,
+    "outstanding": 6,
+    "good": 61,
+    "requiresImprovement": 11,
+    "notRated": 22,
+    "noWebsite": 47,
+    "noWebsiteByType": {
+      "residential": 17,
+      "nursing": 7,
+      "homeCare": 23,
+      "dementia": 29
+    },
+    "topTowns": [
+      {
+        "key": "highworth",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "highworth",
+      "services": 1
+    },
+    "townPoints": [
+      {
+        "key": "highworth",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.6254,
+        "lng": -1.7134
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "tameside": {
+    "services": 66,
+    "towns": 5,
+    "residential": 26,
+    "nursing": 9,
+    "homeCare": 31,
+    "dementia": 53,
+    "learningDisability": 18,
+    "mentalHealth": 27,
+    "youngerAdults": 50,
+    "outstanding": 2,
+    "good": 37,
+    "requiresImprovement": 12,
+    "notRated": 14,
+    "noWebsite": 29,
+    "noWebsiteByType": {
+      "residential": 9,
+      "nursing": 5,
+      "homeCare": 15,
+      "dementia": 22
+    },
+    "topTowns": [
+      {
+        "key": "manchester",
+        "services": 18
+      },
+      {
+        "key": "ashton under lyne",
+        "services": 17
+      },
+      {
+        "key": "hyde",
+        "services": 16
+      },
+      {
+        "key": "stalybridge",
+        "services": 10
+      },
+      {
+        "key": "dukinfield",
+        "services": 5
+      }
+    ],
+    "busiestTown": {
+      "key": "manchester",
+      "services": 18
+    },
+    "townPoints": [
+      {
+        "key": "manchester",
+        "services": 18,
+        "noWebsite": 9,
+        "lat": 53.4757,
+        "lng": -2.1616
+      },
+      {
+        "key": "ashton under lyne",
+        "services": 17,
+        "noWebsite": 7,
+        "lat": 53.5168,
+        "lng": -2.046
+      },
+      {
+        "key": "hyde",
+        "services": 16,
+        "noWebsite": 8,
+        "lat": 53.4568,
+        "lng": -2.0833
+      },
+      {
+        "key": "stalybridge",
+        "services": 10,
+        "noWebsite": 5,
+        "lat": 53.486,
+        "lng": -2.0684
+      },
+      {
+        "key": "dukinfield",
+        "services": 5,
+        "noWebsite": 0,
+        "lat": 53.47,
+        "lng": -2.0723
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "telford-and-wrekin": {
+    "services": 107,
+    "towns": 4,
+    "residential": 26,
+    "nursing": 13,
+    "homeCare": 68,
+    "dementia": 68,
+    "learningDisability": 55,
+    "mentalHealth": 52,
+    "youngerAdults": 87,
+    "outstanding": 1,
+    "good": 54,
+    "requiresImprovement": 14,
+    "notRated": 38,
+    "noWebsite": 60,
+    "noWebsiteByType": {
+      "residential": 16,
+      "nursing": 3,
+      "homeCare": 41,
+      "dementia": 37
+    },
+    "topTowns": [
+      {
+        "key": "telford",
+        "services": 95
+      },
+      {
+        "key": "newport",
+        "services": 10
+      },
+      {
+        "key": "priorslee",
+        "services": 1
+      },
+      {
+        "key": "shropshire",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "telford",
+      "services": 95
+    },
+    "townPoints": [
+      {
+        "key": "telford",
+        "services": 95,
+        "noWebsite": 54,
+        "lat": 52.6374,
+        "lng": -2.4454
+      },
+      {
+        "key": "newport",
+        "services": 10,
+        "noWebsite": 5,
+        "lat": 52.7688,
+        "lng": -2.3798
+      },
+      {
+        "key": "priorslee",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 52.6844,
+        "lng": -2.4244
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "thurrock": {
+    "services": 106,
+    "towns": 11,
+    "residential": 22,
+    "nursing": 5,
+    "homeCare": 79,
+    "dementia": 73,
+    "learningDisability": 53,
+    "mentalHealth": 52,
+    "youngerAdults": 98,
+    "outstanding": 1,
+    "good": 55,
+    "requiresImprovement": 8,
+    "notRated": 42,
+    "noWebsite": 61,
+    "noWebsiteByType": {
+      "residential": 15,
+      "nursing": 5,
+      "homeCare": 41,
+      "dementia": 40
+    },
+    "topTowns": [
+      {
+        "key": "grays",
+        "services": 58
+      },
+      {
+        "key": "tilbury",
+        "services": 21
+      },
+      {
+        "key": "south ockendon",
+        "services": 12
+      },
+      {
+        "key": "stanford le hope",
+        "services": 7
+      },
+      {
+        "key": "chadwell st mary",
+        "services": 2
+      },
+      {
+        "key": "corringham",
+        "services": 1
+      },
+      {
+        "key": "essex",
+        "services": 1
+      },
+      {
+        "key": "linford",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "grays",
+      "services": 58
+    },
+    "townPoints": [
+      {
+        "key": "grays",
+        "services": 58,
+        "noWebsite": 30,
+        "lat": 51.4887,
+        "lng": 0.3363
+      },
+      {
+        "key": "tilbury",
+        "services": 21,
+        "noWebsite": 12,
+        "lat": 51.4618,
+        "lng": 0.3653
+      },
+      {
+        "key": "south ockendon",
+        "services": 12,
+        "noWebsite": 9,
+        "lat": 51.4989,
+        "lng": 0.2547
+      },
+      {
+        "key": "stanford le hope",
+        "services": 7,
+        "noWebsite": 3,
+        "lat": 51.503,
+        "lng": 0.4298
+      },
+      {
+        "key": "chadwell st mary",
+        "services": 2,
+        "noWebsite": 2,
+        "lat": 51.4816,
+        "lng": 0.3723
+      },
+      {
+        "key": "corringham",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.5259,
+        "lng": 0.4487
+      },
+      {
+        "key": "essex",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.4787,
+        "lng": 0.4156
+      },
+      {
+        "key": "linford",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.4899,
+        "lng": 0.4097
+      },
+      {
+        "key": "purfleet on thames",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.4884,
+        "lng": 0.2363
+      },
+      {
+        "key": "south ockenden",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.5081,
+        "lng": 0.2798
+      },
+      {
+        "key": "upminster",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.5468,
+        "lng": 0.36
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "torbay": {
+    "services": 103,
+    "towns": 3,
+    "residential": 61,
+    "nursing": 14,
+    "homeCare": 29,
+    "dementia": 64,
+    "learningDisability": 36,
+    "mentalHealth": 41,
+    "youngerAdults": 65,
+    "outstanding": 5,
+    "good": 69,
+    "requiresImprovement": 14,
+    "notRated": 14,
+    "noWebsite": 54,
+    "noWebsiteByType": {
+      "residential": 31,
+      "nursing": 6,
+      "homeCare": 17,
+      "dementia": 29
+    },
+    "topTowns": [
+      {
+        "key": "torquay",
+        "services": 61
+      },
+      {
+        "key": "paignton",
+        "services": 33
+      },
+      {
+        "key": "brixham",
+        "services": 9
+      }
+    ],
+    "busiestTown": {
+      "key": "torquay",
+      "services": 61
+    },
+    "townPoints": [
+      {
+        "key": "torquay",
+        "services": 61,
+        "noWebsite": 33,
+        "lat": 50.4644,
+        "lng": -3.5513
+      },
+      {
+        "key": "paignton",
+        "services": 33,
+        "noWebsite": 17,
+        "lat": 50.4398,
+        "lng": -3.5671
+      },
+      {
+        "key": "brixham",
+        "services": 9,
+        "noWebsite": 4,
+        "lat": 50.3889,
+        "lng": -3.5257
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "tower-hamlets": {
+    "services": 86,
+    "towns": 1,
+    "residential": 8,
+    "nursing": 2,
+    "homeCare": 76,
+    "dementia": 68,
+    "learningDisability": 48,
+    "mentalHealth": 58,
+    "youngerAdults": 74,
+    "outstanding": 1,
+    "good": 44,
+    "requiresImprovement": 4,
+    "notRated": 37,
+    "noWebsite": 39,
+    "noWebsiteByType": {
+      "residential": 6,
+      "nursing": 1,
+      "homeCare": 32,
+      "dementia": 31
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 86
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 86
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 86,
+        "noWebsite": 39,
+        "lat": 51.5427,
+        "lng": -0.025
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "trafford": {
+    "services": 119,
+    "towns": 3,
+    "residential": 39,
+    "nursing": 17,
+    "homeCare": 64,
+    "dementia": 78,
+    "learningDisability": 48,
+    "mentalHealth": 44,
+    "youngerAdults": 86,
+    "outstanding": 10,
+    "good": 67,
+    "requiresImprovement": 11,
+    "notRated": 29,
+    "noWebsite": 52,
+    "noWebsiteByType": {
+      "residential": 19,
+      "nursing": 6,
+      "homeCare": 27,
+      "dementia": 40
+    },
+    "topTowns": [
+      {
+        "key": "manchester",
+        "services": 48
+      },
+      {
+        "key": "altrincham",
+        "services": 39
+      },
+      {
+        "key": "sale",
+        "services": 31
+      }
+    ],
+    "busiestTown": {
+      "key": "manchester",
+      "services": 48
+    },
+    "townPoints": [
+      {
+        "key": "manchester",
+        "services": 48,
+        "noWebsite": 21,
+        "lat": 53.4609,
+        "lng": -2.2881
+      },
+      {
+        "key": "altrincham",
+        "services": 39,
+        "noWebsite": 19,
+        "lat": 53.3782,
+        "lng": -2.3624
+      },
+      {
+        "key": "sale",
+        "services": 31,
+        "noWebsite": 11,
+        "lat": 53.417,
+        "lng": -2.3229
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "wakefield": {
     "services": 181,
     "towns": 6,
@@ -10782,6 +16263,154 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "waltham-forest": {
+    "services": 104,
+    "towns": 3,
+    "residential": 42,
+    "nursing": 4,
+    "homeCare": 58,
+    "dementia": 67,
+    "learningDisability": 50,
+    "mentalHealth": 52,
+    "youngerAdults": 67,
+    "outstanding": 2,
+    "good": 71,
+    "requiresImprovement": 7,
+    "notRated": 24,
+    "noWebsite": 52,
+    "noWebsiteByType": {
+      "residential": 23,
+      "nursing": 3,
+      "homeCare": 26,
+      "dementia": 30
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 102
+      },
+      {
+        "key": "leyton",
+        "services": 1
+      },
+      {
+        "key": "woodford green",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 102
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 102,
+        "noWebsite": 52,
+        "lat": 51.5635,
+        "lng": -0.0144
+      },
+      {
+        "key": "leyton",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.5683,
+        "lng": -0.0237
+      },
+      {
+        "key": "woodford green",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.6038,
+        "lng": 0.0038
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "wandsworth": {
+    "services": 67,
+    "towns": 1,
+    "residential": 13,
+    "nursing": 13,
+    "homeCare": 41,
+    "dementia": 45,
+    "learningDisability": 33,
+    "mentalHealth": 34,
+    "youngerAdults": 52,
+    "outstanding": 4,
+    "good": 45,
+    "requiresImprovement": 2,
+    "notRated": 16,
+    "noWebsite": 25,
+    "noWebsiteByType": {
+      "residential": 5,
+      "nursing": 2,
+      "homeCare": 18,
+      "dementia": 17
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 67
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 67
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 67,
+        "noWebsite": 25,
+        "lat": 51.4578,
+        "lng": -0.1833
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "warrington": {
+    "services": 99,
+    "towns": 1,
+    "residential": 33,
+    "nursing": 21,
+    "homeCare": 45,
+    "dementia": 60,
+    "learningDisability": 41,
+    "mentalHealth": 44,
+    "youngerAdults": 75,
+    "outstanding": 2,
+    "good": 61,
+    "requiresImprovement": 12,
+    "notRated": 23,
+    "noWebsite": 51,
+    "noWebsiteByType": {
+      "residential": 12,
+      "nursing": 9,
+      "homeCare": 30,
+      "dementia": 34
+    },
+    "topTowns": [
+      {
+        "key": "lymm",
+        "services": 4
+      }
+    ],
+    "busiestTown": {
+      "key": "lymm",
+      "services": 4
+    },
+    "townPoints": [
+      {
+        "key": "lymm",
+        "services": 4,
+        "noWebsite": 1,
+        "lat": 53.3832,
+        "lng": -2.4868
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "warwickshire": {
     "services": 309,
@@ -11013,6 +16642,85 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "west-berkshire": {
+    "services": 85,
+    "towns": 5,
+    "residential": 35,
+    "nursing": 11,
+    "homeCare": 39,
+    "dementia": 48,
+    "learningDisability": 46,
+    "mentalHealth": 22,
+    "youngerAdults": 69,
+    "outstanding": 1,
+    "good": 58,
+    "requiresImprovement": 4,
+    "notRated": 22,
+    "noWebsite": 24,
+    "noWebsiteByType": {
+      "residential": 7,
+      "nursing": 4,
+      "homeCare": 13,
+      "dementia": 17
+    },
+    "topTowns": [
+      {
+        "key": "reading",
+        "services": 36
+      },
+      {
+        "key": "newbury",
+        "services": 26
+      },
+      {
+        "key": "thatcham",
+        "services": 12
+      },
+      {
+        "key": "hungerford",
+        "services": 10
+      },
+      {
+        "key": "whitchurch on thames",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "reading",
+      "services": 36
+    },
+    "townPoints": [
+      {
+        "key": "reading",
+        "services": 36,
+        "noWebsite": 7,
+        "lat": 51.474,
+        "lng": -1.039
+      },
+      {
+        "key": "newbury",
+        "services": 26,
+        "noWebsite": 8,
+        "lat": 51.406,
+        "lng": -1.3256
+      },
+      {
+        "key": "thatcham",
+        "services": 12,
+        "noWebsite": 3,
+        "lat": 51.3828,
+        "lng": -1.3128
+      },
+      {
+        "key": "hungerford",
+        "services": 10,
+        "noWebsite": 5,
+        "lat": 51.4159,
+        "lng": -1.5147
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "west-northamptonshire": {
     "services": 277,
@@ -11483,6 +17191,324 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "westminster": {
+    "services": 30,
+    "towns": 1,
+    "residential": 2,
+    "nursing": 7,
+    "homeCare": 21,
+    "dementia": 22,
+    "learningDisability": 9,
+    "mentalHealth": 12,
+    "youngerAdults": 24,
+    "outstanding": 2,
+    "good": 15,
+    "requiresImprovement": 0,
+    "notRated": 13,
+    "noWebsite": 14,
+    "noWebsiteByType": {
+      "residential": 1,
+      "nursing": 4,
+      "homeCare": 9,
+      "dementia": 9
+    },
+    "topTowns": [
+      {
+        "key": "london",
+        "services": 30
+      }
+    ],
+    "busiestTown": {
+      "key": "london",
+      "services": 30
+    },
+    "townPoints": [
+      {
+        "key": "london",
+        "services": 30,
+        "noWebsite": 14,
+        "lat": 51.5312,
+        "lng": -0.175
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "westmorland-and-furness": {
+    "services": 103,
+    "towns": 15,
+    "residential": 43,
+    "nursing": 18,
+    "homeCare": 44,
+    "dementia": 76,
+    "learningDisability": 38,
+    "mentalHealth": 34,
+    "youngerAdults": 72,
+    "outstanding": 4,
+    "good": 70,
+    "requiresImprovement": 7,
+    "notRated": 22,
+    "noWebsite": 56,
+    "noWebsiteByType": {
+      "residential": 28,
+      "nursing": 7,
+      "homeCare": 21,
+      "dementia": 39
+    },
+    "topTowns": [
+      {
+        "key": "kendal",
+        "services": 26
+      },
+      {
+        "key": "barrow in furness",
+        "services": 24
+      },
+      {
+        "key": "penrith",
+        "services": 13
+      },
+      {
+        "key": "ulverston",
+        "services": 9
+      },
+      {
+        "key": "grange over sands",
+        "services": 8
+      },
+      {
+        "key": "carnforth",
+        "services": 6
+      },
+      {
+        "key": "milnthorpe",
+        "services": 6
+      },
+      {
+        "key": "dalton in furness",
+        "services": 2
+      }
+    ],
+    "busiestTown": {
+      "key": "kendal",
+      "services": 26
+    },
+    "townPoints": [
+      {
+        "key": "kendal",
+        "services": 26,
+        "noWebsite": 11,
+        "lat": 54.3367,
+        "lng": -2.759
+      },
+      {
+        "key": "barrow in furness",
+        "services": 24,
+        "noWebsite": 14,
+        "lat": 54.1152,
+        "lng": -3.2114
+      },
+      {
+        "key": "penrith",
+        "services": 13,
+        "noWebsite": 7,
+        "lat": 54.6627,
+        "lng": -2.752
+      },
+      {
+        "key": "ulverston",
+        "services": 9,
+        "noWebsite": 5,
+        "lat": 54.2488,
+        "lng": -3.0135
+      },
+      {
+        "key": "grange over sands",
+        "services": 8,
+        "noWebsite": 4,
+        "lat": 54.1835,
+        "lng": -2.9235
+      },
+      {
+        "key": "carnforth",
+        "services": 6,
+        "noWebsite": 3,
+        "lat": 54.2922,
+        "lng": -2.5702
+      },
+      {
+        "key": "milnthorpe",
+        "services": 6,
+        "noWebsite": 5,
+        "lat": 54.225,
+        "lng": -2.7732
+      },
+      {
+        "key": "dalton in furness",
+        "services": 2,
+        "noWebsite": 0,
+        "lat": 54.1565,
+        "lng": -3.1793
+      },
+      {
+        "key": "kirkby stephen",
+        "services": 2,
+        "noWebsite": 1,
+        "lat": 54.4745,
+        "lng": -2.3513
+      },
+      {
+        "key": "windermere",
+        "services": 2,
+        "noWebsite": 2,
+        "lat": 54.3718,
+        "lng": -2.8996
+      },
+      {
+        "key": "alston",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 54.812,
+        "lng": -2.4394
+      },
+      {
+        "key": "appleby in westmorland",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 54.573,
+        "lng": -2.4812
+      },
+      {
+        "key": "askam in furness",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 54.1889,
+        "lng": -3.1982
+      },
+      {
+        "key": "coniston",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 54.3698,
+        "lng": -3.0758
+      },
+      {
+        "key": "sedbergh",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 54.3227,
+        "lng": -2.5202
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
+  "wigan": {
+    "services": 103,
+    "towns": 7,
+    "residential": 32,
+    "nursing": 26,
+    "homeCare": 46,
+    "dementia": 81,
+    "learningDisability": 28,
+    "mentalHealth": 43,
+    "youngerAdults": 83,
+    "outstanding": 10,
+    "good": 67,
+    "requiresImprovement": 6,
+    "notRated": 20,
+    "noWebsite": 45,
+    "noWebsiteByType": {
+      "residential": 11,
+      "nursing": 7,
+      "homeCare": 27,
+      "dementia": 36
+    },
+    "topTowns": [
+      {
+        "key": "leigh",
+        "services": 17
+      },
+      {
+        "key": "manchester",
+        "services": 9
+      },
+      {
+        "key": "warrington",
+        "services": 4
+      },
+      {
+        "key": "atherton",
+        "services": 1
+      },
+      {
+        "key": "nr warrington",
+        "services": 1
+      },
+      {
+        "key": "standish",
+        "services": 1
+      },
+      {
+        "key": "tyldesley",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "leigh",
+      "services": 17
+    },
+    "townPoints": [
+      {
+        "key": "leigh",
+        "services": 17,
+        "noWebsite": 8,
+        "lat": 53.4965,
+        "lng": -2.5171
+      },
+      {
+        "key": "manchester",
+        "services": 9,
+        "noWebsite": 7,
+        "lat": 53.5143,
+        "lng": -2.468
+      },
+      {
+        "key": "warrington",
+        "services": 4,
+        "noWebsite": 1,
+        "lat": 53.4725,
+        "lng": -2.5757
+      },
+      {
+        "key": "atherton",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 53.5244,
+        "lng": -2.4963
+      },
+      {
+        "key": "nr warrington",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.4648,
+        "lng": -2.573
+      },
+      {
+        "key": "standish",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.5925,
+        "lng": -2.6348
+      },
+      {
+        "key": "tyldesley",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.5131,
+        "lng": -2.4744
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "wiltshire": {
     "services": 315,
     "towns": 23,
@@ -11707,6 +17733,125 @@
     ],
     "countedAt": "2026-09-26"
   },
+  "windsor-and-maidenhead": {
+    "services": 74,
+    "towns": 8,
+    "residential": 22,
+    "nursing": 22,
+    "homeCare": 31,
+    "dementia": 53,
+    "learningDisability": 21,
+    "mentalHealth": 23,
+    "youngerAdults": 60,
+    "outstanding": 6,
+    "good": 36,
+    "requiresImprovement": 15,
+    "notRated": 16,
+    "noWebsite": 25,
+    "noWebsiteByType": {
+      "residential": 4,
+      "nursing": 8,
+      "homeCare": 14,
+      "dementia": 20
+    },
+    "topTowns": [
+      {
+        "key": "maidenhead",
+        "services": 33
+      },
+      {
+        "key": "windsor",
+        "services": 20
+      },
+      {
+        "key": "ascot",
+        "services": 13
+      },
+      {
+        "key": "slough",
+        "services": 3
+      },
+      {
+        "key": "old windsor",
+        "services": 2
+      },
+      {
+        "key": "datchet",
+        "services": 1
+      },
+      {
+        "key": "marlow",
+        "services": 1
+      },
+      {
+        "key": "staines",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "maidenhead",
+      "services": 33
+    },
+    "townPoints": [
+      {
+        "key": "maidenhead",
+        "services": 33,
+        "noWebsite": 9,
+        "lat": 51.4816,
+        "lng": -0.6924
+      },
+      {
+        "key": "windsor",
+        "services": 20,
+        "noWebsite": 8,
+        "lat": 51.4848,
+        "lng": -0.6397
+      },
+      {
+        "key": "ascot",
+        "services": 13,
+        "noWebsite": 7,
+        "lat": 51.3984,
+        "lng": -0.6469
+      },
+      {
+        "key": "slough",
+        "services": 3,
+        "noWebsite": 1,
+        "lat": 51.4833,
+        "lng": -0.5796
+      },
+      {
+        "key": "old windsor",
+        "services": 2,
+        "noWebsite": 0,
+        "lat": 51.4584,
+        "lng": -0.5799
+      },
+      {
+        "key": "datchet",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.4751,
+        "lng": -0.5603
+      },
+      {
+        "key": "marlow",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.565,
+        "lng": -0.7725
+      },
+      {
+        "key": "staines",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.4582,
+        "lng": -0.5516
+      }
+    ],
+    "countedAt": "2026-09-28"
+  },
   "wirral": {
     "services": 164,
     "towns": 8,
@@ -11825,6 +17970,103 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "wokingham": {
+    "services": 95,
+    "towns": 6,
+    "residential": 34,
+    "nursing": 12,
+    "homeCare": 49,
+    "dementia": 62,
+    "learningDisability": 48,
+    "mentalHealth": 24,
+    "youngerAdults": 70,
+    "outstanding": 8,
+    "good": 58,
+    "requiresImprovement": 7,
+    "notRated": 21,
+    "noWebsite": 34,
+    "noWebsiteByType": {
+      "residential": 9,
+      "nursing": 2,
+      "homeCare": 23,
+      "dementia": 22
+    },
+    "topTowns": [
+      {
+        "key": "reading",
+        "services": 36
+      },
+      {
+        "key": "crowthorne",
+        "services": 14
+      },
+      {
+        "key": "finchampstead",
+        "services": 1
+      },
+      {
+        "key": "henley on thames",
+        "services": 1
+      },
+      {
+        "key": "shinfield",
+        "services": 1
+      },
+      {
+        "key": "twyford",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "reading",
+      "services": 36
+    },
+    "townPoints": [
+      {
+        "key": "reading",
+        "services": 36,
+        "noWebsite": 13,
+        "lat": 51.4412,
+        "lng": -0.9012
+      },
+      {
+        "key": "crowthorne",
+        "services": 14,
+        "noWebsite": 0,
+        "lat": 51.3763,
+        "lng": -0.8176
+      },
+      {
+        "key": "finchampstead",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.374,
+        "lng": -0.8673
+      },
+      {
+        "key": "henley on thames",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.5356,
+        "lng": -0.8963
+      },
+      {
+        "key": "shinfield",
+        "services": 1,
+        "noWebsite": 1,
+        "lat": 51.41,
+        "lng": -0.9485
+      },
+      {
+        "key": "twyford",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 51.4778,
+        "lng": -0.8702
+      }
+    ],
+    "countedAt": "2026-09-28"
   },
   "wolverhampton": {
     "services": 206,
@@ -12074,5 +18316,47 @@
       }
     ],
     "countedAt": "2026-09-26"
+  },
+  "york": {
+    "services": 84,
+    "towns": 1,
+    "residential": 27,
+    "nursing": 14,
+    "homeCare": 43,
+    "dementia": 54,
+    "learningDisability": 33,
+    "mentalHealth": 34,
+    "youngerAdults": 65,
+    "outstanding": 3,
+    "good": 52,
+    "requiresImprovement": 8,
+    "notRated": 21,
+    "noWebsite": 45,
+    "noWebsiteByType": {
+      "residential": 15,
+      "nursing": 5,
+      "homeCare": 25,
+      "dementia": 26
+    },
+    "topTowns": [
+      {
+        "key": "grimston",
+        "services": 1
+      }
+    ],
+    "busiestTown": {
+      "key": "grimston",
+      "services": 1
+    },
+    "townPoints": [
+      {
+        "key": "grimston",
+        "services": 1,
+        "noWebsite": 0,
+        "lat": 53.957,
+        "lng": -1.0039
+      }
+    ],
+    "countedAt": "2026-09-28"
   }
 }

@@ -218,6 +218,20 @@ export function pctNoWebsite(stats: CountyStats) {
   return pct(stats.noWebsite, stats.services)
 }
 
+/**
+ * London boroughs and single cities come out of CareAssura as one town or none (the town
+ * matching the area name is not counted), so "across 1 towns" and a busiest town that is
+ * really the whole city would both be wrong. Town level copy needs at least two towns.
+ */
+export function hasTowns(stats: CountyStats) {
+  return stats.towns >= 2
+}
+
+/** The busiest town, only where the area really is made of towns. */
+export function mainTown(stats: CountyStats) {
+  return hasTowns(stats) ? stats.busiestTown : null
+}
+
 /** A rounded percentage that never divides by zero. */
 export function pct(part: number, whole: number) {
   if (!whole) return 0

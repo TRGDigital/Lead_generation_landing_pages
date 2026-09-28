@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { applyPageSeo } from '@/lib/page-seo'
-import { getCounty, countySlugs, getCountyFigures, pct, pctNoWebsite } from '@/lib/locations'
+import { getCounty, countySlugs, getCountyFigures, mainTown, pct, pctNoWebsite } from '@/lib/locations'
 import { countySeo } from '@/lib/county-seo'
 import { CountyMap } from '@/components/marketing/CountyMap'
 import { CareSiteMock } from '@/components/marketing/county/HeroMocks'
@@ -96,13 +96,12 @@ export default async function NewCareWebsiteCountyPage({ params }: Props) {
 
   const noSiteShare = pctNoWebsite(stats)
   const withSite = stats.services - stats.noWebsite
-  const busiest = stats.busiestTown
+  const busiest = mainTown(stats)
   const homeCareShare = pct(stats.homeCare, stats.services)
   const nurseNoSite = stats.noWebsiteByType.nursing
   const resNoSite = stats.noWebsiteByType.residential
   const homeNoSite = stats.noWebsiteByType.homeCare
   const dementiaNoSite = stats.noWebsiteByType.dementia
-  const topFour = stats.topTowns.slice(0, 4)
 
   return (
     <>
@@ -137,7 +136,7 @@ export default async function NewCareWebsiteCountyPage({ params }: Props) {
         points={['Built from scratch, no templates', 'Live in six to eight weeks', 'Fixed price, you own it']}
         primary={{ label: 'Get an audit of your current site', href: '/site-audit' }}
         secondary={{ label: 'Tell us about your service', href: '#enquire' }}
-        mock={<CareSiteMock townName={busiest?.name ?? topFour[0]?.name ?? county.name} countyName={county.name} />}
+        mock={<CareSiteMock townName={busiest?.name ?? county.name} countyName={county.name} />}
       />
 
       <DarkStats
@@ -435,7 +434,7 @@ export default async function NewCareWebsiteCountyPage({ params }: Props) {
             paragraphs: [
               <>
                 We know what a CQC report looks like, what the difference between residential and nursing does to a
-                fee conversation, and why a home in {busiest?.name ?? topFour[0]?.name} competes with a completely
+                fee conversation, and why a home in {busiest?.name ?? county.name} competes with a completely
                 different set of providers than one twenty miles inland. That is not something an agency picks up from
                 a briefing document, and you should not be paying to teach it.
               </>,

@@ -1,5 +1,5 @@
 import type { County, CountyStats } from '@/lib/locations'
-import { pctNoWebsite } from '@/lib/locations'
+import { hasTowns, mainTown, pctNoWebsite } from '@/lib/locations'
 
 // The path, title, description and canonical for every county page, in one place.
 //
@@ -30,7 +30,7 @@ export function countyPath(kind: CountyPageKind, slug: string) {
 export function countySeo(kind: CountyPageKind, county: County, stats: CountyStats) {
   const path = countyPath(kind, county.slug)
   const canonical = `${SITE_URL}${path}`
-  const busiest = stats.busiestTown
+  const busiest = mainTown(stats)
 
   if (kind === 'website') {
     return {
@@ -46,7 +46,7 @@ export function countySeo(kind: CountyPageKind, county: County, stats: CountySta
       path,
       canonical,
       title: `Care SEO in ${county.name}`,
-      description: `Local SEO for care homes, nursing homes and home care providers in ${county.name}. ${stats.services} registered services across ${stats.towns} towns${busiest ? `, ${busiest.services} of them in ${busiest.name} alone` : ''}. Ranked by town, reported in enquiries.`,
+      description: `Local SEO for care homes, nursing homes and home care providers in ${county.name}. ${stats.services} registered services${hasTowns(stats) ? ` across ${stats.towns} towns` : ''}${busiest ? `, ${busiest.services} of them in ${busiest.name} alone` : ''}. Ranked by town, reported in enquiries.`,
     }
   }
 

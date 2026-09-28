@@ -1,5 +1,5 @@
 import { Star as StarIcon } from 'lucide-react'
-import type { CountyStats } from '@/lib/locations'
+import { hasTowns, type CountyStats } from '@/lib/locations'
 
 // The hero illustrations for the county pages. All three are drawn in markup rather than
 // exported as images, so they stay sharp, weigh nothing and can carry live county figures.
@@ -199,7 +199,16 @@ export function MarketSnapshotMock({
 }) {
   const withSite = stats.services - stats.noWebsite
   const sitePct = Math.round((withSite / Math.max(stats.services, 1)) * 100)
-  const bars = stats.topTowns.slice(0, 6)
+  // A borough or city with no towns inside it gets its services by type instead.
+  const byTown = hasTowns(stats)
+  const bars = byTown
+    ? stats.topTowns.slice(0, 6)
+    : [
+        { name: 'Residential', services: stats.residential },
+        { name: 'Nursing', services: stats.nursing },
+        { name: 'Home care', services: stats.homeCare },
+        { name: 'Dementia', services: stats.dementia },
+      ]
   const biggest = Math.max(1, ...bars.map((b) => b.services))
 
   return (
@@ -215,7 +224,9 @@ export function MarketSnapshotMock({
           {[
             { n: stats.services.toLocaleString(), l: 'registered services' },
             { n: stats.noWebsite.toLocaleString(), l: 'with no website' },
-            { n: stats.towns.toLocaleString(), l: 'towns' },
+            byTown
+              ? { n: stats.towns.toLocaleString(), l: 'towns' }
+              : { n: stats.dementia.toLocaleString(), l: 'offer dementia care' },
             { n: `${sitePct}%`, l: 'have a website of some kind' },
           ].map((s) => (
             <div key={s.l} className="rounded-xl border border-brand-line px-3.5 py-2.5">
@@ -226,7 +237,7 @@ export function MarketSnapshotMock({
         </div>
 
         <p className="mt-5 text-[10px] font-bold uppercase tracking-widest text-brand-ink-muted">
-          Services by town
+          {byTown ? 'Services by town' : 'Services by type'}
         </p>
         <div className="mt-2 space-y-1.5">
           {bars.map((b) => (

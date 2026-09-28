@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { applyPageSeo } from '@/lib/page-seo'
-import { getCounty, countySlugs, getCountyFigures, pct, pctNoWebsite } from '@/lib/locations'
+import { getCounty, countySlugs, getCountyFigures, hasTowns, mainTown, pct, pctNoWebsite } from '@/lib/locations'
 import { countySeo } from '@/lib/county-seo'
 import { CountyMap } from '@/components/marketing/CountyMap'
 import { SerpMockup } from '@/components/marketing/county/HeroMocks'
@@ -93,7 +93,8 @@ export default async function CareSeoCountyPage({ params }: Props) {
   if (!county) notFound()
   const { stats, asAt } = await getCountyFigures(county)
 
-  const busiest = stats.busiestTown
+  const busiest = mainTown(stats)
+  const byTown = hasTowns(stats)
   const ratedWell = stats.good + stats.outstanding
   const ratedShare = pct(ratedWell, stats.services)
   const unclear = stats.requiresImprovement + stats.notRated
@@ -127,9 +128,13 @@ export default async function CareSeoCountyPage({ params }: Props) {
               first. {county.standing}
             </p>
             <p>
-              There are {stats.services} registered services across {stats.towns} towns here
+              There are {stats.services} registered services
+              {byTown ? ` across ${stats.towns} towns here` : ` in ${county.name}`}
               {busiest ? `, and ${busiest.services} of them are in ${busiest.name} alone` : ''}. That is who you are
-              actually up against, and it is a very different fight depending on which side of the county you are on.
+              actually up against
+              {byTown
+                ? ', and it is a very different fight depending on which side of the county you are on.'
+                : ', all of them competing for the same families in the same search results.'}
             </p>
           </>
         }
@@ -151,15 +156,26 @@ export default async function CareSeoCountyPage({ params }: Props) {
           busiest
             ? { n: busiest.services.toLocaleString(), l: `services in ${busiest.name}, the most contested town here` }
             : { n: stats.services.toLocaleString(), l: 'registered services in the county' },
-          { n: stats.towns.toLocaleString(), l: 'towns with at least one registered service' },
+          byTown
+            ? { n: stats.towns.toLocaleString(), l: 'towns with at least one registered service' }
+            : { n: stats.dementia.toLocaleString(), l: 'offer dementia care, the most contested search of all' },
           { n: `${ratedShare}%`, l: `rated Good or Outstanding, that is ${ratedWell} services` },
           { n: `${pctNoWebsite(stats)}%`, l: `have no website, so your real rivals are the other ${stats.services - stats.noWebsite}` },
         ]}
       >
         <div className="mt-10 border-t border-white/15 pt-8">
           <p className="max-w-3xl text-sm leading-relaxed text-white/70">
-            Biggest markets first: {townList}. Search happens at that level, not at county level, which is why a single
-            page about {county.name} will never rank for any of them.
+            {byTown ? (
+              <>
+                Biggest markets first: {townList}. Search happens at that level, not at county level, which is why a
+                single page about {county.name} will never rank for any of them.
+              </>
+            ) : (
+              <>
+                Search here happens by neighbourhood and by care type, not for {county.name} as a whole, which is why a
+                single page about the area will never rank for the searches families actually make.
+              </>
+            )}
           </p>
         </div>
       </DarkStats>

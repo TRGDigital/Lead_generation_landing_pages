@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Check, MapPin } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
-import { getCounty, countySlugs, pctNoWebsite, getCountyFigures } from '@/lib/locations'
+import { getCounty, countySlugs, pctNoWebsite, getCountyFigures, hasTowns } from '@/lib/locations'
 import { Star, Squiggle } from '@/components/marketing/Decor'
 import { countySeo } from '@/lib/county-seo'
 import { MarketSnapshotMock } from '@/components/marketing/county/HeroMocks'
@@ -146,7 +146,7 @@ export default async function CountyPage({ params }: Props) {
 
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { n: stats.services.toLocaleString(), l: `care services across ${stats.towns} towns` },
+              { n: stats.services.toLocaleString(), l: hasTowns(stats) ? `care services across ${stats.towns} towns` : 'registered care services' },
               { n: `${pctNoWebsite(stats)}%`, l: `have no website at all, that is ${stats.noWebsite} providers` },
               { n: `${ratedShare}%`, l: 'rated Good or Outstanding by the CQC' },
               { n: stats.dementia.toLocaleString(), l: 'offer dementia care' },
