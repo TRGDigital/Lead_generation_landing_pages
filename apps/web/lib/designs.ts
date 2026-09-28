@@ -1,6 +1,7 @@
 import { settingLabel, type SettingKey } from '@/lib/design-settings'
 import { MODERN, type ModernContent } from '@/lib/design-families/modern'
 import { TRADITIONAL } from '@/lib/design-families/traditional'
+import { CLINICAL } from '@/lib/design-families/clinical'
 
 // Design examples: complete homepage designs a prospect can click through, each shown with
 // content for a different kind of care service.
@@ -21,7 +22,7 @@ export type Design = {
   /** The setting it is filed under on /designs and on that setting's page. */
   settingKey: SettingKey
   /** A design family template, when it is one (bespoke designs have their own component). */
-  family?: 'modern' | 'traditional'
+  family?: 'modern' | 'traditional' | 'clinical'
   /** The fictional provider shown in the design. */
   provider: {
     name: string
@@ -141,7 +142,7 @@ const BESPOKE: Design[] = [
 ]
 
 // Family designs: one per setting per family, rendered by components/designs/families/*.
-const fromFamily = (family: 'modern' | 'traditional') => (m: ModernContent): Design => ({
+const fromFamily = (family: 'modern' | 'traditional' | 'clinical') => (m: ModernContent): Design => ({
   slug: m.slug,
   name: m.name,
   style: m.style,
@@ -162,7 +163,9 @@ const fromFamily = (family: 'modern' | 'traditional') => (m: ModernContent): Des
 const MODERN_DESIGNS = MODERN.map(fromFamily('modern'))
 const TRADITIONAL_DESIGNS = TRADITIONAL.map(fromFamily('traditional'))
 
-export const DESIGNS: Design[] = [...BESPOKE, ...MODERN_DESIGNS, ...TRADITIONAL_DESIGNS]
+const CLINICAL_DESIGNS = CLINICAL.map(fromFamily('clinical'))
+
+export const DESIGNS: Design[] = [...BESPOKE, ...MODERN_DESIGNS, ...TRADITIONAL_DESIGNS, ...CLINICAL_DESIGNS]
 
 export function getDesign(slug: string): Design | undefined {
   return DESIGNS.find((d) => d.slug === slug)
