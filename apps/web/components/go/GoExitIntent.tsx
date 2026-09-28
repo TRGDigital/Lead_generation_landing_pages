@@ -14,6 +14,7 @@ export function GoExitIntent({
   body,
   ctaLabel,
   slug,
+  variant = '',
   intro,
   questions,
 }: {
@@ -21,6 +22,7 @@ export function GoExitIntent({
   body: string
   ctaLabel: string
   slug: string
+  variant?: string
   intro: string
   questions: GoQuizQuestion[]
 }) {
@@ -79,6 +81,7 @@ export function GoExitIntent({
         {/* The quiz itself, resuming wherever they got to on the page */}
         <TrgGoQuiz
           slug={slug}
+          variant={variant}
           intro={intro}
           questions={questions}
           ctaLabel={ctaLabel}

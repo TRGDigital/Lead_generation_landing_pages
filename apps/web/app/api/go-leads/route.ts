@@ -27,6 +27,8 @@ export async function POST(req: NextRequest) {
   const company = String(body?.company ?? '').trim().slice(0, 200)
   const answers = (body?.answers ?? {}) as Record<string, string>
   const utm = (body?.utm ?? {}) as Record<string, string>
+  // The keyword funnel (?v=) the lead came through, so funnels can be compared.
+  const variant = String(body?.variant ?? '').trim().toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 40)
 
   if (!slug || !name || !email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
     return NextResponse.json({ error: 'Please fill in your name and a valid email.' }, { status: 400 })
@@ -47,6 +49,7 @@ export async function POST(req: NextRequest) {
     .join(' ')
   const message = [
     `Quiz: ${page.service} (/go/${slug})`,
+    ...(variant ? [`Funnel: ${variant}`] : []),
     ...answerLines,
     utmLine ? `\n${utmLine}` : '',
   ].join('\n')

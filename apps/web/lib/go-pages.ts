@@ -8,6 +8,17 @@ export type GoProofStat = { stat: string; label: string }
 export type GoFaq = { q: string; a: string }
 export type GoReview = { quote: string; name: string; role: string }
 export type GoMigrationGroup = { phase: string; items: string[] }
+/**
+ * A funnel for one keyword or group of keywords, chosen by ?v=<key> on the ad's final
+ * URL. Every field is optional and falls back to the page's own, so a variant can change
+ * just the headline or the whole quiz. All the clicks still land on one page.
+ */
+export type GoVariant = {
+  headline?: string
+  subheadline?: string
+  quiz_intro?: string
+  questions?: GoQuizQuestion[]
+}
 
 export type GoPage = {
   id: string
@@ -35,6 +46,7 @@ export type GoPage = {
   meta_title: string
   meta_description: string
   notify_emails: string[]
+  variants?: Record<string, GoVariant>
 }
 
 export async function getGoPage(slug: string): Promise<GoPage | null> {

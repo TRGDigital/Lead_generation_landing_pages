@@ -40,7 +40,8 @@ function clearProgress(slug: string) {
 // The gamified qualification quiz on TRG /go/ ad landing pages: one question per
 // step with a progress bar, then a contact step. Answers ride along with the lead.
 export function TrgGoQuiz({
-  slug,
+  slug: pageSlug,
+  variant = '',
   intro,
   questions,
   ctaLabel,
@@ -50,12 +51,16 @@ export function TrgGoQuiz({
   onSubmitted,
 }: {
   slug: string
+  /** The keyword funnel (?v=) in use, recorded on the lead. */
+  variant?: string
   intro: string
   questions: GoQuizQuestion[]
   ctaLabel: string
   resumeFromSaved?: boolean
   onSubmitted?: () => void
 }) {
+  // Progress is kept per funnel, so a half-done quiz never resumes into another funnel's questions.
+  const slug = variant ? `${pageSlug}~${variant}` : pageSlug
   const saved = resumeFromSaved ? readProgress(slug) : null
   const [step, setStep] = useState(saved?.step ?? -1) // -1 intro, 0..n-1 questions, n contact
   const [answers, setAnswers] = useState<Record<string, string>>(saved?.answers ?? {})
@@ -98,7 +103,7 @@ export function TrgGoQuiz({
         session = crypto.randomUUID()
         sessionStorage.setItem('go-session', session)
       }
-      const payload = JSON.stringify({ slug, session, event, ...extra })
+      const payload = JSON.stringify({ slug: pageSlug, variant, session, event, ...extra })
       if (!navigator.sendBeacon?.('/api/go-events', new Blob([payload], { type: 'application/json' }))) {
         fetch('/api/go-events', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true }).catch(() => {})
       }
@@ -131,7 +136,7 @@ export function TrgGoQuiz({
       const res = await fetch('/api/go-leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug, name, email, phone, company, answers, utm }),
+        body: JSON.stringify({ slug: pageSlug, variant, name, email, phone, company, answers, utm }),
       })
       const body = await res.json().catch(() => ({}))
       if (!res.ok) throw new Error(body?.error || 'Something went wrong. Please try again.')

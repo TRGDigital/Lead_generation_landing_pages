@@ -15,7 +15,7 @@ import { GoExitIntent } from '@/components/go/GoExitIntent'
 // traffic only). Managed in /admin/go-pages.
 export const dynamic = 'force-dynamic'
 
-type Props = { params: { slug: string }; searchParams?: { h?: string } }
+type Props = { params: { slug: string }; searchParams?: { h?: string; v?: string } }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = await getGoPage(params.slug)
@@ -408,7 +408,15 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
   // pages (plain text, capped; React escaping keeps it safe). Meta/SEO always
   // use the admin headline.
   const headlineOverride = (searchParams?.h ?? '').replace(/<[^>]*>/g, '').trim().slice(0, 90)
-  const headline = headlineOverride || page.headline
+  // Keyword funnels: ?v= picks a variant (headline, intro and quiz) stored on the page.
+  // An unknown key falls back to the page itself, so a typo never breaks an ad.
+  const variantKey = (searchParams?.v ?? '').trim().toLowerCase()
+  const variant = (variantKey && page.variants?.[variantKey]) || null
+  const funnel = variant ? variantKey : ''
+  const headline = headlineOverride || variant?.headline || page.headline
+  const subheadline = variant?.subheadline || page.subheadline
+  const quizIntro = variant?.quiz_intro || page.quiz_intro
+  const questions = variant?.questions?.length ? variant.questions : page.questions
 
   const setting = SETTINGS[params.slug] ?? DEFAULT_SETTING
   const steps = stepsFor(setting)
@@ -453,7 +461,7 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
             <h1 className="mt-5 font-display text-4xl font-bold uppercase leading-[1.05] tracking-tight text-brand-ink sm:text-5xl">
               {headline}
             </h1>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-brand-ink-soft">{page.subheadline}</p>
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-brand-ink-soft">{subheadline}</p>
 
             <ul className="mt-7 space-y-3">
               {page.bullets.map((b) => (
@@ -507,7 +515,7 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
 
           <div>
             <div className="rounded-3xl border-2 border-brand-ink bg-white shadow-[8px_8px_0_0_#2a2620]">
-              <TrgGoQuiz slug={page.slug} intro={page.quiz_intro} questions={page.questions} ctaLabel={page.cta_label} />
+              <TrgGoQuiz slug={page.slug} variant={funnel} intro={quizIntro} questions={questions} ctaLabel={page.cta_label} />
             </div>
             {page.risk_reversal && (
               <p className="mt-4 px-2 text-center text-sm leading-relaxed text-brand-ink-soft">{page.risk_reversal}</p>
@@ -726,8 +734,9 @@ export default async function GoLandingPage({ params, searchParams }: Props) {
           body={page.exit_body}
           ctaLabel={page.sticky_cta || 'Take the 60-second check'}
           slug={page.slug}
-          intro={page.quiz_intro}
-          questions={page.questions}
+          variant={funnel}
+          intro={quizIntro}
+          questions={questions}
         />
       )}
 

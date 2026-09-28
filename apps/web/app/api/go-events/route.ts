@@ -29,6 +29,7 @@ export async function POST(req: NextRequest) {
     step: Number.isFinite(Number(body?.step)) ? Number(body.step) : null,
     question: body?.question ? String(body.question).slice(0, 200) : null,
     option: body?.option ? String(body.option).slice(0, 200) : null,
+    variant: body?.variant ? String(body.variant).toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 40) || null : null,
   }).then(() => {}, () => {})
 
   return NextResponse.json({ ok: true })
