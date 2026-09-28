@@ -167,7 +167,7 @@ export default function OakfieldDesign({ design }: { design: Design }) {
           {POSTS.map((post) => (
             <article key={post.title} className="overflow-hidden rounded-2xl border" style={{ borderColor: '#e2dac9', background: '#fffdf8' }}>
               <div className="relative h-40 w-full">
-                <Image src={post.img} alt="" fill className="object-cover" sizes="(min-width:768px) 33vw, 100vw" />
+                <Image src={post.img} alt={`Example photo for the article: ${post.title}`} fill className="object-cover" sizes="(min-width:768px) 33vw, 100vw" />
               </div>
               <div className="p-5">
                 <span className="text-[11px] uppercase tracking-[0.18em]" style={{ color: GOLD }}>{post.tag}</span>

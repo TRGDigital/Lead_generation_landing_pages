@@ -345,7 +345,7 @@ export default function AboutPage() {
               />
               <ManagedImage
                 src="/signature/len-signature.png"
-                alt=""
+                alt="Len Burgess’s signature"
                 width={304}
                 height={68}
                 className="mx-auto mt-5 h-9 w-auto"

@@ -103,7 +103,7 @@ export default function OurCommitmentPage() {
             </ul>
             <div className="mt-6 flex items-end justify-between gap-4 border-t border-brand-line pt-5">
               <div>
-                <ManagedImage src="/signature/len-signature.png" alt="" width={304} height={68} className="h-9 w-auto" />
+                <ManagedImage src="/signature/len-signature.png" alt="Len Burgess’s signature" width={304} height={68} className="h-9 w-auto" />
                 <p className="mt-2 text-sm font-semibold text-brand-ink">Len Burgess</p>
                 <p className="text-xs text-brand-ink-muted">Founder, TRG Digital</p>
               </div>

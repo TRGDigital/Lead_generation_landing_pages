@@ -166,7 +166,7 @@ export default function BrightpathDesign({ design }: { design: Design }) {
             {POSTS.map((post) => (
               <article key={post.title} className="overflow-hidden rounded-3xl bg-white" style={{ border: '1px solid #e6eceb' }}>
                 <div className="relative h-40 w-full">
-                  <Image src={post.img} alt="" fill className="object-cover" sizes="(min-width:768px) 33vw, 100vw" />
+                  <Image src={post.img} alt={`Example photo for the article: ${post.title}`} fill className="object-cover" sizes="(min-width:768px) 33vw, 100vw" />
                 </div>
                 <div className="p-5">
                   <span className="rounded-full px-2.5 py-1 text-[11.5px] font-bold" style={{ background: TEAL_SOFT, color: TEAL }}>{post.tag}</span>

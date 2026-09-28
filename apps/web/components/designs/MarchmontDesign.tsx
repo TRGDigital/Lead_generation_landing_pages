@@ -178,7 +178,7 @@ export default function MarchmontDesign({ design }: { design: Design }) {
           {POSTS.map((post) => (
             <article key={post.title}>
               <div className="relative h-52 w-full">
-                <Image src={post.img} alt="" fill className="object-cover" sizes="(min-width:768px) 33vw, 100vw" />
+                <Image src={post.img} alt={`Example photo for the article: ${post.title}`} fill className="object-cover" sizes="(min-width:768px) 33vw, 100vw" />
               </div>
               <p className="mt-4 text-[11.5px] uppercase tracking-[0.2em]" style={{ color: CHAMPAGNE }}>{post.tag}</p>
               <h3 className="mt-2 text-[21px] leading-snug" style={{ fontFamily: SERIF }}>{post.title}</h3>

@@ -178,7 +178,7 @@ export default function WillowDesign({ design }: { design: Design }) {
             {POSTS.map((post) => (
               <article key={post.title} className="overflow-hidden rounded-3xl bg-white">
                 <div className="relative h-40 w-full">
-                  <Image src={post.img} alt="" fill className="object-cover" sizes="(min-width:768px) 33vw, 100vw" />
+                  <Image src={post.img} alt={`Example photo for the article: ${post.title}`} fill className="object-cover" sizes="(min-width:768px) 33vw, 100vw" />
                 </div>
                 <div className="p-5">
                   <span className="rounded-2xl px-3 py-1 text-[12px] font-bold" style={{ background: SUN, color: '#3b2f00' }}>{post.tag}</span>
