@@ -14,6 +14,28 @@ const nextConfig = {
     // with the route that serves them.
     outputFileTracingIncludes: { '/admin/proposals/[slug]/pdf': ['./private/proposals/**'] },
   },
+  // Security headers for every response. Framing is limited to our own pages everywhere
+  // except /embed/*, which client sites load in an iframe through public/tools.js. No
+  // cross-origin resource policy, because client sites load embed.js, callbar.js and
+  // chat.js from here. No full CSP yet: it would need every analytics, ads, video and
+  // calendar source listed, and a miss breaks tracking silently.
+  async headers() {
+    const common = [
+      { key: 'X-Content-Type-Options', value: 'nosniff' },
+      { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+      { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=()' },
+    ]
+    return [
+      { source: '/:path*', headers: common },
+      {
+        source: '/((?!embed/).*)',
+        headers: [
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'Content-Security-Policy', value: "frame-ancestors 'self'" },
+        ],
+      },
+    ]
+  },
   // The audit page launched briefly at /free-site-audit before the pricing was
   // settled. Permanent redirect so any link already shared still lands.
   async redirects() {

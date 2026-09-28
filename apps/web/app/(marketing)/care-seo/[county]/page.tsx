@@ -24,6 +24,8 @@ import {
   Steps,
 } from '@/components/marketing/county/CountySections'
 import { NearbyCounties } from '@/components/marketing/county/CountyLinks'
+import { JsonLd } from '@/components/JsonLd'
+import { breadcrumbLd } from '@/lib/schema'
 
 // Care SEO, county by county.
 //
@@ -107,6 +109,7 @@ export default async function CareSeoCountyPage({ params }: Props) {
   return (
     <>
       <ExitIntent countyName={county.name} context={`Care SEO, ${county.name}`} need="Better rankings" />
+      <JsonLd data={breadcrumbLd([['Areas we cover', '/locations'], [county.name, `/locations/${county.slug}`], [`Care SEO in ${county.name}`, `/care-seo/${county.slug}`]])} />
       <ServiceJsonLd
         name={`Care SEO in ${county.name}`}
         url={`${SITE_URL}/care-seo/${county.slug}`}

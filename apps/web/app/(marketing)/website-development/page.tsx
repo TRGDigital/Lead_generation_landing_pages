@@ -6,7 +6,7 @@ import { Search, Smartphone, Gauge, ShieldCheck, MousePointerClick, Wrench, Chec
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 import { DESIGNS } from '@/lib/designs'
-import { RelatedLinks, toolItems, COMPARE_LINK } from '@/components/marketing/RelatedLinks'
+import { RelatedLinks, toolItems, COMPARE_LINK, GUIDE_LINK } from '@/components/marketing/RelatedLinks'
 import { CountyLinkGrid } from '@/components/marketing/county/CountyLinks'
 
 export const revalidate = 3600
@@ -517,7 +517,7 @@ export default function WebsiteDevelopmentPage() {
         </div>
       </section>
       <CountyLinkGrid kind="website" heading="Care websites in your county" intro="How many services in each county have no website, and what a new one needs to do there." />
-      <RelatedLinks heading="Before you choose who builds it" items={[COMPARE_LINK, ...toolItems(['/tools/cqc-rating-display-checker', '/tools/care-website-accessibility-check'])]} />
+      <RelatedLinks heading="Before you choose who builds it" items={[GUIDE_LINK, COMPARE_LINK, ...toolItems(['/tools/cqc-rating-display-checker'])]} />
     </>
   )
 }

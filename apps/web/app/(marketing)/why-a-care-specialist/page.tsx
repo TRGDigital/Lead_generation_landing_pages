@@ -4,6 +4,8 @@ import { Check } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
 import { CountyHero, EndCta, FaqJsonLd, Faqs, Prose } from '@/components/marketing/county/CountySections'
 import { ComparisonTable, ScorecardCard, type Mark } from '@/components/marketing/Scorecard'
+import { JsonLd } from '@/components/JsonLd'
+import { breadcrumbLd } from '@/lib/schema'
 
 // The comparison operators already make in their heads: a care specialist, a general
 // agency, a DIY builder, or just paying a directory. Written to be fair to all four,
@@ -117,6 +119,7 @@ function ScorecardMock() {
 export default function WhyACareSpecialistPage() {
   return (
     <main>
+      <JsonLd data={breadcrumbLd([['Compare', '/compare'], ['Why a care specialist', '/why-a-care-specialist']])} />
       <FaqJsonLd faqs={FAQS} />
 
       <CountyHero

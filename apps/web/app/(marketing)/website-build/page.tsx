@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Palette, LayoutTemplate, Search, Accessibility, ShieldCheck, Eye, Check } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
 import { ServiceLanding } from '@/components/marketing/ServiceLanding'
-import { RelatedLinks, toolItems, COMPARE_LINK } from '@/components/marketing/RelatedLinks'
+import { RelatedLinks, toolItems, COMPARE_LINK, GUIDE_LINK } from '@/components/marketing/RelatedLinks'
 
 export const revalidate = 3600
 
@@ -186,7 +186,7 @@ export default function WebsiteBuildPage() {
           body: 'Tell us about your care service and we will show you what your new website could include, and what it would look like.',
         }}
       />
-      <RelatedLinks heading="Before you choose who builds it" items={[COMPARE_LINK, ...toolItems(['/tools/cqc-rating-display-checker', '/tools/website-grader'])]} />
+      <RelatedLinks heading="Before you choose who builds it" items={[GUIDE_LINK, COMPARE_LINK, ...toolItems(['/tools/website-grader'])]} />
     </>
   )
 }

@@ -4,6 +4,8 @@ import { BookOpen, Check } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
 import { Star, Squiggle } from '@/components/marketing/Decor'
 import { BuyersGuideForm } from '@/components/marketing/BuyersGuideForm'
+import { JsonLd } from '@/components/JsonLd'
+import { ORG_REF, WEBSITE_REF } from '@/lib/schema'
 
 // Gated lead magnet: a practical, fair checklist for choosing who builds a care website.
 // The PDF lives at public/guides/choosing-a-care-website-agency.pdf and is built by
@@ -101,6 +103,23 @@ export default function BuyersGuidePage() {
         type="application/ld+json"
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'DigitalDocument',
+          name: TITLE,
+          description: DESCRIPTION,
+          url: `${SITE_URL}${PATH}`,
+          encodingFormat: 'application/pdf',
+          numberOfPages: 10,
+          inLanguage: 'en-GB',
+          isAccessibleForFree: true,
+          audience: { '@type': 'Audience', audienceType: 'UK care providers' },
+          author: ORG_REF,
+          publisher: ORG_REF,
+          isPartOf: WEBSITE_REF,
+        }}
       />
 
       <section className="relative overflow-hidden px-6 pb-14 pt-16">

@@ -5,6 +5,8 @@ import { applyPageSeo } from '@/lib/page-seo'
 import { getCountyFigures, pctNoWebsite } from '@/lib/locations'
 import { COUNTY_PAGE, countyHref, liveCountyList } from '@/lib/county-links'
 import { CountyHero, EndCta } from '@/components/marketing/county/CountySections'
+import { JsonLd } from '@/components/JsonLd'
+import { ORG_REF, WEBSITE_REF, SCHEMA_SITE } from '@/lib/schema'
 
 // The hub for every county: the one page that links to all of them, so none is an island.
 // Reads the live list, so a county the publishing cron switches on appears here by itself.
@@ -47,6 +49,25 @@ export default async function LocationsHubPage() {
   return (
     <main>
       <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'Areas we cover',
+          url: `${SCHEMA_SITE}${PATH}`,
+          isPartOf: WEBSITE_REF,
+          publisher: ORG_REF,
+          mainEntity: {
+            '@type': 'ItemList',
+            itemListElement: counties.map((c, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: `The care market in ${c.name}`,
+              url: `${SCHEMA_SITE}/locations/${c.slug}`,
+            })),
+          },
+        }}
+      />
 
       <CountyHero
         eyebrow="Areas we cover"

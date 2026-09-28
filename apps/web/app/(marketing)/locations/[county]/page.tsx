@@ -14,6 +14,8 @@ import { SchemaMock } from '@/components/marketing/county/SchemaMock'
 import { SerpMockup } from '@/components/marketing/county/HeroMocks'
 import { DesignExamples } from '@/components/marketing/county/Galleries'
 import { NearbyCounties } from '@/components/marketing/county/CountyLinks'
+import { JsonLd } from '@/components/JsonLd'
+import { breadcrumbLd } from '@/lib/schema'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.trgdigital.co.uk'
 
@@ -86,6 +88,7 @@ export default async function CountyPage({ params }: Props) {
         context={`County hub, ${county.name}`}
         need="Both, and I do not know where to start"
       />
+      <JsonLd data={breadcrumbLd([['Areas we cover', '/locations'], [county.name, `/locations/${county.slug}`]])} />
       <script
         type="application/ld+json"
         suppressHydrationWarning

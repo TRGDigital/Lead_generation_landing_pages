@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import type { LucideIcon } from 'lucide-react'
-import { Scale } from 'lucide-react'
+import { BookOpen, Scale } from 'lucide-react'
 import { TOOLS } from '@/lib/tools'
 
 // A band of contextual links: on service pages to the free tools that go with them, and on
@@ -14,6 +14,13 @@ export const COMPARE_LINK: RelatedItem = {
   title: 'Compare your options',
   body: 'A care specialist against Wix, WordPress, a general agency and directory listings, fairly.',
   href: '/compare',
+}
+
+export const GUIDE_LINK: RelatedItem = {
+  icon: BookOpen,
+  title: 'Free buyer’s guide',
+  body: 'How to choose a website agency for your care service: the questions to ask, and a scorecard.',
+  href: '/guides/choosing-a-care-website-agency',
 }
 
 /** Tool cards by href, in the order given. Unknown hrefs are skipped. */
