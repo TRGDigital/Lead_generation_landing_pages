@@ -223,6 +223,24 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
+      <section className="px-6 py-12">
+        <div className="mx-auto flex max-w-5xl flex-col items-start gap-4 rounded-3xl border-2 border-brand-ink bg-white p-6 shadow-[4px_4px_0_0_#2a2620] sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-brand-pop">Free buyer&apos;s guide</p>
+            <p className="mt-1 font-display text-xl font-bold uppercase tracking-tight text-brand-ink">
+              Still weighing it up?
+            </p>
+            <p className="mt-1 text-sm text-brand-ink-soft">
+              Take the questions with you: a printable checklist for choosing any website agency, with a scorecard to
+              compare them side by side.
+            </p>
+          </div>
+          <Link href="/guides/choosing-a-care-website-agency" className="btn-cta flex-shrink-0">
+            Get the guide
+          </Link>
+        </div>
+      </section>
+
       <EndCta
         title={c.cta.title}
         body={c.cta.body}

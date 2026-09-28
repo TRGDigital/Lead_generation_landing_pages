@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { usePathname } from 'next/navigation'
 import {
-  Menu, X, ChevronDown, Mail, Phone, Users, Workflow, HeartHandshake, Scale, Building2, BarChart3, ArrowLeftRight,
+  Menu, X, ChevronDown, Mail, Phone, Users, Workflow, HeartHandshake, Scale, Building2, BarChart3, ArrowLeftRight, MessageSquareQuote,
   type LucideIcon,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -27,6 +27,7 @@ const ABOUT: MegaItem[] = [
   { icon: ArrowLeftRight, title: 'Compare your options', short: 'Us against Wix, WordPress, agencies and directories.', href: '/compare' },
   { icon: Building2, title: 'For care groups', short: 'One system for every home in your group.', href: '/care-groups' },
   { icon: BarChart3, title: 'Research', short: 'The care market in numbers, from our own data.', href: '/research' },
+  { icon: MessageSquareQuote, title: 'Reviews', short: 'What care providers say about working with us.', href: '/reviews' },
 ]
 
 type MegaItem = { icon: LucideIcon; title: string; short: string; href: string; highlight?: boolean }

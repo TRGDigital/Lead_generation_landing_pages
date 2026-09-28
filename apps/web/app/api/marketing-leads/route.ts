@@ -110,12 +110,19 @@ export async function POST(req: NextRequest) {
   // Tool-signup nurture: enrol the lead and fire the day-0 welcome now; the rest of
   // the sequence goes out via the daily cron. Gated by NURTURE_ENABLED so live sending
   // only starts once it is switched on in the environment. ToolLeadGate sends a message
-  // beginning "Used the <tool>." which is how we identify a tool signup.
-  if (process.env.NURTURE_ENABLED === 'true' && /^used the /i.test(message)) {
+  // beginning "Used the <tool>." which is how we identify a tool signup. The buyer's guide
+  // form (BuyersGuideForm) sends "Downloaded the buyer's guide: ..." and joins the same
+  // sequence, but skips the day-0 welcome, whose copy is about a tool result; the daily
+  // cron then picks them up from the day-1 email.
+  const isToolSignup = /^used the /i.test(message)
+  const isGuideDownload = /^downloaded the buyer's guide/i.test(message)
+  if (process.env.NURTURE_ENABLED === 'true' && (isToolSignup || isGuideDownload)) {
     try {
-      const toolSlug = (req.headers.get('referer') ?? '').match(/\/tools\/([a-z0-9-]+)/i)?.[1] ?? null
+      const toolSlug = isGuideDownload
+        ? 'buyers-guide'
+        : ((req.headers.get('referer') ?? '').match(/\/tools\/([a-z0-9-]+)/i)?.[1] ?? null)
       const { enrollment, isNew } = await enrollLead({ db, leadId: lead?.id ?? null, email, name, toolSlug })
-      if (enrollment && isNew && enrollment.status === 'active') {
+      if (isToolSignup && enrollment && isNew && enrollment.status === 'active') {
         await sendNurtureEmail({
           db,
           emailId: 'welcome',

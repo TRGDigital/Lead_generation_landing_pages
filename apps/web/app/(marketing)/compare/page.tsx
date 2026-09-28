@@ -142,6 +142,23 @@ export default function CompareHubPage() {
         }
       />
 
+      <section className="px-6 pb-14">
+        <div className="mx-auto flex max-w-5xl flex-col items-start gap-4 rounded-3xl border-2 border-brand-ink bg-brand-bg-warm p-6 shadow-[4px_4px_0_0_#2a2620] sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-brand-pop">Free buyer&apos;s guide</p>
+            <p className="mt-1 font-display text-xl font-bold uppercase tracking-tight text-brand-ink">
+              How to choose a website agency for your care service
+            </p>
+            <p className="mt-1 text-sm text-brand-ink-soft">
+              The questions to ask any agency, with a scorecard to compare them side by side.
+            </p>
+          </div>
+          <Link href="/guides/choosing-a-care-website-agency" className="btn-cta flex-shrink-0">
+            Get the guide
+          </Link>
+        </div>
+      </section>
+
       <EndCta
         title="See where you stand first"
         body="A free audit shows what your current site does well and what it is missing, whoever you choose to fix it."

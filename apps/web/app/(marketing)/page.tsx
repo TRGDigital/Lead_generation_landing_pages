@@ -118,6 +118,8 @@ export default async function HomePage() {
 
       <BrandStrip />
 
+      <Testimonials />
+
       <AgencyIntro />
 
       <PrivatePayCase />
@@ -145,9 +147,6 @@ export default async function HomePage() {
       <ScrollingBanner />
 
       <StartProject />
-
-      {/* Renders only when real quotes exist */}
-      <Testimonials />
 
       <StatementBand
         tone="pop"
