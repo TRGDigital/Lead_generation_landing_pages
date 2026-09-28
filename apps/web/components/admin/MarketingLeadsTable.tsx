@@ -27,7 +27,7 @@ function toCsv(rows: MarketingLead[]): string {
   return [head.join(','), ...lines].join('\n')
 }
 
-export default function MarketingLeadsTable({ leads }: { leads: MarketingLead[] }) {
+export default function MarketingLeadsTable({ leads, emptyText }: { leads: MarketingLead[]; emptyText?: string }) {
   const [q, setQ] = useState('')
 
   const filtered = useMemo(() => {
@@ -63,7 +63,7 @@ export default function MarketingLeadsTable({ leads }: { leads: MarketingLead[] 
 
       {filtered.length === 0 ? (
         <div className="rounded-2xl border border-brand-line bg-white p-10 text-center text-sm text-brand-ink-muted">
-          {leads.length === 0 ? 'No enquiries yet. Contact and audit form submissions will appear here.' : 'No enquiries match your search.'}
+          {leads.length === 0 ? (emptyText ?? 'No enquiries yet. Contact and audit form submissions will appear here.') : 'No enquiries match your search.'}
         </div>
       ) : (
         <div className="overflow-x-auto rounded-2xl border border-brand-line bg-white">
