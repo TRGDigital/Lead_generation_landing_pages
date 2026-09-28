@@ -18,7 +18,7 @@ export const maxDuration = 60
 const TOOL_NAME = 'Care Job Advert Checker'
 const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages'
 const MODEL = 'claude-sonnet-5'
-const MAX_TOKENS = 1200
+const MAX_TOKENS = 2000
 const TIMEOUT_MS = 45_000
 const LEAD_WINDOW_MS = 3 * 60 * 60 * 1000
 const RATE_LIMIT = 5 // rewrites per IP per hour
@@ -75,19 +75,33 @@ function trackAiUsage(usage: Record<string, unknown> | undefined) {
   }
 }
 
+const REWRITE_TOOL = {
+  name: 'submit_rewrite',
+  description: 'Return the rewritten job advert.',
+  input_schema: {
+    type: 'object',
+    properties: {
+      jobTitle: { type: 'string', description: 'One job title for Indeed and Google for Jobs.' },
+      advert: { type: 'string', description: 'The rewritten advert as plain text with line breaks.' },
+      placeholders: { type: 'array', items: { type: 'string' }, description: 'Placeholder labels used, e.g. "hourly rate".' },
+      notes: { type: 'array', items: { type: 'string' }, description: 'Up to 3 short tips for the manager, each under 25 words.' },
+    },
+    required: ['jobTitle', 'advert', 'placeholders', 'notes'],
+  },
+}
+
 const SYSTEM = `You rewrite job adverts for UK care providers (care homes, nursing homes and home care agencies) so that more carers apply.
 
 Rules you must follow:
 1. Never invent facts. Use only facts stated in the original advert: pay, hours, location, benefits, requirements, the organisation's name and details. Do not add a pay rate, benefit, bonus, rating, location or contact detail that is not in the original.
-2. Where an important fact is missing, insert a clear placeholder in square brackets for the manager to fill in, in the form [add: hourly rate], [add: shift pattern], [add: town or area], [add: how to apply], [add: paid training?]. Only suggest placeholders for things carers genuinely look for.
+2. Where an important fact is missing, insert a clear placeholder in square brackets for the manager to fill in, in the form [add: hourly rate], [add: shift pattern], [add: town or area], [add: how to apply], [add: paid training?]. Only suggest placeholders for things carers genuinely look for, and only ones that fit the role: mileage or a car only for home care or community roles, never for a care home. Keep the original way to apply (for example "send your CV to the manager") and only use [add: how to apply] when the original gives none. Never state that qualifications or experience are not needed unless the original says so.
 3. Structure: a short opening of no more than 2 sentences that leads with the role, pay and location; then short sections with plain headings such as "What you will get", "Your shifts", "What you will be doing", "What we are looking for", "How to apply". Use short bullet points starting with "- ". Keep it between 200 and 450 words.
 4. Write to the reader as "you". Warm, plain, respectful UK English (organisation, colour, recognise). No HR jargon ("the successful candidate", "commensurate", "self starter", "fast paced environment"). Prefer "the people we support" or "residents" over "service users" unless the original insists.
 5. For entry level care roles, do not require qualifications or experience unless the original says they are legally required; if the original demands an NVQ or diploma for an entry role, soften it to "welcome but not essential" only if that does not contradict a stated legal requirement, and otherwise keep it as written.
 6. Never use em dashes or en dashes. Use commas, full stops or the word "to".
 7. Suggest one job title for Indeed and Google for Jobs: the plain role name carers search for, plus the setting and town if known, e.g. "Care Assistant, Nursing Home, Stroud". No pay, no emojis, no capitals for emphasis, under 60 characters. Only include a town if it is in the original.
 
-Return ONLY a JSON object with these keys:
-{"jobTitle": string, "advert": string (the rewritten advert as plain text with line breaks), "placeholders": string[] (the placeholder labels you used, e.g. ["hourly rate"]), "notes": string[] (up to 3 short tips for the manager, each under 25 words)}`
+Return the result by calling the submit_rewrite tool.`
 
 type RewriteJson = { jobTitle?: string; advert?: string; placeholders?: string[]; notes?: string[] }
 
@@ -144,7 +158,7 @@ ${advert}
 >>>
 
 Our checker scored it ${score.score}/100. It could not find: ${score.missing.length ? score.missing.join('; ') : 'nothing major'}.
-Rewrite it following the rules. Respond with ONLY the JSON object: no preamble and no markdown code fences.`
+Rewrite it following the rules and return it with the submit_rewrite tool.`
 
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS)
@@ -159,6 +173,10 @@ Rewrite it following the rules. Respond with ONLY the JSON object: no preamble a
         thinking: { type: 'disabled' },
         system: SYSTEM,
         messages: [{ role: 'user', content: user }],
+        // A forced tool call returns the rewrite as parsed JSON, so line breaks inside the
+        // advert can never break the parse the way free text JSON did.
+        tools: [REWRITE_TOOL],
+        tool_choice: { type: 'tool', name: REWRITE_TOOL.name },
       }),
       signal: controller.signal,
     })
@@ -166,19 +184,13 @@ Rewrite it following the rules. Respond with ONLY the JSON object: no preamble a
       console.error('job-advert-rewrite anthropic error', res.status, (await res.text().catch(() => '')).slice(0, 300))
       return NextResponse.json({ error: 'We could not rewrite your advert just now. Please try again in a minute.' }, { status: 502 })
     }
-    const data = (await res.json()) as { content?: Array<{ type?: string; text?: string }>; usage?: Record<string, unknown>; stop_reason?: string }
+    const data = (await res.json()) as { content?: Array<{ type?: string; name?: string; input?: unknown }>; usage?: Record<string, unknown>; stop_reason?: string }
     trackAiUsage(data.usage)
 
-    let text = (data.content ?? []).map((b) => (b?.type === 'text' && typeof b.text === 'string' ? b.text : '')).join('').trim()
-    text = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim()
-    const start = text.indexOf('{')
-    const end = text.lastIndexOf('}')
-    let out: RewriteJson | null = null
-    if (start >= 0 && end > start) {
-      try { out = JSON.parse(text.slice(start, end + 1)) as RewriteJson } catch { out = null }
-    }
+    const call = (data.content ?? []).find((b) => b?.type === 'tool_use' && b.name === REWRITE_TOOL.name)
+    const out = (call?.input ?? null) as RewriteJson | null
     if (!out?.advert) {
-      console.error('job-advert-rewrite bad reply', data.stop_reason, text.slice(0, 200))
+      console.error('job-advert-rewrite bad reply', data.stop_reason)
       return NextResponse.json({ error: 'We could not rewrite your advert just now. Please try again.' }, { status: 502 })
     }
 
