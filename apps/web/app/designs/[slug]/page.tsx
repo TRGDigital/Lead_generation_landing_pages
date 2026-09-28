@@ -14,6 +14,8 @@ import TraditionalTemplate from '@/components/designs/families/TraditionalTempla
 import { TRADITIONAL } from '@/lib/design-families/traditional'
 import ClinicalTemplate from '@/components/designs/families/ClinicalTemplate'
 import { CLINICAL } from '@/lib/design-families/clinical'
+import PremiumTemplate from '@/components/designs/families/PremiumTemplate'
+import { PREMIUM } from '@/lib/design-families/premium'
 import { JsonLd } from '@/components/JsonLd'
 import { ORG_REF, WEBSITE_REF, SCHEMA_SITE } from '@/lib/schema'
 
@@ -65,9 +67,11 @@ export default function DesignExamplePage({ params }: { params: { slug: string }
       const modern = design.family === 'modern' ? MODERN.find((m) => m.slug === design.slug) : undefined
       const traditional = design.family === 'traditional' ? TRADITIONAL.find((m) => m.slug === design.slug) : undefined
       const clinical = design.family === 'clinical' ? CLINICAL.find((m) => m.slug === design.slug) : undefined
+      const premium = design.family === 'premium' ? PREMIUM.find((m) => m.slug === design.slug) : undefined
       if (modern) page = <ModernTemplate c={modern} />
       else if (traditional) page = <TraditionalTemplate c={traditional} />
       else if (clinical) page = <ClinicalTemplate c={clinical} />
+      else if (premium) page = <PremiumTemplate c={premium} />
       else notFound()
     }
   }
