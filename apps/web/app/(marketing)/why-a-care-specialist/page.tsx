@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Check, Minus, X } from 'lucide-react'
+import { Check } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
 import { CountyHero, EndCta, FaqJsonLd, Faqs, Prose } from '@/components/marketing/county/CountySections'
+import { ComparisonTable, ScorecardCard, type Mark } from '@/components/marketing/Scorecard'
 
 // The comparison operators already make in their heads: a care specialist, a general
 // agency, a DIY builder, or just paying a directory. Written to be fair to all four,
@@ -21,7 +22,6 @@ export async function generateMetadata(): Promise<Metadata> {
   })
 }
 
-type Mark = 'yes' | 'some' | 'no'
 const OPTIONS = ['Care specialist', 'General agency', 'DIY builder', 'Directory only'] as const
 
 const ROWS: { label: string; marks: [Mark, Mark, Mark, Mark]; note: string }[] = [
@@ -81,28 +81,6 @@ const FAQS: [string, string][] = [
   ],
 ]
 
-function MarkIcon({ m, small }: { m: Mark; small?: boolean }) {
-  const box = small ? 'h-6 w-6' : 'h-7 w-7'
-  const icon = small ? 'h-3.5 w-3.5' : 'h-4 w-4'
-  if (m === 'yes')
-    return (
-      <span className={`inline-flex ${box} items-center justify-center rounded-full bg-brand-pop text-white`} aria-label="Yes">
-        <Check className={icon} />
-      </span>
-    )
-  if (m === 'some')
-    return (
-      <span className={`inline-flex ${box} items-center justify-center rounded-full bg-brand-accent/40 text-brand-ink`} aria-label="Partly">
-        <Minus className={icon} />
-      </span>
-    )
-  return (
-    <span className={`inline-flex ${box} items-center justify-center rounded-full bg-brand-line text-brand-ink-muted`} aria-label="No">
-      <X className={icon} />
-    </span>
-  )
-}
-
 // The hero card: five rows of the comparison table, in short. Read from ROWS so the card
 // can never disagree with the table, and it keeps "Lowest upfront cost", where the
 // specialist loses, because a scorecard that only has ticks for us is not believable.
@@ -127,40 +105,12 @@ function ScorecardMock() {
     return row ? [{ short, marks: row.marks }] : []
   })
   return (
-    <div className="rounded-3xl border-2 border-brand-ink bg-white p-4 shadow-[6px_6px_0_0_#2a2620] sm:p-6">
-      <p className="text-xs font-semibold uppercase tracking-wider text-brand-ink-muted">Scorecard</p>
-      <p className="mt-1 font-display text-lg font-bold uppercase tracking-tight text-brand-ink">Four ways to get a care website</p>
-      <div className="mt-4 overflow-hidden rounded-2xl border border-brand-line">
-        <div className="grid grid-cols-[1fr_repeat(4,2.6rem)] items-end gap-x-1 bg-brand-bg-warm px-2.5 py-2 sm:gap-x-0 sm:px-3 sm:grid-cols-[1fr_repeat(4,4rem)]">
-          <span />
-          {SHORT_OPTIONS.map((o, i) => (
-            <span
-              key={o.full}
-              className={`text-center text-[10px] font-bold uppercase tracking-wide sm:text-[11px] ${i === 0 ? 'text-brand-pop' : 'text-brand-ink-muted'}`}
-            >
-              <span className="sm:hidden">{o.phone}</span>
-              <span className="hidden sm:inline">{o.full}</span>
-            </span>
-          ))}
-        </div>
-        {rows.map((r) => (
-          <div
-            key={r.short}
-            className="grid grid-cols-[1fr_repeat(4,2.6rem)] items-center gap-x-1 border-t border-brand-line px-2.5 py-2.5 sm:gap-x-0 sm:px-3 sm:grid-cols-[1fr_repeat(4,4rem)]"
-          >
-            <span className="text-xs font-semibold leading-tight text-brand-ink sm:text-sm">{r.short}</span>
-            {r.marks.map((m, i) => (
-              <span key={i} className={`flex justify-center ${i === 0 ? 'rounded-md bg-brand-pop/5 py-0.5' : ''}`}>
-                <MarkIcon m={m} small />
-              </span>
-            ))}
-          </div>
-        ))}
-      </div>
-      <p className="mt-4 text-sm leading-relaxed text-brand-ink-soft">
-        Judged on what brings a family to your door, not on how the site looks in a pitch.
-      </p>
-    </div>
+    <ScorecardCard
+      title="Four ways to get a care website"
+      options={SHORT_OPTIONS}
+      rows={rows}
+      footer="Judged on what brings a family to your door, not on how the site looks in a pitch."
+    />
   )
 }
 
@@ -199,35 +149,14 @@ export default function WhyACareSpecialistPage() {
             A tick means it is a strength of that option, a dash means it depends on who you choose, a cross means it is
             usually missing.
           </p>
-          <div className="mt-8 overflow-x-auto rounded-2xl border border-brand-line bg-white shadow-soft">
-            <table className="w-full min-w-[720px] text-left text-sm">
-              <thead className="bg-white text-xs uppercase tracking-wider text-brand-ink-muted">
-                <tr>
-                  <th className="px-4 py-4 font-semibold">&nbsp;</th>
-                  {OPTIONS.map((o, i) => (
-                    <th key={o} className={`px-4 py-4 text-center font-semibold ${i === 0 ? 'text-brand-pop' : ''}`}>
-                      {o}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-brand-line">
-                {ROWS.map((r) => (
-                  <tr key={r.label}>
-                    <td className="px-4 py-4 align-top">
-                      <p className="font-semibold text-brand-ink">{r.label}</p>
-                      <p className="mt-1 text-xs leading-relaxed text-brand-ink-muted">{r.note}</p>
-                    </td>
-                    {r.marks.map((m, i) => (
-                      <td key={i} className={`px-4 py-4 text-center align-middle ${i === 0 ? 'bg-brand-pop/5' : ''}`}>
-                        <MarkIcon m={m} />
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <ComparisonTable options={OPTIONS} rows={ROWS} />
+          <p className="mt-5 text-sm text-brand-ink-soft">
+            Weighing up one option in particular?{' '}
+            <Link href="/compare" className="font-semibold text-brand-pop underline underline-offset-2">
+              Read the one to one comparisons
+            </Link>
+            , from Wix and WordPress to directory listings.
+          </p>
         </div>
       </section>
 

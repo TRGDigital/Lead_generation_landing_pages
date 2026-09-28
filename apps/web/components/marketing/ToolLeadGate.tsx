@@ -15,11 +15,15 @@ export function ToolLeadGate({
   toolName,
   summary,
   children,
+  copy = {},
 }: {
   toolName: string
   summary: string // one-line context stored with the lead
   children: ReactNode
+  // Wording for tools that unlock something other than a PDF report.
+  copy?: { heading?: string; body?: string; button?: string; unlocked?: string; pdf?: boolean }
 }) {
+  const { heading = 'See your full report', button = 'Unlock my full report', pdf = true } = copy
   const [unlocked, setUnlocked] = useState(false)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -64,11 +68,13 @@ export function ToolLeadGate({
         <div className="tool-print">{children}</div>
         <div className="no-print mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
           <p className="inline-flex items-center gap-2 text-sm font-semibold text-green-700">
-            <Check className="h-4 w-4" /> Report unlocked, we&apos;ve saved a copy to your inbox request.
+            <Check className="h-4 w-4" /> {copy.unlocked ?? 'Report unlocked, we\u2019ve saved a copy to your inbox request.'}
           </p>
-          <button type="button" onClick={() => window.print()} className="btn-cta-outline inline-flex items-center gap-2">
-            <Printer className="h-4 w-4" /> Save as PDF
-          </button>
+          {pdf && (
+            <button type="button" onClick={() => window.print()} className="btn-cta-outline inline-flex items-center gap-2">
+              <Printer className="h-4 w-4" /> Save as PDF
+            </button>
+          )}
         </div>
       </div>
     )
@@ -79,9 +85,9 @@ export function ToolLeadGate({
       <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-brand-pop/10">
         <Lock className="h-5 w-5 text-brand-pop" />
       </span>
-      <p className="mt-4 font-display text-lg font-bold text-brand-ink">See your full report</p>
+      <p className="mt-4 font-display text-lg font-bold text-brand-ink">{heading}</p>
       <p className="mx-auto mt-1.5 max-w-md text-sm leading-relaxed text-brand-ink-soft">
-        Enter your details to unlock the detailed breakdown and download it as a PDF. Free, no obligation.
+        {copy.body ?? 'Enter your details to unlock the detailed breakdown and download it as a PDF. Free, no obligation.'}
       </p>
       <form onSubmit={submit} className="mx-auto mt-5 max-w-md space-y-3 text-left">
         <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name"
@@ -95,7 +101,7 @@ export function ToolLeadGate({
           className="hidden" aria-hidden />
         {error && <p className="text-sm font-medium text-red-600">{error}</p>}
         <button type="submit" disabled={busy} className="btn-pop w-full">
-          {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Unlock my full report'}
+          {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : button}
           {!busy && <span className="btn-arrow" aria-hidden>→</span>}
         </button>
       </form>

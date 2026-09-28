@@ -5,6 +5,7 @@ import { DESIGNS } from '@/lib/designs'
 import { CASE_STUDIES } from '@/lib/case-studies'
 import { TOPICS } from '@/lib/blog-topics'
 import { TOOLS } from '@/lib/tools'
+import { COMPARISONS } from '@/lib/comparisons'
 import staticRoutes from '@/lib/generated/static-routes.json'
 
 // Single source of truth for every canonical, indexable URL on the marketing site.
@@ -13,7 +14,7 @@ import staticRoutes from '@/lib/generated/static-routes.json'
 // Nothing here needs editing when a page is added:
 // - static pages are discovered from app/(marketing) by scripts/gen-static-routes.mjs at build
 // - blog posts, categories and counties come from the database
-// - tools, designs, case studies and topics come from their registries in lib/
+// - tools, comparisons, designs, case studies and topics come from their registries in lib/
 
 export type ChangeFrequency = 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
 
@@ -54,6 +55,7 @@ export async function getSiteUrls(): Promise<SiteUrl[]> {
   const all: SiteUrl[] = [
     ...(staticRoutes as string[]).map((url) => page(url, url.startsWith('/tools/') ? 0.7 : 0.8)),
     ...TOOLS.map((t) => page(t.href, 0.7)),
+    ...COMPARISONS.map((c) => page(`/compare/${c.slug}`, 0.7)),
     ...DESIGNS.map((d) => page(`/designs/${d.slug}`, 0.6)),
     ...CASE_STUDIES.map((c) => page(`/work/${c.slug}`, 0.7)),
     ...TOPICS.map((t) => page(`/blog/topics/${t.slug}`, 0.7, 'weekly')),

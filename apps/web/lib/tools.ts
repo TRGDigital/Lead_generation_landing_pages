@@ -1,4 +1,4 @@
-import { Calculator, BedDouble, Gauge, Award, MonitorSmartphone, Scale, Code2, ClipboardList, UsersRound, Wallet, RefreshCw, PoundSterling, ShieldCheck, GraduationCap, BadgeCheck, Radar, PhoneIncoming, type LucideIcon } from 'lucide-react'
+import { Calculator, BedDouble, Gauge, Award, MonitorSmartphone, Scale, Code2, ClipboardList, UsersRound, Wallet, RefreshCw, PoundSterling, ShieldCheck, GraduationCap, BadgeCheck, Radar, PhoneIncoming, Accessibility, Megaphone, MessageSquareReply, type LucideIcon } from 'lucide-react'
 
 // The single source of truth for the free Care Toolkit, used by the nav mega-menu
 // and the /tools hub so they never drift apart.
@@ -101,6 +101,27 @@ export const TOOLS: Tool[] = [
     short: 'What every enquiry is worth to you',
     body: 'Put a pound figure on every enquiry and every lost one. See your funnel from first call to admission, and what converting a few more is worth over a year.',
     href: '/tools/enquiry-value-calculator',
+  },
+  {
+    icon: Accessibility,
+    title: 'Care Website Accessibility Check',
+    short: 'How your site works for older visitors',
+    body: 'Enter your web address and we check your homepage and key pages for missing image descriptions, unlabelled enquiry forms, blocked zoom, headings and tap to call. You get a score out of 100 and your top three fixes.',
+    href: '/tools/care-website-accessibility-check',
+  },
+  {
+    icon: Megaphone,
+    title: 'Care Job Advert Checker',
+    short: 'Score your carer job advert out of 100',
+    body: 'Paste a care assistant, senior carer, nurse or home care advert and see what stops carers applying: hidden pay, missing shifts, thin benefits, jargon and barriers for new starters. Get plain-English fixes instantly, and an optional rewrite with a job board ready title.',
+    href: '/tools/care-job-advert-checker',
+  },
+  {
+    icon: MessageSquareReply,
+    title: 'Care Review Reply Helper',
+    short: 'Draft safe, sincere replies to reviews',
+    body: 'Paste a review from Google, carehome.co.uk, homecare.co.uk or Facebook and get a short reply that never confirms who you care for, takes complaints offline and flags safeguarding concerns.',
+    href: '/tools/care-review-reply-helper',
   },
   {
     icon: Gauge,

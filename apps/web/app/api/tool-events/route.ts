@@ -14,9 +14,12 @@ const TOOLS = new Set([
   'website-grader',
   'cqc-rating-checker',
   'cqc-rating-display-checker',
+  'care-website-accessibility-check',
   'google-preview',
   'care-competitor-snapshot',
   'enquiry-value-calculator',
+  'care-review-reply-helper',
+  'care-job-advert-checker',
   // Family tools embedded on client sites (/embed/tools/<tool>?site=<slug>)
   ...TOOL_KEYS,
 ])
