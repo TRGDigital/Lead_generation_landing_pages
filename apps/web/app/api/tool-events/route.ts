@@ -13,7 +13,10 @@ const TOOLS = new Set([
   'funding-mix-calculator',
   'website-grader',
   'cqc-rating-checker',
+  'cqc-rating-display-checker',
   'google-preview',
+  'care-competitor-snapshot',
+  'enquiry-value-calculator',
   // Family tools embedded on client sites (/embed/tools/<tool>?site=<slug>)
   ...TOOL_KEYS,
 ])

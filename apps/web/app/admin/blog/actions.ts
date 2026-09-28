@@ -129,6 +129,8 @@ export async function publishBlogPost(postId: string) {
   if (error) throw new Error(error.message)
   revalidatePath('/admin/blog')
   revalidatePath('/blog')
+  revalidatePath('/sitemap.xml')
+  revalidatePath('/sitemap.xml')
 
   // Auto-submit the new post to RalfyIndex for faster indexing, and record it so the
   // deploy-time auto-indexer never re-submits the same URL.
@@ -150,6 +152,8 @@ export async function unpublishBlogPost(postId: string) {
   if (error) throw new Error(error.message)
   revalidatePath('/admin/blog')
   revalidatePath('/blog')
+  revalidatePath('/sitemap.xml')
+  revalidatePath('/sitemap.xml')
 }
 
 export async function deleteBlogPost(postId: string) {
@@ -159,4 +163,6 @@ export async function deleteBlogPost(postId: string) {
   if (error) throw new Error(error.message)
   revalidatePath('/admin/blog')
   revalidatePath('/blog')
+  revalidatePath('/sitemap.xml')
+  revalidatePath('/sitemap.xml')
 }

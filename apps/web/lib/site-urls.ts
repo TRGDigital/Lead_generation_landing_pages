@@ -1,88 +1,84 @@
 import { getAllPublishedSlugs, getCategories, getActiveCareHomeSlugs } from '@/lib/blog'
 import { SECTORS, COLLECTION_SERVICES } from '@/lib/sectors'
+import { countySlugs } from '@/lib/locations'
+import { DESIGNS } from '@/lib/designs'
+import { CASE_STUDIES } from '@/lib/case-studies'
+import { TOPICS } from '@/lib/blog-topics'
+import { TOOLS } from '@/lib/tools'
+import staticRoutes from '@/lib/generated/static-routes.json'
 
 // Single source of truth for every canonical, indexable URL on the marketing site.
-// Used by the XML sitemap AND the "submit all pages to RalfyIndex" admin action, so the
-// two can never drift apart.
+// Used by the XML sitemap AND the RalfyIndex submits (manual + auto), so they can never drift.
+//
+// Nothing here needs editing when a page is added:
+// - static pages are discovered from app/(marketing) by scripts/gen-static-routes.mjs at build
+// - blog posts, categories and counties come from the database
+// - tools, designs, case studies and topics come from their registries in lib/
 
-export type StaticPage = {
+export type ChangeFrequency = 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
+
+export type SiteUrl = {
   url: string
   priority: number
-  changeFrequency: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
+  changeFrequency: ChangeFrequency
 }
 
-export const STATIC_PAGES: StaticPage[] = [
-  { url: '/', priority: 1.0, changeFrequency: 'weekly' },
-  { url: '/how-it-works', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/our-commitment', priority: 0.5, changeFrequency: 'yearly' },
-  { url: '/book-a-demo', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/work', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/work/crossways-care-home', priority: 0.7, changeFrequency: 'monthly' },
-  { url: '/work/ferndale-nursing-home', priority: 0.7, changeFrequency: 'monthly' },
-  { url: '/seo', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/local-seo', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/google-business-profile', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/refer', priority: 0.5, changeFrequency: 'monthly' },
-  { url: '/content-creation', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/conversion-rate-optimisation', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/website-development', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/site-audit', priority: 0.9, changeFrequency: 'monthly' },
-  { url: '/website-build', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/designs', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/designs/oakfield-house', priority: 0.6, changeFrequency: 'monthly' },
-  { url: '/designs/brightpath-care', priority: 0.6, changeFrequency: 'monthly' },
-  { url: '/designs/st-aidans', priority: 0.6, changeFrequency: 'monthly' },
-  { url: '/designs/willow-court', priority: 0.6, changeFrequency: 'monthly' },
-  { url: '/designs/marchmont-gardens', priority: 0.6, changeFrequency: 'monthly' },
-  { url: '/designs/ravenswood-group', priority: 0.6, changeFrequency: 'monthly' },
-  { url: '/blog/topics/filling-empty-beds', priority: 0.7, changeFrequency: 'weekly' },
-  { url: '/blog/topics/being-found-locally', priority: 0.7, changeFrequency: 'weekly' },
-  { url: '/blog/topics/care-websites', priority: 0.7, changeFrequency: 'weekly' },
-  { url: '/carer-recruitment', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/accessible-websites', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/research', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/care-groups', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/why-a-care-specialist', priority: 0.7, changeFrequency: 'monthly' },
-  { url: '/care-tools', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/marketing', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/development', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/rebranding', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/tools', priority: 0.8, changeFrequency: 'monthly' },
-  { url: '/tools/funding-calculator', priority: 0.7, changeFrequency: 'monthly' },
-  { url: '/tools/empty-bed-calculator', priority: 0.7, changeFrequency: 'monthly' },
-  { url: '/tools/website-grader', priority: 0.7, changeFrequency: 'monthly' },
-  { url: '/tools/cqc-rating-checker', priority: 0.7, changeFrequency: 'monthly' },
-  { url: '/tools/google-preview', priority: 0.7, changeFrequency: 'monthly' },
-  { url: '/tools/care-schema-generator', priority: 0.7, changeFrequency: 'monthly' },
-  { url: '/about', priority: 0.7, changeFrequency: 'monthly' },
-  { url: '/contact', priority: 0.7, changeFrequency: 'monthly' },
-  { url: '/blog', priority: 0.9, changeFrequency: 'daily' },
-  { url: '/privacy', priority: 0.3, changeFrequency: 'yearly' },
-  { url: '/terms', priority: 0.3, changeFrequency: 'yearly' },
-  { url: '/cookies', priority: 0.3, changeFrequency: 'yearly' },
-]
+// Only pages that differ from the 0.8 / monthly default.
+const OVERRIDES: Record<string, Omit<SiteUrl, 'url'>> = {
+  '/': { priority: 1.0, changeFrequency: 'weekly' },
+  '/blog': { priority: 0.9, changeFrequency: 'daily' },
+  '/site-audit': { priority: 0.9, changeFrequency: 'monthly' },
+  '/about': { priority: 0.7, changeFrequency: 'monthly' },
+  '/contact': { priority: 0.7, changeFrequency: 'monthly' },
+  '/why-a-care-specialist': { priority: 0.7, changeFrequency: 'monthly' },
+  '/our-commitment': { priority: 0.5, changeFrequency: 'yearly' },
+  '/refer': { priority: 0.5, changeFrequency: 'monthly' },
+  '/privacy': { priority: 0.3, changeFrequency: 'yearly' },
+  '/terms': { priority: 0.3, changeFrequency: 'yearly' },
+  '/cookies': { priority: 0.3, changeFrequency: 'yearly' },
+}
 
-// Every dynamic path (blog posts, categories, care homes, sector hubs + matrix pages).
-export async function getDynamicPaths(): Promise<string[]> {
-  const [blogSlugs, categories, careHomeSlugs] = await Promise.all([
+const page = (url: string, priority = 0.8, changeFrequency: ChangeFrequency = 'monthly'): SiteUrl => ({
+  url,
+  ...(OVERRIDES[url] ?? { priority, changeFrequency }),
+})
+
+export async function getSiteUrls(): Promise<SiteUrl[]> {
+  const [blogSlugs, categories, careHomeSlugs, counties] = await Promise.all([
     getAllPublishedSlugs(),
     getCategories(),
     getActiveCareHomeSlugs(),
+    countySlugs(),
   ])
 
-  return [
-    ...blogSlugs.map((slug) => `/blog/${slug}`),
-    ...categories.map((cat) => `/blog/category/${encodeURIComponent(cat)}`),
-    ...careHomeSlugs.map((slug) => `/care/${slug}`),
+  const all: SiteUrl[] = [
+    ...(staticRoutes as string[]).map((url) => page(url, url.startsWith('/tools/') ? 0.7 : 0.8)),
+    ...TOOLS.map((t) => page(t.href, 0.7)),
+    ...DESIGNS.map((d) => page(`/designs/${d.slug}`, 0.6)),
+    ...CASE_STUDIES.map((c) => page(`/work/${c.slug}`, 0.7)),
+    ...TOPICS.map((t) => page(`/blog/topics/${t.slug}`, 0.7, 'weekly')),
+    ...blogSlugs.map((slug) => page(`/blog/${slug}`, 0.7)),
+    ...categories.map((cat) => page(`/blog/category/${encodeURIComponent(cat)}`, 0.6, 'weekly')),
+    ...careHomeSlugs.map((slug) => page(`/care/${slug}`, 0.5, 'weekly')),
+    // "Who we serve" sector hubs plus the service × sector matrix.
     ...SECTORS.flatMap((s) => [
-      `/${s.slug}`,
-      ...COLLECTION_SERVICES.map((svc) => `/${s.slug}/${svc.slug}`),
+      page(`/${s.slug}`, 0.75),
+      ...COLLECTION_SERVICES.map((svc) => page(`/${s.slug}/${svc.slug}`, 0.65)),
+    ]),
+    // County hub plus the two service pages per county.
+    ...counties.flatMap((slug) => [
+      page(`/locations/${slug}`, 0.7),
+      page(`/care-website-design/${slug}`, 0.8),
+      page(`/care-seo/${slug}`, 0.8),
     ]),
   ]
+
+  // First entry wins, so a page listed twice keeps its more specific settings.
+  const seen = new Set<string>()
+  return all.filter((u) => !seen.has(u.url) && seen.add(u.url))
 }
 
-// Absolute URLs for every page on the site, de-duplicated. Used for bulk RalfyIndex submits.
+// Absolute URLs for every page on the site. Used for bulk RalfyIndex submits.
 export async function getAllSiteUrls(siteUrl: string): Promise<string[]> {
-  const paths = [...STATIC_PAGES.map((p) => p.url), ...(await getDynamicPaths())]
-  return [...new Set(paths)].map((p) => `${siteUrl}${p}`)
+  return (await getSiteUrls()).map((u) => `${siteUrl}${u.url}`)
 }

@@ -1,4 +1,4 @@
-import { Calculator, BedDouble, Gauge, Award, MonitorSmartphone, Scale, Code2, ClipboardList, UsersRound, Wallet, RefreshCw, PoundSterling, ShieldCheck, GraduationCap, type LucideIcon } from 'lucide-react'
+import { Calculator, BedDouble, Gauge, Award, MonitorSmartphone, Scale, Code2, ClipboardList, UsersRound, Wallet, RefreshCw, PoundSterling, ShieldCheck, GraduationCap, BadgeCheck, Radar, PhoneIncoming, type LucideIcon } from 'lucide-react'
 
 // The single source of truth for the free Care Toolkit, used by the nav mega-menu
 // and the /tools hub so they never drift apart.
@@ -80,6 +80,27 @@ export const TOOLS: Tool[] = [
     short: 'What your funding mix costs you',
     body: 'See how much less social-services funded residents earn you than private ones, per bed and across the whole home, month to year.',
     href: '/tools/funding-mix-calculator',
+  },
+  {
+    icon: BadgeCheck,
+    title: 'CQC Rating Display Checker',
+    short: 'Is your CQC rating on your website?',
+    body: 'Check your website shows your current CQC rating or the official CQC widget, spot out of date ratings, and get plain-English fixes.',
+    href: '/tools/cqc-rating-display-checker',
+  },
+  {
+    icon: Radar,
+    title: 'Local Competitor Snapshot',
+    short: 'See every care service near your postcode',
+    body: 'Enter your postcode and see the care homes, nursing homes or home care services competing with you, with CQC ratings, care types, distance and which ones have a website.',
+    href: '/tools/care-competitor-snapshot',
+  },
+  {
+    icon: PhoneIncoming,
+    title: 'Enquiry Value Calculator',
+    short: 'What every enquiry is worth to you',
+    body: 'Put a pound figure on every enquiry and every lost one. See your funnel from first call to admission, and what converting a few more is worth over a year.',
+    href: '/tools/enquiry-value-calculator',
   },
   {
     icon: Gauge,
