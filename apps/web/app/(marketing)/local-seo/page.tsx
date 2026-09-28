@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Local SEO for Care Providers | Get Found Locally | TRG Digital',
+  title: 'Local SEO for Care Providers | Get Found Locally',
   description:
     'Local SEO for UK care homes, nursing homes and home care. We get you found by families searching for care in your area, Google Business Profile, local pages, citations and reviews, so the right local audience finds you first.',
   alternates: { canonical: `${SITE_URL}/local-seo` },

@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Content Creation for Care Providers | Drive Organic Traffic | TRG Digital',
+  title: 'Content Creation for Care Providers | Drive Organic Traffic',
   description:
     'Ongoing, care-aware content creation for UK care homes, nursing homes and home care. Blogs, guides, FAQs and local content published regularly to grow your organic traffic and enquiries month after month.',
   alternates: { canonical: `${SITE_URL}/content-creation` },

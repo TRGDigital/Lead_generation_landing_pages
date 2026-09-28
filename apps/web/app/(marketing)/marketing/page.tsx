@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Care Home Marketing & Enquiry Generation | TRG Digital',
+  title: 'Care Home Marketing & Enquiry Generation',
   description:
     "TRG Digital fills empty beds for UK care providers with targeted advertising, high-converting landing pages and pre-qualified enquiries. Activate when beds are empty, pause when you're full.",
   alternates: { canonical: `${SITE_URL}/marketing` },

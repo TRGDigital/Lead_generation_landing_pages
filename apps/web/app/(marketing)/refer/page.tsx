@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Refer a Care Home & Get Rewarded | TRG Digital',
+  title: 'Refer a Care Home & Get Rewarded',
   description:
     'Know a care home that could fill more beds? Refer them to TRG Digital. If they become a client, we say thank you with a reward, and give them a warm welcome too.',
   alternates: { canonical: `${SITE_URL}/refer` },

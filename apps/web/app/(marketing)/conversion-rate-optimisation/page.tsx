@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Conversion Rate Optimisation for Care | More Enquiries | TRG Digital',
+  title: 'Conversion Rate Optimisation for Care | More Enquiries',
   description:
     'Conversion rate optimisation for care websites and landing pages. We turn more of your existing visitors into enquiries with clearer journeys, stronger calls to action, faster pages and A/B testing.',
   alternates: { canonical: `${SITE_URL}/conversion-rate-optimisation` },

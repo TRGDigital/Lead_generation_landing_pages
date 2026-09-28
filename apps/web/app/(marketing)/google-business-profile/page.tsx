@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Google Business Profile & Reviews Management | TRG Digital',
+  title: 'Google Business Profile & Reviews Management',
   description:
     'Done-for-you Google Business Profile and reviews management for UK care homes. We keep your listing accurate and active, grow genuine reviews and respond professionally, so you win the local map and the trust of families.',
   alternates: { canonical: `${SITE_URL}/google-business-profile` },

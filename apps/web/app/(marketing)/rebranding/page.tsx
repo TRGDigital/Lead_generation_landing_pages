@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const META: Metadata = {
-  title: 'Care Home Rebranding | Logo, Identity & Website | TRG Digital',
+  title: 'Care Home Rebranding | Logo, Identity & Website',
   description:
     'A complete care-sector rebrand from TRG Digital, brand strategy, new logo and concepts, full visual identity, guidelines, tone of voice and a redesigned, rebuilt website.',
   alternates: { canonical: `${SITE_URL}/rebranding` },
