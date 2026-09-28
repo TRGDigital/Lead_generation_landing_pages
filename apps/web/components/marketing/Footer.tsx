@@ -1,8 +1,9 @@
+import { Fragment } from 'react'
 import Link from 'next/link'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { MapPin } from 'lucide-react'
 import { SERVICES } from '@/lib/services'
-import { TOOLS } from '@/lib/tools'
+import { TOOL_GROUPS, toolsInGroup } from '@/lib/tools'
 import { Star } from './Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
@@ -94,7 +95,12 @@ export default function Footer() {
             {SERVICES.map((s) => <FLink key={s.title} href={s.href} label={s.title} />)}
           </Col>
           <Col title="Free tools">
-            {TOOLS.map((t) => <FLink key={t.href} href={t.href} label={t.title} />)}
+            {TOOL_GROUPS.map((g) => (
+              <Fragment key={g.key}>
+                <li className="pt-2 text-[11px] font-bold uppercase tracking-widest text-white/50 first:pt-0">{g.label}</li>
+                {toolsInGroup(g.key).map((t) => <FLink key={t.href} href={t.href} label={t.title} />)}
+              </Fragment>
+            ))}
             <li>
               <Link href="/tools" className="text-sm font-semibold text-brand-accent transition-colors hover:text-white">
                 All free tools →

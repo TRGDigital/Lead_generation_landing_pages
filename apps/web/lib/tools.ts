@@ -1,5 +1,14 @@
 import { Calculator, BedDouble, Gauge, Award, MonitorSmartphone, Scale, Code2, ClipboardList, UsersRound, Wallet, RefreshCw, PoundSterling, ShieldCheck, GraduationCap, BadgeCheck, Radar, PhoneIncoming, Accessibility, Megaphone, MessageSquareReply, type LucideIcon } from 'lucide-react'
 
+export type ToolGroup = 'care' | 'website'
+
+// Two groups so a long list stays scannable: the nav, /tools and the footer all show them
+// under these headings.
+export const TOOL_GROUPS: { key: ToolGroup; label: string; blurb: string }[] = [
+  { key: 'care', label: 'Care tools', blurb: 'Staffing, fees, funding, CQC and recruitment, worked out for you.' },
+  { key: 'website', label: 'Website & SEO tools', blurb: 'See how your website and Google listing look to families, and fix what is missing.' },
+]
+
 // The single source of truth for the free Care Toolkit, used by the nav mega-menu
 // and the /tools hub so they never drift apart.
 export type Tool = {
@@ -8,6 +17,7 @@ export type Tool = {
   short: string // one-liner for the nav dropdown
   body: string // fuller description for the hub cards
   href: string
+  group: ToolGroup
 }
 
 export const TOOLS: Tool[] = [
@@ -17,6 +27,7 @@ export const TOOLS: Tool[] = [
     short: 'Measure resident dependency & care hours',
     body: 'Assess your residents across six care domains and see your home’s dependency mix and the care hours it requires, the basis for safe staffing.',
     href: '/tools/care-home-dependency-tool',
+    group: 'care',
   },
   {
     icon: UsersRound,
@@ -24,6 +35,7 @@ export const TOOLS: Tool[] = [
     short: 'Turn care hours into staff numbers',
     body: 'Turn your care hours into the care staff you need, in whole-time equivalents and on duty per shift, day and night.',
     href: '/tools/staffing-calculator',
+    group: 'care',
   },
   {
     icon: Wallet,
@@ -31,6 +43,7 @@ export const TOOLS: Tool[] = [
     short: 'What agency is really costing you',
     body: 'See your annual agency spend, the premium over permanent staff, and what you could save by cutting reliance.',
     href: '/tools/agency-staff-cost-calculator',
+    group: 'care',
   },
   {
     icon: RefreshCw,
@@ -38,6 +51,7 @@ export const TOOLS: Tool[] = [
     short: 'The hidden cost of losing staff',
     body: 'Reveal what staff turnover costs your home each year, and what reducing it would save.',
     href: '/tools/staff-turnover-cost-calculator',
+    group: 'care',
   },
   {
     icon: PoundSterling,
@@ -45,34 +59,7 @@ export const TOOLS: Tool[] = [
     short: 'The fee & occupancy you need',
     body: 'Work out the weekly fee and occupancy your home needs to break even, and where you stand today.',
     href: '/tools/care-fee-break-even-calculator',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'CQC Inspection Readiness',
-    short: 'How ready are you to be inspected?',
-    body: 'Self-assess against the five CQC key questions and see where the gaps are before the inspector does.',
-    href: '/tools/cqc-inspection-readiness',
-  },
-  {
-    icon: GraduationCap,
-    title: 'Mandatory Training Checker',
-    short: 'Are your staff up to date?',
-    body: 'Check staff compliance across the mandatory training topics and see exactly where the gaps are.',
-    href: '/tools/mandatory-training-checker',
-  },
-  {
-    icon: Calculator,
-    title: 'Care Funding Calculator',
-    short: 'Who pays for care, and how much',
-    body: 'Estimate care costs and who pays, your contribution, council support and NHS funding, for all four UK nations.',
-    href: '/tools/funding-calculator',
-  },
-  {
-    icon: BedDouble,
-    title: 'Cost of an Empty Bed',
-    short: 'What vacancies really cost you',
-    body: 'See exactly how much each empty bed costs you per week, month and year, and what filling them is worth.',
-    href: '/tools/empty-bed-calculator',
+    group: 'care',
   },
   {
     icon: Scale,
@@ -80,20 +67,23 @@ export const TOOLS: Tool[] = [
     short: 'What your funding mix costs you',
     body: 'See how much less social-services funded residents earn you than private ones, per bed and across the whole home, month to year.',
     href: '/tools/funding-mix-calculator',
+    group: 'care',
   },
   {
-    icon: BadgeCheck,
-    title: 'CQC Rating Display Checker',
-    short: 'Is your CQC rating on your website?',
-    body: 'Check your website shows your current CQC rating or the official CQC widget, spot out of date ratings, and get plain-English fixes.',
-    href: '/tools/cqc-rating-display-checker',
+    icon: Calculator,
+    title: 'Care Funding Calculator',
+    short: 'Who pays for care, and how much',
+    body: 'Estimate care costs and who pays, your contribution, council support and NHS funding, for all four UK nations.',
+    href: '/tools/funding-calculator',
+    group: 'care',
   },
   {
-    icon: Radar,
-    title: 'Local Competitor Snapshot',
-    short: 'See every care service near your postcode',
-    body: 'Enter your postcode and see the care homes, nursing homes or home care services competing with you, with CQC ratings, care types, distance and which ones have a website.',
-    href: '/tools/care-competitor-snapshot',
+    icon: BedDouble,
+    title: 'Cost of an Empty Bed',
+    short: 'What vacancies really cost you',
+    body: 'See exactly how much each empty bed costs you per week, month and year, and what filling them is worth.',
+    href: '/tools/empty-bed-calculator',
+    group: 'care',
   },
   {
     icon: PhoneIncoming,
@@ -101,34 +91,15 @@ export const TOOLS: Tool[] = [
     short: 'What every enquiry is worth to you',
     body: 'Put a pound figure on every enquiry and every lost one. See your funnel from first call to admission, and what converting a few more is worth over a year.',
     href: '/tools/enquiry-value-calculator',
+    group: 'care',
   },
   {
-    icon: Accessibility,
-    title: 'Care Website Accessibility Check',
-    short: 'How your site works for older visitors',
-    body: 'Enter your web address and we check your homepage and key pages for missing image descriptions, unlabelled enquiry forms, blocked zoom, headings and tap to call. You get a score out of 100 and your top three fixes.',
-    href: '/tools/care-website-accessibility-check',
-  },
-  {
-    icon: Megaphone,
-    title: 'Care Job Advert Checker',
-    short: 'Score your carer job advert out of 100',
-    body: 'Paste a care assistant, senior carer, nurse or home care advert and see what stops carers applying: hidden pay, missing shifts, thin benefits, jargon and barriers for new starters. Get plain-English fixes instantly, and an optional rewrite with a job board ready title.',
-    href: '/tools/care-job-advert-checker',
-  },
-  {
-    icon: MessageSquareReply,
-    title: 'Care Review Reply Helper',
-    short: 'Draft safe, sincere replies to reviews',
-    body: 'Paste a review from Google, carehome.co.uk, homecare.co.uk or Facebook and get a short reply that never confirms who you care for, takes complaints offline and flags safeguarding concerns.',
-    href: '/tools/care-review-reply-helper',
-  },
-  {
-    icon: Gauge,
-    title: 'Your Care Website Grader',
-    short: 'Score your site like families do',
-    body: 'Score your care website the way families judge it, CQC rating, fees, enquiry journey, speed, accessibility and more.',
-    href: '/tools/website-grader',
+    icon: ShieldCheck,
+    title: 'CQC Inspection Readiness',
+    short: 'How ready are you to be inspected?',
+    body: 'Self-assess against the five CQC key questions and see where the gaps are before the inspector does.',
+    href: '/tools/cqc-inspection-readiness',
+    group: 'care',
   },
   {
     icon: Award,
@@ -136,6 +107,55 @@ export const TOOLS: Tool[] = [
     short: 'Look up any provider rating',
     body: 'Look up any care provider’s latest CQC rating and the five key-question ratings at a glance.',
     href: '/tools/cqc-rating-checker',
+    group: 'care',
+  },
+  {
+    icon: GraduationCap,
+    title: 'Mandatory Training Checker',
+    short: 'Are your staff up to date?',
+    body: 'Check staff compliance across the mandatory training topics and see exactly where the gaps are.',
+    href: '/tools/mandatory-training-checker',
+    group: 'care',
+  },
+  {
+    icon: Megaphone,
+    title: 'Care Job Advert Checker',
+    short: 'Score your carer job advert out of 100',
+    body: 'Paste a care assistant, senior carer, nurse or home care advert and see what stops carers applying: hidden pay, missing shifts, thin benefits, jargon and barriers for new starters. Get plain-English fixes instantly, and an optional rewrite with a job board ready title.',
+    href: '/tools/care-job-advert-checker',
+    group: 'care',
+  },
+  {
+    icon: Gauge,
+    title: 'Your Care Website Grader',
+    short: 'Score your site like families do',
+    body: 'Score your care website the way families judge it, CQC rating, fees, enquiry journey, speed, accessibility and more.',
+    href: '/tools/website-grader',
+    group: 'website',
+  },
+  {
+    icon: BadgeCheck,
+    title: 'CQC Rating Display Checker',
+    short: 'Is your CQC rating on your website?',
+    body: 'Check your website shows your current CQC rating or the official CQC widget, spot out of date ratings, and get plain-English fixes.',
+    href: '/tools/cqc-rating-display-checker',
+    group: 'website',
+  },
+  {
+    icon: Accessibility,
+    title: 'Care Website Accessibility Check',
+    short: 'How your site works for older visitors',
+    body: 'Enter your web address and we check your homepage and key pages for missing image descriptions, unlabelled enquiry forms, blocked zoom, headings and tap to call. You get a score out of 100 and your top three fixes.',
+    href: '/tools/care-website-accessibility-check',
+    group: 'website',
+  },
+  {
+    icon: Radar,
+    title: 'Local Competitor Snapshot',
+    short: 'See every care service near your postcode',
+    body: 'Enter your postcode and see the care homes, nursing homes or home care services competing with you, with CQC ratings, care types, distance and which ones have a website.',
+    href: '/tools/care-competitor-snapshot',
+    group: 'website',
   },
   {
     icon: MonitorSmartphone,
@@ -143,6 +163,7 @@ export const TOOLS: Tool[] = [
     short: 'Your search and social preview',
     body: 'See your live Google search result and social share preview, then write a better title and description.',
     href: '/tools/google-preview',
+    group: 'website',
   },
   {
     icon: Code2,
@@ -150,5 +171,16 @@ export const TOOLS: Tool[] = [
     short: 'Free JSON-LD structured data',
     body: 'Generate schema.org structured data for a care home, nursing home or home care agency, with your CQC rating added the correct, compliant way. Copy and paste, free.',
     href: '/tools/care-schema-generator',
+    group: 'website',
+  },
+  {
+    icon: MessageSquareReply,
+    title: 'Care Review Reply Helper',
+    short: 'Draft safe, sincere replies to reviews',
+    body: 'Paste a review from Google, carehome.co.uk, homecare.co.uk or Facebook and get a short reply that never confirms who you care for, takes complaints offline and flags safeguarding concerns.',
+    href: '/tools/care-review-reply-helper',
+    group: 'website',
   },
 ]
+
+export const toolsInGroup = (group: ToolGroup) => TOOLS.filter((t) => t.group === group)

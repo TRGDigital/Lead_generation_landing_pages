@@ -10,7 +10,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { SERVICES } from '@/lib/services'
-import { TOOLS } from '@/lib/tools'
+import { TOOL_GROUPS, toolsInGroup } from '@/lib/tools'
 
 const LINKS = [
   // '/work' is hidden from nav while the case-study section is still in progress
@@ -30,14 +30,80 @@ const ABOUT: MegaItem[] = [
 
 type MegaItem = { icon: LucideIcon; title: string; short: string; href: string; highlight?: boolean }
 
+// A headed column in a mega panel. `wide` groups take two of the three columns on desktop.
+type MegaGroup = { label: string; items: MegaItem[]; wide?: boolean }
+
+const TOOL_MENU: MegaGroup[] = TOOL_GROUPS.map((g) => ({
+  label: g.label,
+  items: toolsInGroup(g.key),
+  wide: g.key === 'care',
+}))
+
+/** `compact` drops the one-liner, for grouped panels where twenty full items ran off a laptop screen. */
+function MegaLink({
+  item: { icon: Icon, title, short, href, highlight },
+  onClick,
+  compact,
+}: {
+  item: MegaItem
+  onClick: () => void
+  compact?: boolean
+}) {
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className={cn(
+        'group flex gap-3 rounded-xl border transition-all',
+        compact ? 'items-center px-3 py-2' : 'items-start p-3',
+        highlight
+          ? 'border-brand-accent bg-brand-accent/15 hover:bg-brand-accent/25'
+          : 'border-transparent hover:border-brand-pop/30 hover:bg-brand-bg-warm',
+      )}
+    >
+      <span
+        className={cn(
+          'flex flex-shrink-0 items-center justify-center rounded-xl transition-colors',
+          compact ? 'h-8 w-8' : 'mt-0.5 h-9 w-9',
+          highlight
+            ? 'bg-brand-ink text-brand-accent'
+            : 'bg-brand-pop/10 text-brand-pop group-hover:bg-brand-pop group-hover:text-white',
+        )}
+      >
+        <Icon className="h-[18px] w-[18px]" />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="flex items-center justify-between gap-2">
+          <span className={cn(
+            'text-[13px] font-bold uppercase tracking-wide text-brand-ink transition-colors',
+            highlight ? '' : 'group-hover:text-brand-pop',
+          )}>
+            {title}
+          </span>
+          {highlight ? (
+            <span className="flex-shrink-0 rounded-full bg-brand-ink px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-accent">
+              Start here
+            </span>
+          ) : (
+            <span className="flex-shrink-0 text-brand-pop opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden>→</span>
+          )}
+        </span>
+        {!compact && <span className="mt-0.5 block text-xs leading-snug text-brand-ink-soft">{short}</span>}
+      </span>
+    </Link>
+  )
+}
+
 function DesktopMega({
-  label, active, open, setOpen, items, eyebrow, tagline, ctaHref, ctaLabel, secondaryCta,
+  label, active, open, setOpen, items = [], groups, eyebrow, tagline, ctaHref, ctaLabel, secondaryCta,
 }: {
   label: string
   active: boolean
   open: boolean
   setOpen: (v: boolean) => void
-  items: MegaItem[]
+  items?: MegaItem[]
+  /** Headed columns instead of one flat grid. */
+  groups?: MegaGroup[]
   eyebrow: string
   tagline: string
   ctaHref: string
@@ -67,60 +133,40 @@ function DesktopMega({
       {/* Always in the HTML, hidden until opened, so crawlers see every link in the menu. */}
       <div
         className={cn(
-          'absolute left-1/2 top-full z-50 w-[min(37rem,calc(100vw-2rem))] -translate-x-1/2 pt-2 lg:w-[min(54rem,calc(100vw-2rem))]',
+          'absolute left-1/2 top-full z-50 w-[min(37rem,calc(100vw-2rem))] -translate-x-1/2 pt-2',
+          groups ? 'lg:w-[min(64rem,calc(100vw-2rem))]' : 'lg:w-[min(54rem,calc(100vw-2rem))]',
           !open && 'hidden',
         )}
       >
-          <div className="relative overflow-hidden rounded-2xl border border-brand-line bg-white shadow-card">
+          {/* Capped to the screen so the links at the foot of a long panel stay reachable. */}
+          <div className="relative max-h-[calc(100vh-6rem)] overflow-y-auto overflow-x-hidden rounded-2xl border border-brand-line bg-white shadow-card">
             <div className="h-1.5 w-full bg-brand-pop" />
             <div className="flex items-center justify-between px-4 pb-1 pt-4">
               <p className="font-display text-xs font-bold uppercase tracking-widest text-brand-pop">{eyebrow}</p>
               <span className="font-display text-[11px] font-bold uppercase tracking-wide text-brand-ink-muted">{tagline}</span>
             </div>
-            <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-2 lg:grid-cols-3">
-              {items.map(({ icon: Icon, title, short, href, highlight }) => (
-                <Link
-                  key={title}
-                  href={href}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    'group flex items-start gap-3 rounded-xl border p-3 transition-all',
-                    highlight
-                      ? 'border-brand-accent bg-brand-accent/15 hover:bg-brand-accent/25'
-                      : 'border-transparent hover:border-brand-pop/30 hover:bg-brand-bg-warm',
-                  )}
-                >
-                  <span
-                    className={cn(
-                      'mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl transition-colors',
-                      highlight
-                        ? 'bg-brand-ink text-brand-accent'
-                        : 'bg-brand-pop/10 text-brand-pop group-hover:bg-brand-pop group-hover:text-white',
-                    )}
-                  >
-                    <Icon className="h-[18px] w-[18px]" />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="flex items-center justify-between gap-2">
-                      <span className={cn(
-                        'text-[13px] font-bold uppercase tracking-wide text-brand-ink transition-colors',
-                        highlight ? '' : 'group-hover:text-brand-pop',
-                      )}>
-                        {title}
-                      </span>
-                      {highlight ? (
-                        <span className="flex-shrink-0 rounded-full bg-brand-ink px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-brand-accent">
-                          Start here
-                        </span>
-                      ) : (
-                        <span className="flex-shrink-0 text-brand-pop opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden>→</span>
-                      )}
-                    </span>
-                    <span className="mt-0.5 block text-xs leading-snug text-brand-ink-soft">{short}</span>
-                  </span>
-                </Link>
-              ))}
-            </div>
+            {groups ? (
+              <div className="grid grid-cols-1 gap-x-4 gap-y-3 p-3 lg:grid-cols-3">
+                {groups.map((g) => (
+                  <div key={g.label} className={g.wide ? 'lg:col-span-2' : ''}>
+                    <p className="border-b border-brand-line px-3 pb-2 font-display text-xs font-bold uppercase tracking-widest text-brand-ink">
+                      {g.label}
+                    </p>
+                    <div className={cn('mt-1 grid grid-cols-1 gap-0.5 sm:grid-cols-2', !g.wide && 'lg:grid-cols-1')}>
+                      {g.items.map((item) => (
+                        <MegaLink key={item.title} item={item} onClick={() => setOpen(false)} compact />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-2 lg:grid-cols-3">
+                {items.map((item) => (
+                  <MegaLink key={item.title} item={item} onClick={() => setOpen(false)} />
+                ))}
+              </div>
+            )}
             {secondaryCta && (
               <Link
                 href={secondaryCta.href}
@@ -192,7 +238,7 @@ export default function Nav() {
             active={toolsActive}
             open={toolsOpen}
             setOpen={setToolsOpen}
-            items={TOOLS}
+            groups={TOOL_MENU}
             eyebrow="The care toolkit"
             tagline="Free, no sign-up"
             ctaHref="/tools"
@@ -306,16 +352,21 @@ export default function Nav() {
           </button>
           {mobileTools && (
             <div className="space-y-0.5 pb-1 pl-3">
-              {TOOLS.map(({ icon: Icon, title, href }) => (
-                <Link
-                  key={title}
-                  href={href}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-brand-ink-soft hover:bg-brand-line/40 hover:text-brand-ink"
-                >
-                  <Icon className="h-4 w-4 text-brand-accent" />
-                  {title}
-                </Link>
+              {TOOL_MENU.map((g) => (
+                <div key={g.label} className="pb-1">
+                  <p className="px-3 pb-1 pt-2 text-[11px] font-bold uppercase tracking-widest text-brand-ink">{g.label}</p>
+                  {g.items.map(({ icon: Icon, title, href }) => (
+                    <Link
+                      key={title}
+                      href={href}
+                      onClick={() => setOpen(false)}
+                      className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-brand-ink-soft hover:bg-brand-line/40 hover:text-brand-ink"
+                    >
+                      <Icon className="h-4 w-4 text-brand-accent" />
+                      {title}
+                    </Link>
+                  ))}
+                </div>
               ))}
               <Link
                 href="/tools"

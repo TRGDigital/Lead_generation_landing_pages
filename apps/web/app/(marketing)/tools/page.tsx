@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
-import { TOOLS } from '@/lib/tools'
+import { TOOL_GROUPS, toolsInGroup } from '@/lib/tools'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 
 export const revalidate = 3600
@@ -62,23 +62,31 @@ export default function ToolsPage() {
 
       {/* ── Tools grid ────────────────────────────────────────────────── */}
       <section className="px-6 pb-24">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {TOOLS.map(({ icon: Icon, title, body, href }) => (
-            <Link
-              key={title}
-              href={href}
-              className="group relative flex flex-col rounded-2xl border border-brand-line bg-white p-7 shadow-soft transition-all hover:-translate-y-1 hover:border-brand-pop/40 hover:shadow-card"
-            >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop transition-colors group-hover:bg-brand-pop group-hover:text-white">
-                <Icon className="h-6 w-6" />
+        <div className="mx-auto max-w-6xl space-y-16">
+          {TOOL_GROUPS.map((g) => (
+            <div key={g.key} id={g.key === 'care' ? 'care-tools' : 'website-seo-tools'} className="scroll-mt-28">
+              <h2 className="font-display text-2xl font-bold uppercase tracking-tight text-brand-ink sm:text-3xl">{g.label}</h2>
+              <p className="mt-2 max-w-2xl text-brand-ink-soft">{g.blurb}</p>
+              <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {toolsInGroup(g.key).map(({ icon: Icon, title, body, href }) => (
+                <Link
+                  key={title}
+                  href={href}
+                  className="group relative flex flex-col rounded-2xl border border-brand-line bg-white p-7 shadow-soft transition-all hover:-translate-y-1 hover:border-brand-pop/40 hover:shadow-card"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop transition-colors group-hover:bg-brand-pop group-hover:text-white">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-5 font-display text-lg font-bold uppercase tracking-tight text-brand-ink">{title}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
+                  <span className="btn-pop mt-5 w-fit">
+                    Try it now
+                    <span className="btn-arrow" aria-hidden>→</span>
+                  </span>
+                </Link>
+                ))}
               </div>
-              <h2 className="mt-5 font-display text-lg font-bold uppercase tracking-tight text-brand-ink">{title}</h2>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-ink-soft">{body}</p>
-              <span className="btn-pop mt-5 w-fit">
-                Try it now
-                <span className="btn-arrow" aria-hidden>→</span>
-              </span>
-            </Link>
+            </div>
           ))}
         </div>
 
