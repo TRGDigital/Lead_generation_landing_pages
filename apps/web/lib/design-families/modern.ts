@@ -33,11 +33,15 @@ export type ModernContent = {
 }
 
 // Shared prompt tail, so every image in the family has the same look.
-const LOOK =
+export const LOOK =
   'Photorealistic editorial photograph, natural daylight, warm and optimistic, modern UK setting, candid not posed, shallow depth of field, no text, no logos, no watermarks, respectful and dignified portrayal of older and disabled people.'
 
-export const modernImage = (slug: string, part: 'hero' | 'life' | 'post-1' | 'post-2' | 'post-3') =>
-  `/designs/modern/${slug}-${part}.jpg`
+export type ImagePart = 'hero' | 'life' | 'post-1' | 'post-2' | 'post-3'
+
+/** Where a family's photos live: public/designs/<family>/<slug>-<part>.jpg */
+export const familyImage = (family: string, slug: string, part: ImagePart) => `/designs/${family}/${slug}-${part}.jpg`
+
+export const modernImage = (slug: string, part: ImagePart) => familyImage('modern', slug, part)
 
 export const MODERN: ModernContent[] = [
   {
@@ -532,9 +536,9 @@ export const MODERN: ModernContent[] = [
       title: 'Our homes',
       items: [
         { title: 'Aldwick House, York', body: 'Residential and dementia care for 40 people.' },
-        { title: 'Beckside, Harrogate', body: 'Nursing and residential care for 48 people.' },
-        { title: 'The Maltings, Malton', body: 'Residential and respite care for 32 people.' },
-        { title: 'Ravelston, Ripon', body: 'Dementia nursing for 36 people.' },
+        { title: 'Thistlewood, Harrogate', body: 'Nursing and residential care for 48 people.' },
+        { title: 'Pennock House, Malton', body: 'Residential and respite care for 32 people.' },
+        { title: 'Harebell Lodge, Ripon', body: 'Dementia nursing for 36 people.' },
       ],
     },
     feature: {
@@ -552,7 +556,7 @@ export const MODERN: ModernContent[] = [
       { title: 'Who pays for care?', body: 'Council funding, NHS nursing care and self funding explained.' },
     ],
     posts: [
-      { title: 'Beckside rated Good at its latest inspection', date: '16 September 2026', tag: 'News' },
+      { title: 'Thistlewood rated Good at its latest inspection', date: '16 September 2026', tag: 'News' },
       { title: 'How the Northway academy trains new carers', date: '4 September 2026', tag: 'Careers' },
       { title: 'Summer across the group, in pictures', date: '21 August 2026', tag: 'Life in our homes' },
     ],

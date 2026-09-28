@@ -10,6 +10,8 @@ import RavenswoodDesign from '@/components/designs/RavenswoodDesign'
 import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 import ModernTemplate from '@/components/designs/families/ModernTemplate'
 import { MODERN } from '@/lib/design-families/modern'
+import TraditionalTemplate from '@/components/designs/families/TraditionalTemplate'
+import { TRADITIONAL } from '@/lib/design-families/traditional'
 import { JsonLd } from '@/components/JsonLd'
 import { ORG_REF, WEBSITE_REF, SCHEMA_SITE } from '@/lib/schema'
 
@@ -59,8 +61,10 @@ export default function DesignExamplePage({ params }: { params: { slug: string }
       break
     default: {
       const modern = design.family === 'modern' ? MODERN.find((m) => m.slug === design.slug) : undefined
-      if (!modern) notFound()
-      page = <ModernTemplate c={modern} />
+      const traditional = design.family === 'traditional' ? TRADITIONAL.find((m) => m.slug === design.slug) : undefined
+      if (modern) page = <ModernTemplate c={modern} />
+      else if (traditional) page = <TraditionalTemplate c={traditional} />
+      else notFound()
     }
   }
   return (
