@@ -22,6 +22,7 @@ import { applyPageSeo } from '@/lib/page-seo'
 import { FAMILY_TOOLS } from '@/lib/family-tools'
 import { CountyHero, EndCta, Faqs, FaqJsonLd } from '@/components/marketing/county/CountySections'
 import { Dots, Star } from '@/components/marketing/Decor'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 // What ongoing care of a TRG-built site includes. Every item here maps to something the
 // platform actually runs (see the per-site settings in lib/websites.ts, the embeds in
@@ -247,22 +248,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function HostingAndSupportPage() {
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Hosting and support', item: `${SITE_URL}${PATH}` },
-    ],
-  }
-
   return (
     <main>
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
+      <Breadcrumbs trail={[['Hosting and support', PATH]]} />
       <FaqJsonLd faqs={FAQS} />
 
       <CountyHero

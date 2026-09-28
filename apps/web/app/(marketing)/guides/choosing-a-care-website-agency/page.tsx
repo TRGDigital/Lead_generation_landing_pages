@@ -6,6 +6,7 @@ import { Star, Squiggle } from '@/components/marketing/Decor'
 import { BuyersGuideForm } from '@/components/marketing/BuyersGuideForm'
 import { JsonLd } from '@/components/JsonLd'
 import { ORG_REF, WEBSITE_REF } from '@/lib/schema'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 // Gated lead magnet: a practical, fair checklist for choosing who builds a care website.
 // The PDF lives at public/guides/choosing-a-care-website-agency.pdf and is built by
@@ -88,22 +89,9 @@ function GuideCover() {
 }
 
 export default function BuyersGuidePage() {
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: "Buyer's guide", item: `${SITE_URL}${PATH}` },
-    ],
-  }
-
   return (
     <main>
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
+      <Breadcrumbs trail={[['Buyer’s guide', PATH]]} />
       <JsonLd
         data={{
           '@context': 'https://schema.org',

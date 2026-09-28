@@ -3,6 +3,9 @@ import { applyPageSeo } from '@/lib/page-seo'
 import { UserPlus, MessageSquareText, Gift } from 'lucide-react'
 import { Star, Squiggle, Burst } from '@/components/marketing/Decor'
 import { ReferralForm } from '@/components/marketing/ReferralForm'
+import { JsonLd } from '@/components/JsonLd'
+import { ORG_REF, WEBSITE_REF, SCHEMA_SITE } from '@/lib/schema'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -29,6 +32,8 @@ const STEPS = [
 export default function ReferPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Refer a home', '/refer']]} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Refer a home', url: `${SCHEMA_SITE}/refer`, isPartOf: WEBSITE_REF, publisher: ORG_REF }} />
       {/* ── Hero + form ───────────────────────────────────────────────── */}
       <section className="relative overflow-hidden px-6 pb-16 pt-16">
         <Star className="absolute left-4 top-10 hidden h-16 w-16 -rotate-12 text-brand-accent lg:block" />

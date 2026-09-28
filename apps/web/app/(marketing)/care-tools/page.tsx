@@ -6,6 +6,7 @@ import { Calculator, HeartPulse, HandCoins, Landmark, Check, BedDouble, Accessib
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { FAMILY_TOOLS, type FamilyTool, type FamilyToolKey } from '@/lib/family-tools'
 import { ToolShowcase, type ShowcaseItem } from '@/components/marketing/ToolShowcase'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -228,6 +229,7 @@ const WHY_POINTS = [
 export default function CareToolsPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Care tools for your website', '/care-tools']]} />
       {/* JSON-LD, Service */}
       <script
         type="application/ld+json"

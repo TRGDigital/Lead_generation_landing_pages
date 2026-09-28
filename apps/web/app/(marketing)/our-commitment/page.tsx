@@ -3,6 +3,9 @@ import Link from 'next/link'
 import { Check, MessageSquare, ShieldCheck, RefreshCw } from 'lucide-react'
 import { Star, Squiggle, Dots } from '@/components/marketing/Decor'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
+import { JsonLd } from '@/components/JsonLd'
+import { ORG_REF, WEBSITE_REF, SCHEMA_SITE } from '@/lib/schema'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.trgdigital.co.uk'
 
@@ -62,6 +65,8 @@ const SECURITY = [
 export default function OurCommitmentPage() {
   return (
     <main>
+      <Breadcrumbs trail={[['Our commitment', '/our-commitment']]} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Our commitment', url: `${SCHEMA_SITE}/our-commitment`, isPartOf: WEBSITE_REF, publisher: ORG_REF }} />
       {/* Hero */}
       <section className="relative overflow-hidden px-6 pb-16 pt-16">
         <Star className="absolute left-4 top-10 hidden h-16 w-16 -rotate-12 text-brand-accent lg:block" />

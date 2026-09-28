@@ -8,6 +8,7 @@ import { getPublishedPosts, getCategories, formatDate } from '@/lib/blog'
 import PostCard from '@/components/blog/PostCard'
 import { Star, Squiggle, Dots } from '@/components/marketing/Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -57,6 +58,7 @@ export default async function BlogIndexPage({ searchParams }: Props) {
 
   return (
     <>
+      <Breadcrumbs trail={[['Knowledge Hub', '/blog']]} />
       {/* JSON-LD, Blog */}
       <script
         type="application/ld+json"

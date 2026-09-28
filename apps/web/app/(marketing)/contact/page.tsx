@@ -3,6 +3,7 @@ import { applyPageSeo } from '@/lib/page-seo'
 import { Mail, Phone, MapPin } from 'lucide-react'
 import ContactForm from '@/components/marketing/ContactForm'
 import { Star, Squiggle, Dots } from '@/components/marketing/Decor'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.example.com'
 
@@ -35,6 +36,7 @@ const NEXT_STEPS = [
 export default function ContactPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Contact', '/contact']]} />
       {/* JSON-LD, ContactPage */}
       <script
         type="application/ld+json"

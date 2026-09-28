@@ -6,6 +6,7 @@ import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { SerpResult, SerpJobs, SchemaCode } from '@/components/marketing/SerpMock'
 import { RelatedLinks, toolItems } from '@/components/marketing/RelatedLinks'
 import { CountyLinkGrid } from '@/components/marketing/county/CountyLinks'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -51,6 +52,7 @@ const STEPS = [
 export default function SeoPage() {
   return (
     <>
+      <Breadcrumbs trail={[['SEO', '/seo']]} />
       {/* JSON-LD, Service */}
       <script
         type="application/ld+json"

@@ -3,6 +3,7 @@ import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
 import { MousePointerClick, FlaskConical, LayoutPanelTop, Phone, Gauge, BarChart3, Check } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -47,6 +48,7 @@ const STEPS = [
 export default function CroPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Conversion rate optimisation', '/conversion-rate-optimisation']]} />
       <script
         type="application/ld+json"
         suppressHydrationWarning

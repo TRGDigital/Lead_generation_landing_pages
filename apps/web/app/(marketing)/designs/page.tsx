@@ -4,6 +4,9 @@ import { Check } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
 import { DESIGNS } from '@/lib/designs'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { JsonLd } from '@/components/JsonLd'
+import { ORG_REF, WEBSITE_REF, SCHEMA_SITE } from '@/lib/schema'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -33,6 +36,8 @@ const INCLUDED = [
 export default function DesignsPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Design examples', '/designs']]} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Design examples', url: `${SCHEMA_SITE}/designs`, isPartOf: WEBSITE_REF, publisher: ORG_REF }} />
       <section className="relative overflow-hidden px-6 pb-10 pt-16">
         <Star className="absolute left-4 top-10 hidden h-16 w-16 -rotate-12 text-brand-accent lg:block" />
         <div className="mx-auto max-w-6xl">

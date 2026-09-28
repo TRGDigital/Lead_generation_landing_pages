@@ -5,6 +5,7 @@ import { applyPageSeo } from '@/lib/page-seo'
 import { ServiceLanding } from '@/components/marketing/ServiceLanding'
 import { SerpJobs, SchemaCode } from '@/components/marketing/SerpMock'
 import { RelatedLinks, toolItems } from '@/components/marketing/RelatedLinks'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -25,6 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function CarerRecruitmentPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Carer recruitment', '/carer-recruitment']]} />
       <ServiceLanding
         path="/carer-recruitment"
         schemaName="Carer recruitment websites"

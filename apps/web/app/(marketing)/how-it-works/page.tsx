@@ -5,6 +5,7 @@ import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { Check, ArrowRight } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -96,16 +97,23 @@ const HOME_HANDLES = [
 export default function HowItWorksPage() {
   return (
     <>
-      {/* JSON-LD, HowTo */}
+      <Breadcrumbs trail={[['How it works', '/how-it-works']]} />
+      {/* WebPage listing the phases. Not HowTo: Google stopped showing HowTo results in 2023. */}
       <script
         type="application/ld+json"
         suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'HowTo',
+            '@type': 'WebPage',
             name: 'How TRG Digital fills care home beds',
-            step: PHASES.map((p, i) => ({ '@type': 'HowToStep', position: i + 1, name: p.title })),
+            url: `${SITE_URL}/how-it-works`,
+            isPartOf: { '@id': `${SITE_URL}/#website` },
+            publisher: { '@id': `${SITE_URL}/#organization` },
+            mainEntity: {
+              '@type': 'ItemList',
+              itemListElement: PHASES.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.title })),
+            },
           }),
         }}
       />

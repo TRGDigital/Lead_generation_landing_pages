@@ -24,8 +24,7 @@ import {
   Steps,
 } from '@/components/marketing/county/CountySections'
 import { NearbyCounties } from '@/components/marketing/county/CountyLinks'
-import { JsonLd } from '@/components/JsonLd'
-import { breadcrumbLd } from '@/lib/schema'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 // A new care website, county by county.
 //
@@ -108,7 +107,7 @@ export default async function NewCareWebsiteCountyPage({ params }: Props) {
   return (
     <>
       <ExitIntent countyName={county.name} context={`New care website, ${county.name}`} need="A new website" />
-      <JsonLd data={breadcrumbLd([['Areas we cover', '/locations'], [county.name, `/locations/${county.slug}`], [`Care websites in ${county.name}`, `/care-website-design/${county.slug}`]])} />
+      <Breadcrumbs trail={[['Areas we cover', '/locations'], [county.name, `/locations/${county.slug}`], [`Care websites in ${county.name}`, `/care-website-design/${county.slug}`]]} />
       <ServiceJsonLd
         name={`Care website design in ${county.name}`}
         url={`${SITE_URL}/care-website-design/${county.slug}`}

@@ -5,6 +5,7 @@ import { MapPin, Star as StarIcon, Building2, Search, MessageSquare, BarChart3, 
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { RelatedLinks, toolItems } from '@/components/marketing/RelatedLinks'
 import { CountyLinkGrid } from '@/components/marketing/county/CountyLinks'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -49,6 +50,7 @@ const STEPS = [
 export default function LocalSeoPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Local SEO', '/local-seo']]} />
       <script
         type="application/ld+json"
         suppressHydrationWarning

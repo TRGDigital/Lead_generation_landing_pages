@@ -7,6 +7,9 @@ import StAidansDesign from '@/components/designs/StAidansDesign'
 import WillowDesign from '@/components/designs/WillowDesign'
 import MarchmontDesign from '@/components/designs/MarchmontDesign'
 import RavenswoodDesign from '@/components/designs/RavenswoodDesign'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
+import { JsonLd } from '@/components/JsonLd'
+import { ORG_REF, WEBSITE_REF, SCHEMA_SITE } from '@/lib/schema'
 
 export const revalidate = 3600
 export const dynamicParams = false
@@ -32,20 +35,44 @@ export default function DesignExamplePage({ params }: { params: { slug: string }
   const design = getDesign(params.slug)
   if (!design) notFound()
 
+  let page: React.ReactNode
   switch (design.slug) {
     case 'oakfield-house':
-      return <OakfieldDesign design={design} />
+      page = <OakfieldDesign design={design} />
+      break
     case 'brightpath-care':
-      return <BrightpathDesign design={design} />
+      page = <BrightpathDesign design={design} />
+      break
     case 'st-aidans':
-      return <StAidansDesign design={design} />
+      page = <StAidansDesign design={design} />
+      break
     case 'willow-court':
-      return <WillowDesign design={design} />
+      page = <WillowDesign design={design} />
+      break
     case 'marchmont-gardens':
-      return <MarchmontDesign design={design} />
+      page = <MarchmontDesign design={design} />
+      break
     case 'ravenswood-group':
-      return <RavenswoodDesign design={design} />
+      page = <RavenswoodDesign design={design} />
+      break
     default:
       notFound()
   }
+  return (
+    <>
+      <Breadcrumbs trail={[['Design examples', '/designs'], [design.name, `/designs/${design.slug}`]]} />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'CreativeWork',
+          name: `${design.name}: an example care website design`,
+          description: design.style,
+          url: `${SCHEMA_SITE}/designs/${design.slug}`,
+          creator: ORG_REF,
+          isPartOf: WEBSITE_REF,
+        }}
+      />
+      {page}
+    </>
+  )
 }

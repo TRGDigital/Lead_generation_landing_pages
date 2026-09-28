@@ -6,6 +6,7 @@ import { countySlugs, pct } from '@/lib/locations'
 import { Star, Squiggle, Dots } from '@/components/marketing/Decor'
 import { DarkStats, EndCta, Faqs, FaqJsonLd } from '@/components/marketing/county/CountySections'
 import national from '@/lib/data/national-snapshot.json'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 // The research hub. The figures come from CareAssura, which holds every CQC registered
 // service in England, counted by scripts/build-national.mjs into a dated snapshot. A
@@ -185,6 +186,7 @@ export default async function ResearchPage() {
 
   return (
     <main>
+      <Breadcrumbs trail={[['Research', '/research']]} />
       <FaqJsonLd faqs={FAQS} />
       <script
         type="application/ld+json"

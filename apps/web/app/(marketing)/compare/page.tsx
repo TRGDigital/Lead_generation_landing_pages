@@ -4,6 +4,7 @@ import { applyPageSeo } from '@/lib/page-seo'
 import { COMPARISONS } from '@/lib/comparisons'
 import { CountyHero, EndCta, ServicePanel } from '@/components/marketing/county/CountySections'
 import { MarkIcon } from '@/components/marketing/Scorecard'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 // The hub for the /compare pages. Lists every comparison in lib/comparisons.ts plus the
 // all-options page at /why-a-care-specialist.
@@ -61,14 +62,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function CompareHubPage() {
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Compare', item: `${SITE_URL}${PATH}` },
-    ],
-  }
   const itemList = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -85,7 +78,8 @@ export default function CompareHubPage() {
 
   return (
     <main>
-      {[breadcrumb, itemList].map((s, i) => (
+      <Breadcrumbs trail={[['Compare', PATH]]} />
+      {[itemList].map((s, i) => (
         <script
           key={i}
           type="application/ld+json"

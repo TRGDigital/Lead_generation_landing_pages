@@ -3,6 +3,7 @@ import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
 import { PenLine, FileText, HelpCircle, MapPin, Repeat, BarChart3, Check } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -47,6 +48,7 @@ const STEPS = [
 export default function ContentCreationPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Content creation', '/content-creation']]} />
       <script
         type="application/ld+json"
         suppressHydrationWarning

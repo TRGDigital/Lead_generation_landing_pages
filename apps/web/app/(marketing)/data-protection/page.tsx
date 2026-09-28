@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Clock, Database, Lock, Mail } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
 import { CountyHero, EndCta, FaqJsonLd, Faqs, Included, Prose } from '@/components/marketing/county/CountySections'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 // Trust page for care buyers: how enquiry data is handled on the websites and tools TRG runs.
 // Every statement here was checked against the code, config or live database settings
@@ -84,22 +85,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function DataProtectionPage() {
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Data protection', item: `${SITE_URL}${PATH}` },
-    ],
-  }
-
   return (
     <main>
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
+      <Breadcrumbs trail={[['Data protection', PATH]]} />
       <FaqJsonLd faqs={FAQS} />
 
       <CountyHero

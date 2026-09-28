@@ -16,6 +16,7 @@ import {
 import { applyPageSeo } from '@/lib/page-seo'
 import { ServiceLanding } from '@/components/marketing/ServiceLanding'
 import { AuditForm } from '@/components/marketing/AuditForm'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.trgdigital.co.uk'
 
@@ -195,6 +196,7 @@ export default function SiteAuditPage() {
 
   return (
     <>
+      <Breadcrumbs trail={[['Free site audit', '/site-audit']]} />
       <ServiceLanding
         path="/site-audit"
         schemaName="Care website audit"

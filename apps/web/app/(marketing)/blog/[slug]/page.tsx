@@ -13,6 +13,7 @@ import { splitHtmlForCtas } from '@/lib/blog-cta'
 import BlogCta from '@/components/marketing/BlogCta'
 import PostCard from '@/components/blog/PostCard'
 import { Fragment } from 'react'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -102,6 +103,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      <Breadcrumbs trail={[['Knowledge Hub', '/blog'], [post.title, `/blog/${post.slug}`]]} />
       <script
         type="application/ld+json"
         suppressHydrationWarning

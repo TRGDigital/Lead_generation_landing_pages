@@ -12,6 +12,7 @@ import {
   ServicePanel,
   Steps,
 } from '@/components/marketing/county/CountySections'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 // For operators running several services. Every other page on the site speaks to a single
 // home, and a group is a different buyer: one decision maker, many managers, many local
@@ -56,6 +57,7 @@ const FAQS: [string, string][] = [
 export default function CareGroupsPage() {
   return (
     <main>
+      <Breadcrumbs trail={[['For care groups', '/care-groups']]} />
       <FaqJsonLd faqs={FAQS} />
 
       <CountyHero

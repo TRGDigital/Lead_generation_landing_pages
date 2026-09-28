@@ -6,6 +6,7 @@ import { ArrowRight } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
 import { SECTORS, COLLECTION_SERVICES, getSector, titleCase, firstSentence } from '@/lib/sectors'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 export const dynamicParams = false
@@ -33,6 +34,7 @@ export default function SectorHub({ params }: { params: { sector: string } }) {
 
   return (
     <>
+      <Breadcrumbs trail={[[sector.name, `/${params.sector}`]]} />
       <script
         type="application/ld+json"
         suppressHydrationWarning

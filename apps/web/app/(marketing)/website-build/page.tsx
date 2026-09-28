@@ -4,6 +4,7 @@ import { Palette, LayoutTemplate, Search, Accessibility, ShieldCheck, Eye, Check
 import { applyPageSeo } from '@/lib/page-seo'
 import { ServiceLanding } from '@/components/marketing/ServiceLanding'
 import { RelatedLinks, toolItems, COMPARE_LINK, GUIDE_LINK } from '@/components/marketing/RelatedLinks'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -83,6 +84,7 @@ const INCLUDED: { title: string; items: string[] }[] = [
 export default function WebsiteBuildPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Website build', '/website-build']]} />
       <ServiceLanding
         path="/website-build"
         schemaName="Care provider website build"

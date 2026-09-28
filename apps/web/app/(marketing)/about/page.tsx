@@ -10,6 +10,7 @@ import national from '@/lib/data/national-snapshot.json'
 import { FAMILY_TOOLS } from '@/lib/family-tools'
 import { TOOLS } from '@/lib/tools'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -118,6 +119,7 @@ const OPERATE = [
 export default function AboutPage() {
   return (
     <>
+      <Breadcrumbs trail={[['About us', '/about']]} />
       {/* JSON-LD, AboutPage */}
       <script
         type="application/ld+json"

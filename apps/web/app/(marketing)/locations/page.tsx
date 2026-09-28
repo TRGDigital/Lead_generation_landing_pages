@@ -7,6 +7,7 @@ import { COUNTY_PAGE, countyHref, liveCountyList } from '@/lib/county-links'
 import { CountyHero, EndCta } from '@/components/marketing/county/CountySections'
 import { JsonLd } from '@/components/JsonLd'
 import { ORG_REF, WEBSITE_REF, SCHEMA_SITE } from '@/lib/schema'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 // The hub for every county: the one page that links to all of them, so none is an island.
 // Reads the live list, so a county the publishing cron switches on appears here by itself.
@@ -37,18 +38,9 @@ export default async function LocationsHubPage() {
     }),
   )
 
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Areas we cover', item: `${SITE_URL}${PATH}` },
-    ],
-  }
-
   return (
     <main>
-      <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <Breadcrumbs trail={[['Areas we cover', PATH]]} />
       <JsonLd
         data={{
           '@context': 'https://schema.org',

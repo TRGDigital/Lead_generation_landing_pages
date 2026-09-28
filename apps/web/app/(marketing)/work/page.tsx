@@ -6,6 +6,9 @@ import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { StartProject } from '@/components/marketing/StartProject'
 import { Star, Squiggle } from '@/components/marketing/Decor'
 import { CASE_STUDIES } from '@/lib/case-studies'
+import { JsonLd } from '@/components/JsonLd'
+import { ORG_REF, WEBSITE_REF, SCHEMA_SITE } from '@/lib/schema'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -26,6 +29,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function WorkIndexPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Our work', '/work']]} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Our work', url: `${SCHEMA_SITE}/work`, isPartOf: WEBSITE_REF, publisher: ORG_REF }} />
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden px-6 pb-12 pt-16">
         <Star className="absolute right-8 top-12 hidden h-14 w-14 rotate-12 text-brand-accent lg:block" />

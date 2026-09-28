@@ -4,6 +4,7 @@ import { Type, Contrast, BookOpen, Volume2, Keyboard, ImageIcon } from 'lucide-r
 import { applyPageSeo } from '@/lib/page-seo'
 import { ServiceLanding } from '@/components/marketing/ServiceLanding'
 import { RelatedLinks, toolItems } from '@/components/marketing/RelatedLinks'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -26,6 +27,7 @@ const linkClass = 'font-semibold text-brand-pop underline-offset-2 hover:underli
 export default function AccessibleWebsitesPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Accessible websites', '/accessible-websites']]} />
       <ServiceLanding
         path="/accessible-websites"
         schemaName="Accessible websites for care providers"

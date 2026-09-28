@@ -7,6 +7,7 @@ import { TestimonialCard } from '@/components/marketing/Testimonials'
 import { CountyHero, EndCta } from '@/components/marketing/county/CountySections'
 import { JsonLd } from '@/components/JsonLd'
 import { ORG_REF, WEBSITE_REF, SCHEMA_SITE } from '@/lib/schema'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 // Every client quote in one place. Reads lib/testimonials.ts, the same list as the homepage.
 //
@@ -59,18 +60,9 @@ function HighlightsCard() {
 }
 
 export default function ReviewsPage() {
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Reviews', item: `${SITE_URL}${PATH}` },
-    ],
-  }
-
   return (
     <main>
-      <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <Breadcrumbs trail={[['Reviews', PATH]]} />
       {/* An AboutPage about us, not Review markup: reviews a business publishes about itself are not eligible. */}
       <JsonLd
         data={{

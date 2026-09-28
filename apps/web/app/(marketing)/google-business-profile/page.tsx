@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { MapPin, Star, MessageSquareText, Camera, BellRing, BarChart3, Check } from 'lucide-react'
 import { Star as StarDecor, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { RelatedLinks, toolItems } from '@/components/marketing/RelatedLinks'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -49,6 +50,7 @@ const STEPS = [
 export default function GbpPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Google Business Profile', '/google-business-profile']]} />
       <script
         type="application/ld+json"
         suppressHydrationWarning

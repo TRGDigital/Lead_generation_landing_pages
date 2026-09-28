@@ -16,6 +16,7 @@ import { Star, Squiggle, Dots } from '@/components/marketing/Decor'
 import { Steps, Faqs, FaqJsonLd, EndCta } from '@/components/marketing/county/CountySections'
 import { RelatedLinks, toolItems, COMPARE_LINK } from '@/components/marketing/RelatedLinks'
 import { StartBuildingForm } from '@/components/marketing/StartBuildingForm'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 // The main money page for new website enquiries. County pages link here with the anchor
 // "start building your new website", and the home page has a band pointing to it. The
@@ -240,17 +241,11 @@ export default function StartBuildingPage() {
       description:
         'A new website for a UK care provider, built from scratch, with a choice of homepage designs, our own content management system, careers, SEO, WCAG 2.2 AA accessibility, hosting and launch.',
     },
-    {
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-        { '@type': 'ListItem', position: 2, name: 'Start building your new website', item: `${SITE_URL}${PATH}` },
-      ],
-    },
   ]
 
   return (
     <>
+      <Breadcrumbs trail={[['Start building your new website', PATH]]} />
       {schemas.map((schema, i) => (
         <script
           key={i}

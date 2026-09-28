@@ -100,11 +100,6 @@ export default async function HomePage() {
           name: ['Home', 'Website development', 'SEO', 'Google Profile and Reviews', 'Care tools and technology', 'About', 'Knowledge Hub', 'Contact'],
           url: [SITE_URL, `${SITE_URL}/website-development`, `${SITE_URL}/seo`, `${SITE_URL}/google-business-profile`, `${SITE_URL}/care-tools`, `${SITE_URL}/about`, `${SITE_URL}/blog`, `${SITE_URL}/contact`],
         },
-        {
-          '@type': 'BreadcrumbList',
-          '@id': `${SITE_URL}/#breadcrumb`,
-          itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL }],
-        },
       ] as Record<string, unknown>[]).map((schema, i) => (
         <script
           key={i}

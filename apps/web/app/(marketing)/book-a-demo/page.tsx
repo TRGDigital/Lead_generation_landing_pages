@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { CheckCircle2, PhoneCall, Mail } from 'lucide-react'
 import { Star, Squiggle } from '@/components/marketing/Decor'
+import { JsonLd } from '@/components/JsonLd'
+import { ORG_REF, WEBSITE_REF, SCHEMA_SITE } from '@/lib/schema'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Book a Free Demo',
@@ -25,6 +28,8 @@ const EXPECT = [
 export default function BookADemoPage() {
   return (
     <main>
+      <Breadcrumbs trail={[['Book a demo', '/book-a-demo']]} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'ContactPage', name: 'Book a demo', url: `${SCHEMA_SITE}/book-a-demo`, isPartOf: WEBSITE_REF, publisher: ORG_REF }} />
       <section className="relative overflow-hidden px-6 pb-20 pt-16">
         <Star className="absolute right-8 top-10 hidden h-16 w-16 rotate-12 text-brand-accent lg:block" />
         <div className="mx-auto max-w-6xl">

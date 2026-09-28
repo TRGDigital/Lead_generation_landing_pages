@@ -5,6 +5,7 @@ import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { ArrowUpRight, Check, Code2, Sparkles, LayoutDashboard, Plug, Workflow, Smartphone } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -97,6 +98,7 @@ function BrowserMock({ src, alt, url, w, h }: { src: string; alt: string; url: s
 export default function DevelopmentPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Software development', '/development']]} />
       {/* JSON-LD, Service */}
       <script
         type="application/ld+json"

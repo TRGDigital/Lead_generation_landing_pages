@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { Compass, PenTool, Palette, BookOpen, MessageSquareText, Globe, Printer, Share2, Check } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -53,6 +54,7 @@ const SWATCHES = ['#F0532B', '#FBCC33', '#2a2620', '#7a8a6f', '#f4f1e8']
 export default function RebrandingPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Rebranding', '/rebranding']]} />
       {/* JSON-LD, Service */}
       <script
         type="application/ld+json"

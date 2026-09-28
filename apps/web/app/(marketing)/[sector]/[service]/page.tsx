@@ -6,6 +6,7 @@ import { Check, ArrowRight } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
 import { SECTORS, COLLECTION_SERVICES, getSector, getCollectionService, titleCase, firstSentence, inSentence } from '@/lib/sectors'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 export const dynamicParams = false
@@ -38,6 +39,7 @@ export default function SectorService({ params }: { params: { sector: string; se
 
   return (
     <>
+      <Breadcrumbs trail={[[sector.name, `/${params.sector}`], [`${svc.name} for ${sector.name}`, `/${params.sector}/${params.service}`]]} />
       <script
         type="application/ld+json"
         suppressHydrationWarning

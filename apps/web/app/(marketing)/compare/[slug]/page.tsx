@@ -7,6 +7,7 @@ import { getAllPublishedSlugs } from '@/lib/blog'
 import { COMPARISONS, getComparison } from '@/lib/comparisons'
 import { CountyHero, EndCta, FaqJsonLd, Faqs, Prose } from '@/components/marketing/county/CountySections'
 import { ComparisonTable, ScorecardCard } from '@/components/marketing/Scorecard'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 // "A care specialist vs X": one template, content in lib/comparisons.ts. Same shape and
 // scorecard as /why-a-care-specialist, which covers all the options at once; these pages
@@ -88,24 +89,10 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
   const tableRows = c.rows.map((r) => ({ label: r.criterion, marks: [r.trg, r.them], note: r.note }))
   const cardRows = c.rows.flatMap((r) => (r.short ? [{ short: r.short, marks: [r.trg, r.them] }] : []))
 
-  const breadcrumb = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Compare', item: `${SITE_URL}/compare` },
-      { '@type': 'ListItem', position: 3, name: c.title, item: `${SITE_URL}${path}` },
-    ],
-  }
-
   return (
     <main>
+      <Breadcrumbs trail={[['Compare', '/compare'], [c.title, path]]} />
       <FaqJsonLd faqs={c.faqs} />
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
 
       <CountyHero
         eyebrow={c.hero.eyebrow}
@@ -133,13 +120,6 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
 
       <section id="compare" className="scroll-mt-24 bg-brand-bg-warm px-6 py-14">
         <div className="mx-auto max-w-6xl">
-          <nav aria-label="Breadcrumb" className="mb-4 text-xs font-semibold uppercase tracking-wider text-brand-ink-muted">
-            <Link href="/compare" className="hover:text-brand-pop">
-              Compare
-            </Link>
-            <span className="mx-2">/</span>
-            <span className="text-brand-ink">{c.title}</span>
-          </nav>
           <h2 className="font-display text-2xl font-bold uppercase tracking-tight text-brand-ink sm:text-3xl">
             {c.tableHeading}
           </h2>

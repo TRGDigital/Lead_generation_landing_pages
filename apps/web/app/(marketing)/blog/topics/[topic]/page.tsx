@@ -7,6 +7,7 @@ import { getPostsBySlugs } from '@/lib/blog'
 import { TOPICS, getTopic } from '@/lib/blog-topics'
 import PostCard from '@/components/blog/PostCard'
 import { Star, Squiggle, Dots } from '@/components/marketing/Decor'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 export const dynamicParams = false
@@ -37,6 +38,7 @@ export default async function TopicPage({ params }: { params: { topic: string } 
 
   return (
     <>
+      <Breadcrumbs trail={[['Knowledge Hub', '/blog'], [topic.title, `/blog/topics/${topic.slug}`]]} />
       <script
         type="application/ld+json"
         suppressHydrationWarning

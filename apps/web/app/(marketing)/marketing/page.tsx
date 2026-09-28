@@ -6,6 +6,7 @@ import { CheckCircle, Zap, Shield, Check } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 import { RelatedLinks, toolItems } from '@/components/marketing/RelatedLinks'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -75,6 +76,7 @@ const POINTS = [
 export default function MarketingPage() {
   return (
     <>
+      <Breadcrumbs trail={[['Marketing', '/marketing']]} />
       {/* JSON-LD, Service */}
       <script
         type="application/ld+json"

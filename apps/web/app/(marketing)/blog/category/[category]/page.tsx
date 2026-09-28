@@ -3,6 +3,9 @@ import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { getPublishedPosts, getCategories } from '@/lib/blog'
 import PostCard from '@/components/blog/PostCard'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
+import { JsonLd } from '@/components/JsonLd'
+import { ORG_REF, WEBSITE_REF, SCHEMA_SITE } from '@/lib/schema'
 
 export const revalidate = 3600
 
@@ -38,6 +41,8 @@ export default async function CategoryPage({ params, searchParams }: Props) {
 
   return (
     <>
+      <Breadcrumbs trail={[['Knowledge Hub', '/blog'], [category, `/blog/category/${encodeURIComponent(category)}`]]} />
+      <JsonLd data={{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: `${category} articles`, url: `${SCHEMA_SITE}/blog/category/${encodeURIComponent(category)}`, isPartOf: WEBSITE_REF, publisher: ORG_REF }} />
       <section className="px-6 pt-14 pb-10">
         <div className="mx-auto max-w-6xl">
           <Link

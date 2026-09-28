@@ -9,6 +9,7 @@ import { StartProject } from '@/components/marketing/StartProject'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { CASE_STUDIES, getCaseStudy, otherCaseStudy } from '@/lib/case-studies'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
+import { Breadcrumbs } from '@/components/marketing/Breadcrumbs'
 
 export const revalidate = 3600
 
@@ -77,6 +78,7 @@ export default async function CaseStudyPage({
 
   return (
     <>
+      <Breadcrumbs trail={[['Our work', '/work'], [cs.name, `/work/${cs.slug}`]]} />
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -84,7 +86,7 @@ export default async function CaseStudyPage({
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Article',
-            headline: `${cs.name} — Case Study`,
+            headline: `${cs.name} case study`,
             about: cs.name,
             author: { '@type': 'Organization', name: 'TRG Digital', url: SITE_URL },
             publisher: { '@type': 'Organization', name: 'TRG Digital', url: SITE_URL },
