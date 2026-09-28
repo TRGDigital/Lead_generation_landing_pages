@@ -3,6 +3,7 @@ import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
 import { MapPin, Star as StarIcon, Building2, Search, MessageSquare, BarChart3, Check } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { RelatedLinks, toolItems } from '@/components/marketing/RelatedLinks'
 
 export const revalidate = 3600
 
@@ -241,6 +242,7 @@ export default function LocalSeoPage() {
           </div>
         </div>
       </section>
+      <RelatedLinks heading="Free tools for local search" items={toolItems(['/tools/care-competitor-snapshot', '/tools/care-review-reply-helper', '/tools/google-preview'])} />
     </>
   )
 }

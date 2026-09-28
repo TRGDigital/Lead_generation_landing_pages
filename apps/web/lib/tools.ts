@@ -184,3 +184,34 @@ export const TOOLS: Tool[] = [
 ]
 
 export const toolsInGroup = (group: ToolGroup) => TOOLS.filter((t) => t.group === group)
+
+// The service each tool leads into, for the "related" band under every tool page. Tools not
+// listed fall back to their group's default.
+export const TOOL_SERVICE: Record<string, { href: string; label: string }> = {
+  '/tools/care-job-advert-checker': { href: '/carer-recruitment', label: 'Recruit carers from your own website' },
+  '/tools/staff-turnover-cost-calculator': { href: '/carer-recruitment', label: 'Recruit carers from your own website' },
+  '/tools/agency-staff-cost-calculator': { href: '/carer-recruitment', label: 'Recruit carers from your own website' },
+  '/tools/enquiry-value-calculator': { href: '/marketing', label: 'Get more enquiries with Google Ads' },
+  '/tools/empty-bed-calculator': { href: '/marketing', label: 'Fill empty beds with Google Ads' },
+  '/tools/care-review-reply-helper': { href: '/google-business-profile', label: 'Get your Google Business Profile working' },
+  '/tools/care-competitor-snapshot': { href: '/local-seo', label: 'Rank above your local competitors' },
+  '/tools/google-preview': { href: '/seo', label: 'See how our care SEO works' },
+  '/tools/care-schema-generator': { href: '/seo', label: 'See how our care SEO works' },
+  '/tools/care-website-accessibility-check': { href: '/accessible-websites', label: 'Make your website accessible' },
+  '/tools/cqc-rating-display-checker': { href: '/website-development', label: 'A care website that gets the basics right' },
+  '/tools/website-grader': { href: '/site-audit', label: 'Get a free, detailed site audit' },
+}
+
+export const GROUP_SERVICE: Record<ToolGroup, { href: string; label: string }> = {
+  care: { href: '/care-tools', label: 'Put tools like these on your own website' },
+  website: { href: '/site-audit', label: 'Get a free, detailed site audit' },
+}
+
+/** Three neighbours from the same group, taken in list order after the current tool. */
+export function relatedTools(href: string, count = 3): Tool[] {
+  const tool = TOOLS.find((t) => t.href === href)
+  if (!tool) return []
+  const group = toolsInGroup(tool.group)
+  const i = group.indexOf(tool)
+  return Array.from({ length: Math.min(count, group.length - 1) }, (_, k) => group[(i + 1 + k) % group.length]!)
+}

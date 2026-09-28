@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { usePathname } from 'next/navigation'
 import {
-  Menu, X, ChevronDown, Mail, Phone, Users, Workflow, HeartHandshake, Scale, Building2, BarChart3,
+  Menu, X, ChevronDown, Mail, Phone, Users, Workflow, HeartHandshake, Scale, Building2, BarChart3, ArrowLeftRight,
   type LucideIcon,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -24,6 +24,7 @@ const ABOUT: MegaItem[] = [
   { icon: Workflow, title: 'How it works', short: 'From first call to a site that brings enquiries.', href: '/how-it-works' },
   { icon: HeartHandshake, title: 'Our commitment', short: 'What we promise, and how to hold us to it.', href: '/our-commitment' },
   { icon: Scale, title: 'Why a care specialist', short: 'Specialist, generalist, DIY or directory, compared.', href: '/why-a-care-specialist' },
+  { icon: ArrowLeftRight, title: 'Compare your options', short: 'Us against Wix, WordPress, agencies and directories.', href: '/compare' },
   { icon: Building2, title: 'For care groups', short: 'One system for every home in your group.', href: '/care-groups' },
   { icon: BarChart3, title: 'Research', short: 'The care market in numbers, from our own data.', href: '/research' },
 ]
@@ -203,7 +204,7 @@ export default function Nav() {
 
   const servicesActive = SERVICES.some((s) => pathname === s.href || pathname.startsWith(s.href + '/'))
   const toolsActive = pathname === '/tools' || pathname.startsWith('/tools/')
-  const aboutActive = ABOUT.some((a) => pathname === a.href)
+  const aboutActive = ABOUT.some((a) => pathname === a.href || pathname.startsWith(a.href + '/'))
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-brand-line/60 bg-brand-bg/95 backdrop-blur supports-[backdrop-filter]:bg-brand-bg/80">

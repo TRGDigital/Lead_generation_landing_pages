@@ -55,6 +55,18 @@ const TARGETS: Target[] = [
   { href: '/tools/website-grader', rank: 1, phrases: ['website grader'] },
   { href: '/tools/cqc-rating-checker', rank: 1, phrases: ['CQC rating checker'] },
 
+  // ── Comparison pages and the newer tools ──────────────────────────────────────────
+  { href: '/compare/wix-squarespace-for-care-homes', rank: 1, phrases: ['Wix', 'Squarespace'] },
+  { href: '/compare/wordpress-theme-or-freelancer', rank: 1, phrases: ['WordPress theme', 'WordPress freelancer', 'freelancer'] },
+  { href: '/compare/general-web-agency', rank: 1, phrases: ['general agency', 'generalist agency', 'digital agency'] },
+  { href: '/compare/own-website-vs-directory-listing', rank: 1, phrases: ['directory listing', 'directory listings', 'paid directories'] },
+  { href: '/tools/cqc-rating-display-checker', rank: 1, phrases: ['CQC widget', 'display your CQC rating', 'CQC rating on your website', 'Regulation 20A'] },
+  { href: '/tools/care-competitor-snapshot', rank: 1, phrases: ['local competitors', 'nearby competitors', 'your competitors'] },
+  { href: '/tools/enquiry-value-calculator', rank: 1, phrases: ['value of an enquiry', 'lifetime value', 'what an enquiry is worth'] },
+  { href: '/tools/care-website-accessibility-check', rank: 1, phrases: ['alt text', 'older visitors'] },
+  { href: '/tools/care-job-advert-checker', rank: 1, phrases: ['job advert', 'job adverts', 'job ad'] },
+  { href: '/tools/care-review-reply-helper', rank: 1, phrases: ['reply to reviews', 'replying to reviews', 'review replies', 'negative review'] },
+
   // ── Care settings ─────────────────────────────────────────────────────────────────
   { href: '/nursing-homes', rank: 2, phrases: ['nursing homes'] },
   { href: '/dementia-care', rank: 2, phrases: ['dementia care'] },

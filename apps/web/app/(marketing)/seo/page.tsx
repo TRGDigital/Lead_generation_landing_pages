@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Search, FileText, Settings, MapPin, PenLine, BarChart3, Check } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { SerpResult, SerpJobs, SchemaCode } from '@/components/marketing/SerpMock'
+import { RelatedLinks, toolItems } from '@/components/marketing/RelatedLinks'
 
 export const revalidate = 3600
 
@@ -412,6 +413,7 @@ export default function SeoPage() {
           </div>
         </div>
       </section>
+      <RelatedLinks heading="Free tools for care SEO" items={toolItems(['/tools/care-competitor-snapshot', '/tools/care-schema-generator', '/tools/website-grader'])} />
     </>
   )
 }

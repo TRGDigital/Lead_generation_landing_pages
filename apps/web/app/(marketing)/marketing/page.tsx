@@ -5,6 +5,7 @@ import { ManagedImage } from '@/components/marketing/ManagedImage'
 import { CheckCircle, Zap, Shield, Check } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
+import { RelatedLinks, toolItems } from '@/components/marketing/RelatedLinks'
 
 export const revalidate = 3600
 
@@ -387,6 +388,7 @@ export default function MarketingPage() {
           </div>
         </div>
       </section>
+      <RelatedLinks heading="Free tools to size the opportunity" items={toolItems(['/tools/enquiry-value-calculator', '/tools/empty-bed-calculator', '/tools/care-competitor-snapshot'])} />
     </>
   )
 }

@@ -6,6 +6,7 @@ import { Search, Smartphone, Gauge, ShieldCheck, MousePointerClick, Wrench, Chec
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { EnquiryButton } from '@/components/marketing/EnquiryOverlay'
 import { DESIGNS } from '@/lib/designs'
+import { RelatedLinks, toolItems, COMPARE_LINK } from '@/components/marketing/RelatedLinks'
 
 export const revalidate = 3600
 
@@ -514,6 +515,7 @@ export default function WebsiteDevelopmentPage() {
           </div>
         </div>
       </section>
+      <RelatedLinks heading="Before you choose who builds it" items={[COMPARE_LINK, ...toolItems(['/tools/cqc-rating-display-checker', '/tools/care-website-accessibility-check'])]} />
     </>
   )
 }

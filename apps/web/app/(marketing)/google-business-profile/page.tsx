@@ -3,6 +3,7 @@ import { applyPageSeo } from '@/lib/page-seo'
 import Link from 'next/link'
 import { MapPin, Star, MessageSquareText, Camera, BellRing, BarChart3, Check } from 'lucide-react'
 import { Star as StarDecor, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
+import { RelatedLinks, toolItems } from '@/components/marketing/RelatedLinks'
 
 export const revalidate = 3600
 
@@ -251,6 +252,7 @@ export default function GbpPage() {
           </div>
         </div>
       </section>
+      <RelatedLinks heading="Free tools for your Google listing" items={toolItems(['/tools/care-review-reply-helper', '/tools/care-competitor-snapshot', '/tools/google-preview'])} />
     </>
   )
 }

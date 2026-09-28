@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Type, Contrast, BookOpen, Volume2, Keyboard, ImageIcon } from 'lucide-react'
 import { applyPageSeo } from '@/lib/page-seo'
 import { ServiceLanding } from '@/components/marketing/ServiceLanding'
+import { RelatedLinks, toolItems } from '@/components/marketing/RelatedLinks'
 
 export const revalidate = 3600
 
@@ -24,144 +25,147 @@ const linkClass = 'font-semibold text-brand-pop underline-offset-2 hover:underli
 
 export default function AccessibleWebsitesPage() {
   return (
-    <ServiceLanding
-      path="/accessible-websites"
-      schemaName="Accessible websites for care providers"
-      schemaDescription="Care provider websites built to WCAG 2.2 AA, with a built-in accessibility bar for larger text, high contrast, a readable font and listen to page."
-      eyebrow="Accessible websites"
-      title={['Websites that', 'every family', 'can use']}
-      intro="Many of the people reading a care provider's website are older, or have poor sight, hearing or dexterity. We build every website to the WCAG 2.2 AA standard, with an accessibility bar on every page so each visitor can adjust the site to suit them."
-      heroPoints={['Built to WCAG 2.2 AA', 'Accessibility bar on every page', 'Better for search too']}
-      primaryCta={{ label: 'Check your website', href: '/tools/website-grader' }}
-      secondaryCta={{ label: 'Talk to us', href: '/contact' }}
-      mock={{
-        url: 'yourcarehome.co.uk',
-        heading: 'Accessibility bar',
-        rows: [
-          ['Text size', 'A  A+  A++'],
-          ['High contrast', 'On'],
-          ['Readable font', 'On'],
-          ['Listen to page', 'Play'],
-        ],
-        badge: 'WCAG 2.2 AA',
-      }}
-      why={{
-        title: 'Accessibility decides whether people can use your site at all',
-        tagline: 'For older visitors, readable text is not a nice extra.',
-        paragraphs: [
-          'Your visitors include people arranging care for themselves and husbands or wives arranging care for a partner. For them, being able to enlarge text or have a page read aloud can decide whether they can use your website. Many carers applying for jobs speak English as a second language, and a clear layout with listen to page helps them too.',
-          <>
-            Under the Equality Act 2010, anyone providing a service to the public must make reasonable adjustments so
-            that disabled people are not put at a substantial disadvantage (
-            <a href="https://www.legislation.gov.uk/ukpga/2010/15/section/20" className={linkClass} target="_blank" rel="noopener noreferrer">section 20</a>
-            ), and must not discriminate in the way the service is provided (
-            <a href="https://www.legislation.gov.uk/ukpga/2010/15/section/29" className={linkClass} target="_blank" rel="noopener noreferrer">section 29</a>
-            ). Your website is one of the ways you provide your service. Building to WCAG 2.2 AA is the clearest way
-            to show you have taken this seriously, and Google rewards the same things: clear headings, described
-            images and fast pages. See how your current site scores with our free{' '}
-            <Link href="/tools/website-grader" className={linkClass}>website grader</Link>.
-          </>,
-        ],
-      }}
-      points={[
-        'Built to the WCAG 2.2 AA standard',
-        'Larger text in one tap',
-        'High contrast mode',
-        'A more readable font',
-        'Listen to page, with nothing to install',
-        'Keyboard friendly, with skip to content',
-      ]}
-      pointsCta="How accessible is your website today?"
-      cards={{
-        subtitle: 'What is built in',
-        title: 'Accessible on every page',
-        items: [
-          { Icon: Type, title: 'Text size', body: 'Visitors can increase the text size across the whole site in one tap, without the layout breaking.' },
-          { Icon: Contrast, title: 'High contrast', body: 'A high contrast mode makes text and buttons easier to see for people with low vision.' },
-          { Icon: BookOpen, title: 'Readable font', body: 'Switches the site to a plainer font that many people with dyslexia find easier to read.' },
-          { Icon: Volume2, title: 'Listen to page', body: 'Reads the page aloud using the voice already built into the visitor’s phone or computer.' },
-          { Icon: Keyboard, title: 'Keyboard and screen readers', body: 'A skip to content link, full keyboard navigation and properly marked up headings, lists and forms.' },
-          { Icon: ImageIcon, title: 'Described images and contrast', body: 'Alt text on every image and text colours that meet the AA contrast standard throughout.' },
-        ],
-      }}
-      extra={
-        <section className="relative overflow-hidden bg-brand-bg-warm px-6 py-24">
-          <div className="mx-auto max-w-6xl">
-            <div className="mb-10 max-w-3xl">
-              <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Dementia friendly design</p>
-              <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
-                The principles stop at the front door
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">
-                Dementia friendly design is well established for the physical environment: good contrast, clear
-                signage, avoiding visual confusion, avoiding unnecessary movement and reflective surfaces. Almost none
-                of it gets applied to the digital environment, even though the family carer doing the searching is
-                usually on a phone, often late at night and under pressure, and people living with dementia use these
-                sites too.
-              </p>
-              <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">
-                We build to the same principles on screen. In practice that means:
-              </p>
-            </div>
+    <>
+      <ServiceLanding
+        path="/accessible-websites"
+        schemaName="Accessible websites for care providers"
+        schemaDescription="Care provider websites built to WCAG 2.2 AA, with a built-in accessibility bar for larger text, high contrast, a readable font and listen to page."
+        eyebrow="Accessible websites"
+        title={['Websites that', 'every family', 'can use']}
+        intro="Many of the people reading a care provider's website are older, or have poor sight, hearing or dexterity. We build every website to the WCAG 2.2 AA standard, with an accessibility bar on every page so each visitor can adjust the site to suit them."
+        heroPoints={['Built to WCAG 2.2 AA', 'Accessibility bar on every page', 'Better for search too']}
+        primaryCta={{ label: 'Check your website', href: '/tools/website-grader' }}
+        secondaryCta={{ label: 'Talk to us', href: '/contact' }}
+        mock={{
+          url: 'yourcarehome.co.uk',
+          heading: 'Accessibility bar',
+          rows: [
+            ['Text size', 'A  A+  A++'],
+            ['High contrast', 'On'],
+            ['Readable font', 'On'],
+            ['Listen to page', 'Play'],
+          ],
+          badge: 'WCAG 2.2 AA',
+        }}
+        why={{
+          title: 'Accessibility decides whether people can use your site at all',
+          tagline: 'For older visitors, readable text is not a nice extra.',
+          paragraphs: [
+            'Your visitors include people arranging care for themselves and husbands or wives arranging care for a partner. For them, being able to enlarge text or have a page read aloud can decide whether they can use your website. Many carers applying for jobs speak English as a second language, and a clear layout with listen to page helps them too.',
+            <>
+              Under the Equality Act 2010, anyone providing a service to the public must make reasonable adjustments so
+              that disabled people are not put at a substantial disadvantage (
+              <a href="https://www.legislation.gov.uk/ukpga/2010/15/section/20" className={linkClass} target="_blank" rel="noopener noreferrer">section 20</a>
+              ), and must not discriminate in the way the service is provided (
+              <a href="https://www.legislation.gov.uk/ukpga/2010/15/section/29" className={linkClass} target="_blank" rel="noopener noreferrer">section 29</a>
+              ). Your website is one of the ways you provide your service. Building to WCAG 2.2 AA is the clearest way
+              to show you have taken this seriously, and Google rewards the same things: clear headings, described
+              images and fast pages. See how your current site scores with our free{' '}
+              <Link href="/tools/website-grader" className={linkClass}>website grader</Link>.
+            </>,
+          ],
+        }}
+        points={[
+          'Built to the WCAG 2.2 AA standard',
+          'Larger text in one tap',
+          'High contrast mode',
+          'A more readable font',
+          'Listen to page, with nothing to install',
+          'Keyboard friendly, with skip to content',
+        ]}
+        pointsCta="How accessible is your website today?"
+        cards={{
+          subtitle: 'What is built in',
+          title: 'Accessible on every page',
+          items: [
+            { Icon: Type, title: 'Text size', body: 'Visitors can increase the text size across the whole site in one tap, without the layout breaking.' },
+            { Icon: Contrast, title: 'High contrast', body: 'A high contrast mode makes text and buttons easier to see for people with low vision.' },
+            { Icon: BookOpen, title: 'Readable font', body: 'Switches the site to a plainer font that many people with dyslexia find easier to read.' },
+            { Icon: Volume2, title: 'Listen to page', body: 'Reads the page aloud using the voice already built into the visitor’s phone or computer.' },
+            { Icon: Keyboard, title: 'Keyboard and screen readers', body: 'A skip to content link, full keyboard navigation and properly marked up headings, lists and forms.' },
+            { Icon: ImageIcon, title: 'Described images and contrast', body: 'Alt text on every image and text colours that meet the AA contrast standard throughout.' },
+          ],
+        }}
+        extra={
+          <section className="relative overflow-hidden bg-brand-bg-warm px-6 py-24">
+            <div className="mx-auto max-w-6xl">
+              <div className="mb-10 max-w-3xl">
+                <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">Dementia friendly design</p>
+                <h2 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight text-brand-ink sm:text-4xl">
+                  The principles stop at the front door
+                </h2>
+                <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">
+                  Dementia friendly design is well established for the physical environment: good contrast, clear
+                  signage, avoiding visual confusion, avoiding unnecessary movement and reflective surfaces. Almost none
+                  of it gets applied to the digital environment, even though the family carer doing the searching is
+                  usually on a phone, often late at night and under pressure, and people living with dementia use these
+                  sites too.
+                </p>
+                <p className="mt-4 text-base leading-relaxed text-brand-ink-soft">
+                  We build to the same principles on screen. In practice that means:
+                </p>
+              </div>
 
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                { title: 'No moving imagery on a homepage', body: 'Nothing slides, fades or auto-plays while someone is trying to read. Movement pulls attention away and makes text harder to follow.' },
-                { title: 'No carousels', body: 'A carousel hides content behind movement and timing. Everything that matters gets its own place on the page instead.' },
-                { title: 'Contrast that survives a bright room', body: 'Text that still reads on a phone in daylight, not pale grey on white, and never colour alone to carry meaning.' },
-                { title: 'Plain language, not sector vocabulary', body: 'Domiciliary, respite, CHC and FNC all get explained. A family should never need the jargon to find what they need.' },
-                { title: 'Forms that do not time out', body: 'No session expiring mid enquiry, no losing what was typed, and no puzzle to prove you are human.' },
-                { title: 'One clear next step', body: 'A phone number and one obvious action per page, in the same place every time, so there is nothing to relearn.' },
-              ].map((c) => (
-                <div key={c.title} className="rounded-2xl border border-brand-line bg-white p-7 shadow-soft">
-                  <h3 className="font-display text-lg font-semibold text-brand-ink">{c.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{c.body}</p>
-                </div>
-              ))}
-            </div>
+              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {[
+                  { title: 'No moving imagery on a homepage', body: 'Nothing slides, fades or auto-plays while someone is trying to read. Movement pulls attention away and makes text harder to follow.' },
+                  { title: 'No carousels', body: 'A carousel hides content behind movement and timing. Everything that matters gets its own place on the page instead.' },
+                  { title: 'Contrast that survives a bright room', body: 'Text that still reads on a phone in daylight, not pale grey on white, and never colour alone to carry meaning.' },
+                  { title: 'Plain language, not sector vocabulary', body: 'Domiciliary, respite, CHC and FNC all get explained. A family should never need the jargon to find what they need.' },
+                  { title: 'Forms that do not time out', body: 'No session expiring mid enquiry, no losing what was typed, and no puzzle to prove you are human.' },
+                  { title: 'One clear next step', body: 'A phone number and one obvious action per page, in the same place every time, so there is nothing to relearn.' },
+                ].map((c) => (
+                  <div key={c.title} className="rounded-2xl border border-brand-line bg-white p-7 shadow-soft">
+                    <h3 className="font-display text-lg font-semibold text-brand-ink">{c.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">{c.body}</p>
+                  </div>
+                ))}
+              </div>
 
-            <div className="mt-8 rounded-2xl border border-brand-line bg-white p-7 shadow-soft">
-              <h3 className="font-display text-lg font-semibold text-brand-ink">Where we have not managed it yet</h3>
-              <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">
-                Our own homepage has a moving band of screenshots, which by this standard should not be there. Until it
-                goes, the system setting for reduced motion stops it automatically, and there is a pause button in the
-                accessibility bar at the top of every page and beside the band itself. We would rather say that than
-                pretend otherwise.
-              </p>
-            </div>
+              <div className="mt-8 rounded-2xl border border-brand-line bg-white p-7 shadow-soft">
+                <h3 className="font-display text-lg font-semibold text-brand-ink">Where we have not managed it yet</h3>
+                <p className="mt-2 text-sm leading-relaxed text-brand-ink-soft">
+                  Our own homepage has a moving band of screenshots, which by this standard should not be there. Until it
+                  goes, the system setting for reduced motion stops it automatically, and there is a pause button in the
+                  accessibility bar at the top of every page and beside the band itself. We would rather say that than
+                  pretend otherwise.
+                </p>
+              </div>
 
-            <div className="mt-8 rounded-2xl border-l-4 border-brand-pop bg-white p-7 shadow-soft">
-              <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">A warning worth hearing</p>
-              <h3 className="mt-2 font-display text-xl font-semibold text-brand-ink">
-                Free accessibility checkers can be measuring nothing at all
-              </h3>
-              <p className="mt-3 text-base leading-relaxed text-brand-ink-soft">
-                On one large care directory we work on, scanners reported thousands of images with missing alternative
-                text. The text was there. The page the scanner downloaded simply contained no images at all, because
-                the browser builds them after the page loads, and the scanner never got that far.
-              </p>
-              <p className="mt-3 text-base leading-relaxed text-brand-ink-soft">
-                A provider can pass that report and still be unusable for someone with sight loss. The reverse happens
-                too: a perfectly accessible site can be marked down for faults it does not have. We test the way a
-                person actually uses a site, with a keyboard, a screen reader and real contrast checks, and we tell you
-                which of a report&apos;s findings are real.
-              </p>
+              <div className="mt-8 rounded-2xl border-l-4 border-brand-pop bg-white p-7 shadow-soft">
+                <p className="text-sm font-semibold uppercase tracking-widest text-brand-pop">A warning worth hearing</p>
+                <h3 className="mt-2 font-display text-xl font-semibold text-brand-ink">
+                  Free accessibility checkers can be measuring nothing at all
+                </h3>
+                <p className="mt-3 text-base leading-relaxed text-brand-ink-soft">
+                  On one large care directory we work on, scanners reported thousands of images with missing alternative
+                  text. The text was there. The page the scanner downloaded simply contained no images at all, because
+                  the browser builds them after the page loads, and the scanner never got that far.
+                </p>
+                <p className="mt-3 text-base leading-relaxed text-brand-ink-soft">
+                  A provider can pass that report and still be unusable for someone with sight loss. The reverse happens
+                  too: a perfectly accessible site can be marked down for faults it does not have. We test the way a
+                  person actually uses a site, with a keyboard, a screen reader and real contrast checks, and we tell you
+                  which of a report&apos;s findings are real.
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
-      }
-      steps={{
-        title: 'Accessible from the foundations up',
-        items: [
-          { n: '01', title: 'Designed for older visitors', body: 'Readable type sizes, generous spacing, clear buttons and colours that meet AA contrast from the first design.' },
-          { n: '02', title: 'Built and tested', body: 'We test with the keyboard, screen readers and contrast checks, on phones, tablets and computers.' },
-          { n: '03', title: 'Kept accessible', body: 'Your content management system asks for alt text on every image, so the site stays accessible as your team adds to it.' },
-        ],
-      }}
-      cta={{
-        title: 'A website every family can use',
-        body: 'Grade your current website for free, or talk to us about building an accessible website for your care service.',
-      }}
-    />
+          </section>
+        }
+        steps={{
+          title: 'Accessible from the foundations up',
+          items: [
+            { n: '01', title: 'Designed for older visitors', body: 'Readable type sizes, generous spacing, clear buttons and colours that meet AA contrast from the first design.' },
+            { n: '02', title: 'Built and tested', body: 'We test with the keyboard, screen readers and contrast checks, on phones, tablets and computers.' },
+            { n: '03', title: 'Kept accessible', body: 'Your content management system asks for alt text on every image, so the site stays accessible as your team adds to it.' },
+          ],
+        }}
+        cta={{
+          title: 'A website every family can use',
+          body: 'Grade your current website for free, or talk to us about building an accessible website for your care service.',
+        }}
+      />
+      <RelatedLinks heading="Check your own website" items={toolItems(['/tools/care-website-accessibility-check', '/tools/website-grader', '/tools/cqc-rating-display-checker'])} />
+    </>
   )
 }
