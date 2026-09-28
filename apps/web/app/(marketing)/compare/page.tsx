@@ -3,12 +3,53 @@ import Link from 'next/link'
 import { applyPageSeo } from '@/lib/page-seo'
 import { COMPARISONS } from '@/lib/comparisons'
 import { CountyHero, EndCta, ServicePanel } from '@/components/marketing/county/CountySections'
+import { MarkIcon } from '@/components/marketing/Scorecard'
 
 // The hub for the /compare pages. Lists every comparison in lib/comparisons.ts plus the
 // all-options page at /why-a-care-specialist.
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.trgdigital.co.uk'
 const PATH = '/compare'
+
+// The hero card: what each option genuinely does best. Every strength is a row where that
+// option wins or draws on its own comparison page, so the card says nothing those pages don't.
+const STRENGTHS: { option: string; best: string[]; us?: boolean }[] = [
+  { option: 'Care specialist', best: ['Knows CQC and what you must show', 'Owns the page and the enquiry'], us: true },
+  { option: 'Wix or Squarespace', best: ['Live quickly', 'Lowest first year cost'] },
+  { option: 'WordPress freelancer', best: ['Lowest upfront cost', 'Most choice of add ons'] },
+  { option: 'General agency', best: ['Design and build quality', 'Wider creative services'] },
+  { option: 'Directory listing', best: ['Live today', 'Reviews families already trust'] },
+]
+
+function OptionsCard() {
+  return (
+    <div className="rounded-3xl border-2 border-brand-ink bg-white p-4 shadow-[6px_6px_0_0_#2a2620] sm:p-6">
+      <p className="text-xs font-semibold uppercase tracking-wider text-brand-ink-muted">Five options</p>
+      <p className="mt-1 font-display text-lg font-bold uppercase tracking-tight text-brand-ink">What each one does best</p>
+      <ul className="mt-4 divide-y divide-brand-line overflow-hidden rounded-2xl border border-brand-line">
+        {STRENGTHS.map((s) => (
+          <li key={s.option} className={`px-3 py-3 sm:px-4 ${s.us ? 'bg-brand-pop/5' : ''}`}>
+            <p className={`text-sm font-bold ${s.us ? 'text-brand-pop' : 'text-brand-ink'}`}>{s.option}</p>
+            <div className="mt-1.5 flex flex-wrap gap-1.5">
+              {s.best.map((b) => (
+                <span
+                  key={b}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-brand-bg-warm px-2.5 py-1 text-xs font-medium text-brand-ink-soft"
+                >
+                  <MarkIcon m="yes" small />
+                  {b}
+                </span>
+              ))}
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-4 text-sm leading-relaxed text-brand-ink-soft">
+        Every option is good at something. The comparisons below show where each one falls short for care.
+      </p>
+    </div>
+  )
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   return applyPageSeo(PATH, {
@@ -72,6 +113,7 @@ export default function CompareHubPage() {
         points={['Fair to every option', 'Care specific criteria', 'When not to use us']}
         primary={{ label: 'All options side by side', href: '/why-a-care-specialist' }}
         secondary={{ label: 'Free audit', href: '/site-audit' }}
+        mock={<OptionsCard />}
       />
 
       <ServicePanel
