@@ -13,6 +13,7 @@ import { ExitIntent } from '@/components/marketing/county/ExitIntent'
 import { SchemaMock } from '@/components/marketing/county/SchemaMock'
 import { SerpMockup } from '@/components/marketing/county/HeroMocks'
 import { DesignExamples } from '@/components/marketing/county/Galleries'
+import { NearbyCounties } from '@/components/marketing/county/CountyLinks'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.trgdigital.co.uk'
 
@@ -114,7 +115,10 @@ export default async function CountyPage({ params }: Props) {
             Care websites and search in <span className="text-brand-pop">{county.name}</span>
           </h1>
           <Squiggle className="mt-5 h-6 w-56 text-brand-pop" />
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-brand-ink-soft">{county.standing}</p>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-brand-ink-soft">
+            {county.standing} Whether you want to <Link href="/start-building-your-new-website" className="font-semibold text-brand-pop underline underline-offset-2">start building your new website</Link> or rank the one you have, the figures below are where it
+            starts.
+          </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link href="/site-audit" className="btn-cta">
               Get an audit of your site
@@ -319,6 +323,8 @@ export default async function CountyPage({ params }: Props) {
           </ul>
         }
       />
+
+      <NearbyCounties county={county} kind="locations" />
 
       <LeadSection
         heading="Talk to someone who only works in care"

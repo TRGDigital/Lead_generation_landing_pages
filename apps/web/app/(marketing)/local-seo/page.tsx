@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { MapPin, Star as StarIcon, Building2, Search, MessageSquare, BarChart3, Check } from 'lucide-react'
 import { Star, Squiggle, Dots, Burst } from '@/components/marketing/Decor'
 import { RelatedLinks, toolItems } from '@/components/marketing/RelatedLinks'
+import { CountyLinkGrid } from '@/components/marketing/county/CountyLinks'
 
 export const revalidate = 3600
 
@@ -242,6 +243,7 @@ export default function LocalSeoPage() {
           </div>
         </div>
       </section>
+      <CountyLinkGrid kind="seo" heading="Local search in your county" intro="Where the competition is in each county, town by town." />
       <RelatedLinks heading="Free tools for local search" items={toolItems(['/tools/care-competitor-snapshot', '/tools/care-review-reply-helper', '/tools/google-preview'])} />
     </>
   )

@@ -80,6 +80,7 @@ export async function GET(req: NextRequest) {
       revalidatePath(`/care-seo/${b.slug}`)
     }
     revalidatePath('/sitemap.xml')
+    revalidatePath('/locations')
 
     const { count } = await db
       .from('county_pages')

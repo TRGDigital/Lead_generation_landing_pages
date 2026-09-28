@@ -28,6 +28,7 @@ const COMPANY = [
   { href: '/tools', label: 'Free tools' },
   { href: '/blog', label: 'Knowledge Hub' },
   { href: '/research', label: 'Research' },
+  { href: '/locations', label: 'Areas we cover' },
   { href: '/care-groups', label: 'For care groups' },
   { href: '/why-a-care-specialist', label: 'Why a care specialist' },
   { href: '/contact', label: 'Contact' },

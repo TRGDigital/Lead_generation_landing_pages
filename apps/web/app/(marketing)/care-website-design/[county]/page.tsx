@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { applyPageSeo } from '@/lib/page-seo'
@@ -22,6 +23,7 @@ import {
   ServiceJsonLd,
   Steps,
 } from '@/components/marketing/county/CountySections'
+import { NearbyCounties } from '@/components/marketing/county/CountyLinks'
 
 // A new care website, county by county.
 //
@@ -122,7 +124,7 @@ export default async function NewCareWebsiteCountyPage({ params }: Props) {
           <>
             <p>
               We design and build websites for care homes, nursing homes and home care providers, and we do nothing
-              else. {county.standing}
+              else, so you can <Link href="/start-building-your-new-website" className="font-semibold text-brand-pop underline underline-offset-2">start building your new website</Link> without explaining CQC to anyone. {county.standing}
             </p>
             <p>
               There are {stats.services} registered care services in {county.name}. {stats.noWebsite} of them,{' '}
@@ -135,7 +137,7 @@ export default async function NewCareWebsiteCountyPage({ params }: Props) {
         points={['Built from scratch, no templates', 'Live in six to eight weeks', 'Fixed price, you own it']}
         primary={{ label: 'Get an audit of your current site', href: '/site-audit' }}
         secondary={{ label: 'Tell us about your service', href: '#enquire' }}
-        mock={<CareSiteMock townName={busiest?.name ?? topFour[0]?.name ?? county.name} />}
+        mock={<CareSiteMock townName={busiest?.name ?? topFour[0]?.name ?? county.name} countyName={county.name} />}
       />
 
       <DarkStats
@@ -455,6 +457,8 @@ export default async function NewCareWebsiteCountyPage({ params }: Props) {
       />
 
       <Faqs heading="Questions we get asked before a build" faqs={FAQS} />
+
+      <NearbyCounties county={county} kind="website" />
 
       <AlsoInCounty
         label={`Also in ${county.name}`}

@@ -27,7 +27,7 @@ function BrowserChrome({ url }: { url: string }) {
  * availability this week and a way to book a visit tonight. The service is unnamed on
  * purpose, because it is an illustration rather than a client.
  */
-export function CareSiteMock({ townName }: { townName: string }) {
+export function CareSiteMock({ townName, countyName }: { townName: string; countyName?: string }) {
   return (
     <div className={FRAME} aria-hidden data-nosnippet>
       <BrowserChrome url="yourcarehome.co.uk" />
@@ -37,7 +37,7 @@ export function CareSiteMock({ townName }: { townName: string }) {
             <p className="font-display text-lg font-bold uppercase leading-tight tracking-tight text-brand-ink">
               Residential &amp; nursing care
             </p>
-            <p className="text-xs text-brand-ink-muted">{townName}, West Sussex</p>
+            <p className="text-xs text-brand-ink-muted">{countyName ? `${townName}, ${countyName}` : townName}</p>
           </div>
           <span className="flex shrink-0 items-center gap-1 rounded-full bg-green-100 px-2.5 py-1 text-[10px] font-bold uppercase text-green-800">
             <StarIcon className="h-3 w-3" />

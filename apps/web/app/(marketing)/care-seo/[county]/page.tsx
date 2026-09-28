@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { applyPageSeo } from '@/lib/page-seo'
@@ -22,6 +23,7 @@ import {
   ServiceJsonLd,
   Steps,
 } from '@/components/marketing/county/CountySections'
+import { NearbyCounties } from '@/components/marketing/county/CountyLinks'
 
 // Care SEO, county by county.
 //
@@ -121,7 +123,8 @@ export default async function CareSeoCountyPage({ params }: Props) {
           <>
             <p>
               Ranking a care service is not a county wide job. It is won or lost in one town, for one care type, against
-              a specific set of competitors and two or three directories. {county.standing}
+              a specific set of competitors and two or three directories. If your site cannot compete at all, <Link href="/start-building-your-new-website" className="font-semibold text-brand-pop underline underline-offset-2">start building your new website</Link> 
+              first. {county.standing}
             </p>
             <p>
               There are {stats.services} registered services across {stats.towns} towns here
@@ -393,6 +396,8 @@ export default async function CareSeoCountyPage({ params }: Props) {
       </section>
 
       <Faqs heading="Fair questions before you commit to a retainer" faqs={FAQS} />
+
+      <NearbyCounties county={county} kind="seo" />
 
       <AlsoInCounty
         label={`Also in ${county.name}`}

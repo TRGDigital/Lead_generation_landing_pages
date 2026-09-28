@@ -8,6 +8,7 @@ import { AgencyIntro } from '@/components/marketing/AgencyIntro'
 import { PrivatePayCase } from '@/components/marketing/PrivatePayCase'
 import { CoreServices } from '@/components/marketing/CoreServices'
 import { GetMoreEnquiries } from '@/components/marketing/GetMoreEnquiries'
+import { StartBuildingBand } from '@/components/marketing/StartBuildingBand'
 import { DemoVideo } from '@/components/marketing/DemoVideo'
 import { WorkFeature } from '@/components/marketing/WorkFeature'
 import { CareToolsFeature } from '@/components/marketing/CareToolsFeature'
@@ -122,6 +123,8 @@ export default async function HomePage() {
       <PrivatePayCase />
 
       <CoreServices />
+
+      <StartBuildingBand />
 
       <GetMoreEnquiries />
 
