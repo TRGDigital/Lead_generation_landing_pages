@@ -100,6 +100,18 @@ const SETTINGS: Record<string, Setting> = {
     trust: PROVIDER_TRUST,
     showcase: PROVIDER_SHOWCASE,
   },
+  'home-care-digital-marketing': {
+    band: 'provider',
+    conversionLine:
+      'More of your visitors become enquiries, and more enquiries become packages of care.',
+    tools: ['Care funding calculator','Cost of care estimator','Attendance Allowance checker','“Is it time for care?” checklist','Areas we cover, town by town','Careers section with pay up front','Enquiry forms built for a phone','AI chat assistant, answers 24/7','Accessibility toolbar + tap-to-call'],
+    subject: 'your agency online',
+    outcome: 'We do the work, you win clients and carers',
+    outcomeBody:
+      'Like the plan? We run it month to month across every channel and report in enquiries, packages started and carers hired, never likes or clicks.',
+    trust: PROVIDER_TRUST,
+    showcase: PROVIDER_SHOWCASE,
+  },
   'domiciliary-care-websites': {
     band: 'provider',
     conversionLine:
