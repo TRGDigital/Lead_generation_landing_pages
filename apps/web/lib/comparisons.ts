@@ -465,7 +465,7 @@ export const COMPARISONS: Comparison[] = [
         criterion: 'Wider creative services',
         trg: 'some',
         them: 'yes',
-        note: 'Large agencies may offer video, print and paid social under one roof. We focus on websites and search.',
+        note: 'Large agencies may offer a wider range of creative work, such as video production, under one roof.',
       },
       {
         criterion: 'Experience across many sectors',
@@ -514,7 +514,7 @@ export const COMPARISONS: Comparison[] = [
       {
         heading: 'What a specialist gives up',
         paragraphs: [
-          'We only work in care, so we cannot also build the website for your other business. We concentrate on websites, search and the tools around them, so if you want television advertising or a large print campaign, you will need someone else as well.',
+          'We only work in care, so we cannot also build the website for your other business.',
           'Our founder has more than 20 years in digital and years working inside care. That shapes how we build, but it is fair to judge us on the work rather than the claim. You can see [the sites we have built](/work) and test them with the same tools we use.',
         ],
       },
@@ -524,7 +524,6 @@ export const COMPARISONS: Comparison[] = [
       paragraphs: [
         'If you already have a good relationship with an agency that has built care sites before and can show you how they perform, there may be no reason to change.',
         'If care is one part of a wider group, with a hotel, a nursery or a retail business alongside it, one agency for everything may be simpler and cheaper to manage.',
-        'If you need a large, multi channel campaign with video, print and broadcast, a bigger general agency has the range. A specialist can still work alongside them on the website and search.',
       ],
     },
     checklist: {
